@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="VidexDev">
+    <configurations>
+      <configuration name="VidexDev" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/VidexDev">
+        <dependencies target-player="23.0">
+          <entries>
+            <entry library-name="feathers" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="flash" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="flash_components" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="starling" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Flex" />
+        </dependencies>
+        <compiler-options>
+          <option name="resourceFilesMode" value="ResourcePatterns" />
+          <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-devtest.xml" />
+          <option name="additionalOptions" value="-advanced-telemetry" />
+        </compiler-options>
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/tlefdemo2017-app.xml" package-file-name="as3videx" />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Flex" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="feathers" level="project" />
+    <orderEntry type="library" exported="" name="flash" level="project" />
+    <orderEntry type="library" exported="" name="flash_components" level="project" />
+    <orderEntry type="library" exported="" name="starling" level="project" />
+    <orderEntry type="library" exported="" name="TopcoatLightMobileTheme" level="project" />
+  </component>
+</module>

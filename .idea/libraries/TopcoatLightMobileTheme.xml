@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TopcoatLightMobileTheme" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/TopcoatLightMobileTheme.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
