@@ -170,7 +170,7 @@ import com.deng.fzip.*;
 					var downloadApp:Boolean =    (localVersion == null) || (cloudVersionString != localVersionString);
 					var downloadFfmpeg:Boolean = (localVersion == null) || (cloudVersion.ffmpeg[0].version != localVersion.ffmpeg[0].version);
 
-					trace("downloadApp" + downloadApp);
+//					trace("downloadApp" + downloadApp);
 					// if the version numbers don't match, download them.
 					startDownload(downloadApp, downloadFfmpeg);
 
