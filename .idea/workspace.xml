@@ -4,7 +4,9 @@
     <option name="desktopPackageType" value="captive runtime bundle (*.app)" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="" />
+    <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/PatcherMain.as" afterPath="$PROJECT_DIR$/src/PatcherMain.as" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +20,8 @@
       <file leaf-file-name="FfmpegVideoPlayer.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="400" column="53" lean-forward="true" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
+            <state relative-caret-position="231">
+              <caret line="404" column="60" lean-forward="true" selection-start-line="404" selection-start-column="60" selection-end-line="404" selection-end-column="60" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -325,6 +327,11 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.37045813" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -768,7 +775,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1506715818488</updated>
-      <workItem from="1506715819832" duration="1869000" />
+      <workItem from="1506715819832" duration="1967000" />
     </task>
     <task id="LOCAL-00001" summary="erry da i'm shufflin'">
       <created>1506717787334</created>
@@ -781,16 +788,15 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1869000" />
+    <option name="totallyTimeSpent" value="1967000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -875,8 +881,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="400" column="53" lean-forward="true" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
+        <state relative-caret-position="231">
+          <caret line="404" column="60" lean-forward="true" selection-start-line="404" selection-start-column="60" selection-end-line="404" selection-end-column="60" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
