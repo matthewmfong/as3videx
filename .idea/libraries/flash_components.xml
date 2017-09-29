@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="flash_components" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/flash_components.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

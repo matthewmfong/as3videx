@@ -401,9 +401,9 @@ public class FfmpegVideoPlayer extends IVideoPlayer {
         var operatingSystem:String = Capabilities.os;
         var file:File;
         if(operatingSystem.indexOf("Mac") >= 0) {
-            file = File.applicationDirectory.resolvePath("ffmpeg");
+            file = File.applicationDirectory.resolvePath("exe/ffmpeg");
         } else if(operatingSystem.indexOf("Windows") >= 0) {
-            file = File.applicationDirectory.resolvePath("ffmpeg.exe");
+            file = File.applicationDirectory.resolvePath("exe/ffmpeg.exe");
         }
 
         ffmpegStartupInfo.executable = file;

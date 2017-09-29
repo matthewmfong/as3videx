@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AirPackageProjectParameters">
+    <option name="desktopPackageType" value="captive runtime bundle (*.app)" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/feathers.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/flash_components.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/SeekerVisualization-app.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/chem0011-app.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/chem1121-instructor-app.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0011_1_spring_2017-INSTRUCTOR.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0011_1_winter_2017-INSTRUCTOR.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0011_1_winter_2017.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0012_1_spring_2017-INSTRUCTOR.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0012_1_spring_2017.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM1121_1_winter_2017-INSTRUCTOR .xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM1121_1_winter_2017.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-TokyoTech_DEMO_COURSE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-UBC_APSC160_203_204_spring_2017.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-demonstration_course.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-patcher-BCIT_CHEM1121_1_winter_2017-INSTRUCTOR.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config-patcher-BCIT_CHEM1121_1_winter_2017.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icon.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icon.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icon16x16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icon32x32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/icon48x48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/Arial.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/Arial/Arial.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/consentform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/consentform_bcit.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/ffmpeg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/ffmpeg.exe" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/phone2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/uiimage/oldplayerbar/pause.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppIconsForPublish/icon128x128.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppIconsForPublish/icon32x32.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppIconsForPublish/icon48x48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/UBC_Logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/consentform.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/FEATHERS_VERSION.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Alert.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/AutoSizeMode.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Button.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ButtonGroup.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Callout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DecelerationRate.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Drawers.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/GroupedList.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScreen.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScrollContainer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ImageLoader.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/List.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PanelScreen.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ProgressBar.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Radio.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigator.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigatorItem.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollContainer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollScreen.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Scroller.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StepperButtonLayoutMode.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabBar.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabNavigatorItem.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextArea.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextCallout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleButton.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleState.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackLayoutMode.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Tree.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/WebView.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManagerWithPrompt.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/VerticalCenteredPopUpContentManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListHeaderOrFooterRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListItemRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultTreeItemRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListHeaderOrFooterRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IListItemRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/ITreeItemRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupGroupedListHeaderOrFooterRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupListItemRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupTreeItemRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/BaseScreenNavigator.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/GroupedListDataViewPort.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IScreenNavigatorItem.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IViewPort.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/LayoutViewPort.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/ListDataViewPort.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/TreeDataViewPort.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextEditor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/MeasureTextResult.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextBlockTextEditor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextEditor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/BaseTextEditor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultPopUpManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/FocusManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersControl.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersDisplayObject.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusDisplayObject.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusExtras.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IGroupedToggle.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IIMETextEditor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IMultilineTextEditor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/INativeFocusOwner.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IStateContext.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextBaselineControl.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextRenderer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToggle.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTip.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTipManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ToggleGroup.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ValidationQueue.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayChildrenHierarchicalCollectionDataDescriptor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayHierarchicalCollection.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/HierarchicalCollection.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ListCollection.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/URLAutoCompleteSource.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorCollection.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorListCollectionDataDescriptor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorUintListCollectionDataDescriptor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListListCollectionDataDescriptor.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/display/RenderDelegate.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/DragDropManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/IDropTarget.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/FeathersEventType.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/MediaPlayerEventType.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/AnchorLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseTiledLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseVariableVirtualLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/Direction.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalAlign.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalSpinnerLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IGroupedLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayoutDisplayObject.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ISpinnerLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ITrimmedVirtualLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVariableVirtualLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVirtualLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/LayoutBoundsResult.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/RelativeDepth.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/SlideShowLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalAlign.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ViewPortBounds.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/WaterfallLayout.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/BaseTimedMediaPlayer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IAudioPlayer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IMediaPlayerControl.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IProgressiveMediaPlayer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IVideoPlayer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/MediaTimeMode.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/PlayPauseToggleButton.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundChannelPeakVisualizer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundPlayer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/TimeLabel.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/VideoPlayer.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/ColorFade.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cover.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cube.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Iris.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Reveal.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Wipe.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/AddOnFunctionStyleProvider.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/IStyleProvider.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/BitmapFontTextFormat.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/StageTextField.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/themes/StyleNameFunctionTheme.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/ScreenDensityScaleFactorManager.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/ScreenDensityScaleCalculator.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleX.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleY.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToSelect.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundToPrecision.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextInputNavigation.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/TextureCache.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/calculateSnapshotTextureDimensions.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/LongPress.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToTrigger.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/xml/xmlListInsertAt.as" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/icon16x16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/icon48x48.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/patchertest-app.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/patchertest.swf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/patchertest_win-app.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/phone1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/phone2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/fancy_close.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/filmstrip.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/globalviewcount_active.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_a5d5f6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_e1baeb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_fb9abb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_ffffff.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_old.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/instructor_view_mode.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/no_eye.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/oldplayerbar/close_captions.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/oldplayerbar/enlarge.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/oldplayerbar/play.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_a5d5f6.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_b3e1a5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_e1baeb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_f7e1a0.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_fb9abb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playbarIcons.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playerbar/cc_on.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playerbar/play.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playerbar/unfullscreen.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/seekpoint.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/seekpoint.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/viewcount.psd" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/video.vtt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="FfmpegVideoPlayer.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="400" column="53" lean-forward="true" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoUtil.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="664" column="65" lean-forward="false" selection-start-line="664" selection-start-column="65" selection-end-line="664" selection-end-column="65" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ffmpeg</find>
+      <find>ffmpeg&quot;</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ui/UIScrollView.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1112" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="widgets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="widgets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="video" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="thumbnail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="avmplus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.37045813" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Flash App.as3videx">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="as3videx" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+    <configuration default="false" name="as3videx" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="VidexDev" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/Applications/Flash Player Debugger.app" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="as3videx" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Flash App.as3videx" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="" />
+      <created>1506715818488</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1506715818488</updated>
+      <workItem from="1506715819832" duration="1859000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1859000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980826" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="erry da i'm shufflin'" />
+    <option name="LAST_COMMIT_MESSAGE" value="erry da i'm shufflin'" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/avmplus/DescribeType.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="65" lean-forward="true" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ui/UIScrollView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#550#577#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/setup/Questionnaire.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="664" column="65" lean-forward="false" selection-start-line="664" selection-start-column="65" selection-end-line="664" selection-end-column="65" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="400" column="53" lean-forward="true" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>easyWorkerAS3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37045813" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Flex</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>VidexDev|as3videx</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37045813" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>Flex</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>feathers</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.37045813" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
