@@ -4,226 +4,7 @@
     <option name="desktopPackageType" value="captive runtime bundle (*.app)" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/feathers.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/flash_components.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/SeekerVisualization-app.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chem0011-app.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/chem1121-instructor-app.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0011_1_spring_2017-INSTRUCTOR.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0011_1_winter_2017-INSTRUCTOR.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0011_1_winter_2017.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0012_1_spring_2017-INSTRUCTOR.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM0012_1_spring_2017.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM1121_1_winter_2017-INSTRUCTOR .xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-BCIT_CHEM1121_1_winter_2017.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-TokyoTech_DEMO_COURSE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-UBC_APSC160_203_204_spring_2017.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-demonstration_course.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-patcher-BCIT_CHEM1121_1_winter_2017-INSTRUCTOR.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config-patcher-BCIT_CHEM1121_1_winter_2017.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icon.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icon.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icon16x16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icon32x32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/icon48x48.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/Arial.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/Arial/Arial.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/consentform.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/consentform_bcit.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/ffmpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/ffmpeg.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/phone2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/uiimage/oldplayerbar/pause.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppIconsForPublish/icon128x128.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppIconsForPublish/icon32x32.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/AppIconsForPublish/icon48x48.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/UBC_Logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/consentform.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/FEATHERS_VERSION.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Alert.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/AutoSizeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Button.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ButtonGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Callout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DecelerationRate.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Drawers.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/GroupedList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScrollContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ImageLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/List.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PanelScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ProgressBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Radio.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Scroller.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StepperButtonLayoutMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextArea.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextCallout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackLayoutMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Tree.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/WebView.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManagerWithPrompt.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/VerticalCenteredPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultTreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/ITreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupTreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/BaseScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/GroupedListDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/LayoutViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/ListDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/TreeDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/MeasureTextResult.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextBlockTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/BaseTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultPopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/FocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusExtras.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IGroupedToggle.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IIMETextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IMultilineTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/INativeFocusOwner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IStateContext.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextBaselineControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToggle.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTip.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ToggleGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ValidationQueue.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayChildrenHierarchicalCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/HierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/URLAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorUintListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/display/RenderDelegate.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/DragDropManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/IDropTarget.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/FeathersEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/MediaPlayerEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/AnchorLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseTiledLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseVariableVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/Direction.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalAlign.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalSpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IGroupedLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayoutDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ISpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ITrimmedVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVariableVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/LayoutBoundsResult.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/RelativeDepth.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/SlideShowLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalAlign.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ViewPortBounds.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/WaterfallLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/BaseTimedMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IAudioPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IMediaPlayerControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IProgressiveMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IVideoPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/MediaTimeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/PlayPauseToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundChannelPeakVisualizer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/TimeLabel.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/VideoPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/ColorFade.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cover.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cube.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Iris.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Reveal.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Wipe.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/AddOnFunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/IStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/BitmapFontTextFormat.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/StageTextField.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/themes/StyleNameFunctionTheme.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/ScreenDensityScaleFactorManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/ScreenDensityScaleCalculator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleX.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleY.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToSelect.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundToPrecision.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextInputNavigation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/TextureCache.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/calculateSnapshotTextureDimensions.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/LongPress.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToTrigger.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/xml/xmlListInsertAt.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/icon16x16.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/icon48x48.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/patchertest-app.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/patchertest.swf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/patchertest_win-app.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/phone1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/phone2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/fancy_close.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/filmstrip.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/globalviewcount_active.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_a5d5f6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_e1baeb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_fb9abb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_ffffff.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/highlight_old.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/instructor_view_mode.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/no_eye.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/oldplayerbar/close_captions.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/oldplayerbar/enlarge.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/oldplayerbar/play.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_a5d5f6.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_b3e1a5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_e1baeb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_f7e1a0.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playHighlight_fb9abb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playbarIcons.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playerbar/cc_on.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playerbar/play.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/playerbar/unfullscreen.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/seekpoint.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/seekpoint.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/uiimage/viewcount.psd" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/video.vtt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as" />
-    </list>
+    <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -987,12 +768,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1506715818488</updated>
-      <workItem from="1506715819832" duration="1859000" />
+      <workItem from="1506715819832" duration="1869000" />
     </task>
+    <task id="LOCAL-00001" summary="erry da i'm shufflin'">
+      <created>1506717787334</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1506717787334</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1859000" />
+    <option name="totallyTimeSpent" value="1869000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
