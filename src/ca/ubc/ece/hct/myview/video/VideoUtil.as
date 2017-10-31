@@ -322,10 +322,13 @@ CONFIG::AIR {
 
 				if(!ffmpegFile) {
 					var operatingSystem:String = Capabilities.os;
+					trace("shit, this isn't right.")
 			        if(operatingSystem.indexOf("Mac") >= 0) {
-						ffmpegFile = File.applicationDirectory.resolvePath("exe/ffmpeg");
+                        trace(File.applicationDirectory.nativePath);
+                        trace(File.applicationDirectory.resolvePath("ffmpeg").nativePath);
+						ffmpegFile = File.applicationDirectory.resolvePath("ffmpeg");
 					} else if(operatingSystem.indexOf("Windows") >= 0) {
-						ffmpegFile = File.applicationDirectory.resolvePath("exe/ffmpeg.exe");
+						ffmpegFile = File.applicationDirectory.resolvePath("ffmpeg.exe");
 					}
 					ffmpegStartupInfo = new NativeProcessStartupInfo();
 		            ffmpegStartupInfo.executable = ffmpegFile;
@@ -660,9 +663,9 @@ CONFIG::AIR {
             var file:File;
 			var operatingSystem:String = Capabilities.os;
 	        if(operatingSystem.indexOf("Mac") >= 0) {
-				file = File.applicationDirectory.resolvePath("exe/ffmpeg");
+				file = File.applicationDirectory.resolvePath("ffmpeg");
 			} else if(operatingSystem.indexOf("Windows") >= 0) {
-				file = File.applicationDirectory.resolvePath("exe/ffmpeg.exe");
+				file = File.applicationDirectory.resolvePath("ffmpeg.exe");
 			}
             ffmpegDurationStartupInfo.executable = file;
 

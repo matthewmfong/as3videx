@@ -63,6 +63,7 @@ public class VidexStarling extends Sprite {
 
     public var playerButton:Button;
     public var dashboardButton:Button;
+    public var instructorButton:Button;
 
     private var statusText:TextField;
     private var setup:Setup;
@@ -278,6 +279,11 @@ public class VidexStarling extends Sprite {
 //                playerView = new StarlingVideoPlayerView();
                 if(CONFIG::Instructor) {
                     recordsVisualizer = new UserRecordsVisualizer(stage.stageWidth, stage.stageHeight - toolbar.height);
+                    instructorButton = new Button();
+                    instructorButton.label = "Instructor Mode";
+                    instructorButton.addEventListener(MouseEvent.CLICK, instructorMode);
+                    instructorButton.x = stage.stageWidth - instructorButton.width - 10;
+                    Starling.current.nativeOverlay.addChild(instructorButton);
                 }
 
                 //			trace(VideoMetadataManager.getVideo("21-Arrays_I_VGA_10fps_keyint10_64kbps.mp4"));
@@ -288,6 +294,10 @@ public class VidexStarling extends Sprite {
 //            });
 //        delayTimer.start();
 
+    }
+
+    public function instructorMode(e:MouseEvent):void {
+        popRootPlaylist();
     }
 
 
@@ -397,6 +407,8 @@ public class VidexStarling extends Sprite {
         Starling.current.viewPort.height = e.height;
         stage.stageWidth = e.width + 5;
         stage.stageHeight = e.height + 5;
+
+        instructorButton.x = stage.stageWidth - instructorButton.width - 10;
 
 //        trace("event: " + e.width + "x" + e.height);
 //        trace("stage: " + stage.stageWidth + "x" + stage.stageHeight);

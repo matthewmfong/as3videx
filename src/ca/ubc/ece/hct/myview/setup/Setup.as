@@ -37,7 +37,7 @@ public class Setup extends View {
 
     override protected function addedToStage(e:Event = null):void {
 
-        consentForm = new ConsentForm(stage.stageWidth - 50, stage.stageHeight - 50, "consent/consentform.html");
+        consentForm = new ConsentForm(stage.stageWidth - 50, stage.stageHeight - 50, "consentform.html");
         consentForm.x = 25;
         consentForm.y = 25;
         consentForm.addEventListener(ConsentForm.ConsentFormAccept, acceptConsent);
