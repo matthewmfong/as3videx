@@ -6,7 +6,8 @@
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
-package ca.ubc.ece.hct.myview {
+package ca.ubc.ece.hct.myview.dashboard {
+import ca.ubc.ece.hct.myview.*;
 
 import ca.ubc.ece.hct.myview.setup.Setup;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
