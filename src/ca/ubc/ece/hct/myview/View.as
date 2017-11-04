@@ -14,8 +14,8 @@ import flash.events.Event;
 
 public class View extends Sprite implements IView {
 
-		protected var _width:Number;
-		protected var _height:Number;
+		protected var _width:Number = 1;
+		protected var _height:Number = 1;
 
 
 		public function bringChildToFront(displayObject:DisplayObject):void {

@@ -32,6 +32,7 @@ public class ServerDataLoader {
         public static const GET_VCR_PAGE:String = "getCrowdVCRs.php";
 		public static const GET_CROWD_HIGHLIGHTS_PAGE:String = "getCrowdHighlights.php";
 		private static var queue:LoaderMax = new LoaderMax( { name: "WebLoaderQueue", auditSize:false, autoLoad:true } );
+		public static const QUERY_PAGE:String = "admin/query.php";
 
 		public static function login(userID:String):Signal {
 			var signal:Signal = new Signal(Object);
@@ -217,6 +218,20 @@ public class ServerDataLoader {
             var signal:Signal = new Signal(Object);
             queue.append( new DataLoader(request, {signal: signal, onComplete: requestComplete }) );
 //            queue.load();
+            return signal;
+		}
+
+		public static function getVCRsForMediaAliasID(media_alias_id:String):Signal {
+
+            trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+                    "media_alias_id=" + media_alias_id);
+            var signal:Signal = new Signal(Object);
+            queue.append(
+                    new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+                            "media_alias_id=" + media_alias_id,
+                            {signal: signal,
+                                onComplete: requestComplete }));
+            queue.load();
             return signal;
 		}
 
