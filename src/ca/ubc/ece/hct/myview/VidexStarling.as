@@ -8,6 +8,7 @@
 
 package ca.ubc.ece.hct.myview {
 
+import ca.ubc.ece.hct.myview.dashboard.InstructorDashboard2018;
 import ca.ubc.ece.hct.myview.setup.Setup;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
@@ -52,6 +53,7 @@ public class VidexStarling extends Sprite {
     public var rootPlaylistView:VideoPlaylistView;
     public var playerView:StarlingVideoPlayerView;
     public var recordsVisualizer:UserRecordsVisualizer;
+    public var dashboard:InstructorDashboard2018;
     public var course:Course;
 
     private var consent_so:SharedObject;
@@ -278,12 +280,14 @@ public class VidexStarling extends Sprite {
 //
 //                playerView = new StarlingVideoPlayerView();
                 if(CONFIG::Instructor) {
-                    recordsVisualizer = new UserRecordsVisualizer(stage.stageWidth, stage.stageHeight - toolbar.height);
+//                    recordsVisualizer = new UserRecordsVisualizer(stage.stageWidth, stage.stageHeight - toolbar.height);
                     instructorButton = new Button();
                     instructorButton.label = "Instructor Mode";
                     instructorButton.addEventListener(MouseEvent.CLICK, instructorMode);
                     instructorButton.x = stage.stageWidth - instructorButton.width - 10;
                     Starling.current.nativeOverlay.addChild(instructorButton);
+
+                    instructorMode();
                 }
 
                 //			trace(VideoMetadataManager.getVideo("21-Arrays_I_VGA_10fps_keyint10_64kbps.mp4"));
@@ -296,8 +300,13 @@ public class VidexStarling extends Sprite {
 
     }
 
-    public function instructorMode(e:MouseEvent):void {
+    public function instructorMode(e:MouseEvent = null):void {
         popRootPlaylist();
+        dashboard = new InstructorDashboard2018();
+        dashboard.setPlaylist(VideoMetadataManager.playlist);
+        dashboard.setSize(stage.stageWidth, stage.stageHeight - toolbar.height);
+        dashboard.move(0, toolbar.height);
+        Starling.current.nativeStage.addChild(dashboard);
     }
 
 
@@ -363,6 +372,7 @@ public class VidexStarling extends Sprite {
 //        addChild(rootPlaylistView);
         rootPlaylistView.touchable = true;
         rootPlaylistView.alpha = 1;
+        pushView(rootPlaylistView);
         Starling.current.nativeOverlay.removeChild(backButton);
         rootPlaylistView.setSize(stage.stageWidth - 20, stage.stageHeight - toolbar.height - 20);
 
@@ -370,9 +380,11 @@ public class VidexStarling extends Sprite {
     }
 
     public function popRootPlaylist():void {
-        if(rootPlaylistView.alpha > 0) {
+        if(rootPlaylistView.touchable) {
             rootPlaylistView.touchable = false;
             rootPlaylistView.alpha = 0;
+
+            removeChild(rootPlaylistView);
         }
 //        if(rootPlaylistView && contains(rootPlaylistView)) {
 //            removeChild(rootPlaylistView);
