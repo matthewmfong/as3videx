@@ -32,7 +32,7 @@ public class ServerDataLoader {
         public static const GET_VCR_PAGE:String = "getCrowdVCRs.php";
 		public static const GET_CROWD_HIGHLIGHTS_PAGE:String = "getCrowdHighlights.php";
 		public static const QUERY_PAGE:String = "admin/query.php";
-		private static var queue:LoaderMax = new LoaderMax( {name: "WebLoaderQueue", auditSize:false});
+		private static var queue:LoaderMax = new LoaderMax( { name: "WebLoaderQueue", auditSize:false, autoLoad:true } );
 
 		public static function login(userID:String):Signal {
 			var signal:Signal = new Signal(Object);
