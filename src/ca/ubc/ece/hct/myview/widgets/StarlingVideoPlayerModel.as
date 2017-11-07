@@ -533,8 +533,8 @@ public class StarlingVideoPlayerModel {
             var user_string:String;
             var view_count_record_string:String;
 
-            for(var m:String in obj[n]) {
-                switch(m) {
+            for (var m:String in obj[n]) {
+                switch (m) {
                     case "user_id":
                         user_string = obj[n][m];
                         break;
@@ -544,17 +544,20 @@ public class StarlingVideoPlayerModel {
                 }
             }
 
-            var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, user_string);
+            if (_video) {
+                var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, user_string);
 
-            if(userData && view_count_record_string) {
-                userData.view_count_record = view_count_record_string;
-            } else if(view_count_record_string && user_string) {
-                userData = new UserData();
-                userData.userString = user_string;
-                userData.view_count_record = view_count_record_string;
-                _video.addCrowdUserData(UserData.CLASS, userData);
+                if (userData && view_count_record_string) {
+                    userData.view_count_record = view_count_record_string;
+                } else if (view_count_record_string && user_string) {
+                    userData = new UserData();
+                    userData.userString = user_string;
+                    userData.view_count_record = view_count_record_string;
+                    _video.addCrowdUserData(UserData.CLASS, userData);
+                }
             }
         }
+        
     }
 
     private function crowdHighlightsLoaded(object:Object):void {
