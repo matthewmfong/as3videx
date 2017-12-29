@@ -92,7 +92,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM1121_1_winter_2017" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017">
+      <configuration name="BCIT_CHEM1121_1_winter_2017" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="feathers" library-level="project">
@@ -122,7 +122,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017-INSTRUCTOR">
+      <configuration name="BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="feathers" library-level="project">

@@ -30,7 +30,7 @@ public class ServerDataLoader {
 
         public static const GET_VCR_PAGE:String = "getCrowdVCRs.php";
 		public static const GET_CROWD_HIGHLIGHTS_PAGE:String = "getCrowdHighlights.php";
-		private static var queue:LoaderMax = new LoaderMax( {name: "WebLoaderQueue", auditSize:false});
+		private static var queue:LoaderMax = new LoaderMax( { name: "WebLoaderQueue", auditSize:false, autoLoad:true } );
 
 		public static function login(userID:String):Signal {
 			var signal:Signal = new Signal(Object);
@@ -39,7 +39,7 @@ public class ServerDataLoader {
 							   "user=" + userID,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
-			queue.load();
+//			queue.load();
 			return signal;
 		}
 
@@ -58,7 +58,7 @@ public class ServerDataLoader {
 							   "highlights=" + highlights,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
-			queue.load();
+//			queue.load();
 			return signal;
 		}
 
@@ -77,7 +77,7 @@ public class ServerDataLoader {
 				new DataLoader(urlString,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
-			queue.load();
+//			queue.load();
 			return signal;
 		}
 
@@ -92,7 +92,7 @@ public class ServerDataLoader {
 							   "user=" + userID,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
-			queue.load();
+//			queue.load();
 			return signal;
 		}
 
@@ -118,7 +118,7 @@ public class ServerDataLoader {
 				new DataLoader(request,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
-			queue.load();
+//			queue.load();
 			return signal;
 		}
 
@@ -131,7 +131,7 @@ public class ServerDataLoader {
                             "media_alias_id=" + media_alias_id,
                             {signal: signal,
                                 onComplete: requestComplete }));
-            queue.load();
+//            queue.load();
             return signal;
         }
 
@@ -144,7 +144,7 @@ public class ServerDataLoader {
                             "media_alias_id=" + media_alias_id,
                             {signal: signal,
                                 onComplete: requestComplete }));
-            queue.load();
+//            queue.load();
             return signal;
         }
 
@@ -159,22 +159,30 @@ public class ServerDataLoader {
 							   "user=" + userID,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
-			queue.load();
+//			queue.load();
 			return signal;
 		}
+
+
+		public static var sessionSequence:Number = 0;
 
         public static function addLog_v2(userID:String, state:String, event:String):Signal {
             var urlVar:URLVariables = new URLVariables();
 			urlVar.user = userID;
             urlVar.state = state;
 			urlVar.event = event;
+			urlVar.sessionSequence = sessionSequence++;
+
+			var myDate:Date = new Date();
+			urlVar.clientDateTime = myDate.fullYear + "-" + (myDate.month+1) + "-" + myDate.date + " " +
+								    myDate.hours + ":" + myDate.minutes + ":" + myDate.seconds;
             var request:URLRequest = new URLRequest("http://" + Constants.DOMAIN + "/" + LOG_PAGE_v2);
             request.data = urlVar;
             request.method = URLRequestMethod.POST;
 
             var signal:Signal = new Signal(Object);
             queue.append( new DataLoader(request, {signal: signal, onComplete: requestComplete }) );
-            queue.load();
+//            queue.load();
             return signal;
         }
 
@@ -189,12 +197,12 @@ public class ServerDataLoader {
 
             var signal:Signal = new Signal(Object);
             queue.append( new DataLoader(request, {signal: signal, onComplete: requestComplete }) );
-            queue.load();
+//            queue.load();
             return signal;
 		}
 
 		public static function requestComplete(e:LoaderEvent):void {
-//			 trace(e.target.content);
+			 trace(e.target.content);
 			(Signal)(e.target.vars.signal).dispatch(e.target.content);
 		}
 	}

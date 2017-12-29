@@ -61,7 +61,7 @@ public class SurveyPopup extends View {
 	public function SurveyPopup(surveyID:String, surveyURL:String, confirmCompletionText:String = "?") {
 
 		this.surveyID = surveyID;
-		this.surveyURL = surveyURL;
+		this.surveyURL = surveyURL + "?user_id=" + surveyID;
 		this.confirmCompletionText = confirmCompletionText;
         survey_so = SharedObject.getLocal("survey");
 
@@ -79,7 +79,6 @@ public class SurveyPopup extends View {
 
 	override protected function addedToStage(e:Event = null):void {
 		if(container == null) {
-
 
 			graphics.beginFill(0, 0.8);
 			graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
@@ -120,10 +119,10 @@ public class SurveyPopup extends View {
 			tf.htmlText = "Survey"
 			tf.defaultTextFormat = new TextFormat("Arial", 20, 0x666666, false, false, false, null, null, "center");
 			tf.htmlText += "<br />Thank you for using this application. To help us improve it for the future, " +
-					  "please complete the following survey. <br /><br />Your User ID is: <br />";
+					  "please complete the following survey.";// <br /><br />Your User ID is: <br />";
 
-			tf.defaultTextFormat = new TextFormat("Arial", 25, 0xff0000, false, false, false, null, null, "center");
-			tf.htmlText += surveyID;
+//			tf.defaultTextFormat = new TextFormat("Arial", 25, 0xff0000, false, false, false, null, null, "center");
+//			tf.htmlText += surveyID;
 
 //				tf.defaultTextFormat = new TextFormat("Arial", 20, 0x0000ff, false, null, false);
 //				tf.htmlText += "<br /> <br /><a href='" + surveyURL + "'>" + surveyURL + "</a>";

@@ -222,27 +222,27 @@ public class VidexStarling extends Sprite {
                 NativeApplication.nativeApplication.exit();
             });
             Starling.current.nativeOverlay.addChild(setup);
-//        } else if((survey_so.size == 0 /* so didn't exist */ || survey_so.data.survey1 == false) &&
-//                CONFIG::Instructor == false) {
-//            surveyPopup = new SurveyPopup(UserID.id, "https://survey.ubc.ca/s/videx-2017/", "VIDEXSURVEY2017");
-//            surveyPopup.closeMeSignal.add(function(surveyCompleted:Boolean):void {
-//                if(surveyCompleted) {
-//                    survey_so.data.survey1 = true;
-//                    ServerDataLoader.addLog(UserID.id, "Completed survey.");
-//                } else {
-//                    ServerDataLoader.addLog(UserID.id, "Skipped survey.");
-//                }
-//                if(Starling.current.nativeOverlay.contains(surveyPopup)) {
-//                    Starling.current.nativeOverlay.removeChild(surveyPopup);
-//
-//                }
-//                loadVideoLibrary();
-//            });
-//
-//            surveyPopup.launchedSurveySignal.add(function():void {
-//                ServerDataLoader.addLog(UserID.id, "Launched survey.");
-//            });
-//            Starling.current.nativeOverlay.addChild(surveyPopup);
+        } else if((survey_so.size == 0 /* so didn't exist */ || survey_so.data.survey1 == false) &&
+                CONFIG::Instructor == false) {
+            surveyPopup = new SurveyPopup(UserID.id, "https://survey.ubc.ca/s/videxbcit2017w/", "VIDEXSURVEY2017");
+            surveyPopup.closeMeSignal.add(function(surveyCompleted:Boolean):void {
+                if(surveyCompleted) {
+                    survey_so.data.survey1 = true;
+                    ServerDataLoader.addLog(UserID.id, "Completed survey.");
+                } else {
+                    ServerDataLoader.addLog(UserID.id, "Skipped survey.");
+                }
+                if(Starling.current.nativeOverlay.contains(surveyPopup)) {
+                    Starling.current.nativeOverlay.removeChild(surveyPopup);
+
+                }
+                loadVideoLibrary();
+            });
+
+            surveyPopup.launchedSurveySignal.add(function():void {
+                ServerDataLoader.addLog(UserID.id, "Launched survey.");
+            });
+            Starling.current.nativeOverlay.addChild(surveyPopup);
 
         } else {
             loadVideoLibrary();
