@@ -14,6 +14,9 @@ package ca.ubc.ece.hct.myview {
                                               'DevTestCourse':                      new Course("UBC", "DevTestCourse", "0", "test", "2000"),
                                               'TokyoTech_DEMO_COURSE':              new Course("TokyoTech", "TokyoTechDemoCourse", "0", "demo", "2000"),
 
+                                              'BCIT_CHEM0011_1_spring_2018':        new Course("BCIT", "CHEM0011", "1", "spring", "2018"),
+                                              'BCIT_CHEM0012_1_spring_2018':        new Course("BCIT", "CHEM0012", "1", "spring", "2018"),
+
                                               'BCIT_CHEM0011_1_spring_2017':        new Course("BCIT", "CHEM0011", "1", "spring", "2017"),
                                               'BCIT_CHEM0011_1_winter_2017':        new Course("BCIT", "CHEM0011", "1", "winter", "2017"),
                                               'BCIT_CHEM0011_1_winter_2017_TEST':   new Course("BCIT", "CHEM0011", "test", "winter", "2017"),

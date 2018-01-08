@@ -12,7 +12,7 @@
 
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>ca.ubc.ece.hct.myview.chem0011-instructor</id>
+    <id>ca.ubc.ece.hct.myview.chem0012-instructor</id>
 
     <!-- Used as the filename for the application. Required. -->
     <filename>ViDeX - Instructor</filename>
