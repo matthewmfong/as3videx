@@ -39,6 +39,8 @@ import org.osflash.signals.natives.NativeSignal;
 import spark.components.Panel;
 
 import starling.core.Starling;
+import starling.display.Canvas;
+import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.ResizeEvent;
 import starling.text.TextField;
@@ -313,6 +315,18 @@ public class VidexStarling extends Sprite {
 //                delayTimer.stop();
 //            });
 //        delayTimer.start();
+
+        var asdf:Quad = new Quad(1, 1);
+
+        addChild(asdf);
+        asdf.x = this.width/2;
+        asdf.y = this.height/2;
+
+        AnnotationCallout.showCallout(
+                asdf,
+                Colours.colours,
+                [],
+                asdf);
 
     }
 
