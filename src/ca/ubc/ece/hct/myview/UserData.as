@@ -28,6 +28,7 @@ public class UserData {
 		public var pauseRecord:Array;
 		public var playbackRateRecord:Array;
 		public var highlights:HashMap;
+		public var tags:Vector.<KeywordTag>;
 		
 		public function UserData() {
 
@@ -35,6 +36,7 @@ public class UserData {
 			pauseRecord = [];
 			playbackRateRecord = [];
 			highlights = new HashMap();
+			tags = new Vector.<KeywordTag>();
 			maxViewCount = 0;
 
 		}
@@ -349,6 +351,12 @@ public class UserData {
 				retString += highlight.getString() + "\n";
 			}
 			return retString;
+		}
+
+		public function addTag(string:String, range:Range, colour:uint):void {
+
+			tags.push(new KeywordTag(string, range, colour));
+
 		}
 	}
 }

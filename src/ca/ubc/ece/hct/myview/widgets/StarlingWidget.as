@@ -8,6 +8,7 @@
 
 package ca.ubc.ece.hct.myview.widgets {
 import ca.ubc.ece.hct.Range;
+import ca.ubc.ece.hct.myview.KeywordTag;
 import ca.ubc.ece.hct.myview.StarlingView;
 import ca.ubc.ece.hct.myview.UserDataViewMode;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
@@ -34,6 +35,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
     public var deselected:Signal;
     public var highlighted:Signal;
     public var unhighlighted:Signal;
+    public var keywordTagged:Signal;
     public var searchedText:Signal;
     public var playbackRateSet:Signal;
     public var playHighlightSelected:Signal;
@@ -68,6 +70,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
         deselected 						= new Signal(StarlingWidget);
         highlighted 					= new Signal(StarlingWidget, int, Range); // colour, interval
         unhighlighted 					= new Signal(StarlingWidget, int, Range); // colour, interval
+        keywordTagged                   = new Signal(StarlingWidget, KeywordTag);
         searchedText					= new Signal(StarlingWidget, String);
         playbackRateSet					= new Signal(StarlingWidget, Number); // rate
         playHighlightSelected			= new Signal(StarlingWidget, int);
@@ -103,6 +106,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
         deselected = null;
         highlighted = null;
         unhighlighted = null;
+        keywordTagged = null;
         searchedText = null;
         playbackRateSet = null;
         playHighlightSelected = null;
@@ -135,6 +139,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
     public function setHighlightsWriteMode(mode:String, colour:uint):void { }
     public function highlight(colour:int, interval:Range):void { }
     public function unhighlight(colour:int, interval:Range):void { }
+    public function keywordTag(keywordTag:KeywordTag):void { }
     public function playHighlights(colour:int):void { }
 
     public function updateHighlights():void { }
