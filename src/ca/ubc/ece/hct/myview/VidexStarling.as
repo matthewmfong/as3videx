@@ -222,27 +222,27 @@ public class VidexStarling extends Sprite {
                 NativeApplication.nativeApplication.exit();
             });
             Starling.current.nativeOverlay.addChild(setup);
-        } else if((survey_so.size == 0 /* so didn't exist */ || survey_so.data.survey1 == false) &&
-                CONFIG::Instructor == false) {
-            surveyPopup = new SurveyPopup(UserID.id, "https://survey.ubc.ca/s/videxbcit2017w/", "VIDEXSURVEY2017");
-            surveyPopup.closeMeSignal.add(function(surveyCompleted:Boolean):void {
-                if(surveyCompleted) {
-                    survey_so.data.survey1 = true;
-                    ServerDataLoader.addLog(UserID.id, "Completed survey.");
-                } else {
-                    ServerDataLoader.addLog(UserID.id, "Skipped survey.");
-                }
-                if(Starling.current.nativeOverlay.contains(surveyPopup)) {
-                    Starling.current.nativeOverlay.removeChild(surveyPopup);
-
-                }
-                loadVideoLibrary();
-            });
-
-            surveyPopup.launchedSurveySignal.add(function():void {
-                ServerDataLoader.addLog(UserID.id, "Launched survey.");
-            });
-            Starling.current.nativeOverlay.addChild(surveyPopup);
+//        } else if((survey_so.size == 0 /* so didn't exist */ || survey_so.data.survey1 == false) &&
+//                CONFIG::Instructor == false) {
+//            surveyPopup = new SurveyPopup(UserID.id, "https://survey.ubc.ca/s/videxbcit2017w/", "VIDEXSURVEY2017");
+//            surveyPopup.closeMeSignal.add(function(surveyCompleted:Boolean):void {
+//                if(surveyCompleted) {
+//                    survey_so.data.survey1 = true;
+//                    ServerDataLoader.addLog(UserID.id, "Completed survey.");
+//                } else {
+//                    ServerDataLoader.addLog(UserID.id, "Skipped survey.");
+//                }
+//                if(Starling.current.nativeOverlay.contains(surveyPopup)) {
+//                    Starling.current.nativeOverlay.removeChild(surveyPopup);
+//
+//                }
+//                loadVideoLibrary();
+//            });
+//
+//            surveyPopup.launchedSurveySignal.add(function():void {
+//                ServerDataLoader.addLog(UserID.id, "Launched survey.");
+//            });
+//            Starling.current.nativeOverlay.addChild(surveyPopup);
 
         } else {
             loadVideoLibrary();
@@ -408,7 +408,9 @@ public class VidexStarling extends Sprite {
         stage.stageWidth = e.width + 5;
         stage.stageHeight = e.height + 5;
 
-        instructorButton.x = stage.stageWidth - instructorButton.width - 10;
+        if(instructorButton) {
+            instructorButton.x = stage.stageWidth - instructorButton.width - 10;
+        }
 
 //        trace("event: " + e.width + "x" + e.height);
 //        trace("stage: " + stage.stageWidth + "x" + stage.stageHeight);
