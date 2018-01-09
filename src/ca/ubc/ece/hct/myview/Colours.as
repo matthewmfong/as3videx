@@ -18,6 +18,8 @@ package ca.ubc.ece.hct.myview {
 		public static const BLUE:uint = colours[3];
 		public static const PURPLE:uint = colours[4];
 
+		public static const BUTTON_ACTIVATED_FONT_COLOUR:uint = 0x33a1ff;
+
 		public function Colours() {}
 
 		public static function sortColours(colours:Array):Array {

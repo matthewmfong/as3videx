@@ -10,8 +10,8 @@ package ca.ubc.ece.hct.myview.widgets.filmstrip {
 
 import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.Colours;
-import ca.ubc.ece.hct.myview.HighlightCallout;
-import ca.ubc.ece.hct.myview.HighlightCallout;
+import ca.ubc.ece.hct.myview.AnnotationCallout;
+import ca.ubc.ece.hct.myview.AnnotationCallout;
 import ca.ubc.ece.hct.myview.Util;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.widgets.StarlingWidget;
@@ -390,24 +390,24 @@ public class MultiFilmstrip extends StarlingWidget {
                             selected.dispatch(this, selectionRange);
                             TouchProcessor.PROCESS_TARGETS_WHILE_MOVING = false;
 
-                            highlightCallout = HighlightCallout.showCallout(
+                            highlightCallout = AnnotationCallout.showCallout(
                                     filmstrip.selectionHighlightSprite,
                                     Colours.colours,
                                     _video.userData.getHighlightedColoursforTimeRange(selectionRange),
 								    this);
-							(HighlightCallout)(highlightCallout.content).highlightSignal.add(
+							(AnnotationCallout)(highlightCallout.content).highlightSignal.add(
                                     function highlightme(colour:uint, mode:String):void {
-										if(mode == HighlightCallout.ADD_HIGHLIGHT_MODE) {
-                                            highlighted.dispatch(HighlightCallout.caller, colour, selectionRange);
+										if(mode == AnnotationCallout.ADD_HIGHLIGHT_MODE) {
+                                            highlighted.dispatch(AnnotationCallout.caller, colour, selectionRange);
 											highlightCallout.close(true);
-                                        } else if(mode == HighlightCallout.DEL_HIGHLIGHT_MODE) {
-											unhighlighted.dispatch(HighlightCallout.caller, colour, selectionRange);
+                                        } else if(mode == AnnotationCallout.DEL_HIGHLIGHT_MODE) {
+											unhighlighted.dispatch(AnnotationCallout.caller, colour, selectionRange);
 										}
                                     });
 							highlightCallout.addEventListener(Event.CLOSE,
 									function calloutClosed(e:Event):void {
 										deselect();
-										deselected.dispatch(HighlightCallout.caller);
+										deselected.dispatch(AnnotationCallout.caller);
                                         highlightCallout.removeEventListener(Event.CLOSE, calloutClosed);
 									}
 							);
