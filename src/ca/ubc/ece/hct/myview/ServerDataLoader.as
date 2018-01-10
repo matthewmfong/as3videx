@@ -37,7 +37,7 @@ public class ServerDataLoader {
 		public static function login(userID:String):Signal {
 			var signal:Signal = new Signal(Object);
 			queue.append(
-				new DataLoader("http://" + Constants.DOMAIN + "/" + LOGIN_PAGE + "?" + 
+				new DataLoader("http://" + Constants.DOMAIN + "/" + LOGIN_PAGE + "?" +
 							   "user=" + userID,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
@@ -224,19 +224,39 @@ public class ServerDataLoader {
 		public static function getVCRsForMediaAliasID(media_alias_id:String):Signal {
 
             trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
-                    "media_alias_id=" + media_alias_id);
+                    "media_alias_id=" + media_alias_id + "&user_string=" + COURSE::Name);
             var signal:Signal = new Signal(Object);
             queue.append(
                     new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
-                            "media_alias_id=" + media_alias_id,
+                            "media_alias_id=" + media_alias_id + "&user_string=" + COURSE::Name,
                             {signal: signal,
                                 onComplete: requestComplete }));
             queue.load();
             return signal;
 		}
 
+		public static function getActiveUsers(from:Date, to:Date):Signal {
+
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&" +
+					"from=" + Util.date2string(from) + "&to=" + Util.date2string(to) + "&user_string=" + COURSE::Name);
+			var signal:Signal = new Signal(Object, Date, Date);
+			queue.append(
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&" +
+                            "from=" + Util.date2string(from) + "&to=" + Util.date2string(to) + "&user_string=" + COURSE::Name,
+							{signal: signal,
+								onComplete:
+										function activeUsersReturn(e:LoaderEvent):void {
+											(Signal)(e.target.vars.signal).dispatch(e.target.content, from, to);
+										}
+							}
+					)
+			);
+			queue.load();
+			return signal;
+		}
+
 		public static function requestComplete(e:LoaderEvent):void {
-//			 trace(e.target.content);
+//			trace("Target content: " + e.target.content);
 			(Signal)(e.target.vars.signal).dispatch(e.target.content);
 		}
 	}

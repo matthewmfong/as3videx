@@ -15,6 +15,8 @@ package ca.ubc.ece.hct.myview {
 		public var section:String;
 		public var term:String;
 		public var year:String;
+		public var startDate:Date;
+		public var endDate:Date;
 
 		public function Course(school:String, code:String, section:String, term:String, year:String) {
 			this.school = school;

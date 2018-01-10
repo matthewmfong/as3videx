@@ -77,6 +77,8 @@ public class VidexStarling extends Sprite {
 
     public static var assets:AssetManager;
 
+    public static var flexLayer:Object;
+
     public function VidexStarling() {
 
         assets = new AssetManager();
@@ -226,6 +228,8 @@ public class VidexStarling extends Sprite {
 
     public function loadSetup():void {
 
+        course = VideoMetadataManager.COURSE; // after loading the course from the server, it will get start and end dates too.
+
         if ((consent_so.size == 0 /* s.o. didn't exist */ || consent_so.data.consent == false) &&
                 CONFIG::Instructor == false) {
 
@@ -328,7 +332,7 @@ public class VidexStarling extends Sprite {
 
     public function instructorMode(e:MouseEvent = null):void {
         popRootPlaylist();
-        dashboard = new InstructorDashboard2018();
+        dashboard = new InstructorDashboard2018(flexLayer);
         dashboard.setPlaylist(VideoMetadataManager.playlist);
         dashboard.setSize(stage.stageWidth, stage.stageHeight - toolbar.height);
         dashboard.move(0, toolbar.height);
