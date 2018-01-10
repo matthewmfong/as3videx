@@ -37,6 +37,7 @@ import org.osflash.signals.natives.NativeSignal;
 
 import starling.core.Starling;
 import starling.display.Canvas;
+import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.ResizeEvent;
 import starling.events.TouchEvent;
@@ -92,6 +93,19 @@ public class VidexStarling extends Sprite {
         assets.enqueue(File.applicationDirectory.resolvePath("uiimage/globalviewcount.png"));
         assets.enqueue(File.applicationDirectory.resolvePath("uiimage/instructor_view_mode_active.png"));
         assets.enqueue(File.applicationDirectory.resolvePath("uiimage/instructor_view_mode.png"));
+
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/caution_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/caution_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/puzzle_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/puzzle_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/question_mark_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/question_mark_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/star_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/star_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/tag_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/tag_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/thumbs_up_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/thumbs_up_light.png"));
 
         assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/playerbar/cc_off.png"), "playerBarCCOff");
         assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/playerbar/cc_on.png"), "playerBarCCOn");
@@ -293,6 +307,18 @@ public class VidexStarling extends Sprite {
 //                delayTimer.stop();
 //            });
 //        delayTimer.start();
+
+        var asdf:Quad = new Quad(1, 1);
+
+        addChild(asdf);
+        asdf.x = this.width/2;
+        asdf.y = this.height/2;
+
+        AnnotationCallout.showCallout(
+                asdf,
+                Colours.colours,
+                [],
+                asdf);
 
     }
 
