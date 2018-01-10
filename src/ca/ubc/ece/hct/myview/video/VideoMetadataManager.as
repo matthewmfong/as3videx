@@ -27,6 +27,7 @@ import flash.utils.ByteArray;
 
 	public class VideoMetadataManager {
 
+		public static var COURSE:Course;
 		public static var videos:HashMap = new HashMap();
 		public static var playlist:VideoPlaylist;
 		public static const videosFolder:String = "videos";
@@ -80,6 +81,7 @@ import flash.utils.ByteArray;
 	                                      courseTerm:String,
 	                                      courseYear:String,
 	                                      userID:String = null):Signal {
+			COURSE = new Course(school, courseCode, courseCode, courseTerm, courseYear);
 	    	ServerDataLoader.getCourse(school, courseCode, courseSection, courseTerm, courseYear, userID).add(courseJSONLoaded);
 	    	return courseLoaded;
 	    }
@@ -94,6 +96,10 @@ import flash.utils.ByteArray;
 
 		private static function courseJSONLoaded(object:Object):void {
 			var obj:* = JSON.parse((String)(object));
+
+            COURSE.startDate = Util.dateParser(obj['start_date']);
+            COURSE.endDate = Util.dateParser(obj['end_date']);
+
 			playlist = parsePlaylist(obj, "\t");
 			playlist.listName = "root";
 

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+                xmlns:s="library://ns.adobe.com/flex/spark"
+                layout="absolute"
+                creationComplete="onCreationComplete();"
+                backgroundAlpha="0">
+    <mx:Script source="myview/VidexFlex.as" />
+    <s:SkinnableContainer id="rootContainer" width="800">
+        <s:layout>
+            <s:HorizontalLayout />
+        </s:layout>
+        <s:SpriteVisualElement id="playlistShit" width="400" />
+        <s:SkinnableContainer id="bingbong" width="400" />
+    </s:SkinnableContainer>
+</mx:Application>
