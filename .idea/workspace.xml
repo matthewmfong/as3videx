@@ -629,7 +629,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flash App.BCIT_CHEM0011_1_winter_2017-INSTRUCTOR">
+  <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0011_1_winter_2017_TEST">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -1990,6 +1990,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#554#585#0" expanded="true" />
           </folding>
         </state>
       </provider>
