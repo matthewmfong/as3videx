@@ -250,5 +250,35 @@
             newArry.push( hex2 );
             return newArry;
         }
+
+        public static function getHeatMapColor(value:Number):uint
+        {
+            var NUM_COLORS:int = 4;
+            var color:Array = [ [0,0,255], [0,255,0], [255,255,0], [255,0,0] ];
+            // A static array of 4 colors:  (blue,   green,  yellow,  red) using {r,g,b} for each.
+
+            var idx1:int;        // |-- Our desired color will be between these two indexes in "color".
+            var idx2:int;        // |
+            var fractBetween:Number = 0;  // Fraction between "idx1" and "idx2" where our value is.
+
+            if(value <= 0) {
+                idx1 = idx2 = 0;    // accounts for an input <=0
+            } else if(value >= 1)  {
+                idx1 = idx2 = NUM_COLORS-1; // accounts for an input >=0
+            } else {
+                value = value * (NUM_COLORS-1);        // Will multiply value by 3.
+                idx1  = Math.floor(value);                  // Our desired color will be after this index.
+                idx2  = idx1+1;                        // ... and before this index (inclusive).
+                fractBetween = value - idx1;    // Distance between the two indexes (0-1).
+            }
+
+            var rgb:Object = {};
+
+            rgb.r = (color[idx2][0] - color[idx1][0])*fractBetween + color[idx1][0];
+            rgb.g = (color[idx2][1] - color[idx1][1])*fractBetween + color[idx1][1];
+            rgb.b = (color[idx2][2] - color[idx1][2])*fractBetween + color[idx1][2];
+
+            return ( rgb.r<<16 | rgb.g<<8 | rgb.b );
+        }
     }
 }

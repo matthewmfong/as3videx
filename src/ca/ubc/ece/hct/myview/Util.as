@@ -331,6 +331,41 @@ package ca.ubc.ece.hct.myview {
 		    );
 		}
 
+		public static function date2string(d:Date):String {
+			return d.fullYear + "-" + (d.month+1) + "-" + d.date + " " + d.hours + ":" + d.minutes + ":" + d.seconds;
+		}
+
+		public static function monthNumber2String(m:Number):String {
+			switch(m) {
+				case 1:
+					return "January";
+				case 2:
+					return "Feburary";
+				case 3:
+					return "March";
+				case 4:
+					return "April";
+				case 5:
+					return "May";
+				case 6:
+					return "June";
+				case 7:
+					return "July";
+				case 8:
+					return "August";
+				case 9:
+					return "September";
+				case 10:
+					return "October";
+				case 11:
+					return "November";
+				case 12:
+					return "December";
+				default:
+					return m + " is not a valid month.";
+			}
+		}
+
         public static function timeInSecondsToTimeString(timeX:Number):String {
             var newMinutes:String = uint(timeX/60).toString();
             newMinutes = newMinutes.length == 1 ? "0" + newMinutes : newMinutes;

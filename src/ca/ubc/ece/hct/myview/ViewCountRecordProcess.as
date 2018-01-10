@@ -16,6 +16,9 @@ public class ViewCountRecordProcess implements Runnable {
      */
     public var dispatcher:CrossThreadDispatcher;
 
+    public var hourlyRecordCount:Array;
+    public var hourlyRecordCountBA:ByteArray;
+
     public var orgUserRecords:Array;
     public var records:ByteArray;
 
@@ -33,17 +36,20 @@ public class ViewCountRecordProcess implements Runnable {
             userIndex = orgUserRecords.length - 1;
         }
 
-
         orgUserRecords[userIndex].addRecord(vcr, date);
     }
 
     public function process(obj:ViewCountRecordProcessArguments):int {
 
         orgUserRecords = [];
+        hourlyRecordCount = [];
         var strings:Array = obj.strings;
 
-        var newttt:Number = getTimer();
-        trace(getTimer());
+//        var newttt:Number = getTimer();
+//        trace(getTimer());
+
+        var dateCounter:Date = new Date();
+        var counter:Number = 0;
         for(var i:int = 0; i<strings.length; i++) {
             var record:Array = strings[i].split("\t");
             var user:String = record[0];
@@ -58,6 +64,20 @@ public class ViewCountRecordProcess implements Runnable {
             var minute:Number = Number(dateString.substr(14, 2));
             var second:Number = Number(dateString.substr(17, 2));
             var date:Date = new Date(year, month - 1, day, hour, minute, second);
+//            trace(date);
+
+            if(dateCounter.year     != date.year ||
+                dateCounter.month   != date.month ||
+                dateCounter.date     != date.date ||
+                dateCounter.hours    != date.hours) {
+//                trace();
+//                trace(date + "_ " + dateCounter + " " + counter);
+                dateCounter = date;
+                hourlyRecordCount.push({date:date, count:counter});
+                counter = 0;
+            } else {
+                counter++;
+            }
 
             putRecord(user, vcr, date);
 
@@ -76,6 +96,14 @@ public class ViewCountRecordProcess implements Runnable {
         records.writeObject(orgUserRecords);
         records.position = 0;
         dispatcher.setSharedProperty("orgUserRecords", records);
+
+
+        hourlyRecordCountBA = new ByteArray();
+
+        hourlyRecordCountBA.shareable = true;
+        hourlyRecordCountBA.writeObject(hourlyRecordCount);
+        hourlyRecordCountBA.position = 0;
+        dispatcher.setSharedProperty("hourlyRecordCount", hourlyRecordCountBA);
 
         return 1;
 
@@ -125,6 +153,7 @@ class UserViewCountRecord {
                     mapDates.push(new Date(date.fullYear, date.month, date.date, date.hours));
                 }
             } else {
+                trace(date + " " + vcrDates[vcrDates.length - 1]);
                 throw new Error("records not added sequentially");
             }
         } else {
