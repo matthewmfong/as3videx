@@ -2,15 +2,15 @@
 <project version="4">
   <component name="AirPackageProjectParameters">
     <option name="desktopPackageType" value="captive runtime bundle (*.app)" />
-    <option name="deselectedBCs" value="as3videx&#9;VidexDev&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_WINTER_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;patcher_BCIT_CHEM0012_1_spring_2018" />
+    <option name="deselectedBCs" value="as3videx&#9;VidexDev&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_WINTER_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;patcher_BCIT_CHEM0012_1_spring_2018&#10;as3videx&#9;patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3videx.iml" afterPath="$PROJECT_DIR$/as3videx.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" afterPath="$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config-BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.xml" afterPath="$PROJECT_DIR$/config/config-BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="233">
-              <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+              <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -48,8 +48,28 @@
       <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="114" column="22" lean-forward="false" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
+            <state relative-caret-position="282">
+              <caret line="145" column="31" lean-forward="true" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoMetadataManager.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="19" column="85" lean-forward="false" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -58,8 +78,28 @@
       <file leaf-file-name="PatcherMain.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
+            <state relative-caret-position="272">
+              <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PatcherView.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Patcher.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="784">
+              <caret line="65" column="24" lean-forward="false" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -134,8 +174,6 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/SurveyPopup.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
         <option value="$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml" />
         <option value="$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml" />
@@ -145,7 +183,9 @@
         <option value="$PROJECT_DIR$/app_descriptors/chem1121-app.xml" />
         <option value="$PROJECT_DIR$/app_descriptors/chem1121-instructor-app.xml" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
       </list>
     </option>
   </component>
@@ -1390,7 +1430,8 @@
       <workItem from="1515395674890" duration="3363000" />
       <workItem from="1515446980412" duration="1750000" />
       <workItem from="1515626955167" duration="148000" />
-      <workItem from="1516135489599" duration="1511000" />
+      <workItem from="1516135489599" duration="3980000" />
+      <workItem from="1516141951933" duration="654000" />
     </task>
     <task id="LOCAL-00001" summary="erry da i'm shufflin'">
       <created>1506717787334</created>
@@ -1403,7 +1444,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51156000" />
+    <option name="totallyTimeSpent" value="54279000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
@@ -1412,13 +1453,13 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1582,13 +1623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="227" column="32" lean-forward="false" selection-start-line="227" selection-start-column="32" selection-end-line="227" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as">
       <provider selected="true" editor-type-id="text-editor">
@@ -1613,23 +1647,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as" />
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1728">
-          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/tlefdemo2017.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1320">
@@ -1644,7 +1662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5952">
           <caret line="400" column="53" lean-forward="false" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1680,7 +1697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1968">
           <caret line="144" column="38" lean-forward="false" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1699,21 +1715,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="20" column="117" lean-forward="false" selection-start-line="20" selection-start-column="117" selection-end-line="20" selection-end-column="117" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1773,14 +1778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="167" column="0" lean-forward="false" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1789,18 +1786,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="784">
+          <caret line="65" column="24" lean-forward="false" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="19" column="85" lean-forward="false" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="114" column="22" lean-forward="false" selection-start-line="114" selection-start-column="22" selection-end-line="114" selection-end-column="22" />
+        <state relative-caret-position="282">
+          <caret line="145" column="31" lean-forward="true" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
+        <state relative-caret-position="272">
+          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
           <folding />
         </state>
       </provider>

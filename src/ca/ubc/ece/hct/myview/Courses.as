@@ -16,6 +16,9 @@ package ca.ubc.ece.hct.myview {
 
                                               'BCIT_CHEM0011_1_spring_2018':        new Course("BCIT", "CHEM0011", "1", "spring", "2018"),
                                               'BCIT_CHEM0012_1_spring_2018':        new Course("BCIT", "CHEM0012", "1", "spring", "2018"),
+                                              'BCIT_CHEM0011_1_spring_2018-INSTRUCTOR':        new Course("BCIT", "CHEM0011", "1", "spring", "2018"),
+                                              'BCIT_CHEM0012_1_spring_2018-INSTRUCTOR':        new Course("BCIT", "CHEM0012", "1", "spring", "2018"),
+
 
                                               'BCIT_CHEM0011_1_spring_2017':        new Course("BCIT", "CHEM0011", "1", "spring", "2017"),
                                               'BCIT_CHEM0011_1_winter_2017':        new Course("BCIT", "CHEM0011", "1", "winter", "2017"),
