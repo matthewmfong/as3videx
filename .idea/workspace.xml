@@ -2,15 +2,13 @@
 <project version="4">
   <component name="AirPackageProjectParameters">
     <option name="desktopPackageType" value="captive runtime bundle (*.app)" />
-    <option name="deselectedBCs" value="as3videx&#9;VidexDev&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_WINTER_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;patcher_BCIT_CHEM0012_1_spring_2018&#10;as3videx&#9;patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" />
+    <option name="deselectedBCs" value="as3videx&#9;VidexDev&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017&#10;as3videx&#9;BCIT_CHEM1121_1_winter_2017-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_winter_2017&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_WINTER_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_winter_2017_TEST&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018&#10;as3videx&#9;BCIT_CHEM0011_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;BCIT_CHEM0012_1_spring_2018-INSTRUCTOR&#10;as3videx&#9;patcher_BCIT_CHEM0011_1_spring_2018&#10;as3videx&#9;patcher_BCIT_CHEM0012_1_spring_2018" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" afterPath="$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/config-BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.xml" afterPath="$PROJECT_DIR$/config/config-BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml" afterPath="$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml" afterPath="$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,8 +47,58 @@
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="282">
-              <caret line="145" column="31" lean-forward="true" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
-              <folding />
+              <caret line="143" column="31" lean-forward="true" selection-start-line="143" selection-start-column="31" selection-end-line="143" selection-end-column="31" />
+              <folding>
+                <marker date="1516142642000" expanded="true" signature="542:20878" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="1766:20876" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="2543:5304" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="4948:5073" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="5079:5180" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="5370:5837" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="5877:7010" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="6332:6855" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="6474:6835" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="6627:6805" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="7044:8950" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="8014:8223" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="8225:8322" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="8989:11231" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="9135:10647" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="9224:9323" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="9382:9457" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="9520:10636" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="10653:10696" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="10698:11225" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="11277:12989" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="11280:11430" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="11797:12067" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="12107:12621" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="12639:12982" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="13154:13787" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="13224:13741" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="13829:14497" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="14052:14133" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="14542:15109" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="15169:15538" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="15583:15849" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="15624:15723" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="15724:15843" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="15888:16056" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="15937:16050" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="16098:16284" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="16339:16437" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="16531:17554" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="16750:16842" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="16844:16971" ph="//..." />
+                <marker date="1516142642000" expanded="true" signature="17621:18035" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="18248:18393" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="18738:18948" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="18906:18942" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="19015:19477" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="19051:19108" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="19262:19345" ph="{...}" />
+                <marker date="1516142642000" expanded="true" signature="19480:20874" ph="//..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -439,7 +487,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+  <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0012_1_spring_2018">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -1431,7 +1479,7 @@
       <workItem from="1515446980412" duration="1750000" />
       <workItem from="1515626955167" duration="148000" />
       <workItem from="1516135489599" duration="3980000" />
-      <workItem from="1516141951933" duration="654000" />
+      <workItem from="1516141951933" duration="1095000" />
     </task>
     <task id="LOCAL-00001" summary="erry da i'm shufflin'">
       <created>1506717787334</created>
@@ -1444,7 +1492,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54279000" />
+    <option name="totallyTimeSpent" value="54720000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
@@ -1457,9 +1505,9 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5022921" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.49770793" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1829,8 +1877,58 @@
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
-          <caret line="145" column="31" lean-forward="true" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
-          <folding />
+          <caret line="143" column="31" lean-forward="true" selection-start-line="143" selection-start-column="31" selection-end-line="143" selection-end-column="31" />
+          <folding>
+            <marker date="1516142642000" expanded="true" signature="542:20878" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="1766:20876" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="2543:5304" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="4948:5073" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="5079:5180" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="5370:5837" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="5877:7010" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="6332:6855" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="6474:6835" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="6627:6805" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="7044:8950" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="8014:8223" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="8225:8322" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="8989:11231" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="9135:10647" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="9224:9323" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="9382:9457" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="9520:10636" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="10653:10696" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="10698:11225" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="11277:12989" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="11280:11430" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="11797:12067" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="12107:12621" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="12639:12982" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="13154:13787" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="13224:13741" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="13829:14497" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="14052:14133" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="14542:15109" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="15169:15538" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="15583:15849" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="15624:15723" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="15724:15843" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="15888:16056" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="15937:16050" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="16098:16284" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="16339:16437" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="16531:17554" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="16750:16842" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="16844:16971" ph="//..." />
+            <marker date="1516142642000" expanded="true" signature="17621:18035" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="18248:18393" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="18738:18948" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="18906:18942" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="19015:19477" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="19051:19108" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="19262:19345" ph="{...}" />
+            <marker date="1516142642000" expanded="true" signature="19480:20874" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1895,7 +1993,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR|as3videx</last-edited>
+          <last-edited>patcher_BCIT_CHEM0012_1_spring_2018|as3videx</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
