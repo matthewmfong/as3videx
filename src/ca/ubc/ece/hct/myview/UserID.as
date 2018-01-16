@@ -43,7 +43,7 @@ import com.greensock.*;
             }
 
             if(preset_id != null) {
-                id = preset_id;
+                id = preset_id + "_" + UUID.getUUID();
                 so.data.userid = id;
             }
 
