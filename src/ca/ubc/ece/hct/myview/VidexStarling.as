@@ -424,20 +424,20 @@ public class VidexStarling extends Sprite {
             playerView.setSize(stage.stageWidth - 10, stage.stageHeight - toolbar.height - 10);
         }
 
-        if(!resizeTimer) {
-            resizeTimer = new Timer(1000);
-        }
-        resizeTimer.addEventListener(TimerEvent.TIMER, uploadResizeEvent);
-        resizeTimer.reset();
-        resizeTimer.start();
+//        if(!resizeTimer) {
+//            resizeTimer = new Timer(1000);
+//        }
+//        resizeTimer.addEventListener(TimerEvent.TIMER, uploadResizeEvent);
+//        resizeTimer.reset();
+//        resizeTimer.start();
     }
 
     private function uploadResizeEvent(e:TimerEvent = null):void {
         // TODO : check if window is closed
-        ServerDataLoader.addLog_v2(UserID.id, "{}", eventToJSON(null, "action", "resize", "size", new flash.geom.Rectangle(Starling.current.nativeStage.nativeWindow.x,
-                Starling.current.nativeStage.nativeWindow.y,
-                Starling.current.nativeStage.nativeWindow.width,
-                Starling.current.nativeStage.nativeWindow.height)));
+//        ServerDataLoader.addLog_v2(UserID.id, "{}", eventToJSON(null, "action", "resize", "size", new flash.geom.Rectangle(Starling.current.nativeStage.nativeWindow.x,
+//                Starling.current.nativeStage.nativeWindow.y,
+//                Starling.current.nativeStage.nativeWindow.width,
+//                Starling.current.nativeStage.nativeWindow.height)));
     }
 
     private function windowActivate(e:Event):void {
