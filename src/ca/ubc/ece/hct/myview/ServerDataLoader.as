@@ -202,7 +202,7 @@ public class ServerDataLoader {
 		}
 
 		public static function requestComplete(e:LoaderEvent):void {
-			 trace(e.target.content);
+//			 trace(e.target.content);
 			(Signal)(e.target.vars.signal).dispatch(e.target.content);
 		}
 	}

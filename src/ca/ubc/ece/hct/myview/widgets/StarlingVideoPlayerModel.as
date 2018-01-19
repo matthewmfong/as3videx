@@ -110,6 +110,7 @@ public class StarlingVideoPlayerModel {
 
     public var widgets:Array;
     private var _sendVCRTimer:Timer;
+    private var _pingStateTimer:Timer;
 
     public function StarlingVideoPlayerModel() {
 
@@ -126,6 +127,9 @@ public class StarlingVideoPlayerModel {
         _sendVCRTimer = new Timer(10000);
         _sendVCRTimer.addEventListener(TimerEvent.TIMER, sendVCR);
 
+        _pingStateTimer = new Timer(5000);
+        _pingStateTimer.addEventListener(TimerEvent.TIMER, pingState);
+
         fullscreenSignal = new Signal(Boolean);
 
         leftDimensions = new flash.geom.Rectangle(0, 0, 1, 1);
@@ -137,6 +141,7 @@ public class StarlingVideoPlayerModel {
 
     public function loadVideo(video:VideoMetadata):void {
         _sendVCRTimer.start();
+        _pingStateTimer.start();
         _video = video;
         playheadTime = 0;
         playbackRate = 1;
@@ -592,6 +597,11 @@ public class StarlingVideoPlayerModel {
                 _video.addCrowdUserData(UserData.CLASS, userData);
             }
         }
+    }
+
+    private function pingState(e:TimerEvent):void {
+        ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(this));
+
     }
 }
 }
