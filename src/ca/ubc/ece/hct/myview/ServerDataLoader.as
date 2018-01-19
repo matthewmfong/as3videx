@@ -235,18 +235,16 @@ public class ServerDataLoader {
             return signal;
 		}
 
-		public static function getActiveUsers(from:Date, to:Date):Signal {
+		public static function getActiveUsers():Signal {
 
-			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&" +
-					"from=" + Util.date2string(from) + "&to=" + Util.date2string(to) + "&user_string=" + COURSE::Name);
-			var signal:Signal = new Signal(Object, Date, Date);
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_user&user_string=" + COURSE::Name);
+			var signal:Signal = new Signal(Object);
 			queue.append(
-					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&" +
-                            "from=" + Util.date2string(from) + "&to=" + Util.date2string(to) + "&user_string=" + COURSE::Name,
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&user_string=" + COURSE::Name,
 							{signal: signal,
 								onComplete:
 										function activeUsersReturn(e:LoaderEvent):void {
-											(Signal)(e.target.vars.signal).dispatch(e.target.content, from, to);
+											(Signal)(e.target.vars.signal).dispatch(e.target.content);
 										}
 							}
 					)

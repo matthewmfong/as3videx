@@ -26,6 +26,7 @@ import mx.charts.series.BarSeries;
 import mx.charts.CategoryAxis;
 import mx.charts.Legend;
 import mx.core.FlexGlobals;
+import mx.events.ResizeEvent;
 
 import starling.core.Starling;
 
@@ -51,7 +52,7 @@ public class InstructorDashboard2018 extends View {
         this.playlist = playlist;
         playlistView = new PlaylistListView();
         playlistView.drawPlaylist(playlist, 0, 0);
-        flexLayer.playlistShit.addChild(playlistView);
+        flexLayer.playlist_container.addChild(playlistView);
 
         course = VideoMetadataManager.COURSE;
 
@@ -120,87 +121,71 @@ public class InstructorDashboard2018 extends View {
         _height = h;
     }
 
-    private function grabActiveUsers():void {
-        var asdf:Number = getTimer();
+    private function date2daymonthdate(d:Date):String {
+        return Util.dayNumber2String(d.day, 3) + " " + Util.monthNumber2String(d.month, 3) + "-" + d.date;
+    }
 
-        var now:Date = new Date();
-        var thisMonth:Date = new Date();
-        thisMonth.date = 1;
-        thisMonth.hours = 0;
-        thisMonth.minutes = 0;
-        thisMonth.seconds = 0;
-        var lastWeek:Date = new Date();
-        lastWeek.date -= 7;
-        lastWeek.hours = 0;
-        lastWeek.minutes = 0;
-        lastWeek.seconds = 0;
-        var yesterday:Date = new Date();
-        yesterday.date -= 1;
-        yesterday.hours = 0;
-        yesterday.minutes = 0;
-        yesterday.seconds = 0;
-        var today:Date = new Date();
-        today.hours = 0;
-        today.minutes = 0;
-        today.seconds = 0;
+    private function grabActiveUsers():void {
 
         data = new ArrayCollection();
 
+        var activeDates:Array = [];
+        var activeUsers:Array = [];
 
-        ServerDataLoader.getActiveUsers(today, now).add(
-                function (o:*, from:Date, to:Date):void {
-                    var obj:* = JSON.parse((String)(o));
-                    trace("Today: " + obj.length + " " + (getTimer() - asdf));
+        var insertDate:Date = course.startDate;
+        var todayDate:Date = new Date();
+        while(insertDate.getTime() < todayDate.getTime() + Constants.DAYS2MILLISECONDS) {
 
-                    data.addItem({time: "Today", numUsers: obj.length});
+            activeDates.push(date2daymonthdate(insertDate));
+            activeUsers.push([]);
 
+            insertDate.setTime(insertDate.getTime() + Constants.DAYS2MILLISECONDS);
+        }
 
-                    ServerDataLoader.getActiveUsers(yesterday, today).add(
-                            function (o:*, from:Date, to:Date):void {
-                                var obj:* = JSON.parse((String)(o));
-                                trace("Yesterday: " + obj.length + " " + (getTimer() - asdf));
+        ServerDataLoader.getActiveUsers().add(
+            function consolidateActiveUsers(o:*):void {
+                var entries:* = JSON.parse((String)(o));
 
-                                data.addItem({time: "Yesterday", numUsers: obj.length});
+                for (var id:* in entries){
+                    var entry:* = entries[id];
 
-                                ServerDataLoader.getActiveUsers(lastWeek, now).add(
-                                        function (o:*, from:Date, to:Date):void {
-                                            var obj:* = JSON.parse((String)(o));
-                                            trace("Last Week: " + obj.length + " " + (getTimer() - asdf));
+                    // see if that date already exists
+                    var date:Date = Util.dateParser((String)(entry["date"]));
+                    date.setTime(date.getTime() + Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
 
-                                            data.addItem({time: "Last Week", numUsers: obj.length});
+                    // split "2018-01-01 00:00:00" into "2018-01-01" and "00:00:00" ~ get the date only.
+                    var dateString:String = date2daymonthdate(date);
 
-                                            ServerDataLoader.getActiveUsers(thisMonth, now).add(
-                                                    function (o:*, from:Date, to:Date):void {
-                                                        var obj:* = JSON.parse((String)(o));
-                                                        trace("This Month: " + obj.length + " " + (getTimer() - asdf));
+                    var user:Number = Number((String)(entry["user"]));
 
-                                                        data.addItem({time: "This Month", numUsers: obj.length});
+                    var indexOfDate:int = Util.looseIndexOf(activeDates, dateString);
 
-                                                        for(var month:Number = now.month - 1; month >= course.startDate.month; month--) {
+                    if(indexOfDate == -1) {
+                        // date does not yet exist
+                        activeDates.push(dateString);
+                        activeUsers.push([user]);
 
-                                                            var monthStart:Date = new Date(course.startDate.fullYear, month, 1);
-                                                            var monthEnd:Date = new Date(course.startDate.fullYear, month+1, 1);
+                    } else {
+                        // date found, let's add users.
 
-                                                            ServerDataLoader.getActiveUsers(monthStart, monthEnd).add(
-                                                                    function (o:*, from:Date, to:Date):void {
-                                                                        var obj:* = JSON.parse((String)(o));
-                                                                        trace(Util.monthNumber2String(from.month+1) + ": " + obj.length + " " + (getTimer() - asdf));
+                        if(Util.looseIndexOf(activeUsers[indexOfDate], user) == -1) {
+                            // did not find user
+                            activeUsers[indexOfDate].push(user);
+                        }
 
-                                                                        data.addItem({time: Util.monthNumber2String(from.month+1), numUsers: obj.length});
+                        // otherwise the user has already been added. do nothing :D
+                    }
 
-                                                                    }
-                                                            );
-                                                        }
-
-                                                        chart();
-                                                    }
-                                            );
-                                        }
-                                );
-                            }
-                    );
                 }
-        );
+
+                for(var i:int = 0; i<activeDates.length; i++) {
+                    trace(activeDates[i] + " " + activeUsers[i].length);
+                    data.addItem({time: activeDates[i], numUsers: activeUsers[i].length });
+                }
+
+                chart();
+            }
+        )
 
     }
 
@@ -238,12 +223,30 @@ public class InstructorDashboard2018 extends View {
         myChart.series = mySeries;
 
         /* Create a legend. */
-        legend1 = new Legend();
-        legend1.dataProvider = myChart;
+//        legend1 = new Legend();
+//        legend1.dataProvider = myChart;
 
         /* Attach chart and legend to the display list. */
-        flexLayer.bingbong.addElement(myChart);
-        flexLayer.bingbong.addElement(legend1);
+        flexLayer.activeUsers_container.addElement(myChart);
+//        flexLayer.activeUsers_container.addElement(legend1);
+
+        trace(flexLayer.activeUsers_scroller.width + "x" + flexLayer.activeUsers_scroller.height);
+
+        myChart.width = data.length * 50;
+        myChart.height = 200;
+
+        flexLayer.activeUsers_scroller
+
+//        flexLayer.activeUsers_container.addEventListener(mx.events.ResizeEvent.RESIZE,
+//            function activeUsersResize(e:mx.events.ResizeEvent):void {
+//
+//
+//                trace(flexLayer.activeUsers_scroller.width + "x" + flexLayer.activeUsers_scroller.height);
+//
+//                myChart.width = flexLayer.activeUsers_container.width;
+//                myChart.height = flexLayer.activeUsers_container.height;
+//            })
+
     }
 
 }

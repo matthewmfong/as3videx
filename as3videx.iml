@@ -279,7 +279,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+      <configuration name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
         <dependencies>
           <entries>
             <entry library-name="feathers" library-level="project">
@@ -309,7 +309,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+      <configuration name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
         <dependencies>
           <entries>
             <entry library-name="feathers" library-level="project">
