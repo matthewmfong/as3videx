@@ -6,6 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
+<<<<<<< master
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
@@ -16,6 +17,23 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3videx.iml" afterPath="$PROJECT_DIR$/as3videx.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserViewCountRecord.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserViewCountRecord.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/adobe/utils/DateUtil.as" afterPath="$PROJECT_DIR$/src/com/adobe/utils/DateUtil.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/logging/setup/target/AirFileTarget.as" afterPath="$PROJECT_DIR$/src/org/as3commons/logging/setup/target/AirFileTarget.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/logging/util/LogMessageFormatter.as" afterPath="$PROJECT_DIR$/src/org/as3commons/logging/util/LogMessageFormatter.as" />
+>>>>>>> Can now view active users!
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,6 +59,14 @@
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#546#603#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="ServerDataLoader.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="223" column="103" lean-forward="false" selection-start-line="223" selection-start-column="103" selection-end-line="223" selection-end-column="103" />
+              <folding />
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
@@ -50,6 +76,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
               <caret line="406" column="0" lean-forward="true" selection-start-line="406" selection-start-column="0" selection-end-line="406" selection-end-column="0" />
+=======
+      <file leaf-file-name="InstructorDashboard2018.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1334">
+              <caret line="237" column="38" lean-forward="false" selection-start-line="237" selection-start-column="38" selection-end-line="237" selection-end-column="38" />
+>>>>>>> Can now view active users!
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#554#585#0" expanded="true" />
@@ -58,46 +91,91 @@
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="URLLoaderPlus.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/URLLoaderPlus.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="576">
               <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
+=======
+      <file leaf-file-name="PlaylistListView.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+              <folding>
+                <element signature="e#2086#2135#0" expanded="true" />
+              </folding>
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="Patcher.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
               <caret line="134" column="92" lean-forward="true" selection-start-line="134" selection-start-column="92" selection-end-line="134" selection-end-column="92" />
               <folding />
+=======
+      <file leaf-file-name="Course.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="PatcherView.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
               <folding />
+=======
+      <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+              <folding>
+                <element signature="e#44#87#0" expanded="true" />
+              </folding>
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="PatcherMain.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="192">
               <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
               <folding />
+=======
+      <file leaf-file-name="main.mxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="464">
+              <caret line="29" column="75" lean-forward="true" selection-start-line="29" selection-start-column="75" selection-end-line="29" selection-end-column="75" />
+              <folding>
+                <marker date="1516250259000" expanded="true" signature="349:757" ph="//..." />
+              </folding>
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="ServerDataLoader.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
           <provider selected="true" editor-type-id="text-editor">
@@ -110,6 +188,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="StarlingVideoPlayerView.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerView.as">
           <provider selected="true" editor-type-id="text-editor">
@@ -118,16 +197,35 @@
               <folding>
                 <element signature="n#!!block;n#collapseLayout#0;n#StarlingVideoPlayerView#0;n#widgets#0" expanded="false" />
               </folding>
+=======
+      <file leaf-file-name="Util.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="429" column="0" lean-forward="false" selection-start-line="429" selection-start-column="0" selection-end-line="429" selection-end-column="0" />
+              <folding />
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="StarlingVideoPlayerModel.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
               <caret line="181" column="79" lean-forward="false" selection-start-line="181" selection-start-column="79" selection-end-line="181" selection-end-column="79" />
               <folding />
+=======
+      <file leaf-file-name="Constants.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="25" column="67" lean-forward="false" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
@@ -135,6 +233,7 @@
       <file leaf-file-name="ViewCountRecordBreakdown.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< master
             <state relative-caret-position="246">
               <caret line="41" column="50" lean-forward="true" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
               <folding>
@@ -142,6 +241,11 @@
                 <element signature="e#554#593#0" expanded="true" />
                 <element signature="e#4550#4584#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="128">
+              <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+              <folding />
+>>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
@@ -266,6 +370,16 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" />
+=======
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
+>>>>>>> Can now view active users!
       </list>
     </option>
   </component>
@@ -325,98 +439,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thread" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thread" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="error" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thread" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1717,6 +1739,16 @@
       <workItem from="1507252784617" duration="5000" />
       <workItem from="1507848182084" duration="4281000" />
       <workItem from="1509476542365" duration="24528000" />
+<<<<<<< master
+=======
+      <workItem from="1509760694491" duration="132000" />
+      <workItem from="1509760843843" duration="393000" />
+      <workItem from="1509837910455" duration="761000" />
+      <workItem from="1512860257523" duration="9769000" />
+      <workItem from="1515395674890" duration="3363000" />
+      <workItem from="1515446980412" duration="1750000" />
+      <workItem from="1515626955167" duration="3423000" />
+>>>>>>> Can now view active users!
     </task>
     <task id="LOCAL-00001" summary="erry da i'm shufflin'">
       <created>1506717787334</created>
@@ -1729,7 +1761,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< master
     <option name="totallyTimeSpent" value="33329000" />
+=======
+    <option name="totallyTimeSpent" value="65640000" />
+>>>>>>> Can now view active users!
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1742,6 +1778,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1751,7 +1788,11 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298077" sideWeight="0.5026178" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+<<<<<<< master
       <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.53438115" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> Can now view active users!
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1759,10 +1800,14 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
 <<<<<<< master
+<<<<<<< master
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
 =======
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
 >>>>>>> Tagging boilerplate
+=======
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> Can now view active users!
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1808,6 +1853,14 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
 =======
 >>>>>>> Tagging boilerplate
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+>>>>>>> Can now view active users!
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1879,6 +1932,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< master
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3392">
@@ -1888,6 +1942,12 @@
             <element signature="n#!!doc" expanded="false" />
           </folding>
 =======
+=======
+    <entry file="file://$PROJECT_DIR$/src/starling/events/TouchProcessor.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+>>>>>>> Can now view active users!
         </state>
       </provider>
     </entry>
@@ -2170,6 +2230,11 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="160">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
+>>>>>>> Can now view active users!
         </state>
       </provider>
     </entry>
@@ -2271,24 +2336,29 @@
           <folding>
             <element signature="e#560#594#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+          <folding />
+>>>>>>> Can now view active users!
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="181" column="79" lean-forward="false" selection-start-line="181" selection-start-column="79" selection-end-line="181" selection-end-column="79" />
+        <state relative-caret-position="172">
+          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerView.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="132" column="9" lean-forward="true" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!block;n#collapseLayout#0;n#StarlingVideoPlayerView#0;n#widgets#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="372">
+          <caret line="223" column="103" lean-forward="false" selection-start-line="223" selection-start-column="103" selection-end-line="223" selection-end-column="103" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2410,6 +2480,25 @@
         <state relative-caret-position="408">
           <caret line="134" column="92" lean-forward="true" selection-start-line="134" selection-start-column="92" selection-end-line="134" selection-end-column="92" />
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="29" column="75" lean-forward="true" selection-start-line="29" selection-start-column="75" selection-end-line="29" selection-end-column="75" />
+          <folding>
+            <marker date="1516250259000" expanded="true" signature="349:757" ph="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1334">
+          <caret line="237" column="38" lean-forward="false" selection-start-line="237" selection-start-column="38" selection-end-line="237" selection-end-column="38" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+>>>>>>> Can now view active users!
         </state>
       </provider>
     </entry>
