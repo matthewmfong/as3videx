@@ -147,6 +147,7 @@ public class StarlingVideoPlayerModel {
         playbackRate = 1;
 
 //			ServerDataLoader.addLog(UserID.id, "loadVideo " + video.filename);
+        ServerDataLoader.addLoadMediaLog(UserID.id, _video.media_alias_id);
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(this, "action", "loadVideo", "video", _video.filename));
         ServerDataLoader.getCrowdHighlights(_video.media_alias_id).add(crowdHighlightsLoaded);
         ServerDataLoader.getCrowdVCRs(_video.media_alias_id).add(crowdVCRsLoaded);
