@@ -94,6 +94,15 @@ import flash.utils.ByteArray;
 			return videos.values();
 		}
 
+		public static function getAllMediaAliasIDs():Array {
+			var media_alias_ids:Array = [];
+            for each(var v:VideoMetadata in videos.values()) {
+                media_alias_ids.push(v.media_alias_id);
+            }
+
+			return media_alias_ids;
+		}
+
 		private static function courseJSONLoaded(object:Object):void {
 			var obj:* = JSON.parse((String)(object));
 
@@ -246,6 +255,7 @@ import flash.utils.ByteArray;
 
 						if(!videos.containsKey(video.toString()))
 							videos.put(video.toString(), video);
+							trace(video.toString());
 
 						playlist = insertIntoPlaylist(playlist, videos.grab(video.toString()));
 						break;

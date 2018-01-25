@@ -6,31 +6,29 @@
                 backgroundAlpha="0">
     <mx:Script source="myview/VidexFlex.as" />
     <mx:Script>
-        <![CDATA[
-//        import mx.events.ResizeEvent;
-//
-//        function activeUsers_container_resize(event:ResizeEvent):void {
-//            trace("mxml")
-////            trace(activeUsers_container.numElements);
-////            trace(activeUsers_container.numChildren);
-////            trace("_" + activeUsers_container.getElementAt(0));
-////            trace("_" + activeUsers_container.getElementAt(1));
-//        }
-
-        ]]>
+        <![CDATA[ ]]>
     </mx:Script>
     <s:SkinnableContainer id="rootContainer" width="100%" height="100%" x="0" y="30" backgroundColor="red"> <!-- 30 is the toolbar height, which is defined in VidexStarling -->
         <s:HGroup>
             <s:SkinnableContainer backgroundColor="blue">
                 <s:SpriteVisualElement id="playlist_container" width="400" alpha="0.4" />
             </s:SkinnableContainer>
-            <s:Panel title="Active Users">
-                <s:Scroller id="activeUsers_scroller" width="{rootContainer.width - playlist_container.width}" height="225">
-                    <s:Group>
-                        <s:SkinnableContainer id="activeUsers_container" />
-                    </s:Group>
-                </s:Scroller>
-            </s:Panel>
+            <s:VGroup>
+                <s:Panel title="Active Users">
+                    <s:Scroller id="activeUsers_scroller"
+                                width="{rootContainer.width - playlist_container.width}"
+                                height="150"
+                                verticalScrollPolicy="off">
+                        <s:Group>
+                            <s:SkinnableContainer id="activeUsers_container" height="{activeUsers_scroller.height - 20}" />
+                        </s:Group>
+                    </s:Scroller>
+                </s:Panel>
+                <s:SkinnableContainer id="mainContent"
+                                      backgroundAlpha="0"
+                                      width="{rootContainer.width - playlist_container.width}"
+                                      height="{rootContainer.height - activeUsers_scroller.height}" />
+            </s:VGroup>
         </s:HGroup>
     </s:SkinnableContainer>
 </mx:Application>
