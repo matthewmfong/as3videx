@@ -255,6 +255,7 @@ import flash.utils.ByteArray;
 
 						if(!videos.containsKey(video.toString()))
 							videos.put(video.toString(), video);
+							trace(video.toString());
 
 						if(verbose)
 							trace(video.toString());
