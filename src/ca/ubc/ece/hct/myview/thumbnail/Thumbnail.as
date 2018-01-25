@@ -12,23 +12,18 @@ import ca.ubc.ece.hct.myview.StarlingView;
 import ca.ubc.ece.hct.myview.VideoATFManager;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoUtil;
-import ca.ubc.ece.hct.myview.video.VideoUtilEvent;
-import ca.ubc.ece.hct.myview.video.VideoMetadata;
+
+import fl.transitions.Tween;
+
+import flash.display.BitmapData;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+import flash.utils.ByteArray;
 
 import org.osflash.signals.Signal;
 
-	import fl.transitions.Tween;
-	import fl.transitions.easing.*;
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-
-import starling.display.Canvas;
-
 import starling.display.Image;
-
 import starling.display.Quad;
-
-import starling.display.Shape;
 import starling.events.Event;
 import starling.events.Touch;
 import starling.events.TouchEvent;
@@ -36,16 +31,8 @@ import starling.events.TouchPhase;
 import starling.textures.Texture;
 
 // import flash.display.Loader;
-	import starling.display.Sprite;
 //	import flash.events.Event;
-	import flash.events.MouseEvent;
-	import flash.events.TimerEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	import flash.utils.ByteArray;
-	import flash.utils.Timer;
-
-	public class Thumbnail extends StarlingView {
+public class Thumbnail extends StarlingView {
 
         public static var idIncrementer:uint = 0;
 

@@ -331,7 +331,13 @@ package ca.ubc.ece.hct.myview {
 		    );
 		}
 
-		public static function date2string(d:Date):String {
+        /**
+		 * ISO 8601
+		 *
+         * @param d
+         * @return
+         */
+		public static function dateToISO8601(d:Date):String {
 			return d.fullYear + "-" + (d.month+1) + "-" + d.date + " " + d.hours + ":" + d.minutes + ":" + d.seconds;
 		}
 

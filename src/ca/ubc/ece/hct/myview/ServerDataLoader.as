@@ -216,22 +216,46 @@ public class ServerDataLoader {
             return signal;
 		}
 
+		public static function getVCRsForMediaAliasIDs(media_alias_ids:String):Signal {
+
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+					"media_alias_ids=" + media_alias_ids + "&user_string=" + COURSE::Name);
+			var signal:Signal = new Signal(Object);
+			queue.append(
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+							"media_alias_ids=" + media_alias_ids + "&user_string=" + COURSE::Name,
+							{signal: signal,
+								onComplete: requestComplete }));
+			queue.load();
+			return signal;
+		}
+
 		public static function getActiveUsers():Signal {
 
-			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_user&user_string=" + COURSE::Name);
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&user_string=" + COURSE::Name);
 			var signal:Signal = new Signal(Object);
 			queue.append(
 					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&user_string=" + COURSE::Name,
 							{signal: signal,
-								onComplete:
-										function activeUsersReturn(e:LoaderEvent):void {
-											(Signal)(e.target.vars.signal).dispatch(e.target.content);
-										}
-							}
-					)
-			);
+								onComplete:requestComplete }));
 			queue.load();
 			return signal;
+		}
+
+		public static function getRecentMedia(from:Date, to:Date):Signal {
+            trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
+					"&from=" + Util.dateToISO8601(from) +
+					"&to=" + Util.dateToISO8601(to));
+
+            var signal:Signal = new Signal(Object);
+            queue.append(
+                    new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
+																								"&from=" + Util.dateToISO8601(from) +
+																								"&to=" + Util.dateToISO8601(to),
+                            {signal: signal,
+                                onComplete: requestComplete }));
+            queue.load();
+            return signal;
 		}
 
 		public static function requestComplete(e:LoaderEvent):void {

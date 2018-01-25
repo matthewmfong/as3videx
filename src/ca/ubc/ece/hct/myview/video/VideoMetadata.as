@@ -107,6 +107,13 @@ public class VideoMetadata {
 			crowdUserData.grab(dataType).push(uData);
 		}
 
+    /**
+	 * Grabs the specified type of user data (class, instructor, etc) with a specific username
+	 *
+     * @param dataType (UserData.CLASS, UserData.INSTRUCTOR, etc)
+     * @param userString
+     * @return null if not found, or the UserData
+     */
 		public function grabCrowdUserData(dataType:String, userString:String):UserData {
 			var userDataOfType:Vector.<UserData> = crowdUserData.grab(dataType);
             if(userDataOfType == undefined) {
@@ -122,7 +129,10 @@ public class VideoMetadata {
 			return null;
 		}
 
-		public function get crowdUserViewCounts():Array {
+    /**
+     * Gets the aggregate viewcounts
+     */
+    public function get crowdUserViewCounts():Array {
 			var returnArray:Array;
 			if(_crowdUserViewCounts == null ) {
 				var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
