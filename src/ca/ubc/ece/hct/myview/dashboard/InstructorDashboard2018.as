@@ -8,25 +8,30 @@
 
 package ca.ubc.ece.hct.myview.dashboard {
 import ca.ubc.ece.hct.myview.*;
+import ca.ubc.ece.hct.myview.thumbnail.ThumbnailNative;
+import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 import ca.ubc.ece.hct.myview.widgets.VideoPlaylist;
 import ca.ubc.ece.hct.myview.widgets.filmstrip.Filmstrip;
 
-import flash.display.Shape;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 
-import flash.utils.getTimer;
-
-import mx.charts.ColumnChart;
-import mx.charts.series.ColumnSeries;
-
-import mx.collections.ArrayCollection;
-import mx.charts.BarChart;
-import mx.charts.series.BarSeries;
 import mx.charts.CategoryAxis;
-import mx.charts.Legend;
-import mx.core.FlexGlobals;
-import mx.events.ResizeEvent;
+import mx.charts.ColumnChart;
+import mx.charts.LineChart;
+import mx.charts.LinearAxis;
+import mx.charts.chartClasses.IAxis;
+import mx.charts.events.ChartItemEvent;
+import mx.charts.series.ColumnSeries;
+import mx.charts.series.LineSeries;
+import mx.collections.ArrayCollection;
+
+import spark.components.Group;
+
+import spark.core.SpriteVisualElement;
+import spark.primitives.Line;
 
 import starling.core.Starling;
 
@@ -36,16 +41,34 @@ public class InstructorDashboard2018 extends View {
     private var playlist:VideoPlaylist;
     private var video:VideoMetadata;
     private var playlistView:PlaylistListView;
-    private var data:ArrayCollection;
+
+    private var activeUsersData:ArrayCollection;
+    private var activeUsersChart:ColumnChart;
+    private var activeUsersSeries:ColumnSeries;
+
+    private var recentMediaData:Array;
 
     private var flexLayer:Object;
-
     private var filmstrip:Filmstrip;
+
+    private var dependentFunctionArray:Array;
+    private var dependentFunctionArrayCounter:Number = 0;
 
     public function InstructorDashboard2018(flexLayer:Object) {
 
         this.flexLayer = flexLayer;
 
+        course = VideoMetadataManager.COURSE;
+
+        dependentFunctionArray = [updateLatestVCRs, grabRecentMedia];
+        callNextDependentFunction();
+
+        grabActiveUsers();
+
+    }
+
+    private function callNextDependentFunction():void {
+        dependentFunctionArray[dependentFunctionArrayCounter++]();
     }
 
     public function setPlaylist(playlist:VideoPlaylist):void {
@@ -54,29 +77,25 @@ public class InstructorDashboard2018 extends View {
         playlistView.drawPlaylist(playlist, 0, 0);
         flexLayer.playlist_container.addChild(playlistView);
 
-        course = VideoMetadataManager.COURSE;
-
-        grabActiveUsers();
-
         playlistView.mediaClicked.add(loadVideo);
     }
 
     private function loadVideo(v:VideoMetadata):void {
         trace(v.media_alias_id);
         video = v;
-        VideoATFManager.loadAsyncVideoATF(video).add(thumbnailsLoaded);
+//        VideoATFManager.loadAsyncVideoATF(video).add(thumbnailsLoaded);
     }
 
     private function thumbnailsLoaded(v:VideoMetadata):void {
 
-        filmstrip = new Filmstrip();
-        filmstrip.loadVideo(v);
-        filmstrip.setSize(stage.stageWidth - 20, 200);
-
-        Starling.current.stage.addChild(filmstrip);
-        filmstrip.showImages();
-
-        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
+//        filmstrip = new Filmstrip();
+//        filmstrip.loadVideo(v);
+//        filmstrip.setSize(stage.stageWidth - 20, 200);
+//
+//        Starling.current.stage.addChild(filmstrip);
+//        filmstrip.showImages();
+//
+//        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
     }
 
     private function showVCR(json:Object):void {
@@ -122,12 +141,12 @@ public class InstructorDashboard2018 extends View {
     }
 
     private function date2daymonthdate(d:Date):String {
-        return Util.dayNumber2String(d.day, 3) + " " + Util.monthNumber2String(d.month, 3) + "-" + d.date;
+        return Util.dayNumber2String(d.day, 3) + "\n" + Util.monthNumber2String(d.month, 3) + "-" + d.date;
     }
 
     private function grabActiveUsers():void {
 
-        data = new ArrayCollection();
+        activeUsersData = new ArrayCollection();
 
         var activeDates:Array = [];
         var activeUsers:Array = [];
@@ -179,73 +198,119 @@ public class InstructorDashboard2018 extends View {
                 }
 
                 for(var i:int = 0; i<activeDates.length; i++) {
-                    trace(activeDates[i] + " " + activeUsers[i].length);
-                    data.addItem({time: activeDates[i], numUsers: activeUsers[i].length });
+//                    trace(activeDates[i] + " " + activeUsers[i].length);
+                    activeUsersData.addItem({time: activeDates[i], numUsers: activeUsers[i].length });
                 }
 
-                chart();
+                chartActiveUsers();
             }
         )
 
     }
 
-    public var myChart:ColumnChart;
-    public var series1:ColumnSeries;
-    public var series2:BarSeries;
-    public var legend1:Legend;
+    private function chartActiveUsers():void {
 
-    private function chart():void {
-
-        myChart = new ColumnChart();
-        myChart.showDataTips = true;
-        myChart.dataProvider = data;
+        activeUsersChart = new ColumnChart();
+        activeUsersChart.showDataTips = true;
+        activeUsersChart.dataProvider = activeUsersData;
 
         /* Define the category axis. */
         var vAxis:CategoryAxis = new CategoryAxis();
         vAxis.categoryField = "time" ;
-        vAxis.dataProvider =  data;
-        myChart.horizontalAxis = vAxis;
+        vAxis.dataProvider =  activeUsersData;
+        activeUsersChart.horizontalAxis = vAxis;
 
         /* Add the series. */
         var mySeries:Array = new Array();
-        series1 = new ColumnSeries();
-        series1.xField="time";
-        series1.yField="numUsers";
-        series1.displayName = "Active Users";
-        mySeries.push(series1);
+        activeUsersSeries = new ColumnSeries();
+        activeUsersSeries.xField="time";
+        activeUsersSeries.yField="numUsers";
+        activeUsersSeries.displayName = "Active Users";
+        mySeries.push(activeUsersSeries);
 
-//        series2 = new BarSeries();
-//        series2.xField="Expenses";
-//        series2.yField="Month";
-//        series2.displayName = "Expenses";
-//        mySeries.push(series2);
-
-        myChart.series = mySeries;
+        activeUsersChart.series = mySeries;
 
         /* Create a legend. */
 //        legend1 = new Legend();
-//        legend1.dataProvider = myChart;
+//        legend1.dataProvider = activeUsersChart;
 
         /* Attach chart and legend to the display list. */
-        flexLayer.activeUsers_container.addElement(myChart);
+        flexLayer.activeUsers_container.addElement(activeUsersChart);
 //        flexLayer.activeUsers_container.addElement(legend1);
 
-        trace(flexLayer.activeUsers_scroller.width + "x" + flexLayer.activeUsers_scroller.height);
+        activeUsersChart.width = activeUsersData.length * 50;
+        activeUsersChart.height = flexLayer.activeUsers_container.height;
 
-        myChart.width = data.length * 50;
-        myChart.height = 200;
+//        flexLayer.activeUsers_scroller
 
-        flexLayer.activeUsers_scroller
+    }
 
-//        flexLayer.activeUsers_container.addEventListener(mx.events.ResizeEvent.RESIZE,
-//            function activeUsersResize(e:mx.events.ResizeEvent):void {
-//
-//
-//                trace(flexLayer.activeUsers_scroller.width + "x" + flexLayer.activeUsers_scroller.height);
-//
-//                myChart.width = flexLayer.activeUsers_container.width;
-//                myChart.height = flexLayer.activeUsers_container.height;
-//            })
+    private function grabRecentMedia():void {
+
+        recentMediaData = [];
+
+        var fiveDaysAgo:Date = new Date();
+        fiveDaysAgo.setTime(fiveDaysAgo.getTime() - 5 * Constants.DAYS2MILLISECONDS);
+        ServerDataLoader.getRecentMedia(fiveDaysAgo ,new Date()).add(
+                function recentMediaProcess(o:*):void {
+                    var entries:* = JSON.parse((String)(o));
+
+                    for (var id:* in entries){
+                        var entry:* = entries[id];
+
+                        recentMediaData.push(
+                                {
+                                    video: VideoMetadataManager.getVideo(entry['media_id'] + "-" + entry['filename']),
+                                    count: entry['count']
+                                });
+
+                    }
+
+                    var recentMediaLayout:RecentMedia = new RecentMedia();
+                    recentMediaLayout.width = flexLayer.mainContent.width;
+                    recentMediaLayout.height = flexLayer.mainContent.height;
+                    flexLayer.mainContent.addElement(recentMediaLayout);
+
+                    for each(var o:Object in recentMediaData) {
+
+//                        trace(o.video.id + " " + o.video.media_alias_id + " " + o.video.title);
+
+                        var recentMediaItem:RecentMediaItem = new RecentMediaItem();
+                        recentMediaItem.init(o);
+
+                        recentMediaLayout.main.addElement(recentMediaItem);
+                        recentMediaItem.width = recentMediaLayout.width;
+
+                    }
+
+                }
+        );
+    }
+
+    private function updateLatestVCRs():void {
+
+        ServerDataLoader.getVCRsForMediaAliasIDs(VideoMetadataManager.getAllMediaAliasIDs().toString()).add(
+                function vcrsLoaded(o:*):void {
+                    var obj:* = JSON.parse((String)(o));
+
+                    for(var record:String in obj) {
+
+                        if(obj.hasOwnProperty(record)) {
+                            var videoFilenameString:String = obj[record]['media_id'] + "-" + obj[record]['filename'];
+                            var video:VideoMetadata = VideoMetadataManager.getVideo(videoFilenameString);
+
+                            var userData:UserData = new UserData();
+                            userData.view_count_record = obj[record]['vcr'];
+                            userData.userString = obj[record]['user'];
+
+                            video.addCrowdUserData(UserData.CLASS, userData);
+                        }
+
+                    }
+
+                    callNextDependentFunction();
+                }
+        )
 
     }
 

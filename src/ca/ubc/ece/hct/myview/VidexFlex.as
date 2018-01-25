@@ -34,10 +34,10 @@ private var _starling:Starling;
 
 private var application_preferences_so:SharedObject;
 
-public function VidexFlex() {
-
-
-}
+//public function VidexFlex() {
+//
+//
+//}
 
 public function onCreationComplete():void {
     if (stage) {

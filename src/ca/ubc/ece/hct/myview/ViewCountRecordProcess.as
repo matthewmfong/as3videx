@@ -66,7 +66,7 @@ public class ViewCountRecordProcess implements Runnable {
             var date:Date = new Date(year, month - 1, day, hour, minute, second);
 //            trace(date);
 
-            if(dateCounter.year     != date.year ||
+            if(dateCounter.fullYear     != date.fullYear ||
                 dateCounter.month   != date.month ||
                 dateCounter.date     != date.date ||
                 dateCounter.hours    != date.hours) {

@@ -85,7 +85,7 @@ public class UserRecordsVisualizer extends View {
 
 
         progressBar = new ProgressBar();
-        progressBar..mode = ProgressBarMode.MANUAL;
+        progressBar.mode = ProgressBarMode.MANUAL;
         progressBar.x = 100;
         progressBar.width = _width - 200;
         progressBar.y = _height/2;
@@ -101,8 +101,9 @@ public class UserRecordsVisualizer extends View {
         addChild(statusText);
 
         loader = new LoaderMax( { name: "WebLoaderQueue", auditSize:false });
-        trace("http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?media_alias_id=" + this.video.media_alias_id);
-        loader.append(new BinaryDataLoader("http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?media_alias_id=" + this.video.media_alias_id,
+        var url:String ="http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?media_alias_id=" + this.video.media_alias_id + "&user_string=" + COURSE::Name
+        trace(url);
+        loader.append(new BinaryDataLoader(url,
             {
                 onProgress: function(e:LoaderEvent):void {},
                 onComplete: function(e:LoaderEvent):void {
