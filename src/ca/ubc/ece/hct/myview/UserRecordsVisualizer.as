@@ -52,9 +52,11 @@ public class UserRecordsVisualizer extends View {
     private var newTime:Number;
     private var minDate:Date;
     private var maxDate:Date;
-    private var statusText:TextField;
-    private var orgUserRecordsArray:Array;
-    private var hourlyRecordCount:Array;
+        private var statusText:TextField;
+        private var orgUserRecordsArray:Array;
+        private var hourlyRecordCount:Array;
+
+    private var vcrLoader:ViewCountRecordsHistoryLoader;
 
     private var usernames:Array;
     private var aggregateVCR:Sprite;
@@ -100,27 +102,17 @@ public class UserRecordsVisualizer extends View {
         statusText.y = progressBar.y + progressBar.height;
         addChild(statusText);
 
-        loader = new LoaderMax( { name: "WebLoaderQueue", auditSize:false });
-        var url:String ="http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?media_alias_id=" + this.video.media_alias_id + "&user_string=" + COURSE::Name
-        trace(url);
-        loader.append(new BinaryDataLoader(url,
-            {
-                onProgress: function(e:LoaderEvent):void {},
-                onComplete: function(e:LoaderEvent):void {
+        vcrLoader = new ViewCountRecordsHistoryLoader();
+        addChild(vcrLoader); // TODO: VERY IMPORTANT. NEEDS TO BE ON THE STAGE FOR THREADS TO WORK...? CHECK LATER.
 
-                    statusText.text = "Extracting logs...";
-                    var zip:FZip = new FZip();
-                    zip.addEventListener(Event.COMPLETE,
-                        function loaded(e:Event):void {
-                            statusText.text = "Processing logs...";
-                            userRecordsHistoryLoaded(e.target.getFileByName(video.media_alias_id + ".txt").content);
-                        });
-
-                    zip.loadBytes(e.target.content);
+        vcrLoader.progressSignal.add(
+                function progressHandler(current:Number, total:Number):void {
+                            progressBar.setProgress(current, total);
                 }
-            }));
-        newTime = getTimer();
-        loader.load();
+        );
+        vcrLoader.completeSignal.add(thread_resultHandler);
+        vcrLoader.loadVideo(video);
+
     }
 
     public function destroy():void {
@@ -148,48 +140,31 @@ public class UserRecordsVisualizer extends View {
         }
     }
 
-    private var _thread:IThread;
-    public const extraDependencies:Vector.<String> = Vector.<String>(["flash.utils.ByteArray"]);
 
-    public function userRecordsHistoryLoaded(content:String):void {
-
-        var strings:Array = content.split("\n");
-        strings.pop(); // remove the last line, which is just a \n
-        minDate = DateFormatter.parseDateString(strings[0].split("\t")[2]);
-        maxDate = DateFormatter.parseDateString(strings[strings.length-1].split("\t")[2]);
-        newTime = getTimer();
-
-        Thread.DEFAULT_LOADER_INFO = this.loaderInfo;
-        _thread = new Thread(ViewCountRecordProcess, "complexRunnable", false, extraDependencies, this.loaderInfo);
-        _thread.addEventListener(ThreadStateEvent.THREAD_STATE, onThreadState);
-        _thread.addEventListener(ThreadProgressEvent.PROGRESS, thread_progressHandler);
-        _thread.addEventListener(ThreadResultEvent.RESULT, thread_resultHandler);
-        _thread.addEventListener(ThreadFaultEvent.FAULT, thread_faultHandler);
-
-        _thread.start(new ViewCountRecordProcessArguments(strings));
-
-
-    }
-
-    private function onThreadState(event:ThreadStateEvent):void {
-        trace("Thread State:" + _thread.state);
-    }
-
-    private function thread_resultHandler(event:ThreadResultEvent):void {
+    private function thread_resultHandler(event:ThreadResultEvent = null):void {
 //        result.text += event.result;
 //        trace("Thread State: RESULT HANDLER " + event.result);
 
-        registerClassAlias("ca.ubc.ece.hct.myview.UserViewCountRecord", UserViewCountRecord);
-        var records:ByteArray = _thread.getSharedProperty("orgUserRecords") as ByteArray;
-        orgUserRecordsArray = records.readObject() as Array;
-
-        var records2:ByteArray = _thread.getSharedProperty("hourlyRecordCount") as ByteArray;
-        hourlyRecordCount = records2.readObject() as Array;
-
-        _thread.terminate();
+//        registerClassAlias("ca.ubc.ece.hct.myview.UserViewCountRecord", UserViewCountRecord);
+//        var records:ByteArray = _thread.getSharedProperty("orgUserRecords") as ByteArray;
+//        orgUserRecordsArray = records.readObject() as Array;
+//
+//        var records2:ByteArray = _thread.getSharedProperty("hourlyRecordCount") as ByteArray;
+//        hourlyRecordCount = records2.readObject() as Array;
+//
+//        _thread.terminate();
 
         removeChild(progressBar);
         removeChild(statusText);
+
+        hourlyRecordCount = vcrLoader.hourlyRecordCount;
+        orgUserRecordsArray = vcrLoader.orgUserRecordsArray;
+//        trace("orgUserRecordsArray.length=" + orgUserRecordsArray.length);
+//        trace("hourlyRecordCount.length=" + hourlyRecordCount.length);
+        minDate = vcrLoader.minDate;
+        maxDate = vcrLoader.maxDate;
+
+//        trace("minDate = " + minDate + ", maxDate = " + maxDate)
 
         // TODO: doing the hour record count thing. records should be passed from the thread. we just need to draw it.
 //        graphics.lineStyle(1);
@@ -234,17 +209,17 @@ public class UserRecordsVisualizer extends View {
         return newArr;
     }
 
-    private function thread_faultHandler(event:ThreadFaultEvent):void {
-//        result.text += event.fault.message;
-        trace("THREAD FAULT: " + event.fault.message);
-        trace(new Error().getStackTrace());
-        _thread.terminate();
-    }
-
-    private function thread_progressHandler(event:ThreadProgressEvent):void {
-//        trace("THREAD PROGRESS: " + event.current + "/" + event.total)
-        progressBar.setProgress(event.current, event.total);
-    }
+//    private function thread_faultHandler(event:ThreadFaultEvent):void {
+////        result.text += event.fault.message;
+//        trace("THREAD FAULT: " + event.fault.message);
+//        trace(new Error().getStackTrace());
+//        _thread.terminate();
+//    }
+//
+//    private function thread_progressHandler(event:ThreadProgressEvent):void {
+////        trace("THREAD PROGRESS: " + event.current + "/" + event.total)
+//        progressBar.setProgress(event.current, event.total);
+//    }
 
     public function startUIStuff():void {
 
