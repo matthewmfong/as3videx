@@ -16,6 +16,7 @@ public class ViewCountRecordProcess implements Runnable {
      */
     public var dispatcher:CrossThreadDispatcher;
 
+    // number of records per hour
     public var hourlyRecordCount:Array;
     public var hourlyRecordCountBA:ByteArray;
 

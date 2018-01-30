@@ -29,6 +29,7 @@ import mx.charts.series.LineSeries;
 import mx.collections.ArrayCollection;
 
 import spark.components.Group;
+import spark.components.SkinnableContainer;
 
 import spark.core.SpriteVisualElement;
 import spark.primitives.Line;
@@ -49,6 +50,7 @@ public class InstructorDashboard2018 extends View {
     private var recentMediaData:Array;
 
     private var flexLayer:Object;
+    private var mainContent:SkinnableContainer;
     private var filmstrip:Filmstrip;
 
     private var dependentFunctionArray:Array;
@@ -57,6 +59,8 @@ public class InstructorDashboard2018 extends View {
     public function InstructorDashboard2018(flexLayer:Object) {
 
         this.flexLayer = flexLayer;
+        mainContent = flexLayer.mainContent;
+
 
         course = VideoMetadataManager.COURSE;
 
@@ -83,20 +87,22 @@ public class InstructorDashboard2018 extends View {
     private function loadVideo(v:VideoMetadata):void {
         trace(v.media_alias_id);
         video = v;
-//        VideoATFManager.loadAsyncVideoATF(video).add(thumbnailsLoaded);
+        VideoATFManager.loadAsyncVideoATF(video).add(thumbnailsLoaded);
     }
 
     private function thumbnailsLoaded(v:VideoMetadata):void {
 
-//        filmstrip = new Filmstrip();
-//        filmstrip.loadVideo(v);
-//        filmstrip.setSize(stage.stageWidth - 20, 200);
+        filmstrip = new Filmstrip();
+        filmstrip.loadVideo(v);
+        filmstrip.setSize(stage.stageWidth - 20, 200);
+
+        Starling.current.stage.addChild(filmstrip);
+        filmstrip.showImages();
 //
-//        Starling.current.stage.addChild(filmstrip);
-//        filmstrip.showImages();
-//
-//        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
+        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
     }
+
+    private var urv:UserRecordsVisualizer;
 
     private function showVCR(json:Object):void {
 
@@ -127,10 +133,20 @@ public class InstructorDashboard2018 extends View {
 //        addChild(vcrb);
 //        vcrb.y = stage.stageHeight - 100;
 
-        var urv:UserRecordsVisualizer = new UserRecordsVisualizer(stage.stageWidth - 40, stage.stageHeight - filmstrip.height - 20);
-        addChild(urv);
-        urv.x = 20;
-        urv.y = filmstrip.height;
+//        addChild(urv);
+//        urv.x = 20;
+//        urv.y = filmstrip.height;
+
+        var spr:SpriteVisualElement = new SpriteVisualElement();
+        spr.width = mainContent.width;
+        spr.height = mainContent.height;
+        mainContent.removeAllElements();
+        mainContent.addElement(spr);
+
+
+        urv = new UserRecordsVisualizer(spr.width, spr.height);
+
+        spr.addChild(urv);
         urv.loadVideo(video);
 
     }

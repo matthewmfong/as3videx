@@ -289,6 +289,7 @@ package ca.ubc.ece.hct.myview {
 		        inStream.close(); 
 	        } catch(e:Error) {
 	        	trace("Error reading " + inFile.nativePath);
+				trace(e);
 	        	return false;
 	        }
 	        return true;
