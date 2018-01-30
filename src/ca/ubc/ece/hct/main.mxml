@@ -8,7 +8,7 @@
     <mx:Script>
         <![CDATA[ ]]>
     </mx:Script>
-    <s:SkinnableContainer id="rootContainer" width="100%" height="100%" x="0" y="30" backgroundColor="red"> <!-- 30 is the toolbar height, which is defined in VidexStarling -->
+    <s:SkinnableContainer id="rootContainer" width="100%" height="100%" x="0" y="30"> <!-- 30 is the toolbar height, which is defined in VidexStarling -->
         <s:HGroup>
             <s:SkinnableContainer backgroundColor="blue">
                 <s:SpriteVisualElement id="playlist_container" width="400" alpha="0.4" />
