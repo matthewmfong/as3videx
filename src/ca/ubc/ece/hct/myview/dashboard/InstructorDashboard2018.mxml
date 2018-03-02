@@ -2,31 +2,59 @@
 <!--
   Created by iDunno on 2018-01-30.
 -->
-<dashboard:InstructorDashboard2018
+<dashboard:InstructorDashboard2018Class
         xmlns:fx="http://ns.adobe.com/mxml/2009"
         xmlns:s="library://ns.adobe.com/flex/spark"
-        xmlns:myview="ca.ubc.ece.hct.myview.dashboard.*">
-    <fx:Script source="InstructorDashboard2018.as" />
+        xmlns:mx="library://ns.adobe.com/flex/mx"
+        xmlns:chart="mx.charts.*"
+        xmlns:dashboard="ca.ubc.ece.hct.myview.dashboard.*"
+        creationComplete="creationCompleteHandler()"
+        backgroundColor="0x00ff00"
+        width="100%"
+        height="100%">
 
-    <s:SpriteVisualElement id="playlist_container" width="400" />
+    <fx:Script><![CDATA[
+        import mx.controls.ProgressBarMode;
+        ]]></fx:Script>
 
-    <s:VGroup>
-        <s:Panel id="activeUsers_panel" title="Active Users">
-            <s:Scroller id="activeUsers_scroller"
-                        width="{this.width - playlist_container.width}"
-                        height="150"
-                        verticalScrollPolicy="off">
-                <s:Group>
-                    <s:Group id="activeUsers_container" height="{activeUsers_scroller.height - 20}" />
-                </s:Group>
-            </s:Scroller>
+    <dashboard:layout>
+        <s:VerticalLayout />
+    </dashboard:layout>
+
+    <s:HGroup width="100%" height="100%">
+        <s:Panel title="Videos" left="0" top="0" bottom="0" height="100%" backgroundAlpha="0">
+            <s:SpriteVisualElement id="playlistView_container" width="400" height="500"/>
         </s:Panel>
-        <s:Panel id="mainContent_panel"
-                 title="mainContent">
-            <s:Group id="mainContent_container"
-                     width="{this.width - playlist_container.width}"
-                     height="{this.height - activeUsers_panel.height}" />
-        </s:Panel>
-    </s:VGroup>
+        <s:SkinnableContainer width="100%" height="100%" right="0" backgroundColor="blue">
+            <s:layout>
+                <s:VerticalLayout />
+            </s:layout>
+            <s:Panel id="activeUsers_panel" title="Active Users" width="100%" right="0" top="0">
+                <s:Scroller id="activeUsers_scroller"
+                            width="100%"
+                            height="150"
+                            verticalScrollPolicy="off">
+                    <s:Group id="activeUsers_container" height="{activeUsers_scroller.height - 20}" clipAndEnableScrolling="true">
+                        <!--<chart:ColumnChart id="activeUsersChart"-->
+                                           <!--showDataTips="true"-->
+                                           <!--height="{activeUsers_container.height}" />-->
+                    </s:Group>
+                </s:Scroller>
+            </s:Panel>
+            <s:Panel id="mainContent_panel"
+                     title="mainContent" right="0" bottom="0" width="100%" height="100%">
+                <s:Group id="mainContent_container"
+                         width="100%"
+                         height="100%" />
+            </s:Panel>
+        </s:SkinnableContainer>
+    </s:HGroup>
+    <mx:ProgressBar id="progressBar"
+                    label=""
+                    width="100%"
+                    height="20"
+                    bottom="0"
+                    mode="{ProgressBarMode.MANUAL}"
+                    minimum="0" maximum="1" />
 
-</dashboard:InstructorDashboard2018>
+</dashboard:InstructorDashboard2018Class>
