@@ -20,11 +20,11 @@
     </define>
     <define>
       <name>CONFIG::Instructor</name>
-      <value>true</value>
+      <value>false</value>
     </define>
     <define>
       <name>COURSE::PredefinedName</name>
-      <value>"demo_course"</value>
+      <value>""</value>
     </define>
 
 	</compiler>

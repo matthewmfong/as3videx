@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="feathers" type="flex">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/feathers.swc!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

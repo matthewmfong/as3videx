@@ -322,10 +322,9 @@ CONFIG::AIR {
 
 				if(!ffmpegFile) {
 					var operatingSystem:String = Capabilities.os;
-					trace("shit, this isn't right.")
 			        if(operatingSystem.indexOf("Mac") >= 0) {
-                        trace(File.applicationDirectory.nativePath);
-                        trace(File.applicationDirectory.resolvePath("ffmpeg").nativePath);
+//                        trace(File.applicationDirectory.nativePath);
+//                        trace(File.applicationDirectory.resolvePath("ffmpeg").nativePath);
 						ffmpegFile = File.applicationDirectory.resolvePath("ffmpeg");
 					} else if(operatingSystem.indexOf("Windows") >= 0) {
 						ffmpegFile = File.applicationDirectory.resolvePath("ffmpeg.exe");

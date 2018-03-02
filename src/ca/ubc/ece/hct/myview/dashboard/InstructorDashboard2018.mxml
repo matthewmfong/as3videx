@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  Created by iDunno on 2018-01-30.
+-->
+<dashboard:InstructorDashboard2018
+        xmlns:fx="http://ns.adobe.com/mxml/2009"
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:myview="ca.ubc.ece.hct.myview.dashboard.*">
+    <fx:Script source="InstructorDashboard2018.as" />
+
+    <s:SpriteVisualElement id="playlist_container" width="400" />
+
+    <s:VGroup>
+        <s:Panel id="activeUsers_panel" title="Active Users">
+            <s:Scroller id="activeUsers_scroller"
+                        width="{this.width - playlist_container.width}"
+                        height="150"
+                        verticalScrollPolicy="off">
+                <s:Group>
+                    <s:Group id="activeUsers_container" height="{activeUsers_scroller.height - 20}" />
+                </s:Group>
+            </s:Scroller>
+        </s:Panel>
+        <s:Panel id="mainContent_panel"
+                 title="mainContent">
+            <s:Group id="mainContent_container"
+                     width="{this.width - playlist_container.width}"
+                     height="{this.height - activeUsers_panel.height}" />
+        </s:Panel>
+    </s:VGroup>
+
+</dashboard:InstructorDashboard2018>

@@ -110,6 +110,8 @@ public class ThumbnailNative extends View {
         this.video = video;
         loaded = new Signal(ThumbnailNative);
         vuRenderedSignal = new Signal(Rectangle, ByteArray); // Dimensions, Data
+
+        vuRenderedSignal.add(renderedFrame);
         _timestamp = 0;
     }
 
@@ -136,7 +138,6 @@ public class ThumbnailNative extends View {
                 if (imageLoaded) {
                     imageLoaded = false;
 
-                    vuRenderedSignal.addOnce(renderedFrame);
 
                     vu.renderFrame(video.source[video.primarySource].localPath,
                             new Point(video.source[video.primarySource].width, video.source[video.primarySource].height),
@@ -144,7 +145,7 @@ public class ThumbnailNative extends View {
                             time,
                             _width,
                             id,
-                            true,
+                            false,
                             exact,
                             1,
                             vuRenderedSignal);
