@@ -28,6 +28,9 @@ import flash.utils.ByteArray;
 	public class VideoMetadataManager {
 
 		public static var COURSE:Course;
+
+//        public static function get COURSE():Course { trace(new Error().getStackTrace()); return _COURSE; }
+//        public static function set COURSE(c:Course):void { trace(new Error().getStackTrace()); _COURSE = c; }
 		public static var videos:HashMap = new HashMap();
 		public static var playlist:VideoPlaylist;
 		public static const videosFolder:String = "videos";
@@ -255,6 +258,8 @@ import flash.utils.ByteArray;
 
 						if(!videos.containsKey(video.toString()))
 							videos.put(video.toString(), video);
+
+						if(verbose)
 							trace(video.toString());
 
 						if(verbose)
