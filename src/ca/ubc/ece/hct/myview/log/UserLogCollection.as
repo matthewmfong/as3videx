@@ -3,7 +3,17 @@
  */
 package ca.ubc.ece.hct.myview.log {
 public class UserLogCollection {
-    public function UserLogCollection() {
+
+    public var username:String;
+    public var logs:Array;
+
+    public function UserLogCollection(username:String) {
+        this.username = username;
+        logs = [];
+    }
+
+    public function addRecord(log:Log):void {
+        logs.push(log);
     }
 }
 }
