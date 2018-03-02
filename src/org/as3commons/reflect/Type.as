@@ -150,7 +150,7 @@ public class Type extends MetadataContainer {
 					try {
 						result = Type.forClass(ClassUtils.forName(name, applicationDomain), applicationDomain);
 					} catch (e:ClassNotFoundError) {
-						trace("Type.forName error: " + e.message + " The class '" + name + "' is probably an internal class or it may not have been compiled.");
+//						trace("Type.forName error: " + e.message + " The class '" + name + "' is probably an internal class or it may not have been compiled.");
 					}
 				}
 		}

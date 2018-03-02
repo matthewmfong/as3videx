@@ -35,9 +35,6 @@
       <configuration name="BCIT_CHEM0011_1_winter_2017" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -48,6 +45,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -65,9 +65,6 @@
       <configuration name="BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017-INSTRUCTOR">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -80,7 +77,7 @@
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
               <dependency linkage="Merged" />
             </entry>
-            <entry library-name="Axiis" library-level="project">
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -98,9 +95,6 @@
       <configuration name="BCIT_CHEM1121_1_winter_2017" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -111,6 +105,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -128,9 +125,6 @@
       <configuration name="BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -141,6 +135,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -192,9 +189,6 @@
       <configuration name="BCIT_CHEM0011_1_winter_2017_TEST" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017_TEST" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -205,6 +199,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -222,9 +219,6 @@
       <configuration name="BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -235,6 +229,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -252,9 +249,6 @@
       <configuration name="BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -265,6 +259,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -282,9 +279,6 @@
       <configuration name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -295,6 +289,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -312,9 +309,6 @@
       <configuration name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -325,6 +319,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -474,5 +471,6 @@
     <orderEntry type="library" exported="" name="DegrafaLibrary" level="project" />
     <orderEntry type="library" exported="" name="AxiisLibrary" level="project" />
     <orderEntry type="library" exported="" name="flare" level="project" />
+    <orderEntry type="module" module-name="FeathersLIb" exported="" />
   </component>
 </module>

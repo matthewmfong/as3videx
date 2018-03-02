@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////
+//                                                                    //
+//  Author: Matthew Fong                                              //
+//          Human Communication Laboratories - http://hct.ece.ubc.ca  //
+//          The University of British Columbia                        //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
+
 package ca.ubc.ece.hct.myview {
 
 
@@ -19,9 +27,19 @@ public class ViewCountRecordProcess implements Runnable {
     // number of records per hour
     public var hourlyRecordCount:Array;
     public var hourlyRecordCountBA:ByteArray;
+    public var dailyRecordCountBA:ByteArray;
+    public var dailyRecordMaxCountBA:ByteArray;
 
     public var orgUserRecords:Array;
     public var records:ByteArray;
+
+    private var usernames:Array;
+
+    public static const SECONDS2MILLISECONDS:Number = 1000;
+    public static const MINUTES2MILLISECONDS:Number = 60 * SECONDS2MILLISECONDS;
+    public static const HOURS2MILLISECONDS:Number = 60 * MINUTES2MILLISECONDS;
+    public static const DAYS2MILLISECONDS:Number = 24 * HOURS2MILLISECONDS;
+    public static const WEEKS2MILLISECONDS:Number = 7 * DAYS2MILLISECONDS;
 
     public function putRecord(user:String, vcr:String, date:Date):void {
 
@@ -33,6 +51,7 @@ public class ViewCountRecordProcess implements Runnable {
             }
         }
         if(userIndex < 0) {
+            usernames.push(user);
             orgUserRecords.push(new UserViewCountRecord(user));
             userIndex = orgUserRecords.length - 1;
         }
@@ -42,13 +61,13 @@ public class ViewCountRecordProcess implements Runnable {
 
     public function process(obj:ViewCountRecordProcessArguments):int {
 
+        usernames = [];
         orgUserRecords = [];
         hourlyRecordCount = [];
         var strings:Array = obj.strings;
 
-//        var newttt:Number = getTimer();
-//        trace(getTimer());
-
+        var minDate:Date;
+        var maxDate:Date;
         var dateCounter:Date = new Date();
         var counter:Number = 0;
         for(var i:int = 0; i<strings.length; i++) {
@@ -65,14 +84,16 @@ public class ViewCountRecordProcess implements Runnable {
             var minute:Number = Number(dateString.substr(14, 2));
             var second:Number = Number(dateString.substr(17, 2));
             var date:Date = new Date(year, month - 1, day, hour, minute, second);
-//            trace(date);
+            if(i == 0) {
+                minDate = date;
+            }
+            maxDate = date;
 
             if(dateCounter.fullYear     != date.fullYear ||
                 dateCounter.month   != date.month ||
                 dateCounter.date     != date.date ||
                 dateCounter.hours    != date.hours) {
-//                trace();
-//                trace(date + "_ " + dateCounter + " " + counter);
+
                 dateCounter = date;
                 hourlyRecordCount.push({date:date, count:counter});
                 counter = 0;
@@ -84,11 +105,31 @@ public class ViewCountRecordProcess implements Runnable {
 
             dispatcher.dispatchProgress(i, strings.length);
         }
-//        trace("TIME EXECUTION" + (getTimer() - newttt))
 
-//        for(var i:int = 0; i<orgUserRecords.length; i++) {
-//            trace(orgUserRecords[i].username);
-//        }
+        if(minDate && maxDate) {
+            var runningTime:Number;
+            var oldSum:Number = 0;
+            var newVCR:Array = [];
+            var newSum:Number = 0;
+            var dailyRecordMaxCount:Number = 0;
+            var dailyRecordCount:Array = [];
+            for (runningTime = minDate.getTime(); runningTime <= maxDate.getTime(); runningTime += DAYS2MILLISECONDS) {
+
+                var date:Date = new Date(runningTime);
+                newVCR = getAggregateVCRAtDate(date);
+
+                newSum = 0;
+                for (i = 0; i < newVCR.length; i++) {
+                    newSum += newVCR[i];
+                }
+
+                dailyRecordCount.push({date: date, count: (newSum - oldSum)});
+
+                dailyRecordMaxCount = Math.max(dailyRecordMaxCount, (newSum - oldSum));
+
+                oldSum = newSum;
+            }
+        }
 
 
         records = new ByteArray();
@@ -106,6 +147,22 @@ public class ViewCountRecordProcess implements Runnable {
         hourlyRecordCountBA.position = 0;
         dispatcher.setSharedProperty("hourlyRecordCount", hourlyRecordCountBA);
 
+
+        dailyRecordCountBA = new ByteArray();
+
+        dailyRecordCountBA.shareable = true;
+        dailyRecordCountBA.writeObject(dailyRecordCount);
+        dailyRecordCountBA.position = 0;
+        dispatcher.setSharedProperty("dailyRecordCount", dailyRecordCountBA);
+
+
+        dailyRecordMaxCountBA = new ByteArray();
+
+        dailyRecordMaxCountBA.shareable = true;
+        dailyRecordMaxCountBA.writeObject(dailyRecordMaxCount);
+        dailyRecordMaxCountBA.position = 0;
+        dispatcher.setSharedProperty("dailyRecordMaxCount", dailyRecordMaxCountBA);
+
         return 1;
 
     }
@@ -115,6 +172,85 @@ public class ViewCountRecordProcess implements Runnable {
         var value:ViewCountRecordProcessArguments = (ViewCountRecordProcessArguments)(args[0]);
 
         dispatcher.dispatchResult(process(value));
+    }
+
+    public function getAggregateVCRAtDate(date:Date):Array {
+
+        var aggregateVCR:Array = [];
+
+        for each(var user:String in usernames) {
+
+            var vcr:Array = [];
+            var vcrString:Array = getVCRForUserAtDate(user, date);
+
+            for (var j:int = 0; j < vcrString.length; j++) {
+                vcr.push(Number(vcrString[j]));
+            }
+
+            while (aggregateVCR.length < vcr.length) {
+                aggregateVCR.push(0);
+            }
+            for (var i:int = 0; i < vcr.length; i++) {
+                aggregateVCR[i] += vcr[i];
+            }
+
+        }
+
+        return aggregateVCR;
+    }
+
+    public function getRecordsForUser(user:String):UserViewCountRecord {
+
+        var records:UserViewCountRecord = null;
+        for(var i:int = 0; i<orgUserRecords.length; i++) {
+            if(orgUserRecords[i].username == user) {
+                records = new UserViewCountRecord(user);
+                records.username = orgUserRecords[i].username;
+                records.vcrs = orgUserRecords[i].vcrs;
+                records.vcrDates = orgUserRecords[i].vcrDates;
+                records.mapIndices = orgUserRecords[i].mapIndices;
+                records.mapDates = orgUserRecords[i].mapDates;
+                break;
+            }
+        }
+
+        return records;
+    }
+
+    public function getVCRForUserAtDate(user:String, date:Date):Array {
+
+        var records:UserViewCountRecord = getRecordsForUser(user);
+
+        // find index of records to jump to and start searching
+        var mapIndex:int;
+        for(mapIndex = 0; mapIndex < records.mapDates.length-1; mapIndex++) {
+            if(records.mapDates[mapIndex] >= date) {
+                break;
+            }
+        }
+
+        var entry:int = records.mapIndices[mapIndex];
+        for(var i:int = records.mapIndices[mapIndex]; i < records.vcrDates.length; i++) {
+
+            if(records.vcrDates[i] > date) {
+                break;
+            }
+
+            entry = i;
+        }
+
+        if(entry >= 0) {
+            var arr:Array = records.vcrs[entry].split(",");
+
+            for(var j:int = 0; j<arr.length; j++) {
+                arr[j] = Number(arr[j]);
+            }
+
+            return arr;
+        }
+
+        return [];
+
     }
 
 }
@@ -144,8 +280,9 @@ class UserViewCountRecord {
                 vcrs.push(vcr);
                 vcrDates.push(date);
 
-                if(mapDates.length > 0)
+                if(mapDates.length > 0) {
                     var oldDate:Date = mapDates[mapDates.length - 1];
+                }
 
                 if (mapDates.length == 0 ||
                         (Math.abs(date.time - oldDate.time) > 1000 * 60 * 60)) {

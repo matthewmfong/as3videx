@@ -76,7 +76,7 @@ public class Thread extends EventDispatcher implements IThread {
      * For Flash, there is no default, you need to provide the one containing this easyWorker library and your runnables,
      * could be stage.loaderInfo for example if everything is compiled in the same application.
      */
-    public static var DEFAULT_LOADER_INFO:LoaderInfo;// = FlexGlobals.topLevelApplication.loaderInfo;
+    public static var DEFAULT_LOADER_INFO:LoaderInfo = FlexGlobals.topLevelApplication.loaderInfo;
 
     /**
      * Minimum elapse time between each chained method.

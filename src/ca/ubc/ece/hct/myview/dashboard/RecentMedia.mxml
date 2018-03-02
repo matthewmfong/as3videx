@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  Created by iDunno on 2018-01-22.
+-->
+<s:Scroller xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:s="library://ns.adobe.com/flex/spark"
+                      width="100%" height="100%">
+
+
+        <s:VGroup id="main" width="100%"/>
+    <!--<s:VGroup>-->
+        <!--<s:HGroup>-->
+            <!--<s:VGroup id="main" width="{this.width}" height="{this.height}" clipAndEnableScrolling="true" />-->
+            <!--<s:VScrollBar id="scroller" viewport="{main}" height="{this.height}"/>-->
+        <!--</s:HGroup>-->
+        <!--<s:HScrollBar viewport="{main}" width="100%"/>-->
+    <!--</s:VGroup>-->
+</s:Scroller>

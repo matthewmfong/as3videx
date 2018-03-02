@@ -7,36 +7,26 @@
 ////////////////////////////////////////////////////////////////////////
 
 package ca.ubc.ece.hct.myview.dashboard {
+import ca.ubc.ece.hct.main;
 import ca.ubc.ece.hct.myview.*;
-import ca.ubc.ece.hct.myview.thumbnail.ThumbnailNative;
-import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 import ca.ubc.ece.hct.myview.widgets.VideoPlaylist;
 import ca.ubc.ece.hct.myview.widgets.filmstrip.Filmstrip;
 
-import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-
 import mx.charts.CategoryAxis;
 import mx.charts.ColumnChart;
-import mx.charts.LineChart;
-import mx.charts.LinearAxis;
-import mx.charts.chartClasses.IAxis;
-import mx.charts.events.ChartItemEvent;
 import mx.charts.series.ColumnSeries;
-import mx.charts.series.LineSeries;
 import mx.collections.ArrayCollection;
+import mx.events.ResizeEvent;
 
 import spark.components.Group;
-import spark.components.SkinnableContainer;
-
+import spark.components.Panel;
 import spark.core.SpriteVisualElement;
-import spark.primitives.Line;
 
 import starling.core.Starling;
 
-public class InstructorDashboard2018 extends View {
+public class InstructorDashboard2018 extends Group {
 
     private var course:Course;
     private var playlist:VideoPlaylist;
@@ -49,17 +39,19 @@ public class InstructorDashboard2018 extends View {
 
     private var recentMediaData:Array;
 
-    private var flexLayer:Object;
-    private var mainContent:SkinnableContainer;
+    private var flexLayer:main;
+    private var mainContent_container:Group;
+    private var mainContent_panel:Panel;
     private var filmstrip:Filmstrip;
 
     private var dependentFunctionArray:Array;
     private var dependentFunctionArrayCounter:Number = 0;
 
-    public function InstructorDashboard2018(flexLayer:Object) {
+    public function InstructorDashboard2018(flexLayer:main) {
 
         this.flexLayer = flexLayer;
-        mainContent = flexLayer.mainContent;
+        mainContent_container = flexLayer.mainContent_container;
+        mainContent_panel = flexLayer.mainContent_panel;
 
 
         course = VideoMetadataManager.COURSE;
@@ -137,11 +129,13 @@ public class InstructorDashboard2018 extends View {
 //        urv.x = 20;
 //        urv.y = filmstrip.height;
 
+        mainContent_container.addEventListener(ResizeEvent.RESIZE, resizeMainContent);
+
         var spr:SpriteVisualElement = new SpriteVisualElement();
-        spr.width = mainContent.width;
-        spr.height = mainContent.height;
-        mainContent.removeAllElements();
-        mainContent.addElement(spr);
+        spr.width = mainContent_container.width;
+        spr.height = mainContent_container.height;
+        mainContent_container.removeAllElements();
+        mainContent_container.addElement(spr);
 
 
         urv = new UserRecordsVisualizer(spr.width, spr.height);
@@ -149,7 +143,12 @@ public class InstructorDashboard2018 extends View {
         spr.addChild(urv);
         urv.loadVideo(video);
 
+        function resizeMainContent(e:ResizeEvent):void {
+//            urv.set
+        }
+
     }
+
 
     public function setSize(w:Number, h:Number):void {
         _width = w;
@@ -257,8 +256,6 @@ public class InstructorDashboard2018 extends View {
         activeUsersChart.width = activeUsersData.length * 50;
         activeUsersChart.height = flexLayer.activeUsers_container.height;
 
-//        flexLayer.activeUsers_scroller
-
     }
 
     private function grabRecentMedia():void {
@@ -283,9 +280,10 @@ public class InstructorDashboard2018 extends View {
                     }
 
                     var recentMediaLayout:RecentMedia = new RecentMedia();
-                    recentMediaLayout.width = flexLayer.mainContent.width;
-                    recentMediaLayout.height = flexLayer.mainContent.height;
-                    flexLayer.mainContent.addElement(recentMediaLayout);
+                    recentMediaLayout.width = mainContent_container.width;
+                    recentMediaLayout.height = mainContent_container.height;
+                    mainContent_container.addElement(recentMediaLayout);
+                    mainContent_panel.title = "Recently viewed videos";
 
                     for each(var o:Object in recentMediaData) {
 

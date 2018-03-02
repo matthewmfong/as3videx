@@ -23,6 +23,10 @@ import flash.net.registerClassAlias;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
+import mx.core.ByteArrayAsset;
+
+import mx.core.FlexGlobals;
+
 import mx.formatters.DateFormatter;
 
 import org.osflash.signals.Signal;
@@ -38,12 +42,15 @@ public class ViewCountRecordsHistoryLoader extends View {
 
     public var orgUserRecordsArray:Array;
     public var hourlyRecordCount:Array;
+    public var dailyRecordCount:Array;
+    public var dailyRecordMaxCount:Number;
 
     public var minDate:Date;
     public var maxDate:Date;
 
     public var vcr_so:SharedObject;
 
+    public var localComplete:Signal;
     public var completeSignal:Signal;
     public var errorSignal:Signal;
     public var progressSignal:Signal;
@@ -65,21 +72,32 @@ public class ViewCountRecordsHistoryLoader extends View {
         vcr_so = SharedObject.getLocal("vcr_" + video.id);
         var getDataFromDate:Date;
 
-        trace("vcr_so.size = " + vcr_so.size);
+//        trace("vcr_so.size = " + vcr_so.size);
 
         if(vcr_so.size > 0) {
 
 
             getDataFromDate = vcr_so.data.dataUpToDate;
+            dailyRecordCount = vcr_so.data.dailyRecordCount;
+//            dailyRecordMaxCount = vcr_so.data.dailyRecordMaxCount;
+
+            dailyRecordMaxCount = 0;
+            for(var i:int = 0; i<dailyRecordCount.length; i++) {
+                dailyRecordMaxCount = Math.max(dailyRecordMaxCount, dailyRecordCount[i].count);
+            }
 
 
         } else {
 
             getDataFromDate = new Date(2000, 0, 0, 0, 0, 0, 0);
+            dailyRecordCount = [];
+            dailyRecordMaxCount = 0;
 
         }
 
-        trace(getDataFromDate);
+        getDataFromDate.setTime(getDataFromDate.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
+
+//        trace(getDataFromDate);
 
         loader = new LoaderMax( { name: "WebLoaderQueue", auditSize:false });
         var url:String ="http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?" +
@@ -109,6 +127,39 @@ public class ViewCountRecordsHistoryLoader extends View {
                     }
                 }));
         loader.load();
+
+
+        var oldHourlyBA:ByteArray = new ByteArray();
+
+        if(Util.readFileIntoByteArray("vcr_hourly_" + video.id, oldHourlyBA)) {
+
+            hourlyRecordCount = oldHourlyBA.readObject() as Array;
+
+        } else {
+            hourlyRecordCount = [];
+        }
+
+        var oldRecordsBA:ByteArray = new ByteArray();
+
+        if(Util.readFileIntoByteArray("vcr_records_" + video.id, oldRecordsBA)) {
+
+            orgUserRecordsArray = oldRecordsBA.readObject() as Array;
+
+        } else {
+            orgUserRecordsArray = [];
+        }
+
+
+//        var oldDailyRecordsBA:ByteArray = new ByteArray();
+//        if(Util.readFileIntoByteArray("vcr_daily_" + video.id, oldDailyRecordsBA)) {
+//
+//            dailyRecordCount = oldDailyRecordsBA.readObject() as Array;
+//
+//        } else {
+//            dailyRecordCount = [];
+//        }
+
+//        completeSignal.dispatch();
     }
 
     private var _thread:IThread;
@@ -116,7 +167,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
     public function userRecordsHistoryLoaded(content:String):void {
 
-        trace("userRecordsHistoryLoaded " + content.length);
+//        trace("userRecordsHistoryLoaded " + content.length);
 
         var strings:Array = content.split("\n");
         strings.pop(); // remove the last line, which is just a \n
@@ -131,6 +182,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
             minDate = DateFormatter.parseDateString(strings[0].split("\t")[2]);
         }
+
         if(strings.length > 0) {
 //            minDate = DateFormatter.parseDateString(strings[0].split("\t")[2]);
             maxDate = DateFormatter.parseDateString(strings[strings.length - 1].split("\t")[2]);
@@ -140,7 +192,7 @@ public class ViewCountRecordsHistoryLoader extends View {
         }
 //        var newTime = getTimer();
 
-        Thread.DEFAULT_LOADER_INFO = this.loaderInfo;
+        Thread.DEFAULT_LOADER_INFO = FlexGlobals.topLevelApplication.loaderInfo;//this.loaderInfo;
         _thread = new Thread(ViewCountRecordProcess, "complexRunnable", false, extraDependencies, this.loaderInfo);
         _thread.addEventListener(ThreadStateEvent.THREAD_STATE, onThreadState);
         _thread.addEventListener(ThreadProgressEvent.PROGRESS, thread_progressHandler);
@@ -168,10 +220,16 @@ public class ViewCountRecordsHistoryLoader extends View {
         var records2:ByteArray = _thread.getSharedProperty("hourlyRecordCount") as ByteArray;
         var newHourlyRecordCount:Array = records2.readObject() as Array;
 
+        var records3:ByteArray = _thread.getSharedProperty("dailyRecordCount") as ByteArray;
+        var newDailyRecordCount:Array = records3.readObject() as Array;
+
+        var records4:ByteArray = _thread.getSharedProperty("dailyRecordMaxCount") as ByteArray;
+        var newDailyRecordMaxCount:Number = records4.readObject() as Number;
 
         // read from old files
         var oldRecords:ByteArray = new ByteArray();
         var oldHourly:ByteArray = new ByteArray();
+        var oldDailyRecordCount:Array = [];
 
         if(vcr_so.size > 0) {
 //            trace("Loader: Reading old files in array");
@@ -179,15 +237,30 @@ public class ViewCountRecordsHistoryLoader extends View {
             Util.readFileIntoByteArray("vcr_hourly_" + video.id, oldHourly);
             orgUserRecordsArray = oldRecords.readObject() as Array;
             hourlyRecordCount = oldHourly.readObject() as Array;
+            oldDailyRecordCount = vcr_so.data.dailyRecordCount;
         } else {
-//            trace("Loader: Old files don't exist");
+            // Loader: Old files don't exist
             orgUserRecordsArray = [];
             hourlyRecordCount = [];
+//            dailyRecordMaxCount = 0;
+            dailyRecordCount = [];
         }
+
 
 //        trace("Loader: Concatentating old arrays with new ones");
         orgUserRecordsArray = orgUserRecordsArray.concat(newOrgUserRecordsArray);
         hourlyRecordCount = hourlyRecordCount.concat(newHourlyRecordCount);
+        if(newDailyRecordCount) {
+            dailyRecordCount = oldDailyRecordCount.concat(newDailyRecordCount);
+        } else {
+            dailyRecordCount = oldDailyRecordCount;
+        }
+
+        dailyRecordMaxCount = 0;
+        for(var i:int = 0; i<dailyRecordCount.length; i++) {
+
+            dailyRecordMaxCount = Math.max(dailyRecordMaxCount, dailyRecordCount[i].count);
+        }
 
 //        trace("Loader: orgUserRecordsArray.length = " + orgUserRecordsArray.length);
 //        trace("Loader: hourlyRecordCount.length = " + hourlyRecordCount.length);
@@ -196,21 +269,30 @@ public class ViewCountRecordsHistoryLoader extends View {
         vcr_so.data.minDate = minDate;
         vcr_so.data.maxDate = maxDate;
         vcr_so.data.dataUpToDate = new Date();
+        vcr_so.data.dailyRecordCount = dailyRecordCount;
+
+//        vcr_so.data.dailyRecordMaxCount = dailyRecordMaxCount;
+        vcr_so.flush();
+        trace(dailyRecordCount);
+        trace(vcr_so.data.dailyRecordCount);
 
 
-        // write new records to filesl
+        // write new records to files
         records = new ByteArray();
         records2 = new ByteArray();
+        records3 = new ByteArray();
         records.writeObject(orgUserRecordsArray);
         records2.writeObject(hourlyRecordCount);
+//        records3.writeObject(dailyRecordCount);
 
         Util.writeBytesToFile("vcr_records_" + video.id, records);
         Util.writeBytesToFile("vcr_hourly_" + video.id, records2);
+//        Util.writeBytesToFile("vcr_daily_" + video.id, records3);
 
 
         _thread.terminate();
 
-        trace("all done.");
+        // trace("all done.");
         completeSignal.dispatch();
     }
 

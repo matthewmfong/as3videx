@@ -103,14 +103,14 @@ public class UserRecordsVisualizer extends View {
         addChild(statusText);
 
         vcrLoader = new ViewCountRecordsHistoryLoader();
-        addChild(vcrLoader); // TODO: VERY IMPORTANT. NEEDS TO BE ON THE STAGE FOR THREADS TO WORK...? CHECK LATER.
+//        addChild(vcrLoader); // TODO: VERY IMPORTANT. NEEDS TO BE ON THE STAGE FOR THREADS TO WORK...? CHECK LATER.
 
         vcrLoader.progressSignal.add(
                 function progressHandler(current:Number, total:Number):void {
                             progressBar.setProgress(current, total);
                 }
         );
-        vcrLoader.completeSignal.add(thread_resultHandler);
+        vcrLoader.completeSignal.add(vcrLoaded);
         vcrLoader.loadVideo(video);
 
     }
@@ -141,30 +141,19 @@ public class UserRecordsVisualizer extends View {
     }
 
 
-    private function thread_resultHandler(event:ThreadResultEvent = null):void {
-//        result.text += event.result;
-//        trace("Thread State: RESULT HANDLER " + event.result);
-
-//        registerClassAlias("ca.ubc.ece.hct.myview.UserViewCountRecord", UserViewCountRecord);
-//        var records:ByteArray = _thread.getSharedProperty("orgUserRecords") as ByteArray;
-//        orgUserRecordsArray = records.readObject() as Array;
-//
-//        var records2:ByteArray = _thread.getSharedProperty("hourlyRecordCount") as ByteArray;
-//        hourlyRecordCount = records2.readObject() as Array;
-//
-//        _thread.terminate();
+    private function vcrLoaded():void {
 
         removeChild(progressBar);
         removeChild(statusText);
 
         hourlyRecordCount = vcrLoader.hourlyRecordCount;
         orgUserRecordsArray = vcrLoader.orgUserRecordsArray;
-//        trace("orgUserRecordsArray.length=" + orgUserRecordsArray.length);
-//        trace("hourlyRecordCount.length=" + hourlyRecordCount.length);
         minDate = vcrLoader.minDate;
         maxDate = vcrLoader.maxDate;
+//        maxDate = new Date();
+        maxDate.setTime(vcrLoader.maxDate.getTime() + Constants.DAYS2MILLISECONDS * 2);
 
-//        trace("minDate = " + minDate + ", maxDate = " + maxDate)
+        trace("minDate = " + minDate + ", maxDate = " + maxDate)
 
         // TODO: doing the hour record count thing. records should be passed from the thread. we just need to draw it.
 //        graphics.lineStyle(1);
@@ -172,14 +161,33 @@ public class UserRecordsVisualizer extends View {
 //        graphics.moveTo(20, 20);
         trace("___________________________________ " + hourlyRecordCount.length);
 
+        drawHourlyActivity();
+
+        startUIStuff();
+    }
+
+    private function mapArrayOfValuesToPixels(arr:Array, pixels:Number):Array {
+        var newArr:Array = [];
+
+        for(var i:int = 0; i<pixels; i++) {
+
+        }
+
+        return newArr;
+    }
+
+    public function drawHourlyActivity():void {
+
         var maxCount:Number = 0;
-        for(var i:int = 0; i<hourlyRecordCount.length; i++) {
+        var i:int;
+        for(i = 0; i<hourlyRecordCount.length; i++) {
             maxCount = maxCount < hourlyRecordCount[i].count ?  hourlyRecordCount[i].count : maxCount;
         }
 
         var dateRange:Number = maxDate.time - minDate.time;
 
-        for(var i:int = 0; i<hourlyRecordCount.length; i++) {
+        graphics.clear();
+        for(i = 0; i<hourlyRecordCount.length; i++) {
 //            trace(hourlyRecordCount[i].count + " " + hourlyRecordCount[i].date);
             var color:uint = ColorUtil.getHeatMapColor(hourlyRecordCount[i].count/maxCount);
             graphics.beginFill(color);
@@ -196,30 +204,7 @@ public class UserRecordsVisualizer extends View {
         }
 //        graphics.lineTo(20, 20);
         graphics.endFill();
-        startUIStuff();
     }
-
-    function mapArrayOfValuesToPixels(arr:Array, pixels:Number):Array {
-        var newArr:Array = [];
-
-        for(var i:int = 0; i<pixels; i++) {
-
-        }
-
-        return newArr;
-    }
-
-//    private function thread_faultHandler(event:ThreadFaultEvent):void {
-////        result.text += event.fault.message;
-//        trace("THREAD FAULT: " + event.fault.message);
-//        trace(new Error().getStackTrace());
-//        _thread.terminate();
-//    }
-//
-//    private function thread_progressHandler(event:ThreadProgressEvent):void {
-////        trace("THREAD PROGRESS: " + event.current + "/" + event.total)
-//        progressBar.setProgress(event.current, event.total);
-//    }
 
     public function startUIStuff():void {
 
@@ -252,24 +237,17 @@ public class UserRecordsVisualizer extends View {
         addChild(sliderDate);
         addChild(slider);
 
-//        filmstrip = new Filmstrip();//_width - slider.x - 10, 100);
-//        filmstrip.
-//        filmstrip.loadVideo(video);
-//        filmstrip.x = slider.x + 10;
-//        filmstrip.y = 20;
-//        addChild(filmstrip);
-
         aggregateVCR = new Sprite();
-        aggregateVCR.x = slider.x + 10;
+        aggregateVCR.x = slider.x + 40;
 //        aggregateVCR.y = filmstrip.y + filmstrip.height + 20;
         addChild(aggregateVCR);
 
         uiscroller = new UIScrollView(_width - slider.x - 10, _height - (aggregateVCR.y + VIEW_COUNT_RECORD_HEIGHT));
         container = new Sprite();
         uiscroller.source = container;
-        uiscroller.x = slider.x + 10;
+        uiscroller.x = slider.x + 40;
         uiscroller.y = aggregateVCR.y + VIEW_COUNT_RECORD_HEIGHT;
-//        addChild(uiscroller);
+        addChild(uiscroller);
 
         singleVCRs = new HashMap();
         usernames = [];
@@ -282,13 +260,13 @@ public class UserRecordsVisualizer extends View {
         for(i = 0; i<usernames.length; i++) {
             var vcrSprite:Sprite = new ViewCountRecordSprite(usernames[i]);
             vcrSprite.y = i * (VIEW_COUNT_RECORD_HEIGHT + 5);
-            vcrSprite.addEventListener(MouseEvent.CLICK,
-                function vcrClick(e:MouseEvent):void {
-                    navViz.loadVideo(video, e.currentTarget.username);
-                    navVizTitle.text = e.currentTarget.username;
-                    addChild(navVizContainer);
-                    navVizContainer.alpha = 1;
-                });
+//            vcrSprite.addEventListener(MouseEvent.CLICK,
+//                function vcrClick(e:MouseEvent):void {
+//                    navViz.loadVideo(video, e.currentTarget.username);
+//                    navVizTitle.text = e.currentTarget.username;
+//                    addChild(navVizContainer);
+//                    navVizContainer.alpha = 1;
+//                });
             var usernameTextField:TextField = new TextField();
             usernameTextField.width = _width;
             usernameTextField.defaultTextFormat = Constants.DEFAULT_TEXT_FORMAT;
@@ -299,45 +277,45 @@ public class UserRecordsVisualizer extends View {
             container.addChild(vcrSprite);
         }
 
-        navViz = new UserNavigationVisualizer(_width - 150, _height - 170);
-        navViz.x = 25;
-        navViz.y = 45;
-        navVizContainer = new Sprite();
-        navVizContainer.graphics.beginFill(0xaaaaaa);
-        navVizContainer.graphics.drawRect(3, 3, _width - 100, _height - 100);
-        navVizContainer.graphics.beginFill(0xeeeeee);
-        navVizContainer.graphics.drawRect(0, 0, _width - 100, _height - 100);
-        navVizContainer.addChild(navViz);
-        navVizContainer.x = 50;
-        navVizContainer.y = 50;
-
-        navVizTitle = new TextField();
-        navVizTitle.defaultTextFormat = Constants.DEFAULT_TEXT_FORMAT;
-        navVizTitle.width = navVizContainer.width;
-        navVizTitle.x = 10;
-        navVizTitle.y = 5;
-        navVizContainer.addChild(navVizTitle);
-
-        navVizClose = new Sprite();
-        navVizClose.graphics.beginFill(0, 0);
-        navVizClose.graphics.drawRect(0, 0, 20, 20);
-        navVizClose.graphics.endFill();
-        navVizClose.graphics.lineStyle(8, 0x333333);
-        navVizClose.graphics.lineTo(15, 15);
-        navVizClose.graphics.moveTo(15, 0);
-        navVizClose.graphics.lineTo(0, 15);
-        navVizClose.x = navVizContainer.width - navVizClose.width;
-        navVizClose.y = 5;
-        navVizClose.addEventListener(MouseEvent.CLICK,
-            function closeNavViz(e:MouseEvent):void {
-                TweenLite.to(navVizContainer, 0.24,
-                           {alpha: 0,
-                       onComplete: function navVizDisappeared():void {
-                                        removeChild(navVizContainer);
-
-                }});
-            });
-        navVizContainer.addChild(navVizClose);
+//        navViz = new UserNavigationVisualizer(_width - 150, _height - 170);
+//        navViz.x = 25;
+//        navViz.y = 45;
+//        navVizContainer = new Sprite();
+//        navVizContainer.graphics.beginFill(0xaaaaaa);
+//        navVizContainer.graphics.drawRect(3, 3, _width - 100, _height - 100);
+//        navVizContainer.graphics.beginFill(0xeeeeee);
+//        navVizContainer.graphics.drawRect(0, 0, _width - 100, _height - 100);
+//        navVizContainer.addChild(navViz);
+//        navVizContainer.x = 50;
+//        navVizContainer.y = 50;
+//
+//        navVizTitle = new TextField();
+//        navVizTitle.defaultTextFormat = Constants.DEFAULT_TEXT_FORMAT;
+//        navVizTitle.width = navVizContainer.width;
+//        navVizTitle.x = 10;
+//        navVizTitle.y = 5;
+//        navVizContainer.addChild(navVizTitle);
+//
+//        navVizClose = new Sprite();
+//        navVizClose.graphics.beginFill(0, 0);
+//        navVizClose.graphics.drawRect(0, 0, 20, 20);
+//        navVizClose.graphics.endFill();
+//        navVizClose.graphics.lineStyle(8, 0x333333);
+//        navVizClose.graphics.lineTo(15, 15);
+//        navVizClose.graphics.moveTo(15, 0);
+//        navVizClose.graphics.lineTo(0, 15);
+//        navVizClose.x = navVizContainer.width - navVizClose.width;
+//        navVizClose.y = 5;
+//        navVizClose.addEventListener(MouseEvent.CLICK,
+//            function closeNavViz(e:MouseEvent):void {
+//                TweenLite.to(navVizContainer, 0.24,
+//                           {alpha: 0,
+//                       onComplete: function navVizDisappeared():void {
+//                                        removeChild(navVizContainer);
+//
+//                }});
+//            });
+//        navVizContainer.addChild(navVizClose);
         setDate(minDate);
     }
 
@@ -399,7 +377,7 @@ public class UserRecordsVisualizer extends View {
 
         var records:UserViewCountRecord = getRecordsForUser(user);
 
-        var dS:String = date.toString();
+//        var dS:String = date.toString();
 
         // find index of records to jump to and start searching
         var mapIndex:int;
@@ -409,16 +387,24 @@ public class UserRecordsVisualizer extends View {
             }
         }
 
-        var mapdateslength = records.mapDates.length;
-        var mapidxstring = records.mapDates[mapIndex].toString();
+//        var mapdateslength = records.mapDates.length;
+//        var mapidxstring = records.mapDates[mapIndex].toString();
 
-        var entry:int = 0;
-        for(var i:int = records.mapIndices[mapIndex]; i >= 0; i--) {
-            if(records.vcrDates[i] < date) {
-                entry = i;
+        var entry:int = records.mapIndices[mapIndex];
+        for(var i:int = records.mapIndices[mapIndex]; i < records.vcrDates.length; i++) {
+
+            if(records.vcrDates[i] > date) {
                 break;
             }
+
+            entry = i;
         }
+//        for(var i:int = records.mapIndices[mapIndex]; i >= 0; i--) {
+//            if(records.vcrDates[i] < date) {
+//                entry = i;
+//                break;
+//            }
+//        }
 
         if(entry >= 0) {
             return records.vcrs[entry].split(",");
@@ -428,7 +414,7 @@ public class UserRecordsVisualizer extends View {
 
     }
 
-    public static const VIEW_COUNT_RECORD_HEIGHT:uint = 50;
+    public static const VIEW_COUNT_RECORD_HEIGHT:uint = 100;
 
     public function drawViewCountRecord(viewCountRecordSprite:Sprite, viewCountRecord:Array, width:Number = 100,
                                         colours:Array = null,
@@ -499,6 +485,23 @@ public class UserRecordsVisualizer extends View {
         } else {
             viewCountRecordSprite.graphics.clear();
         }
+    }
+
+    public function setSize(w:Number, h:Number):void {
+        _width = w;
+        _height = h;
+
+        progressBar.width = _width - 200;
+        progressBar.y = _height/2;
+        statusText.x = _width/2 - statusText.width/2;
+        statusText.y = progressBar.y + progressBar.height;
+
+        drawHourlyActivity();
+
+        slider.height = _height - 40;
+        slider.x = 20;
+        slider.y = 20;
+
     }
 }
 }

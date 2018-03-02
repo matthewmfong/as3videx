@@ -120,7 +120,7 @@ public class WorkerFactory {
                     for each (var depAbcName:String in dependencies) {
                         if (tagDoABC.abcName == depAbcName.replace(/\./g, "/")) {
                             abcTags.push(tag);
-                            trace("Dep: " + depAbcName + " tag: " + tag.toString(0, 0x01));
+                            // trace("Dep: " + depAbcName + " tag: " + tag.toString(0, 0x01));
                             break;
                         }
                     }
