@@ -24,6 +24,7 @@ public class UserData {
 
 		public var userString:String;
 		public var viewCountRecord:Array;
+		// TODO: aside from setting VCR via set view_count_record, maxViewCount must be manually specified =\
 		public var maxViewCount:Number;
 		public var pauseRecord:Array;
 		public var playbackRateRecord:Array;
@@ -41,6 +42,7 @@ public class UserData {
 
 		}
 
+		// TODO: Somehow specify that this is only good for database input (view_count_record is the db field name)
 		public function set view_count_record(s:String):void {
 			if(s != null) {
 				var vcr:Array = s.split(",");

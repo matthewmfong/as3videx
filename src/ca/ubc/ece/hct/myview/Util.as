@@ -288,8 +288,9 @@ package ca.ubc.ece.hct.myview {
 		        inStream.readBytes(data); 
 		        inStream.close(); 
 	        } catch(e:Error) {
+//                trace(e.getStackTrace());
 	        	trace("Error reading " + inFile.nativePath);
-				trace(e);
+//				trace(e);
 	        	return false;
 	        }
 	        return true;
@@ -303,6 +304,7 @@ package ca.ubc.ece.hct.myview {
 		        inStream.readBytes(data); 
 		        inStream.close(); 
 	        } catch(e:Error) {
+//				trace(e.getStackTrace());
 	        	trace("Error reading " + path + e);
 	        	return false;
 	        }
@@ -318,7 +320,7 @@ package ca.ubc.ece.hct.myview {
 
 	}
 
-	    public static function dateParser(s:String):Date{
+	    public static function dateParser(s:String):Date {
 		    var regexp:RegExp = /(\d{4})\-(\d{1,2})\-(\d{1,2}) (\d{2})\:(\d{2})\:(\d{2})/;
 		    var _result:Object = regexp.exec(s);
 

@@ -251,10 +251,10 @@
             return newArry;
         }
 
-        public static function getHeatMapColor(value:Number):uint
+        public static function getHeatMapColor(value:Number, colours:Array = null):uint
         {
             var NUM_COLORS:int = 4;
-            var color:Array = [ [0,0,255], [0,255,0], [255,255,0], [255,0,0] ];
+            var color:Array = colours != null ? colours : [ [0,0,255], [0,255,0], [255,255,0], [255,0,0] ];
             // A static array of 4 colors:  (blue,   green,  yellow,  red) using {r,g,b} for each.
 
             var idx1:int;        // |-- Our desired color will be between these two indexes in "color".

@@ -2,42 +2,26 @@
  * Created by matth on 2017-07-09.
  */
 
+import ca.ubc.ece.hct.myview.Constants;
 import ca.ubc.ece.hct.myview.VidexStarling;
 
-import flash.desktop.NativeApplication;
-import flash.display.Sprite;
 import flash.display.Stage;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.events.Event;
-import flash.geom.Rectangle;
 import flash.events.NativeWindowBoundsEvent;
+import flash.geom.Rectangle;
 import flash.net.SharedObject;
 
-import mx.core.Application;
-
-import mx.core.Application;
 import mx.core.FlexGlobals;
 
 import starling.core.Starling;
-
-
-import mx.charts.BarChart;
-import mx.charts.CategoryAxis;
-import mx.charts.Legend;
-import mx.charts.series.BarSeries;
-import mx.collections.ArrayCollection;
 
 public static var stage:Stage = null;
 
 private var _starling:Starling;
 
 private var application_preferences_so:SharedObject;
-
-//public function VidexFlex() {
-//
-//
-//}
 
 public function onCreationComplete():void {
     if (stage) {

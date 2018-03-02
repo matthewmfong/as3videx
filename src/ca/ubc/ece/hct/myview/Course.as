@@ -15,7 +15,7 @@ package ca.ubc.ece.hct.myview {
 		public var section:String;
 		public var term:String;
 		public var year:String;
-		public var startDate:Date;
+		public var _startDate:Date;
 		public var endDate:Date;
 
 		public function Course(school:String, code:String, section:String, term:String, year:String) {
@@ -28,6 +28,16 @@ package ca.ubc.ece.hct.myview {
 
 		public function toString():String {
 			return school + "_" + code + "_" + section + "_" + term + "_" + year;
+		}
+
+		public function set startDate(d:Date):void {
+//			trace(new Error().getStackTrace());
+			_startDate = d;
+		}
+
+		public function get startDate():Date {
+//			trace(new Error().getStackTrace());
+			return _startDate;
 		}
 
 	}

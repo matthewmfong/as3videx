@@ -4,31 +4,14 @@
                 layout="absolute"
                 creationComplete="onCreationComplete();"
                 backgroundAlpha="0">
+
     <mx:Script source="myview/VidexFlex.as" />
-    <mx:Script>
-        <![CDATA[ ]]>
-    </mx:Script>
-    <s:SkinnableContainer id="rootContainer" width="100%" height="100%" x="0" y="30"> <!-- 30 is the toolbar height, which is defined in VidexStarling -->
-        <s:HGroup>
-            <s:SkinnableContainer backgroundColor="blue">
-                <s:SpriteVisualElement id="playlist_container" width="400" alpha="0.4" />
-            </s:SkinnableContainer>
-            <s:VGroup>
-                <s:Panel title="Active Users">
-                    <s:Scroller id="activeUsers_scroller"
-                                width="{rootContainer.width - playlist_container.width}"
-                                height="150"
-                                verticalScrollPolicy="off">
-                        <s:Group>
-                            <s:SkinnableContainer id="activeUsers_container" height="{activeUsers_scroller.height - 20}" />
-                        </s:Group>
-                    </s:Scroller>
-                </s:Panel>
-                <s:SkinnableContainer id="mainContent"
-                                      backgroundAlpha="0"
-                                      width="{rootContainer.width - playlist_container.width}"
-                                      height="{rootContainer.height - activeUsers_scroller.height}" />
-            </s:VGroup>
-        </s:HGroup>
-    </s:SkinnableContainer>
+
+    <s:Group id="titlebar"
+             width="100%"
+             height="{Constants.TITLEBAR_HEIGHT}" />
+
+    <s:Group id="rootContainer"
+             top="30" bottom="10" right="10" left="10" />
+
 </mx:Application>
