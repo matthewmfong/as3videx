@@ -7,51 +7,114 @@
 ////////////////////////////////////////////////////////////////////////
 
 package ca.ubc.ece.hct.myview.dashboard {
-import ca.ubc.ece.hct.main;
 import ca.ubc.ece.hct.myview.*;
+import ca.ubc.ece.hct.myview.log.UserLogsLoader;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 import ca.ubc.ece.hct.myview.widgets.VideoPlaylist;
 import ca.ubc.ece.hct.myview.widgets.filmstrip.Filmstrip;
 
+import flash.display.DisplayObjectContainer;
+
 import mx.charts.CategoryAxis;
 import mx.charts.ColumnChart;
 import mx.charts.series.ColumnSeries;
 import mx.collections.ArrayCollection;
+import mx.controls.ProgressBar;
 import mx.events.ResizeEvent;
 
 import spark.components.Group;
 import spark.components.Panel;
+import spark.components.Scroller;
+import spark.components.SkinnableContainer;
 import spark.core.SpriteVisualElement;
 
-import starling.core.Starling;
-
-public class InstructorDashboard2018 extends Group {
+public class InstructorDashboard2018Class extends SkinnableContainer {
 
     private var course:Course;
     private var playlist:VideoPlaylist;
     private var video:VideoMetadata;
     private var playlistView:PlaylistListView;
 
+    public static var userLogLoader:UserLogsLoader;
+
+    override public function get parent():DisplayObjectContainer { return super.parent };
+
+    [Bindable]
+    public var playlistView_container:SpriteVisualElement;
+
+    [Bindable]
+    public var activeUsers_container:Group;
     private var activeUsersData:ArrayCollection;
-    private var activeUsersChart:ColumnChart;
-    private var activeUsersSeries:ColumnSeries;
+
+    [Bindable]
+    public var activeUsersChart:ColumnChart;
+    private var activeUsersSeries:ColumnSeries
+
+    [Bindable]
+    public var activeUsers_scroller:Scroller;
 
     private var recentMediaData:Array;
 
-    private var flexLayer:main;
-    private var mainContent_container:Group;
-    private var mainContent_panel:Panel;
+    [Bindable]
+    public var mainContent_container:Group;
+    [Bindable]
+    public var mainContent_panel:Panel;
+
+    [Bindable]
+    public var progressBar:ProgressBar;
     private var filmstrip:Filmstrip;
+
+    private var videoStats:VideoStats;
 
     private var dependentFunctionArray:Array;
     private var dependentFunctionArrayCounter:Number = 0;
 
-    public function InstructorDashboard2018(flexLayer:main) {
+    public function InstructorDashboard2018Class() {
 
-        this.flexLayer = flexLayer;
-        mainContent_container = flexLayer.mainContent_container;
-        mainContent_panel = flexLayer.mainContent_panel;
+        super();
+
+        playlistView_container = new SpriteVisualElement();
+        mainContent_panel = new Panel();
+        mainContent_container = new Group();
+        activeUsers_container = new Group();
+        activeUsers_scroller = new Scroller();
+        progressBar = new ProgressBar();
+
+    }
+
+    public function creationCompleteHandler():void {
+
+        graphics.beginFill(0x00ff00);
+        graphics.drawRect(0, 0, 100, 100);
+        graphics.endFill();
+
+
+        userLogLoader = new UserLogsLoader();
+        userLogLoader.freezeSignal.add(
+                function userLogFreeze():void {
+//                    trace("FREEZE");
+                    progressBar.setProgress(0.8, 1);
+//                    trace("FREEZE2?")
+                }
+        );
+        userLogLoader.progressSignal.add(
+                function userLogProgress(current:Number, total:Number):void {
+//                    trace("PROGRESS");
+                    progressBar.setProgress(current*0.8/total, 1);
+                }
+        );
+        userLogLoader.completeSignal.add(
+                function userLogComplete():void {
+//                    trace("COMPLETE");
+                    progressBar.setProgress(1, 1);
+//                    startLogQueries();
+
+
+//                    removeElement(progressBar);
+                }
+        );
+        userLogLoader.load();
 
 
         course = VideoMetadataManager.COURSE;
@@ -61,6 +124,7 @@ public class InstructorDashboard2018 extends Group {
 
         grabActiveUsers();
 
+        playlistView_container.addChild(playlistView);
     }
 
     private function callNextDependentFunction():void {
@@ -68,30 +132,40 @@ public class InstructorDashboard2018 extends Group {
     }
 
     public function setPlaylist(playlist:VideoPlaylist):void {
-        this.playlist = playlist;
         playlistView = new PlaylistListView();
         playlistView.drawPlaylist(playlist, 0, 0);
-        flexLayer.playlist_container.addChild(playlistView);
 
         playlistView.mediaClicked.add(loadVideo);
     }
 
     private function loadVideo(v:VideoMetadata):void {
-        trace(v.media_alias_id);
+
+//        trace("END HERE_________________________");
+//        trace(VideoMetadataManager.COURSE.startDate + " --> " + VideoMetadataManager.COURSE.endDate)
+
+//        trace(v.media_alias_id);
         video = v;
-        VideoATFManager.loadAsyncVideoATF(video).add(thumbnailsLoaded);
+        videoStats = new VideoStats();
+        videoStats.db = userLogLoader;
+        videoStats.video = v;
+
+        mainContent_panel.title = v.title;
+        mainContent_container.removeAllElements();
+        mainContent_container.addElement(videoStats);
+
+//        VideoATFManager.loadAsyncVideoATF(video).add(thumbnailsLoaded);
     }
 
     private function thumbnailsLoaded(v:VideoMetadata):void {
 
-        filmstrip = new Filmstrip();
-        filmstrip.loadVideo(v);
-        filmstrip.setSize(stage.stageWidth - 20, 200);
-
-        Starling.current.stage.addChild(filmstrip);
-        filmstrip.showImages();
+//        filmstrip = new Filmstrip();
+//        filmstrip.loadVideo(v);
+//        filmstrip.setSize(stage.stageWidth - 20, 200);
 //
-        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
+//        Starling.current.stage.addChild(filmstrip);
+//        filmstrip.showImages();
+////
+//        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
     }
 
     private var urv:UserRecordsVisualizer;
@@ -138,21 +212,15 @@ public class InstructorDashboard2018 extends Group {
         mainContent_container.addElement(spr);
 
 
-        urv = new UserRecordsVisualizer(spr.width, spr.height);
-
-        spr.addChild(urv);
-        urv.loadVideo(video);
+//        urv = new UserRecordsVisualizer(spr.width, spr.height);
+//
+//        spr.addChild(urv);
+//        urv.loadVideo(video);
 
         function resizeMainContent(e:ResizeEvent):void {
 //            urv.set
         }
 
-    }
-
-
-    public function setSize(w:Number, h:Number):void {
-        _width = w;
-        _height = h;
     }
 
     private function date2daymonthdate(d:Date):String {
@@ -166,7 +234,7 @@ public class InstructorDashboard2018 extends Group {
         var activeDates:Array = [];
         var activeUsers:Array = [];
 
-        var insertDate:Date = course.startDate;
+        var insertDate:Date = new Date(course.startDate.getTime());
         var todayDate:Date = new Date();
         while(insertDate.getTime() < todayDate.getTime() + Constants.DAYS2MILLISECONDS) {
 
@@ -176,50 +244,52 @@ public class InstructorDashboard2018 extends Group {
             insertDate.setTime(insertDate.getTime() + Constants.DAYS2MILLISECONDS);
         }
 
-        ServerDataLoader.getActiveUsers().add(
-            function consolidateActiveUsers(o:*):void {
-                var entries:* = JSON.parse((String)(o));
+        ServerDataLoader.getActiveUsers().add(consolidateActiveUsers);
 
-                for (var id:* in entries){
-                    var entry:* = entries[id];
+        function consolidateActiveUsers(o:*):void {
+            var entries:* = JSON.parse((String)(o));
 
-                    // see if that date already exists
-                    var date:Date = Util.dateParser((String)(entry["date"]));
-                    date.setTime(date.getTime() + Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
+            for (var id:* in entries){
+                var entry:* = entries[id];
 
-                    // split "2018-01-01 00:00:00" into "2018-01-01" and "00:00:00" ~ get the date only.
-                    var dateString:String = date2daymonthdate(date);
+                // see if that date already exists
+                var date:Date = Util.dateParser((String)(entry["date"]));
+                date.setTime(date.getTime() + Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
 
-                    var user:Number = Number((String)(entry["user"]));
+                // split "2018-01-01 00:00:00" into "2018-01-01" and "00:00:00" ~ get the date only.
+                var dateString:String = date2daymonthdate(date);
 
-                    var indexOfDate:int = Util.looseIndexOf(activeDates, dateString);
+                var user:Number = Number((String)(entry["user"]));
 
-                    if(indexOfDate == -1) {
-                        // date does not yet exist
-                        activeDates.push(dateString);
-                        activeUsers.push([user]);
+                var indexOfDate:int = Util.looseIndexOf(activeDates, dateString);
 
-                    } else {
-                        // date found, let's add users.
+                if(indexOfDate == -1) {
+                    // date does not yet exist
+                    activeDates.push(dateString);
+                    activeUsers.push([user]);
 
-                        if(Util.looseIndexOf(activeUsers[indexOfDate], user) == -1) {
-                            // did not find user
-                            activeUsers[indexOfDate].push(user);
-                        }
+                } else {
+                    // date found, let's add users.
 
-                        // otherwise the user has already been added. do nothing :D
+                    if(Util.looseIndexOf(activeUsers[indexOfDate], user) == -1) {
+                        // did not find user
+                        activeUsers[indexOfDate].push(user);
                     }
 
+                    // otherwise the user has already been added. do nothing :D
                 }
 
-                for(var i:int = 0; i<activeDates.length; i++) {
-//                    trace(activeDates[i] + " " + activeUsers[i].length);
-                    activeUsersData.addItem({time: activeDates[i], numUsers: activeUsers[i].length });
-                }
-
-                chartActiveUsers();
             }
-        )
+
+            for(var i:int = 0; i<activeDates.length; i++) {
+//                    trace(activeDates[i] + " " + activeUsers[i].length);
+                activeUsersData.addItem({time: activeDates[i], numUsers: activeUsers[i].length });
+            }
+
+            chartActiveUsers();
+
+            activeUsers_container.horizontalScrollPosition = 1000;//activeUsers_scroller.width - activeUsersChart.width;
+        }
 
     }
 
@@ -236,7 +306,7 @@ public class InstructorDashboard2018 extends Group {
         activeUsersChart.horizontalAxis = vAxis;
 
         /* Add the series. */
-        var mySeries:Array = new Array();
+        var mySeries:Array = [];
         activeUsersSeries = new ColumnSeries();
         activeUsersSeries.xField="time";
         activeUsersSeries.yField="numUsers";
@@ -250,11 +320,11 @@ public class InstructorDashboard2018 extends Group {
 //        legend1.dataProvider = activeUsersChart;
 
         /* Attach chart and legend to the display list. */
-        flexLayer.activeUsers_container.addElement(activeUsersChart);
+        activeUsers_container.addElement(activeUsersChart);
 //        flexLayer.activeUsers_container.addElement(legend1);
 
         activeUsersChart.width = activeUsersData.length * 50;
-        activeUsersChart.height = flexLayer.activeUsers_container.height;
+        activeUsersChart.height = activeUsers_container.height;
 
     }
 
@@ -264,41 +334,49 @@ public class InstructorDashboard2018 extends Group {
 
         var fiveDaysAgo:Date = new Date();
         fiveDaysAgo.setTime(fiveDaysAgo.getTime() - 5 * Constants.DAYS2MILLISECONDS);
-        ServerDataLoader.getRecentMedia(fiveDaysAgo ,new Date()).add(
-                function recentMediaProcess(o:*):void {
-                    var entries:* = JSON.parse((String)(o));
+        ServerDataLoader.getRecentMedia(fiveDaysAgo ,new Date()).add(recentMediaProcess);
+    }
 
-                    for (var id:* in entries){
-                        var entry:* = entries[id];
+    private function recentMediaProcess(o:*):void {
+        var entries:* = JSON.parse((String)(o));
 
-                        recentMediaData.push(
-                                {
-                                    video: VideoMetadataManager.getVideo(entry['media_id'] + "-" + entry['filename']),
-                                    count: entry['count']
-                                });
+        for (var id:* in entries){
+            var entry:* = entries[id];
 
-                    }
+            recentMediaData.push(
+                    {
+                        video: VideoMetadataManager.getVideo(entry['media_id'] + "-" + entry['filename']),
+                        count: entry['count']
+                    });
 
-                    var recentMediaLayout:RecentMedia = new RecentMedia();
-                    recentMediaLayout.width = mainContent_container.width;
-                    recentMediaLayout.height = mainContent_container.height;
-                    mainContent_container.addElement(recentMediaLayout);
-                    mainContent_panel.title = "Recently viewed videos";
+        }
 
-                    for each(var o:Object in recentMediaData) {
+        var recentMediaLayout:RecentMedia = new RecentMedia();
+//        recentMediaLayout.addEventListener(FlexEvent.INITIALIZE,
+//            function recentMediaLayoutInit(e:FlexEvent):void {
+//
+//                var rml:RecentMedia = (RecentMedia)(e.target);
+//
+////                rml.width = mainContent_container.width;
+////                rml.height = mainContent_container.height;
+//
+////                trace(rml.scroller.width + " " + rml.scroller.height);
+//
+//            });
+        for each(var o:Object in recentMediaData) {
 
-//                        trace(o.video.id + " " + o.video.media_alias_id + " " + o.video.title);
+            var recentMediaItem:RecentMediaItem = new RecentMediaItem();
+//            trace(recentMediaItem.percentWidth);
+            recentMediaItem.content = o;
 
-                        var recentMediaItem:RecentMediaItem = new RecentMediaItem();
-                        recentMediaItem.init(o);
+            recentMediaLayout.main.addElement(recentMediaItem);
 
-                        recentMediaLayout.main.addElement(recentMediaItem);
-                        recentMediaItem.width = recentMediaLayout.width;
+        }
+        mainContent_container.addElement(recentMediaLayout);
+        mainContent_panel.title = "Recently viewed videos";
 
-                    }
 
-                }
-        );
+
     }
 
     private function updateLatestVCRs():void {

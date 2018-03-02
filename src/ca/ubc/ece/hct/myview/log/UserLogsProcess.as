@@ -1,26 +1,26 @@
-/**
- * Created by iDunno on 2018-02-04.
- */
-package ca.ubc.ece.hct.myview {
+////////////////////////////////////////////////////////////////////////
+//                                                                    //
+//  Author: Matthew Fong                                              //
+//          Human Communication Laboratories - http://hct.ece.ubc.ca  //
+//          The University of British Columbia                        //
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
+package ca.ubc.ece.hct.myview.log {
+import ca.ubc.ece.hct.myview.*;
+import ca.ubc.ece.hct.myview.log.UserLogDBManager;
 
-
-import ca.ubc.ece.hct.myview.log.Log;
-import ca.ubc.ece.hct.myview.log.UserLogCollection;
-import ca.ubc.ece.hct.myview.log.VideoLogCollection;
-import ca.ubc.ece.hct.myview.log.VideoPlayerEvent;
-import ca.ubc.ece.hct.myview.log.VideoPlayerState;
-
-import com.adobe.serialization.json.JSONParseError;
 import com.doublefx.as3.thread.api.CrossThreadDispatcher;
 import com.doublefx.as3.thread.api.Runnable;
 
-import flash.net.SharedObject;
+import flash.events.Event;
+import flash.events.ProgressEvent;
+import flash.events.SQLEvent;
 
+import flash.net.SharedObject;
 import flash.utils.ByteArray;
 
-import ca.ubc.ece.hct.myview.Constants;
 
-import flash.utils.getTimer;
+import flash.filesystem.File;
 
 public class UserLogsProcess implements Runnable {
 
@@ -36,63 +36,87 @@ public class UserLogsProcess implements Runnable {
     public var orgVideoRecords:Array;
     public var orgVideoRecordsBA:ByteArray;
 
-    public var timerStart:Number;
+    public var db:UserLogDBManager;
 
-    public function putUserRecord(user:String, log:Log):void {
+    private var byteArray:ByteArray;
 
-        var userIndex:int = -1;
-        for (var i:int = 0; i < orgUserRecords.length; i++) {
-            if (orgUserRecords[i].username == user) {
-                userIndex = i;
-                break;
-            }
-        }
-        if (userIndex < 0) {
-            orgUserRecords.push(new UserLogCollection(user));
-            userIndex = orgUserRecords.length - 1;
-        }
+//    public var timerStart:Number;
 
-        orgUserRecords[userIndex].addRecord(log);
-    }
+//    public function putUserRecord(user:String, log:Log):void {
+//
+//        var userIndex:int = -1;
+//        for (var i:int = 0; i < orgUserRecords.length; i++) {
+//            if (orgUserRecords[i].username == user) {
+//                userIndex = i;
+//                break;
+//            }
+//        }
+//        if (userIndex < 0) {
+//            orgUserRecords.push(new UserLogCollection(user));
+//            userIndex = orgUserRecords.length - 1;
+//        }
+//
+//        orgUserRecords[userIndex].addRecord(log);
+//    }
+//
+//    public function putVideoRecord(videoID:Number, log:Log):void {
+//
+//        var videoIndex:int = -1;
+//        for (var i:int = 0; i < orgVideoRecords.length; i++) {
+//            if (orgVideoRecords[i].videoID == videoID) {
+//                videoIndex = i;
+//                break;
+//            }
+//        }
+//        if (videoIndex < 0) {
+//            orgVideoRecords.push(new VideoLogCollection(videoID));
+//            videoIndex = orgVideoRecords.length - 1;
+//        }
+//
+//        orgVideoRecords[videoIndex].addRecord(log);
+//    }
 
-    public function putVideoRecord(videoID:Number, log:Log):void {
+    public function init(obj:UserLogsProcessArguments):void {
 
-        var videoIndex:int = -1;
-        for (var i:int = 0; i < orgVideoRecords.length; i++) {
-            if (orgVideoRecords[i].videoID == videoID) {
-                videoIndex = i;
-                break;
-            }
-        }
-        if (videoIndex < 0) {
-            orgVideoRecords.push(new VideoLogCollection(videoID));
-            videoIndex = orgVideoRecords.length - 1;
-        }
-
-        orgVideoRecords[videoIndex].addRecord(log);
-    }
-
-    public function process(obj:UserLogsProcessArguments):int {
         orgUserRecords = [];
         orgVideoRecords = [];
 
-        var byteArray:ByteArray = obj.byteArray;
+        byteArray = obj.byteArray;
+        db = new UserLogDBManager(obj.dbPath);
+        db.addEventListener(SQLEvent.OPEN, dbOpen);
+        db.openAsync();
 
-        timerStart = getTimer();
-        var i:int = 0;
+    }
 
-        var char:String = "";
+
+    public function dbOpen(e:SQLEvent):void {
+        db.removeEventListener(SQLEvent.OPEN, dbOpen);
+        db.addEventListener(SQLEvent.BEGIN, dbBegin);
+        db.beginTransaction();
+    }
+
+    public function dbBegin(e:SQLEvent):void {
+        db.conn.removeEventListener(SQLEvent.BEGIN, dbBegin);
+        process();
+    }
+
+    public function process():void {
+
+//        timerStart = getTimer();
+
+        var character:String = "";
         var line:String = "";
         var record:Array;
-        var lineNumber:Number = 0;
         var dateString:String, year:Number, month:Number, day:Number, hour:Number, minute:Number, second:Number,
                 date:Date;
         var stateData:Object, eventData:Object, videoPlayerState:VideoPlayerState, videoPlayerEvent:VideoPlayerEvent;
+
+        var lineCount:Number = 0;
         while (byteArray.bytesAvailable > 0) {
 
-            while (char != "\n") {
-                char = byteArray.readUTFBytes(1);
-                line += char;
+            while (character != "\n") {
+                character = byteArray.readUTFBytes(1);
+                line += character;
             }
 
             // e.g.
@@ -102,8 +126,8 @@ public class UserLogsProcess implements Runnable {
             // 2018-02-05 02:53:31
             record = line.split("\t");
 
+            var log:Log = new Log();
             try {
-                var log:Log = new Log();
                 log.user = record[0];
                 dateString = record[3];
                 // YYYY-MM-DD hh:mm:ss
@@ -118,9 +142,11 @@ public class UserLogsProcess implements Runnable {
                 date.setTime(date.getTime() + Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
                 log.date = date;
 
+                var q:Object;
+
                 stateData = JSON.parse(record[1]);
                 videoPlayerState = new VideoPlayerState();
-                for (var q:Object in stateData) {
+                for (q in stateData) {
                     switch (q) {
                         case "videoID":
                             videoPlayerState.videoID = stateData[q];
@@ -142,7 +168,7 @@ public class UserLogsProcess implements Runnable {
 
                 eventData = JSON.parse(record[2]);
                 videoPlayerEvent = new VideoPlayerEvent();
-                for (var q:Object in eventData) {
+                for (q in eventData) {
                     switch (q) {
                         case "source":
                             videoPlayerEvent.source = eventData[q];
@@ -169,76 +195,61 @@ public class UserLogsProcess implements Runnable {
 //            trace("Time: " + (getTimer() - timerStart) / 1000 + " @ " + (i++) + " = " + (int)(i / ((getTimer() - timerStart) / 1000)) + "records/s");
 
 
-                putUserRecord(log.user, log);
-                if (log.state.videoID) {
-                    putVideoRecord(log.state.videoID, log)
-                }
+//                if(log.state.videoID > 0) {
+//                    putUserRecord(log.user, log);
+//                    if (log.state.videoID) {
+//                        putVideoRecord(log.state.videoID, log)
+//                    }
+//                }
+                //            trace("3 not coercible? ");
+//            trace(db);
+//            trace(line);
+//            trace(log.date + " " + log.date.getTime());
+                db.addRecord(log.user, log.date.getTime(), log.state.videoID, log.state.videoFilename, log.state.play_state ? 1 : 0, log.state.playback_time,
+                        log.state.playback_rate, log.state.selection_start, log.state.selection_end, log.state.active_highlight_colour,
+                        log.state.highlight_write_mode, log.state.highlight_read_mode, log.state.view_count_read_mode,
+                        log.state.pause_record_read_mode, log.state.playback_rate_read_mode,
+                        log.event.source, log.event.action,
+                        log.event.time, log.event.from,
+                        log.event.to);
+
+//            trace("4 not coercible? ");
             } catch (e:Error){} finally {} /* do nothing, it's not worth error checking so many logs.*/
 
 
+
             line = "";
-            char = "";
+            character = "";
 
-            dispatcher.dispatchProgress(byteArray.position, byteArray.length);
+            trace(lineCount++ + "progress: " + byteArray.position + "/" + byteArray.length + "=" + byteArray.position/byteArray.length)
+
+            dispatcher.dispatchProgress(byteArray.position/byteArray.length * 100, 200);
         }
 
-        // read from old files
-        var oldUserRecords:ByteArray = new ByteArray();
-        var oldVideoRecords:ByteArray = new ByteArray();
+        trace("I think we're all done.");
 
-        var logs_so:SharedObject = SharedObject.getLocal("userLogs");
-
-        var oldOrgUserRecordsArray:Array, oldVideoRecordsArray:Array;
-
-        if(logs_so.size > 0) {
-//            trace("Loader: Reading old files in array");
-            Util.readFileIntoByteArray("user_logs", oldUserRecords);
-            Util.readFileIntoByteArray("video_logs", oldVideoRecords);
-            oldOrgUserRecordsArray = oldUserRecords.readObject() as Array;
-            oldVideoRecordsArray = oldVideoRecords.readObject() as Array;
-        } else {
-//            trace("Loader: Old files don't exist");
-            oldOrgUserRecordsArray = [];
-            oldVideoRecordsArray = [];
-        }
-
-        orgUserRecords = oldOrgUserRecordsArray.concat(orgUserRecords);
-        orgVideoRecords = oldVideoRecordsArray.concat(orgVideoRecords);
-
-        logs_so.data.dataUpToDate = new Date();
-
-
-        // write new records to files
-        var records:ByteArray = new ByteArray();
-        var records2:ByteArray = new ByteArray();
-        records.writeObject(orgUserRecords);
-        records2.writeObject(orgVideoRecords);
-
-        Util.writeBytesToFile("user_logs", records);
-        Util.writeBytesToFile("video_logs", records2);
-
-
-        orgUserRecordsBA = new ByteArray();
-        orgUserRecordsBA.shareable = true;
-        orgUserRecordsBA.writeObject(orgUserRecords);
-        orgUserRecordsBA.position = 0;
-        dispatcher.setSharedProperty("orgUserRecordsBA", orgUserRecordsBA);
-
-
-        orgVideoRecordsBA = new ByteArray();
-        orgVideoRecordsBA.shareable = true;
-        orgVideoRecordsBA.writeObject(orgVideoRecords);
-        orgVideoRecordsBA.position = 0;
-        dispatcher.setSharedProperty("orgVideoRecordsBA", orgVideoRecordsBA);
-
-        return 1;
-
+        db.addEventListener(SQLEvent.COMMIT, finish);
+        db.addEventListener(ProgressEvent.PROGRESS, commitProgress);
+        db.commitTransaction();
     }
+
+    private function commitProgress(e:ProgressEvent):void {
+        dispatcher.dispatchProgress(e.bytesLoaded/e.bytesTotal*100 + 100, 200);
+    }
+
+    private function finish(e:SQLEvent):void {
+        dispatcher.dispatchResult(1);
+    }
+
 
     // Implements Runnable interface
     public function run(args:Array):void {
         var value:UserLogsProcessArguments = (UserLogsProcessArguments)(args[0]);
-        dispatcher.dispatchResult(process(value));
+
+        init(value);
+
+        trace("thread.run() - " + args.length + " " + value.dbPath)
+//        dispatcher.dispatchResult(process(value));
     }
 
 }

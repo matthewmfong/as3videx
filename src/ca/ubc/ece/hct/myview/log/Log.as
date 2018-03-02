@@ -3,7 +3,9 @@
  */
 package ca.ubc.ece.hct.myview.log {
 public class Log {
-    public function Log() {
-    }
+    public var user:String;
+    public var event:VideoPlayerEvent;
+    public var state:VideoPlayerState;
+    public var date:Date;
 }
 }
