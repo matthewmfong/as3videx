@@ -6,342 +6,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/feathers.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMedia.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStats.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/Log.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogCollection.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogDBManager.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcess.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcessArguments.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoLogCollection.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEventAction.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerState.as" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/FEATHERS_VERSION.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Alert.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/AutoComplete.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/AutoSizeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/BasicButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Button.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ButtonGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ButtonState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Callout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Check.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DataGrid.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DataGridColumn.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DecelerationRate.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DragGesture.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Drawers.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/GroupedList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Header.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IDirectionalScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IRange.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScrollContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ImageLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ItemRendererLayoutOrder.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Label.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/LayoutGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/List.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/NumericStepper.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PageIndicator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PageIndicatorInteractionMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Panel.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PanelScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PickerList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ProgressBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PullViewDisplayMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Radio.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Screen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollBarDisplayMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollInteractionMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollPolicy.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollText.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Scroller.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/SimpleScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Slider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/SpinnerList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StackScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StackScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StepperButtonLayoutMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextArea.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextCallout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextInput.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextInputState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleSwitch.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackInteractionMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackLayoutMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackScaleMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Tree.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/WebView.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/BottomDrawerPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/CalloutPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/DropDownPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPersistentPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManagerWithPrompt.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/VerticalCenteredPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/BaseDefaultItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultDataGridCellRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultDataGridHeaderRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultTreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IDataGridCellRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IDataGridHeaderRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListHeaderRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/ITreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupDataGridCellRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupTreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/BaseScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/DataGridDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/DataGridRowRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/GroupedListDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/LayoutViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/ListDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/TextFieldViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/TreeDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BaseTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/ITextEditorViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/MeasureTextResult.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/StageTextTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/StageTextTextEditorViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextBlockTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextBlockTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextEditorViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/BaseTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultFocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultPopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/FeathersControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/FocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IAdvancedNativeFocusOwner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersEventDispatcher.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusExtras.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IGroupedToggle.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IIMETextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IMeasureDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IMultilineTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/INativeFocusOwner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IPopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IStateContext.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IStateObserver.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextBaselineControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToggle.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTip.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IValidating.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/PopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/PropertyProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ToggleGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/TokenList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ValidationQueue.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayChildrenHierarchicalCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/HierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IHierarchicalCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/LocalAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/SortOrder.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/URLAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorIntListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorNumberListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorUintListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/display/RenderDelegate.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/DragData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/DragDropManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/IDragSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/IDropTarget.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/CollectionEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/DragDropEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/ExclusiveTouch.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/FeathersEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/MediaPlayerEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/AnchorLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/AnchorLayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseLinearLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseTiledLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseVariableVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/Direction.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/FlowLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalAlign.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalLayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalSpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IGroupedLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayoutDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ISpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ITrimmedVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVariableVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/LayoutBoundsResult.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/Orientation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/RelativeDepth.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/RelativePosition.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/SlideShowLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/TiledColumnsLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/TiledRowsLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalAlign.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalLayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalSpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ViewPortBounds.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/WaterfallLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/BaseMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/BaseTimedMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/FullScreenToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IAudioPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IMediaPlayerControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IProgressiveMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/ITimedMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IVideoPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/MediaTimeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/MuteToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/PlayPauseToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SeekSlider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundChannelPeakVisualizer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SpectrumBarGraphVisualizer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/TimeLabel.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/VideoPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/VolumeSlider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/ColorFade.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cover.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cube.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Fade.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Flip.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Iris.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Reveal.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Slide.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Wipe.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/AddOnFunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/ConditionalStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/FunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/IStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/ImageSkin.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/StyleNameFunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/StyleProviderRegistry.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/system/DeviceCapabilities.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/BitmapFontTextFormat.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/FontStylesSet.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/StageTextField.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/themes/IAsyncTheme.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/themes/StyleNameFunctionTheme.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/ScreenDensityScaleFactorManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/ScreenDensityScaleCalculator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/calculateScaleRatioToFill.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/calculateScaleRatioToFit.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/getDisplayObjectDepthFromStage.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/stageToStarling.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/focus/isBetterFocusForRelativePosition.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/focus/isBetterFocusForRelativePosition_LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToRotation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleX.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleY.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToSelect.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToTrigger.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/clamp.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundDownToNearest.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundToNearest.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundToPrecision.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundUpToNearest.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/skins/resetFluidChildDimensionsForMeasurement.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextEditorIMEClient.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextInputNavigation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextInputRestrict.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/TextureCache.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/calculateSnapshotTextureDimensions.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/DelayedDownTouchToState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/LongPress.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToSelect.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToTrigger.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TouchToState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/xml/xmlListInsertAt.as" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3videx.iml" afterPath="$PROJECT_DIR$/as3videx.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserData.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserData.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/doublefx/as3/thread/Thread.as" afterPath="$PROJECT_DIR$/src/com/doublefx/as3/thread/Thread.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/doublefx/as3/thread/util/WorkerFactory.as" afterPath="$PROJECT_DIR$/src/com/doublefx/as3/thread/util/WorkerFactory.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" afterPath="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -365,34 +33,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InstructorDashboard2018Class.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1968">
-              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewCountRecordsHistoryLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
-              <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ViewCountRecordProcess.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="125" column="37" lean-forward="false" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="37" />
+            <state relative-caret-position="2144">
+              <caret line="134" column="34" lean-forward="false" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#546#603#0" expanded="true" />
+                <marker date="1520121694000" expanded="true" signature="9634:9715" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -403,73 +50,72 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4352">
               <caret line="293" column="25" lean-forward="false" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoStats.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStats.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstructorDashboard2018.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Calendar.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#563#602#0" expanded="true" />
+                <marker date="1520121694000" expanded="true" signature="9577:10030" ph="{...}" />
+                <marker date="1520121694000" expanded="true" signature="9679:10030" ph="{...}" />
+                <marker date="1520121694000" expanded="true" signature="10028:10030" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DayBox.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="16" column="90" lean-forward="true" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
-              <folding />
+            <state relative-caret-position="352">
+              <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+              <folding>
+                <marker date="1520121797000" expanded="true" signature="542:2668" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="568:2666" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="616:2550" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="2616:2663" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VideoStatsClass.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as">
+      <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            <state relative-caret-position="7280">
+              <caret line="455" column="9" lean-forward="false" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
+              <folding>
+                <marker date="1520121797000" expanded="false" signature="0:33" ph="//..." />
+                <marker date="1520121797000" expanded="true" signature="19737:19805" ph="//..." />
+                <marker date="1520121797000" expanded="true" signature="19737:19811" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="19737:22652" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="19737:22654" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="19863:19970" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20024:20169" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20215:20316" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20514:20724" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20682:20718" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20791:21253" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20827:20884" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="21256:22650" ph="//..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#554#593#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -545,7 +191,6 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
         <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/controls/DataGridColumn.as" />
         <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/events/ExclusiveTouch.as" />
         <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/motion/Cube.as" />
@@ -589,6 +234,7 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
       </list>
     </option>
   </component>
@@ -621,9 +267,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -786,88 +431,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="log" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calendar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="avmplus" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -888,13 +451,14 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33175355" />
   </component>
@@ -927,7 +491,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flash App.BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+  <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -1936,7 +1500,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310505000" />
+    <option name="totallyTimeSpent" value="311775000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1949,38 +1513,60 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279003" sideWeight="0.43002027" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23039216" sideWeight="0.571332" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5075311" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="MXML Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.42866802" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.4924689" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978907" sideWeight="0.49770793" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980826" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23039216" sideWeight="0.571332" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="MXML Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978907" sideWeight="0.49770793" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279003" sideWeight="0.43002027" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.42866802" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2052,20 +1638,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/WebSlideFilmstrip.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="123" column="39" lean-forward="true" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="103" column="61" lean-forward="false" selection-start-line="103" selection-start-column="61" selection-end-line="103" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="539">
@@ -2176,7 +1748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2191,7 +1762,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="2371" column="25" lean-forward="false" selection-start-line="2371" selection-start-column="25" selection-end-line="2371" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2199,9 +1769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1292">
           <caret line="123" column="524" lean-forward="false" selection-start-line="123" selection-start-column="523" selection-end-line="123" selection-end-column="524" />
-          <folding>
-            <element signature="e#1451#1515#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2243,9 +1810,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="169" column="43" lean-forward="true" selection-start-line="169" selection-start-column="43" selection-end-line="169" selection-end-column="43" />
-          <folding />
+        <state relative-caret-position="7280">
+          <caret line="455" column="9" lean-forward="false" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
+          <folding>
+            <marker date="1520121797000" expanded="false" signature="0:33" ph="//..." />
+            <marker date="1520121797000" expanded="true" signature="19737:19805" ph="//..." />
+            <marker date="1520121797000" expanded="true" signature="19737:19811" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="19737:22652" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="19737:22654" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="19863:19970" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20024:20169" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20215:20316" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20514:20724" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20682:20718" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20791:21253" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20827:20884" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="21256:22650" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2291,9 +1872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5141">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2301,7 +1879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2316,9 +1893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="174" column="20" lean-forward="false" selection-start-line="174" selection-start-column="20" selection-end-line="174" selection-end-column="20" />
-          <folding>
-            <marker date="1518558829000" expanded="true" signature="5997:6050" ph="SELECT date logs" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2326,9 +1900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="227" column="0" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
-          <folding>
-            <element signature="e#44#87#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2362,7 +1933,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4352">
           <caret line="293" column="25" lean-forward="false" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
-          <folding />
+          <folding>
+            <marker date="1520121694000" expanded="true" signature="9577:10030" ph="{...}" />
+            <marker date="1520121694000" expanded="true" signature="9679:10030" ph="{...}" />
+            <marker date="1520121694000" expanded="true" signature="10028:10030" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2386,17 +1961,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="568" column="0" lean-forward="false" selection-start-line="568" selection-start-column="0" selection-end-line="568" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="125" column="37" lean-forward="false" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="37" />
+        <state relative-caret-position="2144">
+          <caret line="134" column="34" lean-forward="false" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#546#603#0" expanded="true" />
+            <marker date="1520121694000" expanded="true" signature="9634:9715" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -2405,7 +1978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
           <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2413,7 +1985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2421,10 +1992,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#554#593#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2432,10 +1999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="557">
           <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#563#602#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2443,14 +2006,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="509">
           <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="16" column="90" lean-forward="true" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
+        <state relative-caret-position="352">
+          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <marker date="1520121797000" expanded="true" signature="542:2668" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="568:2666" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="616:2550" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="2616:2663" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2508,7 +2093,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>FeathersLIb|FeathersLIb</last-edited>
+          <last-edited>patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR|as3videx</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
