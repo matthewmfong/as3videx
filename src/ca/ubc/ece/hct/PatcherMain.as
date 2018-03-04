@@ -13,10 +13,13 @@
 
 	public class PatcherMain extends MovieClip {
 
-		public static const CLASS_ID:String = COURSE::Name;
+		public static var CLASS_ID:String = COURSE::Name;
 		private var patcherView:PatcherView;
 
 		public function PatcherMain() {
+			if(CONFIG::Instructor) {
+				CLASS_ID += "-INSTRUCTOR";
+			}
 			patcherView = new PatcherView(CLASS_ID);
 			addChild(patcherView);
 		}
