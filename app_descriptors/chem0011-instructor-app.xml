@@ -255,24 +255,5 @@
         <!-- <containsVideo></containsVideo> -->
     <!--</android>-->
 
-    
-    <InfoAdditions>
-        <![CDATA[
-        <key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSExceptionDomains</key>
-            <dict>
-                <key>yourapiurl.com</key>
-                <dict>
-                    <key>NSIncludesSubdomains</key>
-                    <true/>
-                    <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                    <true/>
-                </dict>
-            </dict>
-        </dict>
-        ]]>
-    </InfoAdditions>
-
 </application>
 
