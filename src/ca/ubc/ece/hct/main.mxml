@@ -2,8 +2,10 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
                 xmlns:s="library://ns.adobe.com/flex/spark"
                 layout="absolute"
-                creationComplete="onCreationComplete();"
-                backgroundAlpha="0">
+                applicationComplete="onCreationComplete();"
+                backgroundAlpha="0"
+                width="100%"
+                height="100%">
 
     <mx:Script source="myview/VidexFlex.as" />
 

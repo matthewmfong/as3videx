@@ -160,7 +160,7 @@ public class UserLogDBManager extends EventDispatcher {
                     if(numResults > 0) {
                         date.setTime(result.data[0].date);
                     } else {
-                        date = new Date(2000, 0, 0);
+                        date = new Date(2018, 0, 0);
                     }
 
                     getLatestRecordDateSignal.dispatch(date);

@@ -35,37 +35,39 @@ public function onCreationComplete():void {
 
 private function _init(e:Event = null):void {
 
-    FlexGlobals.topLevelApplication.stage.scaleMode = StageScaleMode.NO_SCALE;
-    FlexGlobals.topLevelApplication.stage.align = StageAlign.TOP_LEFT;
+    stage.scaleMode = StageScaleMode.NO_SCALE;
+    stage.align = StageAlign.TOP_LEFT;
 
     application_preferences_so = SharedObject.getLocal("app_preferences");
 
     if(application_preferences_so.data.windowDimensions) {
-        FlexGlobals.topLevelApplication.stage.nativeWindow.width = application_preferences_so.data.windowDimensions.width;
-        FlexGlobals.topLevelApplication.stage.nativeWindow.height = application_preferences_so.data.windowDimensions.height;
-//        FlexGlobals.topLevelApplication.stage.nativeWindow.x = application_preferences_so.data.windowDimensions.x;
-//        FlexGlobals.topLevelApplication.stage.nativeWindow.y = application_preferences_so.data.windowDimensions.y;
+        stage.nativeWindow.width = application_preferences_so.data.windowDimensions.width;
+        stage.nativeWindow.height = application_preferences_so.data.windowDimensions.height;
+        stage.nativeWindow.x = 0;//application_preferences_so.data.windowDimensions.x;
+        stage.nativeWindow.y = 0;//application_preferences_so.data.windowDimensions.y;
+        this.width = stage.nativeWindow.width;
+        this.height = stage.nativeWindow.height;
     } else {
         application_preferences_so.data.windowDimensions = new Rectangle(
-                FlexGlobals.topLevelApplication.stage.nativeWindow.x,
-                FlexGlobals.topLevelApplication.stage.nativeWindow.y,
-                FlexGlobals.topLevelApplication.stage.nativeWindow.width,
-                FlexGlobals.topLevelApplication.stage.nativeWindow.height);
+                stage.nativeWindow.x,
+                stage.nativeWindow.y,
+                stage.nativeWindow.width,
+                stage.nativeWindow.height);
     }
 
-    FlexGlobals.topLevelApplication.stage.nativeWindow.title = "ViDeX";
+    stage.nativeWindow.title = "This is ViDeX";
 
-    _starling = new Starling(VidexStarling, FlexGlobals.topLevelApplication.stage);
+    _starling = new Starling(VidexStarling, stage);
     VidexStarling.flexLayer = this;
 //        _starling.showStats = true;
 //        _starling.skipUnchangedFrames = true;
 //        _starling.antiAliasing = 1;
     _starling.start();
 
-    FlexGlobals.topLevelApplication.stage.frameRate = 30;
+    stage.frameRate = 30;
 
-    FlexGlobals.topLevelApplication.stage.nativeWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, resizeListener);
-    FlexGlobals.topLevelApplication.stage.nativeWindow.addEventListener(NativeWindowBoundsEvent.MOVE, resizeListener);
+    stage.nativeWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, resizeListener);
+    stage.nativeWindow.addEventListener(NativeWindowBoundsEvent.MOVE, resizeListener);
 }
 
 
