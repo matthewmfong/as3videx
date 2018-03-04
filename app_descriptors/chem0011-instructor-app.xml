@@ -15,10 +15,10 @@
     <id>ca.ubc.ece.hct.myview.chem0011-instructor</id>
 
     <!-- Used as the filename for the application. Required. -->
-    <filename>ViDeX - Instructor</filename>
+    <filename>ViDeX - CHEM0011 - Instructor</filename>
 
     <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>ViDeX - Instructor</name>
+    <name>ViDeX - CHEM0011 - Instructor</name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
@@ -126,12 +126,12 @@
 
     <!-- The icon the system uses for the application. For at least one resolution, specify the path to a PNG file included in the AIR package. Optional. -->
     <icon>
-        <image16x16>icon16x16.png</image16x16>
+        <image16x16>icons/icon16x16.png</image16x16>
         <!--<image29x29></image29x29>-->
-        <image32x32>icon32x32.png</image32x32>
+        <image32x32>icons/icon32x32.png</image32x32>
         <!--<image36x36></image36x36>-->
         <!--<image40x40></image40x40>-->
-        <image48x48>icon48x48.png</image48x48>
+        <image48x48>icons/icon48x48.png</image48x48>
         <!--<image50x50></image50x50>-->
         <!--<image57x57></image57x57>-->
         <!--<image58x58></image58x58>-->
@@ -143,7 +143,7 @@
         <!--<image100x100></image100x100>-->
         <!--<image114x114></image114x114>-->
         <!--<image120x120></image120x120>-->
-        <image128x128>icon128x128.png</image128x128>
+        <image128x128>icons/icon128x128.png</image128x128>
         <!--<image144x144></image144x144>-->
         <!--<image152x152></image152x152>-->
         <!--<image512x512></image512x512>-->

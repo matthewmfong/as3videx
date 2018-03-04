@@ -943,8 +943,9 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
+<<<<<<< HEAD
+      <file leaf-file-name="UserID.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2907">
               <caret line="213" column="46" lean-forward="false" selection-start-line="213" selection-start-column="46" selection-end-line="213" selection-end-column="46" />
@@ -955,8 +956,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
+      <file leaf-file-name="ServerDataLoader.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
               <caret line="16" column="138" lean-forward="true" selection-start-line="16" selection-start-column="138" selection-end-line="16" selection-end-column="138" />
@@ -967,8 +968,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FfmpegVideoPlayer.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
+      <file leaf-file-name="StarlingVideoPlayerModel.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="6324">
               <caret line="400" column="53" lean-forward="false" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
@@ -977,8 +978,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Patcher.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
+      <file leaf-file-name="Player.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/Player.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1836">
               <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
@@ -987,18 +988,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PatcherView.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
+      <file leaf-file-name="Course.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
               <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
               <folding />
+=======
+            <state relative-caret-position="160">
+              <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <marker date="1516595380000" expanded="true" signature="542:1043" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="567:1041" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="801:921" ph="{...}" />
+              </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerDataLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
+<<<<<<< HEAD
+      <file leaf-file-name="PatcherMain.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2686">
               <caret line="171" column="33" lean-forward="false" selection-start-line="171" selection-start-column="33" selection-end-line="171" selection-end-column="33" />
@@ -1009,46 +1021,79 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecordMap.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecordMap.as">
+      <file leaf-file-name="chem0011-instructor-app.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TraceLogger.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/TraceLogger.as">
+      <file leaf-file-name="chem0012-instructor-app.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="160">
+              <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+              <folding />
+=======
+      <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-275">
+              <caret line="428" column="9" lean-forward="false" selection-start-line="428" selection-start-column="9" selection-end-line="428" selection-end-column="9" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <marker date="1516595380000" expanded="true" signature="542:20898" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="552:574" ph="..." />
+                <marker date="1516595380000" expanded="true" signature="17981:18055" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="17981:20896" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="18107:18214" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="18268:18413" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="18459:18560" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="18609:18713" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="18758:18968" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="19035:19497" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="19071:19128" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="19282:19365" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="19500:20894" ph="//..." />
               </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StarlingVideoPlayerModel.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
+      <file leaf-file-name="Util.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2091">
               <caret line="144" column="38" lean-forward="false" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
               <folding />
+=======
+            <state relative-caret-position="535">
+              <caret line="387" column="0" lean-forward="false" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
+              <folding>
+                <marker date="1516595380000" expanded="true" signature="542:12983" ph="{...}" />
+                <marker date="1516595380000" expanded="true" signature="1194:12981" ph="{...}" />
+              </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SurveyPopup.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/SurveyPopup.as">
+      <file leaf-file-name="Constants.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1683">
               <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
               <folding />
+=======
+            <state relative-caret-position="272">
+              <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
@@ -1070,7 +1115,6 @@
       <find>CLASS_ID</find>
       <find>exe/</find>
       <find>ffmpeg&quot;</find>
-      <find>resize</find>
       <find>setsize</find>
       <find>addchild(back</find>
       <find>shit</find>
@@ -1089,6 +1133,9 @@
       <find>session</find>
       <find>date</find>
       <find>.</find>
+      <find>survey</find>
+      <find>resize</find>
+      <find>timer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1119,11 +1166,29 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/SurveyPopup.as" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
+=======
+        <option value="$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml" />
+>>>>>>> master
+        <option value="$PROJECT_DIR$/app_descriptors/chem0011-app.xml" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem0012-app.xml" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem0011-test-app.xml" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem1121-app.xml" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem1121-instructor-app.xml" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml" />
+=======
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
+>>>>>>> master
       </list>
     </option>
   </component>
@@ -1322,7 +1387,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="hct" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="myview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="video" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="avmplus" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3videx" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_descriptors" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1364,7 +1469,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+  <component name="RunManager" selected="Flash App.BCIT_CHEM0011_1_spring_2018">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -2383,6 +2488,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20430672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2390,11 +2496,23 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980826" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5022921" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.49770793" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2409,7 +2527,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2418,73 +2536,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6032">
-          <caret line="405" column="35" lean-forward="false" selection-start-line="405" selection-start-column="35" selection-end-line="405" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2768">
-          <caret line="215" column="54" lean-forward="false" selection-start-line="215" selection-start-column="54" selection-end-line="215" selection-end-column="54" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3696">
-          <caret line="276" column="53" lean-forward="true" selection-start-line="276" selection-start-column="53" selection-end-line="276" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/setup/Setup.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/avmplus/DescribeType.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="65" lean-forward="true" selection-start-line="8" selection-start-column="65" selection-end-line="8" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ui/UIScrollView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/setup/Questionnaire.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/setup/ConsentForm.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="35" column="65" lean-forward="false" selection-start-line="35" selection-start-column="65" selection-end-line="35" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PatcherMain.as" />
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/setup/Setup.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="39" column="65" lean-forward="false" selection-start-line="39" selection-start-column="65" selection-end-line="39" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3392">
@@ -2532,13 +2583,6 @@
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/VideoPlayerView.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/Player.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-995">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
@@ -2599,13 +2643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="227" column="32" lean-forward="false" selection-start-line="227" selection-start-column="32" selection-end-line="227" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as">
       <provider selected="true" editor-type-id="text-editor">
@@ -2626,7 +2663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
           <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2660,6 +2696,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1320">
           <caret line="180" column="40" lean-forward="true" selection-start-line="180" selection-start-column="40" selection-end-line="180" selection-end-column="40" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2667,7 +2706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6324">
           <caret line="400" column="53" lean-forward="false" selection-start-line="400" selection-start-column="53" selection-end-line="400" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2675,7 +2713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1683">
           <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2683,9 +2720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2693,13 +2727,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="387" column="0" lean-forward="false" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <marker date="1516595380000" expanded="true" signature="542:12983" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="1194:12981" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/HighlightCallout.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Colours.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2091">
           <caret line="144" column="38" lean-forward="false" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
@@ -2707,14 +2750,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem1121-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4832">
-          <caret line="323" column="27" lean-forward="false" selection-start-line="323" selection-start-column="23" selection-end-line="323" selection-end-column="27" />
+        <state relative-caret-position="160">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-test-app.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2686">
           <caret line="171" column="33" lean-forward="false" selection-start-line="171" selection-start-column="33" selection-end-line="171" selection-end-column="33" />
@@ -2724,14 +2768,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/HighlightCallout.as" />
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Colours.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0012-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+        <state relative-caret-position="112">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-app.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserID.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="28" column="49" lean-forward="false" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="65" column="24" lean-forward="false" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="221">
+          <caret line="19" column="85" lean-forward="false" selection-start-line="19" selection-start-column="85" selection-end-line="19" selection-end-column="85" />
+=======
+        <state relative-caret-position="192">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+>>>>>>> master
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="1020">
+=======
+        <state relative-caret-position="269">
+>>>>>>> master
+          <caret line="82" column="33" lean-forward="false" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="867">
+          <caret line="64" column="31" lean-forward="false" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
+          <folding />
+=======
+        <state relative-caret-position="272">
+          <caret line="24" column="1" lean-forward="false" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
+>>>>>>> master
         </state>
       </provider>
     </entry>
@@ -2740,18 +2850,55 @@
         <state relative-caret-position="2907">
           <caret line="213" column="46" lean-forward="false" selection-start-line="213" selection-start-column="46" selection-end-line="213" selection-end-column="46" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <marker date="1516595380000" expanded="true" signature="542:20898" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="552:574" ph="..." />
+            <marker date="1516595380000" expanded="true" signature="17981:18055" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="17981:20896" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="18107:18214" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="18268:18413" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="18459:18560" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="18609:18713" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="18758:18968" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="19035:19497" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="19071:19128" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="19282:19365" ph="{...}" />
+            <marker date="1516595380000" expanded="true" signature="19500:20894" ph="//..." />
           </folding>
+>>>>>>> master
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/Player.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="138" lean-forward="true" selection-start-line="16" selection-start-column="138" selection-end-line="16" selection-end-column="138" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="149" column="33" lean-forward="false" selection-start-line="149" selection-start-column="33" selection-end-line="149" selection-end-column="33" />
+>>>>>>> master
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="847">
+          <caret line="224" column="25" lean-forward="false" selection-start-line="224" selection-start-column="25" selection-end-line="224" selection-end-column="25" />
+>>>>>>> master
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2808,7 +2955,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>VidexDev|as3videx</last-edited>
+          <last-edited>patcher_BCIT_CHEM0012_1_spring_2018|as3videx</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

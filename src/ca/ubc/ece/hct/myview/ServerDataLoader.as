@@ -25,6 +25,7 @@ public class ServerDataLoader {
 		public static const GET_COURSE_PAGE:String = "getCourseTest.php";
 		public static const LOG_PAGE:String = "addLog.php";
         public static const LOG_PAGE_v2:String = "addLog_v2.php";
+		public static const ADD_MEDIA_LOAD_LOG_PAGE:String = "addMediaLoadLog.php";
         public static const SET_VCR_PAGE:String = "setVCR.php";
 		public static const UPLOAD_TRACES_PAGE:String = "addTraces.php";
 
@@ -186,7 +187,25 @@ public class ServerDataLoader {
             return signal;
         }
 
-		public static function uploadTraces(userID:String, traces:String):Signal {
+		public static function addLoadMediaLog(userID:String, mediaAliasID:String):Signal {
+			var urlVar:URLVariables = new URLVariables();
+			urlVar.user = userID;
+			urlVar.media_alias_id = mediaAliasID;
+
+			var myDate:Date = new Date();
+			urlVar.clientDateTime = myDate.fullYear + "-" + (myDate.month+1) + "-" + myDate.date + " " +
+					myDate.hours + ":" + myDate.minutes + ":" + myDate.seconds;
+			var request:URLRequest = new URLRequest("http://" + Constants.DOMAIN + "/" + ADD_MEDIA_LOAD_LOG_PAGE);
+			request.data = urlVar;
+			request.method = URLRequestMethod.GET;
+
+			var signal:Signal = new Signal(Object);
+			queue.append( new DataLoader(request, {signal: signal, onComplete: requestComplete }) );
+	//            queue.load();
+			return signal;
+		}
+
+    public static function uploadTraces(userID:String, traces:String):Signal {
 
             var urlVar:URLVariables = new URLVariables();
             urlVar.user = userID;
@@ -202,7 +221,7 @@ public class ServerDataLoader {
 		}
 
 		public static function requestComplete(e:LoaderEvent):void {
-			 trace(e.target.content);
+//			 trace(e.target.content);
 			(Signal)(e.target.vars.signal).dispatch(e.target.content);
 		}
 	}
