@@ -40,14 +40,14 @@ public class Videx extends Sprite {
         if(application_preferences_so.data.windowDimensions) {
             stage.nativeWindow.width = application_preferences_so.data.windowDimensions.width;
             stage.nativeWindow.height = application_preferences_so.data.windowDimensions.height;
-            stage.nativeWindow.x = application_preferences_so.data.windowDimensions.x;
-            stage.nativeWindow.y = application_preferences_so.data.windowDimensions.y;
+            stage.nativeWindow.x = 0;//application_preferences_so.data.windowDimensions.x;
+            stage.nativeWindow.y = 0;//application_preferences_so.data.windowDimensions.y;
         } else {
             application_preferences_so.data.windowDimensions = new Rectangle(
                     stage.nativeWindow.x, stage.nativeWindow.y, stage.nativeWindow.width, stage.nativeWindow.height);
         }
 
-        stage.nativeWindow.title = "ViDeX";
+//        stage.nativeWindow.title = "ViDeX";
 
         _starling = new Starling(VidexStarling, stage);
 //        _starling.showStats = true;
