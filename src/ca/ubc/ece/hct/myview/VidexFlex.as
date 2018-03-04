@@ -43,8 +43,8 @@ private function _init(e:Event = null):void {
     if(application_preferences_so.data.windowDimensions) {
         FlexGlobals.topLevelApplication.stage.nativeWindow.width = application_preferences_so.data.windowDimensions.width;
         FlexGlobals.topLevelApplication.stage.nativeWindow.height = application_preferences_so.data.windowDimensions.height;
-        FlexGlobals.topLevelApplication.stage.nativeWindow.x = application_preferences_so.data.windowDimensions.x;
-        FlexGlobals.topLevelApplication.stage.nativeWindow.y = application_preferences_so.data.windowDimensions.y;
+//        FlexGlobals.topLevelApplication.stage.nativeWindow.x = application_preferences_so.data.windowDimensions.x;
+//        FlexGlobals.topLevelApplication.stage.nativeWindow.y = application_preferences_so.data.windowDimensions.y;
     } else {
         application_preferences_so.data.windowDimensions = new Rectangle(
                 FlexGlobals.topLevelApplication.stage.nativeWindow.x,
