@@ -451,6 +451,10 @@ public class VidexStarling extends Sprite {
             playerView.setSize(stage.stageWidth - 10, stage.stageHeight - toolbar.height - 10);
         }
 
+        if(dashboard) {
+            dashboard.setActualSize(stage.stageWidth - 10, stage.stageHeight - toolbar.height - 10);
+        }
+
 //        if(!resizeTimer) {
 //            resizeTimer = new Timer(1000);
 //        }

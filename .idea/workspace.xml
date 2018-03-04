@@ -6,11 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
@@ -21,17 +16,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
-=======
-=======
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountExplorer.mxml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" />
->>>>>>> Separated VCR process into another object
-=======
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/feathers.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml" />
@@ -347,20 +336,13 @@
       <change type="MOVED" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
->>>>>>> Calendar
-=======
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
->>>>>>> ....?
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3videx.iml" afterPath="$PROJECT_DIR$/as3videx.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
-<<<<<<< master
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" />
-<<<<<<< master
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
-<<<<<<< master
-<<<<<<< master
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/adobe/utils/DateUtil.as" afterPath="$PROJECT_DIR$/src/com/adobe/utils/DateUtil.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/logging/setup/target/AirFileTarget.as" afterPath="$PROJECT_DIR$/src/org/as3commons/logging/setup/target/AirFileTarget.as" />
@@ -419,7 +401,6 @@
             <state relative-caret-position="372">
               <caret line="223" column="103" lean-forward="false" selection-start-line="223" selection-start-column="103" selection-end-line="223" selection-end-column="103" />
               <folding />
->>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
@@ -452,8 +433,8 @@
       <file leaf-file-name="InstructorDashboard2018Class.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1968">
-              <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+            <state relative-caret-position="393">
+              <caret line="117" column="0" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -462,8 +443,8 @@
       <file leaf-file-name="ViewCountRecordsHistoryLoader.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
-              <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+            <state relative-caret-position="1088">
+              <caret line="107" column="19" lean-forward="true" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -472,32 +453,20 @@
       <file leaf-file-name="ViewCountRecordProcess.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="125" column="37" lean-forward="false" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="37" />
->>>>>>> Calendar
-=======
-      <file leaf-file-name="ViewCountRecordProcess.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2144">
-              <caret line="134" column="34" lean-forward="false" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
->>>>>>> ....?
+            <state relative-caret-position="187">
+              <caret line="156" column="72" lean-forward="false" selection-start-line="156" selection-start-column="72" selection-end-line="156" selection-end-column="72" />
               <folding>
-                <marker date="1520121694000" expanded="true" signature="9634:9715" ph="{...}" />
+                <marker date="1520154468000" expanded="true" signature="5997:6050" ph="SELECT date logs" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-      <file leaf-file-name="URLLoaderPlus.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/URLLoaderPlus.as">
+      <file leaf-file-name="InstructorDashboard2018Class.as~Calendar" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as~Calendar">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
 =======
       <file leaf-file-name="PlaylistListView.as" pinned="false" current-in-tab="false">
@@ -545,8 +514,8 @@
       <file leaf-file-name="Patcher.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="134" column="92" lean-forward="true" selection-start-line="134" selection-start-column="92" selection-end-line="134" selection-end-column="92" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
 =======
       <file leaf-file-name="Course.as" pinned="false" current-in-tab="false">
@@ -635,53 +604,15 @@
       <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7280">
-              <caret line="455" column="9" lean-forward="false" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
-              <folding>
-                <marker date="1520121797000" expanded="false" signature="0:33" ph="//..." />
-                <marker date="1520121797000" expanded="true" signature="19737:19805" ph="//..." />
-                <marker date="1520121797000" expanded="true" signature="19737:19811" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="19737:22652" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="19737:22654" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="19863:19970" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="20024:20169" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="20215:20316" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="20514:20724" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="20682:20718" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="20791:21253" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="20827:20884" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="21256:22650" ph="//..." />
-              </folding>
->>>>>>> ....?
+            <state relative-caret-position="2974">
+              <caret line="454" column="98" lean-forward="false" selection-start-line="454" selection-start-column="98" selection-end-line="454" selection-end-column="98" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-      <file leaf-file-name="PatcherMain.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-              <folding />
-=======
-      <file leaf-file-name="main.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml">
-=======
-      <file leaf-file-name="UserRecordsVisualizer.as" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as">
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-      <file leaf-file-name="Calendar.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as">
->>>>>>> Calendar
-=======
       <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
->>>>>>> ....?
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
               <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
@@ -713,25 +644,6 @@
             <state relative-caret-position="-567">
               <caret line="250" column="17" lean-forward="false" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
               <folding />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-      <file leaf-file-name="ViewCountRecordsHistoryLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="93" column="17" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
-              <folding>
-                <element signature="e#76#125#0" expanded="true" />
-              </folding>
->>>>>>> Separated VCR process into another object
-=======
-      <file leaf-file-name="DayBox.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-              <folding />
->>>>>>> Calendar
             </state>
           </provider>
         </entry>
@@ -866,7 +778,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Flex 4 Component" />
         <option value="ActionScript Class" />
       </list>
     </option>
@@ -904,18 +815,9 @@
       <find>usernames = []</find>
       <find>dailyrecordcount.push</find>
     </findStrings>
-    <replaceStrings>
-      <replace>\&quot;</replace>
-      <replace>FlexGlobals.topLevelApplication</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
   </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
@@ -932,9 +834,13 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/setup/Setup.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/InstructorDashboard2018.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/SurveyPopup.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
@@ -971,32 +877,6 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" />
-=======
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
-=======
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/TileLayout.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/Thumbnail.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" />
-=======
->>>>>>> Calendar
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountExplorer.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard.mxml" />
-        <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/controls/DataGridColumn.as" />
-        <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/events/ExclusiveTouch.as" />
-        <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/motion/Cube.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsHistoryLoader.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserLogsProcessArguments.as" />
@@ -1014,17 +894,7 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcessArguments.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogDBManager.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcess.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" />
-        <option value="$PROJECT_DIR$/src/com/doublefx/as3/thread/Thread.as" />
-        <option value="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" />
-        <option value="$PROJECT_DIR$/src/org/as3commons/lang/ClassUtils.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsLoader.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserData.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
@@ -1316,10 +1186,13 @@
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -1329,17 +1202,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
-      <recent name="ca.ubc.ece.hct.myview.dashboard.calendar" />
-      <recent name="ca.ubc.ece.hct.myview.log" />
       <recent name="ca.ubc.ece.hct.myview.dashboard" />
       <recent name="ca.ubc.ece.hct.myview.thumbnail" />
     </key>
-    <key name="JSMoveMembersDialog.RECENTS_KEY">
-      <recent name="ca.ubc.ece.hct.myview.Constants" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard" />
-      <recent name="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -2440,8 +2307,6 @@
       <workItem from="1507252784617" duration="5000" />
       <workItem from="1507848182084" duration="4281000" />
       <workItem from="1509476542365" duration="24528000" />
-<<<<<<< master
-=======
       <workItem from="1509760694491" duration="132000" />
       <workItem from="1509760843843" duration="393000" />
       <workItem from="1509837910455" duration="761000" />
@@ -2506,7 +2371,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1112" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2564,7 +2430,7 @@
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2610,32 +2476,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -2718,11 +2558,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/greensock/loading/LoaderMax.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
-          <folding />
+        <state relative-caret-position="-57">
+          <caret line="143" column="17" lean-forward="false" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -2740,38 +2579,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="103" column="61" lean-forward="false" selection-start-line="103" selection-start-column="61" selection-end-line="103" selection-end-column="61" />
+        <state relative-caret-position="160">
+          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-=======
->>>>>>> ....?
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="113" column="44" lean-forward="false" selection-start-line="113" selection-start-column="44" selection-end-line="113" selection-end-column="44" />
+        <state relative-caret-position="224">
+          <caret line="227" column="32" lean-forward="false" selection-start-line="227" selection-start-column="32" selection-end-line="227" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="66" column="13" lean-forward="true" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+        <state relative-caret-position="24">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/MultiFilmstrip.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerView.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-387">
-          <caret line="459" column="40" lean-forward="false" selection-start-line="459" selection-start-column="16" selection-end-line="459" selection-end-column="40" />
+        <state relative-caret-position="1280">
+          <caret line="132" column="9" lean-forward="false" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/URLLoaderPlus.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1272">
-          <caret line="230" column="99" lean-forward="false" selection-start-line="230" selection-start-column="82" selection-end-line="230" selection-end-column="99" />
+        <state relative-caret-position="576">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2798,12 +2637,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/doublefx/as3/thread/api/IThread.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        <state relative-caret-position="192">
+          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/Log.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
@@ -2848,15 +2688,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="24" column="28" lean-forward="false" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+        <state relative-caret-position="2686">
+          <caret line="171" column="33" lean-forward="false" selection-start-line="171" selection-start-column="33" selection-end-line="171" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/doublefx/as3/thread/api/IWorker.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/HighlightCallout.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Colours.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2989,15 +2830,7 @@
 =======
         <state relative-caret-position="160">
           <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
-=======
-        <state relative-caret-position="224">
-          <caret line="1154" column="28" lean-forward="false" selection-start-line="1154" selection-start-column="28" selection-end-line="1154" selection-end-column="28" />
-<<<<<<< master
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
           <folding />
->>>>>>> Can now view active users!
-=======
->>>>>>> Separated VCR process into another object
         </state>
       </provider>
     </entry>
@@ -3130,21 +2963,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-514">
-          <caret line="328" column="37" lean-forward="true" selection-start-line="328" selection-start-column="37" selection-end-line="328" selection-end-column="37" />
+        <state relative-caret-position="160">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
           <folding />
->>>>>>> Can now view active users!
         </state>
       </provider>
     </entry>
-=======
->>>>>>> Separated VCR process into another object
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml">
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
           <caret line="55" column="59" lean-forward="false" selection-start-line="55" selection-start-column="59" selection-end-line="55" selection-end-column="59" />
@@ -3197,30 +3024,19 @@
           <caret line="52" column="52" lean-forward="false" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#554#585#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as~Calendar">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="196" column="75" lean-forward="false" selection-start-line="196" selection-start-column="75" selection-end-line="196" selection-end-column="75" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as">
->>>>>>> Calendar
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1968">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as~master">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="655">
           <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
@@ -3442,7 +3258,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27588603" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -3454,7 +3270,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.33175355" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -3466,7 +3282,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27588603" />
+                <option value="0.37045813" />
               </list>
             </option>
           </splitter-proportions>
@@ -3478,7 +3294,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27588603" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -3514,7 +3330,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.33175355" />
+                <option value="0.37045813" />
               </list>
             </option>
           </splitter-proportions>

@@ -46,8 +46,8 @@ import org.osflash.signals.Signal;
 
 public class UserLogsLoader extends View {
 
-//    public var minDate:Date;
-//    public var maxDate:Date;
+    public var getDataFromDate:Date;
+    public var todayDate:Date
 
     public var finishedLoading:Boolean = false;
 
@@ -57,11 +57,6 @@ public class UserLogsLoader extends View {
     public var orgVideoRecordsArray:Array;
 
     public var db:UserLogDBManager;
-
-//    public var minDate:Date;
-//    public var maxDate:Date;
-
-    public var logs_so:SharedObject;
 
     public var freezeSignal:Signal;
     public var completeSignal:Signal;
@@ -98,23 +93,8 @@ public class UserLogsLoader extends View {
 
     private function gotLatestRecordDate(date:Date):void {
 
-
-//        trace("UserLogsLoader.gotLatestRecordDate");
-//        trace(date);
-
-//        logs_so = SharedObject.getLocal("userLogs");
-        var getDataFromDate:Date = date;
-//        trace("logs_so.size = " + logs_so.size);
-//
-//        if(logs_so.size > 0) {
-//
-//            getDataFromDate = logs_so.data.dataUpToDate;
-//
-//        } else {
-//
-//            getDataFromDate = new Date(2018, 0, 1, 0, 0, 0, 0);
-//
-//        }
+        todayDate = new Date();
+        getDataFromDate = date;
 
         getDataFromDate.setTime(getDataFromDate.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
 
@@ -123,28 +103,34 @@ public class UserLogsLoader extends View {
         loader = new LoaderMax( { name: "WebLoaderQueue", auditSize:false });
         var url:String ="http://" + Constants.DOMAIN + "/admin/getLogsForClass.php?" +
                 "fromDate=" + Util.dateToISO8601(getDataFromDate) +
+                "&toDate=" + Util.dateToISO8601(new Date(getDataFromDate.getTime() + Constants.DAYS2MILLISECONDS)) +
                 "&user_string=" + COURSE::Name;
         trace(url);
 
 
-        statusSignal.dispatch("Downloading logs (1/2)");
+        statusSignal.dispatch("Downloading " + getDataFromDate);
         loader.append(new BinaryDataLoader(url,
                 {
                     onProgress: function(e:LoaderEvent):void { /*trace("Download Progress: " + e.target.progress) */},
                     onComplete: function(e:LoaderEvent):void {
 
 //                        trace("Extracting logs");
-                        statusSignal.dispatch("Extracting logs");
+                        statusSignal.dispatch("Extracting " + getDataFromDate);
                         var zip:FZip = new FZip();
                         zip.addEventListener(Event.COMPLETE,
                                 function loaded(e:Event):void {
 //                                    trace("Processing Logs");
-                                    statusSignal.dispatch("Processing logs (2/2)");
+                                    statusSignal.dispatch("Processing " + getDataFromDate);
                                     var zip:FZip = (FZip)(e.target);
+
                                     userLogsLoaded(zip.getFileByName(COURSE::Name + ".txt"));
                                 });
 
-                        zip.loadBytes(e.target.content);
+                        try {
+                            zip.loadBytes(e.target.content);
+                        } catch (e:Error) {
+                            thread_resultHandler(null);
+                        }
                     }
                 }));
         loader.load();
@@ -173,35 +159,11 @@ public class UserLogsLoader extends View {
 
     public function userLogsLoaded(file:FZipFile):void {
 
-//        trace("userLogsLoaded " + file.sizeUncompressed + " " + file.sizeCompressed);
-
         var byteArray:ByteArray = file.content;
         byteArray.shareable = true;
 
-//        db = new UserLogDBManager();
-
-//        trace("is db actually null?" + db)
-
         var dbPath:String = File.applicationStorageDirectory.resolvePath("user_logs.db").nativePath;
 
-//        trace("strings.length = " + strings.length);
-//
-//        if(logs_so.size > 0) {
-//
-//            minDate = logs_so.data.minDate;
-//
-//        } else if(strings.length > 0) {
-//
-//            minDate = DateFormatter.parseDateString(strings[0].split("\t")[2]);
-//        }
-//        if(strings.length > 0) {
-////            minDate = DateFormatter.parseDateString(strings[0].split("\t")[2]);
-//            maxDate = DateFormatter.parseDateString(strings[strings.length - 1].split("\t")[2]);
-//
-//        } else {
-//            maxDate = logs_so.data.maxDate;
-//        }
-//        var newTime = getTimer();
 
         Thread.DEFAULT_LOADER_INFO = FlexGlobals.topLevelApplication.loaderInfo;
         _thread = new Thread(UserLogsProcess, "complexRunnable", true, extraDependencies, Thread.DEFAULT_LOADER_INFO);
@@ -212,9 +174,6 @@ public class UserLogsLoader extends View {
 
         _thread.start(new UserLogsProcessArguments(dbPath, byteArray));
 
-//        trace("UserLogsProcess should be running now.");
-
-
     }
 
     private function onThreadState(event:ThreadStateEvent):void {
@@ -224,33 +183,57 @@ public class UserLogsLoader extends View {
     private function thread_resultHandler(event:ThreadResultEvent):void {
 
 //        trace("IT'S DEEPFREEZE TIME")
-        freezeSignal.dispatch();
+//        freezeSignal.dispatch();
 
         registerClassAlias("ca.ubc.ece.hct.myview.Log", Log);
 
-//        var asdf:Number = getTimer();
-//        var records:ByteArray = _thread.getSharedProperty("orgUserRecordsBA") as ByteArray;
-//        trace((getTimer() - asdf) + " orgUserRecordsBA getSharedProperty");
-//        orgUserRecordsArray = records.readObject() as Array;
-//        trace((getTimer() - asdf) + " orgUserRecordsBA readObject");
-//
-//        var records2:ByteArray = _thread.getSharedProperty("orgVideoRecordsBA") as ByteArray;
-//        trace((getTimer() - asdf) + " orgVideoRecordsBA getSharedProperty");
-//        orgVideoRecordsArray = records2.readObject() as Array;
-//        trace((getTimer() - asdf) + " orgUserRecordsBA readObject");
-//
-//
-//        Util.writeBytesToFile("user_logs", records);
-//        Util.writeBytesToFile("video_logs", records2);
-//
-//
-//        logs_so.data.dataUpToDate = new Date();
-
-        _thread.terminate();
+        if(_thread) {
+            _thread.terminate();
+        }
 
 //        trace("Logs loading all done. " + (getTimer() - asdf));
         finishedLoading = true;
-        completeSignal.dispatch();
+
+        getDataFromDate = new Date(getDataFromDate.getTime() + Constants.DAYS2MILLISECONDS);
+
+        if(getDataFromDate.getTime() < todayDate.getTime()) {
+
+            var url:String = "http://" + Constants.DOMAIN + "/admin/getLogsForClass.php?" +
+                    "fromDate=" + Util.dateToISO8601(getDataFromDate) +
+                    "&toDate=" + Util.dateToISO8601(new Date(getDataFromDate.getTime() + Constants.DAYS2MILLISECONDS)) +
+                    "&user_string=" + COURSE::Name;
+            trace(url);
+
+
+            statusSignal.dispatch("Downloading " + getDataFromDate);
+            loader.append(new BinaryDataLoader(url,
+                    {
+                        onProgress: function (e:LoaderEvent):void { /*trace("Download Progress: " + e.target.progress) */
+                        },
+                        onComplete: function (e:LoaderEvent):void {
+
+                            //                        trace("Extracting logs");
+                            statusSignal.dispatch("Extracting " + getDataFromDate);
+                            var zip:FZip = new FZip();
+                            zip.addEventListener(Event.COMPLETE,
+                                    function loaded(e:Event):void {
+                                        //                                    trace("Processing Logs");
+                                        statusSignal.dispatch("Processing " + getDataFromDate);
+                                        var zip:FZip = (FZip)(e.target);
+                                        userLogsLoaded(zip.getFileByName(COURSE::Name + ".txt"));
+                                    });
+
+                            try {
+                                zip.loadBytes(e.target.content);
+                            } catch (e:Error) {
+                                thread_resultHandler(null);
+                            }
+                        }
+                    }));
+            loader.load();
+        } else {
+            completeSignal.dispatch();
+        }
     }
 
     private function thread_faultHandler(event:ThreadFaultEvent):void {

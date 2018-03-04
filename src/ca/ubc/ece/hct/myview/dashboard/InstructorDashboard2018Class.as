@@ -168,7 +168,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 //        ServerDataLoader.getVCRsForMediaAliasID(video.media_alias_id).add(showVCR);
     }
 
-    private var urv:UserRecordsVisualizer;
+//    private var urv:UserRecordsVisualizer;
 
     private function showVCR(json:Object):void {
 
