@@ -10,6 +10,7 @@
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
@@ -347,16 +348,13 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
 >>>>>>> Calendar
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
+>>>>>>> ....?
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3videx.iml" afterPath="$PROJECT_DIR$/as3videx.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserData.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserData.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
+<<<<<<< master
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" />
 <<<<<<< master
@@ -387,6 +385,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/doublefx/as3/thread/util/WorkerFactory.as" afterPath="$PROJECT_DIR$/src/com/doublefx/as3/thread/util/WorkerFactory.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" afterPath="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" />
 >>>>>>> Calendar
+=======
+>>>>>>> ....?
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -410,6 +410,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -486,9 +487,15 @@
             <state relative-caret-position="239">
               <caret line="125" column="37" lean-forward="false" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="37" />
 >>>>>>> Calendar
+=======
+      <file leaf-file-name="ViewCountRecordProcess.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2144">
+              <caret line="134" column="34" lean-forward="false" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
+>>>>>>> ....?
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#546#603#0" expanded="true" />
+                <marker date="1520121694000" expanded="true" signature="9634:9715" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -528,12 +535,21 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="4352">
               <caret line="293" column="25" lean-forward="false" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
+<<<<<<< master
               <folding />
 >>>>>>> Shows Recent Media + VCRs graphed using mx.charts
+=======
+              <folding>
+                <marker date="1520121694000" expanded="true" signature="9577:10030" ph="{...}" />
+                <marker date="1520121694000" expanded="true" signature="9679:10030" ph="{...}" />
+                <marker date="1520121694000" expanded="true" signature="10028:10030" ph="{...}" />
+              </folding>
+>>>>>>> ....?
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -578,10 +594,24 @@
               <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
               <folding />
 >>>>>>> Separated VCR process into another object
+=======
+      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+              <folding>
+                <marker date="1520121797000" expanded="true" signature="542:2668" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="568:2666" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="616:2550" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="2616:2663" ph="{...}" />
+              </folding>
+>>>>>>> ....?
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -613,10 +643,33 @@
               <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
               <folding />
 >>>>>>> Shows Recent Media + VCRs graphed using mx.charts
+=======
+      <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7280">
+              <caret line="455" column="9" lean-forward="false" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
+              <folding>
+                <marker date="1520121797000" expanded="false" signature="0:33" ph="//..." />
+                <marker date="1520121797000" expanded="true" signature="19737:19805" ph="//..." />
+                <marker date="1520121797000" expanded="true" signature="19737:19811" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="19737:22652" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="19737:22654" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="19863:19970" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20024:20169" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20215:20316" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20514:20724" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20682:20718" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20791:21253" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="20827:20884" ph="{...}" />
+                <marker date="1520121797000" expanded="true" signature="21256:22650" ph="//..." />
+              </folding>
+>>>>>>> ....?
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -637,18 +690,22 @@
       <file leaf-file-name="Calendar.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as">
 >>>>>>> Calendar
+=======
+      <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
+>>>>>>> ....?
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
+            <state relative-caret-position="272">
+              <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#563#602#0" expanded="true" />
               </folding>
 >>>>>>> Can now view active users!
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -766,12 +823,20 @@
             <state relative-caret-position="160">
               <caret line="16" column="90" lean-forward="true" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
 >>>>>>> Calendar
+=======
+      <file leaf-file-name="config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> ....?
               <folding />
 >>>>>>> Shows Recent Media + VCRs graphed using mx.charts
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< master
       <file leaf-file-name="VideoStatsClass.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as">
           <provider selected="true" editor-type-id="text-editor">
@@ -810,6 +875,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> ....?
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -1041,7 +1108,6 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
         <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/controls/DataGridColumn.as" />
         <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/events/ExclusiveTouch.as" />
         <option value="$PROJECT_DIR$/FeathersLIb/src/feathers/motion/Cube.as" />
@@ -1097,7 +1163,11 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as" />
+<<<<<<< master
 >>>>>>> Calendar
+=======
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
+>>>>>>> ....?
       </list>
     </option>
   </component>
@@ -1134,6 +1204,7 @@
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
 =======
       <pane id="Scratches" />
       <pane id="PackagesPane" />
@@ -1152,6 +1223,10 @@
 =======
       <pane id="PackagesPane" />
 >>>>>>> Calendar
+=======
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+>>>>>>> ....?
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1314,88 +1389,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="log" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calendar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="avmplus" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1416,13 +1409,14 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.33175355" />
   </component>
@@ -1457,6 +1451,7 @@
   </component>
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
   <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0011_1_winter_2017_TEST">
 =======
   <component name="RunManager" selected="Flash App.BCIT_CHEM0011_1_winter_2017-INSTRUCTOR">
@@ -1464,6 +1459,9 @@
 =======
   <component name="RunManager" selected="Flash App.BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
 >>>>>>> Can now view active users!
+=======
+  <component name="RunManager" selected="Flash App.patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+>>>>>>> ....?
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -2486,6 +2484,7 @@
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
     <option name="totallyTimeSpent" value="33329000" />
 =======
     <option name="totallyTimeSpent" value="65640000" />
@@ -2498,6 +2497,9 @@
 =======
     <option name="totallyTimeSpent" value="310505000" />
 >>>>>>> Calendar
+=======
+    <option name="totallyTimeSpent" value="311775000" />
+>>>>>>> ....?
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2511,11 +2513,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -2597,27 +2599,52 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23039216" sideWeight="0.571332" order="7" side_tool="true" content_ui="tabs" />
 >>>>>>> Calendar
+=======
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5075311" order="7" side_tool="true" content_ui="tabs" />
+>>>>>>> ....?
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="MXML Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.42866802" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.4924689" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978907" sideWeight="0.49770793" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980826" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23039216" sideWeight="0.571332" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="MXML Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978907" sideWeight="0.49770793" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279003" sideWeight="0.43002027" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -2642,6 +2669,15 @@
 =======
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
 >>>>>>> Separated VCR process into another object
+=======
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.42866802" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+>>>>>>> ....?
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2729,6 +2765,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< master
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
@@ -2834,6 +2871,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> ....?
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="539">
@@ -3118,7 +3157,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="23" column="17" lean-forward="false" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3133,7 +3171,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="2371" column="25" lean-forward="false" selection-start-line="2371" selection-start-column="25" selection-end-line="2371" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3141,9 +3178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1292">
           <caret line="123" column="524" lean-forward="false" selection-start-line="123" selection-start-column="523" selection-end-line="123" selection-end-column="524" />
-          <folding>
-            <element signature="e#1451#1515#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3562,9 +3596,23 @@
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
 >>>>>>> Calendar
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="169" column="43" lean-forward="true" selection-start-line="169" selection-start-column="43" selection-end-line="169" selection-end-column="43" />
-          <folding />
+        <state relative-caret-position="7280">
+          <caret line="455" column="9" lean-forward="false" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
+          <folding>
+            <marker date="1520121797000" expanded="false" signature="0:33" ph="//..." />
+            <marker date="1520121797000" expanded="true" signature="19737:19805" ph="//..." />
+            <marker date="1520121797000" expanded="true" signature="19737:19811" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="19737:22652" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="19737:22654" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="19863:19970" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20024:20169" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20215:20316" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20514:20724" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20682:20718" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20791:21253" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="20827:20884" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="21256:22650" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3667,9 +3715,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5141">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3700,6 +3745,7 @@
 =======
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+<<<<<<< master
 >>>>>>> Calendar
           <folding />
         </state>
@@ -3712,6 +3758,8 @@
         <state relative-caret-position="224">
           <caret line="237" column="20" lean-forward="false" selection-start-line="237" selection-start-column="20" selection-end-line="237" selection-end-column="20" />
           <folding />
+=======
+>>>>>>> ....?
         </state>
       </provider>
     </entry>
@@ -3740,9 +3788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="174" column="20" lean-forward="false" selection-start-line="174" selection-start-column="20" selection-end-line="174" selection-end-column="20" />
-          <folding>
-            <marker date="1518558829000" expanded="true" signature="5997:6050" ph="SELECT date logs" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3803,10 +3848,13 @@
 =======
         <state relative-caret-position="266">
           <caret line="227" column="0" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
+<<<<<<< master
           <folding>
             <element signature="e#44#87#0" expanded="false" />
           </folding>
 >>>>>>> Calendar
+=======
+>>>>>>> ....?
         </state>
       </provider>
     </entry>
@@ -3888,8 +3936,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4352">
           <caret line="293" column="25" lean-forward="false" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
+<<<<<<< master
 >>>>>>> Calendar
           <folding />
+=======
+          <folding>
+            <marker date="1520121694000" expanded="true" signature="9577:10030" ph="{...}" />
+            <marker date="1520121694000" expanded="true" signature="9679:10030" ph="{...}" />
+            <marker date="1520121694000" expanded="true" signature="10028:10030" ph="{...}" />
+          </folding>
+>>>>>>> ....?
         </state>
       </provider>
     </entry>
@@ -3946,17 +4002,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="568" column="0" lean-forward="false" selection-start-line="568" selection-start-column="0" selection-end-line="568" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="125" column="37" lean-forward="false" selection-start-line="125" selection-start-column="16" selection-end-line="125" selection-end-column="37" />
+        <state relative-caret-position="2144">
+          <caret line="134" column="34" lean-forward="false" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#546#603#0" expanded="true" />
+            <marker date="1520121694000" expanded="true" signature="9634:9715" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -4061,7 +4115,6 @@
 =======
         <state relative-caret-position="453">
           <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4069,8 +4122,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
+<<<<<<< master
 >>>>>>> Calendar
           <folding />
+=======
+>>>>>>> ....?
         </state>
       </provider>
     </entry>
@@ -4091,10 +4147,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#554#593#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4102,11 +4154,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="557">
           <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
+<<<<<<< master
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#563#602#0" expanded="true" />
           </folding>
 >>>>>>> Can now view active users!
+=======
+>>>>>>> ....?
         </state>
       </provider>
     </entry>
@@ -4114,14 +4169,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="509">
           <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="16" column="90" lean-forward="true" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
+        <state relative-caret-position="352">
+          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <marker date="1520121797000" expanded="true" signature="542:2668" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="568:2666" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="616:2550" ph="{...}" />
+            <marker date="1520121797000" expanded="true" signature="2616:2663" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -4182,6 +4259,7 @@
 <<<<<<< master
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
           <last-edited>patcher_BCIT_CHEM0012_1_spring_2018|as3videx</last-edited>
 =======
           <last-edited>patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR|as3videx</last-edited>
@@ -4192,6 +4270,9 @@
 =======
           <last-edited>FeathersLIb|FeathersLIb</last-edited>
 >>>>>>> Calendar
+=======
+          <last-edited>patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR|as3videx</last-edited>
+>>>>>>> ....?
           <splitter-proportions>
             <option name="proportions">
               <list>
