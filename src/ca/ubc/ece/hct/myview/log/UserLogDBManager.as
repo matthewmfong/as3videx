@@ -7,6 +7,8 @@
 ////////////////////////////////////////////////////////////////////////
 
 package ca.ubc.ece.hct.myview.log {
+import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
+
 import flash.data.SQLConnection;
 import flash.data.SQLResult;
 import flash.data.SQLStatement;
@@ -160,7 +162,7 @@ public class UserLogDBManager extends EventDispatcher {
                     if(numResults > 0) {
                         date.setTime(result.data[0].date);
                     } else {
-                        date = new Date(2018, 0, 0);
+                        date = VideoMetadataManager.COURSE.startDate;
                     }
 
                     getLatestRecordDateSignal.dispatch(date);

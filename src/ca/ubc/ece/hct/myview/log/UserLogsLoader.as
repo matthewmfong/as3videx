@@ -47,7 +47,7 @@ import org.osflash.signals.Signal;
 public class UserLogsLoader extends View {
 
     public var getDataFromDate:Date;
-    public var todayDate:Date
+    public var todayDate:Date;
 
     public var finishedLoading:Boolean = false;
 

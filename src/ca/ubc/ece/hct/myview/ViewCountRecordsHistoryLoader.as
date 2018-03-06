@@ -3,6 +3,7 @@
  */
 package ca.ubc.ece.hct.myview {
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
+import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 
 import com.deng.fzip.FZip;
 import com.doublefx.as3.thread.Thread;
@@ -47,6 +48,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
     public var minDate:Date;
     public var maxDate:Date;
+    public var todayDate:Date;
 
     public var vcr_so:SharedObject;
 
@@ -56,6 +58,8 @@ public class ViewCountRecordsHistoryLoader extends View {
     public var progressSignal:Signal;
 
     public var statusSignal:Signal;
+
+    public var getDataFromDate:Date;
 
     public function ViewCountRecordsHistoryLoader() {
 
@@ -69,8 +73,10 @@ public class ViewCountRecordsHistoryLoader extends View {
 
         this.video = video;
 
+        todayDate = new Date();
+
         vcr_so = SharedObject.getLocal("vcr_" + video.id);
-        var getDataFromDate:Date;
+//        var getDataFromDate:Date;
 
 //        trace("vcr_so.size = " + vcr_so.size);
 
@@ -89,7 +95,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
         } else {
 
-            getDataFromDate = new Date(2000, 0, 0, 0, 0, 0, 0);
+            getDataFromDate = VideoMetadataManager.COURSE.startDate;
             dailyRecordCount = [];
             dailyRecordMaxCount = 0;
 
@@ -103,7 +109,8 @@ public class ViewCountRecordsHistoryLoader extends View {
         var url:String ="http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?" +
                 "media_alias_id=" + video.media_alias_id +
                 "&user_string=" + COURSE::Name +
-                "&fromDate=" + Util.dateToISO8601(getDataFromDate);
+                "&fromDate=" + Util.dateToISO8601(getDataFromDate) +
+                "&toDate=" + Util.dateToISO8601(new Date(getDataFromDate.getTime() + 7 * Constants.DAYS2MILLISECONDS));
         trace(url);
 
 
@@ -123,7 +130,11 @@ public class ViewCountRecordsHistoryLoader extends View {
                                     userRecordsHistoryLoaded(e.target.getFileByName(video.media_alias_id + ".txt").content);
                                 });
 
-                        zip.loadBytes(e.target.content);
+                        try {
+                            zip.loadBytes(e.target.content);
+                        } catch (e:Error) {
+                            thread_resultHandler(null);
+                        }
                     }
                 }));
         loader.load();
@@ -213,87 +224,133 @@ public class ViewCountRecordsHistoryLoader extends View {
 
     private function thread_resultHandler(event:ThreadResultEvent):void {
 
-        registerClassAlias("ca.ubc.ece.hct.myview.UserViewCountRecord", UserViewCountRecord);
-        var records:ByteArray = _thread.getSharedProperty("orgUserRecords") as ByteArray;
-        var newOrgUserRecordsArray:Array = records.readObject() as Array;
+        if(_thread) {
 
-        var records2:ByteArray = _thread.getSharedProperty("hourlyRecordCount") as ByteArray;
-        var newHourlyRecordCount:Array = records2.readObject() as Array;
+            registerClassAlias("ca.ubc.ece.hct.myview.UserViewCountRecord", UserViewCountRecord);
+            var records:ByteArray = _thread.getSharedProperty("orgUserRecords") as ByteArray;
+            var newOrgUserRecordsArray:Array = records.readObject() as Array;
 
-        var records3:ByteArray = _thread.getSharedProperty("dailyRecordCount") as ByteArray;
-        var newDailyRecordCount:Array = records3.readObject() as Array;
+            var records2:ByteArray = _thread.getSharedProperty("hourlyRecordCount") as ByteArray;
+            var newHourlyRecordCount:Array = records2.readObject() as Array;
 
-        var records4:ByteArray = _thread.getSharedProperty("dailyRecordMaxCount") as ByteArray;
-        var newDailyRecordMaxCount:Number = records4.readObject() as Number;
+            var records3:ByteArray = _thread.getSharedProperty("dailyRecordCount") as ByteArray;
+            var newDailyRecordCount:Array = records3.readObject() as Array;
 
-        // read from old files
-        var oldRecords:ByteArray = new ByteArray();
-        var oldHourly:ByteArray = new ByteArray();
-        var oldDailyRecordCount:Array = [];
+            var records4:ByteArray = _thread.getSharedProperty("dailyRecordMaxCount") as ByteArray;
+            var newDailyRecordMaxCount:Number = records4.readObject() as Number;
 
-        if(vcr_so.size > 0) {
+            // read from old files
+            var oldRecords:ByteArray = new ByteArray();
+            var oldHourly:ByteArray = new ByteArray();
+            var oldDailyRecordCount:Array = [];
+
+            if (vcr_so.size > 0) {
 //            trace("Loader: Reading old files in array");
-            Util.readFileIntoByteArray("vcr_records_" + video.id, oldRecords);
-            Util.readFileIntoByteArray("vcr_hourly_" + video.id, oldHourly);
-            orgUserRecordsArray = oldRecords.readObject() as Array;
-            hourlyRecordCount = oldHourly.readObject() as Array;
-            oldDailyRecordCount = vcr_so.data.dailyRecordCount;
-        } else {
-            // Loader: Old files don't exist
-            orgUserRecordsArray = [];
-            hourlyRecordCount = [];
+                Util.readFileIntoByteArray("vcr_records_" + video.id, oldRecords);
+                Util.readFileIntoByteArray("vcr_hourly_" + video.id, oldHourly);
+                orgUserRecordsArray = oldRecords.readObject() as Array;
+                hourlyRecordCount = oldHourly.readObject() as Array;
+                oldDailyRecordCount = vcr_so.data.dailyRecordCount;
+            } else {
+                // Loader: Old files don't exist
+                orgUserRecordsArray = [];
+                hourlyRecordCount = [];
 //            dailyRecordMaxCount = 0;
-            dailyRecordCount = [];
-        }
+                dailyRecordCount = [];
+            }
 
 
 //        trace("Loader: Concatentating old arrays with new ones");
-        orgUserRecordsArray = orgUserRecordsArray.concat(newOrgUserRecordsArray);
-        hourlyRecordCount = hourlyRecordCount.concat(newHourlyRecordCount);
-        if(newDailyRecordCount) {
-            dailyRecordCount = oldDailyRecordCount.concat(newDailyRecordCount);
-        } else {
-            dailyRecordCount = oldDailyRecordCount;
-        }
+            orgUserRecordsArray = orgUserRecordsArray.concat(newOrgUserRecordsArray);
+            hourlyRecordCount = hourlyRecordCount.concat(newHourlyRecordCount);
+            if (newDailyRecordCount) {
+                dailyRecordCount = oldDailyRecordCount.concat(newDailyRecordCount);
+            } else {
+                dailyRecordCount = oldDailyRecordCount;
+            }
 
-        dailyRecordMaxCount = 0;
-        for(var i:int = 0; i<dailyRecordCount.length; i++) {
+            dailyRecordMaxCount = 0;
+            for (var i:int = 0; i < dailyRecordCount.length; i++) {
 
-            dailyRecordMaxCount = Math.max(dailyRecordMaxCount, dailyRecordCount[i].count);
-        }
+                dailyRecordMaxCount = Math.max(dailyRecordMaxCount, dailyRecordCount[i].count);
+            }
 
 //        trace("Loader: orgUserRecordsArray.length = " + orgUserRecordsArray.length);
 //        trace("Loader: hourlyRecordCount.length = " + hourlyRecordCount.length);
 
 
-        vcr_so.data.minDate = minDate;
-        vcr_so.data.maxDate = maxDate;
-        vcr_so.data.dataUpToDate = new Date();
-        vcr_so.data.dailyRecordCount = dailyRecordCount;
+            vcr_so.data.minDate = minDate;
+            vcr_so.data.maxDate = maxDate;
+            vcr_so.data.dataUpToDate = new Date();
+            vcr_so.data.dailyRecordCount = dailyRecordCount;
 
 //        vcr_so.data.dailyRecordMaxCount = dailyRecordMaxCount;
-        vcr_so.flush();
-        trace(dailyRecordCount);
-        trace(vcr_so.data.dailyRecordCount);
+            vcr_so.flush();
+//            trace(dailyRecordCount);
+//            trace(vcr_so.data.dailyRecordCount);
 
 
-        // write new records to files
-        records = new ByteArray();
-        records2 = new ByteArray();
-        records3 = new ByteArray();
-        records.writeObject(orgUserRecordsArray);
-        records2.writeObject(hourlyRecordCount);
+            // write new records to files
+            records = new ByteArray();
+            records2 = new ByteArray();
+            records3 = new ByteArray();
+            records.writeObject(orgUserRecordsArray);
+            records2.writeObject(hourlyRecordCount);
 //        records3.writeObject(dailyRecordCount);
 
-        Util.writeBytesToFile("vcr_records_" + video.id, records);
-        Util.writeBytesToFile("vcr_hourly_" + video.id, records2);
+            Util.writeBytesToFile("vcr_records_" + video.id, records);
+            Util.writeBytesToFile("vcr_hourly_" + video.id, records2);
 //        Util.writeBytesToFile("vcr_daily_" + video.id, records3);
 
 
-        _thread.terminate();
+            _thread.terminate();
+        }
 
-        // trace("all done.");
-        completeSignal.dispatch();
+
+        getDataFromDate = new Date(getDataFromDate.getTime() + 7 * Constants.DAYS2MILLISECONDS);
+
+
+        if(getDataFromDate.getTime() - 7 * Constants.DAYS2MILLISECONDS < todayDate.getTime()) {
+            var url:String = "http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?" +
+                    "media_alias_id=" + video.media_alias_id +
+                    "&user_string=" + COURSE::Name +
+                    "&fromDate=" + Util.dateToISO8601(getDataFromDate) +
+                    "&toDate=" + Util.dateToISO8601(new Date(getDataFromDate.getTime() + 7 * Constants.DAYS2MILLISECONDS));
+            trace(url);
+
+
+            statusSignal.dispatch("Downloading logs (1/2)");
+            loader.append(new BinaryDataLoader(url,
+                    {
+                        onProgress: function (e:LoaderEvent):void {
+                            trace("Download Progress: " + e.target.progress)
+                        },
+                        onComplete: function (e:LoaderEvent):void {
+
+//                        trace("Extracting logs");
+                            statusSignal.dispatch("Extracting logs");
+                            var zip:FZip = new FZip();
+                            zip.addEventListener(Event.COMPLETE,
+                                    function loaded(e:Event):void {
+//                                    trace("Processing Logs");
+                                        statusSignal.dispatch("Processing logs (2/2)");
+                                        userRecordsHistoryLoaded(e.target.getFileByName(video.media_alias_id + ".txt").content);
+                                    });
+
+                            try {
+                                zip.loadBytes(e.target.content);
+                            } catch (e:Error) {
+                                thread_resultHandler(null);
+                            }
+                        }
+                    }));
+            loader.load();
+        }
+//        } else {
+
+            // trace("all done.");
+            completeSignal.dispatch();
+//        }
     }
 
     private function thread_faultHandler(event:ThreadFaultEvent):void {
