@@ -262,9 +262,6 @@ import flash.utils.ByteArray;
 						if(verbose)
 							trace(video.toString());
 
-						if(verbose)
-							trace(video.toString());
-
 						playlist = insertIntoPlaylist(playlist, videos.grab(video.toString()));
 						break;
 					case "string":
