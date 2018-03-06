@@ -6,369 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0076d613-5750-43b0-8c3e-47aa0fdf1e37" name="Default" comment="erry da i'm shufflin'">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/InstructorDashboard2017.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2017.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountExplorer.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/feathers.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMedia.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStats.mxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/Log.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogCollection.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogDBManager.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsLoader.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcess.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcessArguments.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoLogCollection.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEvent.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEventAction.as" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerState.as" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/FEATHERS_VERSION.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Alert.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/AutoComplete.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/AutoSizeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/BasicButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Button.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ButtonGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ButtonState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Callout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Check.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DataGrid.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DataGridColumn.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DecelerationRate.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/DragGesture.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Drawers.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/GroupedList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Header.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IDirectionalScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IRange.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/IScrollContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ImageLoader.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ItemRendererLayoutOrder.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Label.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/LayoutGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/List.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/NumericStepper.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PageIndicator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PageIndicatorInteractionMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Panel.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PanelScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PickerList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ProgressBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/PullViewDisplayMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Radio.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Screen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollBarDisplayMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollInteractionMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollPolicy.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollScreen.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ScrollText.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Scroller.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/SimpleScrollBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Slider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/SpinnerList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StackScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StackScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/StepperButtonLayoutMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabBar.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TabNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextArea.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextCallout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextInput.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TextInputState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/ToggleSwitch.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackInteractionMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackLayoutMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/TrackScaleMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/Tree.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/WebView.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/BottomDrawerPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/CalloutPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/DropDownPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPersistentPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/IPopUpContentManagerWithPrompt.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/popups/VerticalCenteredPopUpContentManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/BaseDefaultItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultDataGridCellRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultDataGridHeaderRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/DefaultTreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IDataGridCellRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IDataGridHeaderRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListHeaderRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/IListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/ITreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupDataGridCellRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupGroupedListHeaderOrFooterRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupGroupedListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupListItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/renderers/LayoutGroupTreeItemRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/BaseScreenNavigator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/DataGridDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/DataGridRowRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/GroupedListDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IScreenNavigatorItem.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/IViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/LayoutViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/ListDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/TextFieldViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/supportClasses/TreeDataViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BaseTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/BitmapFontTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/ITextEditorViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/MeasureTextResult.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/StageTextTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/StageTextTextEditorViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextBlockTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextBlockTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextEditorViewPort.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/controls/text/TextFieldTextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/BaseTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultFocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultPopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/DefaultToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/FeathersControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/FocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IAdvancedNativeFocusOwner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFeathersEventDispatcher.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusContainer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusExtras.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IFocusManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IGroupedToggle.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IIMETextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IMeasureDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IMultilineTextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/INativeFocusOwner.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IPopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IStateContext.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IStateObserver.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextBaselineControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextEditor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ITextRenderer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToggle.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTip.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/IValidating.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/PopUpManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/PropertyProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ToggleGroup.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/TokenList.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ToolTipManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/core/ValidationQueue.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayChildrenHierarchicalCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ArrayListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/HierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IHierarchicalCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/IListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/ListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/LocalAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/SortOrder.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/URLAutoCompleteSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorIntListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorNumberListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/VectorUintListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListHierarchicalCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/data/XMLListListCollectionDataDescriptor.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/display/RenderDelegate.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/DragData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/DragDropManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/IDragSource.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/dragDrop/IDropTarget.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/CollectionEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/DragDropEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/ExclusiveTouch.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/FeathersEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/events/MediaPlayerEventType.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/AnchorLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/AnchorLayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseLinearLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseTiledLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/BaseVariableVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/Direction.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/FlowLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalAlign.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalLayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/HorizontalSpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IGroupedLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ILayoutDisplayObject.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ISpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ITrimmedVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVariableVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/IVirtualLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/LayoutBoundsResult.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/Orientation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/RelativeDepth.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/RelativePosition.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/SlideShowLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/TiledColumnsLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/TiledRowsLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalAlign.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalLayoutData.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/VerticalSpinnerLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/ViewPortBounds.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/layout/WaterfallLayout.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/BaseMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/BaseTimedMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/FullScreenToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IAudioPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IMediaPlayerControl.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IProgressiveMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/ITimedMediaPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/IVideoPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/MediaTimeMode.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/MuteToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/PlayPauseToggleButton.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SeekSlider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundChannelPeakVisualizer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SoundPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/SpectrumBarGraphVisualizer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/TimeLabel.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/VideoPlayer.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/media/VolumeSlider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/ColorFade.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cover.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Cube.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Fade.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Flip.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Iris.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Reveal.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Slide.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/motion/Wipe.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/AddOnFunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/ConditionalStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/FunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/IStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/ImageSkin.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/StyleNameFunctionStyleProvider.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/skins/StyleProviderRegistry.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/system/DeviceCapabilities.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/BitmapFontTextFormat.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/FontStylesSet.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/text/StageTextField.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/themes/IAsyncTheme.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/themes/StyleNameFunctionTheme.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/ScreenDensityScaleFactorManager.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/ScreenDensityScaleCalculator.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/calculateScaleRatioToFill.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/calculateScaleRatioToFit.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/getDisplayObjectDepthFromStage.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/display/stageToStarling.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/focus/isBetterFocusForRelativePosition.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/focus/isBetterFocusForRelativePosition_LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToRotation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleX.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/geom/matrixToScaleY.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToSelect.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/keyboard/KeyToTrigger.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/clamp.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundDownToNearest.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundToNearest.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundToPrecision.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/math/roundUpToNearest.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/skins/resetFluidChildDimensionsForMeasurement.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextEditorIMEClient.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextInputNavigation.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/text/TextInputRestrict.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/TextureCache.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/textures/calculateSnapshotTextureDimensions.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/DelayedDownTouchToState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/LongPress.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToEvent.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToSelect.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TapToTrigger.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/touch/TouchToState.as" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/feathers/utils/xml/xmlListInsertAt.as" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/feathers.swc" afterPath="$PROJECT_DIR$/lib/feathers.swc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3videx.iml" afterPath="$PROJECT_DIR$/as3videx.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/adobe/utils/DateUtil.as" afterPath="$PROJECT_DIR$/src/com/adobe/utils/DateUtil.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" afterPath="$PROJECT_DIR$/src/feathers/controls/DateTimeSpinner.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/logging/setup/target/AirFileTarget.as" afterPath="$PROJECT_DIR$/src/org/as3commons/logging/setup/target/AirFileTarget.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/logging/util/LogMessageFormatter.as" afterPath="$PROJECT_DIR$/src/org/as3commons/logging/util/LogMessageFormatter.as" />
->>>>>>> Can now view active users!
-=======
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/Thumbnail.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/Thumbnail.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as" />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
->>>>>>> Separated VCR process into another object
-=======
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" afterPath="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/doublefx/as3/thread/Thread.as" afterPath="$PROJECT_DIR$/src/com/doublefx/as3/thread/Thread.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/doublefx/as3/thread/util/WorkerFactory.as" afterPath="$PROJECT_DIR$/src/com/doublefx/as3/thread/util/WorkerFactory.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" afterPath="$PROJECT_DIR$/src/org/as3commons/reflect/Type.as" />
->>>>>>> Calendar
-=======
->>>>>>> ....?
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -385,380 +23,96 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InstructorDashboard2018Class.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="52" column="52" lean-forward="false" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#546#603#0" expanded="true" />
-              </folding>
-=======
-      <file leaf-file-name="ServerDataLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="223" column="103" lean-forward="false" selection-start-line="223" selection-start-column="103" selection-end-line="223" selection-end-column="103" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Util.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="406" column="0" lean-forward="true" selection-start-line="406" selection-start-column="0" selection-end-line="406" selection-end-column="0" />
-=======
-      <file leaf-file-name="InstructorDashboard2018.as" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1334">
-              <caret line="237" column="38" lean-forward="false" selection-start-line="237" selection-start-column="38" selection-end-line="237" selection-end-column="38" />
->>>>>>> Can now view active users!
-=======
-      <file leaf-file-name="InstructorDashboard2018.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< master
-            <state relative-caret-position="328">
-              <caret line="129" column="54" lean-forward="true" selection-start-line="129" selection-start-column="54" selection-end-line="129" selection-end-column="54" />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-            <state relative-caret-position="190">
-              <caret line="146" column="62" lean-forward="false" selection-start-line="146" selection-start-column="62" selection-end-line="146" selection-end-column="62" />
->>>>>>> Separated VCR process into another object
-=======
-      <file leaf-file-name="InstructorDashboard2018Class.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="117" column="0" lean-forward="true" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+            <state relative-caret-position="3744">
+              <caret line="255" column="84" lean-forward="false" selection-start-line="255" selection-start-column="82" selection-end-line="255" selection-end-column="84" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewCountRecordsHistoryLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="107" column="19" lean-forward="true" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewCountRecordProcess.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="156" column="72" lean-forward="false" selection-start-line="156" selection-start-column="72" selection-end-line="156" selection-end-column="72" />
-              <folding>
-                <marker date="1520154468000" expanded="true" signature="5997:6050" ph="SELECT date logs" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstructorDashboard2018Class.as~Calendar" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as~Calendar">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-=======
-      <file leaf-file-name="PlaylistListView.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-              <folding>
-                <element signature="e#2086#2135#0" expanded="true" />
-              </folding>
->>>>>>> Can now view active users!
-=======
-      <file leaf-file-name="ViewCountExplorer.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountExplorer.mxml">
-=======
-      <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
->>>>>>> Separated VCR process into another object
-=======
-      <file leaf-file-name="Util.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
->>>>>>> Calendar
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4352">
-              <caret line="293" column="25" lean-forward="false" selection-start-line="293" selection-start-column="25" selection-end-line="293" selection-end-column="25" />
-<<<<<<< master
-              <folding />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-              <folding>
-                <marker date="1520121694000" expanded="true" signature="9577:10030" ph="{...}" />
-                <marker date="1520121694000" expanded="true" signature="9679:10030" ph="{...}" />
-                <marker date="1520121694000" expanded="true" signature="10028:10030" ph="{...}" />
-              </folding>
->>>>>>> ....?
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-      <file leaf-file-name="Patcher.as" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Patcher.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-=======
-      <file leaf-file-name="Course.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as">
-=======
-      <file leaf-file-name="RecentMediaItem.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/RecentMediaItem.mxml">
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="739">
-              <caret line="96" column="12" lean-forward="false" selection-start-line="96" selection-start-column="7" selection-end-line="96" selection-end-column="12" />
-              <folding>
-                <marker date="1516839792000" expanded="true" signature="252:708" ph="..." />
-                <marker date="1516839792000" expanded="true" signature="953:3250" ph="{...}" />
-                <marker date="1516839792000" expanded="true" signature="1606:1733" ph="//..." />
-                <marker date="1516839792000" expanded="true" signature="1861:1939" ph="{...}" />
-                <marker date="1516839792000" expanded="true" signature="2217:2389" ph="{...}" />
-                <marker date="1516839792000" expanded="true" signature="2403:2434" ph="/*...*/" />
-                <marker date="1516839792000" expanded="true" signature="2621:2729" ph="{...}" />
-                <marker date="1516839792000" expanded="true" signature="2787:2808" ph="/*...*/" />
-                <marker date="1516839792000" expanded="true" signature="3312:3407" ph="{...}" />
-              </folding>
->>>>>>> Can now view active users!
-=======
-      <file leaf-file-name="ViewCountExplorer.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountExplorer.mxml">
-=======
-      <file leaf-file-name="VideoStats.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStats.mxml">
->>>>>>> Calendar
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-              <folding />
->>>>>>> Separated VCR process into another object
-=======
-      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-              <folding>
-                <marker date="1520121797000" expanded="true" signature="542:2668" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="568:2666" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="616:2550" ph="{...}" />
-                <marker date="1520121797000" expanded="true" signature="2616:2663" ph="{...}" />
-              </folding>
->>>>>>> ....?
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-      <file leaf-file-name="PatcherView.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-              <folding />
-=======
-      <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="36" column="27" lean-forward="false" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-              <folding>
-                <element signature="e#44#87#0" expanded="true" />
-              </folding>
->>>>>>> Can now view active users!
-=======
-      <file leaf-file-name="main.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml">
-=======
-      <file leaf-file-name="InstructorDashboard2018.mxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml">
->>>>>>> Calendar
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-              <folding />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-      <file leaf-file-name="VidexStarling.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2974">
-              <caret line="454" column="98" lean-forward="false" selection-start-line="454" selection-start-column="98" selection-end-line="454" selection-end-column="98" />
+            <state relative-caret-position="3040">
+              <caret line="206" column="49" lean-forward="false" selection-start-line="206" selection-start-column="49" selection-end-line="206" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
->>>>>>> Can now view active users!
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-      <file leaf-file-name="ServerDataLoader.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="196" column="75" lean-forward="false" selection-start-line="196" selection-start-column="75" selection-end-line="196" selection-end-column="75" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-=======
-      <file leaf-file-name="ViewCountRecord.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-567">
-              <caret line="250" column="17" lean-forward="false" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-      <file leaf-file-name="StarlingVideoPlayerView.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerView.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="132" column="9" lean-forward="true" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
-              <folding>
-                <element signature="n#!!block;n#collapseLayout#0;n#StarlingVideoPlayerView#0;n#widgets#0" expanded="false" />
-              </folding>
-=======
-      <file leaf-file-name="Util.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
-=======
-      <file leaf-file-name="ViewCountRecordProcess.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< master
-            <state relative-caret-position="225">
-              <caret line="68" column="56" lean-forward="false" selection-start-line="68" selection-start-column="56" selection-end-line="68" selection-end-column="56" />
-              <folding />
->>>>>>> Can now view active users!
-            </state>
-          </provider>
-        </entry>
-      </file>
-<<<<<<< master
-<<<<<<< master
       <file leaf-file-name="StarlingVideoPlayerModel.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="181" column="79" lean-forward="false" selection-start-line="181" selection-start-column="79" selection-end-line="181" selection-end-column="79" />
+            <state relative-caret-position="576">
+              <caret line="57" column="49" lean-forward="false" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
               <folding />
-=======
-      <file leaf-file-name="Constants.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Constants.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="25" column="67" lean-forward="false" selection-start-line="25" selection-start-column="67" selection-end-line="25" selection-end-column="67" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
->>>>>>> Can now view active users!
-=======
-      <file leaf-file-name="VidexFlex.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-=======
-            <state relative-caret-position="495">
-              <caret line="113" column="42" lean-forward="false" selection-start-line="113" selection-start-column="42" selection-end-line="113" selection-end-column="42" />
->>>>>>> Separated VCR process into another object
-=======
-      <file leaf-file-name="Courses.as" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="16" column="90" lean-forward="true" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
->>>>>>> Calendar
-=======
-      <file leaf-file-name="config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> ....?
-              <folding />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< master
-      <file leaf-file-name="VideoStatsClass.as" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as">
+      <file leaf-file-name="VideoATFManager.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-            <state relative-caret-position="246">
-              <caret line="41" column="50" lean-forward="true" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#554#593#0" expanded="true" />
-                <element signature="e#4550#4584#0" expanded="true" />
-              </folding>
-=======
-            <state relative-caret-position="128">
-              <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
-=======
-            <state relative-caret-position="207">
-=======
-            <state relative-caret-position="3056">
->>>>>>> Separated VCR process into another object
-              <caret line="204" column="31" lean-forward="false" selection-start-line="204" selection-start-column="31" selection-end-line="204" selection-end-column="31" />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
+            <state relative-caret-position="496">
+              <caret line="49" column="46" lean-forward="false" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
               <folding />
->>>>>>> Can now view active users!
-=======
-            <state relative-caret-position="323">
-              <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoUtil.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4640">
+              <caret line="329" column="68" lean-forward="false" selection-start-line="329" selection-start-column="68" selection-end-line="329" selection-end-column="68" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#554#593#0" expanded="true" />
               </folding>
->>>>>>> Calendar
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoPlaylistView.as" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/VideoPlaylistView.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="242" column="47" lean-forward="true" selection-start-line="242" selection-start-column="47" selection-end-line="242" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoPlaylist.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/VideoPlaylist.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoMetadata.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FfmpegVideoPlayer.as" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6400">
+              <caret line="406" column="49" lean-forward="false" selection-start-line="406" selection-start-column="49" selection-end-line="406" selection-end-column="49" />
+              <folding>
+                <element signature="e#560#594#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -784,36 +138,34 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>error</find>
-      <find>recordcount</find>
-      <find>course</find>
-      <find>:</find>
-      <find>viewcount</find>
-      <find>verbose</find>
-      <find>vcrloader.load</find>
-      <find>new textfield</find>
-      <find>flimstrip</find>
-      <find>filmstrip</find>
-      <find>cal.setsize</find>
-      <find>usernames =</find>
-      <find>usernames.push</find>
-      <find>graphics.</find>
-      <find>records</find>
+      <find>consent</find>
+      <find>class_id</find>
+      <find>CLASS_ID</find>
+      <find>exe/</find>
+      <find>ffmpeg&quot;</find>
+      <find>resize</find>
+      <find>setsize</find>
+      <find>addchild(back</find>
+      <find>for each(var</find>
+      <find>_filmstrip</find>
+      <find>hsb</find>
+      <find>crowd</find>
       <find>trace</find>
-      <find>drawviewcount</find>
-      <find>loader.</find>
-      <find>vcrloader.progress</find>
-      <find>util.read</find>
-      <find>eating shit</find>
+      <find>exit</find>
+      <find>dispose()</find>
+      <find>bar.height</find>
+      <find>appurl =</find>
+      <find>confirmCompletionText</find>
+      <find>queue</find>
+      <find>queue.load</find>
+      <find>session</find>
+      <find>date</find>
+      <find>.</find>
+      <find>_video =</find>
+      <find>chmod</find>
       <find>shit</find>
-      <find>readobject</find>
-      <find>cal.upd</find>
-      <find>vcr</find>
-      <find>cal.update</find>
-      <find>setsharedproperty</find>
-      <find>vcr_so.data</find>
-      <find>usernames = []</find>
-      <find>dailyrecordcount.push</find>
+      <find>writebytes</find>
+      <find>ffmpeg</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -827,7 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-<<<<<<< master
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ui/UIScrollView.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as" />
         <option value="$PROJECT_DIR$/src/PatcherMain.as" />
@@ -836,7 +187,6 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
@@ -846,13 +196,7 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/InstructorDashboard2018.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
+        <option value="$PROJECT_DIR$/app_descriptors/chem0011-app.xml" />
         <option value="$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml" />
         <option value="$PROJECT_DIR$/app_descriptors/chem0011-test-app.xml" />
         <option value="$PROJECT_DIR$/app_descriptors/chem0012-app.xml" />
@@ -864,64 +208,7 @@
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as" />
         <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/InstructorDashboard2018.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsHistoryLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserLogsProcessArguments.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoLogCollection.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/Log.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerState.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogCollection.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoLogCollection.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserLogsProcess.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserLogsLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/thumbnail/ThumbnailNative.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEventAction.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEvent.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcessArguments.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogDBManager.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsLoader.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserData.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordsHistoryLoader.as" />
-<<<<<<< master
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as" />
-<<<<<<< master
-<<<<<<< master
->>>>>>> Can now view active users!
-=======
-=======
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml" />
->>>>>>> Separated VCR process into another object
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserRecordsVisualizer.as" />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStats.mxml" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as" />
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as" />
-<<<<<<< master
->>>>>>> Calendar
-=======
-        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as" />
->>>>>>> ....?
+        <option value="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/VideoPlaylistView.as" />
       </list>
     </option>
   </component>
@@ -954,241 +241,60 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-=======
->>>>>>> Merging Dashboard
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="filmstrip" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="thumbnail" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="avmplus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hct" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="myview" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dashboard" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="calendar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3videx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="avmplus" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+              <item name="app_descriptors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hct" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hct" type="462c0819:PsiDirectoryNode" />
+              <item name="myview" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hct" type="462c0819:PsiDirectoryNode" />
+              <item name="myview" type="462c0819:PsiDirectoryNode" />
+              <item name="video" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="as3videx" type="b2602c69:ProjectViewProjectNode" />
+              <item name="as3videx" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hct" type="462c0819:PsiDirectoryNode" />
+              <item name="myview" type="462c0819:PsiDirectoryNode" />
+              <item name="widgets" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1203,7 +309,7 @@
   <component name="RecentsManager">
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
       <recent name="ca.ubc.ece.hct.myview.dashboard" />
-      <recent name="ca.ubc.ece.hct.myview.thumbnail" />
+      <recent name="ca.ubc.ece.hct.myview" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard" />
@@ -1222,69 +328,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flash App.BCIT_CHEM0011_1_winter_2017-INSTRUCTOR">
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="EXTRA_OPTIONS" value="" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
-      <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
-        <option name="GAPID_ENABLED" value="false" />
-        <option name="GAPID_DISABLE_PCS" value="false" />
-        <option name="SUPPORT_LIB_ENABLED" value="true" />
-        <option name="INSTRUMENTATION_ENABLED" value="true" />
-      </Profilers>
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Flash App.videx_demo">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -1946,6 +990,18 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="as3videx" />
+      <envs />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -2217,19 +1273,6 @@
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="as3videx" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="filePath" />
@@ -2311,23 +1354,13 @@
       <workItem from="1509760843843" duration="393000" />
       <workItem from="1509837910455" duration="761000" />
       <workItem from="1512860257523" duration="9769000" />
-      <workItem from="1515395674890" duration="3363000" />
-      <workItem from="1515446980412" duration="1750000" />
-      <workItem from="1515626955167" duration="3423000" />
-<<<<<<< master
-<<<<<<< master
->>>>>>> Can now view active users!
-=======
-      <workItem from="1516908166386" duration="17132000" />
->>>>>>> Separated VCR process into another object
-=======
-      <workItem from="1516908166386" duration="36987000" />
-      <workItem from="1517387554258" duration="33655000" />
-      <workItem from="1517817736476" duration="45226000" />
-      <workItem from="1518204747736" duration="41067000" />
-      <workItem from="1519159772354" duration="50651000" />
-      <workItem from="1519931274988" duration="4438000" />
->>>>>>> Calendar
+      <workItem from="1515395674890" duration="1785000" />
+      <workItem from="1515404987302" duration="934000" />
+      <workItem from="1516137264954" duration="1523000" />
+      <workItem from="1520136733489" duration="550000" />
+      <workItem from="1520137578029" duration="26000" />
+      <workItem from="1520320353792" duration="1839000" />
+      <workItem from="1520373442874" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="erry da i'm shufflin'">
       <created>1506717787334</created>
@@ -2340,35 +1373,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-    <option name="totallyTimeSpent" value="33329000" />
-=======
-    <option name="totallyTimeSpent" value="65640000" />
->>>>>>> Can now view active users!
-=======
-    <option name="totallyTimeSpent" value="96539000" />
-=======
-    <option name="totallyTimeSpent" value="115613000" />
->>>>>>> Separated VCR process into another object
-=======
-    <option name="totallyTimeSpent" value="310505000" />
->>>>>>> Calendar
-=======
-    <option name="totallyTimeSpent" value="311775000" />
->>>>>>> ....?
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="55884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1112" extended-state="0" />
@@ -2376,49 +1381,21 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298077" sideWeight="0.4973822" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298077" sideWeight="0.5026178" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-<<<<<<< master
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32981783" sideWeight="0.53438115" order="2" side_tool="false" content_ui="tabs" />
->>>>>>> Can now view active users!
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298077" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-<<<<<<< master
-<<<<<<< master
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
-=======
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
->>>>>>> Tagging boilerplate
-=======
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
->>>>>>> Can now view active users!
-=======
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39980826" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32885906" sideWeight="0.37393582" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32214764" sideWeight="0.53438115" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39903846" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2429,49 +1406,9 @@
       <window_info id="MXML Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20416667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3978907" sideWeight="0.49770793" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279003" sideWeight="0.43002027" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298077" sideWeight="0.4973822" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.42866802" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-=======
->>>>>>> Tagging boilerplate
-=======
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2046875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
->>>>>>> Can now view active users!
-=======
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
->>>>>>> Separated VCR process into another object
-=======
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26174498" sideWeight="0.42866802" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.4950884" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
->>>>>>> ....?
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2486,29 +1423,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="flex">
-          <url>file:///Applications/Flex/frameworks/projects/framework/src/mx/styles/StyleManager.as</url>
-          <line>130</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="flex">
-          <url>file:///Applications/Flex/frameworks/projects/framework/src/mx/styles/StyleManager.as</url>
-          <line>145</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="flex">
-          <url>file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Videx.as</url>
-          <line>6</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="flex">
-          <url>file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as</url>
-          <line>382</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="48" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2517,44 +1432,68 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-<<<<<<< master
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2017.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/IView.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3392">
-          <caret line="257" column="31" lean-forward="false" selection-start-line="257" selection-start-column="31" selection-end-line="257" selection-end-column="31" />
-<<<<<<< master
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-=======
-=======
-    <entry file="file://$PROJECT_DIR$/src/starling/events/TouchProcessor.as">
+        <state relative-caret-position="48">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/WebSlideFilmstrip.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
->>>>>>> Can now view active users!
+        <state relative-caret-position="-2776">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/SimpleFilmstrip.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/VideoPlayerView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/Player.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="17" column="118" lean-forward="false" selection-start-line="17" selection-start-column="118" selection-end-line="17" selection-end-column="118" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
+        <state relative-caret-position="-995">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/Filmstrip.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="350">
+          <caret line="646" column="0" lean-forward="false" selection-start-line="646" selection-start-column="0" selection-end-line="646" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/WidgetRegion.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="237" column="20" lean-forward="false" selection-start-line="237" selection-start-column="20" selection-end-line="237" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/MultiFilmstrip.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-528">
+          <caret line="79" column="24" lean-forward="false" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="277" column="0" lean-forward="true" selection-start-line="277" selection-start-column="0" selection-end-line="440" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -2565,25 +1504,6 @@
         </state>
       </provider>
     </entry>
-=======
->>>>>>> Separated VCR process into another object
-    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-app.xml">
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/WebSlideFilmstrip.as">
->>>>>>> Calendar
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="123" column="39" lean-forward="true" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -2591,7 +1511,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/common/CaptionView.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as" />
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="17" />
@@ -2606,83 +1527,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/URLLoaderPlus.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerState.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEvent.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/VideoPlayerEventAction.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/doublefx/as3/thread/api/IThread.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as" />
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as" />
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/tlefdemo2017.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="-1320">
+          <caret line="180" column="40" lean-forward="true" selection-start-line="180" selection-start-column="40" selection-end-line="180" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcessArguments.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/SurveyPopup.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="1683">
+          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/TraceLogger.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="329" column="79" lean-forward="false" selection-start-line="329" selection-start-column="79" selection-end-line="329" selection-end-column="79" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/osflash/signals/OnceSignal.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecordMap.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ui/UIScrollView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="22" column="17" lean-forward="false" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcessArguments.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="11" column="20" lean-forward="false" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="51" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2701,269 +1572,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/doublefx/as3/thread/api/CrossThreadDispatcher.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="33" column="50" lean-forward="false" selection-start-line="33" selection-start-column="50" selection-end-line="33" selection-end-column="50" />
+        <state relative-caret-position="221">
+          <caret line="13" column="95" lean-forward="false" selection-start-line="13" selection-start-column="95" selection-end-line="13" selection-end-column="95" />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Applications/Flex/frameworks/libs/air/airglobal.swc!/library.swf">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="2371" column="25" lean-forward="false" selection-start-line="2371" selection-start-column="25" selection-end-line="2371" selection-end-column="25" />
+        <state relative-caret-position="170">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/log/UserLogsProcess.as">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1292">
-          <caret line="123" column="524" lean-forward="false" selection-start-line="123" selection-start-column="523" selection-end-line="123" selection-end-column="524" />
+        <state relative-caret-position="256">
+          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/as3commons/lang/ClassUtils.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="140" column="36" lean-forward="false" selection-start-line="140" selection-start-column="36" selection-end-line="140" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/as3commons/reflect/Type.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="150" column="0" lean-forward="false" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Course.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/PlaylistListView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="55" column="59" lean-forward="false" selection-start-line="55" selection-start-column="59" selection-end-line="55" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/tlefdemo2017-app.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/Player.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/SeekVisualizer-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-995">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserViewCountRecord.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="256" column="48" lean-forward="false" selection-start-line="256" selection-start-column="48" selection-end-line="256" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/SeekerVisualization-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-514">
-          <caret line="328" column="37" lean-forward="true" selection-start-line="328" selection-start-column="37" selection-end-line="328" selection-end-column="37" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/RecentMedia.mxml">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem1121-instructor-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="169" column="43" lean-forward="true" selection-start-line="169" selection-start-column="43" selection-end-line="169" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="255" column="35" lean-forward="true" selection-start-line="255" selection-start-column="35" selection-end-line="256" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/WidgetRegion.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-528">
-          <caret line="79" column="24" lean-forward="false" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/filmstrip/ViewCountRecord.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="277" column="0" lean-forward="true" selection-start-line="277" selection-start-column="0" selection-end-line="440" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-=======
         <state relative-caret-position="160">
           <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="79" column="26" lean-forward="true" selection-start-line="79" selection-start-column="26" selection-end-line="79" selection-end-column="26" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/VideoPlayerView.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-12">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="27" column="54" lean-forward="false" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2017.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5141">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountExplorer.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="143" column="17" lean-forward="false" selection-start-line="143" selection-start-column="17" selection-end-line="143" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="22" column="19" lean-forward="false" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="227" column="32" lean-forward="false" selection-start-line="227" selection-start-column="32" selection-end-line="227" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ColorUtil.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="113" column="31" lean-forward="false" selection-start-line="113" selection-start-column="31" selection-end-line="113" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="17" />
-          <folding>
-            <element signature="e#545#580#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="52" column="52" lean-forward="false" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#554#585#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ServerDataLoader.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="196" column="75" lean-forward="false" selection-start-line="196" selection-start-column="75" selection-end-line="196" selection-end-column="75" />
-          <folding>
-            <element signature="e#560#594#0" expanded="true" />
-          </folding>
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherMain.as">
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcessArguments.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/UserViewCountRecord.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="22" lean-forward="false" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="256" column="48" lean-forward="false" selection-start-line="256" selection-start-column="48" selection-end-line="256" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem1121-app.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
@@ -2973,176 +1635,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_descriptors/chem0012-instructor-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="55" column="59" lean-forward="false" selection-start-line="55" selection-start-column="59" selection-end-line="55" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadataManager.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="245" column="71" lean-forward="false" selection-start-line="245" selection-start-column="71" selection-end-line="245" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
->>>>>>> Calendar
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7280">
-          <caret line="455" column="9" lean-forward="false" selection-start-line="455" selection-start-column="9" selection-end-line="455" selection-end-column="9" />
-          <folding>
-            <marker date="1520121797000" expanded="false" signature="0:33" ph="//..." />
-            <marker date="1520121797000" expanded="true" signature="19737:19805" ph="//..." />
-            <marker date="1520121797000" expanded="true" signature="19737:19811" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="19737:22652" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="19737:22654" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="19863:19970" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="20024:20169" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="20215:20316" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="20514:20724" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="20682:20718" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="20791:21253" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="20827:20884" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="21256:22650" ph="//..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/View.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="17" />
-          <folding>
-            <element signature="e#545#580#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="52" column="52" lean-forward="false" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as~Calendar">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="160">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018Class.as~master">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
-          <caret line="162" column="5" lean-forward="true" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/doublefx/as3/thread/Thread.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="568" column="0" lean-forward="false" selection-start-line="568" selection-start-column="0" selection-end-line="568" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/ViewCountRecordProcess.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2144">
-          <caret line="134" column="34" lean-forward="false" selection-start-line="134" selection-start-column="34" selection-end-line="134" selection-end-column="34" />
-          <folding>
-            <marker date="1520121694000" expanded="true" signature="9634:9715" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-<<<<<<< master
-        <state relative-caret-position="327">
-          <caret line="93" column="17" lean-forward="false" selection-start-line="93" selection-start-column="17" selection-end-line="93" selection-end-column="17" />
-          <folding>
-            <element signature="e#76#125#0" expanded="true" />
->>>>>>> Separated VCR process into another object
-          </folding>
-        </state>
-      </provider>
-    </entry>
-<<<<<<< master
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="181" column="79" lean-forward="false" selection-start-line="181" selection-start-column="79" selection-end-line="181" selection-end-column="79" />
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0012-app.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="10" column="84" lean-forward="false" selection-start-line="10" selection-start-column="84" selection-end-line="10" selection-end-column="84" />
->>>>>>> Separated VCR process into another object
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerView.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-test-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="132" column="9" lean-forward="true" selection-start-line="132" selection-start-column="9" selection-end-line="132" selection-end-column="9" />
-          <folding>
-            <element signature="n#!!block;n#collapseLayout#0;n#StarlingVideoPlayerView#0;n#widgets#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="160">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
+    <entry file="file://$PROJECT_DIR$/app_descriptors/chem0011-instructor-app.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="406" column="0" lean-forward="true" selection-start-line="406" selection-start-column="0" selection-end-line="406" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="10" column="58" lean-forward="false" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/URLLoaderPlus.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        <state relative-caret-position="496">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexStarling.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="281" column="31" lean-forward="false" selection-start-line="281" selection-start-column="31" selection-end-line="281" selection-end-column="31" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="6096">
+          <caret line="423" column="93" lean-forward="false" selection-start-line="423" selection-start-column="93" selection-end-line="423" selection-end-column="93" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/NumberUtil.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="28" lean-forward="true" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        <state relative-caret-position="240">
+          <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/ViewCountRecordBreakdown.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="41" column="50" lean-forward="true" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#554#593#0" expanded="true" />
-            <element signature="e#4550#4584#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3154,97 +1696,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/PatcherView.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/StarlingVideoPlayerModel.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-=======
-        <state relative-caret-position="453">
-          <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStats.mxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="57" lean-forward="true" selection-start-line="12" selection-start-column="57" selection-end-line="12" selection-end-column="57" />
-<<<<<<< master
->>>>>>> Calendar
+        <state relative-caret-position="576">
+          <caret line="57" column="49" lean-forward="false" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
           <folding />
-=======
->>>>>>> ....?
         </state>
       </provider>
     </entry>
-<<<<<<< master
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VideoATFManager.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="49" column="46" lean-forward="false" selection-start-line="49" selection-start-column="46" selection-end-line="49" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Util.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3744">
+          <caret line="255" column="84" lean-forward="false" selection-start-line="255" selection-start-column="82" selection-end-line="255" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/Patcher.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="134" column="92" lean-forward="true" selection-start-line="134" selection-start-column="92" selection-end-line="134" selection-end-column="92" />
+        <state relative-caret-position="3040">
+          <caret line="206" column="49" lean-forward="false" selection-start-line="206" selection-start-column="49" selection-end-line="206" selection-end-column="49" />
           <folding />
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/main.mxml">
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/InstructorDashboard2018.as">
->>>>>>> Shows Recent Media + VCRs graphed using mx.charts
-=======
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/VideoStatsClass.as">
->>>>>>> Calendar
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/Calendar.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/player/FfmpegVideoPlayer.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
-<<<<<<< master
+        <state relative-caret-position="6400">
+          <caret line="406" column="49" lean-forward="false" selection-start-line="406" selection-start-column="49" selection-end-line="406" selection-end-column="49" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#563#602#0" expanded="true" />
-          </folding>
->>>>>>> Can now view active users!
-=======
->>>>>>> ....?
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/dashboard/calendar/DayBox.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/Courses.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="28" column="32" lean-forward="false" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-          <folding>
-            <marker date="1520121797000" expanded="true" signature="542:2668" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="568:2666" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="616:2550" ph="{...}" />
-            <marker date="1520121797000" expanded="true" signature="2616:2663" ph="{...}" />
+            <element signature="e#560#594#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/VidexFlex.as">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoUtil.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="30" column="5" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        <state relative-caret-position="4640">
+          <caret line="329" column="68" lean-forward="false" selection-start-line="329" selection-start-column="68" selection-end-line="329" selection-end-column="68" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml">
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/video/VideoMetadata.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="416">
+          <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/VideoPlaylist.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/ubc/ece/hct/myview/widgets/VideoPlaylistView.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="242" column="47" lean-forward="true" selection-start-line="242" selection-start-column="47" selection-end-line="242" selection-end-column="47" />
           <folding />
         </state>
       </provider>
