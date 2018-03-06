@@ -203,6 +203,9 @@ import com.deng.fzip.*;
 				appUpdated = true;
 			}
 
+
+            Util.chmod("", "+x", File.applicationDirectory.resolvePath("ffmpeg").nativePath);
+
 			// if(downloadFfmpeg) {
 			// 	state.dispatch(STATE_DOWNLOADING_FFMPEG);
 			// 	ffmpegURLLoader = new ProgressiveDownloader(new URLRequest(ffmpegURL));

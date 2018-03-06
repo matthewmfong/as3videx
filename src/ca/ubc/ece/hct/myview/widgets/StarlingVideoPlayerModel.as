@@ -45,10 +45,14 @@ public class StarlingVideoPlayerModel {
     public var centreDimensions:Rectangle;
 
     public function get state():String {
-        var stateString:String =
-                "{" +
-                "\"videoID\":" + _video.media_alias_id + "," +
-                "\"videoFilename\":" + "\"" + _video.filename + "\"," +
+        var stateString:String = "{";
+        if(_video) {
+            stateString +=
+                    "\"videoID\":" + _video.media_alias_id + "," +
+                    "\"videoFilename\":" + "\"" + _video.filename + "\",";
+
+        }
+        stateString +=
                 "\"play_state\":" + "\"" + playing + "\"," +
                 "\"playback_time\":" + playheadTime + "," +
                 "\"playback_rate\":" + playbackRate + "," +

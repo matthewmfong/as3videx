@@ -47,7 +47,9 @@ public class VideoATFManager {
     public static function loadAsyncVideoATF(video:VideoMetadata, texture:Texture = null, atfData:ByteArray = null, fileStream:FileStream = null):Signal {
         openingInProgress = true;
         VideoATFManager.video = video;
+        // TODO: .mp4.atf is hardcoded LOL -.-
         var file:File = File.applicationStorageDirectory.resolvePath(VideoMetadataManager.thumbnailsFolder + "/" + video.filename + ".mp4.atf");
+//        trace(file.nativePath);
 
 //        trace(file.nativePath);
         openedSignal = new Signal(VideoMetadata);

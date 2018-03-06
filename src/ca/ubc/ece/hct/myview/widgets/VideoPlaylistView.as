@@ -246,7 +246,7 @@ public class VideoPlaylistView extends StarlingView {
 		private function videoClickedHandler(e:TouchEvent):void {
             var touch:Touch = e.getTouch(this, TouchPhase.ENDED);
 //            trace(touch);;
-            if (touch) {
+            if (touch && (VideoMetadataButton)(e.currentTarget).completedLoading) {
                 var video:VideoMetadata = (VideoMetadataButton)(e.currentTarget).video;
 
 //                if (video.totalNumberOfSourcesDownloaded == video.totalNumberOfSourcesToDownload)
@@ -364,6 +364,7 @@ class VideoMetadataButton extends StarlingView {
 	public var title:TextField;
 	public var titleBG:Shape;
 	public var thumbnail:Thumbnail;
+	public var completedLoading:Boolean = true;
 
 	public function VideoMetadataButton(video:VideoMetadata, width:Number, height:Number) {
 		this.video = video;
@@ -433,6 +434,7 @@ class VideoMetadataButton extends StarlingView {
 		titleBG.graphics.beginFill(0xffffff, 0.7);
 		titleBG.graphics.drawRect(0, 0, title.width, title.height);
 		titleBG.graphics.endFill();
+		completedLoading = false;
 	}
 
 	public function downloadComplete(video:VideoMetadata, val:Boolean):void {
@@ -457,6 +459,7 @@ class VideoMetadataButton extends StarlingView {
 		titleBG.graphics.beginFill(0xffffff, 0.7);
 		titleBG.graphics.drawRect(0, 0, title.width, title.height);
 		titleBG.graphics.endFill();
+		completedLoading = true;
 	}
 
 	private function reset():void {

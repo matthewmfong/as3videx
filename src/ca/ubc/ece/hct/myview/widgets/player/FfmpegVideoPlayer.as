@@ -8,6 +8,8 @@
 
 package ca.ubc.ece.hct.myview.widgets.player {
 
+import ca.ubc.ece.hct.myview.Util;
+
 import flash.desktop.NativeProcess;
 import flash.desktop.NativeProcessStartupInfo;
 import flash.events.IOErrorEvent;
@@ -402,6 +404,7 @@ public class FfmpegVideoPlayer extends IVideoPlayer {
         var file:File;
         if(operatingSystem.indexOf("Mac") >= 0) {
             file = File.applicationDirectory.resolvePath("ffmpeg");
+            Util.chmod("", "+x", file.nativePath);
         } else if(operatingSystem.indexOf("Windows") >= 0) {
             file = File.applicationDirectory.resolvePath("ffmpeg.exe");
         }

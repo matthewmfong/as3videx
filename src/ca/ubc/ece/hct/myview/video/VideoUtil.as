@@ -322,14 +322,16 @@ CONFIG::AIR {
 
 				if(!ffmpegFile) {
 					var operatingSystem:String = Capabilities.os;
-					trace("shit, this isn't right.")
+//					trace("shit, this isn't right.")
 			        if(operatingSystem.indexOf("Mac") >= 0) {
                         trace(File.applicationDirectory.nativePath);
                         trace(File.applicationDirectory.resolvePath("ffmpeg").nativePath);
 						ffmpegFile = File.applicationDirectory.resolvePath("ffmpeg");
+                        Util.chmod("", "+x", ffmpegFile.nativePath);
 					} else if(operatingSystem.indexOf("Windows") >= 0) {
 						ffmpegFile = File.applicationDirectory.resolvePath("ffmpeg.exe");
 					}
+
 					ffmpegStartupInfo = new NativeProcessStartupInfo();
 		            ffmpegStartupInfo.executable = ffmpegFile;
 	            	ffmpeg = new NativeProcess();
