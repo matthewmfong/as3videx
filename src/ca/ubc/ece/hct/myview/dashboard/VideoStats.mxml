@@ -9,7 +9,7 @@
                            creationComplete="creationCompleteHandler()"
                            width="100%"
                            height="100%"
-                           backgroundColor="#ff9300">
+                           backgroundColor="#cccccc">
     <s:Scroller id="scroller" width="100%" height="100%">
         <s:VGroup id="base_vGroup" padding="10">
             <mx:ProgressBar id="progressBar_ProgressBar"

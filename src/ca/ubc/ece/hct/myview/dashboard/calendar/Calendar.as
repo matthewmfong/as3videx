@@ -40,11 +40,13 @@ public class Calendar extends View {
 
     public var dateHoverSignal:Signal;
     public var dateClickSignal:Signal;
+    public var dateRollOutSignal:Signal;
 
     public function Calendar(startDate:Date, endDate:Date) {
 
         dateHoverSignal = new Signal(Date);
         dateClickSignal = new Signal(Date);
+        dateRollOutSignal = new Signal();
 
         this.startDate = startDate;
         this.endDate = endDate;
@@ -103,12 +105,16 @@ public class Calendar extends View {
 
             db.addEventListener(MouseEvent.ROLL_OVER,
                     function (e:MouseEvent):void {
-                        dateHoverSignal.dispatch(e.target.date);
+                        dateHoverSignal.dispatch(e.currentTarget.date);
 //                        trace(Math.floor((e.target.date.getTime() - startTime) / Constants.DAYS2MILLISECONDS));
                     });
             db.addEventListener(MouseEvent.CLICK,
                     function (e:MouseEvent):void {
-                        dateClickSignal.dispatch(e.target.date);
+                        dateClickSignal.dispatch(e.currentTarget.date);
+                        for(var i:int = 0; i<dayBoxes.length; i++) {
+                            dayBoxes[i].selected = false;
+                        }
+                        (DayBox)(e.currentTarget).selected = true;
 //                        trace(Math.floor((e.target.date.getTime() - startTime) / Constants.DAYS2MILLISECONDS));
                     });
 
@@ -119,6 +125,7 @@ public class Calendar extends View {
         }
 
 
+        addEventListener(MouseEvent.ROLL_OUT, rollOut);
         calendar.x = dayTextWidth;
         calendar.y = monthText.height + padding;
         addChild(calendar);
@@ -183,16 +190,12 @@ public class Calendar extends View {
             dayTexts[i].y = calendar.y + (boxHeight + padding) * i;
         }
 //        trace("setSize(" + w + ", " + h +"): " + boxWidth + ", " + boxHeight);
-    }
 
-//    override protected function addedToStage(e:Event = null):void {
-//
-//        super.addedToStage(e);
-//
-//
-//
-//
-//    }
+        calendar.graphics.clear();
+        calendar.graphics.beginFill(0xdddddd);
+        calendar.graphics.drawRect(0, 0, calendar.width, calendar.height);
+        calendar.graphics.endFill();
+    }
 
     public function updateDailyRecordCount(records:Array):void {
 
@@ -210,19 +213,25 @@ public class Calendar extends View {
             var date:Date = new Date(runningTime);
             var colour:Number = 0xffffff;
             for each(var o:Object in dailyRecordCount) {
-                if(date.fullYear == o.date.fullYear &&
-                        date.month == o.date.month &&
-                        date.date == o.date.date) {
-//                    trace(date + ": " + o.count);
-                    colour = (o.colour || o.count == 0) ? 0xffffff : ColorUtil.getHeatMapColor(o.count/maxCount, colours);
+
+                if(     date.fullYear   ==    o.date.fullYear &&
+                        date.month      ==    o.date.month      &&
+                        date.date       ==    o.date.date) {
+
+                    colour = (o.count == 0) ? 0xffffff : ColorUtil.getHeatMapColor(o.count/maxCount, colours);
+
+                    var index:int = (runningTime - startTime) / Constants.DAYS2MILLISECONDS;
+                    if(index > 0) {
+                        dayBoxes[index].setColour(Util.brighten(colour, 2));
+                    }
                     break;
                 }
             }
-
-//            trace(dayBoxes[(runningTime - startTime) / Constants.DAYS2MILLISECONDS].date + " " + colour.toString(16));
-            dayBoxes[(runningTime - startTime) / Constants.DAYS2MILLISECONDS].setColour(Util.brighten(colour, 2));
-
         }
+    }
+
+    private function rollOut(e:MouseEvent):void {
+        dateRollOutSignal.dispatch();
     }
 }
 }

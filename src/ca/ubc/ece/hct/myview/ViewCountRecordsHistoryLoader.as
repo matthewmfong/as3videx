@@ -101,7 +101,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
         }
 
-        getDataFromDate.setTime(getDataFromDate.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
+//        getDataFromDate.setTime(getDataFromDate.getTime());
 
 //        trace(getDataFromDate);
 
@@ -109,8 +109,8 @@ public class ViewCountRecordsHistoryLoader extends View {
         var url:String ="http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?" +
                 "media_alias_id=" + video.media_alias_id +
                 "&user_string=" + COURSE::Name +
-                "&fromDate=" + Util.dateToISO8601(getDataFromDate) +
-                "&toDate=" + Util.dateToISO8601(new Date(getDataFromDate.getTime() + 7 * Constants.DAYS2MILLISECONDS));
+                "&fromDate=" + Util.dateToISO8601(Util.localTime2ServerTime(getDataFromDate)) +
+                "&toDate=" + Util.dateToISO8601(new Date(Util.localTime2ServerTime(getDataFromDate).getTime() + 7 * Constants.DAYS2MILLISECONDS));
         trace(url);
 
 
@@ -174,7 +174,7 @@ public class ViewCountRecordsHistoryLoader extends View {
     }
 
     private var _thread:IThread;
-    public const extraDependencies:Vector.<String> = Vector.<String>(["flash.utils.ByteArray"]);
+    public const extraDependencies:Vector.<String> = Vector.<String>(["flash.utils.ByteArray", "ca.ubc.ece.hct.myview.Util", "ca.ubc.ece.hct.myview.Constants"]);
 
     public function userRecordsHistoryLoaded(content:String):void {
 
@@ -183,7 +183,7 @@ public class ViewCountRecordsHistoryLoader extends View {
         var strings:Array = content.split("\n");
         strings.pop(); // remove the last line, which is just a \n
 
-        trace("strings.length = " + strings.length);
+//        trace("strings.length = " + strings.length);
 
         if(vcr_so.size > 0) {
 
@@ -273,6 +273,8 @@ public class ViewCountRecordsHistoryLoader extends View {
             for (var i:int = 0; i < dailyRecordCount.length; i++) {
 
                 dailyRecordMaxCount = Math.max(dailyRecordMaxCount, dailyRecordCount[i].count);
+
+                trace(dailyRecordCount[i].date + " - " + dailyRecordCount[i].count)
             }
 
 //        trace("Loader: orgUserRecordsArray.length = " + orgUserRecordsArray.length);
@@ -314,8 +316,8 @@ public class ViewCountRecordsHistoryLoader extends View {
             var url:String = "http://" + Constants.DOMAIN + "/admin/getUserRecordsHistoryByMediaAliasID.php?" +
                     "media_alias_id=" + video.media_alias_id +
                     "&user_string=" + COURSE::Name +
-                    "&fromDate=" + Util.dateToISO8601(getDataFromDate) +
-                    "&toDate=" + Util.dateToISO8601(new Date(getDataFromDate.getTime() + 7 * Constants.DAYS2MILLISECONDS));
+                    "&fromDate=" + Util.dateToISO8601(Util.localTime2ServerTime(getDataFromDate)) +
+                    "&toDate=" + Util.dateToISO8601(new Date(Util.localTime2ServerTime(getDataFromDate).getTime() + 7 * Constants.DAYS2MILLISECONDS));
             trace(url);
 
 

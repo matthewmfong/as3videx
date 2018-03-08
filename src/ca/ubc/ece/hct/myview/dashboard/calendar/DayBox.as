@@ -17,7 +17,7 @@ public class DayBox extends View {
 
 //    public var colour:Array = [0xff0000, 0xffa200, 0xfcff00, 0x00ff24, 0x00f0ff, 0x0012ff, 0xba00ff];
     public var _colour:Number;
-    public var _selected:Boolean;
+    private var _selected:Boolean;
     public var text:TextField;
 
     public function DayBox(d:Date, colour:Number, w:Number, h:Number) {
@@ -27,6 +27,7 @@ public class DayBox extends View {
         _colour = colour;
         text = new TextField();
         text.defaultTextFormat = new TextFormat("Arial", _height/2);
+        text.mouseEnabled = false;
         addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
     }
 
@@ -46,7 +47,7 @@ public class DayBox extends View {
         graphics.drawRect(0, 0, _width, _height);
         graphics.endFill();
 
-        if(_selected) {
+        if (_selected) {
             graphics.lineStyle(1, 0xff0000);
             graphics.drawRect(0, 0, _width, _height);
         }
@@ -55,18 +56,18 @@ public class DayBox extends View {
 //        text.height = _height;
         text.autoSize = TextFormatAlign.LEFT;
         text.text = date.date.toString();
-        text.x = _width/2 - text.width/2;
-        text.y = _height/2 - text.height/2;
-        addChild(text);
+        text.x = _width / 2 - text.width / 2;
+        text.y = _height / 2 - text.height / 2;
+
+        if (!contains(text)) {
+            addChild(text);
+        }
     }
 
     public function setColour(c:Number):void {
         _colour = c;
 
-        graphics.clear();
-        graphics.beginFill(_colour, 1);
-        graphics.drawRect(0, 0, _width, _height);
-        graphics.endFill();
+        draw();
     }
 
     public function setSize(w:Number, h:Number):void {
@@ -76,12 +77,9 @@ public class DayBox extends View {
     }
 
     public function set selected(val:Boolean):void {
-        _selected = val;
-        setColour(_colour);
-
-        if(val) {
-            graphics.lineStyle(1, 0xff0000);
-            graphics.drawRect(0, 0, _width, _height);
+        if(val != _selected) {
+            _selected = val;
+            draw();
         }
     }
 

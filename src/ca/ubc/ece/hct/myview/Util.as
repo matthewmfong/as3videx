@@ -447,5 +447,14 @@ package ca.ubc.ece.hct.myview {
 
             return -1;
         }
+
+
+		public static function localTime2ServerTime(date:Date):Date {
+			return new Date(date.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
+		}
+
+		public static function serverTime2LocalTime(date:Date):Date {
+			return new Date(date.getTime() + Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS)
+		}
 	}
 }

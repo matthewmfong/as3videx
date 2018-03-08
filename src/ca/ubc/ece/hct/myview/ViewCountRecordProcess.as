@@ -15,6 +15,8 @@ import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
 import ca.ubc.ece.hct.myview.UserViewCountRecord;
+import ca.ubc.ece.hct.myview.Util;
+import ca.ubc.ece.hct.myview.Constants;
 
 public class ViewCountRecordProcess implements Runnable {
 
@@ -83,7 +85,7 @@ public class ViewCountRecordProcess implements Runnable {
             var hour:Number = Number(dateString.substr(11, 2));
             var minute:Number = Number(dateString.substr(14, 2));
             var second:Number = Number(dateString.substr(17, 2));
-            var date:Date = new Date(year, month - 1, day, hour, minute, second);
+            var date:Date = Util.serverTime2LocalTime(new Date(year, month - 1, day, hour, minute, second));
             if(i == 0) {
                 minDate = date;
             }
@@ -106,16 +108,21 @@ public class ViewCountRecordProcess implements Runnable {
             dispatcher.dispatchProgress(i, strings.length);
         }
 
-        if(minDate && maxDate) {
-            var runningTime:Number;
-            var oldSum:Number = 0;
-            var newVCR:Array = [];
-            var newSum:Number = 0;
-            var dailyRecordMaxCount:Number = 0;
-            var dailyRecordCount:Array = [];
-            for (runningTime = minDate.getTime(); runningTime <= maxDate.getTime(); runningTime += DAYS2MILLISECONDS) {
+        var runningTime:Number;
+        var oldSum:Number = 0;
+        var newVCR:Array = [];
+        var newSum:Number = 0;
 
-                var date:Date = new Date(runningTime);
+        var dailyRecordMaxCount:Number = 0;
+        var dailyRecordCount:Array = [];
+
+        if(minDate && maxDate) {
+
+            var startDate:Date = new Date(minDate.fullYear, minDate.month, minDate.date);
+            for (runningTime = startDate.getTime(); runningTime <= maxDate.getTime(); runningTime += DAYS2MILLISECONDS) {
+
+                // get the vcr at the END of the day, and store it as the beginning of the day.
+                var date:Date = new Date(runningTime + DAYS2MILLISECONDS);
                 newVCR = getAggregateVCRAtDate(date);
 
                 newSum = 0;
@@ -123,13 +130,17 @@ public class ViewCountRecordProcess implements Runnable {
                     newSum += newVCR[i];
                 }
 
-                dailyRecordCount.push({date: date, count: (newSum - oldSum)});
+//                trace("x" + date + " " + (newSum - oldSum));
+
+                dailyRecordCount.push({date: new Date(runningTime), count: (newSum - oldSum)});
 
                 dailyRecordMaxCount = Math.max(dailyRecordMaxCount, (newSum - oldSum));
 
                 oldSum = newSum;
             }
         }
+
+//        trace("dailyRecordMaxCount = " + dailyRecordMaxCount);
 
 
         records = new ByteArray();
@@ -252,6 +263,7 @@ public class ViewCountRecordProcess implements Runnable {
         return [];
 
     }
+
 
 }
 }

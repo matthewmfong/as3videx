@@ -44,6 +44,7 @@ public class VideoStatsClass extends SkinnableContainer {
     private var thumb:ThumbnailNative;
 
     private var cal:Calendar;
+    private var selectedDate:Date;
     private var captionView:TextField;
     private var viewCountRecordSprite:Sprite;
 
@@ -96,6 +97,7 @@ public class VideoStatsClass extends SkinnableContainer {
         );
 
         cal = new Calendar(VideoMetadataManager.COURSE.startDate, VideoMetadataManager.COURSE.endDate);
+        selectedDate = new Date();
     }
 
     public function creationCompleteHandler():void {
@@ -105,6 +107,7 @@ public class VideoStatsClass extends SkinnableContainer {
         cal.setSize(calendar_SpriteVisualElement.width * 0.8, calendar_SpriteVisualElement.height * 0.8);
         cal.dateClickSignal.add(dateClicked);
         cal.dateHoverSignal.add(dateHovered);
+        cal.dateRollOutSignal.add(dateRollOut);
 
         calendar_SpriteVisualElement.addChild(cal);
 
@@ -404,11 +407,26 @@ public class VideoStatsClass extends SkinnableContainer {
 
     private function dateHovered(date:Date):void {
 
+        gotoDate(date);
+
+    }
+
+    private function dateClicked(date:Date):void {
+
+        selectedDate = date;
+        gotoDate(date);
+    }
+
+    private function dateRollOut():void {
+        gotoDate(selectedDate);
+    }
+
+    private function gotoDate(date:Date):void {
         var userdatas:Vector.<UserData> = new Vector.<UserData>();
         for(var i:int = 0; i<usernames.length; i++) {
             var user:UserData = new UserData();
             user.userString = usernames[i];
-            user.viewCountRecord = getVCRForUserAtDate(user.userString, new Date(date.getTime()));
+            user.viewCountRecord = getVCRForUserAtDate(user.userString, date);
             for(var j:int = 0; j < user.viewCountRecord.length; j++) {
                 user.maxViewCount = Math.max(user.maxViewCount, user.viewCountRecord[j]);
             }
@@ -416,11 +434,6 @@ public class VideoStatsClass extends SkinnableContainer {
         }
 
         drawViewCountRecord(userdatas);
-
-    }
-
-    private function dateClicked(date:Date):void {
-
     }
 }
 }
