@@ -46,9 +46,10 @@ public class VideoStatsClass extends SkinnableContainer {
     private var cal:Calendar;
     private var selectedDate:Date;
     private var captionView:TextField;
-    private var viewCountRecordSprite:Sprite;
 
     private var secondsWatched:Number = 0;
+
+    private var viewCountRecordSprite:InstructorViewCountRecordSprite;
 
     private var allTimeAggregateMaxViewCount:Number = 0;
     private var allTimeMaxViewCount:Number = 0;
@@ -85,8 +86,6 @@ public class VideoStatsClass extends SkinnableContainer {
         avg_minutes_watched_Label = new Label();
         number_of_seeks_Label = new Label();
 
-
-
         vcrLoader = new ViewCountRecordsHistoryLoader();
 
         usernames = [];
@@ -95,6 +94,12 @@ public class VideoStatsClass extends SkinnableContainer {
                     progressBar_ProgressBar.setProgress(current, total);
                 }
         );
+        vcrLoader.statusSignal.add(
+                function statusHandler(string:String):void {
+                    progressBar_ProgressBar.label = string;
+                }
+        );
+        vcrLoader.completeSignal.add(vcrHistoryLoaded);
 
         cal = new Calendar(VideoMetadataManager.COURSE.startDate, VideoMetadataManager.COURSE.endDate);
         selectedDate = new Date();
@@ -102,7 +107,6 @@ public class VideoStatsClass extends SkinnableContainer {
 
     public function creationCompleteHandler():void {
 
-        vcrLoader.completeSignal.add(vcrHistoryLoaded);
 
         cal.setSize(calendar_SpriteVisualElement.width * 0.8, calendar_SpriteVisualElement.height * 0.8);
         cal.dateClickSignal.add(dateClicked);
@@ -111,10 +115,12 @@ public class VideoStatsClass extends SkinnableContainer {
 
         calendar_SpriteVisualElement.addChild(cal);
 
-        viewCountRecordSprite = new Sprite();
+        viewCountRecordSprite = new InstructorViewCountRecordSprite(aggregate_vcr_SpriteVisualElement.width, aggregate_vcr_SpriteVisualElement.height);
+        viewCountRecordSprite.video = _video;
         viewCountRecordSprite.addEventListener(MouseEvent.MOUSE_MOVE, vcrMouseMove);
         viewCountRecordSprite.addEventListener(MouseEvent.CLICK, vcrClick);
-        drawViewCountRecord(_video.crowdUserData.grab(UserData.CLASS));
+        viewCountRecordSprite.drawViewCountRecord(_video.crowdUserData.grab(UserData.CLASS), allTimeMaxViewCount, allTimeAggregateMaxViewCount);
+
 
         aggregate_vcr_SpriteVisualElement.addChild(viewCountRecordSprite);
 
@@ -156,6 +162,7 @@ public class VideoStatsClass extends SkinnableContainer {
 
             var viewCountRecord:Array = data.viewCountRecord;
 
+//            trace(viewCountRecord);
             if(viewCountRecord.length > 0) {
 
                 for (var i:int = 0; i < viewCountRecord.length; i++) {
@@ -177,95 +184,7 @@ public class VideoStatsClass extends SkinnableContainer {
     }
 
 
-    private function drawViewCountRecord(userdatas:Vector.<UserData>):void {
-//        var userdatas:Vector.<UserData> = _video.crowdUserData.grab(UserData.CLASS);
-        var aggregateVCR:Array = [];
 
-        viewCountRecordSprite.graphics.clear();
-        viewCountRecordSprite.graphics.beginFill(0xffffff);
-        viewCountRecordSprite.graphics.drawRect(0, 0, aggregate_vcr_SpriteVisualElement.width, aggregate_vcr_SpriteVisualElement.height);
-        viewCountRecordSprite.graphics.endFill();
-
-        var maxViewCount:Number = allTimeMaxViewCount;
-        var data:UserData;
-//        for each(data in userdatas) {
-//            maxViewCount = Math.max(data.maxViewCount, maxViewCount);
-//        }
-
-//        var aggregateMaxViewCount:Number = allTimeAggregateMaxViewCount;
-
-        var graphMaxHeight:int = aggregate_vcr_SpriteVisualElement.height;
-        var graphHeight:Number = 0;
-
-        for each(data in userdatas) {
-
-            var viewCountRecord:Array = data.viewCountRecord;
-
-//            var startTime:Number = 0;
-//            var endTime:Number = _video.duration;
-
-            if(viewCountRecord.length > 0) {
-
-
-                viewCountRecordSprite.graphics.beginFill(0xaaaaaa, 0.3);
-
-//                viewCountRecordSprite.graphics.lineStyle(0.1, 0x777777);
-                viewCountRecordSprite.graphics.moveTo(0, graphMaxHeight);
-
-                var calc:Number;
-//                trace(viewCountRecord)
-                for (var i:int = 0; i < viewCountRecord.length; i++) {
-
-                    if(aggregateVCR[i] || aggregateVCR[i] == 0) {
-                        aggregateVCR[i] += viewCountRecord[i];
-                    } else {
-                        aggregateVCR.push(viewCountRecord[i]);
-                    }
-//
-//                    aggregateMaxViewCount = Math.max(aggregateMaxViewCount, aggregateVCR[i]);
-
-
-                    secondsWatched += viewCountRecord[i];
-
-
-                    calc = viewCountRecord[i] / maxViewCount * graphMaxHeight;
-
-
-                    viewCountRecordSprite.graphics.lineTo(((i + 0.5) / _video.duration) * aggregate_vcr_SpriteVisualElement.width,
-                            graphMaxHeight - calc)
-                }
-
-//                trace("A: " + aggregateVCR + "\n");
-                viewCountRecordSprite.graphics.lineTo(aggregate_vcr_SpriteVisualElement.width, graphMaxHeight);
-
-                viewCountRecordSprite.graphics.lineTo(0, graphMaxHeight);
-            }
-
-//            trace(data.viewCountRecord);
-        }
-
-        viewCountRecordSprite.graphics.endFill();
-
-        viewCountRecordSprite.graphics.lineStyle(1, 0x00ff00, 0.5)
-//        viewCountRecordSprite.graphics.beginFill(0x00ff00, 0.1);
-        viewCountRecordSprite.graphics.lineTo(0, graphMaxHeight);
-
-//        trace(aggregateVCR);
-        for(var i:int = 0; i<aggregateVCR.length; i++) {
-
-            var calc:Number = aggregateVCR[i] / allTimeAggregateMaxViewCount * graphMaxHeight;
-
-
-            viewCountRecordSprite.graphics.lineTo((i + 0.5) / _video.duration * aggregate_vcr_SpriteVisualElement.width,
-                    graphMaxHeight - calc)
-
-        }
-
-        viewCountRecordSprite.graphics.lineTo(aggregate_vcr_SpriteVisualElement.width, graphMaxHeight);
-        viewCountRecordSprite.graphics.lineTo(0, graphMaxHeight);
-//        viewCountRecordSprite.graphics.endFill();
-//        viewCountRecordSprite.graphics.lineTo(calc, graphMaxHeight);
-    }
     private function captionSeek(time:Number):void {
 
         if(_video.getSources("vtt")[0]) {
@@ -421,7 +340,8 @@ public class VideoStatsClass extends SkinnableContainer {
         gotoDate(selectedDate);
     }
 
-    private function gotoDate(date:Date):void {
+    private function gotoDate(inputDate:Date):void {
+        var date:Date = new Date(inputDate.getTime() + Constants.DAYS2MILLISECONDS - 1);
         var userdatas:Vector.<UserData> = new Vector.<UserData>();
         for(var i:int = 0; i<usernames.length; i++) {
             var user:UserData = new UserData();
@@ -433,7 +353,7 @@ public class VideoStatsClass extends SkinnableContainer {
             userdatas.push(user);
         }
 
-        drawViewCountRecord(userdatas);
+        viewCountRecordSprite.drawViewCountRecord(userdatas, allTimeMaxViewCount, allTimeAggregateMaxViewCount);
     }
 }
 }

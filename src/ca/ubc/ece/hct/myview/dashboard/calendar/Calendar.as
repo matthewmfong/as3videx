@@ -214,7 +214,7 @@ public class Calendar extends View {
             var colour:Number = 0xffffff;
             for each(var o:Object in dailyRecordCount) {
 
-                if(     date.fullYear   ==    o.date.fullYear &&
+                if(     date.fullYear   ==    o.date.fullYear   &&
                         date.month      ==    o.date.month      &&
                         date.date       ==    o.date.date) {
 
@@ -224,6 +224,8 @@ public class Calendar extends View {
                     if(index > 0) {
                         dayBoxes[index].setColour(Util.brighten(colour, 2));
                     }
+
+//                    trace("cal: " + date + ": " + o.count);
                     break;
                 }
             }

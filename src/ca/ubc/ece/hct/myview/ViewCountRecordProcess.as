@@ -134,6 +134,8 @@ public class ViewCountRecordProcess implements Runnable {
 
                 dailyRecordCount.push({date: new Date(runningTime), count: (newSum - oldSum)});
 
+//                trace("proc: " + new Date(runningTime) + ": " + (newSum - oldSum));
+
                 dailyRecordMaxCount = Math.max(dailyRecordMaxCount, (newSum - oldSum));
 
                 oldSum = newSum;
@@ -180,6 +182,7 @@ public class ViewCountRecordProcess implements Runnable {
 
     // Implements Runnable interface
     public function run(args:Array):void {
+        trace(args[0]);
         var value:ViewCountRecordProcessArguments = (ViewCountRecordProcessArguments)(args[0]);
 
         dispatcher.dispatchResult(process(value));
