@@ -59,6 +59,10 @@ public class UserLogDBManager extends EventDispatcher {
         conn.openAsync(dbFile);
     }
 
+    public function close():void {
+        conn.close();
+    }
+
     public function beginTransaction():void {
         conn.addEventListener(SQLEvent.BEGIN, beginHandler);
         conn.begin();
@@ -176,18 +180,23 @@ public class UserLogDBManager extends EventDispatcher {
 
     public function select(sql:String):Signal {
 
-        var selectStmt:SQLStatement = new SQLStatement();
-        selectStmt.sqlConnection = conn;
-
-        selectStmt.text = sql;
         var signal:Signal = new Signal(Object);
-        selectStmt.addEventListener(SQLEvent.RESULT,
-                function returnGetLatestRecord(e:SQLEvent):void {
 
-                    signal.dispatch(e.target.getResult());
+        try {
+            var selectStmt:SQLStatement = new SQLStatement();
+            selectStmt.sqlConnection = conn;
 
-                });
-        selectStmt.execute();
+            selectStmt.text = sql;
+            selectStmt.addEventListener(SQLEvent.RESULT,
+                    function returnGetLatestRecord(e:SQLEvent):void {
+
+                        signal.dispatch(e.target.getResult());
+
+                    });
+            selectStmt.execute();
+        } catch (e:Error) {
+
+        }
 
 
         return signal;
@@ -313,6 +322,7 @@ public class UserLogDBManager extends EventDispatcher {
         executeNextInsert();
 
     }
+
 
 //    public function toString():String {
 //        return "[Object UserLogDBManager]";

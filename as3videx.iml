@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="VidexDev">
     <configurations>
-      <configuration name="VidexDev" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/VidexDev">
+      <configuration name="VidexDev" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/VidexDev" skip-build="true">
         <dependencies target-player="23.0">
           <entries>
             <entry library-name="feathers" library-level="project">
@@ -62,7 +62,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017-INSTRUCTOR">
+      <configuration name="BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -216,7 +216,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018">
+      <configuration name="BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -246,7 +246,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018">
+      <configuration name="BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -302,7 +302,11 @@
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" />
           <option name="additionalOptions" value="-advanced-telemetry" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
@@ -336,7 +340,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018">
+      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -353,7 +357,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -370,7 +374,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018">
+      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -387,7 +391,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -404,7 +408,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/ViDeX_Demo">
+      <configuration name="ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/ViDeX_Demo" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="feathers" library-level="project">
@@ -434,7 +438,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="patcher_ViDeX_Demo.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_ViDeX_Demo">
+      <configuration name="patcher_ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="patcher_ViDeX_Demo.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_ViDeX_Demo" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>

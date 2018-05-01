@@ -28,5 +28,7 @@ public class Constants {
 	public static const WEEKS2MILLISECONDS:Number = 7 * DAYS2MILLISECONDS;
 
     public static const TITLEBAR_HEIGHT:Number = 30;
+
+	public static const INSTALLER_TYPE:Object = {WINDOWS: "exe", MAC: "dmg"};
 }
 }

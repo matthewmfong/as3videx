@@ -27,10 +27,13 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 import flash.utils.getTimer;
 
+import flashx.textLayout.conversion.TextConverter;
+
 import mx.controls.ProgressBar;
 
 import spark.components.Group;
 import spark.components.Label;
+import spark.components.RichText;
 import spark.components.Scroller;
 import spark.components.SkinnableContainer;
 import spark.components.VGroup;
@@ -64,11 +67,11 @@ public class VideoStatsClass extends SkinnableContainer {
     public var aggregate_vcr_SpriteVisualElement:SpriteVisualElement;
     public var thumbnail_SpriteVisualElement:SpriteVisualElement;
     public var caption_SpriteVisualElement:SpriteVisualElement;
-    public var users_watched_Label:Label;
-    public var views_Label:Label;
-    public var minutes_watched_Label:Label;
-    public var avg_minutes_watched_Label:Label;
-    public var number_of_seeks_Label:Label;
+    public var users_watched_Label:RichText;
+    public var views_Label:RichText;
+    public var minutes_watched_Label:RichText;
+    public var avg_minutes_watched_Label:RichText;
+    public var number_of_seeks_Label:RichText;
 
     public function VideoStatsClass() {
         super();
@@ -80,11 +83,11 @@ public class VideoStatsClass extends SkinnableContainer {
         aggregate_vcr_SpriteVisualElement = new SpriteVisualElement();
         thumbnail_SpriteVisualElement = new SpriteVisualElement();
         caption_SpriteVisualElement = new SpriteVisualElement();
-        users_watched_Label = new Label();
-        views_Label = new Label();
-        minutes_watched_Label = new Label();
-        avg_minutes_watched_Label = new Label();
-        number_of_seeks_Label = new Label();
+        users_watched_Label = new RichText();
+        views_Label = new RichText();
+        minutes_watched_Label = new RichText();
+        avg_minutes_watched_Label = new RichText();
+        number_of_seeks_Label = new RichText();
 
         vcrLoader = new ViewCountRecordsHistoryLoader();
 
@@ -124,6 +127,13 @@ public class VideoStatsClass extends SkinnableContainer {
 
         aggregate_vcr_SpriteVisualElement.addChild(viewCountRecordSprite);
 
+        var crowdUserData:Vector.<UserData> = _video.crowdUserData.grab(UserData.CLASS);
+        for(var i:int = 0; i<crowdUserData.length; i++) {
+            for(var j:int = 0; j<(UserData)(crowdUserData[i]).viewCountRecord.length; j++) {
+                secondsWatched += (UserData)(crowdUserData[i]).viewCountRecord[j];
+            }
+        }
+
         thumb = new ThumbnailNative();
         thumb.setSize(thumbnail_SpriteVisualElement.width, thumbnail_SpriteVisualElement.height);
         thumb.loadVideo(_video);
@@ -131,9 +141,9 @@ public class VideoStatsClass extends SkinnableContainer {
         thumbnail_SpriteVisualElement.addChild(thumb);
 
         var userdatas:Vector.<UserData> = _video.crowdUserData.grab(UserData.CLASS);
-        users_watched_Label.text = "Users watched: " + (userdatas ? userdatas.length : 0);
-        minutes_watched_Label.text = "Minutes watched: " + NumberUtil.roundDecimalToPlace(secondsWatched/60, 1);
-        avg_minutes_watched_Label.text = "Average Minutes watched per user: " + NumberUtil.roundDecimalToPlace((secondsWatched/60/(userdatas ? userdatas.length : 1)), 1);
+        users_watched_Label.textFlow = TextConverter.importToFlow("<b>Users watched: </b>" + (userdatas ? userdatas.length : 0), TextConverter.TEXT_FIELD_HTML_FORMAT);
+        minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Minutes watched: </b>" + NumberUtil.roundDecimalToPlace(secondsWatched/60, 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
+        avg_minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Average Minutes watched per user: </b>" + NumberUtil.roundDecimalToPlace((secondsWatched/60/(userdatas ? userdatas.length : 1)), 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
 
         captionView = new TextField();
         captionView.width = caption_SpriteVisualElement.width;
@@ -144,7 +154,7 @@ public class VideoStatsClass extends SkinnableContainer {
 
         db.select("SELECT count(*) AS count FROM main.logs WHERE action = 'seek' AND video_id = '" + _video.media_alias_id + "'").add(
             function (r:Object):void {
-                number_of_seeks_Label.text = "Number of seeks " + r.data[0].count;
+                number_of_seeks_Label.textFlow = TextConverter.importToFlow("<b>Number of seeks: </b>" + r.data[0].count, TextConverter.TEXT_FIELD_HTML_FORMAT);
             }
         )
 
@@ -229,6 +239,7 @@ public class VideoStatsClass extends SkinnableContainer {
     private function vcrHistoryLoaded():void {
 
 //        var dailyRecordCount:Array = [];
+        progressBar_ProgressBar.setProgress(1, 1);
 
         var maxCount:Number = 0;
         var counter:Number = 0;
@@ -292,32 +303,34 @@ public class VideoStatsClass extends SkinnableContainer {
 
         var records:UserViewCountRecord = getRecordsForUser(user);
 
-        // find index of records to jump to and start searching
-        var mapIndex:int;
-        for(mapIndex = 0; mapIndex < records.mapDates.length-1; mapIndex++) {
-            if(records.mapDates[mapIndex] >= date) {
-                break;
-            }
-        }
-
-        var entry:int = records.mapIndices[mapIndex];
-        for(var i:int = records.mapIndices[mapIndex]; i < records.vcrDates.length; i++) {
-
-            if(records.vcrDates[i] > date) {
-                break;
+        if(records.mapDates.length > 0 && records.mapDates[0] < date) {
+            // find index of records to jump to and start searching
+            var mapIndex:int;
+            for (mapIndex = 0; mapIndex < records.mapDates.length - 1; mapIndex++) {
+                if (records.mapDates[mapIndex] >= date) {
+                    break;
+                }
             }
 
-            entry = i;
-        }
+            var entry:int = records.mapIndices[mapIndex];
+            for (var i:int = records.mapIndices[mapIndex]; i < records.vcrDates.length; i++) {
 
-        if(entry >= 0) {
-            var arr:Array = records.vcrs[entry].split(",");
+                if (records.vcrDates[i] > date) {
+                    break;
+                }
 
-            for(var j:int = 0; j<arr.length; j++) {
-                arr[j] = Number(arr[j]);
+                entry = i;
             }
 
-            return arr;
+            if (entry >= 0) {
+                var arr:Array = records.vcrs[entry].split(",");
+
+                for (var j:int = 0; j < arr.length; j++) {
+                    arr[j] = Number(arr[j]);
+                }
+
+                return arr;
+            }
         }
 
         return [];
@@ -341,6 +354,7 @@ public class VideoStatsClass extends SkinnableContainer {
     }
 
     private function gotoDate(inputDate:Date):void {
+        var numUsers:Number = 0;
         var date:Date = new Date(inputDate.getTime() + Constants.DAYS2MILLISECONDS - 1);
         var userdatas:Vector.<UserData> = new Vector.<UserData>();
         for(var i:int = 0; i<usernames.length; i++) {
@@ -350,10 +364,32 @@ public class VideoStatsClass extends SkinnableContainer {
             for(var j:int = 0; j < user.viewCountRecord.length; j++) {
                 user.maxViewCount = Math.max(user.maxViewCount, user.viewCountRecord[j]);
             }
+            if(user.maxViewCount > 0) {
+//                trace(user.viewCountRecord);
+                numUsers++;
+            }
             userdatas.push(user);
         }
 
         viewCountRecordSprite.drawViewCountRecord(userdatas, allTimeMaxViewCount, allTimeAggregateMaxViewCount);
+
+        secondsWatched = 0;
+
+        for(var i:int = 0; i<userdatas.length; i++) {
+            for(var j:int = 0; j<(UserData)(userdatas[i]).viewCountRecord.length; j++) {
+                secondsWatched += (UserData)(userdatas[i]).viewCountRecord[j];
+            }
+        }
+
+        users_watched_Label.textFlow = TextConverter.importToFlow("<b>Users watched (" + date + "): </b>" + numUsers, TextConverter.TEXT_FIELD_HTML_FORMAT);
+        minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Minutes watched (" + date + "): </b>" + NumberUtil.roundDecimalToPlace(secondsWatched/60, 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
+        avg_minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Average Minutes watched per user (" + date + "): </b>" + NumberUtil.roundDecimalToPlace((secondsWatched/60/numUsers), 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
+
+        db.select("SELECT count(*) AS count FROM main.logs WHERE action = 'seek' AND video_id = '" + _video.media_alias_id + "' AND date < '" + inputDate.time + "'").add(
+                function (r:Object):void {
+                    number_of_seeks_Label.textFlow = TextConverter.importToFlow("<b>Number of seeks </b>" + r.data[0].count, TextConverter.TEXT_FIELD_HTML_FORMAT);
+                }
+        )
     }
 }
 }

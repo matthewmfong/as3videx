@@ -129,9 +129,6 @@ public class ViewCountRecordsHistoryLoader extends View {
 
         loader.load();
 
-        trace("loader.numChildren = " + loader.numChildren);
-
-
 
         var oldHourlyBA:ByteArray = new ByteArray();
         if(Util.readFileIntoByteArray("vcr_hourly_" + video.id, oldHourlyBA)) {
