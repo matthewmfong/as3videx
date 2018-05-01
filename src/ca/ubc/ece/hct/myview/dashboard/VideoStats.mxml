@@ -27,13 +27,13 @@
                     <s:SpriteVisualElement id="caption_SpriteVisualElement" width="{thumbnail_VGroup.width}" />
                 </s:VGroup>
             </s:HGroup>
-            <s:TileGroup width="100%">
-                <s:Label id="users_watched_Label" text="Users watched" />
-                <s:Label id="views_Label" text="Views" />
-                <s:Label id="minutes_watched_Label" text="Minutes Watched" />
-                <s:Label id="avg_minutes_watched_Label" text="Average Minutes Watched" />
-                <s:Label id="number_of_seeks_Label" text="Number of seeks" />
-            </s:TileGroup>
+            <s:VGroup width="100%">
+                <s:RichText id="users_watched_Label" text="Users watched" />
+                <s:RichText id="views_Label" text="Views" />
+                <s:RichText id="minutes_watched_Label" text="Minutes Watched" />
+                <s:RichText id="avg_minutes_watched_Label" text="Average Minutes Watched" />
+                <s:RichText id="number_of_seeks_Label" text="Number of seeks" />
+            </s:VGroup>
         </s:VGroup>
     </s:Scroller>
 

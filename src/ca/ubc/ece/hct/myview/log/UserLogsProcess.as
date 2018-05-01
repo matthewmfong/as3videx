@@ -221,7 +221,7 @@ public class UserLogsProcess implements Runnable {
             line = "";
             character = "";
 
-            trace(lineCount++ + "progress: " + byteArray.position + "/" + byteArray.length + "=" + byteArray.position/byteArray.length)
+//            trace(lineCount++ + "progress: " + byteArray.position + "/" + byteArray.length + "=" + byteArray.position/byteArray.length)
 
             dispatcher.dispatchProgress(byteArray.position/byteArray.length * 100, 200);
         }
@@ -238,6 +238,7 @@ public class UserLogsProcess implements Runnable {
     }
 
     private function finish(e:SQLEvent):void {
+        db.close();
         dispatcher.dispatchResult(1);
     }
 

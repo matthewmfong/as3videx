@@ -91,29 +91,26 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
 
         userLogLoader = new UserLogsLoader();
-        userLogLoader.freezeSignal.add(
-                function userLogFreeze():void {
-//                    trace("FREEZE");
-                    progressBar.setProgress(0.8, 1);
-//                    trace("FREEZE2?")
-                }
-        );
+//        userLogLoader.freezeSignal.add(
+//                function userLogFreeze():void {
+//                    progressBar.setProgress(0.8, 1);
+//                }
+//        );
         userLogLoader.progressSignal.add(
                 function userLogProgress(current:Number, total:Number):void {
-//                    trace("PROGRESS");
-                    progressBar.setProgress(current*0.8/total, 1);
+                    progressBar.setProgress(current/total, 1);
                 }
         );
         userLogLoader.completeSignal.add(
                 function userLogComplete():void {
-//                    trace("COMPLETE");
                     progressBar.setProgress(1, 1);
-//                    startLogQueries();
-
-
-//                    removeElement(progressBar);
                 }
         );
+        userLogLoader.statusSignal.add(
+                function userLogStatus(s:String):void {
+                    progressBar.label = s;
+                }
+        )
         userLogLoader.load();
 
 

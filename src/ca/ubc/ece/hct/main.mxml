@@ -8,6 +8,11 @@
                 height="100%">
 
     <mx:Script source="myview/VidexFlex.as" />
+    <mx:Script><![CDATA[
+
+//        import com.
+
+        ]]></mx:Script>
 
     <s:Group id="titlebar"
              width="100%"
@@ -15,5 +20,6 @@
 
     <s:Group id="rootContainer"
              top="30" bottom="10" right="10" left="10" />
+
 
 </mx:Application>

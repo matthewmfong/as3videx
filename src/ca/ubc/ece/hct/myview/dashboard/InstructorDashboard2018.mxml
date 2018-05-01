@@ -35,6 +35,10 @@
                 <s:Group id="mainContent_container"
                          width="100%"
                          height="100%">
+                    <s:layout>
+                        <s:VerticalLayout />
+                    </s:layout>
+
                     <s:Panel id="activeUsers_panel" title="Active Users" width="100%" right="0" top="0">
                         <s:Scroller id="activeUsers_scroller"
                                     width="100%"
@@ -54,8 +58,9 @@
     <mx:ProgressBar id="progressBar"
                     label=""
                     width="100%"
-                    height="20"
-                    bottom="0"
+                    height="50"
+                    top = "10"
+                    bottom="10"
                     mode="{ProgressBarMode.MANUAL}"
                     minimum="0" maximum="1" />
 
