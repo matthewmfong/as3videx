@@ -22,6 +22,7 @@ import com.doublefx.as3.thread.event.ThreadFaultEvent;
 import com.doublefx.as3.thread.event.ThreadProgressEvent;
 import com.doublefx.as3.thread.event.ThreadResultEvent;
 import com.doublefx.as3.thread.event.ThreadStateEvent;
+import com.doublefx.as3.thread.util.ThreadRunnerX;
 import com.greensock.events.LoaderEvent;
 import com.greensock.loading.BinaryDataLoader;
 import com.greensock.loading.LoaderMax;
@@ -65,6 +66,7 @@ public class UserLogsLoader extends View {
     private var urlsToDownload:Array = [];
     private var currentURL:String;
     private var progress:Number;
+//    private var URLDOWNLOADINGINDEX:Number = 0;
 
 //    public var freezeSignal:Signal;
     public var completeSignal:Signal;
@@ -131,32 +133,38 @@ public class UserLogsLoader extends View {
         var i:int = 0;
 
         urlsToDownload = [];
+        var newFromDate:Date;
         for(var time:Number = newTime; time < todayDate.getTime(); time += 7 * Constants.DAYS2MILLISECONDS) {
 
-            getDataFromDate = new Date(time);
+            newFromDate = new Date(time);
             getDataToDate = new Date(time + 7 * Constants.DAYS2MILLISECONDS);
 
             var url:String ="http://" + Constants.DOMAIN + "/admin/getLogsForClass.php?" +
                     "&user_string=" + COURSE::Name +
-                    "&fromDate=" + Util.dateToISO8601(getDataFromDate) +
+                    "&fromDate=" + Util.dateToISO8601(newFromDate) +
                     "&toDate=" + Util.dateToISO8601(getDataToDate);
             urlsToDownload.push(url);
 
         }
 
+        trace("URLS TO DOWNLOAD: " + urlsToDownload.length)
+        for(var i:int = 0; i<urlsToDownload.length; i++) {
+            trace(i + ": " + urlsToDownload[i]);
+        }
+
         totalURLS = urlsToDownload.length;
 
         if(urlsToDownload.length > 0) {
-            currentURL = urlsToDownload.pop();
+            currentURL = urlsToDownload.shift();
             trace(url);
-            loader.append(new BinaryDataLoader(url,
+            loader.append(new BinaryDataLoader(currentURL,
                     {
-                        name: url,
+                        name: currentURL,
                         onComplete: loaderComplete
                     }
             ));
 
-            trace("Downloading " + getDataFromDate);
+            trace("Downloading " + currentURL);
             loader.load();
         } else {
 
@@ -164,8 +172,11 @@ public class UserLogsLoader extends View {
         }
     }
 
+
     private var _thread:IThread;
     public const extraDependencies:Vector.<String> = Vector.<String>([
+            "com.doublefx.as3.thread.util.ThreadRunnerX"
+        ,
             "flash.net.SharedObject",
             "flash.utils.ByteArray",
 
@@ -183,7 +194,8 @@ public class UserLogsLoader extends View {
             "flash.events.EventDispatcher",
             "flash.events.SQLErrorEvent",
             "flash.events.SQLEvent",
-            "flash.filesystem.File"]);
+            "flash.filesystem.File"
+    ]);
 
 
     public function userLogsLoaded(file:FZipFile):void {
@@ -192,7 +204,6 @@ public class UserLogsLoader extends View {
         byteArray.shareable = true;
 
         var dbPath:String = File.applicationStorageDirectory.resolvePath("user_logs.db").nativePath;
-
 
         Thread.DEFAULT_LOADER_INFO = FlexGlobals.topLevelApplication.loaderInfo;
         _thread = new Thread(UserLogsProcess, "complexRunnable", true, extraDependencies, Thread.DEFAULT_LOADER_INFO);
@@ -226,7 +237,7 @@ public class UserLogsLoader extends View {
 
         if(urlsToDownload.length > 0) {
 
-            currentURL = urlsToDownload.pop();
+            currentURL = urlsToDownload.shift();
 
             loader.append(new BinaryDataLoader(currentURL,
                     {

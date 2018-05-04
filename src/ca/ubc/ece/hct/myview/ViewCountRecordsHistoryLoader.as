@@ -155,7 +155,7 @@ public class ViewCountRecordsHistoryLoader extends View {
     }
 
     private var _thread:IThread;
-    public const extraDependencies:Vector.<String> = Vector.<String>(["flash.utils.ByteArray", "ca.ubc.ece.hct.myview.Util", "ca.ubc.ece.hct.myview.Constants"]);
+    public const extraDependencies:Vector.<String> = Vector.<String>(["flash.utils.ByteArray", "ca.ubc.ece.hct.myview.Util", "ca.ubc.ece.hct.myview.Constants", "com.doublefx.as3.thread.util.ThreadRunnerX"]);
 
     public function userRecordsHistoryLoaded():void {
 

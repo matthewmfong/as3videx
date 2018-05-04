@@ -42,8 +42,12 @@ import flash.system.WorkerDomain;
 import flash.utils.ByteArray;
 import flash.utils.getQualifiedClassName;
 
+import com.doublefx.as3.thread.util.ThreadRunnerX;
+
 [ExcludeClass]
 public class WorkerFactory {
+
+    public static const DUMMY:Array = [ThreadRunnerX];
 
     /**
      * Creates a Worker from a Class.
@@ -120,7 +124,8 @@ public class WorkerFactory {
                     for each (var depAbcName:String in dependencies) {
                         if (tagDoABC.abcName == depAbcName.replace(/\./g, "/")) {
                             abcTags.push(tag);
-                            // trace("Dep: " + depAbcName + " tag: " + tag.toString(0, 0x01));
+                             trace("Dep: " + depAbcName + " tag: " + tag.toString(0, 0x01));
+//                            trace(new Error().getStackTrace());
                             break;
                         }
                     }

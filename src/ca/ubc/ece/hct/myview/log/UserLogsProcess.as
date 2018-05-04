@@ -19,6 +19,7 @@ import flash.events.SQLEvent;
 import flash.net.SharedObject;
 import flash.utils.ByteArray;
 
+import com.doublefx.as3.thread.util.ThreadRunnerX;
 
 import flash.filesystem.File;
 
@@ -28,6 +29,8 @@ public class UserLogsProcess implements Runnable {
      * Mandatory declaration if you want your Worker be able to communicate.
      * This CrossThreadDispatcher is injected at runtime.
      */
+
+    private var asdf:ThreadRunnerX;
     public var dispatcher:CrossThreadDispatcher;
 
     public var orgUserRecords:Array;

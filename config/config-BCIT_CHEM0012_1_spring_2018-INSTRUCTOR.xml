@@ -16,7 +16,7 @@
 		</define>
     <define>
       <name>COURSE::Name</name>
-      <value>"BCIT_CHEM0012_1_spring_2018-INSTRUCTOR"</value>
+      <value>"BCIT_CHEM0012_1_spring_2018"</value>
     </define>
     <define>
       <name>CONFIG::Instructor</name>

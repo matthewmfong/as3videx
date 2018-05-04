@@ -9,10 +9,14 @@
 package ca.ubc.ece.hct.myview.dashboard {
 import ca.ubc.ece.hct.myview.*;
 import ca.ubc.ece.hct.myview.log.UserLogsLoader;
+import ca.ubc.ece.hct.myview.ui.UIScrollView;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 import ca.ubc.ece.hct.myview.widgets.VideoPlaylist;
 import ca.ubc.ece.hct.myview.widgets.filmstrip.Filmstrip;
+
+import com.doublefx.as3.thread.Thread;
+import com.doublefx.as3.thread.util.ThreadRunnerX;
 
 import flash.display.DisplayObjectContainer;
 
@@ -35,6 +39,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
     private var playlist:VideoPlaylist;
     private var video:VideoMetadata;
     private var playlistView:PlaylistListView;
+    private var uiscroller:UIScrollView;
 
     public static var userLogLoader:UserLogsLoader;
 
@@ -42,6 +47,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
     [Bindable]
     public var playlistView_container:SpriteVisualElement;
+    public var playlist_Panel:Panel;
 
     [Bindable]
     public var activeUsers_container:Group;
@@ -74,12 +80,14 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         super();
 
+        playlist_Panel = new Panel();
         playlistView_container = new SpriteVisualElement();
         mainContent_panel = new Panel();
         mainContent_container = new Group();
         activeUsers_container = new Group();
         activeUsers_scroller = new Scroller();
         progressBar = new ProgressBar();
+
 
     }
 
@@ -113,7 +121,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
         )
         userLogLoader.load();
 
-
         course = VideoMetadataManager.COURSE;
 
         dependentFunctionArray = [updateLatestVCRs, grabRecentMedia];
@@ -121,7 +128,12 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         grabActiveUsers();
 
-        playlistView_container.addChild(playlistView);
+        uiscroller = new UIScrollView(playlist_Panel.width, playlist_Panel.height - 20);
+        uiscroller.source = playlistView;
+
+
+        playlistView_container.addChild(uiscroller);
+        uiscroller.update();
     }
 
     private function callNextDependentFunction():void {
@@ -131,6 +143,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
     public function setPlaylist(playlist:VideoPlaylist):void {
         playlistView = new PlaylistListView();
         playlistView.drawPlaylist(playlist, 0, 0);
+
 
         playlistView.mediaClicked.add(loadVideo);
     }

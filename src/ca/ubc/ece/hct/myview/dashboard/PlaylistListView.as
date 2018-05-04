@@ -50,10 +50,12 @@ public class PlaylistListView extends View {
                 mediaText.y = yOffset += mediaText.height;
                 mediaText.video = playlist.mediaList[i];
                 textFields.push(mediaText);
+                height = mediaText.y + 20;
             }
         }
 
         addEventListener(MouseEvent.CLICK, clickedMedia, true);
+
     }
 
     private function clickedMedia(e:MouseEvent):void {

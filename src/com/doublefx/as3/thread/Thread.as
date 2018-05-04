@@ -30,7 +30,7 @@ import com.doublefx.as3.thread.event.ThreadStateEvent;
 import com.doublefx.as3.thread.namespace.thread_diagnostic;
 import com.doublefx.as3.thread.util.ClassAlias;
 import com.doublefx.as3.thread.util.ThreadDependencyHelper;
-import com.doublefx.as3.thread.util.ThreadRunner;
+import com.doublefx.as3.thread.util.ThreadRunnerX;
 import com.doublefx.as3.thread.util.WorkerFactory;
 
 import flash.display.LoaderInfo;
@@ -68,6 +68,11 @@ import org.as3commons.reflect.Type;
 [Bindable]
 public class Thread extends EventDispatcher implements IThread {
     private static const THREAD_NS:String = "com.doublefx.as3.thread.";
+
+    public static const DUMMY:Array = [ThreadRunnerX];
+
+    public static var ThreadRunnerXClass:Class;
+    public static var ThreadRunnerXClass2:Object;
 
     /**
      * The Default LoaderInfo used by all new created Thread when none is provided to its constructor.
@@ -134,7 +139,8 @@ public class Thread extends EventDispatcher implements IThread {
             THREAD_NS + "error.NotImplementedRunnableError",
             THREAD_NS + "error.IllegalStateError",
             THREAD_NS + "error.UnsupportedOperationError",
-            THREAD_NS + "util.ClassAlias"]);
+            THREAD_NS + "util.ClassAlias",
+            THREAD_NS + "util.ThreadRunnerX"]);
     }
 
     {
@@ -175,6 +181,10 @@ public class Thread extends EventDispatcher implements IThread {
      * @param workerDomain The Worker domain in which the Worker will be created, WorkerDomain.current if none is provided.
      */
     public function Thread(runnable:Class = null, name:String = null, giveAppPrivileges:Boolean = false, extraDependencies:Vector.<String> = null, loaderInfo:LoaderInfo = null, workerDomain:WorkerDomain = null):void {
+
+//        ThreadRunnerXClass = loaderInfo.applicationDomain.getDefinition("com.doublefx.as3.thread.util.ThreadRunnerX") as Class;
+//        ThreadRunnerXClass2 = getDefinitionByName("com.doublefx.as3.thread.util.ThreadRunnerX");
+
         if (WorkerDomain.isSupported) {
             _id = ++__count;
             _name = name;
@@ -202,7 +212,8 @@ public class Thread extends EventDispatcher implements IThread {
 
                     reflect(loaderInfo.applicationDomain, extraDependencies);
 
-                    _worker = WorkerFactory.getWorkerFromClass(loaderInfo, ThreadRunner, _collectedDependencies, Capabilities.isDebugger, giveAppPrivileges, workerDomain);
+
+                    _worker = WorkerFactory.getWorkerFromClass(loaderInfo, ThreadRunnerX, _collectedDependencies, Capabilities.isDebugger, giveAppPrivileges, workerDomain);
                     _worker.addEventListener(Event.WORKER_STATE, onWorkerState);
                     _worker.setSharedProperty(THREAD_NS + "name", _name);
                     _worker.setSharedProperty(THREAD_NS + "id", _id);
@@ -212,8 +223,8 @@ public class Thread extends EventDispatcher implements IThread {
 
                     _incomingChannel.addEventListener(Event.CHANNEL_MESSAGE, onMessage);
 
-                    _worker.setSharedProperty(getQualifiedClassName(ThreadRunner) + "incoming", _outgoingChannel);
-                    _worker.setSharedProperty(getQualifiedClassName(ThreadRunner) + "outgoing", _incomingChannel);
+                    _worker.setSharedProperty(getQualifiedClassName(ThreadRunnerX) + "incoming", _outgoingChannel);
+                    _worker.setSharedProperty(getQualifiedClassName(ThreadRunnerX) + "outgoing", _incomingChannel);
 
                     registerClassAliases(__internalAliasesToRegister);
                     registerClassAliases(_collectedAliasesToRegister);
@@ -248,12 +259,12 @@ public class Thread extends EventDispatcher implements IThread {
         }
 
         if (_worker && _worker.state == WorkerState.RUNNING)
-            command(_runnableClassName, ThreadRunner.REGISTER_ALIASES_METHOD, aliasesToRegister);
+            command(_runnableClassName, ThreadRunnerX.REGISTER_ALIASES_METHOD, aliasesToRegister);
         else
             callLater(function ():void {
                 const v:uint = commandInterval;
                 commandInterval = 0;
-                command(_runnableClassName, ThreadRunner.REGISTER_ALIASES_METHOD, aliasesToRegister);
+                command(_runnableClassName, ThreadRunnerX.REGISTER_ALIASES_METHOD, aliasesToRegister);
                 commandInterval = v;
                 _workerReady = true;
             });
@@ -287,7 +298,7 @@ public class Thread extends EventDispatcher implements IThread {
     private function reflect(domain:ApplicationDomain, extraDependencies:Vector.<String>):void {
         var qualifiedDefinitionName:String;
 
-        const threadRunnerClassName:String = ClassUtils.getFullyQualifiedName(ThreadRunner, true);
+        const threadRunnerClassName:String = ClassUtils.getFullyQualifiedName(ThreadRunnerX, true);
         const threadRunnerType:Type = Type.forName(threadRunnerClassName, domain);
         _collectedDependencies = ThreadDependencyHelper.collectDependencies(threadRunnerType);
 
@@ -404,7 +415,7 @@ public class Thread extends EventDispatcher implements IThread {
             trace("Thread start");
             _isStarting = true;
             callLater(function ():void {
-                command(_runnableClassName, ThreadRunner.RUN_METHOD, args);
+                command(_runnableClassName, ThreadRunnerX.RUN_METHOD, args);
             });
             _worker.start();
         }
@@ -421,7 +432,7 @@ public class Thread extends EventDispatcher implements IThread {
     private function doPause(milli:Number):void {
         if (!_isPausing && _worker && _isRunning) {
             _isPausing = true;
-            command(_runnableClassName, ThreadRunner.PAUSE_REQUESTED, null);
+            command(_runnableClassName, ThreadRunnerX.PAUSE_REQUESTED, null);
             if (milli)
                 setTimeout(resume, milli);
         }
@@ -436,7 +447,7 @@ public class Thread extends EventDispatcher implements IThread {
     private function doResume():void {
         if (!_isResuming && _worker && _isPaused) {
             _isResuming = true;
-            command(_runnableClassName, ThreadRunner.RESUME_REQUESTED, null);
+            command(_runnableClassName, ThreadRunnerX.RESUME_REQUESTED, null);
         }
     }
 
@@ -451,7 +462,7 @@ public class Thread extends EventDispatcher implements IThread {
         trace("Thread terminate");
         if (!_isTerminating && _worker && !_isTerminated) {
             _isTerminating = true;
-            command(_runnableClassName, ThreadRunner.TERMINATE_REQUESTED, null);
+            command(_runnableClassName, ThreadRunnerX.TERMINATE_REQUESTED, null);
         }
     }
 

@@ -300,7 +300,7 @@
         <compiler-options>
           <option name="resourceFilesMode" value="ResourcePatterns" />
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" />
-          <option name="additionalOptions" value="-advanced-telemetry" />
+          <option name="additionalOptions" value="-advanced-telemetry -includes com.doublefx.as3.thread.util.ThreadRunnerX  -optimize=false" />
         </compiler-options>
         <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
           <files-to-package>
@@ -334,9 +334,13 @@
         <compiler-options>
           <option name="resourceFilesMode" value="ResourcePatterns" />
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.xml" />
-          <option name="additionalOptions" value="-advanced-telemetry" />
+          <option name="additionalOptions" value="-advanced-telemetry -includes com.doublefx.as3.thread.util.ThreadRunnerX  -optimize=false" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0012-instructor-app.xml" package-file-name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0012-instructor-app.xml" package-file-name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>

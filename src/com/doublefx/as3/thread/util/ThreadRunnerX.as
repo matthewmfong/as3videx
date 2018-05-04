@@ -51,8 +51,7 @@ import mx.core.DebuggableWorker;
  * This instance will be pass to the Runnable public var dispatcher:CrossThreadDispatcher
  * in order to delegate the sending of the events to the caller Thread.
  */
-[ExcludeClass]
-public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatcher {
+public class ThreadRunnerX extends DebuggableWorker implements CrossThreadDispatcher {
 
     private static const DISPATCHER_PROPERTY:String = "dispatcher";
     public static const REGISTER_ALIASES_METHOD:String = "registerClassAliases";
@@ -67,7 +66,7 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
     private var _paused:Boolean;
     private var _callLater:Array;
 
-    public function ThreadRunner():void {
+    public function ThreadRunnerX():void {
         init();
     }
 
@@ -153,7 +152,7 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
         }
 
         try {
-            trace("ThreadRunner run");
+            trace("ThreadRunnerX run");
             func.apply(null, args);
         } catch (e:Error) {
             dispatchError(e);
@@ -208,7 +207,7 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
     }
 
     protected function terminateRequested():void {
-        trace("ThreadRunner terminateRequested");
+        trace("ThreadRunnerX terminateRequested");
         if (this.hasEventListener(ThreadActionRequestEvent.TERMINATE_REQUESTED)) {
             addEventListener(ThreadActionResponseEvent.TERMINATED, terminate);
             dispatchEvent(new ThreadActionRequestEvent(ThreadActionRequestEvent.TERMINATE_REQUESTED));
@@ -218,7 +217,7 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
     }
 
     private function terminate(e:ThreadActionResponseEvent = null):void {
-        trace("ThreadRunner terminate");
+        trace("ThreadRunnerX terminate");
         _paused = false;
         removeEventListener(ThreadActionResponseEvent.TERMINATED, terminate);
         dispatchActionResponse(new ThreadActionResponseEvent(ThreadActionResponseEvent.TERMINATED));
@@ -226,7 +225,7 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
     }
 
     private function destroyRunnable():void {
-        trace("ThreadRunner destroyRunnable");
+        trace("ThreadRunnerX destroyRunnable");
 
         _runnable[DISPATCHER_PROPERTY] = null;
         _runnable = null;
@@ -262,7 +261,7 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
                 var cls:Class = getDefinitionByName(classAlias.fullyQualifiedName) as Class;
                 registerClassAlias(classAlias.alias, cls);
             } catch (e:Error) {
-                trace("ThreadRunner registerClassAliases Error: " + e.message);
+                trace("ThreadRunnerX registerClassAliases Error: " + e.message);
             }
         }
     }
@@ -275,12 +274,12 @@ public class ThreadRunner extends DebuggableWorker implements CrossThreadDispatc
     }
 
     public function dispatchError(error:Error):void {
-        trace("ThreadRunner dispatchError: " + error.message);
+        trace("ThreadRunnerX dispatchError: " + error.message);
         _outgoingChannel.send(new ThreadFaultEvent(error));
     }
 
     public function dispatchResult(result:*):void {
-        //trace("ThreadRunner dispatchResult: " + result);
+        //trace("ThreadRunnerX dispatchResult: " + result);
         _outgoingChannel.send(new ThreadResultEvent(result));
     }
 

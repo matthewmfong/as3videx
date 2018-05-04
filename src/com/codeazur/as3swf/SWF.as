@@ -3,11 +3,14 @@
 	import com.codeazur.as3swf.data.SWFRectangle;
 	import com.codeazur.as3swf.events.SWFProgressEvent;
 	import com.codeazur.utils.StringUtils;
-	
-	import flash.utils.ByteArray;
+import com.doublefx.as3.thread.util.ThreadRunnerX;
+
+import flash.utils.ByteArray;
 
 	public class SWF extends SWFTimelineContainer
 	{
+
+        public static const DUMMY:Array = [ThreadRunnerX];
 		public var signature:String;
 		public var version:int;
 		public var fileLength:uint;
