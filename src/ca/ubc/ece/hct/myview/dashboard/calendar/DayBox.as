@@ -34,10 +34,10 @@ public class DayBox extends View {
     private function addedToStageHandler(e:Event):void {
         draw();
 
-        addEventListener(MouseEvent.ROLL_OVER,
-            function(e:MouseEvent):void {
-                trace(date);
-            });
+//        addEventListener(MouseEvent.ROLL_OVER,
+//            function(e:MouseEvent):void {
+//                trace(date);
+//            });
     }
 
     private function draw():void {

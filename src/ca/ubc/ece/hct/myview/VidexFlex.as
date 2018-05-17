@@ -38,6 +38,9 @@ private var nativeApplicationUpdater:com.riaspace.nativeApplicationUpdater.Nativ
 
 public function onCreationComplete():void {
 
+    trace(this.width + " " + this.height);
+    trace(rootContainer.width + " " + rootContainer.height);
+
     var installerType:String = "";
     if(Capabilities.os.indexOf("Mac") >= 0) {
         installerType = "dmg";

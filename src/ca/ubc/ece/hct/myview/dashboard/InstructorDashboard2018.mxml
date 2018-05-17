@@ -17,51 +17,55 @@
         import mx.controls.ProgressBarMode;
         ]]></fx:Script>
 
-    <dashboard:layout>
-        <s:VerticalLayout />
-    </dashboard:layout>
 
-    <s:HGroup width="100%" height="100%">
-        <s:Panel id="playlist_Panel" title="Videos" left="0" top="0" bottom="0" height="100%" backgroundAlpha="0">
-            <s:SpriteVisualElement id="playlistView_container" width="400" height="500"/>
-        </s:Panel>
-        <s:SkinnableContainer width="100%" height="100%" right="0" backgroundColor="blue">
-            <s:layout>
-                <s:VerticalLayout />
-            </s:layout>
-
-            <s:Panel id="mainContent_panel"
-                     title="mainContent" right="0" bottom="0" width="100%" height="100%">
-                <s:Group id="mainContent_container"
-                         width="100%"
-                         height="100%">
-                    <s:layout>
-                        <s:VerticalLayout />
-                    </s:layout>
-
-                    <s:Panel id="activeUsers_panel" title="Active Users" width="100%" right="0" top="0">
-                        <s:Scroller id="activeUsers_scroller"
-                                    width="100%"
-                                    height="150"
-                                    verticalScrollPolicy="off">
-                            <s:Group id="activeUsers_container" height="{activeUsers_scroller.height - 20}" clipAndEnableScrolling="true">
-                                <!--<chart:ColumnChart id="activeUsersChart"-->
-                                <!--showDataTips="true"-->
-                                <!--height="{activeUsers_container.height}" />-->
-                            </s:Group>
-                        </s:Scroller>
-                    </s:Panel>
-                </s:Group>
+    <s:SkinnableContainer width="100%" height="100%">
+        <s:layout>
+            <s:VerticalLayout />
+        </s:layout>
+        <s:HGroup width="100%" height="100%">
+            <s:Panel id="playlist_Panel" title="Videos" left="0" top="0" bottom="0" height="100%" backgroundAlpha="0">
+                <s:SpriteVisualElement id="playlistView_container" width="400" height="500"/>
             </s:Panel>
+            <s:SkinnableContainer width="100%" height="100%" right="0">
+                <s:layout>
+                    <s:VerticalLayout />
+                </s:layout>
+
+                <s:Panel id="mainContent_panel"
+                         title="mainContent" right="0" bottom="0" width="100%" height="100%">
+                    <s:Group id="mainContent_container"
+                             width="100%"
+                             height="100%">
+                        <s:layout>
+                            <s:VerticalLayout />
+                        </s:layout>
+
+                        <s:Panel id="activeUsers_panel" title="Active Users" width="100%" right="0" top="0">
+                            <s:Scroller id="activeUsers_scroller"
+                                        width="100%"
+                                        height="150"
+                                        verticalScrollPolicy="off">
+                                <s:Group id="activeUsers_container" height="{activeUsers_scroller.height - 20}" clipAndEnableScrolling="true">
+                                    <!--<chart:ColumnChart id="activeUsersChart"-->
+                                    <!--showDataTips="true"-->
+                                    <!--height="{activeUsers_container.height}" />-->
+                                </s:Group>
+                            </s:Scroller>
+                        </s:Panel>
+                    </s:Group>
+                </s:Panel>
+            </s:SkinnableContainer>
+        </s:HGroup>
+        <s:SkinnableContainer id="progressBar_Container" width="100%" height="50">
+            <mx:ProgressBar id="progressBar"
+                            label=""
+                            width="100%"
+                            height="50"
+                            top = "10"
+                            bottom="10"
+                            mode="{ProgressBarMode.MANUAL}"
+                            minimum="0" maximum="1" />
         </s:SkinnableContainer>
-    </s:HGroup>
-    <mx:ProgressBar id="progressBar"
-                    label=""
-                    width="100%"
-                    height="50"
-                    top = "10"
-                    bottom="10"
-                    mode="{ProgressBarMode.MANUAL}"
-                    minimum="0" maximum="1" />
+    </s:SkinnableContainer>
 
 </dashboard:InstructorDashboard2018Class>

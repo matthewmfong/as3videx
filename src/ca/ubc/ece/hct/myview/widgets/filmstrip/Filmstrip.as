@@ -12,7 +12,7 @@ import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.Colours;
 import ca.ubc.ece.hct.myview.UserData;
 import ca.ubc.ece.hct.myview.UserDataViewMode;
-import ca.ubc.ece.hct.myview.ui.FloatingTextField;
+import ca.ubc.ece.hct.myview.ui.StarlingFloatingTextField;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 
 import collections.HashMap;
@@ -56,7 +56,7 @@ public class Filmstrip extends SimpleFilmstrip {
 
 		private var playhead:Quad;
 		private var cursor:Quad;
-		protected var previewText:FloatingTextField;
+		protected var previewText:StarlingFloatingTextField;
 
 		private var timeTicks:Quad;
 		private var timeTexts:Sprite;
@@ -87,7 +87,7 @@ public class Filmstrip extends SimpleFilmstrip {
 			cursor = new Quad(2, _height);
 			cursor.touchable = false;
 
-            previewText = new FloatingTextField("00:00", new TextFormat("Arial", 10, 0xFFFFE8, "center"));//true, false, false, null, null, "center", null, null, null, 4));
+            previewText = new StarlingFloatingTextField("00:00", new TextFormat("Arial", 10, 0xFFFFE8, "center"));//true, false, false, null, null, "center", null, null, null, 4));
 
             timeTicks = new Quad(1, 1);
             timeTicks.touchable = false;
@@ -591,19 +591,19 @@ public class Filmstrip extends SimpleFilmstrip {
 //                    }
 //                }
 
-                var tickText:FloatingTextField;
+                var tickText:StarlingFloatingTextField;
                 var textFormat:TextFormat = new TextFormat("Arial", 10, 0xFFFFE8);
                 for (i = 1; i <= 2; i++) {
 
                     if(i > timeTexts.numChildren) {
 
-                        tickText = new FloatingTextField(timeInSecondsToTimeString(getTimeFromXCoordinate(_width * (i / 3))), textFormat);
+                        tickText = new StarlingFloatingTextField(timeInSecondsToTimeString(getTimeFromXCoordinate(_width * (i / 3))), textFormat);
                         tickText.touchable = false;
                         timeTexts.addChild(tickText);
 
                     } else {
 
-                        tickText = (FloatingTextField)(timeTexts.getChildAt(i - 1));
+                        tickText = (StarlingFloatingTextField)(timeTexts.getChildAt(i - 1));
                         tickText.text = timeInSecondsToTimeString(getTimeFromXCoordinate(_width * (i / 3)));
 
                     }

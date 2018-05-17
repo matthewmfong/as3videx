@@ -37,7 +37,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 //    public var minDate:Date;
 //    public var maxDate:Date;
 
-    private var video:VideoMetadata;
+    public var video:VideoMetadata;
 
     public var loader:LoaderMax;
 

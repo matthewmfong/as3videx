@@ -95,7 +95,6 @@ public class Calendar extends View {
         for(runningTime = startTime; runningTime <= endTime; runningTime += Constants.DAYS2MILLISECONDS) {
 
             date = new Date(runningTime);
-//            trace(date);
 
             var db:DayBox = new DayBox(date, 0xffffff, boxWidth, boxHeight);
 
@@ -106,7 +105,6 @@ public class Calendar extends View {
             db.addEventListener(MouseEvent.ROLL_OVER,
                     function (e:MouseEvent):void {
                         dateHoverSignal.dispatch(e.currentTarget.date);
-//                        trace(Math.floor((e.target.date.getTime() - startTime) / Constants.DAYS2MILLISECONDS));
                     });
             db.addEventListener(MouseEvent.CLICK,
                     function (e:MouseEvent):void {
@@ -115,7 +113,6 @@ public class Calendar extends View {
                             dayBoxes[i].selected = false;
                         }
                         (DayBox)(e.currentTarget).selected = true;
-//                        trace(Math.floor((e.target.date.getTime() - startTime) / Constants.DAYS2MILLISECONDS));
                     });
 
             if(today.fullYear == date.fullYear && today.month == date.month && today.date == date.date) {
@@ -189,7 +186,6 @@ public class Calendar extends View {
         for(i = 0; i<dayTexts.length; i++) {
             dayTexts[i].y = calendar.y + (boxHeight + padding) * i;
         }
-//        trace("setSize(" + w + ", " + h +"): " + boxWidth + ", " + boxHeight);
 
         calendar.graphics.clear();
         calendar.graphics.beginFill(0xdddddd);
@@ -225,7 +221,6 @@ public class Calendar extends View {
                         dayBoxes[index].setColour(Util.brighten(colour, 2));
                     }
 
-//                    trace("cal: " + date + ": " + o.count);
                     break;
                 }
             }

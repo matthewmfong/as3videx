@@ -18,7 +18,7 @@ import com.greensock.*;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import ca.ubc.ece.hct.ImageLoader;
-	import ca.ubc.ece.hct.myview.ui.FloatingTextField;
+	import ca.ubc.ece.hct.myview.ui.StarlingFloatingTextField;
 
 	import org.osflash.signals.Signal;
 
@@ -29,7 +29,7 @@ import com.greensock.*;
 		private var _video:VideoMetadata;
 		private var _showPreviewThumbnail:Boolean;
 		private var previewThumbnail:WebThumbnail;
-		private var previewText:FloatingTextField;
+		private var previewText:StarlingFloatingTextField;
 		private var seekPoint:ImageLoader;
 
 		private var redBar:Shape;
@@ -50,7 +50,7 @@ import com.greensock.*;
 			previewThumbnail = new WebThumbnail(_video.filename, 240, 240 / _video.aspectRatio);
 			previewThumbnail.y = -previewThumbnail.height - 10;
 			previewThumbnail.mouseEnabled = false
-			previewText = new FloatingTextField();
+			previewText = new StarlingFloatingTextField();
 			previewText.y = previewThumbnail.y + previewThumbnail.height - previewText.height;
 
 			seekPoint = new ImageLoader("uiimage/seekpoint.png");

@@ -321,7 +321,7 @@ public class VidexStarling extends Sprite {
         dashboard = new InstructorDashboard2018();
         dashboard.setPlaylist(VideoMetadataManager.playlist);
         flexLayer.rootContainer.addElement(dashboard);
-        dashboard.setActualSize(flexLayer.rootContainer.width, flexLayer.rootContainer.height);
+//        dashboard.setActualSize(flexLayer.rootContainer.width, flexLayer.rootContainer.height);
     }
 
 

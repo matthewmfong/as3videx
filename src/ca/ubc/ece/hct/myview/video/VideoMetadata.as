@@ -114,20 +114,24 @@ public class VideoMetadata {
      * @param userString
      * @return null if not found, or the UserData
      */
-		public function grabCrowdUserData(dataType:String, userString:String):UserData {
-			var userDataOfType:Vector.<UserData> = crowdUserData.grab(dataType);
-            if(userDataOfType == undefined) {
-				return null;
-            } else {
-				for each(var userData:UserData in userDataOfType) {
-					if(userData.userString == userString) {
-						return userData;
-					}
+	public function grabCrowdUserData(dataType:String, userString:String):UserData {
+		var userDataOfType:Vector.<UserData> = crowdUserData.grab(dataType);
+		if(userDataOfType == undefined) {
+			return null;
+		} else {
+			for each(var userData:UserData in userDataOfType) {
+				if(userData.userString == userString) {
+					return userData;
 				}
 			}
-
-			return null;
 		}
+
+		return null;
+	}
+
+	public function grabAllClassData():Vector.<UserData> {
+		return crowdUserData.grab(UserData.CLASS);
+	}
 
     /**
      * Gets the aggregate viewcounts
@@ -170,21 +174,21 @@ public class VideoMetadata {
 
 							for each(var interval:Range in highlights.intervals) {
 
-								for(var i:int = interval.start; i<interval.end + 1; i++) {
+								for (var i:int = interval.start; i < interval.end + 1; i++) {
 
-                                    if(isNaN(returnArray[i])) {
-                                        returnArray[i] = 0;
-                                    }
-                                    returnArray[i]++;
+									if (isNaN(returnArray[i])) {
+										returnArray[i] = 0;
+									}
+									returnArray[i]++;
 								}
 
-								for(var j:int = 0; j<returnArray.length; j++) {
-									if(isNaN(returnArray[j])) {
+								for (var j:int = 0; j < returnArray.length; j++) {
+									if (isNaN(returnArray[j])) {
 										returnArray[j] = 0;
 									}
 								}
 							}
-						}
+                        }
                     }
                 } else {
                     returnArray = [0];
@@ -194,6 +198,51 @@ public class VideoMetadata {
             }
 
             return returnArray;
+		}
+
+
+		public function get currentClassCrowdHighlights():Array {
+			var returnArray:Array;
+			if(_crowdUserViewCounts == null ) {
+				var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
+				if(crowdUserData != null) {
+					returnArray = [];
+					for each(var userData:UserData in crowdUserData) {
+
+						if(userData.userString.indexOf(COURSE::Name) > -1) {
+	//                            trace("user string: " + userData.userString);
+
+							var highlightColours:Array = userData.highlights.values();
+
+							for each(var highlights:Highlights in highlightColours) {
+
+								for each(var interval:Range in highlights.intervals) {
+
+									for (var i:int = interval.start; i < interval.end + 1; i++) {
+
+										if (isNaN(returnArray[i])) {
+											returnArray[i] = 0;
+										}
+										returnArray[i]++;
+									}
+
+									for (var j:int = 0; j < returnArray.length; j++) {
+										if (isNaN(returnArray[j])) {
+											returnArray[j] = 0;
+										}
+									}
+								}
+							}
+						}
+					}
+				} else {
+					returnArray = [0];
+				}
+			} else {
+				returnArray = _crowdUserViewCounts;
+			}
+
+			return returnArray;
 		}
 
 //		public function traceCrowdUserData(type:String):void {

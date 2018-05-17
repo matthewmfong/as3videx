@@ -1,6 +1,9 @@
 package ca.ubc.ece.hct.myview.dashboard {
+import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.UserData;
+import ca.ubc.ece.hct.myview.Util;
 import ca.ubc.ece.hct.myview.View;
+import ca.ubc.ece.hct.myview.ui.FloatingTextField;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 
 import flash.display.Shape;
@@ -10,6 +13,7 @@ import flash.events.MouseEvent;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import flash.text.TextFormat;
+import flash.utils.getTimer;
 
 import mx.controls.Text;
 
@@ -17,8 +21,10 @@ public class InstructorViewCountRecordSprite extends View {
 
     private var _video:VideoMetadata;
     private var viewCountRecordSprite:Sprite;
+    private var highlightSprite:Sprite;
     private var axis:Shape;
     private var cursor:Shape;
+    private var floatingTime:FloatingTextField;
     private var axisLabels:Sprite;
 
     private var aggregateVCR:Array;
@@ -33,10 +39,15 @@ public class InstructorViewCountRecordSprite extends View {
         viewCountRecordSprite = new Sprite();
         addChild(viewCountRecordSprite);
 
+        highlightSprite = new Sprite();
+        addChild(highlightSprite);
+
         cursor = new Shape();
         cursor.graphics.lineStyle(1, 0xff0000);
         cursor.graphics.moveTo(0, 0);
         cursor.graphics.lineTo(0, _height);
+
+        floatingTime = new FloatingTextField();
 
         axisLabels = new Sprite();
         addChild(axisLabels);
@@ -72,6 +83,7 @@ public class InstructorViewCountRecordSprite extends View {
             axis.graphics.lineTo(_width, i);
 
             var textfield:TextField = new TextField();
+            textfield.mouseEnabled = false;
             textfield.defaultTextFormat = new TextFormat("Arial", 10, 0x999999);
             textfield.autoSize = TextFieldAutoSize.LEFT;
             textfield.text = Math.round((_height - i)/_height*allTimeMaxViewCount).toString();
@@ -79,6 +91,7 @@ public class InstructorViewCountRecordSprite extends View {
             textfield.y = i - textfield.height;
 
             textfield = new TextField();
+            textfield.mouseEnabled = false;
             textfield.autoSize = TextFieldAutoSize.RIGHT;
             textfield.defaultTextFormat = new TextFormat("Arial", 10, 0x00ff00);
             textfield.text = Math.round((_height - i)/_height*allTimeAggregateMaxViewCount).toString();
@@ -172,19 +185,64 @@ public class InstructorViewCountRecordSprite extends View {
 //        viewCountRecordSprite.graphics.lineTo(calc, graphMaxHeight);
     }
 
+    public function drawHighlights():void {
+
+
+        var maxViewCount:Number = 1;
+        var highlightsHeight:Number = 8;
+
+        var startTime:Number = 0;
+        var endTime:Number = _video.duration;
+
+        var i:int;
+
+        var crowdHighlights:Array = _video.currentClassCrowdHighlights;
+//        trace(_video.crowdHighlights.length);
+        for(i = 0; i<crowdHighlights.length; i++) {
+            maxViewCount = Math.max(maxViewCount,crowdHighlights[i]);
+        }
+
+//        trace(crowdHighlights)
+
+        highlightSprite.graphics.clear();
+//        highlightSprite.graphics.beginFill(0x222222, 0.8);
+//        highlightSprite.graphics.drawRect(0, 0, _width, highlightsHeight);
+//        highlightSprite.graphics.endFill();
+        for(i = 0; i<crowdHighlights.length; i++) {
+            var transparency:Number = crowdHighlights[i]/maxViewCount == 0 ? 0 : (crowdHighlights[i]/maxViewCount) * 0.7 + 0.3;
+            highlightSprite.graphics.beginFill(0x00cc00, transparency);
+            highlightSprite.graphics.drawRect((i - uint(startTime))/(uint(endTime+1) - uint(startTime)) * _width, 0,
+                    (1 - uint(startTime))/(uint(endTime+1) - uint(startTime)) * _width, highlightsHeight);
+            highlightSprite.graphics.endFill();
+        }
+
+    }
+
     private function mouseMove(e:MouseEvent):void {
 
         if(!contains(cursor)) {
             addChild(cursor);
         }
 
+        if(!contains(floatingTime)) {
+            addChild(floatingTime);
+        }
+
         cursor.x = e.localX;
+        floatingTime.x = e.localX - floatingTime.width;
+        floatingTime.y = e.localY;
+
+        floatingTime.text = Util.timeInSecondsToTimeString(e.localX / _width * _video.duration);
     }
 
     private function rollOut(e:MouseEvent):void {
 
         if(contains(cursor)) {
             removeChild(cursor);
+        }
+
+        if(contains(floatingTime)) {
+            removeChild(floatingTime);
         }
     }
 }
