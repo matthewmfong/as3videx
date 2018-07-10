@@ -182,8 +182,8 @@ CONFIG::AIR {
 			keyframes = [];
 			ffprobeKeyframesStartupInfo = new NativeProcessStartupInfo();
 
-			var file:File = File.applicationDirectory.resolvePath("ffprobe");
-            // var file:File = new File("/opt/local/bin/ffprobe");
+//			var file:File = File.applicationDirectory.resolvePath("ffprobe");
+             var file:File = new File("/opt/local/bin/ffprobe");
             ffprobeKeyframesStartupInfo.executable = file;
 
             ffprobeKeyframesArgs = new Vector.<String>();
@@ -264,7 +264,8 @@ CONFIG::AIR {
 // ---------------------------------------------------------------------------------------------- //
 
 		private var ffmpegFile:File;
-		private var ffmpeg:NativeProcess;
+		private var running:Boolean = false;
+		public var ffmpeg:NativeProcess;
 		public static var numRunning:uint;
 		private var ffmpegStartupInfo:NativeProcessStartupInfo;
 		private var ffmpegArgs:Vector.<String>;
@@ -290,9 +291,16 @@ CONFIG::AIR {
 									numSequentialFrames:Number = 1,
 									callbackSignal:Signal = null):void {
 
-			// trace("Already rendering... pushing. queue length" + renderQueue.length);
+//			if(ffmpeg)
+//				trace("are we running? " + ffmpeg.running)
+//			else
+//					trace("are we running? false");
+//
+////			 trace("Already rendering... pushing. queue length" + renderQueue.length);
+//
+//			trace("RUNNING: " + running);
 
-			if(ffmpeg && ffmpeg.running) {
+			if(running) {
 				var queueObject:Object = {absolutePath:absolutePath,
 										  dimensions:dimensions,
 					keyframes:keyframes,
@@ -303,8 +311,11 @@ CONFIG::AIR {
 					callbackSignal:callbackSignal};
 //				trace("QUEUEING LOL " + callbackSignal);
 				renderQueue.push(queueObject);
-				// trace("currently rendering... pushing. queue length" + renderQueue.length);
+//				 trace("currently rendering... pushing. queue length: " + renderQueue.length + ", thumbnailID: " + thumbnailID);
 			} else {
+
+				running = true;
+
 				currentRenderObject = {absolutePath:absolutePath,
 					dimensions:dimensions,
 					keyframes:keyframes,
@@ -371,14 +382,19 @@ CONFIG::AIR {
 	            				);
 	            ffmpegStartupInfo.arguments = ffmpegArgs;
 
+				var thumbnailIDX:Number = currentRenderObject.thumbnailID;
+				var signal:Signal = currentRenderObject.callbackSignal;
+
+//				trace("1. render: " + thumbnailIDX);// + ", " + signal);
+
 	            if(!ffmpeg.running) {
-	            	
-		            // var traceString:String = "";
-		            // traceString += (ffmpegFile.nativePath);
-		            // for(var i:int = 0; i<ffmpegArgs.length; i++) {
-		            // 	traceString += (" " + ffmpegArgs[i])
-		            // }
-		           	// trace(traceString);
+//
+//		             var traceString:String = "";
+//		             traceString += (ffmpegFile.nativePath);
+//		             for(var i:int = 0; i<ffmpegArgs.length; i++) {
+//		             	traceString += (" " + ffmpegArgs[i])
+//		             }
+//		           	 trace("2. " + traceString);
 
 					// trace(video.filename);
 					this.outputHeight = uint(this.outputWidth * (dimensions.y/dimensions.x) / 2) *2;
@@ -466,6 +482,7 @@ CONFIG::AIR {
 			newBA.writeBytes(abc, 0, abc.length);
 			newBA.position = 0;
 
+//			trace("3. finish + " + currentRenderObject.thumbnailID);// + ", " + currentRenderObject.callbackSignal);
 			// totalTime += (new Date().time-startDate.time);
 			// numTimes++;
 			// trace("f = \t" + (new Date().time-startDate.time) + "ms. Average time = " + totalTime/numTimes + " " + numTimes);
@@ -475,9 +492,13 @@ CONFIG::AIR {
 			finalVideoDimensions.width = outputWidth;
 			finalVideoDimensions.height = outputHeight;
 
+//			trace(currentRenderObject.callbackSignal)
+
 //			trace("currentRenderObject.callbackSignal: " + currentRenderObject.callbackSignal);
 
+//			trace("if(" + currentRenderObject.callbackSignal + "[" + currentRenderObject.thumbnailID + "]) {");
 			if(currentRenderObject.callbackSignal) {
+//				trace("dispatched " + currentRenderObject.thumbnailID)
 				currentRenderObject.callbackSignal.dispatch(finalVideoDimensions, newBA);
 			}
 
@@ -485,8 +506,14 @@ CONFIG::AIR {
 //											 finalVideoDimensions,
 //											 0, null, 0, newBA, null, currentRenderObject.time, currentRenderObject.thumbnailID));
 
+//            trace(currentRenderObject.thumbnailID);
+//            trace(currentRenderObject.callbackSignal);
 //			trace("RENDERQUEUELENGTH: " + renderQueue.length)
+
+			running = false;
+
 			if(renderQueue.length > 0) {
+//				trace("4. SHIIIIIFFT");
 				currentRenderObject = renderQueue.shift();
 
 //				trace("NEXT: " + currentRenderObject.callbackSignal);
@@ -504,6 +531,8 @@ CONFIG::AIR {
 							currentRenderObject.callbackSignal);
 
 			}
+
+//			trace("5. exit " + ffmpeg.running);
 		}
 
 		private function findKeyframe(time:Number, keyframes:Array):Number {
@@ -579,7 +608,8 @@ CONFIG::AIR {
 
 			ffprobeDimensionsStartupInfo = new NativeProcessStartupInfo();
 
-            var file:File = File.applicationDirectory.resolvePath("ffprobe");
+//            var file:File = File.applicationDirectory.resolvePath("ffprobe");
+            var file:File = new File("/opt/local/bin/ffprobe");
             ffprobeDimensionsStartupInfo.executable = file;
 
             ffprobeDimensionsArgs = new Vector.<String>();
@@ -666,6 +696,7 @@ CONFIG::AIR {
 			var operatingSystem:String = Capabilities.os;
 	        if(operatingSystem.indexOf("Mac") >= 0) {
 				file = File.applicationDirectory.resolvePath("ffmpeg");
+                Util.chmod("", "+x", file.nativePath);
 			} else if(operatingSystem.indexOf("Windows") >= 0) {
 				file = File.applicationDirectory.resolvePath("ffmpeg.exe");
 			}

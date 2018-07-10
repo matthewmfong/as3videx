@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+    <fx:Script><![CDATA[
+        import ca.ubc.ece.hct.myview.video.VideoUtil;
+        import ca.ubc.ece.hct.myview.video.VideoUtilEvent;
+
+        import flash.geom.Rectangle;
+
+        import org.osflash.signals.Signal;
+
+
+        public var filePath:String;
+        public var duration:Number;
+        public var keyframes:Array;
+        public var dimensions:Point;
+        public var renderTimes:Array;
+        public var renderTimesCounter:Number;
+        public var renderedFrames:Array;
+        public var frame1data:ByteArray;
+        public var frame2data:ByteArray;
+        public var frame1:BitmapData;
+        public var outputDimensions1:Rectangle;
+        public var outputDimensions2:Rectangle;
+        public var frame2:BitmapData;
+
+        public var frame1callback:Signal;
+        public var frame2callback:Signal;
+
+        public function openVideo():void {
+            trace("Opening video...");
+
+            keyframes = [];
+            duration = -1;
+
+            VideoUtil.getInstance();
+
+            var file:File = new File();
+            file.addEventListener(Event.SELECT, fileChosen);
+            file.browse();
+        }
+
+        public function fileChosen(e:Event):void {
+
+            filePath = (File)(e.target).nativePath;
+
+            VideoUtil.getInstance().addEventListener(VideoUtilEvent.DURATION_LOADED, durationLoaded);
+            VideoUtil.getInstance().getDuration(filePath, true);
+            VideoUtil.getInstance().addEventListener(VideoUtilEvent.KEYFRAMES_LOADED, keyframesLoaded);
+            VideoUtil.getInstance().getKeyframes(filePath, true);
+            VideoUtil.getInstance().addEventListener(VideoUtilEvent.DIMENSIONS_LOADED, dimensionsLoaded);
+            VideoUtil.getInstance().getDimensions(filePath, true);
+        }
+
+        public function dimensionsLoaded(e:VideoUtilEvent):void {
+
+            dimensions = new Point(e.dimensions.width, e.dimensions.height);
+
+            if (isVideoLoaded()) {
+                launch();
+            }
+        }
+
+        public function durationLoaded(e:VideoUtilEvent):void {
+
+            duration = e.duration;
+
+            if (isVideoLoaded()) {
+                launch();
+            }
+        }
+
+        public function keyframesLoaded(e:VideoUtilEvent):void {
+
+            keyframes = e.keyframes;
+
+            if (isVideoLoaded()) {
+                launch();
+            }
+        }
+
+        public function isVideoLoaded():Boolean {
+            if (keyframes.length > 0 && duration > 0 && dimensions) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public function launch():void {
+
+            frame1callback = new Signal(Rectangle, ByteArray);
+            frame2callback = new Signal(Rectangle, ByteArray);
+            frame1callback.add(frame1Finished);
+            frame2callback.add(frame2Finished);
+
+            renderTimes = [];
+            for (var i:int = 0; i < duration; i++) {
+                renderTimes.push(i);
+            }
+
+            renderTimesCounter = 1;
+            render2Frames(renderTimes[0], renderTimes[1]);
+
+
+        }
+
+        public function render2Frames(t1:Number, t2:Number):void {
+
+            trace("render: " + t1 + ", " + t2);
+
+
+            renderFrame(t1, frame1callback);
+            renderFrame(t2, frame2callback);
+
+        }
+
+        public function frame1Finished(dimensions:Rectangle, data:ByteArray):void {
+
+//            trace("frame1Done");
+
+            frame1data = data;
+
+            this.outputDimensions1 = dimensions;
+
+            frame1 = new BitmapData(outputDimensions1.width, outputDimensions1.height, false);
+            frame1.lock();
+            frame1.setPixels(new Rectangle(0, 0, outputDimensions1.width, outputDimensions1.height), frame1data);
+            frame1.unlock();
+
+            if (bothFramesFinished()) {
+                compare();
+            }
+
+        }
+
+        public function frame2Finished(dimensions:Rectangle, data:ByteArray):void {
+
+//            trace("frame2Done");
+
+            frame2data = data;
+
+            this.outputDimensions2 = dimensions;
+
+            frame2 = new BitmapData(outputDimensions2.width, outputDimensions2.height, false);
+            frame2.lock();
+            frame2.setPixels(new Rectangle(0, 0, outputDimensions2.width, outputDimensions2.height), frame2data);
+            frame2.unlock();
+
+
+            if (bothFramesFinished()) {
+                compare();
+            }
+        }
+
+        public function bothFramesFinished():Boolean {
+            if (frame1data && frame2data) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public function compare():void {
+
+            var diffsum:Number = 0;
+
+            for (var i:int = 0; i < frame1.width; i++) {
+
+                for (var j:int = 0; j < frame1.height; j++) {
+
+                    var pixel:Number = frame1.getPixel(i, j);
+                    var pixel2:Number = frame2.getPixel(i, j);
+
+                    var r1:Number = pixel << 16;
+                    var g1:Number = pixel & 0xff00 << 8;
+                    var b1:Number = pixel & 0xff;
+
+                    var r2:Number = pixel2 << 16;
+                    var g2:Number = pixel2 & 0xff00 << 8;
+                    var b2:Number = pixel2 & 0xff;
+
+                    var rdiff:Number = Math.abs(r1 - r2);
+                    var gdiff:Number = Math.abs(g1 - g2);
+                    var bdiff:Number = Math.abs(b1 - 2);
+
+                    diffsum += (rdiff + gdiff + bdiff);
+
+                }
+
+            }
+
+            trace(Util.millisecondsToHMS(renderTimes[renderTimesCounter - 1] * 1000) + " -- " + diffsum/1000);
+
+
+            frame1data = null;
+            frame2data = null;
+
+
+            if (renderTimesCounter + 1 < renderTimes.length) {
+                render2Frames(renderTimes[renderTimesCounter], renderTimes[++renderTimesCounter]);
+            }
+
+        }
+
+        public function renderFrame(time:Number, callbackSignal:Signal):void {
+//            trace("vu.renderFrame(" + time + ")");
+
+            VideoUtil.getInstance().renderFrame(filePath, dimensions, keyframes, time, 100, time, true, true, 1, callbackSignal);
+        }
+        ]]></fx:Script>
+    <s:Button id="open_Button" label="Open video..." click="openVideo()"/>
+</s:WindowedApplication>

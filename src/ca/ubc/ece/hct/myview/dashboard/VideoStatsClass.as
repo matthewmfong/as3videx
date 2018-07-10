@@ -280,6 +280,10 @@ public class VideoStatsClass extends SkinnableContainer {
     private function vcrMouseMove(e:MouseEvent):void {
         thumb.seekNormalized(e.localX/viewCountRecordSprite.width, true, true);
         captionSeek(e.localX/viewCountRecordSprite.width * _video.duration);
+
+        for each(var vcr:ViewCountRecordSprite in individualViewCountRecordSprites) {
+            vcr.seek(e.localX/viewCountRecordSprite.width);
+        }
     }
 
     private function vcrClick(e:MouseEvent):void {
@@ -323,8 +327,6 @@ public class VideoStatsClass extends SkinnableContainer {
 
         cal.maxCount = vcrLoader.dailyRecordMaxCount;
         cal.updateDailyRecordCount(vcrLoader.dailyRecordCount);
-
-        trace(usernames.length + "ASDLAJDSLKD")
 
         for(i = 0; i<usernames.length; i++) {
             var vcrSprite:ViewCountRecordSprite = new ViewCountRecordSprite(usernames[i]);
@@ -501,6 +503,7 @@ import ca.ubc.ece.hct.myview.widgets.filmstrip.FilmstripHighlight;
 import collections.HashMap;
 
 import flash.display.GradientType;
+import flash.display.Shape;
 
 import flash.display.Sprite;
 import flash.geom.Matrix;
@@ -511,10 +514,18 @@ class ViewCountRecordSprite extends Sprite {
     public var _height:Number;
     public var username:String;
     private var highlightSprite:Sprite;
+    private var seekLine:Shape;
+
     public function ViewCountRecordSprite(username:String) {
         this.username = username;
         highlightSprite = new Sprite();
         addChild(highlightSprite);
+
+    }
+
+    public function seek(percentage:Number):void {
+
+        seekLine.x = _width * percentage;
     }
 
     public function drawViewCountRecord(viewCountRecord:Array,
@@ -527,6 +538,12 @@ class ViewCountRecordSprite extends Sprite {
 
         _width = width;
         _height = height;
+
+        seekLine = new Shape();
+        seekLine.graphics.lineStyle(1, 0xff0000);
+        seekLine.graphics.lineTo(0, _height);
+        addChild(seekLine);
+
 
         var startTime:Number = 0;
         var endTime:Number = video.duration;
