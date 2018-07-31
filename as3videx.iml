@@ -231,7 +231,7 @@
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
               <dependency linkage="Merged" />
             </entry>
-            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
+            <entry module-name="feathers" build-configuration-name="feathers">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -487,10 +487,6 @@
     <orderEntry type="library" exported="" name="flash_components" level="project" />
     <orderEntry type="library" exported="" name="starling" level="project" />
     <orderEntry type="library" exported="" name="TopcoatLightMobileTheme" level="project" />
-    <orderEntry type="library" exported="" name="Axiis" level="project" />
-    <orderEntry type="library" exported="" name="DegrafaLibrary" level="project" />
-    <orderEntry type="library" exported="" name="AxiisLibrary" level="project" />
-    <orderEntry type="library" exported="" name="flare" level="project" />
-    <orderEntry type="module" module-name="FeathersLIb" exported="" />
+    <orderEntry type="module" module-name="feathers" exported="" />
   </component>
 </module>
