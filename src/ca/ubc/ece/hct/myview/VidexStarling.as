@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////
+/////////////////////////////////import ca.ubc.ece.hct.myview.Constants; ///////////////////////////////////////
 //                                                                    //
 //  Author: Matthew Fong                                              //
 //          Human Communication Laboratories - http://hct.ece.ubc.ca  //
@@ -8,12 +8,14 @@
 
 package ca.ubc.ece.hct.myview {
 
+import ca.ubc.ece.hct.main;
+import ca.ubc.ece.hct.myview.dashboard.InstructorDashboard2018;
+import ca.ubc.ece.hct.myview.dashboard.InstructorDashboard2018Class;
 import ca.ubc.ece.hct.myview.setup.Setup;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 import ca.ubc.ece.hct.myview.widgets.StarlingVideoPlayerView;
 import ca.ubc.ece.hct.myview.widgets.VideoPlaylistView;
-import ca.ubc.ece.hct.myview.widgets.filmstrip.ViewCountRecord;
 
 import com.greensock.*;
 
@@ -31,16 +33,14 @@ import flash.filesystem.File;
 import flash.geom.Rectangle;
 import flash.net.SharedObject;
 import flash.utils.Timer;
-import flash.utils.getTimer;
 
 import org.osflash.signals.natives.NativeSignal;
 
+import spark.components.Panel;
+
 import starling.core.Starling;
-import starling.display.Canvas;
 import starling.display.Sprite;
 import starling.events.ResizeEvent;
-import starling.events.TouchEvent;
-import starling.geom.Polygon;
 import starling.text.TextField;
 import starling.text.TextFieldAutoSize;
 import starling.text.TextFormat;
@@ -52,6 +52,7 @@ public class VidexStarling extends Sprite {
     public var rootPlaylistView:VideoPlaylistView;
     public var playerView:StarlingVideoPlayerView;
     public var recordsVisualizer:UserRecordsVisualizer;
+    public var dashboard:InstructorDashboard2018;
     public var course:Course;
 
     private var consent_so:SharedObject;
@@ -74,6 +75,8 @@ public class VidexStarling extends Sprite {
 
     public static var assets:AssetManager;
 
+    public static var flexLayer:main;
+
     public function VidexStarling() {
 
         assets = new AssetManager();
@@ -92,6 +95,19 @@ public class VidexStarling extends Sprite {
         assets.enqueue(File.applicationDirectory.resolvePath("uiimage/globalviewcount.png"));
         assets.enqueue(File.applicationDirectory.resolvePath("uiimage/instructor_view_mode_active.png"));
         assets.enqueue(File.applicationDirectory.resolvePath("uiimage/instructor_view_mode.png"));
+
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/caution_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/caution_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/puzzle_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/puzzle_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/question_mark_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/question_mark_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/star_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/star_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/tag_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/tag_light.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/thumbs_up_dark.png"));
+        assets.enqueue(File.applicationDirectory.resolvePath("ui/tags/thumbs_up_light.png"));
 
         assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/playerbar/cc_off.png"), "playerBarCCOff");
         assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/playerbar/cc_on.png"), "playerBarCCOn");
@@ -185,7 +201,7 @@ public class VidexStarling extends Sprite {
         toolbar = new Header();
         toolbar.title = course.code;
         toolbar.width = stage.stageWidth;
-        toolbar.height = 30;
+        toolbar.height = Constants.TITLEBAR_HEIGHT;
         addChild(toolbar);
         toolbar.alpha = 0;
         TweenLite.to(toolbar, 1, {alpha: 1});
@@ -209,6 +225,8 @@ public class VidexStarling extends Sprite {
     }
 
     public function loadSetup():void {
+
+        course = VideoMetadataManager.COURSE; // after loading the course from the server, it will get start and end dates too.
 
         if ((consent_so.size == 0 /* s.o. didn't exist */ || consent_so.data.consent == false) &&
                 CONFIG::Instructor == false) {
@@ -278,12 +296,14 @@ public class VidexStarling extends Sprite {
 //
 //                playerView = new StarlingVideoPlayerView();
                 if(CONFIG::Instructor) {
-                    recordsVisualizer = new UserRecordsVisualizer(stage.stageWidth, stage.stageHeight - toolbar.height);
+//                    recordsVisualizer = new UserRecordsVisualizer(stage.stageWidth, stage.stageHeight - toolbar.height);
                     instructorButton = new Button();
                     instructorButton.label = "Instructor Mode";
                     instructorButton.addEventListener(MouseEvent.CLICK, instructorMode);
                     instructorButton.x = stage.stageWidth - instructorButton.width - 10;
                     Starling.current.nativeOverlay.addChild(instructorButton);
+
+                    instructorMode();
                 }
 
                 //			trace(VideoMetadataManager.getVideo("21-Arrays_I_VGA_10fps_keyint10_64kbps.mp4"));
@@ -296,8 +316,12 @@ public class VidexStarling extends Sprite {
 
     }
 
-    public function instructorMode(e:MouseEvent):void {
+    public function instructorMode(e:MouseEvent = null):void {
         popRootPlaylist();
+        dashboard = new InstructorDashboard2018();
+        dashboard.setPlaylist(VideoMetadataManager.playlist);
+        flexLayer.rootContainer.addElement(dashboard);
+//        dashboard.setActualSize(flexLayer.rootContainer.width, flexLayer.rootContainer.height);
     }
 
 
@@ -363,6 +387,7 @@ public class VidexStarling extends Sprite {
 //        addChild(rootPlaylistView);
         rootPlaylistView.touchable = true;
         rootPlaylistView.alpha = 1;
+        pushView(rootPlaylistView);
         Starling.current.nativeOverlay.removeChild(backButton);
         rootPlaylistView.setSize(stage.stageWidth - 20, stage.stageHeight - toolbar.height - 20);
 
@@ -370,9 +395,11 @@ public class VidexStarling extends Sprite {
     }
 
     public function popRootPlaylist():void {
-        if(rootPlaylistView.alpha > 0) {
+        if(rootPlaylistView.touchable) {
             rootPlaylistView.touchable = false;
             rootPlaylistView.alpha = 0;
+
+            removeChild(rootPlaylistView);
         }
 //        if(rootPlaylistView && contains(rootPlaylistView)) {
 //            removeChild(rootPlaylistView);
@@ -422,6 +449,10 @@ public class VidexStarling extends Sprite {
 
         if(playerView && contains(playerView)) {
             playerView.setSize(stage.stageWidth - 10, stage.stageHeight - toolbar.height - 10);
+        }
+
+        if(dashboard) {
+            dashboard.setActualSize(stage.stageWidth - 10, stage.stageHeight - toolbar.height - 10);
         }
 
 //        if(!resizeTimer) {

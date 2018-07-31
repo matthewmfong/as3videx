@@ -29,6 +29,10 @@ import flash.utils.ByteArray;
 
 	public class VideoMetadataManager {
 
+		public static var COURSE:Course;
+
+//        public static function get COURSE():Course { trace(new Error().getStackTrace()); return _COURSE; }
+//        public static function set COURSE(c:Course):void { trace(new Error().getStackTrace()); _COURSE = c; }
 		public static var videos:HashMap = new HashMap();
 		public static var playlist:VideoPlaylist;
 		public static const videosFolder:String = "videos";
@@ -82,6 +86,7 @@ import flash.utils.ByteArray;
 	                                      courseTerm:String,
 	                                      courseYear:String,
 	                                      userID:String = null):Signal {
+			COURSE = new Course(school, courseCode, courseCode, courseTerm, courseYear);
 	    	ServerDataLoader.getCourse(school, courseCode, courseSection, courseTerm, courseYear, userID).add(courseJSONLoaded);
 	    	return courseLoaded;
 	    }
@@ -94,8 +99,21 @@ import flash.utils.ByteArray;
 			return videos.values();
 		}
 
+		public static function getAllMediaAliasIDs():Array {
+			var media_alias_ids:Array = [];
+            for each(var v:VideoMetadata in videos.values()) {
+                media_alias_ids.push(v.media_alias_id);
+            }
+
+			return media_alias_ids;
+		}
+
 		private static function courseJSONLoaded(object:Object):void {
 			var obj:* = JSON.parse((String)(object));
+
+            COURSE.startDate = Util.dateParser(obj['start_date']);
+            COURSE.endDate = Util.dateParser(obj['end_date']);
+
 			playlist = parsePlaylist(obj, "\t");
 			playlist.listName = "root";
 
@@ -263,6 +281,9 @@ import flash.utils.ByteArray;
 
 						if(!videos.containsKey(video.toString()))
 							videos.put(video.toString(), video);
+
+						if(verbose)
+							trace(video.toString());
 
 						playlist = insertIntoPlaylist(playlist, videos.grab(video.toString()));
 						break;

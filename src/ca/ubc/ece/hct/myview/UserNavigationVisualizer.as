@@ -9,7 +9,7 @@ package ca.ubc.ece.hct.myview {
 import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.Constants;
 import ca.ubc.ece.hct.myview.View;
-import ca.ubc.ece.hct.myview.ui.FloatingTextField;
+import ca.ubc.ece.hct.myview.ui.StarlingFloatingTextField;
 import ca.ubc.ece.hct.myview.ui.UIScrollView;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
@@ -452,7 +452,7 @@ public class UserNavigationVisualizer extends View  {
 //
 //        var textFormat:TextFormat = new TextFormat("Arial", 10, 0xFFFFE8, true, false, false, null, null, "center", null, null, null, 4);
 //        for(var i:int = 1; i<3; i++) {
-//            var tickText:FloatingTextField = new FloatingTextField(timeInSecondsToTimeString(getTimeFromXCoordinate(_width*(i/3))), textFormat);
+//            var tickText:StarlingFloatingTextField = new StarlingFloatingTextField(timeInSecondsToTimeString(getTimeFromXCoordinate(_width*(i/3))), textFormat);
 //
 //            tickText.x = _width*(i/3) - tickText.width/2;
 //            tickText.y = _height - tickText.height - 10;

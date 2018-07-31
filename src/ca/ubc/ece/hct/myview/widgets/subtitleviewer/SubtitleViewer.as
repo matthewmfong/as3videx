@@ -10,7 +10,7 @@ package ca.ubc.ece.hct.myview.widgets.subtitleviewer {
 
 import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.Colours;
-import ca.ubc.ece.hct.myview.HighlightCallout;
+import ca.ubc.ece.hct.myview.AnnotationCallout;
 import ca.ubc.ece.hct.myview.Util;
 import ca.ubc.ece.hct.myview.ui.SearchBar;
 import ca.ubc.ece.hct.myview.widgets.player.PlayerEvent;

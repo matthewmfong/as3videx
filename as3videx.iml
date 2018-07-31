@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="VidexDev">
     <configurations>
-      <configuration name="VidexDev" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/VidexDev">
+      <configuration name="VidexDev" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/VidexDev" skip-build="true">
         <dependencies target-player="23.0">
           <entries>
             <entry library-name="feathers" library-level="project">
@@ -35,9 +35,6 @@
       <configuration name="BCIT_CHEM0011_1_winter_2017" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -48,6 +45,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -62,12 +62,9 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" skip-build="true">
+      <configuration name="BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017-INSTRUCTOR" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -78,6 +75,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -95,9 +95,6 @@
       <configuration name="BCIT_CHEM1121_1_winter_2017" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -108,6 +105,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -125,9 +125,6 @@
       <configuration name="BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1121_1_winter_2017-INSTRUCTOR" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -138,6 +135,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -189,9 +189,6 @@
       <configuration name="BCIT_CHEM0011_1_winter_2017_TEST" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2017_TEST" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -202,6 +199,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -216,12 +216,9 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018">
+      <configuration name="BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -232,6 +229,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -246,12 +246,9 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018">
+      <configuration name="BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018" skip-build="true">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -262,6 +259,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -276,12 +276,9 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+      <configuration name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -292,6 +289,9 @@
               <dependency linkage="Merged" />
             </entry>
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
               <dependency linkage="Merged" />
             </entry>
           </entries>
@@ -300,18 +300,19 @@
         <compiler-options>
           <option name="resourceFilesMode" value="ResourcePatterns" />
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.xml" />
-          <option name="additionalOptions" value="-advanced-telemetry" />
+          <option name="additionalOptions" value="-advanced-telemetry -includes com.doublefx.as3.thread.util.ThreadRunnerX  -optimize=false" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+      <configuration name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
         <dependencies>
           <entries>
-            <entry library-name="feathers" library-level="project">
-              <dependency linkage="Merged" />
-            </entry>
             <entry library-name="flash" library-level="project">
               <dependency linkage="Merged" />
             </entry>
@@ -324,19 +325,26 @@
             <entry library-name="TopcoatLightMobileTheme" library-level="project">
               <dependency linkage="Merged" />
             </entry>
+            <entry module-name="FeathersLIb" build-configuration-name="FeathersLIb">
+              <dependency linkage="Merged" />
+            </entry>
           </entries>
           <sdk name="Flex" />
         </dependencies>
         <compiler-options>
           <option name="resourceFilesMode" value="ResourcePatterns" />
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.xml" />
-          <option name="additionalOptions" value="-advanced-telemetry" />
+          <option name="additionalOptions" value="-advanced-telemetry -includes com.doublefx.as3.thread.util.ThreadRunnerX  -optimize=false" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0012-instructor-app.xml" package-file-name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0012-instructor-app.xml" package-file-name="BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018">
+      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -353,7 +361,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR">
+      <configuration name="patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0011_1_spring_2018-INSTRUCTOR" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -370,7 +378,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018">
+      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -387,7 +395,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR">
+      <configuration name="patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="install_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_BCIT_CHEM0012_1_spring_2018-INSTRUCTOR" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -404,7 +412,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/ViDeX_Demo">
+      <configuration name="ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.Videx" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/ViDeX_Demo" skip-build="true">
         <dependencies>
           <entries>
             <entry library-name="feathers" library-level="project">
@@ -434,7 +442,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="patcher_ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="patcher_ViDeX_Demo.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_ViDeX_Demo">
+      <configuration name="patcher_ViDeX_Demo" target-platform="Desktop" main-class="ca.ubc.ece.hct.PatcherMain" output-file="patcher_ViDeX_Demo.swf" output-folder="$MODULE_DIR$/../bin/builds/patcher_ViDeX_Demo" skip-build="true">
         <dependencies>
           <sdk name="Flex" />
         </dependencies>
@@ -448,6 +456,18 @@
             <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
           </files-to-package>
         </packaging-air-desktop>
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+      <configuration name="SlideDetector" target-platform="Desktop" main-class="ca.ubc.ece.hct.myview.SlideDetector" output-file="SlideDetector.swf" output-folder="$MODULE_DIR$/../bin/builds/SlideDetector">
+        <dependencies>
+          <sdk name="Flex" />
+        </dependencies>
+        <compiler-options>
+          <option name="resourceFilesMode" value="ResourcePatterns" />
+          <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-SlideDetector.xml" />
+        </compiler-options>
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="SlideDetector" />
         <packaging-android />
         <packaging-ios />
       </configuration>
@@ -467,5 +487,10 @@
     <orderEntry type="library" exported="" name="flash_components" level="project" />
     <orderEntry type="library" exported="" name="starling" level="project" />
     <orderEntry type="library" exported="" name="TopcoatLightMobileTheme" level="project" />
+    <orderEntry type="library" exported="" name="Axiis" level="project" />
+    <orderEntry type="library" exported="" name="DegrafaLibrary" level="project" />
+    <orderEntry type="library" exported="" name="AxiisLibrary" level="project" />
+    <orderEntry type="library" exported="" name="flare" level="project" />
+    <orderEntry type="module" module-name="FeathersLIb" exported="" />
   </component>
 </module>

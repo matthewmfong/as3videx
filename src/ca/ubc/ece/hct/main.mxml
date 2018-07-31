@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                       xmlns:mx="library://ns.adobe.com/flex/mx"
+                       xmlns:s="library://ns.adobe.com/flex/spark"
+                       creationComplete="onCreationComplete()"
+                       showStatusBar="false">
+
+    <fx:Script source="myview/VidexFlex.as" />
+    <fx:Script><![CDATA[ ]]></fx:Script>
+
+    <s:layout>
+        <s:BasicLayout/>
+    </s:layout>
+
+    <s:SkinnableContainer id="titlebar"
+                          width="100%"
+                          height="{Constants.TITLEBAR_HEIGHT}" />
+
+    <s:SkinnableContainer id="rootContainer"
+                          top="{titlebar.height}"
+                          bottom="0"
+                          left="5"
+                          right="5" />
+
+
+</s:WindowedApplication>

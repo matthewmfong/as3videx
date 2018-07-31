@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" filepath="$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" />
       <module fileurl="file://$PROJECT_DIR$/as3videx.iml" filepath="$PROJECT_DIR$/as3videx.iml" />
     </modules>
   </component>

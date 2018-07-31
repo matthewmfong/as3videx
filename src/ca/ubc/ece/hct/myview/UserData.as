@@ -24,10 +24,12 @@ public class UserData {
 
 		public var userString:String;
 		public var viewCountRecord:Array;
+		// TODO: aside from setting VCR via set view_count_record, maxViewCount must be manually specified =\
 		public var maxViewCount:Number;
 		public var pauseRecord:Array;
 		public var playbackRateRecord:Array;
 		public var highlights:HashMap;
+		public var tags:Vector.<KeywordTag>;
 		
 		public function UserData() {
 
@@ -35,10 +37,12 @@ public class UserData {
 			pauseRecord = [];
 			playbackRateRecord = [];
 			highlights = new HashMap();
+			tags = new Vector.<KeywordTag>();
 			maxViewCount = 0;
 
 		}
 
+		// TODO: Somehow specify that this is only good for database input (view_count_record is the db field name)
 		public function set view_count_record(s:String):void {
 			if(s != null) {
 				var vcr:Array = s.split(",");
@@ -349,6 +353,12 @@ public class UserData {
 				retString += highlight.getString() + "\n";
 			}
 			return retString;
+		}
+
+		public function addTag(string:String, range:Range, colour:uint):void {
+
+			tags.push(new KeywordTag(string, range, colour));
+
 		}
 	}
 }

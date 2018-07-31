@@ -4,7 +4,7 @@
 package ca.ubc.ece.hct.myview.widgets.subtitleviewer {
 import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.Colours;
-import ca.ubc.ece.hct.myview.HighlightCallout;
+import ca.ubc.ece.hct.myview.AnnotationCallout;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.widgets.StarlingWidget;
 import ca.ubc.ece.hct.myview.widgets.Widget;
@@ -171,19 +171,31 @@ public class StarlingCaptionViewer extends StarlingWidget {
 
         TouchProcessor.PROCESS_TARGETS_WHILE_MOVING = false;
 
-        highlightCallout = HighlightCallout.showCallout(
+        highlightCallout = AnnotationCallout.showCallout(
                 mouseLocation,
                 Colours.colours,
                 nativeSubtitleViewer.svm.video.userData.getHighlightedColoursforTimeRange(selectionRange),
                 this);
 
-        (HighlightCallout)(highlightCallout.content).highlightSignal.add(
+        (AnnotationCallout)(highlightCallout.content).highlightSignal.add(
                 function highlightme(colour:uint, mode:String):void {
-                    if(mode == HighlightCallout.ADD_HIGHLIGHT_MODE) {
-                        highlighted.dispatch(HighlightCallout.caller, colour, selectionRange);
+                    if(mode == AnnotationCallout.ADD_HIGHLIGHT_MODE) {
+                        highlighted.dispatch(AnnotationCallout.caller, colour, selectionRange);
                         highlightCallout.close(true);
-                    } else if(mode == HighlightCallout.DEL_HIGHLIGHT_MODE) {
-                        unhighlighted.dispatch(HighlightCallout.caller, colour, selectionRange);
+                    } else if(mode == AnnotationCallout.DEL_HIGHLIGHT_MODE) {
+                        unhighlighted.dispatch(AnnotationCallout.caller, colour, selectionRange);
+                    }
+                    drawCacheView();
+                }
+        );
+
+        (AnnotationCallout)(highlightCallout.content).keywordTagSignal.add(
+                function tagme(colour:uint, mode:String):void {
+                    if(mode == AnnotationCallout.ADD_HIGHLIGHT_MODE) {
+                        highlighted.dispatch(AnnotationCallout.caller, colour, selectionRange);
+                        highlightCallout.close(true);
+                    } else if(mode == AnnotationCallout.DEL_HIGHLIGHT_MODE) {
+                        unhighlighted.dispatch(AnnotationCallout.caller, colour, selectionRange);
                     }
                     drawCacheView();
                 }
@@ -192,9 +204,9 @@ public class StarlingCaptionViewer extends StarlingWidget {
         highlightCallout.addEventListener(Event.CLOSE,
             function calloutClosed(e:Event):void {
                 nativeSubtitleViewer.deselect();
-//                trace(HighlightCallout.caller);
-//                trace(HighlightCallout.caller is StarlingWidget);
-                deselected.dispatch(HighlightCallout.caller);
+//                trace(AnnotationCallout.caller);
+//                trace(AnnotationCallout.caller is StarlingWidget);
+                deselected.dispatch(AnnotationCallout.caller);
                 highlightCallout.removeEventListener(Event.CLOSE, calloutClosed);
             }
         );

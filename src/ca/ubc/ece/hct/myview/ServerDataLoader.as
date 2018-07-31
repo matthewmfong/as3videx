@@ -31,12 +31,13 @@ public class ServerDataLoader {
 
         public static const GET_VCR_PAGE:String = "getCrowdVCRs.php";
 		public static const GET_CROWD_HIGHLIGHTS_PAGE:String = "getCrowdHighlights.php";
+		public static const QUERY_PAGE:String = "admin/query.php";
 		private static var queue:LoaderMax = new LoaderMax( { name: "WebLoaderQueue", auditSize:false, autoLoad:true } );
 
 		public static function login(userID:String):Signal {
 			var signal:Signal = new Signal(Object);
 			queue.append(
-				new DataLoader("http://" + Constants.DOMAIN + "/" + LOGIN_PAGE + "?" + 
+				new DataLoader("http://" + Constants.DOMAIN + "/" + LOGIN_PAGE + "?" +
 							   "user=" + userID,
 							   {signal: signal,
 						   	onComplete: requestComplete }));
@@ -220,8 +221,64 @@ public class ServerDataLoader {
             return signal;
 		}
 
+		public static function getVCRsForMediaAliasID(media_alias_id:String):Signal {
+
+            trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+                    "media_alias_id=" + media_alias_id + "&user_string=" + COURSE::Name);
+            var signal:Signal = new Signal(Object);
+            queue.append(
+                    new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+                            "media_alias_id=" + media_alias_id + "&user_string=" + COURSE::Name,
+                            {signal: signal,
+                                onComplete: requestComplete }));
+            queue.load();
+            return signal;
+		}
+
+		public static function getVCRsForMediaAliasIDs(media_alias_ids:String):Signal {
+
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+					"media_alias_ids=" + media_alias_ids + "&user_string=" + COURSE::Name);
+			var signal:Signal = new Signal(Object);
+			queue.append(
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?vcr&" +
+							"media_alias_ids=" + media_alias_ids + "&user_string=" + COURSE::Name,
+							{signal: signal,
+								onComplete: requestComplete }));
+			queue.load();
+			return signal;
+		}
+
+		public static function getActiveUsers():Signal {
+
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&user_string=" + COURSE::Name);
+			var signal:Signal = new Signal(Object);
+			queue.append(
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?active_users&user_string=" + COURSE::Name,
+							{signal: signal,
+								onComplete:requestComplete }));
+			queue.load();
+			return signal;
+		}
+
+		public static function getRecentMedia(from:Date, to:Date):Signal {
+            trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
+					"&from=" + Util.dateToISO8601(from) +
+					"&to=" + Util.dateToISO8601(to));
+
+            var signal:Signal = new Signal(Object);
+            queue.append(
+                    new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
+																								"&from=" + Util.dateToISO8601(from) +
+																								"&to=" + Util.dateToISO8601(to),
+                            {signal: signal,
+                                onComplete: requestComplete }));
+            queue.load();
+            return signal;
+		}
+
 		public static function requestComplete(e:LoaderEvent):void {
-//			 trace(e.target.content);
+//			trace("Target content: " + e.target.content);
 			(Signal)(e.target.vars.signal).dispatch(e.target.content);
 		}
 	}

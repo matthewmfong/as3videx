@@ -20,7 +20,7 @@ import com.greensock.*;
 
 	import org.osflash.signals.Signal;
 	
-	import ca.ubc.ece.hct.myview.ui.FloatingTextField;
+	import ca.ubc.ece.hct.myview.ui.StarlingFloatingTextField;
 	import ca.ubc.ece.hct.myview.widgets.filmstrip.FilmstripHighlight;
 	import ca.ubc.ece.hct.myview.common.CaptionView;
 	import ca.ubc.ece.hct.myview.widgets.subtitleviewer.Cue;
@@ -82,7 +82,7 @@ import com.greensock.*;
 
 		private var highlightSprite:Sprite;
 
-		private var previewText:FloatingTextField;
+		private var previewText:StarlingFloatingTextField;
 
 		private var logTimer:Timer;
 
@@ -189,7 +189,7 @@ import com.greensock.*;
 			addEventListener(MouseEvent.MOUSE_UP, mouseUp);
 			thumbnailContainer.addEventListener(MouseEvent.CLICK, filmstripMouseClick);
 
-			previewText = new FloatingTextField("00:00", new TextFormat("Arial", 10, 0xFFFFE8, true, false, false, null, null, "center", null, null, null, 4));
+			previewText = new StarlingFloatingTextField("00:00", new TextFormat("Arial", 10, 0xFFFFE8, true, false, false, null, null, "center", null, null, null, 4));
 
 			drawHighlights();
 			reorderSpriteIndex();

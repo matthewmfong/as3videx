@@ -30,7 +30,7 @@ package ca.ubc.ece.hct.myview.common {
 
 	    private var _width:Number; override public function get width():Number { return _width; }
 
-		public function CaptionView(width:Number, textFormat:TextFormat) {
+		public function CaptionView(width:Number, textFormat:TextFormat = null) {
 
 			_width = width;
 
@@ -44,7 +44,8 @@ package ca.ubc.ece.hct.myview.common {
 		    for(var i:int = 0; i<2; i++) {
 		        captionDisplay.push(new TextFieldWithCursor());
 		        captionDisplay[i].defaultTextFormat = captionFormat;
-		        captionDisplay[i].y = i * captionDisplay[i].height;
+                captionDisplay[i].y = i * captionDisplay[i].height;
+
 		        addChild(captionDisplay[i]);
 		    }
 
@@ -53,11 +54,18 @@ package ca.ubc.ece.hct.myview.common {
 		    _mask.graphics.beginFill(0xff00ff);
 		    _mask.graphics.drawRect(0, 0, width, Number(captionFormat.size) * 1.3);
 		    _mask.graphics.endFill();
-		    addChild(_mask)
-		    this.mask = _mask;
+//		    addChild(_mask);
+//		    this.mask = _mask;
 
 		    activeDisplay = 0;
 		}
+
+//		public function set wordwrap(val:Boolean):void {
+//			for each(var textfield:TextFieldWithCursor in captionDisplay) {
+//				textfield.width = _width;
+//				textfield.wordwrap = val;
+//			}
+//		}
 
 		public function set text(val:String):void {
 			displayText(val);
@@ -162,7 +170,6 @@ class TextFieldWithCursor extends Sprite {
 		textField.text = s;
 		textMask.text = s;
 
-
 		_cursor.graphics.clear();
 		_cursor.graphics.beginFill(0xff0000, 1);
 		_cursor.graphics.drawRect(-textField.width, 0, textField.width, Number(format.size) * 1.5);
@@ -170,6 +177,16 @@ class TextFieldWithCursor extends Sprite {
 		_cursor.graphics.beginFill(0xffffff, 1);
 		_cursor.graphics.drawRect(0, 0, textField.width, Number(format.size) * 1.5);
 		_cursor.graphics.endFill();
+	}
+
+//	public function set wordwrap(val:Boolean):void {
+//		textField.wordWrap = true;
+//		textMask.wordWrap = true;
+//	}
+
+	override public function set width(val:Number):void {
+		textField.width = val;
+		textMask.width = val;
 	}
 
 	override public function get width():Number {

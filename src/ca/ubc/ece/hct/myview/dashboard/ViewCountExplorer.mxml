@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  Created by iDunno on 2018-01-24.
+-->
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+    <s:HGroup>
+        <s:VGroup id="vcrGroup">
+            <s:SpriteVisualElement id="aggregate" />
+            <s:Scroller></s:Scroller>
+        </s:VGroup>
+        <s:VGroup>
+            <s:SpriteVisualElement id="thumbnail_SpriteVisualElement" />
+            <s:TextArea id="transcript" />
+        </s:VGroup>
+    </s:HGroup>
+</s:Panel>

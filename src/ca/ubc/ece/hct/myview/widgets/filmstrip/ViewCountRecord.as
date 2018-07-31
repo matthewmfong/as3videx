@@ -218,7 +218,7 @@ public class ViewCountRecord extends StarlingView {
 
         var graphMaxHeight:int = _height;
 
-        var viewCountRecordSprite = new Shape();
+        var viewCountRecordSprite:Shape = new Shape();
         viewCountRecordSprite.graphics.clear();
         viewCountRecordSprite.graphics.beginFill(0xff0000, 0);
         viewCountRecordSprite.graphics.drawRect(0, 0, _width, graphMaxHeight);

@@ -250,13 +250,15 @@ public class StarlingVideoPlayerModel {
             ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(null, "action", "resize_resume_video"));
         }
 
+        var widget:IWidget;
+
         if(val) {
             resizingPlayingState = playing;
-            for each(var widget:IWidget in widgets) {
+            for each(widget in widgets) {
                 widget.stop();
             }
         } else if(resizingPlayingState) {
-            for each(var widget:IWidget in widgets) {
+            for each(widget in widgets) {
                 widget.play();
             }
         }
@@ -540,30 +542,35 @@ public class StarlingVideoPlayerModel {
         var obj:* = JSON.parse((String)(object));
 
         for(var n:String in obj) {
-            var user_string:String;
-            var view_count_record_string:String;
+            if(obj.hasOwnProperty(n)) {
+                var user_string:String;
+                var view_count_record_string:String;
 
-            for (var m:String in obj[n]) {
-                switch (m) {
-                    case "user_id":
-                        user_string = obj[n][m];
-                        break;
-                    case "view_count_record":
-                        view_count_record_string = obj[n][m];
-                        break;
+                for (var m:String in obj[n]) {
+                    if (obj[n].hasOwnProperty(m)) {
+                        switch (m) {
+                            case "user_id":
+                                user_string = obj[n][m];
+                                break;
+                            case "view_count_record":
+                                view_count_record_string = obj[n][m];
+                                break;
+                        }
+                    }
                 }
-            }
 
-            if (_video) {
-                var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, user_string);
 
-                if (userData && view_count_record_string) {
-                    userData.view_count_record = view_count_record_string;
-                } else if (view_count_record_string && user_string) {
-                    userData = new UserData();
-                    userData.userString = user_string;
-                    userData.view_count_record = view_count_record_string;
-                    _video.addCrowdUserData(UserData.CLASS, userData);
+                if (_video) {
+                    var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, user_string);
+
+                    if (userData && view_count_record_string) {
+                        userData.view_count_record = view_count_record_string;
+                    } else if (view_count_record_string && user_string) {
+                        userData = new UserData();
+                        userData.userString = user_string;
+                        userData.view_count_record = view_count_record_string;
+                        _video.addCrowdUserData(UserData.CLASS, userData);
+                    }
                 }
             }
         }
@@ -573,33 +580,37 @@ public class StarlingVideoPlayerModel {
     private function crowdHighlightsLoaded(object:Object):void {
         var obj:* = JSON.parse((String)(object));
         for(var n:String in obj) {
+            if (obj.hasOwnProperty(n)) {
 
-            var user_string:String;
-            var colour_string:String;
-            var intervals_string:String;
+                var user_string:String;
+                var colour_string:String;
+                var intervals_string:String;
 
-            for(var m:String in obj[n]) {
-                switch(m) {
-                    case "user_id":
-                        user_string = obj[n][m];
-                        break;
-                    case "colour":
-                        colour_string = obj[n][m];
-                        break;
-                    case "intervals":
-                        intervals_string = obj[n][m];
-                        break;
+                for (var m:String in obj[n]) {
+                    if(obj[n].hasOwnProperty(m)) {
+                        switch (m) {
+                            case "user_id":
+                                user_string = obj[n][m];
+                                break;
+                            case "colour":
+                                colour_string = obj[n][m];
+                                break;
+                            case "intervals":
+                                intervals_string = obj[n][m];
+                                break;
+                        }
+                    }
                 }
-            }
 
-            var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, user_string);
+                var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, user_string);
 
-            if(userData && colour_string && intervals_string) {
-                userData.setHighlights(colour_string, intervals_string);
-            } else {
-                userData = new UserData();
-                userData.setHighlights(colour_string, intervals_string);
-                _video.addCrowdUserData(UserData.CLASS, userData);
+                if (userData && colour_string && intervals_string) {
+                    userData.setHighlights(colour_string, intervals_string);
+                } else {
+                    userData = new UserData();
+                    userData.setHighlights(colour_string, intervals_string);
+                    _video.addCrowdUserData(UserData.CLASS, userData);
+                }
             }
         }
     }

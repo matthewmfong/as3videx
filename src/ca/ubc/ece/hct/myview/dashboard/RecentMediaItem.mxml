@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+  Created by iDunno on 2018-01-24.
+-->
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
+                      xmlns:mx="library://ns.adobe.com/flex/mx"
+                      initialize="init()"
+                      width="100%">
+
+    <fx:Script><![CDATA[
+        import ca.ubc.ece.hct.myview.Util;
+        import ca.ubc.ece.hct.myview.thumbnail.ThumbnailNative;
+        import ca.ubc.ece.hct.myview.video.VideoMetadata;
+
+        import mx.charts.LineChart;
+        import mx.charts.chartClasses.IAxis;
+        import mx.charts.events.ChartItemEvent;
+        import mx.collections.ArrayCollection;
+
+        import spark.core.SpriteVisualElement;
+
+        public var content:Object;
+
+        private var thumb:ThumbnailNative;
+        private var textfield:TextField = new TextField();
+
+        private var chartData:ArrayCollection = new ArrayCollection();
+
+        public function init():void {
+
+            textfield.width = 200;
+            textfield.autoSize = TextFieldAutoSize.LEFT;
+            textfield.wordWrap = true;
+            textfield.text = content.video.title + " " + content.count;
+
+            thumb = new ThumbnailNative();
+            thumb.setSize(200, 200);
+            thumb.loadVideo(content.video);
+            thumb.showImage();
+
+            sprvisel.addChild(thumb);
+            sprvisel.addChild(textfield);
+
+            var vcr:Array = (VideoMetadata)(content.video).crowdUserViewCounts;
+
+
+            for (var i:int = 0; i < vcr.length; i++) {
+                chartData.addItem({time: i, vcr: vcr[i]});
+            }
+
+//            chart = new LineChart();
+//            chart.showDataTips = true;
+//            chart.dataProvider = chartData;
+            chart.addEventListener(ChartItemEvent.ITEM_MOUSE_MOVE, chartItemHit);
+
+            function chartItemHit(e:ChartItemEvent):void {
+//                trace(e.hitData.item.time + " " + e.hitData.item.vcr);
+                thumb.seekTimeInSeconds((Number)(e.hitData.item.time), true, true);
+            }
+
+            /* Define the category axis. */
+//            var vAxis:LinearAxis = new LinearAxis();
+//            vAxis.labelFunction =
+//                    function timeLabel(labelValue:Object, previousValue:Object, axis:IAxis):String {
+//                        return Util.timeInSecondsToTimeString((Number)(labelValue));
+//                    };
+//
+//            chart.horizontalAxis = vAxis;
+
+            /* Add the series. */
+//            var mySeries:Array = [];
+//            var chartSeries = new LineSeries();
+//            chartSeries.xField="time";
+//            chartSeries.yField="vcr";
+//            chartSeries.displayName = "View Count";
+//            mySeries.push(chartSeries);
+//
+//            chart.series = mySeries;
+//
+//            chart.width = this.width - thumb.width;
+//            chart.height = 150;
+//            chart.y = this.height/2 - chart.height/2;
+
+
+        }
+
+//        override public function set width(val:Number):void {
+//            super.width = val;
+//            chart.width = val - thumb.width;
+//        }
+
+        ]]></fx:Script>
+        <s:layout>
+            <s:HorizontalLayout padding="10"/>
+        </s:layout>
+        <s:SpriteVisualElement id="sprvisel" width="200" height="200"/>
+        <mx:LineChart id="chart"
+                      showDataTips="true"
+                      dataProvider="{chartData}"
+                      width="100%" height="150"
+                      right="0" >
+            <mx:horizontalAxis>
+                <mx:LinearAxis>
+                    <mx:labelFunction><![CDATA[
+                            function timeLabel(labelValue:Object, previousValue:Object, axis:IAxis):String {
+                                return Util.timeInSecondsToTimeString((Number)(labelValue));
+                            }
+                        ]]></mx:labelFunction>
+                </mx:LinearAxis>
+            </mx:horizontalAxis>
+            <mx:series>
+                <mx:LineSeries xField="time" yField="vcr" displayName="View Count" />
+            </mx:series>
+        </mx:LineChart>
+</s:SkinnableContainer>

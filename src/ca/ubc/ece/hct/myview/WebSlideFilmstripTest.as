@@ -32,7 +32,7 @@ import fl.controls.Button;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 
-	import ca.ubc.ece.hct.myview.ui.FloatingTextField;
+	import ca.ubc.ece.hct.myview.ui.StarlingFloatingTextField;
 
 
 	public class WebSlideFilmstripTest extends MovieClip {
@@ -73,7 +73,7 @@ import fl.controls.Button;
 														  "Find the introduction of the twist of the trolley problem. (animals)",
 														  "Find how many animals you can save if you went on a vegan diet for a year."] ];
 
-		private static var searchInstructionsText:FloatingTextField;
+		private static var searchInstructionsText:StarlingFloatingTextField;
 		private static var studySearch:ca.ubc.ece.hct.Range;
 		private var nextStageTimer:Timer;
 		private var timeForNextStage:Number;
@@ -205,7 +205,7 @@ import fl.controls.Button;
 					}
 				});
 
-			searchInstructionsText = new FloatingTextField("", new TextFormat("Arial", 20, 0x66ff66, true, false, false, null, null, "center", null, null, null, 4));
+			searchInstructionsText = new StarlingFloatingTextField("", new TextFormat("Arial", 20, 0x66ff66, true, false, false, null, null, "center", null, null, null, 4));
 
 			// VideoLoader.metadataDownloaded.add(
 			// 	function metadataDownloaded():void {

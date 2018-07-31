@@ -288,7 +288,9 @@ package ca.ubc.ece.hct.myview {
 		        inStream.readBytes(data); 
 		        inStream.close(); 
 	        } catch(e:Error) {
+//                trace(e.getStackTrace());
 	        	trace("Error reading " + inFile.nativePath);
+//				trace(e);
 	        	return false;
 	        }
 	        return true;
@@ -302,6 +304,7 @@ package ca.ubc.ece.hct.myview {
 		        inStream.readBytes(data); 
 		        inStream.close(); 
 	        } catch(e:Error) {
+//				trace(e.getStackTrace());
 	        	trace("Error reading " + path + e);
 	        	return false;
 	        }
@@ -317,7 +320,7 @@ package ca.ubc.ece.hct.myview {
 
 	}
 
-	    public static function dateParser(s:String):Date{
+	    public static function dateParser(s:String):Date {
 		    var regexp:RegExp = /(\d{4})\-(\d{1,2})\-(\d{1,2}) (\d{2})\:(\d{2})\:(\d{2})/;
 		    var _result:Object = regexp.exec(s);
 
@@ -330,6 +333,46 @@ package ca.ubc.ece.hct.myview {
 		        parseInt(_result[6])
 		    );
 		}
+
+        /**
+		 * ISO 8601
+		 *
+         * @param d
+         * @return
+         */
+		public static function dateToISO8601(d:Date):String {
+			return d.fullYear + "-" + (d.month+1) + "-" + d.date + " " + d.hours + ":" + d.minutes + ":" + d.seconds;
+		}
+
+
+        /**
+		 *
+         * @param m
+         * @param length January? or Jan?
+         * @return
+         */
+		public static function monthNumber2String(m:Number, length:uint = 255):String {
+			if(m < 0 || m > 11) {
+				return m + " is not a valid MONTH";
+			}
+
+			return Constants.MONTH[m].substr(0, length);
+		}
+
+
+        /**
+		 *
+         * @param d
+         * @param length Monday? or Mon?
+         * @return
+         */
+        public static function dayNumber2String(d:Number, length:uint = 255):String {
+			if(d < 0 || d > 6) {
+				return d + " is not a valid DAY of the week.";
+			}
+
+			return Constants.DAY[d].substr(0, length);
+        }
 
         public static function timeInSecondsToTimeString(timeX:Number):String {
             var newMinutes:String = uint(timeX/60).toString();
@@ -376,14 +419,42 @@ package ca.ubc.ece.hct.myview {
 			return false;
 		}
 
-		public static function arrayContains(array:Array, obj:*):Boolean {
-			for(var i:int = 0; i<array.length; i++) {
-				if(array[i] == obj) {
-					return true;
-				}
-			}
+        public static function arrayContains(array:Array, obj:*):Boolean {
+            for(var i:int = 0; i<array.length; i++) {
+                if(array[i] == obj) {
+                    return true;
+                }
+            }
 
-			return false;
+            return false;
+        }
+
+        /**
+		 * Same as Array.indexOf() except it uses == rather than the strict equality ===
+         * @param array Array to search
+         * @param obj Object to search for
+         * @return index of the array object if it exists, and -1 if it doesn't
+         */
+        public static function looseIndexOf(array:Array, obj:*):int {
+
+			if(array && array.length > 0) {
+                for (var i:int = 0; i < array.length; i++) {
+                    if (array[i] == obj) {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+
+		public static function localTime2ServerTime(date:Date):Date {
+			return new Date(date.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
+		}
+
+		public static function serverTime2LocalTime(date:Date):Date {
+			return new Date(date.getTime() + Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS)
 		}
 	}
 }
