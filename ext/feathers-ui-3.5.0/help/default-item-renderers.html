@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the default Feathers item renderer with List, DataGrid, Tree, and GroupedList - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-default-feathers-item-renderer-with-list-datagrid-tree-and-groupedlist">How to use the default Feathers item renderer with <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code></h1>
+<p>The <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html"><code>DefaultListItemRenderer</code></a>, <a href="../api-reference/feathers/controls/renderers/DefaultTreeItemRenderer.html"><code>DefaultTreeItemRenderer</code></a>, and <a href="../api-reference/feathers/controls/renderers/DefaultGroupedListItemRenderer.html"><code>DefaultGroupedListItemRenderer</code></a> classes provide a basic way to display items from data collections in the <a href="list.html"><code>List</code></a>, <a href="tree.html"><code>Tree</code></a>, and <a href="grouped-list.html"><code>GroupedList</code></a> components. These default item renderers are derived from the same base class, and their functionality is virtually identical.</p>
+<figure>
+<img src="images/item-renderer.png" srcset="images/item-renderer@2x.png 2x" alt="Screenshot of Feathers a DefaultListItemRenderer component" />
+<figcaption>
+A <code>DefaultListItemRenderer</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<aside class="info">
+<p>In many of the examples below, code and descriptions will refer to the <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html"><code>DefaultListItemRenderer</code></a> class and the <a href="../api-reference/feathers/controls/renderers/IListItemRenderer.html"><code>IListItemRenderer</code></a> interface, which are both used by the <code>List</code> component. When using a <code>Tree</code> component, you should substitute the <a href="../api-reference/feathers/controls/renderers/DefaultTreeItemRenderer.html"><code>DefaultTreeItemRenderer</code></a> class and the <a href="../api-reference/feathers/controls/renderers/ITreeItemRenderer.html"><code>ITreeItemRenderer</code></a> interface instead. When using a <code>GroupedList</code> component, you should substitute the <a href="../api-reference/feathers/controls/renderers/DefaultGroupedListItemRenderer.html"><code>DefaultGroupedListItemRenderer</code></a> class and the <a href="../api-reference/feathers/controls/renderers/IGroupedListItemRenderer.html"><code>IGroupedListItemRenderer</code></a> interface instead.</p>
+Whether using a <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, or a <code>GroupedList</code>, the default item renderers will have all of the same properties that are used in the examples below. The differences are entirely behind the scenes.
+</aside>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#children-of-an-item-renderer">Children of an item renderer</a></p></li>
+<li><p><a href="#skinning-a-default-item-renderer">Skinning a default item renderer</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>Item renderers are managed by a <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, or <code>GroupedList</code> component, and you generally don't add them to the display list directly. To customize properties on a default item renderer, you can use the list's <a href="../api-reference/feathers/controls/List.html#itemRendererFactory"><code>itemRendererFactory</code></a>:</p>
+<pre class="code"><code>list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+    itemRenderer.labelField = &quot;text&quot;;
+    return itemRenderer;
+}</code></pre>
+<p>In the next section, we'll look at several examples of properties that we can set in the <code>itemRendererFactory</code>.</p>
+<h2 id="children-of-an-item-renderer">Children of an item renderer</h2>
+<p>An item renderer provides up to three children to display data. A label, an icon, and an accessory. A label must always display a string in a <a href="text-renderers.html">text renderer</a>. However, both the icon and the accessory have three different ways to display data. They may display either a texture or URL in an <a href="image-loader.html"><code>ImageLoader</code></a>, a string in a text renderer, or they can add an arbitrary display object, like a Feathers component, as a child.</p>
+<h3 id="label">Label</h3>
+<p>The <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#labelField"><code>labelField</code></a> property displays a string in the primary <a href="text-renderers.html">text renderer</a>.</p>
+<p>Consider the following item in a data provider:</p>
+<pre class="code"><code>{ text: &quot;Example Item&quot; }</code></pre>
+<p>For an item renderer to display &quot;Example Item&quot; string, it needs to know about the item's <code>text</code> property:</p>
+<pre class="code"><code>itemRenderer.labelField = &quot;text&quot;;</code></pre>
+<p>The default item renderer also has a <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#labelFunction"><code>labelFunction</code></a> property that may be used to generate a string dynamically.</p>
+<h3 id="icon">Icon</h3>
+<p>The icon is typically intended for displaying a texture (either preloaded or from a URL) in an <a href="image-loader.html"><code>ImageLoader</code></a> component. However, for convenience, it may also display a string in another text renderer, or it may add any Starling display object as a child.</p>
+<p>When loading a texture or URL, the item renderer will create and manage its own internal <code>ImageLoader</code> instance. If the texture is loaded from a URL, we do not need to dispose this texture when we are finished with it. The texture will be disposed when the <code>ImageLoader</code> is disposed. If we pass in a preloaded texture, it is our responsibility to dispose it when needed.</p>
+<p>To display a texture or a URL, you may use the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#iconSourceField"><code>iconSourceField</code></a> property.</p>
+<p>Consider the following item from the data provider:</p>
+<pre class="code"><code>{ label: &quot;Example Label&quot;, thumbnail: atlas.getTexture( &quot;texture-name&quot; ) }</code></pre>
+<p>For an item renderer to display the texture from the altas, it needs to know about the item's <code>thumbnail</code> property:</p>
+<pre class="code"><code>itemRenderer.iconSourceField = &quot;thumbnail&quot;;</code></pre>
+<p>Similar to the <code>labelField</code> property, the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#iconLabelField"><code>iconLabelField</code></a> property can be used to display a string in another <a href="text-renderers.html">text renderer</a>. This can be a convenient way to display another line of text, or it could even be used to display symbols using icon fonts.</p>
+<p>Finally, if you need to display a Feathers component or any other type of Starling display object, you can use the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#iconField"><code>iconField</code></a> property.</p>
+<p>Consider the following code where a <a href="slider.html"><code>Slider</code></a> component is included in a list's data provider:</p>
+<pre class="code"><code>var slider:Slider = new Slider();
+slider.minimum = 0;
+slider.maximum = 10;
+slider.step = 1;
+slider.value = 0;
+ 
+list.dataProvider = new ArrayCollection(
+[
+    { label: &quot;Example Label&quot;, control: slider }
+];</code></pre>
+<p>For an item renderer to add the display object as a child, it needs to know about the item's <code>control</code> property:</p>
+<pre class="code"><code>itemRenderer.iconField = &quot;control&quot;;</code></pre>
+<p>When using <code>iconField</code>, it's important to understand that the display object in the data provider will not be automatically disposed when the item renderer or the list is disposed. This display object may need to be used in another list later, and Feathers cannot know whether it is safe to dispose it, similar to how a <a href="http://doc.starling-framework.org/core/starling/display/Image.html"><code>starling.display.Image</code></a> cannot dispose its <a href="http://doc.starling-framework.org/core/starling/textures/Texture.html"><code>starling.textures.Texture</code></a>. To avoid memory leaks, remember to dispose any display objects included in the list's data provider when the list is disposed. The <a href="../api-reference/feathers/data/IListCollection.html#dispose()"><code>dispose()</code></a> function on the data provider makes it easy to dispose display objects in an <code>IListCollection</code>.</p>
+<p>Finally, it's possible to skin the icon without passing it through the data provider. For example, you might want to display a checkmark as the icon when an item renderer is selected. Set the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#itemHasIcon"><code>itemHasIcon</code></a> property to <code>false</code>, and you can skin the icon using <a href="../api-reference/feathers/controls/Button.html#defaultIcon"><code>defaultIcon</code></a> and <a href="../api-reference/feathers/controls/Button.html#setIconForState()"><code>setIconForState()</code></a> just like you would for a button.</p>
+<h3 id="accessory">Accessory</h3>
+<p>In addition to the label and the icon, the default item renderer can display a third child, an <em>accessory</em>. This is a display object that is added as a child and it is often meant to be interactive in some way. For instance, you might create a list of settings with labels on the left and some user interface controls like sliders and toggle switches on the right.</p>
+<p>When using interactive accessories, it's a good idea to set the list's <a href="../api-reference/feathers/controls/List.html#isSelectable"><code>isSelectable</code></a> property to <code>false</code> to avoid touch conflicts and user confusion. When a list displays interactive accessories, it may not be obvious that the items in a list may be touched to select them too.</p>
+<p>Similar to icons, for extra convenience and flexibility, an accessory may be a text renderer that displays a string, an <a href="image-loader.html"><code>ImageLoader</code></a> that displays a texture, or a Starling display object that is added as a child. You may use the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessorySourceField"><code>accessorySourceField</code></a> property, the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryLabelField"><code>accessoryLabelField</code></a> property, and the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryField"><code>accessoryField</code></a> property. These properties work the same as they would for icons.</p>
+<p>Similar to <code>iconField</code>, a display object in the list's data provider that is displayed using <code>accessoryField</code> will not be automatically disposed when the item renderer or the list is disposed. See the note above about <code>iconField</code> for details.</p>
+<p>Finally, similar to <code>itemHasIcon</code>, it's possible to skin the accessory without passing it through the data provider by setting <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#itemHasAccessory"><code>itemHasAccessory</code></a> to <code>false</code>. You can skin the accessory using <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#defaultAccessory"><code>defaultAccessory</code></a> and <a href="../api-reference/feathers/controls/renderers/setAccessoryForState.html#setAccessoryForState()"><code>setAccessoryForState()</code></a>.</p>
+<h2 id="skinning-a-default-item-renderer">Skinning a default item renderer</h2>
+<p>The <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html"><code>DefaultListItemRenderer</code></a> class is a subclass of the <a href="toggle-button.html"><code>ToggleButton</code></a> component. Like a button, the default item renderer can change its background skin based on the touch state, and it supports different background skins when selected too. Similarly, an item renderer may have both a label and an icon, and all of the layout options used by buttons for alignment, gap, and padding apply to an item renderer too. For full details about these inherited properties, see <a href="button.html">How to use the Feathers <code>Button</code> component</a> and <a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a>. For full details about which properties are available to item renderers, see the <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html"><code>DefaultListItemRenderer</code> API reference</a>. We'll look at a few of the most common ways of styling an item renderer below.</p>
+<h3 id="font-styles">Font styles</h3>
+<p>If the item renderer's accessory is a label set using <code>accessoryLabelField</code> or <code>accessoryLabelFunction</code>, we can customize its font styles using the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryLabelFontStyles"><code>accessoryLabelFontStyles</code></a> property.</p>
+<pre class="code"><code>itemRenderer.accessoryLabelFontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );</code></pre>
+<p>Pass in a <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> object, which will work with any type of <a href="text-renderers.html">text renderer</a>.</p>
+<p>If the accessory label should use different font styles when the item renderer is disabled, you may set the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryLabelDisabledFontStyles"><code>accessoryLabelDisabledFontStyles</code></a> property too:</p>
+<pre class="code"><code>itemRenderer.accessoryLabelDisabledFontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x9a9a9a );</code></pre>
+<p>Finally, we can even customize the accessory label's font styles for each of the item renderer's specific states:</p>
+<pre class="code"><code>itemRenderer.setAccessoryLabelFontStylesForState( ButtonState.DOWN,
+    new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 ) );</code></pre>
+<p>Using the code above, the color of the accessor label will change when the item renderer is pressed, and the state changes to <code>ButtonState.DOWN</code>.</p>
+<p>When font styles aren't available for a specific state, the item renderer will use the default <code>accessoryLabelFontStyles</code> as a fallback. For example, we haven't provided font styles for <code>ButtonState.HOVER</code>, so the default styles will be used.</p>
+<p>Similarly, if the item renderer's icon is a label set using <code>iconLabelField</code> or <code>iconLabelFunction</code>, its font styles may be customized too. Use the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#iconLabelFontStyles"><code>iconLabelFontStyles</code></a> and <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#iconLabelDisabledFontStyles"><code>iconLabelDisabledFontStyles</code></a> properties, or the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#setIconLabelFontStylesForState()"><code>setIconLabelFontStylesForState()</code></a> function.</p>
+<h3 id="layout-with-an-accessory">Layout with an accessory</h3>
+<p>Buttons may have two children, a label text renderer and an icon, but the default item renderers add a third child, known as an <em>accessory</em>. Earlier, we looked at how an accessory may be passed in through the data provider. Now, let's look at some of the layout options available when adding an accessory into the mix.</p>
+<p>Positioning the accessory in the item renderer's layout is very similar to positioning the icon relative to the label text renderer. The default item renderer has an <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryPosition"><code>accessoryPosition</code></a> property that will allow it to be positioned relative to the other children. The <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryGap"><code>accessoryGap</code></a> property defines the gap in pixels between the accessory and the other children.</p>
+<aside class="info">
+The <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#accessoryPosition"><code>iconPosition</code></a> and <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#gap"><code>gap</code></a> properties provided by the <a href="button.html"><code>Button</code></a> superclass may also be used by item renderers to position the icon.
+</aside>
+<p>When displaying all three children that the default item renderer supports (the label text renderer, the icon, and the accessory), you can use the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#layoutOrder"><code>layoutOrder</code></a> property to customize the order that the children are positioned in the layout. By default, the label text renderer is positioned first, followed by the icon (relative to the label), and finally, the accessory is positioned last (relative to the combined bounding box of the label and the icon). Alternatively, you can change the order so that the label text renderer is positioned first, followed by the accessory (relative to the label), and the icon is positioned last (relative to the combined bounding box of the label and the accessory).</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html"><code>feathers.controls.renderers.DefaultListItemRenderer</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/DefaultTreeItemRenderer.html"><code>feathers.controls.renderers.DefaultTreeItemRenderer</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/DefaultGroupedListItemRenderer.html"><code>feathers.controls.renderers.DefaultGroupedListItemRenderer</code> API Documentation</a></p></li>
+<li><p><a href="list.html">How to use the Feathers <code>List</code> component</a></p></li>
+<li><p><a href="tree.html">How to use the Feathers <code>Tree</code> component</a></p></li>
+<li><p><a href="grouped-list.html">How to use the Feathers <code>GroupedList</code> component</a></p></li>
+<li><p><a href="item-renderers.html">Creating custom item renderers for the Feathers <code>List</code>, <code>DataGrid</code>, <code>Tree</code> and <code>GroupedList</code> components</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="TextureCache,feathers.utils.textures.TextureCache,maxUnretainedTextures,addTexture,calculateSnapshotTextureDimensions,dispose,getRetainCount,hasTexture,releaseTexture,removeTexture,retainTexture"><title>feathers.utils.textures.TextureCache</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'TextureCache - Feathers User Interface Controls for Starling Framework API Reference';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Feathers 3.5.0 API Reference</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?feathers/utils/textures/TextureCache.html&amp;feathers/utils/textures/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><picture><img src="../../../images/logo.jpg" srcset="../../../images/logo@2x.jpg 2x" class="logoImage" alt=" Feathers Logo " title=" Feathers Logo "></picture></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">TextureCache</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("TextureCache"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">feathers.utils.textures</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  TextureCache</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">TextureCache  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Feathers 2.3.0</td></tr></table><p></p><p></p><p></p>
+	 Caches textures in memory. Each texture may be saved with its own key,
+	 such as the URL where the original image file is located.
+	 
+	 <p>
+                  <b>Note:</b> Most developers will only need to create a
+	 <code>TextureCache</code>, pass it to multiple <code>ImageLoader</code>
+	 components, and dispose the cache when finished. APIs to retain and
+	 release textures are meant to be used by <code>ImageLoader</code>.</p>
+	 
+	              <p>A single <code>TextureCache</code> may be passed to multiple
+	 <code>ImageLoader</code> components using the <code>textureCache</code>
+	 property:</p>
+	 
+	              <div class="listing" version="3.0"><pre>
+var cache:TextureCache = new TextureCache();
+loader1.textureCache = cache;
+loader2.textureCache = cache;</pre></div>
+	 	            <p>Don't forget to dispose the <code>TextureCache</code> when it is no
+	 longer needed -- to avoid memory leaks:</p>
+	 	            <div class="listing" version="3.0"><pre>
+cache.dispose();</pre></div>
+	 
+	              <p>To use a TextureCache in a <code>List</code> or
+	 <code>GroupedList</code> with the default item renderer, pass the cache
+	 to the <code>ImageLoader</code> components using the
+	 <code>iconLoaderFactory</code> or
+	 <code>accessoryLoaderFactory</code>:</p>
+	 
+	              <div class="listing" version="3.0"><pre>
+var cache:TextureCache = new TextureCache();
+list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+    itemRenderer.iconLoaderFactory = function():ImageLoader
+    {
+        var loader:ImageLoader = new ImageLoader();
+        loader.textureCache = cache;
+        return loader;
+    };
+    return itemRenderer;
+};</pre></div>
+	 
+	           <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso"><a href="../../../feathers/controls/ImageLoader.html#textureCache" target="">feathers.controls.ImageLoader.textureCache</a></div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#maxUnretainedTextures" class="signatureLink">maxUnretainedTextures</a> : int<div class="summaryTableDescription">
+		 Limits the number of unretained textures that may be stored in
+		 memory.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#TextureCache()" class="signatureLink">TextureCache</a>(maxUnretainedTextures:int)</div><div class="summaryTableDescription">
+		 Constructor.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#addTexture()" class="signatureLink">addTexture</a>(key:String, texture:Texture, retainTexture:Boolean = true):void</div><div class="summaryTableDescription">
+		 Saves a texture, and associates it with a specific key.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#dispose()" class="signatureLink">dispose</a>():void</div><div class="summaryTableDescription">
+		 Disposes the texture cache, including all textures (even if they are
+		 retained).</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getRetainCount()" class="signatureLink">getRetainCount</a>(key:String):int</div><div class="summaryTableDescription">
+		 Returns how many times the texture associated with the specified key
+		 has currently been retained.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#hasTexture()" class="signatureLink">hasTexture</a>(key:String):Boolean</div><div class="summaryTableDescription">
+		 Indicates if a texture is associated with the specified key.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#releaseTexture()" class="signatureLink">releaseTexture</a>(key:String):void</div><div class="summaryTableDescription">
+		 Releases a retained texture.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#removeTexture()" class="signatureLink">removeTexture</a>(key:String, dispose:Boolean = false):void</div><div class="summaryTableDescription">
+		 Removes a specific key from the cache, and optionally disposes the
+		 texture associated with the key.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#retainTexture()" class="signatureLink">retainTexture</a>(key:String):Texture</div><div class="summaryTableDescription">
+		 Gets the texture associated with the specified key, and increments
+		 the retain count for the texture.</div></td><td class="summaryTableOwnerCol">TextureCache</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="maxUnretainedTextures"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">maxUnretainedTextures</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>maxUnretainedTextures:int</code><p></p><p></p><p>
+		 Limits the number of unretained textures that may be stored in
+		 memory. The textures retained least recently will be disposed if
+		 there are too many.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxUnretainedTextures():int</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxUnretainedTextures(value:int):void</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="TextureCache()"></a><a name="TextureCache(int)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">TextureCache</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function TextureCache(maxUnretainedTextures:int)</code><p></p><p>
+		 Constructor.
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">maxUnretainedTextures</span>:int</code> (default = <code>NaN</code>)<code></code></td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="addTexture()"></a><a name="addTexture(String,starling.textures.Texture,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">addTexture</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function addTexture(key:String, texture:Texture, retainTexture:Boolean = true):void</code><p></p><p></p><p>
+		 Saves a texture, and associates it with a specific key.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">key</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">texture</span>:Texture</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">retainTexture</span>:Boolean</code> (default = <code>true</code>)<code></code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="TextureCache.html#removeTexture()" target="">removeTexture()</a><br/><a href="TextureCache.html#hasTexture()" target="">hasTexture()</a></div></div><a name="dispose()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">dispose</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function dispose():void</code><p></p><p></p><p>
+		 Disposes the texture cache, including all textures (even if they are
+		 retained).
+		 </p></div><a name="getRetainCount()"></a><a name="getRetainCount(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getRetainCount</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getRetainCount(key:String):int</code><p></p><p></p><p>
+		 Returns how many times the texture associated with the specified key
+		 has currently been retained.
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">key</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>int</code></td></tr></table></div><a name="hasTexture()"></a><a name="hasTexture(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">hasTexture</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function hasTexture(key:String):Boolean</code><p></p><p></p><p>
+		 Indicates if a texture is associated with the specified key.
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">key</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code></td></tr></table></div><a name="releaseTexture()"></a><a name="releaseTexture(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">releaseTexture</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function releaseTexture(key:String):void</code><p></p><p></p><p>
+		 Releases a retained texture.
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">key</span>:String</code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="TextureCache.html#retainTexture()" target="">retainTexture()</a></div></div><a name="removeTexture()"></a><a name="removeTexture(String,Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">removeTexture</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function removeTexture(key:String, dispose:Boolean = false):void</code><p></p><p></p><p>
+		 Removes a specific key from the cache, and optionally disposes the
+		 texture associated with the key.
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">key</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">dispose</span>:Boolean</code> (default = <code>false</code>)<code></code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="TextureCache.html#addTexture()" target="">addTexture()</a></div></div><a name="retainTexture()"></a><a name="retainTexture(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">retainTexture</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function retainTexture(key:String):Texture</code><p></p><p></p><p>
+		 Gets the texture associated with the specified key, and increments
+		 the retain count for the texture. Always remember to call
+		 <code>releaseTexture()</code> when finished with a retained texture.
+		 
+		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">key</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Texture</code></td></tr></table><p><span class="label">See also</span></p><div class="seeAlso"><a href="TextureCache.html#releaseTexture()" target="">releaseTexture()</a></div></div><br/><br/><hr><br/><p></p><center class="copyright"><footer><a href="https://feathersui.com/" target="_top">Feathers</a> | <a href="https://github.com/BowlerHatLLC/feathers" target="_top">Github Project</a> | <a href="https://forum.starling-framework.org/forum/feathers" target="_top">Support Forum</a></footer><br/>Thu Jun 21 2018, 07:04 AM -07:00  </center></div></body></html><!--Feathers | Github Project | Support Forum<br/>Thu Jun 21 2018, 07:04 AM -07:00  -->

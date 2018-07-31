@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers VideoPlayer component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-videoplayer-component">How to use the Feathers <code>VideoPlayer</code> component</h1>
+<p>The <a href="../api-reference/feathers/media/VideoPlayer.html"><code>VideoPlayer</code></a> class provides video playback capabilities using a <code>flash.net.NetStream</code> object. Video files may be loaded from a URL and displayed as a Starling texture. <a href="media-player-controls.html">Media player controls</a> may be added as children to display information such as the current time or to control playback by seeking or pausing the audio. <code>VideoPlayer</code> is a subclass of <a href="layout-group.html"><code>LayoutGroup</code></a>, so its children may be positioned and sized using layouts.</p>
+<figure>
+<img src="images/video-player.png" srcset="images/video-player@2x.png 2x" alt="Screenshot of a Feathers VideoPlayer component" />
+<figcaption>
+A <code>VideoPlayer</code> component with controls skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#controls">Controls</a></p></li>
+<li><p><a href="#layout">Layout</a></p></li>
+<li><p><a href="#controlling-playback-programatically">Controlling playback programmatically</a></p></li>
+<li><p><a href="#loading-videos">Loading Videos</a></p></li>
+<li><p><a href="#skinning-a-videoplayer">Skinning a <code>VideoPlayer</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>VideoPlayer</code> component, set its dimensions, and add it to the display list:</p>
+<pre class="code"><code>var player:VideoPlayer = new VideoPlayer();
+player.setSize( 320, 300 );
+this.addChild( player );</code></pre>
+<p>To play a video file, pass the URL to the <a href="../api-reference/feathers/media/VideoPlayer.html#videoSource"><code>videoSource</code></a> property:</p>
+<pre class="code"><code>player.videoSource = &quot;http://example.com/video.m4v&quot;;</code></pre>
+<aside class="info">
+For additional ways to play videos (such as streaming from a server), see the <a href="#loading-videos">Loading Videos</a> section below.
+</aside>
+<p>To display the video, we need to add an <a href="image-loader.html"><code>ImageLoader</code></a> as a child of the <code>VideoPlayer</code>:</p>
+<pre class="code"><code>var loader:ImageLoader = new ImageLoader();
+player.addChild( loader );</code></pre>
+<p>Notice that we have not set the <a href="../api-reference/feathers/controls/ImageLoader.html#source"><code>source</code></a> property of the <code>ImageLoader</code> yet. A video texture requires a moment to initialize on the GPU before it may be rendered by Starling. The <code>VideoPlayer</code> will dispatch <a href="../api-reference/feathers/media/VideoPlayer.html#event:ready"><code>Event.READY</code></a> once we can pass the texture to the <code>ImageLoader</code>:</p>
+<pre class="code"><code>function videoPlayer_readyHandler( event:Event ):void
+{
+    loader.source = player.texture;
+}
+player.addEventListener( Event.READY, videoPlayer_readyHandler );</code></pre>
+<p>The video texture may be accessed throught the <a href="../api-reference/feathers/media/VideoPlayer.html#texture"><code>texture</code></a> property. Until <code>Event.READY</code> is dispatched, the <code>texture</code> property of the <code>VideoPlayer</code> will be <code>null</code>.</p>
+<p>Additionally, you should listen for <a href="../api-reference/feathers/media/VideoPlayer.html#event:clear"><code>Event.CLEAR</code></a>:</p>
+<pre class="code"><code>function videoPlayer_clearHandler( event:Event ):void
+{
+    loader.source = null;
+}
+player.addEventListener( Event.CLEAR, videoPlayer_clearHandler );</code></pre>
+<p>This event is dispatched when the video texture has been disposed, and it must no longer be rendered.</p>
+<h2 id="controls">Controls</h2>
+<p>Let's give the <code>VideoPlayer</code> some controls. First, let's create a <a href="layout-group.html"><code>LayoutGroup</code></a> to use as a toolbar for our controls:</p>
+<pre class="code"><code>var controls:LayoutGroup = new LayoutGroup();
+controls.styleNameList.add( LayoutGroup.ALTERNATE_STYLE_NAME_TOOLBAR );
+player.addChild(controls);</code></pre>
+<p>With the toolbar in place, let's add a <a href="../api-reference/feathers/media/PlayPauseToggleButton.html"><code>PlayPauseToggleButton</code></a> and a <a href="../api-reference/feathers/media/SeekSlider.html"><code>SeekSlider</code></a>. It's as simple as adding them as children of the tool bar:</p>
+<pre class="code"><code>var button:PlayPauseToggleButton = new PlayPauseToggleButton();
+controls.addChild( button );
+
+var slider:SeekSlider = new SeekSlider();
+controls.addChild( slider );</code></pre>
+<p>There's no need to add event listeners for these controls. You simply need to add them as children of the <code>VideoPlayer</code> (or a container that has been added as a child of the <code>VideoPlayer</code>), and everything will be set up automatically.</p>
+<aside class="info">
+The complete list of <a href="media-player-controls.html">media player controls</a> includes several more pre-built components that you can add to a <code>VideoPlayer</code>.
+</aside>
+<p>In the next section, we'll position everything with some layouts.</p>
+<h2 id="layout">Layout</h2>
+<p>First, let's create a layout for the toolbar with our controls. We'll pass a <a href="../api-reference/feathers/layout/HorizontalLayout.html"><code>HorizontalLayout</code></a> to the <a href="../api-reference/feathers/controls/LayoutGroup.html#layout"><code>layout</code></a> property:</p>
+<pre class="code"><code>var layout:HorizontalLayout = new HorizontalLayout();
+layout.gap = 10;
+controls.layout = layout;</code></pre>
+<p>Here, we've set the <a href="../api-reference/feathers/layout/HorizontalLayout.html#gap"><code>gap</code></a> property, but <code>HorizontalLayout</code> provides many more useful features, including padding and alignment. See <a href="horizontal-layout.html">How to use <code>HorizontalLayout</code> with Feathers containers</a> for complete details.</p>
+<p>If we want our <code>SeekSlider</code> to stretch to fill as much space as possible within the <code>VideoPlayer</code>, we can pass in <a href="../api-reference/feathers/layout/HorizontalLayoutData.html"><code>HorizontalLayoutData</code></a>:</p>
+<pre class="code"><code>var sliderLayoutData:HorizontalLayoutData = new HorizontalLayoutData();
+sliderLayoutData.percentWidth = 100;
+slider.layoutData = sliderLayoutData;</code></pre>
+<p>Now, because we set the <a href="../api-reference/feathers/layout/HorizontalLayoutData.html#percentWidth"><code>percentWidth</code></a> property, when the width of the toolbar changes, the width of the <code>SeekSlider</code> will change too.</p>
+<p>Next, we want to position the toolbar and the <code>ImageLoader</code>. Let's use a <code>VerticalLayout</code> for that.</p>
+<pre class="code"><code>player.layout = new VerticalLayout();</code></pre>
+<p>We want the <code>ImageLoader</code> to fill as much space as possible.</p>
+<pre class="code"><code>var loaderLayoutData:VerticalLayoutData = new VerticalLayoutData();
+loaderLayoutData.percentWidth = 100;
+loaderLayoutData.percentHeight = 100;
+loader.layoutData = loaderLayoutData;</code></pre>
+<p>Then, we want the toolbar to fill the entire width of the <code>VideoPlayer</code>:</p>
+<pre class="code"><code>var controlsLayoutData:VerticalLayoutData = new VerticalLayoutData();
+controlsLayoutData.percentWidth = 100;
+controls.layoutData = controlsLayoutData;</code></pre>
+<h2 id="controlling-playback-programmatically">Controlling playback programmatically</h2>
+<p>By default, the <code>VideoPlayer</code> will automatically start playing its <code>videoSource</code>. We can use the <a href="../api-reference/feathers/media/VideoPlayer.html#autoPlay"><code>autoPlay</code></a> property to change this behavior:</p>
+<pre class="code"><code>player.autoPlay = false;</code></pre>
+<p>If <code>autoPlay</code> is set to <code>false</code>, we can call <code>play()</code> to begin playback manually:</p>
+<pre class="code"><code>player.play();</code></pre>
+<p>To pause, we can call <code>pause()</code> to pause playback at the current position:</p>
+<pre class="code"><code>player.pause();</code></pre>
+<p>The <code>togglePlayPause()</code> method may be called to toggle between the play and pause states:</p>
+<pre class="code"><code>player.togglePlayPause();</code></pre>
+<p>To stop playback and return the video to the beginning, we may call <code>stop()</code>:</p>
+<pre class="code"><code>player.stop();</code></pre>
+<p>The <code>seek()</code> function may be called to change the current time:</p>
+<pre class="code"><code>player.seek( 5.0 );</code></pre>
+<p>The time is measured in seconds.</p>
+<p>To change the volume, we can pass a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/media/SoundTransform.html"><code>flash.media.SoundTransform</code></a> object to the <a href="../api-reference/feathers/media/VideoPlayer.html#soundTransform"><code>soundTransform</code></a> property:</p>
+<pre class="code"><code>player.soundTransform = new SoundTransform( 0.5 );</code></pre>
+<p>The <code>toggleFullScreen()</code> function will toggle between normal and full screen modes:</p>
+<pre class="code"><code>player.toggleFullScreen();</code></pre>
+<p>When the <code>VideoPlayer</code> is displayed in full screen mode, it will be added as a modal pop-up above all Starling content.</p>
+<h2 id="loading-videos">Loading Videos</h2>
+<p>Previously, we loaded a video using a simple URL. Let's look at all of the ways that video may be loaded by the <code>VideoPlayer</code> component.</p>
+<h3 id="loading-from-urls">Loading from URLs</h3>
+<p>First, we'll review how to load a video from a URL:</p>
+<pre class="code"><code>player.videoSource = &quot;http://example.com/video.mp4&quot;;</code></pre>
+<h3 id="loading-from-the-file-system">Loading from the file system</h3>
+<p>In Adobe AIR, we can also load a video from the file system:</p>
+<pre class="code"><code>var videoFile:File = File.applicationDirectory.resolvePath(&quot;video.mp4&quot;);
+player.videoSource = videoFile.url;</code></pre>
+<p>Be sure to pass the <code>url</code> property of a <code>flash.filesystem.File</code> object to <code>videoSource</code>. Attempting to use the <code>nativePath</code> property will not work.</p>
+<h3 id="streaming-video">Streaming video</h3>
+<p>Finally, we can stream a video from a server, such as Adobe Media Server or the open source Red5 Media Server. First, we want to use the <code>netConnectionFactory</code> property of the video player to set up the connection to the server:</p>
+<pre class="code"><code>player.netConnectionFactory = function():NetConnection
+{
+    var nc:NetConnection = new NetConnection();
+    nc.connect(&quot;rtmp://localhost/vod&quot;);
+    return nc;
+};</code></pre>
+<p>Next, we'll pass the name of the stream to the <code>videoSource</code> property:</p>
+<pre class="code"><code>player.videoSource = &quot;mp4:streams/myvideo&quot;;</code></pre>
+<p>To play another video stream from the same server, set the <code>videoSource</code> property again.</p>
+<h2 id="skinning-a-videoplayer">Skinning a <code>VideoPlayer</code></h2>
+<p>As mentioned above, <code>VideoPlayer</code> is a subclass of <code>LayoutGroup</code>. For more detailed information about the skinning options available to <code>VideoPlayer</code>, see <a href="layout-group.html">How to use the Feathers <code>LayoutGroup</code> component</a>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/media/VideoPlayer.html"><code>feathers.media.VideoPlayer</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

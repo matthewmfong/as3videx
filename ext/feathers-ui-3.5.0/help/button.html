@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Button component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-button-component">How to use the Feathers <code>Button</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Button.html"><code>Button</code></a> class displays a button that may be triggered by pressing and releasing. It can display an optional label and an optional icon with a variety of layout options. Buttons have separate states for each of the different touch phases. The skin and icon can be customized for each state, and the label <a href="text-renderers.html">text renderer</a> may display different font styles for each state too.</p>
+<figure>
+<img src="images/button.png" srcset="images/button@2x.png 2x" alt="Screenshot of a Feathers Button component" />
+<figcaption>
+<code>Button</code> components skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#button-states">Button states</a></p></li>
+<li><p><a href="#skinning-a-button">Skinning a <code>Button</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>Button</code> control, give it a label, and add it to the display list:</p>
+<pre class="code"><code>var button:Button = new Button();
+button.label = &quot;Click Me&quot;;
+this.addChild( button );</code></pre>
+<p>If we want to know when the button is tapped or clicked, we can listen for <a href="../api-reference/feathers/controls/BasicButton.html#event:triggered"><code>Event.TRIGGERED</code></a>:</p>
+<pre class="code"><code>button.addEventListener( Event.TRIGGERED, button_triggeredHandler );</code></pre>
+<p>This event is dispatched when the touch ends <em>and</em> the touch was not dragged outside of the button's bounds. In other words, the button is only triggered when the touch both begins and ends over the button.</p>
+<p>The listener function might look like this:</p>
+<pre class="code"><code>function button_triggeredHandler( event:Event ):void
+{
+    trace( &quot;button triggered&quot; );
+}</code></pre>
+<h2 id="button-states">Button states</h2>
+<p>When the user interacts with a button, it's internal state changes. This may be used for skinning purposes, such as displaying different background skins or changing font styles. We'll look at some examples in a moment.</p>
+<p>All buttons have the following states:</p>
+<ul>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a> is the button's default state when the user is not interacting with it.</li>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a> is the state when the user presses the button by touching it or clicking it with the mouse.</li>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a> is the state when the mouse is hovering over the button. On a touchscreen, this state is not used.</li>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a> is the state when the button's <code>isEnabled</code> property has been set to <code>false</code>.</li>
+</ul>
+<h2 id="skinning-a-button">Skinning a <code>Button</code></h2>
+<p>A number of styles may be customized on a button, including the font styles, the background skin, and an optional icon. For full details about which properties are available, see the <a href="../api-reference/feathers/controls/Button.html"><code>Button</code> API reference</a>. We'll look at a few of the most common ways of styling a button below.</p>
+<h3 id="font-styles">Font styles</h3>
+<p>The font styles of the button's label text renderer may be customized using the <a href="../api-reference/feathers/controls/Button.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>button.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );</code></pre>
+<p>Pass in a <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> object, which will work with any type of <a href="text-renderers.html">text renderer</a>.</p>
+<p>If the button's label should use different font styles when the button is disabled, you may set the <a href="../api-reference/feathers/controls/Button.html#disabledFontStyles"><code>disabledFontStyles</code></a> property too:</p>
+<pre class="code"><code>button.disabledFontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x9a9a9a );</code></pre>
+<p>Finally, we can even customize the font styles for each of the button's specific states:</p>
+<pre class="code"><code>button.setFontStylesForState( ButtonState.DOWN,
+    new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 ) );</code></pre>
+<p>Using the code above, the color of the button's label will change when the button is pressed, and the state changes to <code>ButtonState.DOWN</code>.</p>
+<p>When font styles aren't available for a specific state, the button will use the default <code>fontStyles</code> as a fallback. For example, we haven't provided font styles for <code>ButtonState.HOVER</code>, so the default styles will be used.</p>
+<h3 id="background-skins">Background skins</h3>
+<p>Let's give our button its background skin. In the following example, we'll use an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a>, but the skin may be any Starling display object:</p>
+<pre class="code"><code>var skin:ImageSkin = new ImageSkin( upTexture );
+skin.scale9Grid = new Rectangle( 2, 3, 3, 8 );
+button.defaultSkin = skin;</code></pre>
+<p>We can change the appearance of the button's skin when the state changes. In the next example, we provide another texture to the same <code>ImageSkin</code> for the button's &quot;down&quot; state:</p>
+<pre class="code"><code>skin.setTextureForState( ButtonState.DOWN, downTexture );</code></pre>
+<p>The <code>ImageSkin</code> automatically listens for changes to the button's state and updates its appearance to match. When the user presses the button down, the <code>ImageSkin</code> will display this texture instead of the default one.</p>
+<p>We can also provide different display objects for specific states, if needed. In the next example, we have a texture for the &quot;disabled&quot; state that requires a different <code>scale9Grid</code> than the other textures. We can create a separate <code>ImageSkin</code> for this state:</p>
+<pre class="code"><code>var disabledSkin:ImageSkin = new ImageSkin( disabledTexture );
+disabledSkin.scale9Grid = new Rectangle( 4, 2, 2, 10 );
+button.setSkinForState( ButtonState.DISABLED, disabledSkin );</code></pre>
+<p>Pass in skins for any state using the <a href="../api-reference/feathers/controls/BasicButton.html#setSkinForState()"><code>setSkinForState()</code></a> function.</p>
+<p>If a skin is not provided for a specific state, the button will display its <code>defaultSkin</code>. Similarly, when using an <code>ImageSkin</code>, and a texture isn't provided for a specific state, it will display its default texture.</p>
+<h3 id="icons">Icons</h3>
+<p>Let's also add an icon to the <code>Button</code>. Icons may be customized for each of the button's states (just like the background skin), but let's simply use one icon. In this example, we'll pass in a <code>starling.display.Image</code>:</p>
+<pre class="code"><code>button.defaultIcon = new Image( iconTexture );</code></pre>
+<p>This icon will be displayed for all of the button's different states.</p>
+<p>If we wanted to change the appearance of the icon when the button's state changes, we could use a <a href="../api-reference/feathers/skins/ImageSkin.html"><code>feathers.skins.ImageSkin</code></a> with multiple textures, like we did in the example above that demonstrated how to set the button's background skin. Similarly, we could use <a href="../api-reference/feathers/controls/Button.html#setIconForState()"><code>setIconForState()</code></a> to pass in different display objects for each state.</p>
+<h2 id="layout">Layout</h2>
+<p>Padding may be added on each side of the button:</p>
+<pre class="code"><code>button.paddingTop = 5;
+button.paddingRight = 8;
+button.paddingBottom = 5;
+button.paddingLeft = 8;</code></pre>
+<p>If all four padding values should be the same, you may use the <a href="../api-reference/feathers/controls/Button.html#padding"><code>padding</code></a> property to quickly set them all at once:</p>
+<pre class="code"><code>button.padding = 6;</code></pre>
+<p>The icon may be positioned on any side of the button's label. Let's move the icon above the label so that they are stacked vertically:</p>
+<pre class="code"><code>button.iconPosition = RelativePosition.TOP;</code></pre>
+<p>We set the <a href="../api-reference/feathers/controls/Button.html#iconPosition"><code>iconPosition</code></a> property to <a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a>. We can easily position the icon to the top, right, bottom, or left of the label.</p>
+<p>The <a href="../api-reference/feathers/controls/Button.html#gap"><code>gap</code></a> refers to the space, measured in pixels, between the icon and the label:</p>
+<pre class="code"><code>button.gap = 10;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/Button.html#horizontalAlign"><code>horizontalAlign</code></a> and <a href="../api-reference/feathers/controls/Button.html#verticalAlign"><code>verticalAlign</code></a> properties will adjust the alignment of the icon and label inside the button, allowing you to anchor them at the edges or in the center.</p>
+<pre class="code"><code>button.horizontalAlign = HorizontalAlign.CENTER;
+button.verticalAlign = VerticalAlign.MIDDLE;</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/Button.html"><code>feathers.controls.Button</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

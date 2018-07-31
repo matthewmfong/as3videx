@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers ScrollBar component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-scrollbar-component">How to use the Feathers <code>ScrollBar</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/ScrollBar.html"><code>ScrollBar</code></a> component selects a numeric value in a specific range by dragging a thumb along a track, or by triggering one of its step buttons at the beginning or end of the track. A scroll bar may be displayed in either a horizontal or a vertical direction. This component is designed to be used with components that support scrolling, like <a href="scroll-container.html"><code>ScrollContainer</code></a> and <a href="list.html"><code>List</code></a>.</p>
+<figure>
+<img src="images/scroll-bar.png" srcset="images/scroll-bar@2x.png 2x" alt="Screenshot of a Feathers ScrollBar component" />
+<figcaption>
+A horizontal <code>ScrollBar</code> component skinned with <code>MetalWorksDesktopTheme</code>
+</figcaption>
+</figure>
+<aside class="info">
+Additionally, Feathers offers a <a href="simple-scroll-bar.html"><code>SimpleScrollBar</code></a> component. This is a mobile-style scroll bar that only has a thumb to visually indicate the scroll position and range. It has no visible track nor buttons for stepping the scroll position.
+</aside>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-scrollbar">Skinning a <code>ScrollBar</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>You can use the <code>ScrollBar</code> with a class like <code>ScrollContainer</code> or <code>List</code> by instantiating it in the <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollBarFactory"><code>horizontalScrollBarFactory</code></a> or the <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollBarFactory"><code>verticalScrollBarFactory</code></a>.</p>
+<pre class="code"><code>list.horizontalScrollBarFactory = function():IScrollBar
+{
+    return new ScrollBar();
+}</code></pre>
+<p>The container will automatically handle setting properties like <a href="../api-reference/feathers/controls/ScrollBar.html#direction"><code>direction</code></a>, <a href="../api-reference/feathers/controls/ScrollBar.html#minimum"><code>minimum</code></a>, <a href="../api-reference/feathers/controls/ScrollBar.html#maximum"><code>maximum</code></a>, and <a href="../api-reference/feathers/controls/ScrollBar.html#step"><code>step</code></a>, and it will automatically listen for <a href="../api-reference/feathers/controls/ScrollBar.html#event:change"><code>Event.CHANGE</code></a> to know when the <a href="../api-reference/feathers/controls/ScrollBar.html#value"><code>value</code></a> property changes.</p>
+<aside class="info">
+If, for some reason, you want to use a <code>ScrollBar</code> outside of a container, the values like <code>minimum</code>, <code>maximum</code>, <code>step</code> and <code>value</code> that are normally handled by the container work similarly to the same properties on a <a href="slider.html"><code>Slider</code></a> component.
+</aside>
+<h2 id="skinning-a-scrollbar">Skinning a <code>ScrollBar</code></h2>
+<p>The skins for a <code>ScrollBar</code> control are divided into several parts, including the thumb, the track(s), and the increment and decrement buttons. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/ScrollBar.html"><code>ScrollBar</code> API reference</a>.</p>
+<h3 id="tracks-and-layout">Track(s) and Layout</h3>
+<p>The scroll bar's track is made from either one or two buttons, depending on the value of the <a href="../api-reference/feathers/controls/ScrollBar.html#trackLayoutMode"><code>trackLayoutMode</code></a> property. The default value of this property is <a href="../api-reference/feathers/controls/TrackLayoutMode.html#SINGLE"><code>TrackLayoutMode.SINGLE</code></a>, which creates a single track that fills the entire width and height of the scroll bar.</p>
+<p>If we'd like to have separate buttons for both sides of the track (one for the minimum side and another for the maximum side), we can set <code>trackLayoutMode</code> to <a href="../api-reference/feathers/controls/TrackLayoutMode.html#SPLIT"><code>TrackLayoutMode.SPLIT</code></a>. In this mode, the width or height of each track (depending on the direction of the scroll bar) is adjusted as the thumb moves to ensure that the two tracks always meet at the center of the thumb.</p>
+<p><code>TrackLayoutMode.SINGLE</code> is often best for cases where the track's appearance is mostly static. When you want down or hover states for the track, <code>TrackLayoutMode.SPLIT</code> works better because the state will only change on one side of the thumb, making it more visually clear to the user what is happening.</p>
+<p>When the value of <code>trackLayoutMode</code> is <code>TrackLayoutMode.SINGLE</code>, the scroll bar will have a minimum track, but it will not have a maximum track. The minimum track will fill the entire region that is scrollable.</p>
+<h3 id="skinning-the-thumb">Skinning the Thumb</h3>
+<p>This section only explains how to access the thumb sub-component. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/ScrollBar.html#DEFAULT_CHILD_STYLE_NAME_THUMB"><code>ScrollBar.DEFAULT_CHILD_STYLE_NAME_THUMB</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( ScrollBar.DEFAULT_CHILD_STYLE_NAME_THUMB, setScrollBarThumbStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setScrollBarThumbStyles( thumb:Button ):void
+{
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    thumb.defaultSkin = skin;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>scrollBar.customThumbStyleName = &quot;custom-thumb&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/ScrollBar.html#customThumbStyleName"><code>customThumbStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;custom-thumb&quot;, setScrollBarCustomThumbStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/ScrollBar.html#thumbFactory"><code>thumbFactory</code></a> to provide skins for the scroll bar's thumb:</p>
+<pre class="code"><code>scrollBar.thumbFactory = function():Button
+{
+    var thumb:Button = new Button();
+
+    //skin the thumb here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    thumb.defaultSkin = skin;
+
+    return thumb;
+}</code></pre>
+<h3 id="skinning-the-minimum-track">Skinning the Minimum Track</h3>
+<p>This section only explains how to access the minimum track sub-component. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<h4 id="with-a-theme-1">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/ScrollBar.html#DEFAULT_CHILD_STYLE_NAME_MINIMUM_TRACK"><code>ScrollBar.DEFAULT_CHILD_STYLE_NAME_MINIMUM_TRACK</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( ScrollBar.DEFAULT_CHILD_STYLE_NAME_MINIMUM_TRACK, setScrollBarMinimumTrackStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setScrollBarMinimumTrackStyles( track:Button ):void
+{
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    track.defaultSkin = skin;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>scrollBar.customMinimumTrackStyleName = &quot;custom-minimum-track&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/ScrollBar.html#customMinimumTrackStyleName"><code>customMinimumTrackStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;custom-minimum-track&quot;, setScrollBarCustomMinimumTrackStyles );</code></pre>
+<h4 id="without-a-theme-1">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/ScrollBar.html#minimumTrackFactory"><code>minimumTrackFactory</code></a> to provide skins for the scroll bar's minimum track:</p>
+<pre class="code"><code>scrollBar.minimumTrackFactory = function():Button
+{
+    var track:Button = new Button();
+
+    //skin the minimum track here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    track.defaultSkin = skin;
+
+    return track;
+}</code></pre>
+<h3 id="skinning-the-maximum-track">Skinning the Maximum Track</h3>
+<p>This section only explains how to access the maximum track sub-component. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<p>The scroll bar's maximum track may be skinned similarly to the minimum track. The style name to use with <a href="themes.html">themes</a> is <a href="../api-reference/feathers/controls/ScrollBar.html#DEFAULT_CHILD_STYLE_NAME_MAXIMUM_TRACK"><code>ScrollBar.DEFAULT_CHILD_STYLE_NAME_MAXIMUM_TRACK</code></a> or you can customize the style name with <a href="../api-reference/feathers/controls/ScrollBar.html#customMaximumTrackStyleName"><code>customMaximumTrackStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/ScrollBar.html#maximumTrackFactory"><code>maximumTrackFactory</code></a>.</p>
+<h3 id="skinning-the-decrement-button">Skinning the Decrement Button</h3>
+<p>This section only explains how to access the decrement button sub-component. Please read <a href="button.html">How to use the Feathers Button component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<h4 id="with-a-theme-2">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/ScrollBar.html#DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON"><code>ScrollBar.DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( ScrollBar.DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON, setScrollBarDecrementButtonStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setScrollBarDecrementButtonStyles( button:Button ):void
+{
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    button.defaultSkin = skin;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>scrollBar.customDecrementButtonStyleName = &quot;custom-decrement-button&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/ScrollBar.html#customDecrementButtonStyleName"><code>customDecrementButtonStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;custom-decrement-button&quot;, setScrollBarCustomDecrementButtonStyles );</code></pre>
+<h4 id="without-a-theme-2">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/ScrollBar.html#decrementButtonFactory"><code>decrementButtonFactory</code></a> to provide skins for the scroll bar's decrement button:</p>
+<pre class="code"><code>scrollBar.decrementButtonFactory = function():Button
+{
+    var button:Button = new Button();
+
+    //skin the decrement button here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    button.defaultSkin = skin;
+
+    return button;
+}</code></pre>
+<h3 id="skinning-the-increment-button">Skinning the Increment Button</h3>
+<p>This section only explains how to access the increment button sub-component. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<p>The scroll bar's increment button may be skinned similarly to the decrement button. The style name to use with <a href="themes.html">themes</a> is <a href="../api-reference/feathers/controls/ScrollBar.html#DEFAULT_CHILD_STYLE_NAME_INCREMENT_BUTTON"><code>ScrollBar.DEFAULT_CHILD_STYLE_NAME_INCREMENT_BUTTON</code></a> or you can customize the style name with <a href="../api-reference/feathers/controls/ScrollBar.html#customIncrementButtonStyleName"><code>customIncrementButtonStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/ScrollBar.html#incrementButtonFactory"><code>incrementButtonFactory</code></a>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/ScrollBar.html"><code>feathers.controls.ScrollBar</code> API Documentation</a></p></li>
+<li><p><a href="simple-scroll-bar.html">How to use the Feathers <code>SimpleScrollBar</code> Component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

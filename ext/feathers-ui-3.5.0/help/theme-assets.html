@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Managing assets in Feathers themes - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="managing-assets-in-feathers-themes">Managing assets in Feathers themes</h1>
+<p>There are two primary approaches to managing assets (such as textures or bitmap fonts) in Feathers themes. You can embed assets in the SWF or you can load assets at runtime.</p>
+<h2 id="embedded-assets">Embedded Assets</h2>
+<p>The first approach packages everything up in one place by embedded the assets into the final SWF (or SWC) with the compiled code. The assets are preloaded and ready to instantiate and use as needed.</p>
+<p>It's the easiest way for beginners to get started with the Feathers example themes. Just drop a SWC into your project, and instantiate the theme:</p>
+<pre class="code"><code>new MetalWorksMobileTheme();</code></pre>
+<p>However, this approach requires more memory. The Flash runtimes store the full running SWF in memory at all times. When an embedded asset is instantiated, the memory for that asset is duplicated from the SWF, essentially doubling the memory.</p>
+<p>The example themes have small texture atlases, so this impact will be low, but more advanced custom themes may require a much larger amount of memory.</p>
+<h2 id="loading-assets-at-runtime">Loading Assets at Runtime</h2>
+<p>The second approach keeps the assets separate from the code by using the Starling <code>AssetManager</code> to load assets at rutnime. The assets can be loaded from a URL, and in AIR, the assets can also be loaded from the file system. The memory usage is lower because the assets will only appear in memory once, unlike when they are embedded. However, setting up the theme to use an asset manager is a little more complicated.</p>
+<p>First, you need to specify the location of the assets. In an AIR app, you need to include the asset files when packaging your app. <code>MetalWorksMobileThemeWithAssetManager</code> requires two files:</p>
+<ul>
+<li><p>images/metalworks.xml</p></li>
+<li><p>images/metalworks.png</p></li>
+</ul>
+<p>In the following example, we tell the theme that the <code>images</code> folder (which contains the two files) are placed in <code>File.applicationDirectory</code>:</p>
+<pre class="code"><code>var theme:MetalWorksMobileThemeWithAssetManager =
+    new MetalWorksMobileThemeWithAssetManager( File.applicationDirectory.url );</code></pre>
+<p>You don't necessarily need to add the assets directly to <code>File.applicationDirectory</code>. You might want to add them to a subdirectory instead. Flash Builder and other IDEs should allow you to specify the location of included files, and you can also specify the included files when packaging with the ADT command line tool.</p>
+<p>Next, let's add a listener to the theme for <code>Event.COMPLETE</code>:</p>
+<pre class="code"><code>theme.addEventListener( Event.COMPLETE, theme_completeHandler );</code></pre>
+<p>This event will be dispatched when the asset manager has finished loading all of the assets, and the theme is ready to start skinning Feathers components. In other words, you should always wait until the theme dispatches this event before you start showing any of your app's user interface. Otherwise, the theme won't have textures and things ready to provide skins.</p>
+<p>The listener for this event might look something like this:</p>
+<pre class="code"><code>private function theme_completeHandler( event:Event ):void
+{
+    // the theme is ready!
+ 
+    this.button = new Button();
+    this.button.label = &quot;Click Me&quot;;
+    this.addChild( button );
+}</code></pre>
+<p>Other themes will require their own set of files. The main thing to keep in mind is that you need to point to what the theme considers the root directory of its assets. In the case of <code>MetalWorksMobileThemeWithAssetManager</code>, that isn't actually the <code>images</code> directory, but its parent directory instead. In future versions of Feathers, this theme might require additional assets that are in a directory next to the <code>images</code> directory, so we want to keep it flexible. As an example, <code>MinimalMobileThemeWithAssetManager</code> requires these files:</p>
+<ul>
+<li><p>images/minimal.xml</p></li>
+<li><p>images/minimal.png</p></li>
+<li><p>fonts/pf_ronda_seven.fnt</p></li>
+</ul>
+<p>As you can see, the bitmap font file that <code>MinimalMobileThemeWithAssetManager</code> uses is in a separate directory from the image files. The parent directory of <code>images</code> and <code>fonts</code> is the real &quot;root&quot; directory for this theme's files.</p>
+<h3 id="loading-assets-with-a-custom-asset-manager">Loading assets with a custom asset manager</h3>
+<p>By default, the theme will create its own <code>AssetManager</code>. If you would like to load extra assets that the theme isn't aware of, you may optionally pass in your own asset manager to the example theme's constructor:</p>
+<pre class="code"><code>var assets:AssetManager = new AssetManager();
+assets.enqueue( File.applicationDirectory.resolvePath( &quot;./images/custom-asset.png&quot; ) );
+ 
+var theme:MetalWorksMobileThemeWithAssetManager =
+    new MetalWorksMobileThemeWithAssetManager( File.applicationDirectory.url, assets );
+ 
+theme.addEventListener( Event.COMPLETE, theme_completeHandler );</code></pre>
+<p>Add all of extra assets that you need before passing the asset manager to the theme.</p>
+<p>Never call the <code>loadQueue()</code> function on the <code>AssetManager</code> that you pass to a theme. The theme must call it for you because the asset manager does not dispatch any kind of complete event that the theme can listen to, and the theme needs to know when its assets are ready. If you need to know when the assets are fully loaded, listen for <code>Event.COMPLETE</code> on the theme.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="themes.html">Introduction to Feathers Themes</a></p></li>
+<li><p><a href="http://wiki.starling-framework.org/manual/asset_management">Starling Framework: Asset Management</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

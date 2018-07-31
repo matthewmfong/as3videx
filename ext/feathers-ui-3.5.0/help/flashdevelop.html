@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Setting up Feathers in FlashDevelop - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="setting-up-feathers-in-flashdevelop">Setting up Feathers in FlashDevelop</h1>
+<p>Let's get your <a href="http://www.flashdevelop.org/">FlashDevelop</a> development environment ready to use Feathers.</p>
+<aside class="info">
+These instructions apply to FlashDevelop 4.2. Minor variations may exist between different versions of FlashDevelop.
+</aside>
+<ol>
+<li><p>Download the latest stable versions of <a href="http://feathersui.com/download/">Feathers</a> and <a href="http://gamua.com/starling/download/">Starling Framework</a>.</p></li>
+<li><p>In FlashDevelop, select the <strong>Project</strong> menu → <strong>New Project</strong>. Select to <strong>ActionScript 3 - AIR Mobile AS3 App</strong> project type. Enter your project <strong>Name</strong>, and project <strong>Location</strong> in your system. Then click <strong>Ok</strong>.</p></li>
+<li><p>Next, select the <strong>Project</strong> menu → <strong>Properties…</strong>. Go to the <strong>SDK</strong> tab and select the appropriate combined Flex or AIR SDK to use.</p></li>
+<li><p>Edit <code>bat/SetupSDK.bat</code> to point to your SDK folder.</p>
+<pre class="code"><code>set FLEX_SDK=C:\flex-sdk</code></pre></li>
+<li><p>Make sure in <strong>Project</strong> menu → <strong>Properties…</strong>, in <strong>Output</strong> tab to select the appropriate version of Adobe AIR. Check the Feathers README file to see the minimum required versions of Adobe AIR and Flash Player for the build of Feathers that you are using.</p></li>
+<li><p>Edit the <strong>application.xml</strong> file to update the Adobe AIR namespace. This version should be the same as the Adobe AIR version in the previous step. For example, to target Adobe AIR 15, the namespace should read:</p>
+<pre class="code"><code>&lt;application xmlns=&quot;http://ns.adobe.com/air/application/15.0&quot;&gt;</code></pre></li>
+<li><p>Now that the project is created, you will need to add Feathers and Starling Framework to the project. Move <strong>starling.swc</strong> and <strong>feathers.swc</strong> into the <code>lib</code> folder.</p></li>
+<li><p>Right-click <strong>starling.swc</strong> file in the Project pane, and select <strong>Add to library</strong>. The color of the file should change to blue. Repeat this step with <strong>feathers.swc</strong> .</p></li>
+</ol>
+<p>Your project is ready. If you're unsure how to proceed, start by using the code in the <strong>Create your Game</strong> section of the <a href="http://gamua.com/starling/first-steps/">Starling First Steps Tutorial</a>. Then take a look at the <a href="getting-started.html">Feathers Getting Started Tutorial</a>.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

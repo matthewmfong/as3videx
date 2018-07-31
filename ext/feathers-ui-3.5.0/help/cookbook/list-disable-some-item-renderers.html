@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to disable some item renderers in a Feathers List component - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-disable-some-item-renderers-in-a-feathers-list-component">How to disable some item renderers in a Feathers <code>List</code> component</h1>
+<p>In your data provider, add a new property to the items that will indicate whether the item renderer should be enabled or not. In this example, we call it <code>enabled</code>, but you can choose any name:</p>
+<pre class="code"><code>list.dataProvider = new ArrayCollection(
+[
+    { text: &quot;Some Item&quot;, enabled: true },
+    { text: &quot;Another One&quot;, enabled: false },
+]);</code></pre>
+<p>In your <code>itemRendererFactory</code>, set the <code>itemHasEnabled</code> property of the item renderer to <code>true</code>. Then, pass the name of the new property to the <code>enabledField</code> property:</p>
+<pre class="code"><code>list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+    itemRenderer.labelField = &quot;text&quot;;
+
+    itemRenderer.itemHasEnabled = true;
+    itemRenderer.enabledField = &quot;enabled&quot;;
+    
+    return itemRenderer;
+};</code></pre>
+<p>To update whether an item renderer is enabled or not after the <code>List</code> has been created, change the property in the data provider:</p>
+<pre class="code"><code>var item:Object = list.dataProvider.getItemAt(4);
+item.enabled = false;</code></pre>
+<p>Then, call <code>updateItemAt()</code> with the item's index to update the item renderer with the new data:</p>
+<pre class="code"><code>list.dataProvider.updateItemAt(4);</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../list.html">How to use the Feathers <code>List</code> component</a></li>
+<li><a href="../default-item-renderers.html">How to use the default Feathers item renderer with <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code></a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

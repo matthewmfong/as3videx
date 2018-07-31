@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Media player controls - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="media-player-controls">Media player controls</h1>
+<p>Media players can have many different types of sub-components for customizing the playback behavior. Buttons might pause or play the media, switch to full screen mode, or mute the volume. Sliders might seek to a different time or change the volume. The <a href="sound-player.html"><code>SoundPlayer</code></a> and <a href="video-player.html"><code>VideoPlayer</code></a> components may be customized with a number of these controls. Let's look at which ones are available in Feathers.</p>
+<h2 id="fullscreentogglebutton"><code>FullScreenToggleButton</code></h2>
+<p>The <a href="../api-reference/feathers/media/FullScreenToggleButton.html"><code>FullScreenToggleButton</code></a> class is a special toggle button component that controls whether a video player is displayed in full screen mode or not.</p>
+<pre class="code"><code>var button:FullScreenToggleButton = new FullScreenToggleButton();
+videoPlayer.addChild( button );</code></pre>
+<h2 id="mutetogglebutton"><code>MuteToggleButton</code></h2>
+<p>The <a href="../api-reference/feathers/media/MuteToggleButton.html"><code>MuteToggleButton</code></a> class is a special toggle button component that controls whether the media player's audio is muted or not.</p>
+<pre class="code"><code>var button:MuteToggleButton = new MuteToggleButton();
+mediaPlayer.addChild( button );</code></pre>
+<h2 id="playpausetogglebutton"><code>PlayPauseToggleButton</code></h2>
+<p>The <a href="../api-reference/feathers/media/PlayPauseToggleButton.html"><code>PlayPauseToggleButton</code></a> class is a special toggle button component that controls whether the media player's media is playing or paused.</p>
+<pre class="code"><code>var button:PlayPauseToggleButton = new PlayPauseToggleButton();
+mediaPlayer.addChild( button );</code></pre>
+<h2 id="seekslider"><code>SeekSlider</code></h2>
+<p>The <a href="../api-reference/feathers/media/SeekSlider.html"><code>SeekSlider</code></a> class is a special slider component that displays and changes the current time of the playing media.</p>
+<pre class="code"><code>var slider:SeekSlider = new SeekSlider();
+mediaPlayer.addChild( slider );</code></pre>
+<h2 id="timelabel"><code>TimeLabel</code></h2>
+<p>The <a href="../api-reference/feathers/media/TimeLabel.html"><code>TimeLabel</code></a> class is a special label component that displays the current time, the remaining time, or the total time of the playing media. It can also display the current time and the total time together.</p>
+<pre class="code"><code>var label:TimeLabel = new TimeLabel();
+label.displayMode = TimeLabel.DISPLAY_MODE_CURRENT_TIME;
+mediaPlayer.addChild( label );</code></pre>
+<h2 id="volumeslider"><code>VolumeSlider</code></h2>
+<p>The <a href="../api-reference/feathers/media/VolumeSlider.html"><code>VolumeSlider</code></a> class is a special slider component that changes the current volume of the playing media.</p>
+<pre class="code"><code>var slider:VolumeSlider = new VolumeSlider();
+mediaPlayer.addChild( slider );</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="sound-player.html">How to use the Feathers <code>SoundPlayer</code> component</a></p></li>
+<li><p><a href="video-player.html">How to use the Feathers <code>VideoPlayer</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Using WaterfallLayout in Feathers containers - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="using-waterfalllayout-in-feathers-containers">Using <code>WaterfallLayout</code> in Feathers containers</h1>
+<p>The <a href="../api-reference/feathers/layout/WaterfallLayout.html"><code>WaterfallLayout</code></a> class may be used by components that support layout, such as <a href="list.html"><code>List</code></a>, <a href="layout-group.html"><code>LayoutGroup</code></a> and <a href="scroll-container.html"><code>ScrollContainer</code></a>, to display items with multiple columns of equal width where items may have variable heights. Items are added to the layout in order, but they may be added to any of the available columns. The layout selects the column where the column's height plus the item's height will result in the smallest possible total height.</p>
+<p><picture><img src="images/waterfall-layout.png" srcset="images/waterfall-layout@2x.png 2x" alt="Screenshot of Feathers WaterfallLayout" /></picture></p>
+<p><code>WaterfallLayout</code> supports a number of useful options for adjusting the number of columns, the spacing between items, and the alignment of the columns.</p>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>WaterfallLayout</code> and pass it to a <a href="layout-group.html"><code>LayoutGroup</code></a>:</p>
+<pre class="code"><code>var layout:WaterfallLayout = new WaterfallLayout();
+ 
+var container:LayoutGroup = new LayoutGroup();
+container.layout = layout;
+this.addChild( container );</code></pre>
+<p>There are a number of simple properties that may be used to affect positioning and sizing of items in the layout. Let's look at some of the most common.</p>
+<h3 id="spacing">Spacing</h3>
+<p>The <em>padding</em> is the space around the edges of the container. Let's set the <a href="../api-reference/feathers/layout/WaterfallLayout.html#padding"><code>padding</code></a> property to <code>12</code> pixels:</p>
+<pre class="code"><code>layout.padding = 12;</code></pre>
+<p>If needed, we may set padding on each side of the container separately. Below, we set the <a href="../api-reference/feathers/layout/WaterfallLayout.html#paddingTop"><code>paddingTop</code></a> and <a href="../api-reference/feathers/layout/WaterfallLayout.html#paddingBottom"><code>paddingBottom</code></a> to <code>10</code> pixels, and we set the <a href="../api-reference/feathers/layout/WaterfallLayout.html#paddingLeft"><code>paddingLeft</code></a> and <a href="../api-reference/feathers/layout/WaterfallLayout.html#paddingRight"><code>paddingRight</code></a> to <code>15</code> pixels:</p>
+<pre class="code"><code>layout.paddingTop = 10;
+layout.paddingRight = 15;
+layout.paddingBottom = 10;
+layout.paddingLeft = 15;</code></pre>
+<p>The <em>gap</em> is the space between items. Let's set the <a href="../api-reference/feathers/layout/WaterfallLayout.html#gap"><code>gap</code></a> property to <code>5</code> pixels:</p>
+<pre class="code"><code>layout.gap = 5;</code></pre>
+<p>If needed, we can set the horizontal and vertical gaps separately. We'll set the <a href="../api-reference/feathers/layout/WaterfallLayout.html#horizontalGap"><code>horizontalGap</code></a> property to <code>4</code> pixels and the <a href="../api-reference/feathers/layout/WaterfallLayout.html#verticalGap"><code>verticalGap</code></a> property to <code>6</code> pixels:</p>
+<pre class="code"><code>layout.horizontalGap = 4;
+layout.verticalGap = 6;</code></pre>
+<h3 id="columns">Columns</h3>
+<p>We can <em>align</em> the columns in the layout using the <a href="../api-reference/feathers/layout/WaterfallLayout.html#horizontalAlign"><code>horizontalAlign</code></a> property. Let's adjust the horizontal alignment so that the content will be pulled to the right:</p>
+<pre class="code"><code>layout.horizontalAlign = HorizontalAlign.RIGHT;</code></pre>
+<p>It's possible to request a specific number of columns for the layout to display. The layout may not always be able to accomodate this value because the container may be too small, but if there is enough room for the requested number of columns, that's the number it will display. Let's tell the layout to use three columns by setting the <a href="../api-reference/feathers/layout/WaterfallLayout.html#requestedColumnCount"><code>requestedColumnCount</code></a> property:</p>
+<pre class="code"><code>layout.requestedColumnCount = 3;</code></pre>
+<p>Now, the layout will always display three columns, even if the container can fit four or more. However, if only one or two columns can be fit into the container, the layout will display the maximum number that will fit.</p>
+<aside class="info">
+If the width of the container is not set, the layout will automatically calculate a width that accomodates the <code>requestedColumnCount</code>.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/layout/WaterfallLayout.html"><code>feathers.layout.WaterfallLayout</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

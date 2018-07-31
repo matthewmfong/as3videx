@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to dispatch a triggered event from a custom item renderer - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-dispatch-a-triggered-event-from-a-custom-item-renderer">How to dispatch a triggered event from a custom item renderer</h1>
+<p>A <a href="../item-renderers.html">custom item renderer</a> should dispatch <a href="http://doc.starling-framework.org/core/starling/events/Event.html#TRIGGERED"><code>Event.TRIGGERED</code></a> when it is tapped or clicked, similar to a <a href="../button.html"><code>Button</code></a>.</p>
+<p>Using the <a href="../../api-reference/feathers/utils/touch/TapToTrigger.html"><code>TapToTrigger</code></a> class, it's easy to dispatch <code>Event.TRIGGERED</code> on tap or click:</p>
+<pre class="code"><code>public class CustomItemRenderer extends LayoutGroupListItemRenderer
+{
+    public function CustomItemRenderer()
+    {
+        super();
+        this._trigger = new TapToTrigger(this);
+    }
+
+    private var _trigger:TapToTrigger;
+}</code></pre>
+<p>That's it! The <code>TouchEvent.TOUCH</code> listeners will be added automatically, and your item renderer will dispatch <code>Event.TRIGGERED</code> like a button.</p>
+<p>You should also <a href="item-renderer-select-on-tap.html">learn how to use <code>TapToSelect</code></a> to change <code>isSelected</code> and dispatch <code>Event.CHANGE</code> when tapped or clicked.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../item-renderers.html">Introduction to Custom Item Renderers</a></p></li>
+<li><p><a href="item-renderer-select-on-tap.html">Feathers Cookbook: Selecting a custom item renderer on tap or click</a></p></li>
+<li><p><a href="item-renderer-long-press.html">Feathers Cookbook: Dispatching a long press event from a custom item renderer</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

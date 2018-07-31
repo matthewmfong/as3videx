@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="ImageSkin,feathers.skins.ImageSkin,addOnFunction,callBeforeOriginalStyleProvider,conditionalFunction,defaultColor,defaultStyleFunction,defaultTexture,disabledColor,disabledTexture,explicitHeight,explicitMaxHeight,explicitMaxWidth,explicitMinHeight,explicitMinWidth,explicitWidth,falseStyleProvider,maxHeight,maxWidth,minHeight,minTouchHeight,minTouchWidth,minWidth,originalStyleProvider,selectedColor,selectedTexture,stateContext,styleFunction,trueStyleProvider,applyStyles,applyStyles,applyStyles,applyStyles,clearStyleProvider,dispose,getColorForState,getRegisteredClasses,getStyleProvider,getTextureForState,hasStyleProvider,setColorForState,setFunctionForStyleName,setTextureForState"><title>feathers.skins.ImageSkin</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'ImageSkin - Feathers User Interface Controls for Starling Framework API Reference';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Feathers 3.5.0 API Reference</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?feathers/skins/ImageSkin.html&amp;feathers/skins/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><picture><img src="../../images/logo.jpg" srcset="../../images/logo@2x.jpg 2x" class="logoImage" alt=" Feathers Logo " title=" Feathers Logo "></picture></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">ImageSkin</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("ImageSkin"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">feathers.skins</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  ImageSkin</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">ImageSkin  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> starling.display.Image</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../feathers/core/IMeasureDisplayObject.html">IMeasureDisplayObject</a>,  <a href="../../feathers/core/IStateObserver.html">IStateObserver</a></td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Feathers 3.0.0</td></tr></table><p></p><p></p><p></p>
+	 A skin for Feathers components that displays a texture. Has the ability
+	 to change its texture based on the current state of the Feathers
+	 component that is being skinned.
+	 
+	 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin( upTexture );
+skin.setTextureForState( ButtonState.DOWN, downTexture );
+skin.setTextureForState( ButtonState.HOVER, hoverTexture );
+
+var button:Button = new Button();
+button.label = "Click Me";
+button.defaultSkin = skin;
+this.addChild( button );</pre></div>
+	 
+	           <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso">starling.display.Image</div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#defaultColor" class="signatureLink">defaultColor</a> : uint<div class="summaryTableDescription">
+		 The default color to use to tint the skin.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#defaultTexture" class="signatureLink">defaultTexture</a> : Texture<div class="summaryTableDescription">
+		 The default texture that the skin will display.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#disabledColor" class="signatureLink">disabledColor</a> : uint<div class="summaryTableDescription">
+		 The color to tint the skin when the stateContext is
+		 an IFeathersControl and its isEnabled
+		 property is false.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#disabledTexture" class="signatureLink">disabledTexture</a> : Texture<div class="summaryTableDescription">
+		 The texture to display when the stateContext is
+		 an IFeathersControl and its isEnabled
+		 property is false.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#explicitHeight" class="signatureLink">explicitHeight</a> : Number<div class="summaryTableDescription">[read-only] 
+		 The value passed to the height property setter.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#explicitMaxHeight" class="signatureLink">explicitMaxHeight</a> : Number<div class="summaryTableDescription">[read-only] 
+		 The value passed to the maxHeight property setter.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#explicitMaxWidth" class="signatureLink">explicitMaxWidth</a> : Number<div class="summaryTableDescription">[read-only] 
+		 The value passed to the maxWidth property setter.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#explicitMinHeight" class="signatureLink">explicitMinHeight</a> : Number<div class="summaryTableDescription">[read-only] 
+		 The value passed to the minHeight property setter.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#explicitMinWidth" class="signatureLink">explicitMinWidth</a> : Number<div class="summaryTableDescription">[read-only] 
+		 The value passed to the minWidth property setter.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#explicitWidth" class="signatureLink">explicitWidth</a> : Number<div class="summaryTableDescription">[read-only] 
+		 The value passed to the width property setter.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#maxHeight" class="signatureLink">maxHeight</a> : Number<div class="summaryTableDescription">
+		 The maximum height of the component.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#maxWidth" class="signatureLink">maxWidth</a> : Number<div class="summaryTableDescription">
+		 The maximum width of the component.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#minHeight" class="signatureLink">minHeight</a> : Number<div class="summaryTableDescription">
+		 The minimum height of the component.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#minTouchHeight" class="signatureLink">minTouchHeight</a> : Number<div class="summaryTableDescription">
+		 If the skin's height is smaller than this value, the hit area will be expanded.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#minTouchWidth" class="signatureLink">minTouchWidth</a> : Number<div class="summaryTableDescription">
+		 If the skin's width is smaller than this value, the hit area will be expanded.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#minWidth" class="signatureLink">minWidth</a> : Number<div class="summaryTableDescription">
+		 The minimum width of the component.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#selectedColor" class="signatureLink">selectedColor</a> : uint<div class="summaryTableDescription">
+		 The color to tint the skin when the stateContext is
+		 an IToggle instance and its isSelected
+		 property is true.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#selectedTexture" class="signatureLink">selectedTexture</a> : Texture<div class="summaryTableDescription">
+		 The texture to display when the stateContext is
+		 an IToggle instance and its isSelected
+		 property is true.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#stateContext" class="signatureLink">stateContext</a> : <a href="../../feathers/core/IStateContext.html">IStateContext</a><div class="summaryTableDescription">
+		 When the skin observes a state context, the skin may change its
+		 Texture based on the current state of that context.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#ImageSkin()" class="signatureLink">ImageSkin</a>(defaultTexture:Texture = null)</div><div class="summaryTableDescription">
+		 Constructor.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getColorForState()" class="signatureLink">getColorForState</a>(state:String):uint</div><div class="summaryTableDescription">
+		 Gets the color to be used by the skin when the context's
+		 currentState property matches the specified state value.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getTextureForState()" class="signatureLink">getTextureForState</a>(state:String):Texture</div><div class="summaryTableDescription">
+		 Gets the texture to be used by the skin when the context's
+		 currentState property matches the specified state value.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setColorForState()" class="signatureLink">setColorForState</a>(state:String, color:uint):void</div><div class="summaryTableDescription">
+		 Sets the color to be used by the skin when the context's
+		 currentState property matches the specified state value.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setTextureForState()" class="signatureLink">setTextureForState</a>(state:String, texture:Texture):void</div><div class="summaryTableDescription">
+		 Sets the texture to be used by the skin when the context's
+		 currentState property matches the specified state value.</div></td><td class="summaryTableOwnerCol">ImageSkin</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="defaultColor"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">defaultColor</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>defaultColor:uint</code><p></p><p></p><p>
+		 The default color to use to tint the skin. If the component
+		 being skinned supports states, the color for a specific state may
+		 be specified using the <code>setColorForState()</code> method. If
+		 no color has been specified for the current state, the default
+		 color will be used.
+		 
+		 <p>To set the color of an <code>ImageSkin</code>, the
+		 <code>defaultColor</code> property should be preferred over the
+		 <code>color</code> property defined on
+		 <code>starling.display.Mesh</code>. The <code>ImageSkin</code>
+		 will manage the <code>color</code> property internally.</p>
+		 
+		 <p>A value of <code>uint.MAX_VALUE</code> means that the
+		 <code>color</code> property will not be changed when the context's
+		 state changes.</p>
+		 		 <p>In the following example, the default color is specified:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin();
+skin.defaultColor = 0x9f0000;</pre></div>
+		 		 </p><p> The default value is <code>0xffffff</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get defaultColor():uint</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set defaultColor(value:uint):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#disabledColor" target="">disabledColor</a><br/><a href="ImageSkin.html#selectedColor" target="">selectedColor</a><br/><a href="ImageSkin.html#setColorForState()" target="">setColorForState()</a></div></div><a name="propertyDetail"></a><a name="defaultTexture"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">defaultTexture</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>defaultTexture:Texture</code><p></p><p></p><p>
+		 The default texture that the skin will display. If the component
+		 being skinned supports states, the texture for a specific state may
+		 be specified using the <code>setTextureForState()</code> method. If
+		 no texture has been specified for the current state, the default
+		 texture will be used.
+		 		 <p>In the following example, the default texture is specified in the
+		 constructor:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin( texture );</pre></div>
+		 		 <p>In the following example, the default texture is specified by
+		 setting the property:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin();
+skin.defaultTexture = texture;</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get defaultTexture():Texture</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set defaultTexture(value:Texture):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#disabledTexture" target="">disabledTexture</a><br/><a href="ImageSkin.html#selectedTexture" target="">selectedTexture</a><br/><a href="ImageSkin.html#setTextureForState()" target="">setTextureForState()</a><br/><a href="http://doc.starling-framework.org/current/starling/textures/Texture.html" target="_top">starling.textures.Texture</a></div></div><a name="propertyDetail"></a><a name="disabledColor"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">disabledColor</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>disabledColor:uint</code><p></p><p></p><p>
+		 The color to tint the skin when the <code>stateContext</code> is
+		 an <code>IFeathersControl</code> and its <code>isEnabled</code>
+		 property is <code>false</code>. If a color has been specified for
+		 the context's current state with <code>setColorForState()</code>,
+		 it will take precedence over the <code>disabledColor</code>.
+		 		 <p>A value of <code>uint.MAX_VALUE</code> means that the
+		 <code>disabledColor</code> property cannot affect the tint when the
+		 context's state changes.</p>
+		 		 <p>In the following example, the disabled color is changed:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin();
+skin.defaultColor = 0xffffff;
+skin.disabledColor = 0x999999;
+var button:Button = new Button();
+button.defaultSkin = skin;
+button.isEnabled = false;</pre></div>
+		 		 </p><p> The default value is <code>uint.MAX_VALUE</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get disabledColor():uint</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set disabledColor(value:uint):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#defaultColor" target="">defaultColor</a><br/><a href="ImageSkin.html#selectedColor" target="">selectedColor</a><br/><a href="ImageSkin.html#setColorForState()" target="">setColorForState()</a></div></div><a name="propertyDetail"></a><a name="disabledTexture"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">disabledTexture</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>disabledTexture:Texture</code><p></p><p></p><p>
+		 The texture to display when the <code>stateContext</code> is
+		 an <code>IFeathersControl</code> and its <code>isEnabled</code>
+		 property is <code>false</code>. If a texture has been specified for
+		 the context's current state with <code>setTextureForState()</code>,
+		 it will take precedence over the <code>disabledTexture</code>.
+		 		 <p>In the following example, the disabled texture is changed:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin( upTexture );
+skin.disabledTexture = disabledTexture;
+
+var button:Button = new Button();
+button.defaultSkin = skin;
+button.isEnabled = false;</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get disabledTexture():Texture</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set disabledTexture(value:Texture):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#defaultTexture" target="">defaultTexture</a><br/><a href="ImageSkin.html#selectedTexture" target="">selectedTexture</a><br/><a href="ImageSkin.html#setTextureForState()" target="">setTextureForState()</a><br/><a href="http://doc.starling-framework.org/current/starling/textures/Texture.html" target="_top">starling.textures.Texture</a></div></div><a name="propertyDetail"></a><a name="explicitHeight"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">explicitHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>explicitHeight:Number</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The value passed to the <code>height</code> property setter. If the
+		 <code>height</code> property has not be set, returns
+		 <code>NaN</code>.
+		 
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get explicitHeight():Number</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#height" target="">height</a></div></div><a name="propertyDetail"></a><a name="explicitMaxHeight"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">explicitMaxHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>explicitMaxHeight:Number</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The value passed to the <code>maxHeight</code> property setter. If
+		 the <code>maxHeight</code> property has not be set, returns
+		 <code>NaN</code>.
+		 		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get explicitMaxHeight():Number</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#maxHeight" target="">maxHeight</a></div></div><a name="propertyDetail"></a><a name="explicitMaxWidth"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">explicitMaxWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>explicitMaxWidth:Number</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The value passed to the <code>maxWidth</code> property setter. If the
+		 <code>maxWidth</code> property has not be set, returns
+		 <code>NaN</code>.
+		 		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get explicitMaxWidth():Number</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#maxWidth" target="">maxWidth</a></div></div><a name="propertyDetail"></a><a name="explicitMinHeight"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">explicitMinHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>explicitMinHeight:Number</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The value passed to the <code>minHeight</code> property setter. If
+		 the <code>minHeight</code> property has not be set, returns
+		 <code>NaN</code>.
+		 		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get explicitMinHeight():Number</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#minHeight" target="">minHeight</a></div></div><a name="propertyDetail"></a><a name="explicitMinWidth"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">explicitMinWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>explicitMinWidth:Number</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The value passed to the <code>minWidth</code> property setter. If the
+		 <code>minWidth</code> property has not be set, returns
+		 <code>NaN</code>.
+		 		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get explicitMinWidth():Number</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#minWidth" target="">minWidth</a></div></div><a name="propertyDetail"></a><a name="explicitWidth"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">explicitWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>explicitWidth:Number</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 The value passed to the <code>width</code> property setter. If the
+		 <code>width</code> property has not be set, returns <code>NaN</code>.
+		 
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get explicitWidth():Number</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#width" target="">width</a></div></div><a name="propertyDetail"></a><a name="maxHeight"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">maxHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>maxHeight:Number</code><p></p><p></p><p>
+		 The maximum height of the component.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxHeight():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxHeight(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="maxWidth"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">maxWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>maxWidth:Number</code><p></p><p></p><p>
+		 The maximum width of the component.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get maxWidth():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set maxWidth(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="minHeight"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">minHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>minHeight:Number</code><p></p><p></p><p>
+		 The minimum height of the component.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minHeight():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minHeight(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="minTouchHeight"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">minTouchHeight</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>minTouchHeight:Number</code><p></p><p></p><p>
+		 If the skin's height is smaller than this value, the hit area will be expanded.
+		 		 <p>In the following example, the minimum height of the hit area is
+		 set to 120 pixels:</p>
+		 		 <div class="listing" version="3.0"><pre>
+skin.minTouchHeight = 120;</pre></div>
+		 		 </p><p> The default value is <code>0</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minTouchHeight():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minTouchHeight(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="minTouchWidth"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">minTouchWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>minTouchWidth:Number</code><p></p><p></p><p>
+		 If the skin's width is smaller than this value, the hit area will be expanded.
+		 		 <p>In the following example, the minimum width of the hit area is
+		 set to 120 pixels:</p>
+		 		 <div class="listing" version="3.0"><pre>
+skin.minTouchWidth = 120;</pre></div>
+		 		 </p><p> The default value is <code>0</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minTouchWidth():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minTouchWidth(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="minWidth"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">minWidth</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>minWidth:Number</code><p></p><p></p><p>
+		 The minimum width of the component.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get minWidth():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set minWidth(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="selectedColor"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">selectedColor</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>selectedColor:uint</code><p></p><p></p><p>
+		 The color to tint the skin when the <code>stateContext</code> is
+		 an <code>IToggle</code> instance and its <code>isSelected</code>
+		 property is <code>true</code>. If a color has been specified for
+		 the context's current state with <code>setColorForState()</code>,
+		 it will take precedence over the <code>selectedColor</code>.
+		 		 <p>In the following example, the selected color is changed:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin();
+skin.defaultColor = 0xffffff;
+skin.selectedColor = 0xffcc00;
+var toggleButton:ToggleButton = new ToggleButton();
+toggleButton.defaultSkin = skin;
+toggleButton.isSelected = true;</pre></div>
+		 		 </p><p> The default value is <code>uint.MAX_VALUE</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get selectedColor():uint</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set selectedColor(value:uint):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#defaultColor" target="">defaultColor</a><br/><a href="ImageSkin.html#disabledColor" target="">disabledColor</a><br/><a href="ImageSkin.html#setColorForState()" target="">setColorForState()</a></div></div><a name="propertyDetail"></a><a name="selectedTexture"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">selectedTexture</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>selectedTexture:Texture</code><p></p><p></p><p>
+		 The texture to display when the <code>stateContext</code> is
+		 an <code>IToggle</code> instance and its <code>isSelected</code>
+		 property is <code>true</code>. If a texture has been specified for
+		 the context's current state with <code>setTextureForState()</code>,
+		 it will take precedence over the <code>selectedTexture</code>.
+		 		 <p>In the following example, the selected texture is changed:</p>
+		 		 <div class="listing" version="3.0"><pre>
+var skin:ImageSkin = new ImageSkin( upTexture );
+skin.selectedTexture = selectedTexture;
+var toggleButton:ToggleButton = new ToggleButton();
+toggleButton.defaultSkin = skin;
+toggleButton.isSelected = true;</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get selectedTexture():Texture</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set selectedTexture(value:Texture):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#defaultTexture" target="">defaultTexture</a><br/><a href="ImageSkin.html#disabledTexture" target="">disabledTexture</a><br/><a href="ImageSkin.html#setTextureForState()" target="">setTextureForState()</a><br/><a href="http://doc.starling-framework.org/current/starling/textures/Texture.html" target="_top">starling.textures.Texture</a></div></div><a name="propertyDetail"></a><a name="stateContext"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">stateContext</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>stateContext:<a href="../../feathers/core/IStateContext.html">IStateContext</a></code><p></p><p></p><p>
+		 When the skin observes a state context, the skin may change its
+		 <code>Texture</code> based on the current state of that context.
+		 Typically, a relevant component will automatically assign itself as
+		 the state context of its skin, so this property is considered to be
+		 for internal use only.
+		 		 </p><p> The default value is <code>null</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get stateContext():<a href="../../feathers/core/IStateContext.html">IStateContext</a></code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set stateContext(value:<a href="../../feathers/core/IStateContext.html">IStateContext</a>):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#setTextureForState()" target="">setTextureForState()</a></div></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="ImageSkin()"></a><a name="ImageSkin(starling.textures.Texture)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">ImageSkin</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function ImageSkin(defaultTexture:Texture = null)</code><p></p><p>
+		 Constructor.
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">defaultTexture</span>:Texture</code> (default = <code>null</code>)<code></code></td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="getColorForState()"></a><a name="getColorForState(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getColorForState</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function getColorForState(state:String):uint</code><p></p><p></p><p>
+		 Gets the color to be used by the skin when the context's
+		 <code>currentState</code> property matches the specified state value.
+		 		 <p>If a color is not defined for a specific state, returns
+		 <code>uint.MAX_VALUE</code>.</p>
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">state</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>uint</code></td></tr></table><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#setColorForState()" target="">setColorForState()</a></div></div><a name="getTextureForState()"></a><a name="getTextureForState(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getTextureForState</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function getTextureForState(state:String):Texture</code><p></p><p></p><p>
+		 Gets the texture to be used by the skin when the context's
+		 <code>currentState</code> property matches the specified state value.
+		 		 <p>If a texture is not defined for a specific state, returns
+		 <code>null</code>.</p>
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">state</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Texture</code></td></tr></table><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#setTextureForState()" target="">setTextureForState()</a></div></div><a name="setColorForState()"></a><a name="setColorForState(String,uint)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setColorForState</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setColorForState(state:String, color:uint):void</code><p></p><p></p><p>
+		 Sets the color to be used by the skin when the context's
+		 <code>currentState</code> property matches the specified state value.
+		 		 <p>If a color is not defined for a specific state, the value of the
+		 <code>defaultTexture</code> property will be used instead.</p>
+		 
+		 <p>To clear a state's color, pass in <code>uint.MAX_VALUE</code>.</p>
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">state</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">color</span>:uint</code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#defaultColor" target="">defaultColor</a><br/><a href="ImageSkin.html#getColorForState()" target="">getColorForState()</a></div></div><a name="setTextureForState()"></a><a name="setTextureForState(String,starling.textures.Texture)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setTextureForState</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setTextureForState(state:String, texture:Texture):void</code><p></p><p></p><p>
+		 Sets the texture to be used by the skin when the context's
+		 <code>currentState</code> property matches the specified state value.
+		 		 <p>If a texture is not defined for a specific state, the value of the
+		 <code>defaultTexture</code> property will be used instead.</p>
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">state</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">texture</span>:Texture</code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="ImageSkin.html#defaultTexture" target="">defaultTexture</a><br/><a href="ImageSkin.html#getTextureForState()" target="">getTextureForState()</a></div></div><br/><br/><hr><br/><p></p><center class="copyright"><footer><a href="https://feathersui.com/" target="_top">Feathers</a> | <a href="https://github.com/BowlerHatLLC/feathers" target="_top">Github Project</a> | <a href="https://forum.starling-framework.org/forum/feathers" target="_top">Support Forum</a></footer><br/>Thu Jun 21 2018, 07:04 AM -07:00  </center></div></body></html><!--Feathers | Github Project | Support Forum<br/>Thu Jun 21 2018, 07:04 AM -07:00  -->

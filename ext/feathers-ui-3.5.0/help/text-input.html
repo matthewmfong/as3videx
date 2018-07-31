@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers TextInput component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-textinput-component">How to use the Feathers <code>TextInput</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/TextInput.html"><code>TextInput</code></a> class supports the editing of text. It displays a background skin and uses a <a href="text-editors.html">text editor</a> to allow the user to modify the text.</p>
+<figure>
+<img src="images/text-input.png" srcset="images/text-input@2x.png 2x" alt="Screenshot of a Feathers TextInput component" />
+<figcaption>
+<code>TextInput</code> components skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#customize-input-behavior">Customize input behavior</a></p></li>
+<li><p><a href="#skinning-a-textinput">Skinning a <code>TextInput</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>TextInput</code> control and add it to the display list:</p>
+<pre class="code"><code>var input:TextInput = new TextInput();
+this.addChild( input );</code></pre>
+<h3 id="changing-text-programmatically">Changing text programmatically</h3>
+<p>Text may be changed programatically by setting the <a href="../api-reference/feathers/controls/TextInput.html#text"><code>text</code></a> property:</p>
+<pre class="code"><code>input.text = &quot;Hello World&quot;;</code></pre>
+<h3 id="prompt">Prompt</h3>
+<p>A prompt or hint may be displayed to describe the purpose of the text input when the text input does not contain any text.</p>
+<pre class="code"><code>input.prompt = &quot;Password&quot;;</code></pre>
+<p>Simply set the <a href="../api-reference/feathers/controls/TextInput.html#prompt"><code>prompt</code></a> property to any <code>String</code> to display it inside the text input.</p>
+<h3 id="focus-and-selection">Focus and Selection</h3>
+<p>You may programmatically set focus to the text input by calling <a href="../api-reference/feathers/controls/TextInput.html#setFocus()"><code>setFocus()</code></a>:</p>
+<pre class="code"><code>input.setFocus();</code></pre>
+<p>You can select part of the text too:</p>
+<pre class="code"><code>input.selectRange(0, input.text.length);</code></pre>
+<p>If you simply want to set the position of the cursor, you can omit the second argument to <a href="../api-reference/feathers/controls/TextInput.html#selectRange()"><code>selectRange()</code></a>:</p>
+<pre class="code"><code>input.selectRange(0);</code></pre>
+<h3 id="events">Events</h3>
+<p>Text inputs provide a number of useful events. One of the most common requirements is knowing, in real time, when the value of the <a href="../api-reference/feathers/controls/TextInput.html#text"><code>text</code></a> property has changed:</p>
+<pre class="code"><code>input.addEventListener( Event.CHANGE, input_changeHandler );</code></pre>
+<p>We can listen for <a href="../api-reference/feathers/controls/TextInput.html#event:change"><code>Event.CHANGE</code></a>.</p>
+<p>We might also want to know when the user presses <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/ui/Keyboard.html#ENTER"><code>Keyboard.ENTER</code></a>:</p>
+<pre class="code"><code>input.addEventListener( FeathersEventType.ENTER, input_enterHandler );</code></pre>
+<p>Simply listen for <a href="../api-reference/feathers/controls/TextInput.html#event:enter"><code>FeathersEventType.ENTER</code></a>.</p>
+<aside class="warn">
+On some mobile platforms, the <code>FeathersEventType.ENTER</code> event may not always be dispatched by certain text editors. For complete details, please refer to the API reference for the specific text editor that you are using.
+</aside>
+<p>Finally, you might also want to know when the text input receives and loses focus:</p>
+<pre class="code"><code>input.addEventListener( FeathersEventType.FOCUS_IN, input_focusInHandler );
+input.addEventListener( FeathersEventType.FOCUS_OUT, input_focusOutHandler );</code></pre>
+<p>The <a href="../api-reference/feathers/controls/TextInput.html#event:focusIn"><code>FeathersEventType.FOCUS_IN</code></a> and <a href="../api-reference/feathers/controls/TextInput.html#event:focusOut"><code>FeathersEventType.FOCUS_OUT</code></a> events are specially dispatched by the <code>TextInput</code>, even if the <a href="focus.html">focus manager</a> is not enabled.</p>
+<h3 id="customize-input-behavior">Customize input behavior</h3>
+<p>The <a href="../api-reference/feathers/controls/TextInput.html#displayAsPassword"><code>displayAsPassword</code></a> property may be enabled to mask a text input's text:</p>
+<pre class="code"><code>input.displayAsPassword = true;</code></pre>
+<p>Set the <a href="../api-reference/feathers/controls/TextInput.html#isEditable"><code>isEditable</code></a> property to false to make the text uneditable, without giving the text input a disabled appearance:</p>
+<pre class="code"><code>input.isEditable = false;</code></pre>
+<p>To limit the number of characters that may be entered, use the <a href="../api-reference/feathers/controls/TextInput.html#maxChars"><code>maxChars</code></a> property:</p>
+<pre class="code"><code>input.maxChars = 16;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/TextInput.html#restrict"><code>restrict</code></a> property limits the set of characters that can be entered into the text input. It works like the <code>restrict</code> property on <code>flash.text.TextField</code>.</p>
+<pre class="code"><code>input.restrict = &quot;0-9&quot;;</code></pre>
+<p>In the example above, we restrict to numeric values only.</p>
+<h2 id="skinning-a-textinput">Skinning a <code>TextInput</code></h2>
+<p>A text input provides a number of properties to customize its appearance. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/TextInput.html"><code>TextInput</code> API reference</a>. We'll look at a few of the most common ways of styling a text input below.</p>
+<h3 id="font-styles">Font Styles</h3>
+<p>The text input's font styles may be customized using the <a href="../api-reference/feathers/controls/TextInput.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>input.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );</code></pre>
+<p>Pass in a <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> object, which will work with any type of <a href="text-editors.html">text editor</a>.</p>
+<p>If the input should use different font styles when it is disabled, you may set the <a href="../api-reference/feathers/controls/TextInput.html#disabledFontStyles"><code>disabledFontStyles</code></a> property too:</p>
+<pre class="code"><code>input.disabledFontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x9a9a9a );</code></pre>
+<p>Finally, we can even customize the font styles for each of the input's specific states:</p>
+<pre class="code"><code>input.setFontStylesForState( TextInputState.ERROR,
+    new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 ) );</code></pre>
+<p>Using the code above, the color of the input's text will change when the input displays an <code>errorString</code>, and the state changes to <code>TextInputState.ERROR</code>.</p>
+<p>When font styles aren't available for a specific state, the input will use the default <code>fontStyles</code> as a fallback. For example, we haven't provided font styles for <code>TextInputState.FOCUSED</code>, so the default styles will be used.</p>
+<p>The font styles of the prompt <a href="text-renderers.html">text renderer</a> may be customized separately:</p>
+<pre class="code"><code>input.promptFontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );
+input.promptDisabledFontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x9a9a9a );
+input.setPromptFontStylesForState( TextInputState.ERROR,
+    new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 ) );</code></pre>
+<p>See the <a href="../api-reference/feathers/controls/TextInput.html#promptFontStyles"><code>promptFontStyles</code></a> and <a href="../api-reference/feathers/controls/TextInput.html#promptDisabledFontStyles"><code>promptDisabledFontStyles</code></a> properties, and the <a href="../api-reference/feathers/controls/TextInput.html#setPromptFontStylesForState()"><code>setPromptFontStylesForState()</code></a> function for details.</p>
+<h3 id="background-skin">Background Skin</h3>
+<p>Let's give our text input its background skin. In the following example, we'll use an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a>, but the skin may be any Starling display object:</p>
+<pre class="code"><code>var skin:ImageSkin = new ImageSkin( upTexture );
+skin.scale9Grid = new Rectangle( 2, 3, 3, 8 );
+input.backgroundSkin = skin;</code></pre>
+<p>We can change the appearance of the text input's skin when the state changes. In the next example, we provide another texture to the same <code>ImageSkin</code> for the text input's &quot;focused&quot; state:</p>
+<pre class="code"><code>skin.setTextureForState( TextInputState.FOCUSED, focusedTexture );</code></pre>
+<p>The <code>ImageSkin</code> automatically listens for changes to the text input's state and updates its appearance to match. When the text input is given focus, the <code>ImageSkin</code> will display this texture instead of the default one.</p>
+<p>We can also provide different display objects for specific states, if needed. In the next example, we have a texture for the &quot;disabled&quot; state that requires a different <code>scale9Grid</code> than the other textures. We can create a separate <code>ImageSkin</code> for this state:</p>
+<pre class="code"><code>var disabledSkin:ImageSkin = new ImageSkin( disabledTexture );
+input.scale9Grid = new Rectangle( 4, 2, 2, 10 );
+input.setSkinForState( TextInputState.DISABLED, disabledSkin );</code></pre>
+<p>Pass in skins for any state using the <a href="../api-reference/feathers/controls/TextInput.html#setSkinForState()"><code>setSkinForState()</code></a> function.</p>
+<p>If a skin is not provided for a specific state, the text area will display its <code>backgroundSkin</code>. Similarly, when using an <code>ImageSkin</code>, and a texture isn't provided for a specific state, it will display its default texture.</p>
+<h3 id="icon">Icon</h3>
+<p>Let's also add an icon to the <code>TextInput</code>. Icons may be customized for each of the text input's states (just like the background skin), but let's simply use one icon. In this example, we'll pass in a <code>starling.display.Image</code>:</p>
+<pre class="code"><code>input.defaultIcon = new Image( iconTexture );</code></pre>
+<p>This icon will be displayed for all of the text input's different states.</p>
+<p>If we wanted to change the appearance of the icon when the text input's state changes, we could use a <a href="../api-reference/feathers/skins/ImageSkin.html"><code>feathers.skins.ImageSkin</code></a> with multiple textures, like we did in the example above that demonstrated how to set the text input's background skin. Similarly, we could use <a href="../api-reference/feathers/controls/TextInput.html#setIconForState()"><code>setIconForState()</code></a> to pass in different display objects for each state.</p>
+<h3 id="layout">Layout</h3>
+<p>Padding may be added on each side of the text input:</p>
+<pre class="code"><code>input.paddingTop = 5;
+input.paddingRight = 8;
+input.paddingBottom = 5;
+input.paddingLeft = 8;</code></pre>
+<p>If all four padding values should be the same, you may use the <a href="../api-reference/feathers/controls/TextInput.html#padding"><code>padding</code></a> property to quickly set them all at once:</p>
+<pre class="code"><code>input.padding = 6;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/TextInput.html#typicalText"><code>typicalText</code></a> property may be used to help the text input calculate its dimensions based on the dimensions of a specific rendered string:</p>
+<pre class="code"><code>input.typicalText = &quot;The quick brown fox jumps over the lazy dog&quot;;</code></pre>
+<p>By default, the text input does not use its text for measurement. Instead, it uses the background skin, padding, and other layout properties. <code>typicalText</code> is useful when there is a width or height that must be based on the font styles. For instance, the <a href="numeric-stepper.html"><code>NumericStepper</code></a> component uses this property to provide the text input with a string that represents the largest possible string it might display.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/TextInput.html"><code>feathers.controls.TextInput</code> API Documentation</a></p></li>
+<li><p><a href="text-area.html">How to Use the Feathers <code>TextArea</code> Component</a></p></li>
+<li><p><a href="text-editors.html">Introduction to Feathers Text Editors</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

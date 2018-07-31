@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers DateTimeSpinner component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-datetimespinner-component">How to use the Feathers <code>DateTimeSpinner</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/DateTimeSpinner.html"><code>DateTimeSpinner</code></a> component allows the selection of date and time values using a set of <a href="spinner-list.html"><code>SpinnerList</code></a> components. It support multiple editing modes to allow users to select only the date, only the time, or both.</p>
+<figure>
+<img src="images/date-time-spinner.png" srcset="images/date-time-spinner@2x.png 2x" alt="Screenshot of Feathers a DateTimeSpinner component" />
+<figcaption>
+A <code>DateTimeSpinner</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-datetimespinner">Skinning a <code>DateTimeSpinner</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>DateTimeSpinner</code> control, set up its editing mode and its range of values, and add it to the display list.</p>
+<pre class="code"><code>var spinner:DateTimeSpinner = new DateTimeSpinner();
+spinner.editingMode = DateTimeMode.DATE;
+spinner.minimum = new Date(1970, 0, 1);
+spinner.maximum = new Date(2050, 11, 31);
+spinner.value = new Date(2015, 10, 31);
+this.addChild( spinner );</code></pre>
+<p>The <a href="../api-reference/feathers/controls/DateTimeSpinner.html#value"><code>value</code></a> property indicates the currently selected date and time, while the <a href="../api-reference/feathers/controls/DateTimeSpinner.html#minimum"><code>minimum</code></a> and <a href="../api-reference/feathers/controls/DateTimeSpinner.html#maximum"><code>maximum</code></a> properties establish a range of possible values. You may omit the <code>minimum</code> and <code>maximum</code> properties, and reasonable defaults will be chosen automatically.</p>
+<p>The <a href="../api-reference/feathers/controls/DateTimeSpinner.html#editingMode"><code>editingMode</code></a> property determines how the date and time are displayed.</p>
+<ul>
+<li><a href="../api-reference/feathers/controls/DateTimeMode.html#DATE"><code>DateTimeMode.DATE</code></a> displays only the date, without the time. The month and day are displayed in order based on the current locale.</li>
+<li><a href="../api-reference/feathers/controls/DateTimeMode.html#TIME"><code>DateTimeMode.TIME</code></a> displays only the time, without the date. The time is displayed in either 12-hour or 24-hour format based on the current locale.</li>
+<li><a href="../api-reference/feathers/controls/DateTimeMode.html#DATE_AND_TIME"><code>DateTimeMode.DATE_AND_TIME</code></a> displays both the date and the time. As with the previous mode, the current locale determines formatting.</li>
+</ul>
+<p>Add a listener to the <a href="../api-reference/feathers/controls/DateTimeSpinner.html#event:change"><code>Event.CHANGE</code></a> event to know when the <code>value</code> property changes:</p>
+<pre class="code"><code>spinner.addEventListener( Event.CHANGE, spinner_changeHandler );</code></pre>
+<p>The listener might look something like this:</p>
+<pre class="code"><code>function spinner_changeHandler( event:Event ):void
+{
+    var spinner:DateTimeSpinner = DateTimeSpinner( event.currentTarget );
+    trace( &quot;spinner.value changed:&quot;, spinner.value );
+}</code></pre>
+<h2 id="skinning-a-datetimespinner">Skinning a <code>DateTimeSpinner</code></h2>
+<p>The skins for a <code>DateTimeSpinner</code> control are divided into multiple <a href="spinner-list.html"><code>SpinnerList</code></a> components. For full details about which properties are available, see the <a href="../api-reference/feathers/controls/DateTimeSpinner.html"><code>DateTimeSpinner</code> API reference</a>. We'll look at a few of the most common properties below.</p>
+<h3 id="skinning-the-spinnerlist-sub-components">Skinning the <code>SpinnerList</code> sub-components</h3>
+<p>This section only explains how to access the <code>SpinnerList</code> sub-components. Please read <a href="spinner-list.html">How to use the Feathers <code>SpinnerList</code> component</a> for full details about the skinning properties that are available on <code>SpinnerList</code> components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/DateTimeSpinner.html#DEFAULT_CHILD_STYLE_NAME_LIST"><code>DateTimeSpinner.DEFAULT_CHILD_STYLE_NAME_LIST</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( SpinnerList )
+    .setFunctionForStyleName( DateTimeSpinner.DEFAULT_CHILD_STYLE_NAME_LIST, setDateTimeSpinnerListStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setDateTimeSpinnerListStyles( list:SpinnerList ):void
+{
+    var skin:Image = new Image( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    list.backgroundSkin = skin;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>spinner.customListStyleName = &quot;custom-list&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/DateTimeSpinner.html#customListStyleName"><code>customListStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( SpinnerList )
+    .setFunctionForStyleName( &quot;custom-list&quot;, setDateTimeSpinnerCustomListStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/DateTimeSpinner.html#listFactory"><code>listFactory</code></a> to provide skins for the list sub-components:</p>
+<pre class="code"><code>spinner.listFactory = function():SpinnerList
+{
+    var list:SpinnerList = new SpinnerList();
+
+    //skin the lists here, if you&#39;re not using a theme
+    var skin:Image = new Image( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    list.backgroundSkin = skin;
+
+    return list;
+}</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/DateTimeSpinner.html"><code>feathers.controls.DateTimeSpinner</code> API Documentation</a></p></li>
+<li><p><a href="spinner-list.html">How to use the Feathers <code>SpinnerList</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

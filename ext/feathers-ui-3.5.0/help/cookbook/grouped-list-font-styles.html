@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to change font styles in a GroupedList component - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-change-font-styles-in-a-groupedlist-component">How to change font styles in a <code>GroupedList</code> component</h1>
+<p>A <a href="../grouped-list.html"><code>GroupedList</code></a> component contains a number of <a href="../default-item-renderers.html">item renderers</a> and header or footer renderers that display some text. Let's look at how to change the font styles in these renderers outside of the theme.</p>
+<h2 id="the-item-renderer-font-styles">The item renderer font styles</h2>
+<p>We can customize the item renderers inside the grouped list's <a href="../../api-reference/feathers/controls/GroupedList.html#itemRendererFactory"><code>itemRendererFactory</code></a>. As long as we aren't setting any advanced font styles on the item renderer's <a href="../text-renderers.html">text renderer</a> (and the theme isn't either), we can pass a <code>starling.text.TextFormat</code> directly to the item renderer's <a href="../../api-reference/feathers/controls/Button.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>var list:GroupedList = new GroupedList();
+list.itemRendererFactory = function():IGroupedListItemRenderer
+{
+    var itemRenderer:DefaultGroupedListItemRenderer = new DefaultGroupedListItemRenderer();
+    itemRenderer.fontStyles = new TextFormat( &quot;Arial&quot;, 20, 0x3c3c3c );
+    return itemRenderer;
+};</code></pre>
+<p>If we wanted to change the item renderer's font styles inside the theme, we could set the grouped list's <a href="../../api-reference/feathers/controls/GroupedList.html#customItemRendererStyleName"><code>customItemRendererStyleName</code></a> property and <a href="../extending-themes.html">extend the theme</a>.</p>
+<h2 id="the-header-renderer-font-styles">The header renderer font styles</h2>
+<p>We can customize the header renderers inside the grouped list's <a href="../../api-reference/feathers/controls/GroupedList.html#headerRendererFactory"><code>headerRendererFactory</code></a>. As long as we aren't setting any advanced font styles on the header renderer's <a href="../text-renderers.html">text renderer</a> (and the theme isn't either), we can pass a <code>starling.text.TextFormat</code> directly to the header renderer's <a href="../../api-reference/feathers/controls/renderers/DefaultGroupedListHeaderOrFooterRenderer.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>var list:GroupedList = new GroupedList();
+list.headerRendererFactory = function():IGroupedListHeaderRenderer
+{
+    var headerRenderer:DefaultGroupedListHeaderOrFooterRenderer = new DefaultGroupedListHeaderOrFooterRenderer();
+    headerRenderer.fontStyles = new TextFormat( &quot;Arial&quot;, 20, 0x3c3c3c );
+    return headerRenderer;
+};</code></pre>
+<p>If we wanted to change the header renderer's font styles inside the theme, we could set the grouped list's <a href="../../api-reference/feathers/controls/GroupedList.html#customHeaderRendererStyleName"><code>customHeaderRendererStyleName</code></a> property and <a href="../extending-themes.html">extend the theme</a>.</p>
+<h2 id="the-footer-renderer-font-styles">The footer renderer font styles</h2>
+<p>We can customize the footer renderers inside the grouped list's <a href="../../api-reference/feathers/controls/GroupedList.html#footerRendererFactory"><code>footerRendererFactory</code></a>. As long as we aren't setting any advanced font styles on the footer renderer's <a href="../text-renderers.html">text renderer</a> (and the theme isn't either), we can pass a <code>starling.text.TextFormat</code> directly to the footer renderer's <a href="../../api-reference/feathers/controls/renderers/DefaultGroupedListHeaderOrFooterRenderer.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>var list:GroupedList = new GroupedList();
+list.footerRendererFactory = function():IGroupedListFooterRenderer
+{
+    var footerRenderer:DefaultGroupedListHeaderOrFooterRenderer = new DefaultGroupedListHeaderOrFooterRenderer();
+    footerRenderer.fontStyles = new TextFormat( &quot;Arial&quot;, 20, 0x3c3c3c );
+    return footerRenderer;
+};</code></pre>
+<p>If we wanted to change the footer renderer's font styles inside the theme, we could set the grouped list's <a href="../../api-reference/feathers/controls/GroupedList.html#customFooterRendererStyleName"><code>customFooterRendererStyleName</code></a> property and <a href="../extending-themes.html">extend the theme</a>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../grouped-list.html">How to use the Feathers <code>GroupedList</code> component</a></p></li>
+<li><p><a href="../default-item-renderers.html">How to use the Feathers default item renderers</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

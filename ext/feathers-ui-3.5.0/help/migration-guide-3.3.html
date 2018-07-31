@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Feathers 3.3 Migration Guide - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="feathers-3.3-migration-guide">Feathers 3.3 Migration Guide</h1>
+<p>This guide explains how to migrate an application created with Feathers 3.2 to Feathers 3.3.</p>
+<ul>
+<li><p><a href="#shared-font-styles">Shared font styles</a></p></li>
+<li><p><a href="#changes-to-implicit-mxml-imports">Changes to implicit MXML imports</a></p></li>
+<li><p><a href="#appendix-list-of-deprecated-apis">Appendix: List of Deprecated APIs</a></p></li>
+</ul>
+<h2 id="shared-font-styles">Shared font styles</h2>
+<p>In Feathers versions 3.1.2 and 3.2.0, whenever a <code>starling.text.TextFormat</code> was passed into a text renderer, it was always cloned. This was a workaround to avoid a memory leak caused by event listeners that were not being removed. It also had an unfortunate side effect where you could not modify properties of the original reference to the <code>TextFormat</code> object and see those changes reflected in the component. It also didn't let you simultaneously change the font styles of multiple components that share the same <code>TextFormat</code>. That had been possible in previous versions of Feathers, before 3.1.2.</p>
+<p>This bug has now been fixed in Feathers 3.3.0, including a fix for the original memory leak. However, if you were not aware that modifying a shared <code>TextFormat</code> object could affect other components, you may discover unexpected changes to font styles when upgrading.</p>
+<p>In Feathers 3.1.2 and 3.2.0, the following code would modify the color of only <code>label2</code>:</p>
+<pre class="code"><code>var myFontStyles:TextFormat = new TextFormat(&quot;_sans&quot;, 12, 0x000000);
+label1.fontStyles = myFontStyles;
+label2.fontStyles = myFontStyles;
+label2.fontStyles.color = 0xff0000; //should actually change both!</code></pre>
+<p>However, it was actually supposed to modify the color of both labels, and that's what you will now see in Feathers 3.3. If you don't want both labels to use the modified color, you should use <code>clone()</code> to ensure that each label uses a different <code>TextFormat</code> object:</p>
+<pre class="code"><code>var myFontStyles:TextFormat = new TextFormat(&quot;_sans&quot;, 12, 0x000000);
+label1.fontStyles = myFontStyles.clone();
+label2.fontStyles = myFontStyles.clone();
+label2.fontStyles.color = 0xff0000; //changes only label2</code></pre>
+<h2 id="changes-to-implicit-mxml-imports">Changes to implicit MXML imports</h2>
+<p>In Feathers SDK 3.3, two changes have been made to the &quot;implicit&quot; imports when using MXML. As you may be aware, certain packages are automatically imported in an MXML file, and if you use any classes from one of those packages, they do not need to be imported manually.</p>
+<p>Because Feathers has embraced the use of <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> for font styles, the <code>starling.text.*</code> package is now imported implicitly in MXML.</p>
+<p>To avoid conflicts between classes in the <code>starling.text.*</code> package and the <code>flash.text.*</code> package, <code>flash.text.*</code> is no longer implicitly imported in MXML.</p>
+<p>If you are using a class from the <code>flash.text.*</code> package in MXML, and you see new compiler errors after upgrading to Feathers SDK 3.3, simply import those classes at the beginning of the <code>&lt;fx:Script&gt;</code> block.</p>
+<h2 id="appendix-list-of-deprecated-apis">Appendix: List of Deprecated APIs</h2>
+<p>The following tables list all deprecated APIs, organized by class. The replacement API or migration instructions appear next to each listed property or method.</p>
+<aside class="warn">
+APIs that are deprecated have not been removed yet, but they will be removed at some point in the future. You are encouraged to migrate as soon as possible.
+</aside>
+<h3 id="tiledcolumnslayout"><code>TiledColumnsLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TiledColumnsLayout.PAGING_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.PAGING_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.PAGING_NONE</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#NONE"><code>Direction.NONE</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tiledrowslayout"><code>TiledRowsLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TiledRowsLayout.PAGING_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.PAGING_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.PAGING_NONE</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#NONE"><code>Direction.NONE</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="migration-guide-3.1.html">Feathers 3.1 Migration Guide</a></li>
+<li><a href="migration-guide-3.0.html">Feathers 3.0 Migration Guide</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

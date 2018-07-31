@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to display a context menu with Feathers - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-display-a-context-menu-with-feathers">How to display a context menu with Feathers</h1>
+<aside class="warn">
+This will only work in Adobe AIR. It will not work in Adobe Flash Player.
+</aside>
+<p>First, let's create a simple <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/ui/ContextMenu.html"><code>flash.ui.ContextMenu</code></a>.</p>
+<pre class="code"><code>function item_menuItemSelectHandler(event:ContextMenuEvent):void
+{
+    trace(&quot;menu item selected&quot;);
+}
+
+this._menu = new ContextMenu();
+this._menu.hideBuiltInItems();
+var item:ContextMenuItem = new ContextMenuItem(&quot;Do something&quot;);
+item.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, item_menuItemSelectHandler);
+this._menu.customItems.push(item);</code></pre>
+<p>Next, we want to know when the right mouse button is pressed:</p>
+<pre class="code"><code>Starling.current.nativeStage.addEventListener(MouseEvent.RIGHT_MOUSE_DOWN, nativeStage_rightMouseDownHandler, false, 0, true);</code></pre>
+<p>In the listener, simply display the context menu at the appropriate location:</p>
+<pre class="code"><code>private function nativeStage_rightMouseDownHandler(event:MouseEvent):void
+{
+    this._menu.display(Starling.current.nativeStage, event.stageX, event.stageY);
+}</code></pre>
+<p>If we wanted to limit the context menu to a specific Feathers component, we could translate the native stage coordinates to Starling coordinates and do a simple hit test before calling <code>display()</code> on the <code>ContextMenu</code>.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

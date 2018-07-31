@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to select (or deselect) a custom item renderer on tap or click - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-select-or-deselect-a-custom-item-renderer-on-tap-or-click">How to select (or deselect) a custom item renderer on tap or click</h1>
+<p><a href="../item-renderers.html">Custom item renderers</a> should dispatch <code>Event.CHANGE</code> when their <a href="../../api-reference/feathers/controls/renderers/IToggle.html#isSelected"><code>isSelected</code></a> property changes. The list does not select an item renderer on tap or click because some item renderers might be selected with a different interaction, like a long press or a swipe. The item renderer needs to implement this behavior.</p>
+<p>Using the <a href="../../api-reference/feathers/utils/touch/TapToSelect.html"><code>TapToSelect</code></a> class, it's easy to change the <code>isSelected</code> property on tap or click:</p>
+<pre class="code"><code>public class CustomItemRenderer extends LayoutGroupListItemRenderer
+{
+    public function CustomItemRenderer()
+    {
+        super();
+        this._select = new TapToSelect(this);
+    }
+
+    private var _select:TapToSelect;
+}</code></pre>
+<h2 id="deselect-on-tap-or-click">Deselect on Tap or Click</h2>
+<p>You may notice that the item renderer is selected on tap, but not deselected when you tap again. Generally, that's how you want a list to behave. The item renderer will be deselected when another item renderer is selected. However, sometimes the list supports multiple selection, and you want to deselect the item renderer on tap or click. Simply set the <a href="../../api-reference/feathers/utils/touch/TapToSelect.html#tapToDeselect"><code>tapToDeselect</code></a> property of the <code>TapToSelect</code> instance to <code>true</code>:</p>
+<pre class="code"><code>this._select.tapToDeselect = true;</code></pre>
+<p>Set the <a href="../../api-reference/feathers/controls/List.html#allowMultipleSelection"><code>allowMultipleSelection</code></a> property on the <code>List</code> to <code>true</code> to allow multiple item renderers to be selected.</p>
+<h2 id="dispatch-event.triggered-when-tapped-or-clicked">Dispatch <code>Event.TRIGGERED</code> when tapped or clicked</h2>
+<p>All item renderers should also dispatch <a href="../../api-reference/feathers/controls/renderers/IListItemRenderer.html#event:triggered"><code>Event.TRIGGERED</code></a> when tapped.</p>
+<p>Similar to <code>TapToSelect</code>, you can use <a href="../../api-reference/feathers/utils/touch/TapToTrigger.html"><code>TapToTrigger</code></a> to set this up automatically:</p>
+<pre class="code"><code>public class CustomItemRenderer extends LayoutGroupListItemRenderer
+{
+    public function CustomItemRenderer()
+    {
+        super();
+        this._trigger = new TapToTrigger(this);
+        this._select = new TapToSelect(this);
+    }
+
+    private var _trigger:TapToTrigger;
+    private var _select:TapToSelect;
+}</code></pre>
+<p>Always be sure to create the <code>TapToTrigger</code> instance before the <code>TapToSelect</code> instance so that the <code>Event.TRIGGERED</code> and <code>Event.CHANGE</code> events are dispatched in the correct order.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../item-renderers.html">Introduction to Custom Item Renderers</a></p></li>
+<li><p><a href="item-renderer-triggered-on-tap.html">Feathers Cookbook: Dispatching a triggered event from a custom item renderer</a></p></li>
+<li><p><a href="item-renderer-long-press.html">Feathers Cookbook: Dispatching a long press event from a custom item renderer</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

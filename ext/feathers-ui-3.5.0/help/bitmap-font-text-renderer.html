@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers BitmapFontTextRenderer component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-bitmapfonttextrenderer-component">How to use the Feathers <code>BitmapFontTextRenderer</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html"><code>BitmapFontTextRenderer</code></a> class renders text using <a href="http://wiki.starling-framework.org/manual/displaying_text#bitmap_fonts">bitmap fonts</a>.</p>
+<aside class="info">
+<code>BitmapFontTextRenderer</code> is one of many different <a href="text-renderers.html">text renderers</a> supported by Feathers. Since no method of rendering text on the GPU is considered definitively better than the others, Feathers allows you to choose the best text renderer for your project's requirements. See <a href="text-renderers.html">Introduction to Feathers text renderers</a> for complete details about all of the text rendering options supported by Feathers.
+</aside>
+<h2 id="advantages-and-disadvantages">Advantages and disadvantages</h2>
+<p>Bitmap fonts separate each character into sub-textures inside an atlas. These sub-textures are displayed as images placed next to each other to form words and paragraphs. If the text has a particularly stylized appearance, such as gradients and outlines, bitmap fonts provide the best performance because the effects can be pre-rendered at design time rather than slowing things down at runtime.</p>
+<p>Bitmap fonts are often great for games in situations when you need to display a limited amount of text around the edges of the screen. Values that change often, such as score, ammo, health, etc. can quickly swap out characters without uploading new textures to the GPU.</p>
+<p>Bitmap fonts can sometimes be useful for longer passages of text (assuming that you need a uniform font style throughout the whole passage) because each character is a separate sub-texture and can be reused without requiring more memory on the GPU. However, since each new character is a new image to render on Starling's display list, the transformation calculations for all of those separate display objects may eventually overwhelm the CPU as the number of characters increases. It may require testing to determine how many characters a particular device's CPU can handle at once.</p>
+<p>While the English language has only 26 letters in the alphabet (in addition to any punctuation and other supporting characters that you might need), some languages require many hundreds of characters, or even advanced ligatures to join adjacent characters. A texture that contains all of those characters, or combinations of characters, may be impossible to use with bitmap fonts because it hits texture memory limits imposed by Stage 3D or by the GPU. In these situations, you may have no choice but to use another text renderer that supports device fonts.</p>
+<p>Bitmap fonts may be scaled, but because they use bitmaps, only scaling down is recommended. Even then, you may lose out on text hinting that would make vector fonts more readable at smaller sizes. It's common to include separate font sizes as separate textures for bitmap fonts to achieve the best looking results, and that can require a lot of memory.</p>
+<p><code>BitmapFontTextRenderer</code> does not support multiple font styles in the same text renderer. A <code>BitmapFontTextRenderer</code> must use a single bitmap font to render its entire text.</p>
+<h3 id="advanced-font-styles">Advanced font styles</h3>
+<aside class="info">
+<p>In general, you should customize font styles on the parent component of a text renderer using a <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> object. For example, to customize the font styles on a <a href="button.html"><code>Button</code></a> component, you'd set the button's <a href="../api-reference/feathers/controls/Button.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>button.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );</code></pre>
+However, <code>starling.text.TextFormat</code> object does not always expose every unique font styling feature that a text renderer supports. The next section demostrates how to set advanced font styles that may not be exposed through this class.
+</aside>
+<p>To display text with bitmap fonts, create a <a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html"><code>BitmapFontTextRenderer</code></a> in the appropriate factory exposed by the parent component. In the following example, we'll use the <a href="../api-reference/feathers/controls/Button.html#labelFactory"><code>labelFactory</code></a> of a <a href="button.html"><code>Button</code></a> component:</p>
+<pre class="code"><code>var button:Button = new Button();
+button.label = &quot;Click Me&quot;;
+button.labelFactory = function():ITextRenderer
+{
+    var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+    textRenderer.styleProvider = null;
+    
+    //set advanced font styles here
+    
+    return textRenderer;
+};</code></pre>
+<aside class="info">
+You may need to remove the text renderer's style provider in the factory before changing font styles to avoid conflicts with the default styles set by a theme. That's why the <code>styleProvider</code> property is set to <code>null</code> in the code above.
+</aside>
+<p>Advanced font styles may be customized by passing a <a href="../api-reference/feathers/text/BitmapFontTextFormat.html"><code>BitmapFontTextFormat</code></a> instance to the text renderer's <a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html#textFormat"><code>textFormat</code></a> property.</p>
+<pre class="code"><code>var format:BitmapFontTextFormat = new BitmapFontTextFormat( &quot;FontName&quot; );</code></pre>
+<p>Pass the font to display to the <code>BitmapFontTextFormat</code> constructor. In the code above, we pass in the name of a font registered with <a href="http://doc.starling-framework.org/core/starling/text/TextField.html#registerCompositor()"><code>TextField.registerCompositor()</code></a>. We could also pass in a <a href="http://doc.starling-framework.org/core/starling/text/BitmapFont.html"><code>starling.text.BitmapFont</code></a> instance that has not been registered.</p>
+<p>The tint of the text can be customized with the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html#color"><code>color</code></a> property:</p>
+<pre class="code"><code>format.color = 0xc4c4c4;</code></pre>
+<p>The RGB values of the tint color are multiplied with the RGB values of each of the font texture's pixels, similar to <a href="http://doc.starling-framework.org/current/starling/display/BlendMode.html#MULTIPLY"><code>starling.display.BlendMode.MULTIPLY</code></a>.</p>
+<aside class="info">
+To support the maximum range of colors, the bitmap font image should be exported with completely white pixels.
+</aside>
+<p>The alignment of the text can be customized with the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html#align"><code>align</code></a> property:</p>
+<pre class="code"><code>format.align = TextFormatAlign.CENTER;</code></pre>
+<p>Bitmap fonts have one primary font size. They may be scaled, but scaled bitmap fonts may not render as nicely as scaled vector fonts. However, if needed, we can use the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html#size"><code>size</code></a> property:</p>
+<pre class="code"><code>format.size = 18;</code></pre>
+<p>In most cases, it's not necessary to set the <code>size</code> property. The primary font size will be detected automatically.</p>
+<aside class="info">
+Generally, to display the same bitmap font with different sizes, it's better to use separate textures, and register each size with a different font name.
+</aside>
+<p><code>BitmapFontTextRenderer</code> provides a number of other advanced properties that may be customized, but aren't included in this quick introduction. For complete details about available properties, please take a look at the <a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html"><code>BitmapFontTextRenderer</code> API reference</a> and the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html"><code>BitmapFontTextFormat</code> API reference</a>.</p>
+<h3 id="how-to-change-advanced-font-styles-when-a-parent-component-has-multiple-states">How to change advanced font styles when a parent component has multiple states</h3>
+<p>Some components, like <a href="button.html"><code>Button</code></a> and <a href="text-input.html"><code>TextInput</code></a>, have multiple states. It's possible to pass more than one <code>BitmapFontTextFormat</code> to the <code>BitmapFontTextRenderer</code> so that the font styles change when the parent component's state changes.</p>
+<p>For instance, we can provide a different font style for the down state of a <code>Button</code> by calling <a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html#setTextFormatForState()"><code>setTextFormatForState()</code></a>:</p>
+<pre class="code"><code>var defaultFormat:BitmapFontTextFormat = new BitmapFontTextFormat( &quot;FontName&quot;, 20, 0xc4c4c4 );
+textRenderer.textFormat = defaultFormat;
+
+var downFormat:BitmapFontTextFormat = new BitmapFontTextFormat( &quot;FontName&quot;, 20, 0x343434 );
+textRenderer.setTextFormatForState( ButtonState.DOWN, downFormat );</code></pre>
+<p>We didn't provide separate font styles for other states, like <code>ButtonState.HOVER</code> or <code>ButtonState.DISABLED</code>. When the <code>Button</code> is in one of these states, the <code>BitmapFontTextRenderer</code> will fall back to using the value we passed to the <code>textFormat</code> property.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html"><code>feathers.controls.text.BitmapFontTextRenderer</code> API Documentation</a></p></li>
+<li><p><a href="text-renderers.html">Introduction to Feathers text renderers</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

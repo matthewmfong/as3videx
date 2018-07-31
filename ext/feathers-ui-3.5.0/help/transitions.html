@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Transitions for Feathers screen navigators - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="transitions-for-feathers-screen-navigators">Transitions for Feathers screen navigators</h1>
+<p>A <em>transition</em> provides animation when a <a href="stack-screen-navigator.html"><code>StackScreenNavigator</code></a> or a <a href="screen-navigator.html"><code>ScreenNavigator</code></a> component navigates from one screen to another. Transitions help establish a relationship between two screens, providing extra context to improve the user experience.</p>
+<p>Feathers offers a number of classes to quickly create common transitions. Screen navigators support custom transitions too, but first, we'll look at the built-in transitions.</p>
+<h2 id="colorfade">ColorFade</h2>
+<p>With a <a href="../api-reference/feathers/motion/ColorFade.html"><code>ColorFade</code></a> transition, the old screen is hidden as a solid color fades in over it. Then, the solid color fades back out to show that the new screen has replaced the old screen.</p>
+<pre class="code"><code>var color:uint = 0xff851b;
+ColorFade.createColorFadeTransition( color );</code></pre>
+<p>The <code>ColorFade</code> class offers two convienence functions, one for black and one for white:</p>
+<pre class="code"><code>ColorFade.createBlackFadeTransition();
+ColorFade.createWhiteFadeTransition();</code></pre>
+<h2 id="cover">Cover</h2>
+<p>A <a href="../api-reference/feathers/motion/Cover.html"><code>Cover</code></a> transition slides the new screen into view, animating the <code>x</code> or <code>y</code> property, to cover up the old screen. The new screen may slide up, right, down, or left. The old screen remains stationary.</p>
+<pre class="code"><code>Cover.createCoverLeftTransition();
+Cover.createCoverRightTransition();
+Cover.createCoverUpTransition();
+Cover.createCoverownTransition();</code></pre>
+<h2 id="cube">Cube</h2>
+<p>A <a href="../api-reference/feathers/motion/Cube.html"><code>Cube</code></a> transition positions the screens in 3D space as if they are on two adjacent sides of a cube. The cube may rotate up or down around the x-axis, or it may rotate left or right around the y-axis.</p>
+<pre class="code"><code>Cube.createCubeLeftTransition();
+Cube.createCubeRightTransition();
+Cube.createCubeUpTransition();
+Cube.createCubeDownTransition();</code></pre>
+<h2 id="fade">Fade</h2>
+<p>The <a href="../api-reference/feathers/motion/Fade.html"><code>Fade</code></a> transition animates the opacity of one or both screens.</p>
+<h3 id="fade-in">Fade in</h3>
+<p>The new screen may fade in, animating the <code>alpha</code> property from <code>0.0</code> to <code>1.0</code>, while the old screen remains fully opaque at a lower depth.</p>
+<pre class="code"><code>Fade.createFadeInTransition();</code></pre>
+<h3 id="fade-out">Fade out</h3>
+<p>Alternatively, the old screen may fade out, animating the <code>alpha</code> property from <code>1.0</code> to <code>0.0</code>, while the new screen remains fully opaque at a lower depth.</p>
+<pre class="code"><code>Fade.createFadeOutTransition();</code></pre>
+<h3 id="crossfade">Crossfade</h3>
+<p>A third option is to crossfade the screens. In other words, the old screen fades out, animating the <code>alpha</code> property from <code>1.0</code> to <code>0.0</code>. Simultaneously, the new screen fades in, animating its <code>alpha</code> property from <code>0.0</code> to <code>1.0</code>.</p>
+<pre class="code"><code>Fade.createCrossfadeTransition();</code></pre>
+<p>Since both screens are semi-transparent during a crossfade, the background behind the screens may be slightly visible during this transition.</p>
+<h2 id="flip">Flip</h2>
+<p>The <a href="../api-reference/feathers/motion/Flip.html"><code>Flip</code></a> transition positions the screens in 3D space is if they are printed on opposite sides of a postcard. The old screen appears on the front, and the card rotates around its center to show the new screen on the back side. The screens may rotate up or down around the x-axis, or they may rotate left or right around the y-axis.</p>
+<pre class="code"><code>Flip.createFlipLeftTransition();
+Flip.createFlipRightTransition();
+Flip.createFlipUpTransition();
+Flip.createFlipDownTransition();</code></pre>
+<h2 id="iris">Iris</h2>
+<p>The <a href="../api-reference/feathers/motion/Iris.html"><code>Iris</code></a> transition shows or hides a screen by masking it with circle that grows or shrinks in radius.</p>
+<pre class="code"><code>Iris.createIrisOpenTransition();
+Iris.createIrisOpenTransitionAt(x, y);
+Iris.createIrisCloseTransition();
+Iris.createIrisCloseTransitionAt(x, y);</code></pre>
+<h2 id="reveal">Reveal</h2>
+<p>A <a href="../api-reference/feathers/motion/Reveal.html"><code>Reveal</code></a> transition slides the old screen out of view, animating the <code>x</code> or <code>y</code> property, to reveal the new screen under it. The old screen may slide up, right, down, or left. The new screen remains stationary.</p>
+<pre class="code"><code>Reveal.createRevealLeftTransition();
+Reveal.createRevealRightTransition();
+Reveal.createRevealUpTransition();
+Reveal.createRevealDownTransition();</code></pre>
+<h2 id="slide">Slide</h2>
+<p>With a <a href="../api-reference/feathers/motion/Slide.html"><code>Slide</code></a> transition, the new screen slides in from off-stage, pushing the old screen in the same direction. The screens may slide up, right, down, or left.</p>
+<pre class="code"><code>Slide.createSlideLeftTransition();
+Slide.createSlideRightTransition();
+Slide.createSlideUpTransition();
+Slide.createSlideDownTransition();</code></pre>
+<h2 id="wipe">Wipe</h2>
+<p>With a <a href="../api-reference/feathers/motion/Wipe.html"><code>Wipe</code></a> transition, the old screen is wiped away, revealing the new screen under it. Both screens remain stationary, and clipping rectangles are used to alter their appearance. The screens may be wiped up, right, down, or left.</p>
+<pre class="code"><code>Wipe.createWipeLeftTransition();
+Wipe.createWipeRightTransition();
+Wipe.createWipeUpTransition();
+Wipe.createWipeDownTransition();</code></pre>
+<h2 id="custom-transitions">Custom transitions</h2>
+<p>The <code>pushTransition</code> and <code>popTransition</code> properties on <code>StackScreenNavigator</code> (or the <code>transition</code> property on <code>ScreenNavigator</code>) are simply typed as <code>Function</code>. Let's take a look at the required function signature:</p>
+<pre class="code"><code>function( oldScreen:DisplayObject, newScreen:DisplayObject, completeCallback:Function ):void</code></pre>
+<p>A transition function should accept three arguments. The first argument is the old screen that is transitioning out. The second argument is the new screen that is transitioning in. Finally, a callback is passed in as the third argument. The transition uses this callback to tell the screen navigator that the animation has finished.</p>
+<p>To better understand custom transitions, we'll look at a couple of examples. Let's start with the simplest possible transition: a transition that does nothing.</p>
+<h3 id="an-empty-transition">An empty transition</h3>
+<p>This transition simply calls the <code>completeCallback</code> to say that it has finished:</p>
+<pre class="code"><code>navigator.transition = function( oldScreen:DisplayObject, newScreen:DisplayObject, completeCallback:Function ):void
+{
+    completeCallback();
+};</code></pre>
+<p>There's no animation, so it's pretty boring, but this basic example illustrates the minimum requirements of a transition function. It accepts three arguments, and it uses the callback to notify the screen navigator that it has finished.</p>
+<p>For our next example, let's animate something!</p>
+<h3 id="a-custom-transition-using-starling.animation.tween">A custom transition using <code>starling.animation.Tween</code></h3>
+<p>Let's create a transition that's kind of a combination between <code>Cover</code> and <code>Fade</code>. The new screen will move from right to left to cover the old screen, animating the <code>x</code> property. In parallel, it will fade in, animating the <code>alpha</code> property from <code>0</code> to <code>1</code>.</p>
+<p>Let's start with a simple function that sets the initial conditions before the animation starts:</p>
+<pre class="code"><code>function( oldScreen:DisplayObject, newScreen:DisplayObject, completeCallback:Function ):void
+{
+    newScreen.x = newScreen.width;
+    newScreen.alpha = 0;
+}</code></pre>
+<p>The new screen will start on the right side, so we should update its <code>x</code> property to position it. We want this screen to fade in too, so we'll set its <code>alpha</code> property to <code>0</code>.</p>
+<p>Next, we'll create a <code>Tween</code> that animates properties on the new screen:</p>
+<pre class="code"><code>var tween:Tween = new Tween( newScreen, 1.0, Transitions.EASE_IN_OUT );
+tween.animate( &quot;x&quot;, 0 );
+tween.animate( &quot;alpha&quot;, 1 );</code></pre>
+<p>As you can see, we animate the <code>x</code> and <code>alpha</code> properties for a duration of one second, and we specify an easing function. Try not to get confused about the name of the <code>Transitions</code> class used above. That's simply what Starling calls an easing function. A transition for a Feathers screen navigator is something different, of course.</p>
+<aside class="info">
+For more information about Starling's <code>Tween</code> class, see <a href="http://manual.starling-framework.org/en/#_animations">Animations</a> in the Starling Manual.
+</aside>
+<p>Now, we need to use the callback to notify the screen navigator when the animation is complete. If there isn't anything to clean up after the animation is complete, then we can simply pass to callback to its <code>onComplete</code> property:</p>
+<pre class="code"><code>tween.onComplete = completeCallback;</code></pre>
+<p>If some kind of cleanup is needed after the tween completes, we can create a closure that uses the callback when it is done:</p>
+<pre class="code"><code>tween.onComplete = function():void
+{
+    // clean up here
+
+    completeCallback();
+}</code></pre>
+<p>In this case, there is nothing to clean up. More advanced transitions might need to reset some properties on the old screen or the new screen, after the animation completes.</p>
+<p>Finally, add the <code>Tween</code> to the Starling juggler to start the animation:</p>
+<pre class="code"><code>Starling.juggler.add( tween );</code></pre>
+<p>That's all that we need in most cases, but there's one more thing that we may need to consider.</p>
+<p>It's possible that either the old screen or the new screen passed to a transition function will be <code>null</code>. For instance, when the very first screen is shown by the screen navigator, the old screen will be <code>null</code> because no other screen has been shown previously. Similarly, if <code>clearScreen()</code> is called on a <code>ScreenNavigator</code>, the new screen will be <code>null</code> because the current screen is being removed, and it won't be replaced by a new screen. There will never be a case where both screens are <code>null</code>.</p>
+<p>For completeness, since were are animating properties on the new screen, we should handle the case where it is <code>null</code>. We don't want to get this dreaded runtime error:</p>
+<pre><code>TypeError: Error #1009: Cannot access a property or method of a null object reference</code></pre>
+<p>At the start of the function, we'll simply check if the new screen is <code>null</code>:</p>
+<pre class="code"><code>function(oldScreen:DisplayObject, newScreen:DisplayObject, completeCallback:Function):void
+{
+    if(!newScreen)
+    {
+        completeCallback();
+        return;
+    }</code></pre>
+<p>In this case, since there is no screen to animate, we can notify the screen navigator that the transition is complete by immediately calling <code>completeCallback</code> function before returning.</p>
+<p>Since we aren't animating the old screen, we don't need to worry about it being <code>null</code>. A more advanced transition might need to account for that case, though.</p>
+<p>Truly, our custom transition is now complete. Let's combine all of the source code snippets from above to see the final result.</p>
+<h3 id="full-custom-transition-source-code">Full custom transition source code</h3>
+<pre class="code"><code>function( oldScreen:DisplayObject, newScreen:DisplayObject, completeCallback:Function ):void
+{
+    if(!newScreen)
+    {
+        completeCallback();
+        return;
+    }
+
+    newScreen.x = newScreen.width;
+    newScreen.alpha = 0;
+    var tween:Tween = new Tween( newScreen, 1.0, Transitions.EASE_IN_OUT );
+    tween.animate( &quot;x&quot;, 0 );
+    tween.animate( &quot;alpha&quot;, 1 );
+    tween.onComplete = completeCallback;
+    Starling.juggler.add( tween );
+}</code></pre>
+<h3 id="canceling-transitions">Canceling transitions</h3>
+<p>In most cases, the callback passed to a transition function should be called without arguments. However, it's worth noting that this function has one optional argument.</p>
+<p>The callback passed to a transition function has the following signature:</p>
+<pre class="code"><code>function completeCallback( cancelTransition:Boolean = false ):void</code></pre>
+<p>The callback accepts one optional argument that indicates if the transition was canceled or not. If you pass <code>true</code> to cancel the transition, the screen navigator will keep the old screen active instead of making the new screen active. If you pass <code>false</code> (which is the default behavior), the transition will complete normally and the new screen will become active.</p>
+<p>Most transitions cannot be canceled. With that in mind, you should usually call the complete callback with no arguments when the animation is complete:</p>
+<pre class="code"><code>completeCallback();</code></pre>
+<p>If you need to cancel a transition to return to the old screen, you can pass <code>true</code> to the callback:</p>
+<pre class="code"><code>completeCallback( true );</code></pre>
+<p>The screen navigator will not make the new screen its active screen. The old screen will remain visible.</p>
+<h2 id="optimizing-transitions">Optimizing transitions</h2>
+<p>Transition animations between screens help give the user more context. However, the creation of a new screen can be expensive enough to make the runtime skip a transition completely due to dropped frames. Often, by strategically choreographing a screen's initialization code to spread it out over time, you can improve the performance of screen creation to preserve the transition animation.</p>
+<p>If possible, try to limit the number of new objects you create in <code>initialize()</code>, and take out any code that does things that aren't immediately needed when the screen is first displayed. Keep the code in <code>initialize()</code> limited to what must be displayed during the transition. You can listen for <code>FeathersEventType.TRANSITION_COMPLETE</code> on the screen's <code>owner</code> (the <code>ScreenNavigator</code>) to know when the transition has completed so that you can finish your initialization.</p>
+<p>Some examples of things to avoid in <code>initialize()</code>:</p>
+<ul>
+<li>Don't <code>flatten()</code> anything yet. Starling won't actually handle the request to flatten a <code>Sprite</code> until the next time that its <code>render()</code> function is called. The transition starts before that, so the expensive processing of flattening will happen in the middle of the transition, which will affect the frame rate. Wait until after the transition to flatten things.</li>
+<li>Don't upload any new textures to the GPU. Ideally, you'll be using a texture atlas, and your <code>SubTexture</code> objects needed by the screen will already be created with calls to <code>atlas.getTexture()</code> before the screen is initialized.</li>
+<li>Don't create display objects that don't need to be visible immediately during the transition. If something isn't vitally important, you should consider creating it after the transition. For instance, you may have all sorts of powerups, enemies, and terrain in your game's level, but if some of them are not on screen during the transition, consider creating those objects later.</li>
+<li>Any long-running code that generates data or does some non-visual calculations can wait too, if its results don't matter during the transition.</li>
+<li>Don't access the file system during initialization of a screen. If you're using shared objects or files to store settings and stuff, load those values when the app first starts up or at some other time before you need the screen to transition in.</li>
+<li>Avoid creating many temporary objects that will be quickly garbage collected. Many functions like <code>push()</code>, <code>unshift()</code>, and <code>splice()</code> from the <code>Array</code> class have <code>rest</code> arguments. Every time one of these functions is called, a new temporary <code>Array</code> will be allocated and quickly deallocated. Garbage collection running during a transition can result in lost frames, especially on slower devices.</li>
+</ul>
+<p>Chances are that all the initialization will still take just as long to complete, but you'll be spreading it out to strategic times when the user won't notice that all that work is happening. Some animations in between help make the app look more responsive and they naturally make the user pause for a moment as their brain switches context from watching the content transition in to interacting with it.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="effects.html">Effects and animations for Feathers components</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

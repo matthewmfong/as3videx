@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Screen component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-screen-component">How to use the Feathers <code>Screen</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Screen.html"><code>Screen</code></a> component is meant to be a base class for custom screens to be displayed by <a href="stack-screen-navigator.html"><code>StackScreenNavigator</code></a> and <a href="screen-navigator"><code>ScreenNavigator</code></a>. <code>Screen</code> is based on the <a href="layout-group.html"><code>LayoutGroup</code></a> component, and it provides optional layout.</p>
+<aside class="info">
+If you need scrolling, you should use <a href="scroll-screen.html"><code>ScrollScreen</code></a> or <a href="panel-screen.html"><code>PanelScreen</code></a> instead.
+</aside>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#hardware-key-callbacks">Hardware Key Callbacks</a></p></li>
+<li><p><a href="#transition-events">Transition Events</a></p></li>
+<li><p><a href="#screen-id">Screen ID</a></p></li>
+<li><p><a href="#skinning-a-screen">Skinning a <code>Screen</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>Just like <a href="layout-group.html"><code>LayoutGroup</code></a>, you can add children and use layouts. Typically, you would override <code>initialize()</code> in a subclass of <code>Screen</code> and add children there:</p>
+<pre class="code"><code>protected function initialize():void
+{
+    // never forget to call this!
+    super.initialize();
+
+    // use a layout
+    var layout:HorizontalLayout = new HorizontalLayout();
+    layout.gap = 10;
+    this.layout = layout;
+
+    // add children
+    for(var i:int = 0; i &lt; 5; i++)
+    {
+        var quad:Quad = new Quad( 100, 100, 0xff0000 );
+        group.addChild( quad );
+    }
+}</code></pre>
+<h2 id="hardware-key-callbacks">Hardware Key Callbacks</h2>
+<p>Some devices, such as Android phones and tablets, have hardware keys. These may include a back button, a search button, and a menu button. The <code>Screen</code> class provides a way to provide callbacks for when each of these keys is pressed. These are shortcuts to avoid needing to listen to the keyboard events manually and prevent the default behavior.</p>
+<p>Screen provides <a href="../api-reference/feathers/controls/Screen.html#backButtonHandler"><code>backButtonHandler</code></a>, <a href="../api-reference/feathers/controls/Screen.html#menuButtonHandler"><code>menuButtonHandler</code></a>, and <a href="../api-reference/feathers/controls/Screen.html#searchButtonHandler"><code>searchButtonHandler</code></a>.</p>
+<pre class="code"><code>this.backButtonHandler = function():void
+{
+    trace( &quot;the back button has been pressed.&quot; );
+}</code></pre>
+<h2 id="transition-events">Transition Events</h2>
+<p>A <code>Screen</code> dispatches a number of events when the screen navigator shows and hides it with a <a href="transitions.html">transition</a>. To avoid long delays and to keep the transition animation smooth, it's often a good idea to postpone certain actions during initialization until after the transition has completed. We can listen for these events to know when to continue initializing the screen.</p>
+<p>When the screen is shown by the screen navigator, the screen dispatches <a href="../api-reference/feathers/controls/Screen.html#event:transitionInStart"><code>FeathersEventType.TRANSITION_IN_START</code></a> at the beginning of a transition, and it dispatches <a href="../api-reference/feathers/controls/Screen.html#event:transitionInComplete"><code>FeathersEventType.TRANSITION_IN_COMPLETE</code></a> when the transition has finished. Similarly, when the screen navigator shows a different screen and the active screen is hidden, we can listen for <a href="../api-reference/feathers/controls/Screen.html#event:transitionOutStart"><code>FeathersEventType.TRANSITION_OUT_START</code></a> and <a href="../api-reference/feathers/controls/Screen.html#event:transitionOutComplete"><code>FeathersEventType.TRANSITION_OUT_COMPLETE</code></a>.</p>
+<p>Let's listen for <code>FeathersEventType.TRANSITION_IN_COMPLETE</code>:</p>
+<pre class="code"><code>this.addEventListener( FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler );</code></pre>
+<p>The event listener might look like this:</p>
+<pre class="code"><code>private function transitionInCompleteHandler( event:Event ):void
+{
+    // do something after the screen transitions in
+}</code></pre>
+<h2 id="screen-id">Screen ID</h2>
+<p>The <a href="../api-reference/feathers/controls/Screen.html#screenID"><code>screenID</code></a> property refers to the string that the screen navigator uses to identify the current screen when calling functions like <a href="../api-reference/feathers/controls/StackScreenNavigator.html#pushScreen()"><code>pushScreen()</code></a> on a <code>StackScreenNavigator</code> or <a href="../api-reference/feathers/controls/ScreenNavigator.html#showScreen()"><code>showScreen()</code></a> on a <code>ScreenNavigator</code>.</p>
+<h2 id="accessing-the-screen-navigator">Accessing the screen navigator</h2>
+<p>The <a href="../api-reference/feathers/controls/Screen.html#owner"><code>owner</code></a> property provides access to the <code>StackScreenNavigator</code> or <code>ScreenNavigator</code> that is currently displaying the screen.</p>
+<h2 id="skinning-a-screen">Skinning a <code>Screen</code></h2>
+<p>For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/Screen.html"><code>Screen</code> API reference</a>.</p>
+<aside class="info">
+As mentioned above, <code>Screen</code> is a subclass of <code>LayoutGroup</code>. For more detailed information about the skinning options available to <code>Screen</code>, see <a href="layout-group.html">How to use the Feathers <code>LayoutGroup</code> component</a>.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/Screen.html"><code>feathers.controls.Screen</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

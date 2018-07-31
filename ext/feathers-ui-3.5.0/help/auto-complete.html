@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers AutoComplete component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-autocomplete-component">How to use the Feathers <code>AutoComplete</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/AutoComplete.html"><code>AutoComplete</code></a> class extends the <a href="text-input.html"><code>TextInput</code></a> component to add a pop-up list of suggestions as you type.</p>
+<figure>
+<img src="images/auto-complete.png" srcset="images/auto-complete@2x.png 2x" alt="Screenshot of Feathers a AutoComplete component" />
+<figcaption>
+A <code>AutoComplete</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#provide-completion-suggestions">Provide completion suggestions</a></p></li>
+<li><p><a href="#customize-suggestion-behavior">Customize suggestion behavior</a></p></li>
+<li><p><a href="#skinning-an-autocomplete">Skinning an <code>AutoComplete</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create an <code>AutoComplete</code> control and add it to the display list:</p>
+<pre class="code"><code>var input:AutoComplete = new AutoComplete();
+this.addChild( input );</code></pre>
+<p>At this point, the <code>AutoComplete</code> will behave like a normal <a href="text-input.html"><code>TextInput</code></a> without suggestions. All properties available to a <code>TextInput</code> (like <a href="../api-reference/feathers/controls/TextInput.html#maxChars"><code>maxChars</code></a> or <a href="../api-reference/feathers/controls/TextInput.html#prompt"><code>prompt</code></a>, for example) may be used with an <code>AutoComplete</code> too.</p>
+<h2 id="provide-completion-suggestions">Provide completion suggestions</h2>
+<p>An <a href="../api-reference/feathers/data/IAutoCompleteSource.html"><code>IAutoCompleteSource</code></a> implementation should be passed to the <a href="../api-reference/feathers/controls/AutoComplete.html#source"><code>source</code></a> property to display suggestions for completion. Let's look at a couple of the classes that we can use to provide these suggestions.</p>
+<h3 id="localautocompletesource"><code>LocalAutoCompleteSource</code></h3>
+<p>The simplest option involves passing a collection, such as <a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a>, to <a href="../api-reference/feathers/data/LocalAutoCompleteSource.html"><code>LocalAutoCompleteSource</code></a>. As the user types, the collection will be filtered to display appropriate suggestions.</p>
+<pre class="code"><code>input.source = new LocalAutoCompleteSource( new VectorCollection(new &lt;String&gt;
+[
+    &quot;Apple&quot;,
+    &quot;Banana&quot;,
+    &quot;Cherry&quot;,
+    &quot;Grape&quot;,
+    &quot;Lemon&quot;,
+    &quot;Orange&quot;,
+    &quot;Watermelon&quot;
+]));</code></pre>
+<p>When one types &quot;ap&quot; into the <code>AutoComplete</code>, the list of suggestions will include &quot;Apple&quot; and &quot;Grape&quot;. By default, <code>LocalAutoCompleteSource</code> converts each item to lowercase, and it returns any item that contains the entered text. The entered text may be in the middle of an item, as we see when &quot;ap&quot; matches &quot;Grape&quot;.</p>
+<p>If the default behavior doesn't quite fit our needs, we can use a custom <a href="../api-reference/feathers/data/LocalAutoCompleteSource.html#compareFunction"><code>compareFunction</code></a> to handle the filtering. In the following example, we create a <code>compareFunction</code> where the entered text must be at the very beginning of the suggestion:</p>
+<pre class="code"><code>var source:LocalAutoCompleteSource = new LocalAutoCompleteSource();
+source.compareFunction = function( item:Object, textToMatch:String ):Boolean
+{
+    return item.toString().toLowerCase().indexOf(textToMatch.toLowerCase()) == 0;
+};</code></pre>
+<p>In this case, if one types &quot;ap&quot; using the same data provider as in the previous example, only &quot;Apple&quot; will be suggested. &quot;Grape&quot; will not be suggested because &quot;ap&quot; appears in the middle of the word instead of the beginning.</p>
+<p>As you can see above, the first argument to the <code>compareFunction</code> is typed as <code>Object</code>, meaning that suggestions don't necessarily need to be strings.</p>
+<aside class="info">
+When using objects that aren't strings for suggestions, we must provide an implementation of the <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Object.html#toString()"><code>toString()</code></a> function so that each suggestion can be converted to a string that the text input can display.
+</aside>
+<h3 id="urlautocompletesource"><code>URLAutoCompleteSource</code></h3>
+<p>In some cases, you may want to request personalized suggestions from a server instead. We can pass the text entered by the user to a backend API using <a href="../api-reference/feathers/data/URLAutoCompleteSource.html"><code>URLAutoCompleteSource</code></a>.</p>
+<p>To load suggestions from the web, we need a URL. The <a href="../api-reference/feathers/data/URLAutoCompleteSource.html#urlRequestFunction"><code>urlRequestFunction</code></a> property can be used to generate a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/net/URLRequest.html"><code>URLRequest</code></a>:</p>
+<pre class="code"><code>function createURLRequest( textToMatch:String ):URLRequest
+{
+    var request:URLRequest = new URLRequest( &quot;http://example.com/search_suggestions&quot; );
+    var variables:URLVariables = new URLVariables();
+    variables.query = textToMatch;
+    request.data = variables;
+    return request;
+};
+input.source = new URLAutoCompleteSource( createURLRequest );</code></pre>
+<p>The <code>urlRequestFunction</code> takes one argument, the text entered into the <code>AutoComplete</code>. We can pass that to the server to return relevant suggestions.</p>
+<p>By default, <code>URLAutoCompleteSource</code> parses the result as a JSON array. If the result returned by the API looks similar to the example below, it can be parsed automatically:</p>
+<pre class="code"><code>[
+    &quot;adobe&quot;,
+    &quot;adobe flash&quot;,
+    &quot;adobe reader&quot;,
+    &quot;adobe creative cloud&quot;
+]</code></pre>
+<p>However, if the API returns data in a different format, we can use the <a href="../api-reference/feathers/data/URLAutoCompleteSource.html#parseResultFunction"><code>parseResultFunction</code></a> property to tell the <code>URLAutoCompleteSource</code> how to convert the result into something that the pop-up list of suggestions can display.</p>
+<p>Let's create a <code>parseResultFunction</code> for some XML in the following format:</p>
+<pre class="code"><code>&lt;search&gt;
+    &lt;suggestion&gt;adobe&lt;/suggestion&gt;
+    &lt;suggestion&gt;adobe flash&lt;/suggestion&gt;
+    &lt;suggestion&gt;adobe reader&lt;/suggestion&gt;
+    &lt;suggestion&gt;adobe creative cloud&lt;/suggestion&gt;
+&lt;/search&gt;</code></pre>
+<p>In the custom <code>parseResultFunction</code> below, we loop through each <code>&lt;suggestion&gt;</code> element in the result and extract the string. We'll return an <code>Array</code> of these strings:</p>
+<pre class="code"><code>source.parseResultFunction = function( result:String ):Object
+{
+    var parsedSuggestions:Array = [];
+    var xmlResult:XML = new XML( result );
+    var resultCount:int = xmlResult.suggestion.length();
+    for( var i:int = 0; i &lt; resultCount; i++ )
+    {
+        var suggestion:XML = xmlResult.suggestion[i];
+        parsedSuggestions.push( suggestion.toString() );
+    }
+    return parsedSuggestions;
+};</code></pre>
+<p>The <code>parseResultFunction</code> may return an <a href="../api-reference/feathers/data/IListCollection.html"><code>IListCollection</code></a> implementation, such as an <a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a> or a <a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a>.</p>
+<h2 id="customize-suggestion-behavior">Customize suggestion behavior</h2>
+<p>The <a href="../api-reference/feathers/controls/AutoComplete.html#minimumAutoCompleteLength"><code>minimumAutoCompleteLength</code></a> property determines how many characters must be entered into the input before displaying suggestions:</p>
+<pre class="code"><code>input.minimumAutoCompleteLength = 3;</code></pre>
+<p>By default, the input will not make suggestions until at least <code>2</code> characters have been typed.</p>
+<p>The <a href="../api-reference/feathers/controls/AutoComplete.html#autoCompleteDelay"><code>autoCompleteDelay</code></a> property determines how long to wait after the text in the input has been edited before updating the suggestions:</p>
+<pre class="code"><code>input.autoCompleteDelay = 0.25;</code></pre>
+<p>This value is measured in seconds, and the default value is <code>0.5</code>.</p>
+<h2 id="skinning-an-autocomplete">Skinning an <code>AutoComplete</code></h2>
+<p>As mentioned above, <code>AutoComplete</code> is a subclass of <code>TextInput</code>. For more detailed information about skins and font styles available to <code>AutoComplete</code>, see <a href="text-input.html">How to use the Feathers <code>TextInput</code> component</a>. All styling properties are inherited by the <code>AutoComplete</code> class.</p>
+<h3 id="skinning-the-pop-up-list">Skinning the pop-up list</h3>
+<p>This section only explains how to access the pop-up list sub-component. Please read <a href="list.html">How to use the Feathers <code>List</code> component</a> for full details about the skinning properties that are available on <code>List</code> components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/AutoComplete.html#DEFAULT_CHILD_STYLE_NAME_LIST"><code>AutoComplete.DEFAULT_CHILD_STYLE_NAME_LIST</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( List )
+    .setFunctionForStyleName( AutoComplete.DEFAULT_CHILD_STYLE_NAME_LIST, setAutoCompleteListStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setAutoCompleteListStyles( list:List ):void
+{
+    list.backgroundSkin = new Image( listBackgroundTexture );
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>input.customListStyleName = &quot;custom-list&quot;;</code></pre>
+<p>You can set the styling function for the <a href="../api-reference/feathers/controls/AutoComplete.html#customListStyleName"><code>customListStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( List )
+    .setFunctionForStyleName( &quot;custom-list&quot;, setAutoCompleteCustomListStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/AutoComplete.html#listFactory"><code>listFactory</code></a> to provide skins for the pop-up list</p>
+<pre class="code"><code>input.listFactory = function():List
+{
+    var list:List = new List();
+
+    //skin the list here, if you&#39;re not using a theme
+    list.backgroundSkin = new Image( listBackgroundTexture );
+
+    return list;
+}</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/AutoComplete.html"><code>feathers.controls.AutoComplete</code> API Documentation</a></p></li>
+<li><p><a href="text-input.html">How to Use the Feathers <code>TextInput</code> Component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

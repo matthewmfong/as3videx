@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Setting up Feathers in Adobe Animate CC - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="setting-up-feathers-in-adobe-animate-cc">Setting up Feathers in Adobe Animate CC</h1>
+<p>Let's get your <a href="https://www.adobe.com/products/animate.html">Adobe Animate</a> development environment ready to use Feathers.</p>
+<aside class="info">
+These instructions apply to Animate CC. Minor variations may exist between different versions of Animate (or older versions of Flash Professional).
+</aside>
+<ol>
+<li><p>Download the latest stable versions of <a href="http://feathersui.com/download/">Feathers</a> and <a href="http://gamua.com/starling/download/">Starling Framework</a>.</p></li>
+<li><p>In Animate, create a new project. For mobile, you will want to create an <strong>AIR for Android</strong> or <strong>AIR for iOS</strong> project. For desktop, you will want to create an <strong>AIR</strong> project. For Flash Player in the browser, you will want to create an <strong>ActionScript 3.0</strong> project.</p></li>
+<li><p>In the <strong>Properties</strong> panel, ensure that the <strong>Target</strong> is set to an appropriate version of the Flash runtime that you are targeting. Please check the Feathers README file to see which versions of the Flash runtimes are required for the version of Feathers that you are using.</p>
+<p>If the minimum version of Adobe AIR or Flash Player specified in the Feathers README file is not listed, go to the <strong>Help</strong> menu and select <strong>Manage AIR SDK…</strong> to manually add the appropriate version of the AIR SDK. You can <a href="http://www.adobe.com/devnet/air/air-sdk-download.html">download the latest AIR SDK</a> from Adobe's website.</p></li>
+<li><p>Set up the <code>renderMode</code> or <code>wmode</code> for your target platform.</p>
+<p>a. If you are targeting <em>Adobe AIR</em>, click the button with the <strong>Wrench icon</strong> next to the <strong>Target</strong> in the <strong>Properties</strong> panel. Ensure that <strong>Render mode</strong> is set to <strong>Direct</strong>. Click <strong>OK</strong>.</p>
+<p>b. If you are targeting <em>Adobe Flash Player</em> in a web browser, you will need to ensure that the <strong>wmode</strong> value in your HTML and/or JavaScript is set to <strong>direct</strong>.</p></li>
+<li><p>Click the button with the <strong>Wrench icon</strong> next to <strong>Script</strong> in the <strong>Properties</strong> panel. In the <strong>Library path</strong> tab, click the <strong>Browse to SWC</strong> button (the one with the Flash Player logo) and specify the location of <strong>starling.swc</strong>. Repeat this step to add <strong>feathers.swc</strong>.</p></li>
+<li><p>An <strong>FPS</strong> value of <strong>60</strong> is recommended.</p></li>
+</ol>
+<p>Your project is ready. If you're unsure how to proceed, start by using the code in the <strong>Create your Game</strong> section of the <a href="http://gamua.com/starling/first-steps/">Starling First Steps Tutorial</a>. Then take a look at the <a href="getting-started.html">Feathers Getting Started Tutorial</a>.</p>
+<aside class="warn">
+<p>Animate's ability to properly simulate devices on AIR is limited compared to other development environments. Animate's AIR simulator does not provide the correct screen DPI/PPI for the mobile device that it is simulating. The value of <code>Capabilities.screenDPI</code> is used by Feathers themes to scale skins to an appropriate physical size for each device.</p>
+In order to use the DPI scaling capabilities of Feathers themes, you will need to run <strong>ADL</strong> from the AIR SDK on the command line or test on a real device. For more details, see <a href="faq/display-density.html">Why do the Feathers component skins and font sizes appear very small?</a> in the <a href="faq/index.html">Feathers FAQ</a>.
+</aside>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

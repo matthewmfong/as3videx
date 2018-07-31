@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Why does the compiler throw errors that some classes cannot be found when I use the Feathers SWC? - Feathers FAQ - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+</div>
+</header>
+<article>
+<h1 id="why-does-the-compiler-throw-errors-that-some-classes-cannot-be-found-when-i-use-the-feathers-swc">Why does the compiler throw errors that some classes cannot be found when I use the Feathers SWC?</h1>
+<p>Double check that your development environment has been set up correctly. Instructions are provided for setting up <a href="../flash-builder.html">Flash Builder</a>, <a href="../intellij-idea.html">IntelliJ IDEA</a>, <a href="../flash-pro.html">Animate CC</a>, and <a href="../flashdevelop.html">FlashDevelop</a>.</p>
+<p>Confirm that you added Feathers to your project's build settings. The SWC should be added to your project's library path. Where to find this information depends on which IDE that you are using, so please take a look at the appropriate instructions for details.</p>
+<p>Check the minimum required versions of Starling Framework, Adobe Flash Player, and Adobe AIR in the Feathers README file. You may need to specify an appropriate <code>-swf-version</code> argument in the compiler settings if you are using an older SDK. If you are targeting Adobe AIR, double-check that you are using the correct version in the namespace in your application's <code>*-app.xml</code> file.</p>
+<p>The Feathers SWC has been tested using both 1) the <a href="http://www.adobe.com/go/flex_sdk">Adobe Flex SDK 4.6</a> merged with the latest version of &quot;the original AIR SDK without the new compiler&quot; and 2) the latest <a href="http://www.adobe.com/go/air_sdk">Adobe AIR SDK &amp; Compiler</a>. Again, be sure to double check the Feathers README file to see which version of Adobe Flash Player, Adobe AIR, and Starling Framework are required.</p>
+<p>Flash Builder 4.6 and Flash Builder 4.7 have both been tested and confirmed to work correctly. If you are still using Flash Builder 4.5, please consider upgrading to at least Flash Builder 4.6. Your serial number from Flash Builder 4.5 is fully compatible with Flash Builder 4.6 without paying an upgrade fee.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

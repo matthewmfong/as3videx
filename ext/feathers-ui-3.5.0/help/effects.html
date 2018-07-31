@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Effects and animations for Feathers components - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="effects-and-animations-for-feathers-components">Effects and animations for Feathers components</h1>
+<p>A Feathers component supports playing animations triggered by certain moments in its lifecycle, such as adding it to the display list, changing its size or position, or even changing its data. These are called <em>effects</em>. A number of built-in effects are available to quickly add a bit of life to your project.</p>
+<p>Let's start by looking at a quick example of how to use an effect:</p>
+<pre class="code"><code>component.addedEffect = Fade.createFadeInEffect();</code></pre>
+<p>In the example above, we're using one of the built-in effects on the <a href="../api-reference/feathers/motion/Fade.html"><code>feathers.motion.Fade</code></a> class. When the component is added to the stage, the <a href="../api-reference/feathers/core/FeathersControl.html#addedEffect"><code>addedEffect</code></a> will play, and the component's <code>alpha</code> value will fade in from <code>0.0</code> to <code>1.0</code>.</p>
+<p>Now, let's explore all of the built-in effects. Components support custom effects too, and we'll look at that later.</p>
+<h2 id="fade">Fade</h2>
+<p>The <a href="../api-reference/feathers/motion/Fade.html"><code>Fade</code></a> effect animates the opacity of the target component. Several different types of fade effects are available for maximum flexibility.</p>
+<h3 id="fade-in">Fade in</h3>
+<p>The component may fade in, animating the <code>alpha</code> property from <code>0.0</code> to <code>1.0</code>.</p>
+<pre class="code"><code>Fade.createFadeInEffect();</code></pre>
+<h3 id="fade-out">Fade out</h3>
+<p>Alternatively, the component may fade out, animating the <code>alpha</code> property from <code>1.0</code> to <code>0.0</code>.</p>
+<pre class="code"><code>Fade.createFadeOutEffect();</code></pre>
+<h3 id="fade-to">Fade to</h3>
+<p>A third option is to fade to a specific <code>alpha</code> value starting from the component's current <code>alpha</code> value.</p>
+<pre class="code"><code>Fade.createFadeToEffect(0.5);</code></pre>
+<h3 id="fade-from">Fade from</h3>
+<p>Similarly, we can start from a custom <code>alpha</code> value and fade to the component's current <code>alpha</code> value.</p>
+<pre class="code"><code>Fade.createFadeFromEffect(0.0);</code></pre>
+<h3 id="fade-between">Fade between</h3>
+<p>The final option is to fade between a custom starting <code>alpha</code> value and a custom ending <code>alpha</code> value.</p>
+<pre class="code"><code>Fade.createFadeBetweenEffect(1.0, 0.5);</code></pre>
+<h2 id="iris">Iris</h2>
+<p>The <a href="../api-reference/feathers/motion/Iris.html"><code>Iris</code></a> effect adds a circular mask to the target component, and animates its radius to either reveal or hide the component.</p>
+<pre class="code"><code>Iris.createIrisOpenEffect();
+Iris.createIrisCloseEffect();</code></pre>
+<h2 id="move">Move</h2>
+<p>The <a href="../api-reference/feathers/motion/Move.html"><code>Move</code></a> effect animates the <code>x</code> and <code>y</code> position of the target component.</p>
+<h3 id="move-to">Move to</h3>
+<p>You may animate the component to a new position, starting from its current position:</p>
+<pre class="code"><code>Move.createMoveToEffect();
+Move.createMoveXToEffect();
+Move.createMoveYToEffect();</code></pre>
+<h3 id="move-from">Move from</h3>
+<p>You may animate the component from a specific position to its current position:</p>
+<pre class="code"><code>Move.createMoveFromEffect();
+Move.createMoveXFromEffect();
+Move.createMoveYFromEffect();</code></pre>
+<h3 id="move-by">Move by</h3>
+<p>You may animate the component's position by a specific offset, starting from its current position:</p>
+<pre class="code"><code>Move.createMoveByffect();
+Move.createMoveXByEffect();
+Move.createMoveYByEffect();</code></pre>
+<h3 id="move-on-x-or-y-property-change">Move on <code>x</code> or <code>y</code> property change</h3>
+<p>To animate a component's size any time that the <code>x</code> or <code>y</code> setters are called, pass the result of <a href="../api-reference/feathers/motion/Move.html#createMoveEffect()"><code>Move.createMoveEffect()</code></a> to the <a href="../api-reference/feathers/core/FeathersControl.html#moveEffect"><code>moveEffect</code></a> property:</p>
+<pre class="code"><code>component.moveEffect = Move.createMoveEffect();</code></pre>
+<h2 id="parallel">Parallel</h2>
+<p>A <a href="../api-reference/feathers/motion/Parallel.html"><code>Parallel</code></a> effect can play multiple effects simulataeously, ending when all of them have completed.</p>
+<pre class="code"><code>Parallel.createParallelEffect(
+    Fade.createFadeInEffect(),
+    Iris.createIrisOpenEffect()
+);</code></pre>
+<h2 id="resize">Resize</h2>
+<p>The <a href="../api-reference/feathers/motion/Resize.html"><code>Resize</code></a> effect animates the <code>width</code> and <code>height</code> values of the target component.</p>
+<h3 id="resize-to">Resize to</h3>
+<p>You may animate the component's size to new dimensions, starting from its current dimensions:</p>
+<pre class="code"><code>Resize.createResizeToEffect();
+Resize.createResizeWidthToEffect();
+Resize.createResizeHeightToEffect();</code></pre>
+<h3 id="resize-from">Resize from</h3>
+<p>You may animate the component's size from custom dimensions to its current dimensions:</p>
+<pre class="code"><code>Resize.createResizeFromEffect();
+Resize.createResizeWidthFromEffect();
+Resize.createResizeHeightFromEffect();</code></pre>
+<h3 id="resize-by">Resize by</h3>
+<p>You may animate the component's size by a specific offset, starting from its current dimensions:</p>
+<pre class="code"><code>Resize.createResizeByEffect();
+Resize.createResizeWidthByEffect();
+Resize.createResizeHeightByEffect();</code></pre>
+<h3 id="resize-on-width-or-height-property-change">Resize on <code>width</code> or <code>height</code> property change</h3>
+<p>To animate a component's size any time that the <code>width</code> or <code>height</code> setters are called, pass the result of <a href="../api-reference/feathers/motion/Resize.html#createResizeEffect()"><code>Resize.createResizeEffect()</code></a> to the <a href="../api-reference/feathers/core/FeathersControl.html#resizeEffect"><code>resizeEffect</code></a> property:</p>
+<pre class="code"><code>component.resizeEffect = Resize.createResizeEffect();</code></pre>
+<h2 id="sequence">Sequence</h2>
+<p>A <a href="../api-reference/feathers/motion/Sequence.html"><code>Sequence</code></a> effect plays multiple effects one at a time, moving on to the next as each one completes.</p>
+<pre class="code"><code>Sequence.createSequenceEffect(
+    Fade.createFadeInEffect(),
+    Move.createMoveToEffect(100, 50)
+);</code></pre>
+<h2 id="wipe">Wipe</h2>
+<p>With a <a href="../api-reference/feathers/motion/Wipe.html"><code>Wipe</code></a> effect, the target component is given a rectangular mask that is resized over time. The mask may be resized in one of four directions: up, down, right, or left.</p>
+<p>A <em>wipe in</em> effect can show the target component:</p>
+<pre class="code"><code>Wipe.createWipeInLeftEffect();
+Wipe.createWipeInRightEffect();
+Wipe.createWipeInUpEffect();
+Wipe.createWipeInDownEffect();</code></pre>
+<p>A <em>wipe out</em> effect can hide the target component:</p>
+<pre class="code"><code>Wipe.createWipeOutLeftEffect();
+Wipe.createWipeOutRightEffect();
+Wipe.createWipeOutUpEffect();
+Wipe.createWipeOutDownEffect();</code></pre>
+<h2 id="custom-effects">Custom effects</h2>
+<p>Effect properties on Feathers components are simply typed as <code>Function</code>. Let's start by taking a look at the required function signature:</p>
+<pre class="code"><code>function( target:DisplayObject ):IEffectContext</code></pre>
+<p>An effect function should accept a single argument, the target of the effect. It should return an implementation of <a href="../api-reference/feathers/motion/effectClasses/IEffectContext.html"><code>feathers.motion.effectClasses.IEffectContext</code></a>. The component uses this context to start, pause, and stop the effect, as needed. Typically, you'll want to animate something using <a href="http://doc.starling-framework.org/current/starling/animation/Tween.html"><code>starling.animation.Tween</code></a>, so the return value is often an instance of <a href="../api-reference/feathers/motion/effectClasses/TweenEffectContext.html"><code>feathers.motion.effectClasses.TweenEffectContext</code></a>. Let's take a look at an example that uses <code>Tween</code> and <code>TweenEffectContext</code> to create our first custom effect.</p>
+<h3 id="a-custom-transition-using-starling.animation.tween">A custom transition using <code>starling.animation.Tween</code></h3>
+<p>Let's create a custom effect that's a simplified version of the built-in <a href="../api-reference/feathers/motion/Fade.html#createFadeInEffect()"><code>Fade.createFadeInEffect()</code></a>. The target component's <code>alpha</code> property will fade in from <code>0.0</code> to <code>1.0</code>.</p>
+<p>Let's start with a simple function that sets the initial conditions before the animation starts:</p>
+<pre class="code"><code>function( target:DisplayObject ):IEffectContext
+{
+    target.alpha = 0.0;
+    //more code will go here
+}</code></pre>
+<p>The target component will start completely hidden, so we should set its <code>alpha</code> property to <code>0.0</code>.</p>
+<p>Next, we'll create a <code>Tween</code> that animates the <code>alpha</code> property on the target component:</p>
+<pre class="code"><code>var tween:Tween = new Tween( target, 1.0, Transitions.EASE_OUT );
+tween.animate( &quot;alpha&quot;, 1.0 );</code></pre>
+<p>As you can see, we animate the <code>alpha</code> property for a duration of one second, and we specify an easing function.</p>
+<aside class="info">
+For more information about Starling's <code>Tween</code> class, see <a href="http://manual.starling-framework.org/en/#_animations">Animations</a> in the Starling Manual.
+</aside>
+<p>Finally, we need to pass our <code>Tween</code> instance to a <code>TweenEffectContext</code> to return from our function.</p>
+<pre class="code"><code>return new TweenEffectContext(target, tween);</code></pre>
+<p>That's it! When this effect is triggered, the component's alpha property will fade in.</p>
+<h3 id="full-custom-transition-source-code">Full custom transition source code</h3>
+<pre class="code"><code>function( target:DisplayObject ):IEffectContext
+{
+    target.alpha = 0.0;
+    var tween:Tween = new Tween( target, 1.0, Transitions.EASE_OUT );
+    tween.fadeTo( 1.0 );
+    return new TweenEffectContext(target, tween);
+}</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="transitions.html">Transitions for Feathers screen navigators</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Drag and drop between Feathers components - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="drag-and-drop-between-feathers-components">Drag and drop between Feathers components</h1>
+<aside class="warn">
+The following description of how to use the Feathers <a href="../api-reference/feathers/dragDrop/DragDropManager.html"><code>DragDropManager</code></a> is taken from <a href="http://forum.starling-framework.org/topic/would-you-please-give-us-an-examples-on-how-to-use-dragdropmanager">this forum thread</a>. This text combines multiple posts into a single source, without much editing, so refer to the linked thread if some context is missing. More thorough documentation will be added in the future.
+</aside>
+<aside class="info">
+In the <code>examples/DragDrop</code> directory that comes with Feathers, you can find a simple, working example of the <code>DragDropManager</code>.
+</aside>
+<p>1) You need to implement the <a href="../api-reference/feathers/dragDrop/IDragSource.html"><code>IDragSource</code></a> and <a href="../api-reference/feathers/dragDrop/IDropTarget.html"><code>IDropTarget</code></a> interfaces on the appropriate objects.</p>
+<p>2) Call <a href="../api-reference/feathers/dragDrop/DragDropManager.html#startDrag()"><code>DragDropManager.startDrag()</code></a>, passing in the <code>IDragSource</code>, the <a href="http://doc.starling-framework.org/core/starling/events/Touch.html"><code>Touch</code></a> object that initiated the drag, and a <a href="../api-reference/feathers/dragDrop/DragData.html"><code>DragData</code></a> object which stores the data that is being dragged. You can specify data by &quot;format&quot; so that different targets can accept different types of data.</p>
+<p>3) When the <code>IDropTarget</code> dispatches <a href="../api-reference/feathers/events/DragDropEvent.html#DRAG_ENTER"><code>DragDropEvent.DRAG_ENTER</code></a> (the <code>DragDropManager</code> handles the event dispatching, you just need to listen), and the <code>DragData</code> object includes data of the correct format, it should call <a href="../api-reference/feathers/dragDrop/DragDropManager.html#acceptDrag()"><code>DragDropManager.acceptDrag()</code></a>.</p>
+<p>4) The <code>IDropTarget</code> will dispatch <a href="../api-reference/feathers/events/DragDropEvent.html#DRAG_DROP"><code>DragDropEvent.DRAG_DROP</code></a> if you drop the object (stop touching or release the mouse button) over the <code>IDropTarget</code>. If it does, you need to handle the drop in the event listener.</p>
+<p>5) The <code>IDragSource</code> will dispatch <a href="../api-reference/feathers/events/DragDropEvent.html#DRAG_COMPLETE"><code>DragDropEvent.DRAG_COMPLETE</code></a> whether the drop was accepted or not. The <a href="../api-reference/feathers/events/DragDropEvent.html#isDropped"><code>isDropped</code></a> property of the event is a <code>Boolean</code> that indicates if the drag was successfully dropped on a target that accepted it, of if it was cancelled. If the data that was dragged needs to be removed from the source after being dropped on the target, this event listener is the place to do it. Just check the <code>isDropped</code> property to see if it was dropped or cancelled.</p>
+<p>You can pass the &quot;ghosted drag image&quot; as the &quot;avatar&quot; when you call <code>DragDropManager.startDrag()</code>. The avatar is what follows the mouse while you're dragging.</p>
+<p>The format is what actually gets passed between the drag source and the drop target. This may be the same as the avatar, or it may be something more data-centric, like the data for a list item.</p>
+<p>Usually, if you're simply dragging a display object around (that has no data associated with it like a list item would), you could add the display object itself as the drag data. Something like this is probably fine:</p>
+<pre class="code"><code>var dragData:DragData = new DragData();
+dragData.setDataForFormat(&quot;display-object-drag-format&quot;, theDisplayObject);</code></pre>
+<p>In this case, I randomly called the format <code>&quot;display-object-drag-format&quot;</code>, but call it whatever you want. It just needs to be a string that both sides (the drag source and the drop target) agree on.</p>
+<p>Then in your <code>DragDropEvent.DRAG_ENTER</code> listener, you can check for that format:</p>
+<pre class="code"><code>function(event:DragDropEvent, dragData:DragData):void
+{
+    if(dragData.hasDataForFormat(&quot;display-object-drag-format&quot;))
+    {
+        DragDropManager.acceptDrag(this);
+    }
+}</code></pre>
+<p>In the <code>DragDropEvent.DRAG_DROP</code> listener, you use <code>dragData.getDataForFormat()</code> with the same string to retrieve the display object or other data.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/dragDrop/DragDropManager.html"><code>feathers.dragDrop.DragDropManager</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

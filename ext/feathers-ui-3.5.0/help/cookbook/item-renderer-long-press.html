@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to dispatch a long press event from a custom item renderer - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-dispatch-a-long-press-event-from-a-custom-item-renderer">How to dispatch a long press event from a custom item renderer</h1>
+<p>A <a href="../item-renderers.html">custom item renderer</a> may optionally dispatch <a href="../../api-reference/feathers/events/FeathersEventType.html#LONG_PRESS"><code>FeathersEventType.LONG_PRESS</code></a>, similar to a <a href="../button.html"><code>Button</code></a>.</p>
+<p>Using the <a href="../../api-reference/feathers/utils/touch/LongPress.html"><code>LongPress</code></a> class, it's easy to dispatch <code>FeathersEventType.LONG_PRESS</code>:</p>
+<pre class="code"><code>public class CustomItemRenderer extends LayoutGroupListItemRenderer
+{
+    public function CustomItemRenderer()
+    {
+        super();
+        this._longPress = new LongPress(this);
+    }
+
+    private var _longPress:LongPress;
+}</code></pre>
+<p>That's it! The <code>TouchEvent.TOUCH</code> listeners will be added automatically, and your item renderer will dispatch <code>FeathersEventType.LONG_PRESS</code> like a button.</p>
+<h2 id="combined-with-event.triggered-or-event.change">Combined with Event.TRIGGERED or Event.CHANGE</h2>
+<p>If you plan to combine, <code>LongPress</code> with <a href="../../api-reference/feathers/utils/touch/TapToTrigger.html"><code>TapToTrigger</code></a> or <a href="../../api-reference/feathers/utils/touch/LongPress.html"><code>TapToSelect</code></a>, you should ensure that the other two events aren't dispatched after a long press.</p>
+<p>First, always create the <code>LongPress</code> instance before the <code>TapToTrigger</code> and <code>TapToSelect</code> instances. This ensures that the <code>TouchEvent.TOUCH</code> listener in <code>LongPress</code> gets a higher priority.</p>
+<pre class="code"><code>this._longPress = new LongPress(this);
+this._trigger = new TapToTrigger(this);
+this._select = new TapToSelect(this);</code></pre>
+<p>Then, pass the <code>TapToTrigger</code> and <code>TapToSelect</code> instances to the <code>LongPress</code> so that it can disable them temporarily after a long press.</p>
+<pre class="code"><code>this._longPress.tapToTrigger = this._trigger;
+this._longPress.tapToSelect = this._select;</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../item-renderers.html">Introduction to Custom Item Renderers</a></p></li>
+<li><p><a href="item-renderer-select-on-tap.html">Feathers Cookbook: How to select (or deselect) a custom item renderer on tap or click</a></p></li>
+<li><p><a href="item-renderer-triggered-on-tap.html">Feathers Cookbook: How to dispatch a triggered event from a custom item renderer</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Introduction to Feathers text editors - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="introduction-to-feathers-text-editors">Introduction to Feathers text editors</h1>
+<p>The Adobe Flash runtimes provide more than one way to edit text, and there are multiple different approaches to rendering text on the GPU. None of these approaches are ultimately better than the others. To allow you to choose the method that works best in your app, Feathers provides APIs that allow you to choose the appropriate <em>text editor</em> for the <a href="text-input.html"><code>TextInput</code></a> component based on your project's requirements.</p>
+<p>Different text editors may be more appropriate for some situations than others. You should keep a number of factors in mind when choosing a text editor, including (but not necessarily limited to) the following:</p>
+<ul>
+<li><p>whether the app is running on mobile or desktop</p></li>
+<li><p>whether you need to use embedded fonts or not</p></li>
+<li><p>the language of the text that needs to be displayed</p></li>
+</ul>
+<p>These factors may impact things like performance and memory usage, depending on which text editor that you choose. Additionally, some text editors are better suited to mobile or desktop, and they may not work well on other platforms. What works for one app may be very inappropriate for another.</p>
+<p>Feathers provides four different text editors. We'll learn the capabilities of each, along with their advantages and disadvantages. These text editors are listed below:</p>
+<ul>
+<li><p><a href="stage-text-text-editor.html"><code>StageTextTextEditor</code></a> uses <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/StageText.html"><code>flash.text.StageText</code></a> to natively support entering text on all platforms, but especially on mobile. When the <code>TextInput</code> has focus, the <code>StageText</code> is displayed above Starling. Without focus, the <code>TextField</code> is drawn to <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/BitmapData.html"><code>BitmapData</code></a> and uploaded as a texture to the GPU.</p></li>
+<li><p><a href="text-field-text-editor.html"><code>TextFieldTextEditor</code></a> uses <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html"><code>flash.text.TextField</code></a> to natively support entering text on all platforms. When the <code>TextInput</code> has focus, it is added to the classic display list above Starling. Without focus, the <code>TextField</code> is drawn to <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/BitmapData.html"><code>BitmapData</code></a> and uploaded as a texture to the GPU.</p></li>
+<li><p><a href="text-block-text-editor.html"><code>TextBlockTextEditor</code></a> uses <a href="http://help.adobe.com/en_US/as3/dev/WS9dd7ed846a005b294b857bfa122bd808ea6-8000.html">Flash Text Engine</a> to render text in software and the result is drawn to <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/BitmapData.html"><code>BitmapData</code></a> and uploaded as a texture to the GPU. This text editor is not compatible with mobile apps.</p></li>
+<li><p><a href="bitmap-font-text-editor.html"><code>BitmapFontTextEditor</code></a> uses <a href="http://wiki.starling-framework.org/manual/displaying_text#bitmap_fonts">bitmap fonts</a> to display characters as separate textured quads. This text editor is not compatible with mobile apps.</p></li>
+</ul>
+<p>Each text renderer has different capabilities, so be sure to study each one in detail to choose the best one for your project.</p>
+<h2 id="the-default-text-editor-factory">The default text editor factory</h2>
+<p>In many cases, most of the <code>TextInput</code> components in your app will use the same type of text editor. To keep from repeating yourself by passing the same factory (a function that creates the text editor) to each <code>TextInput</code> separately, you can specify a global <em>default text editor factory</em> to tell all <code>TextInput</code> components in your app how to create a new text editor. Then, if some of your <code>TextInput</code> components need a different text editor, you can pass them a separate factory that will override the default one.</p>
+<p>If you don't replace it, the default text editor factory returns a <a href="../api-reference/feathers/controls/text/StageTextTextEditor.html"><code>StageTextTextEditor</code></a>. <code>StageTextTextEditor</code> provides the best native experience on mobile devices, and it generally works well on desktop too. However, when using a <a href="themes.html">theme</a>, you should check which text editor the theme sets as the default. Themes will often embed a custom font, or they may have special font rendering requirements that require a different text editor. It is completely up to the theme which text editor it wants to use by default with <code>TextInput</code>.</p>
+<p>When an individual component doesn't have a custom text editor factory specified, it calls the function <a href="../api-reference/feathers/core/FeathersControl.html#defaultTextEditorFactory()"><code>FeathersControl.defaultTextEditorFactory()</code></a>. This is a static variable that references a <code>Function</code>, and it can be changed to a different function, as needed. The default implementation of this function looks like this:</p>
+<pre class="code"><code>function():ITextEditor
+{
+    return new StageTextTextEditor();
+}</code></pre>
+<p>If you would prefer to use a different text editor as the default in your app, you can easily change the variable to point to a different function. For instance, you might want to add this code to your application to use the <a href="../api-reference/feathers/controls/text/TextFieldTextEditor.html"><code>TextFieldTextEditor</code></a> instead:</p>
+<pre class="code"><code>FeathersControl.defaultTextEditorFactory = function():ITextEditor
+{
+    return new TextFieldTextEditor();
+};</code></pre>
+<h2 id="using-a-different-text-editor-on-an-individual-textinput">Using a different text editor on an individual <code>TextInput</code></h2>
+<p>You can tell a specific <code>TextInput</code> not to use the default text editor. For instance, you can pass in a custom <a href="../api-reference/feathers/controls/TextInput.html#textEditorFactory"><code>textEditorFactory</code></a> that will be used to create the input's text editor:</p>
+<pre class="code"><code>input.textEditorFactory = function():ITextEditor
+{
+    return new TextFieldTextEditor();
+}</code></pre>
+<p>You can even customize advanced font properties in the factory before returning the text editor:</p>
+<pre class="code"><code>input.textEditorFactory = function():ITextEditor
+{
+    var textEditor:TextFieldTextEditor = new TextFieldTextEditor();
+    textEditor.antiAliasType = AntiAliasType.NORMAL;
+    textEditor.gridFitType = GridFitType.SUBPIXEL;
+    return textEditor;
+}</code></pre>
+<aside class="warn">
+Be careful, if you're using a theme. When changing any styles in <code>textEditorFactory</code>, you may need to set the <code>styleProvider</code> property of the text editor to <code>null</code>. The theme applies styles after the factory returns, and there is a chance that the theme could replace those styles.
+</aside>
+<h2 id="custom-text-editors">Custom Text Editors</h2>
+<p>If you'd like to use a different approach to rendering text, you may implement the <a href="../api-reference/feathers/core/ITextEditor.html"><code>ITextEditor</code></a> interface. This interface provides a simple API for communicating with the <code>TextInput</code> component.</p>
+<p>Unless your custom editor is capable of drawing directly to the GPU, chances are that you will need to implement some form of texture snapshots, similar to the <code>StageTextTextEditor</code> or <code>TextFieldTextEditor</code>. Since Feathers is open source, feel free to look through the source code for one of these text editor classes for inspiration.</p>
+<p>Please note that unless you find a way to take advantage of <code>StageText</code> or <code>TextField</code> in your custom text editor, you will not be able to access the native soft keyboard on mobile. Without the soft keyboard, the text editor may be limited to desktop, unless you can provide an alternate keyboard.</p>
+<h2 id="multiline-text-editors">Multiline Text Editors</h2>
+<p>On mobile, <code>StageTextTextEditor</code> can be used to edit text with multiple word-wrapped lines. The underlying <code>StageText</code> instance will provide its own scrolling capabilities. Simply set its <a href="../api-reference/feathers/controls/text/StageTextTextEditor.html#multiline"><code>multiline</code></a> property to <code>true</code>.</p>
+<p>For desktop apps, the <a href="text-area.html"><code>TextArea</code></a> component may be used. It will work on mobile, in a pinch, but it only recommended for desktop. <code>TextArea</code> supports special text editors with an extended the <a href="../api-reference/feathers/controls/text/ITextEditorViewPort.html"><code>ITextEditorViewPort</code></a> interface. Currently, Feathers provides one text editor for <code>TextArea</code>:</p>
+<ul>
+<li><a href="../api-reference/feathers/controls/text/TextFieldTextEditorViewPort.html"><code>TextFieldTextEditorViewPort</code></a> is similar to <code>TextFieldTextEditor</code>. It renders text using a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html"><code>flash.text.TextField</code></a>. This is the default text editor used by <code>TextArea</code>.</li>
+</ul>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="stage-text-text-editor.html">How to use the Feathers <code>StageTextTextEditor</code> component</a></p></li>
+<li><p><a href="text-field-text-editor.html">How to use the Feathers <code>TextFieldTextEditor</code> component</a></p></li>
+<li><p><a href="text-block-text-editor.html">How to use the Feathers <code>TextBlockTextEditor</code> component</a></p></li>
+<li><p><a href="bitmap-font-text-editor.html">How to use the Feathers <code>BitmapFontTextEditor</code> component</a></p></li>
+<li><p><a href="text-input.html">How to use the Feathers <code>TextInput</code> component</a></p></li>
+<li><p><a href="text-area.html">How to use the Feathers <code>TextArea</code> component</a></p></li>
+<li><p><a href="../api-reference/feathers/core/ITextEditor.html"><code>ITextEditor</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/text/ITextEditorViewPort.html"><code>ITextEditorViewPort</code> API Documentation</a></p></li>
+<li><p><a href="text-renderers.html">Introduction to Feathers Text Renderers</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

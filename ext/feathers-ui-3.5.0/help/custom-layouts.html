@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Introduction to custom layouts for Feathers containers - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="introduction-to-custom-layouts-for-feathers-containers">Introduction to custom layouts for Feathers containers</h1>
+<p>Several Feathers components support the ability to customize layouts. <a href="index.html#layouts">Several layouts</a> are provided by Feathers out of the box. However, if those don't quite fit your needs, you can create custom layouts by implementing the <a href="../api-reference/feathers/layout/ILayout.html"><code>ILayout</code></a> interface. This interface provides the most basic API required to use a custom layout with a Feathers component. A number of other interfaces are available with more advanced functionality, and we'll look at those below.</p>
+<h2 id="a-simple-example-layout">A Simple Example Layout</h2>
+<p>Let's start by looking at the complete source code for a custom layout. Don't worry, we'll look at more closely it in smaller, digestible chunks in a moment.</p>
+<p>This custom layout will be similar to <a href="vertical-layout.html"><code>VerticalLayout</code></a>, but it won't offer so many options available to the built-in version. This <code>SimpleVerticalLayout</code> class, as we'll call it, will position items from top to bottom, aligned to the top and left. We'll offer one customizable property, a gap between items, to show how to implement something like that.</p>
+<pre class="code"><code>package feathersx.layout
+{
+    import feathers.core.IFeathersControl;
+    import feathers.layout.ILayout;
+    import feathers.layout.ILayoutDisplayObject;
+    import feathers.layout.LayoutBoundsResult;
+    import feathers.layout.ViewPortBounds;
+ 
+    import flash.geom.Point;
+ 
+    import starling.display.DisplayObject;
+    import starling.events.Event;
+    import starling.events.EventDispatcher;
+ 
+    public class SimpleVerticalLayout extends EventDispatcher implements ILayout
+    {
+        public function SimpleVerticalLayout()
+        {
+        }
+ 
+        protected var _gap:Number = 0;
+ 
+        public function get gap():Number
+        {
+            return this._gap;
+        }
+ 
+        public function set gap(value:Number):void
+        {
+            if(this._gap == value)
+            {
+                return;
+            }
+            this._gap = value;
+            this.dispatchEventWith(Event.CHANGE);
+        }
+
+        public function get requiresLayoutOnScroll():Boolean
+        {
+            return false;
+        }
+ 
+        public function layout(items:Vector.&lt;DisplayObject&gt;, viewPortBounds:ViewPortBounds = null, result:LayoutBoundsResult = null):LayoutBoundsResult
+        {
+            // initialize the view port&#39;s position and dimensions
+            var startX:Number = 0;
+            var startY:Number = 0;
+            var explicitWidth:Number = NaN;
+            var explicitHeight:Number = NaN;
+            var minWidth:Number = 0;
+            var minHeight:Number = 0;
+            var maxWidth:Number = Number.POSITIVE_INFINITY;
+            var maxHeight:Number = Number.POSITIVE_INFINITY;
+            if(viewPortBounds)
+            {
+                startX = viewPortBounds.x;
+                startY = viewPortBounds.y;
+                explicitWidth = viewPortBounds.explicitWidth;
+                explicitHeight = viewPortBounds.explicitHeight;
+                minWidth = viewPortBounds.minWidth;
+                minHeight = viewPortBounds.minHeight;
+                maxWidth = viewPortBounds.maxWidth;
+                maxHeight = viewPortBounds.maxHeight;
+            }
+ 
+            // loop through the items and position them
+            var positionY:Number = startY;
+            var maxItemWidth:Number = 0;
+            var itemCount:int = items.length;
+            for(var i:int = 0; i &lt; itemCount; i++)
+            {
+                var item:DisplayObject = items[i];
+                // skip items that aren&#39;t included in the layout
+                var layoutItem:ILayoutDisplayObject = item as ILayoutDisplayObject;
+                if(layoutItem &amp;&amp; !layoutItem.includeInLayout)
+                {
+                    continue;
+                }
+                // special case for Feathers components
+                if(item is IFeathersControl)
+                {
+                    IFeathersControl(item).validate();
+                }
+                item.x = startX;
+                item.y = positionY;
+                positionY += item.height + this._gap;
+ 
+                // used for the final content width below
+                maxItemWidth = Math.max(maxItemWidth, item.width);
+            }
+ 
+            // used for the final content height below
+            positionY -= (startY + this._gap);
+ 
+            // prepare the result object and return it
+            if(!result)
+            {
+                result = new LayoutBoundsResult();
+            }
+            var viewPortWidth:Number = explicitWidth;
+            var viewPortHeight:Number = explicitHeight;
+            if(isNaN(viewPortWidth))
+            {
+                viewPortWidth = Math.max(minWidth, Math.min(maxWidth, maxItemWidth));
+            }
+            if(isNaN(explicitHeight))
+            {
+                viewPortHeight = Math.max(minHeight, Math.min(maxHeight, positionY));
+            }
+            var contentWidth:Number = Math.max(maxItemWidth, viewPortWidth);
+            var contentHeight:Number = Math.max(positionY, viewPortHeight);
+            result.viewPortWidth = viewPortWidth;
+            result.viewPortHeight = viewPortHeight;
+            result.contentWidth = contentWidth;
+            result.contentHeight = contentHeight;
+            return result;
+        }
+ 
+        public function getScrollPositionForIndex(index:int, items:Vector.&lt;DisplayObject&gt;, x:Number, y:Number, viewPortWidth:Number, viewPortHeight:Number, result:Point = null):Point
+        {
+            // loop through the items to calculate the scroll position
+            var positionY:Number = 0;
+            for(var i:int = 0; i &lt; index; i++)
+            {
+                var item:DisplayObject = items[i];
+                var layoutItem:ILayoutDisplayObject = item as ILayoutDisplayObject;
+                if(layoutItem &amp;&amp; !layoutItem.includeInLayout)
+                {
+                    continue;
+                }
+                if(item is IFeathersControl)
+                {
+                    IFeathersControl(item).validate();
+                }
+                positionY += item.height + this._gap;
+            }
+ 
+            // prepare the result object and return it
+            if(!result)
+            {
+                result = new Point();
+            }
+            result.x = 0;
+            result.y = positionY;
+            return result;
+        }
+
+        public function getNearestScrollPositionForIndex(index:int, scrollX:Number, scrollY:Number, items:Vector.&lt;DisplayObject&gt;, x:Number, y:Number, viewPortWidth:Number, viewPortHeight:Number, result:Point = null):Point
+        {
+            result = this.getScrollPositionForIndex(index, items, x, y, viewPortWidth, viewPortHeight, result);
+            
+            var item:DisplayObject = items[index];
+            var maxPositionY:Number = result.y;
+            var minPositionY:Number = maxPositionY - viewPortHeight + item.height;
+            if(scrollY &lt; minPositionY)
+            {
+                result.y = minPositionY;
+            }
+            else if(scrollY &gt; maxPositionY)
+            {
+                result.y = maxPositionY;
+            }
+            else
+            {
+                result.y = scrollY;
+            }
+            return result;
+        }
+    }
+}</code></pre>
+<p>We'll go into the low-level details in a moment, but let's look at a couple of important parts of the <code>SimpleVerticalLayout</code> class first.</p>
+<ul>
+<li><p>The class implements <a href="../api-reference/feathers/layout/ILayout.html"><code>feathers.layout.ILayout</code></a>. This interface defines some properties and methods that all layouts need, which we'll be digging into next. There are some other interfaces for more advanced layout capabilities, but <code>ILayout</code> is the bare minimum.</p></li>
+<li><p>The class extends the standard Starling <a href="http://doc.starling-framework.org/core/starling/events/EventDispatcher.html"><code>starling.events.EventDispatcher</code></a> because <code>ILayout</code> specifies that layouts should dispatch <code>Event.CHANGE</code> when their properties change. This will allow components that use layouts to properly invalidate when they need to call the <a href="../api-reference/feathers/layout/ILayout.html#layout()"><code>layout()</code></a> function again.</p></li>
+</ul>
+<h2 id="the-requireslayoutonscroll-property">The <code>requiresLayoutOnScroll</code> property</h2>
+<p>This property informs the container if the layout code should be updated when the container scrolls.</p>
+<pre class="code"><code>public function get requiresLayoutOnScroll():Boolean
+{
+    return false;
+}</code></pre>
+<p>For our layout, we don't need to change the position or size of anything after scrolling, so we can simply return <code>false</code>.</p>
+<h2 id="the-layout-function">The <code>layout()</code> function</h2>
+<p>The first function defined by the <code>ILayout</code> interface is <a href="../api-reference/feathers/layout/ILayout.html#layout()"><code>layout()</code></a>. Please take a moment to review its signature below:</p>
+<pre class="code"><code>layout(items:Vector.&lt;DisplayObject&gt;, viewPortBounds:ViewPortBounds = null, result:LayoutBoundsResult = null):LayoutBoundsResult</code></pre>
+<p>This function's main purpose is to set the final transformations on the items in the layout, such as position and dimensions. If the final dimensions of the view port aren't specified, it will also calculate those values and return them.</p>
+<p>The first argument is a <code>Vector.&lt;DisplayObject&gt;</code> of the items to layout. A layout implementation can loop through these items and transform them as needed. Below, you can see a this exact loop from our class:</p>
+<pre class="code"><code>var itemCount:int = items.length;
+for(var i:int = 0; i &lt; itemCount; i++)
+{
+    var item:DisplayObject = items[i];
+    // skip items that aren&#39;t included in the layout
+    if(item is ILayoutDisplayObject &amp;&amp; !ILayoutDisplayObject(item).includeInLayout)
+    {
+        continue;
+    }
+    if(item is IFeathersControl)
+    {
+        IFeathersControl(item).validate();
+    }
+    item.x = startX;
+    item.y = positionY;
+    positionY += item.height + this._gap;
+    maxItemWidth = Math.max(maxItemWidth, item.width);
+}</code></pre>
+<p>In this loop, we set the item's position. If this were a more advanced layout, we might perform other transformations, like setting the width or height, or even rotating the item. We're also tracking the total width of each item, which we may use later to calculate the final view port width, if required.</p>
+<p>Notice that we check the datatype of each item two times using the <code>is</code> keyword.</p>
+<p>First, we check if the item is an <a href="../api-reference/feathers/layout/ILayoutDisplayObject.html"><code>ILayoutDisplayObject</code></a>. If so, we want to check if the <a href="../api-reference/feathers/layout/ILayoutDisplayObject.html#includeInLayout"><code>includeInLayout</code></a> property has been set to <code>false</code>. If so, we will skip that item.</p>
+<p>For more information about the <code>ILayoutDisplayObject</code> interface and related layout features, please take a look at the <a href="layout-data.html"><code>ILayoutDisplayObject</code> and <code>ILayoutData</code></a> article.</p>
+<p>Next, we check if an item is a Feathers component. If we encounters one, we need to call <code>validate()</code>. If a Feathers component is in an invalid state, it may not report the correct dimensions, so this function call is required for accurate bounds calculations and positioning.</p>
+<p>The second argument is an optional <a href="../api-reference/feathers/layout/ViewPortBounds.html"><code>ViewPortBounds</code></a> object. This object specifies restrictions on the layout, such as dimensions, starting position, and scroll position (for scrolling containers). If the <code>ViewPortBounds</code> object is not provided, the layout is expected to assume that it has no restrictions on dimensions, the container has not scrolled, and item positioning should start at the standard origin <code>(0,0)</code>. The code below will use <code>viewPortBounds</code>, if it is not <code>null</code>, or it will select sensible defaults for all values:</p>
+<pre class="code"><code>var startX:Number = 0;
+var startY:Number = 0;
+var explicitWidth:Number = NaN;
+var explicitHeight:Number = NaN;
+var minWidth:Number = 0;
+var minHeight:Number = 0;
+var maxWidth:Number = Number.POSITIVE_INFINITY;
+var maxHeight:Number = Number.POSITIVE_INFINITY;
+if(viewPortBounds)
+{
+    startX = viewPortBounds.x;
+    startY = viewPortBounds.y;
+    explicitWidth = viewPortBounds.explicitWidth;
+    explicitHeight = viewPortBounds.explicitHeight;
+    minWidth = viewPortBounds.minWidth;
+    minHeight = viewPortBounds.minHeight;
+    maxWidth = viewPortBounds.maxWidth;
+    maxHeight = viewPortBounds.maxHeight;
+}</code></pre>
+<p>In a moment, we'll spend some time looking at <a href="#viewportbounds-properties">every property defined by ViewPortBounds</a>, including those interesting <code>NaN</code> values.</p>
+<p>The final argument is an optional <a href="../api-reference/feathers/layout/LayoutBoundsResult.html"><code>LayoutBoundsResult</code></a> object. This object is used to specify the final view port dimensions and the dimensions of the content within the view port. The content may be larger than the view port, and a component like <code>ScrollContainer</code> will use that to determine if it needs to scroll.</p>
+<p>This argument actually becomes the return value of the <code>layout()</code> function. By passing in (and reusing) a pre-created <code>LayoutBoundsResult</code> object, Feathers can avoid unnecessary garbage collection. It is optional, though, so the layout is expected to create a new instance of <code>LayoutBoundsResult</code> if the argument is <code>null</code>.</p>
+<p>Below, we see how the dimensions of the content and some of the values from <code>ViewPortBounds</code> are used to calculate the properties on the <code>LayoutBoundsResult</code> object:</p>
+<pre class="code"><code>if(!result)
+{
+    result = new LayoutBoundsResult();
+}
+var viewPortWidth:Number = explicitWidth;
+var viewPortHeight:Number = explicitHeight;
+if(isNaN(viewPortWidth))
+{
+    viewPortWidth = Math.max(minWidth, Math.min(maxWidth, maxItemWidth));
+}
+if(isNaN(explicitHeight))
+{
+    viewPortHeight = Math.max(minHeight, Math.min(maxHeight, positionY));
+}
+var contentWidth:Number = Math.max(maxItemWidth, viewPortWidth);
+var contentHeight:Number = Math.max(positionY, viewPortHeight);
+result.viewPortWidth = viewPortWidth;
+result.viewPortHeight = viewPortHeight;
+result.contentWidth = contentWidth;
+result.contentHeight = contentHeight;
+return result;</code></pre>
+<p>Notice that if the view port's dimensions are not explicitly specified by the <code>ViewPortBounds</code> argument (in other words, if they're <code>NaN</code>), we calculate the view port dimensions manually, using the combined height of all items and the maximum width of the items. In that case, we also need to take into account the minimum and maximum dimensions. Finally, the content dimensions should either be equal to or larger than the view port dimensions.</p>
+<h3 id="viewportbounds-properties"><code>ViewPortBounds</code> properties</h3>
+<p>Let's look in more detail at the properties on a <a href="../api-reference/feathers/layout/ViewPortBounds.html"><code>ViewPortBounds</code></a> object. This object specifies dimensions, starting position, and scroll position values of the container's view port.</p>
+<p>The <a href="../api-reference/feathers/layout/ViewPortBounds.html#explicitWidth"><code>explicitWidth</code></a> and <a href="../api-reference/feathers/layout/ViewPortBounds.html#explicitHeight"><code>explicitHeight</code></a> properties may specify that the view port has an exact width and height that cannot change. The layout may position its items beyond these dimensions, but it should expect that the container will be required to scroll if any items are positioned beyond the explicit dimensions. If the value of one of these properties is <code>NaN</code> (which can be checked by passing the value to the <code>isNaN()</code> function), the view port dimension in question is not restricted to an exact value.</p>
+<p>The <a href="../api-reference/feathers/layout/ViewPortBounds.html#minWidth"><code>minWidth</code></a>, <a href="../api-reference/feathers/layout/ViewPortBounds.html#minHeight"><code>minHeight</code></a>, <a href="../api-reference/feathers/layout/ViewPortBounds.html#maxWidth"><code>maxWidth</code></a>, and <a href="../api-reference/feathers/layout/ViewPortBounds.html#maxHeight"><code>maxHeight</code></a> properties specify restrictions on view port dimensions that should be taken into account if <code>explicitWidth</code> or <code>explicitHeight</code> is not specified (if they are <code>NaN</code>, as explained above). The layout should take these values into account when it calculates its preferred width and height.</p>
+<p>The <a href="../api-reference/feathers/layout/ViewPortBounds.html#scrollX"><code>scrollX</code></a> and <a href="../api-reference/feathers/layout/ViewPortBounds.html#scrollY"><code>scrollY</code></a> properties specify the scroll position of the container that is using the layout. If the container has not been scrolled, or it cannot scroll, the value will be <code>0</code>.</p>
+<p>The <a href="../api-reference/feathers/layout/ViewPortBounds.html#x"><code>x</code></a> and <a href="../api-reference/feathers/layout/ViewPortBounds.html#y"><code>y</code></a> properties specify the starting position of the layout. The layout should consider the point <code>(x,y)</code> as its origin, instead of <code>(0,0)</code>. However, in most cases <code>x</code> and <code>y</code> will both probably be <code>0</code>.</p>
+<p>Again, this is an optional argument. If the layout receives <code>null</code>, it may assume the following defaults, which we've previously pointed out in the source code:</p>
+<ul>
+<li><p><code>explicitWidth = NaN</code></p></li>
+<li><p><code>explicitHeight = NaN</code></p></li>
+<li><p><code>minWidth = 0</code></p></li>
+<li><p><code>minHeight = 0</code></p></li>
+<li><p><code>maxWidth = Number.POSITIVE_INFINITY</code></p></li>
+<li><p><code>maxHeight = Number.POSITIVE_INFINITY</code></p></li>
+<li><p><code>scrollX = 0</code></p></li>
+<li><p><code>scrollY = 0</code></p></li>
+<li><p><code>x = 0</code></p></li>
+<li><p><code>y = 0</code></p></li>
+</ul>
+<h3 id="layoutboundsresult-properties"><code>LayoutBoundsResult</code> properties</h3>
+<p>Let's look in more detail at the properties on a <a href="../api-reference/feathers/layout/LayoutBoundsResult.html"><code>LayoutBoundsResult</code></a> object. This object is returned by the <a href="../api-reference/feathers/layout/ILayout.html#layout()"><code>layout()</code></a> function and &quot;fills in the blanks&quot; from the <code>ViewPortBounds</code> object passed as one of the arguments to the <code>layout()</code> function.</p>
+<p>The <a href="../api-reference/feathers/layout/LayoutBoundsResult.html#viewPortWidth"><code>viewPortWidth</code></a> and <a href="../api-reference/feathers/layout/LayoutBoundsResult.html#viewPortHeight"><code>viewPortHeight</code></a> properties specify the final width and height of the container's view port. If the <code>ViewPortBounds</code> object specifies an <code>explicitWidth</code> or <code>explicitHeight</code>, those values should <strong>always</strong> be used. If not, then these values must be calculated by the layout (how they are calculated depends on the layout algorithm), using <code>minWidth</code>, <code>minHeight</code>, <code>maxWidth</code>, and <code>maxHeight</code> as restrictions.</p>
+<p>The <a href="../api-reference/feathers/layout/LayoutBoundsResult.html#contentWidth"><code>contentWidth</code></a> and <a href="../api-reference/feathers/layout/LayoutBoundsResult.html#contentHeight"><code>contentHeight</code></a> properties specify the width and height of the content. They may be the same as <code>viewPortWidth</code> and <code>viewPortHeight</code>, but if the view port contains content that goes beyond its bounds, these values may be larger, which allows a layout to tell the container that its view port should scroll, if the container supports scrolling.</p>
+<p>The <a href="../api-reference/feathers/layout/LayoutBoundsResult.html#contentX"><code>contentX</code></a> and <a href="../api-reference/feathers/layout/LayoutBoundsResult.html#contentY"><code>contentY</code></a> properties specify where the content begins for scrolling containers to set the minimum scroll positions. These values are typically set to <code>0</code> (zero), but they may also be negative.</p>
+<h2 id="the-getscrollpositionforindex-function">The <code>getScrollPositionForIndex()</code> function</h2>
+<p>The second function defined by <a href="../api-reference/feathers/layout/ILayout.html"><code>ILayout</code></a> is <a href="../api-reference/feathers/layout/ILayout.html#getScrollPositionForIndex()"><code>getScrollPositionForIndex()</code></a>. Please take a moment to review its signature below:</p>
+<pre class="code"><code>getScrollPositionForIndex(index:int, items:Vector.&lt;DisplayObject&gt;, x:Number, y:Number, viewPortWidth:Number, viewPortHeight:Number, result:Point = null):Point</code></pre>
+<p>This function may be called by a component that supports layout to calculate a scroll position that ensures that a specific item is fully visible in the view port. The item's exact position within the view port is determined entirely by the layout. A custom layout might consider aligning the item to the center, or it might align it to one of the edges. The only rule is that the item must be fully visible when the view port is scrolled to that position. If you're calling this function, you should make no other assumptions about the item's position.</p>
+<p>The first argument is the zero-based index of the item that needs to be fully visible in the view port. You can see that this is used for the ending condition in the <code>for</code> loop:</p>
+<pre class="code"><code>for(var i:int = 0; i &lt; index; i++)</code></pre>
+<p>In other words, we don't need to loop through every item to see where the final scroll position will be unless we need the final scroll position for the final item.</p>
+<p>Next, the full list of items are passed in. In the code below, we loop through the items mentioned above, adding each item's height and the gap between the items, similar to the <code>layout()</code> function, except that we aren't setting the positions of items:</p>
+<pre class="code"><code>var positionY:Number = 0;
+for(var i:int = 0; i &lt; index; i++)
+{
+    var item:DisplayObject = items[i];
+    if(item is ILayoutDisplayObject &amp;&amp; !ILayoutDisplayObject(item).includeInLayout)
+    {
+        continue;
+    }
+    if(item is IFeathersControl)
+    {
+        IFeathersControl(item).validate();
+    }
+    positionY += item.height + this._gap;
+}</code></pre>
+<p>As above, we need to check if the item is included in the layout or not, and we need to validate Feathers controls before we can access their correct dimensions.</p>
+<p>For the next arguments, it's important to understand that <code>getScrollPositionForIndex()</code> must always be called after <code>layout()</code>. With that in mind, we don't pass a <code>ViewPortBounds</code> object to <code>getScrollPositionForIndex()</code> like we do for <code>layout()</code>. We know the final x, y, width and height values now, so minimum and maximum dimensions are irrelevant.</p>
+<p>The third and fourth arguments are the x and y position of the view port. These values match up with the x and y values of the <code>ViewPortBounds</code> object passed to <code>layout()</code>. These values often are not needed.</p>
+<p>The fifth and sixth arguments are the final dimensions of the view port. They're equivalent to the <code>viewPortWidth</code> and <code>viewPortHeight</code> properties of the <code>LayoutBoundsResult</code> object returned by <code>layout()</code>. We don't need these values in this example, but other layouts may use them if items need to be resized based on the width and height of the view port.</p>
+<p>The seventh, and final, argument is an optional <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/geom/Point.html"><code>flash.geom.Point</code></a> object where the <code>x</code> and <code>y</code> properties are equivalent, respectively, to <code>horizontalScrollPosition</code> and <code>verticalScrollPosition</code> values of a scrolling container.</p>
+<p>If the result value isn't <code>null</code>, <code>getScrollPositionForIndex()</code> must use it as the return value. By passing in (and reusing) a pre-created <code>Point</code> object, Feathers can avoid unnecessary garbage collection. It is optional, though, so the layout is expected to create a new instance of <code>Point</code> if the argument is <code>null</code>.</p>
+<p>Below, we can see how we check if the result is <code>null</code> or not, and the final scroll position is set before returning:</p>
+<pre class="code"><code>if(!result)
+{
+    result = new Point();
+}
+result.x = 0;
+result.y = positionY;
+return result;</code></pre>
+<h2 id="the-getnearestscrollpositionforindex-function">The <code>getNearestScrollPositionForIndex()</code> function</h2>
+<p>The <code>getNearestScrollPositionForIndex()</code> function is very similar to the <code>getScrollPositionForIndex()</code> function. The main difference is that <code>getNearestScrollPositionForIndex()</code> tries to scroll the minimum amount possible to fully show an item in the view port, while <code>getScrollPositionForIndex()</code> may try to center it or display it in some kind of ideal position. <code>getNearestScrollPositionForIndex()</code> is called when using the keyboard arrow keys to navigate in a List.</p>
+<p>First, we're going to take advantage of the fact that our implementation of <code>getScrollPositionForIndex()</code> will position the item at the top of the view port.</p>
+<pre class="code"><code>result = this.getScrollPositionForIndex(index, items, x, y, viewPortWidth, viewPortHeight, result);</code></pre>
+<p>The <code>y</code> value of the result will become the maximum possible position that we'll scroll to where the item is completely visible:</p>
+<pre class="code"><code>var maxPositionY:Number = result.y;</code></pre>
+<p>Next, we want to know the minimum possible position. We can calculate that with some simple arithmetic:</p>
+<pre class="code"><code>var minPositionY:Number = maxPositionY - viewPortHeight + item.height;</code></pre>
+<p>Now that we know the range of possible scroll positions, we can simply ensure that the value of scrollY is within that range:</p>
+<pre class="code"><code>if(scrollY &lt; minPositionY)
+{
+    result.y = minPositionY;
+}
+else if(scrollY &gt; maxPositionY)
+{
+    result.y = maxPositionY;
+}
+else
+{
+    result.y = scrollY;
+}</code></pre>
+<p>If the vertical scroll position is less than <code>minPositionY</code>, we'll set it to <code>minPositionY</code>. If it's greater than <code>maxPositionY</code>, we'll set it to <code>maxPositionY</code>. Otherwise, we know that the item is fully visible already, so we'll return the <code>scrollY</code> value that was passed into the function.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="layout-data.html"><code>ILayoutDisplayObject</code> and <code>ILayoutData</code></a></p></li>
+<li><p><a href="virtual-custom-layouts.html">Virtualized Custom Layouts for Feathers Components</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

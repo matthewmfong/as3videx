@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers BitmapFontTextEditor component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-bitmapfonttexteditor-component">How to use the Feathers <code>BitmapFontTextEditor</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/text/BitmapFontTextEditor.html"><code>BitmapFontTextEditor</code></a> class renders text using <a href="http://wiki.starling-framework.org/manual/displaying_text#bitmap_fonts">bitmap fonts</a>. This text editor is fully integrated with the Starling display list, which means that nothing appears as an overlay when the text editor is focused.</p>
+<aside class="warn">
+<code>BitmapFontTextEditor</code> is intended for use in desktop applications only, and it does not provide support for software keyboards on mobile devices.
+</aside>
+<aside class="info">
+<code>BitmapFontTextEditor</code> is one of many different <a href="text-editors.html">text editors</a> supported by the Feathers <a href="text-input.html"><code>TextInput</code></a> component. Since no method of editing text is considered definitively better than the others, Feathers allows you to choose the best text editor for your project's requirements. See <a href="text-editors.html">Introduction to Feathers text editors</a> for complete details about all of the text editing options supported by Feathers.
+</aside>
+<h2 id="advantages-and-disadvantages">Advantages and disadvantages</h2>
+<p>Due to limitations in the Adobe AIR runtime, this text editor cannot be used on mobile. Adobe AIR does not offer an API for displaying the soft keyboard on iOS when the text editor receives focus. This text editor should only be used in desktop apps.</p>
+<p>Bitmap fonts separate each character into sub-textures inside an atlas. These sub-textures are displayed as images placed next to each other to form words and paragraphs. If the text has a particularly stylized appearance, such as gradients and outlines, bitmap fonts provide the best performance because the styles can be calculated at design time rather than runtime.</p>
+<p>While the English language has only 26 letters in the alphabet (in addition to any punctuation and other supporting characters that you might need), some languages require many hundreds of characters. A texture that contains all of those characters may be impossible to use with bitmap fonts because it hits texture memory limits imposed by the Flash runtime or the GPU. In these situations, you may have no choice but to use device fonts.</p>
+<p>Bitmap fonts may be scaled, but because they use bitmaps, only scaling down is recommended. Even then, you may lose out on text hinting that would make vector fonts more readable at smaller sizes. It's common to include separate font sizes as separate textures for bitmap fonts to achieve the best looking results, and that can require a lot of memory.</p>
+<p><code>BitmapFontTextEditor</code> does not support multiple font styles. A <code>BitmapFontTextEditor</code> must use a single bitmap font to render its entire text.</p>
+<h3 id="advanced-font-styles">Advanced font styles</h3>
+<aside class="info">
+<p>In general, you should customize font styles on the parent component of a text editor using a <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> object. For example, to customize the font styles on a <a href="text-input.html"><code>TextInput</code></a> component, you'd set the input's <a href="../api-reference/feathers/controls/TextInput.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>input.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );</code></pre>
+However, <code>starling.text.TextFormat</code> object does not always expose every unique font styling feature that a text editor supports. The next section demostrates how to set advanced font styles that may not be exposed through this class.
+</aside>
+<p>To use bitmap fonts with <code>TextInput</code>, create a <a href="../api-reference/feathers/controls/text/BitmapFontTextEditor.html"><code>BitmapFontTextEditor</code></a> class in the appropriate factory exposed by the parent component. In the following example, we'll use the <a href="../api-reference/feathers/controls/TextInput.html#textEditorFactory"><code>textEditorFactory</code></a> of a <a href="text-input.html"><code>TextInput</code></a> component:</p>
+<pre class="code"><code>var input:TextInput = new TextInput();
+input.textEditorFactory = function():ITextEditor
+{
+    var textEditor:BitmapFontTextEditor = new BitmapFontTextEditor();
+    textEditor.styleProvider = null;
+    
+    //set advanced font styles here
+
+    return textEditor;
+};</code></pre>
+<aside class="info">
+You may need to remove the text editor's style provider in the factory before changing font styles to avoid conflicts with the default styles set by a theme. That's why the <code>styleProvider</code> property is set to <code>null</code> in the code above.
+</aside>
+<p>Font styles may be customized by passing a <a href="../api-reference/feathers/text/BitmapFontTextFormat.html"><code>BitmapFontTextFormat</code></a> instance to the text editor's <a href="../api-reference/feathers/controls/text/BitmapFontTextRenderer.html#textFormat"><code>textFormat</code></a> property.</p>
+<pre class="code"><code>var format:BitmapFontTextFormat = new BitmapFontTextFormat( &quot;FontName&quot; );</code></pre>
+<p>Pass the font to display to the <code>BitmapFontTextFormat</code> constructor. In the code above, we pass in the name of a font registered with <a href="http://doc.starling-framework.org/core/starling/text/TextField.html#registerCompositor()"><code>TextField.registerCompositor()</code></a>. We could also pass in a <a href="http://doc.starling-framework.org/core/starling/text/BitmapFont.html"><code>starling.text.BitmapFont</code></a> instance that has not been registered.</p>
+<p>The tint of the text can be customized with the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html#color"><code>color</code></a> property:</p>
+<pre class="code"><code>format.color = 0xc4c4c4;</code></pre>
+<p>The RGB values of the tint color are multiplied with the RGB values of each of the font texture's pixels, similar to <a href="http://doc.starling-framework.org/current/starling/display/BlendMode.html#MULTIPLY"><code>starling.display.BlendMode.MULTIPLY</code></a>.</p>
+<aside class="info">
+To support the maximum range of colors, the bitmap font image should be exported with completely white pixels.
+</aside>
+<p>The alignment of the text can be customized with the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html#align"><code>align</code></a> property:</p>
+<pre class="code"><code>format.align = TextFormatAlign.CENTER;</code></pre>
+<p>Bitmap fonts have one primary font size. They may be scaled, but scaled bitmap fonts may not render as nicely as scaled vector fonts. However, if needed, we can use the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html#size"><code>size</code></a> property:</p>
+<pre class="code"><code>format.size = 18;</code></pre>
+<p>In most cases, it's not necessary to set the <code>size</code> property. The primary font size will be detected automatically.</p>
+<p><code>BitmapFontTextEditor</code> provides a number of other advanced properties that may be customized, but aren't included in this quick introduction. For complete details about available properties, please take a look at the <a href="../api-reference/feathers/controls/text/BitmapFontTextEditor.html"><code>BitmapFontTextEditor</code> API reference</a> and the <a href="../api-reference/feathers/text/BitmapFontTextFormat.html"><code>BitmapFontTextFormat</code> API reference</a>.</p>
+<h3 id="how-to-change-advanced-font-styles-when-a-parent-component-has-multiple-states">How to change advanced font styles when a parent component has multiple states</h3>
+<p><a href="text-input.html"><code>TextInput</code></a> has multiple states, and it's possible to pass a different <code>BitmapFontTextFormat</code> to the <code>BitmapFontTextEditor</code> for each state. When the parent component's state changes, the font styles of the text editor will update automatically.</p>
+<p>For instance, we can provide a different font style for the focused state of a <code>TextInput</code> by calling <a href="../api-reference/feathers/controls/text/BitmapFontTextEditor.html#setTextFormatForState()"><code>setTextFormatForState()</code></a>:</p>
+<pre class="code"><code>var defaultFormat:BitmapFontTextFormat = new BitmapFontTextFormat( &quot;FontName&quot;, 20, 0xc4c4c4 );
+textEditor.textFormat = defaultFormat;
+
+var focusedFormat:BitmapFontTextFormat = new BitmapFontTextFormat( &quot;FontName&quot;, 20, 0x343434 );
+textEditor.setTextFormatForState( TextInput.STATE_FOCUSED, focusedFormat );</code></pre>
+<p>We didn't provide separate font styles for other states, like <code>TextInput.STATE_DISABLED</code>. When the <code>TextInput</code> is in one of these states, the <code>BitmapFontTextEditor</code> will fall back to using the value we passed to the <code>textFormat</code> property.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/text/BitmapFontTextEditor.html"><code>feathers.controls.text.BitmapFontTextEditor</code> API Documentation</a></p></li>
+<li><p><a href="text-editors.html">Introduction to Feathers text editors</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

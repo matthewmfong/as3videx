@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>The Feathers user interface component lifecycle - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="the-feathers-user-interface-component-lifecycle">The Feathers user interface component lifecycle</h1>
+<p>To develop custom components for Feathers, one should understand the basics of the Feathers component lifecycle. A component goes through a number of distinct stages between when it is created and when it is destroyed.</p>
+<h2 id="instantiation">Instantiation</h2>
+<p>The component instance is created with the <code>new</code> keyword. It has not yet been added to the display list. Properties may be changed, and the new values will be saved, but the component will not automatically react to those changes until after it has been added to the display list. This ensures that the Feathers component doesn't run its drawing code too often.</p>
+<h2 id="initialization">Initialization</h2>
+<p>The component is added to the display list and its <code>initialize()</code> function is called. <code>FeathersEventType.INITIALIZE</code> will be dispatched after <code>initialize()</code> returns.</p>
+<h2 id="apply-theme-styles">Apply theme styles</h2>
+<p>If the component has a style provider from a <a href="theme.html">theme</a>, the theme's styles will be applied to the component immediately after <code>FeathersEventType.INITIALIZE</code> is dispatched.</p>
+<h2 id="validation">Validation</h2>
+<p>The component will validate for the first time, doing a complete redraw as if every single property has been invalidated (see <em>Invalidation</em> below). After the first validation <code>FeathersEventType.CREATION_COMPLETE</code> will be dispatched.</p>
+<p>When a component validates, its <code>draw()</code> function is called. The component should handle any changes that have been made to its properties inside <code>draw()</code>. Then, if the component's dimensions have not been specified manually, it should automatically calculate ideal width and height values (along with minimum values). These calculated values should be passed to <code>saveMeasurements()</code> where the final dimensions used for layout are calculated. Finally, the component should position and resize its children, as needed.</p>
+<p>Read <a href="component-properties-methods.html">Anatomy of a Feathers Component</a> for more detailed information about the various &quot;width&quot; and &quot;height&quot; properties and variables that are available on a Feathers component.</p>
+<h2 id="render">Render</h2>
+<p>A Feathers component is a Starling display object, so it has a <code>render()</code> function that is automatically called by Starling every frame. Feathers components typically don't override Starling's <code>render()</code> function.</p>
+<p>Component will always be validated before <code>render()</code> is called.</p>
+<h2 id="invalidation">Invalidation</h2>
+<p>Any time a property changes, the component should call <code>invalidate()</code> while passing in a flag (or multiple flags) to specify the type of invalidation. Examples of invalidation types include size, layout, and selection. Each component may have its own internal categorization of properties as invalidation flags, but a number of useful generic flags are defined on <code>FeathersControl</code> as <code>protected</code> constants. How these flags are used is not enforced in any way. Feel free call <code>invalidate()</code> without flags and use private <code>Boolean</code> variables to track state, if you prefer.</p>
+<p>After being invalidated, the component will wait to validate in case other properties need to be changed. Before Starling asks the component to render again, it will validate to ensure that all changes have been committed.</p>
+<p>The process of 1) invalidation, 2) validation, 3) rendering will repeat indefinitely until the component is removed from the display list. It will start again if the component is removed and re-added.</p>
+<h2 id="removal">Removal</h2>
+<p>The component is removed from the display list. Unless it is added to the display list again, it will no longer validate automatically. Property changes will be saved, but not committed. To force the component to validate after property changes while it is not on the stage, call <code>validate()</code> manually.</p>
+<h2 id="disposal">Disposal</h2>
+<p>Like all Starling display objects, Feathers components have a <code>dispose()</code> function that may be used to do things like remove external event listeners and dispose children or textures.</p>
+<p>Once a Feathers component is disposed, it cannot be validated again. A disposed component should never be added to the display list. It may result in runtime errors or undefined behavior. Most disposed components will be completely unresponsive to user interaction.</p>
+<h2 id="garbage-collection">Garbage Collection</h2>
+<p>After all references to the component have been removed, it becomes eligible for garbage collection to be handled by the runtime. The component's life has completed.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="component-properties-methods.html">Anatomy of a Feathers Component</a></p></li>
+<li><p><a href="component-validation.html">Feathers Component Validation with <code>draw()</code></a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

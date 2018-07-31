@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers PickerList component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-pickerlist-component">How to use the Feathers <code>PickerList</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/PickerList.html"><code>PickerList</code></a> class displays a <a href="button.html"><code>Button</code></a> that may be triggered to show a <a href="pop-ups.html">pop-up</a> <a href="list.html"><code>List</code></a>. The way that the list is displayed may be customized for different platforms by changing the picker list's <em>pop-up content manager</em>. Several different options are available, including drop downs, callouts, and simply filling the stage vertically.</p>
+<figure>
+<img src="images/picker-list.png" srcset="images/picker-list@2x.png 2x" alt="Screenshot of a Feathers PickerList component" />
+<figcaption>
+A <code>PickerList</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-pickerlist">Skinning a <code>PickerList</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>PickerList</code> control and add it to the display list:</p>
+<pre class="code"><code>var list:PickerList = new PickerList();
+this.addChild( list );</code></pre>
+<p>Next, we want to actually allow it to select some items, so like a <code>List</code> components, we pass in an <a href="../api-reference/feathers/data/IListCollection.html"><code>IListCollection</code></a> implementation, such as <a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a> or <a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a>, to the <a href="../api-reference/feathers/controls/PickerList.html#dataProvider"><code>dataProvider</code></a> property.</p>
+<pre class="code"><code>var groceryList:ArrayCollection = new ArrayCollection(
+[
+    { text: &quot;Milk&quot; },
+    { text: &quot;Eggs&quot; },
+    { text: &quot;Bread&quot; },
+    { text: &quot;Chicken&quot; },
+]);
+list.dataProvider = groceryList;</code></pre>
+<p>We need to tell the picker list's item renderers about the text to display, so we'll define the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#labelField"><code>labelField</code></a>.</p>
+<pre class="code"><code>list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+    itemRenderer.labelField = &quot;text&quot;;
+    return itemRenderer;
+}</code></pre>
+<p>Since the selected item's label is also displayed by the picker list's button, we also need to pass a value to the <a href="../api-reference/feathers/controls/PickerList.html#labelField"><code>labelField</code></a> of the picker list.</p>
+<pre class="code"><code>list.labelField = &quot;text&quot;;</code></pre>
+<aside class="info">
+Custom item renderers are not required to define a property named <code>labelField</code>, so the <code>PickerList</code> cannot automatically detect this property from its pop-up <code>List</code>. That's why we need to define it in two places.
+</aside>
+<p>We can provide some text to display with the button's label when no item is selected. This is often called a hint, a description, or a <a href="../api-reference/feathers/controls/PickerList.html#prompt"><code>prompt</code></a>:</p>
+<pre class="code"><code>list.prompt = &quot;Select an Item&quot;;
+list.selectedIndex = -1;</code></pre>
+<p>We need to set the <a href="../api-reference/feathers/controls/PickerList.html#selectedIndex"><code>selectedIndex</code></a> to <code>-1</code> if you want to display the prompt because the picker list will automatically select the first item.</p>
+<h2 id="skinning-a-pickerlist">Skinning a <code>PickerList</code></h2>
+<p>The skins for a <code>PickerList</code> control are divided into several parts, including the button and pop-up list sub-components. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/PickerList.html"><code>PickerList</code> API reference</a>.</p>
+<h3 id="skinning-the-button">Skinning the button</h3>
+<p>Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about how to skin this component.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/PickerList.html#DEFAULT_CHILD_STYLE_NAME_BUTTON"><code>PickerList.DEFAULT_CHILD_STYLE_NAME_BUTTON</code></a> style name:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( PickerList.DEFAULT_CHILD_STYLE_NAME_BUTTON, setPickerListButtonStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setPickerListButtonStyles( button:Button ):void
+{
+    button.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>list.customButtonStyleName = &quot;custom-button-name&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/PickerList.html#customButtonStyleName"><code>customButtonStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;custom-button-name&quot;, setPickerListCustomButtonStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/PickerList.html#buttonFactory"><code>buttonFactory</code></a> to provide skins for the picker list's button:</p>
+<pre class="code"><code>list.buttonFactory = function():Button
+{
+    var button:Button = new Button();
+
+    //skin the button here, if not using a theme
+    button.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );
+
+    return button;
+};</code></pre>
+<h3 id="skinning-the-list">Skinning the List</h3>
+<p>Please read <a href="list.html">How to use the Feathers <code>List</code> component</a> for full details about how to skin this component.</p>
+<h4 id="with-a-theme-1">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/PickerList.html#DEFAULT_CHILD_STYLE_NAME_LIST"><code>PickerList.DEFAULT_CHILD_STYLE_NAME_LIST</code></a> style name:</p>
+<pre class="code"><code>getStyleProviderForClass( List )
+    .setFunctionForStyleName( PickerList.DEFAULT_CHILD_STYLE_NAME_LIST, setPickerListPopUpListStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setPickerListPopUpListStyles( list:List ):void
+{
+    var skin:Image = new Image( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    list.backgroundSkin = skin;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>list.customListStyleName = &quot;custom-list&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/PickerList.html#customListStyleName"><code>customListStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( List )
+    .setFunctionForStyleName( &quot;custom-list&quot;, setPickerListCustomListStyles );</code></pre>
+<h4 id="without-a-theme-1">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/PickerList.html#listFactory"><code>listFactory</code></a> to provide skins for the picker list's pop-up list:</p>
+<pre class="code"><code>list.listFactory = function():List
+{
+    var list:List = new List();
+
+    //skin the pop-up list here, if not using a theme
+    var skin:Image = new Image( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    list.backgroundSkin = skin;
+
+    return list;
+};</code></pre>
+<h3 id="customizing-the-pop-up-behavior">Customizing the Pop Up Behavior</h3>
+<p>Next, we'll take a look at how to use the <a href="../api-reference/feathers/controls/PickerList.html#popUpContentManager"><code>popUpContentManager</code></a> property to customize how the pop-up list appears when you trigger the picker list's button.</p>
+<p>Feathers comes with three pop-up content managers:</p>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/popups/VerticalCenteredPopUpContentManager.html"><code>VerticalCenteredPopUpContentManager</code></a> provides a pop-up UI similar to Android. The list fills the entire vertical space of the screen. The list fills enough space horizontally to fit within the shorter edge of the screen, even when the device is in the landscape orientation. Along all edges, padding around the edges of the list may be customized.</p></li>
+<li><p><a href="../api-reference/feathers/controls/popups/CalloutPopUpContentManager.html"><code>CalloutPopUpContentManager</code></a> places the list into a <a href="callout.html"><code>Callout</code></a> component. The callout points to the picker list's button.</p></li>
+<li><p><a href="../api-reference/feathers/controls/popups/DropDownPopUpContentManager.html"><code>DropDownPopUpContentManager</code></a> displays the list as a drop down along the edge of the picker list's button. This is similar to a drop down list in a desktop UI.</p></li>
+</ul>
+<p>Selecting the pop up content manager, is as simple as instantiating it and passing it to the picker list:</p>
+<pre class="code"><code>list.popUpContentManager = new DropDownPopUpContentManager();</code></pre>
+<p>You may customize properties of the pop up content manager first, if needed:</p>
+<pre class="code"><code>var popUpContentManager:VerticalCenteredPopUpContentManager = new VerticalCenteredPopUpContentManager();
+popUpContentManager.marginTop = 20;
+popUpContentManager.marginRight = 25;
+popUpContentManager.marginBottom = 20;
+popUpContentManager.marginLeft = 25;
+list.popUpContentManager = popUpContentManager;</code></pre>
+<p>You can completely customize the pop-up behavior of the picker list by implementing the <a href="../api-reference/feathers/controls/popups/IPopUpContentManager.html"><code>IPopUpContentManager</code></a> interface.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/PickerList.html"><code>feathers.controls.PickerList</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

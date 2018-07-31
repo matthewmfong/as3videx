@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Features - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="feathers-features">Feathers Features</h1>
+<p>Feathers is an open source library of user interface components for <a href="http://gamua.com/starling/">Starling Framework</a>. Let's take a look at some of what Feathers has to offer.</p>
+<h2 id="overview">Overview</h2>
+<ul>
+<li><p>Dozens of user interface components for apps and games.</p></li>
+<li><p>Hardware-accelerated graphics.</p></li>
+<li><p>Target iOS, Android, Windows, macOS, and Android TV.</p></li>
+<li><p>Built on top of Starling Framework and Adobe AIR.</p></li>
+<li><p>Backed by Adobe and the community.</p></li>
+</ul>
+<h2 id="cross-platform">Cross Platform</h2>
+<ul>
+<li><p>Create user interfaces for desktop, mobile, and smart TV apps.</p></li>
+<li><p>Easy to scale your app for different screen dimensions and densities with <a href="../api-reference/feathers/utils/ScreenDensityScaleFactorManager.html"><code>ScreenDensityScaleFactorManager</code></a>.</p></li>
+<li><p>Support for fluid layouts (using anchors and percentages) that fit to a wide variety of screen sizes.</p></li>
+<li><p>Choose between scrolling with touch physics including elastic, springy edges or traditional desktop scroll bars and the mouse scroll wheel.</p></li>
+<li><p>Support for keyboard focus navigation using the tab key, with the ability to disable focus on individual components or children of specific container. Includes full control over focus order.</p></li>
+</ul>
+<h2 id="skinning">Skinning</h2>
+<ul>
+<li><p>All components may be skinned using regular Starling display objects, like <code>Image</code> or <code>Quad</code>.</p></li>
+<li><p>Resizable skins using <code>scale9Grid</code> and <code>tileGrid</code>.</p></li>
+<li><p>Strictly-typed properties for all skins and properties that affect visual styling. No vague <code>getStyle()</code> or <code>setStyle()</code> look-ups with string keys.</p></li>
+<li><p><a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a> can change color and texture when a component's state changes.</p></li>
+<li><p>Supports <a href="themes.html">themes</a> that separate all skinning code from the application logic.</p></li>
+</ul>
+<h2 id="robust-architecture">Robust Architecture</h2>
+<ul>
+<li><p>Invalidation. Queues property changes until Starling render phase to maximize performance.</p></li>
+<li><p>Easy to understand for anyone familiar with Apache Flex or the AS3 components from Adobe Animate CC.</p></li>
+<li><p>If no width or height is provided, components will resize themselves automatically based on their skins or their sub-components.</p></li>
+<li><p>Factories and interfaces allow you to customize sub-components. For instance, select the type of sub-component best suited for phone, tablet, or desktop.</p></li>
+<li><p>Choice of <a href="text-renderers.html">text rendering</a> between bitmap fonts or vector fonts drawn to textures. Vector fonts may be rendered with either <code>flash.text.TextField</code> or Flash Text Engine.</p></li>
+</ul>
+<h2 id="containers">Containers</h2>
+<ul>
+<li><p>Several built-in layouts, and support for <a href="custom-layouts.html">custom layouts</a>.</p></li>
+<li><p><a href="layout-group.html"><code>LayoutGroup</code></a> is a lightweight Feathers container with support for layouts.</p></li>
+<li><p><a href="scroll-container.html"><code>ScrollContainer</code></a> supports scrolling and layouts.</p></li>
+<li><p><a href="panel.html"><code>Panel</code></a> supports a header and an optional footer, in addition to scrolling and layouts.</p></li>
+<li><p><a href="drawers.html"><code>Drawers</code></a> provides slide-out drawers to display menus and other actions.</p></li>
+</ul>
+<h2 id="lists">Lists</h2>
+<ul>
+<li><p>The <a href="list.html"><code>List</code></a> component supports displaying a data provider using item renderers inside a scrollable container.</p></li>
+<li><p>Support for hierarchical data using <a href="tree.html"><code>Tree</code></a> and <a href="grouped-list.html"><code>GroupedList</code></a>.</p></li>
+<li><p>Display a table of data using the <a href="data-grid.html"><code>DataGrid</code></a> component.</p></li>
+<li><p><a href="picker-list.html"><code>PickerList</code></a> supports displaying a list as a pop-up triggered by a <a href="button.html"><code>Button</code></a>.</p></li>
+<li><p>Several built-in layouts, including <a href="vertical-layout.html"><code>VerticalLayout</code></a>, <a href="horizontal-layout.html"><code>HorizontalLayout</code></a>, and <a href="tiled-rows-layout.html"><code>TiledRowsLayout</code></a>.</p></li>
+<li><p>Support for <a href="custom-layouts.html">custom layouts</a>.</p></li>
+<li><p>Layout virtualization for improved performance (creates and reuses renderers only for visible data).</p></li>
+<li><p>Support for selecting an item, including optional multiple selection.</p></li>
+<li><p>A robust <a href="default-item-renderers.html">default item renderer</a> with up to three sub-views with full control over how they are positioned relative to each other.</p></li>
+<li><p>Support for <a href="item-renderers.html">custom item renderers</a>.</p></li>
+<li><p>Variable item renderer dimensions.</p></li>
+<li><p>Collection classes for various types of data, such as <a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a>, <a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a>, or <a href="../api-reference/feathers/data/XMLListCollection.html"><code>XMLListCollection</code></a>.</p></li>
+<li><p>Optionally split items into multiple pages, and snap to each page when scrolling.</p></li>
+</ul>
+<h2 id="menus-and-navigation">Menus and Navigation</h2>
+<ul>
+<li><p>Create menus and navigate between screens using <a href="stack-screen-navigator.html"><code>StackScreenNavigator</code></a> or <a href="tab-navigator.html"><code>TabNavigator</code></a>.</p></li>
+<li><p>Push and pop screens using a history stack that easily supports a back button.</p></li>
+<li><p><a href="transitions.html">Animate the transition</a> between screens. Push and pop actions may use separate transitions, and individual screens may optionally be given their own unique transitions.</p></li>
+<li><p>Support for custom transitions.</p></li>
+<li><p>Dispatch events to trigger navigation between screens.</p></li>
+<li><p>Inject properties into screens to quickly configure them.</p></li>
+</ul>
+<h2 id="more">More!</h2>
+<ul>
+<li><p>Buttons, sliders, radio buttons, check boxes, toggle switches, steppers, text inputs, tabs, and tons of other common UI controls.</p></li>
+<li><p>A manager for drag and drop.</p></li>
+<li><p>Add <a href="pop-ups.html">pop-ups</a> above all other content in the app. Includes support for modal pop-ups that display an overlay between the pop-up and everything under it.</p></li>
+<li><p>Create media players for <a href="video-player.html">video</a> and <a href="sound-player.html">audio</a>.</p></li>
+</ul>
+<h2 id="sound-useful">Sound useful?</h2>
+<p><a href="http://feathersui.com/download/">Download Feathers</a>, and <a href="getting-started.html">get started</a> building cross-platform, hardware-accelerated user interfaces for apps and games with Starling Framework and Feathers.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

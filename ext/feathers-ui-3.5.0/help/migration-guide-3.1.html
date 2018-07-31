@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Feathers 3.1 Migration Guide - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="feathers-3.1-migration-guide">Feathers 3.1 Migration Guide</h1>
+<p>This guide explains how to migrate an application created with <a href="migration-guide-3.0.html">Feathers 3.0</a> to Feathers 3.1. Be aware that, as a minor update, the new features in this version are not considered &quot;breaking&quot; changes. You are not required to make any modifications to your projects to update to this version. However, you will see benefits from switching to some of the newer, simplified APIs. The focus of this release is to improve the developer experience, especially when dealing with font styles and skinning.</p>
+<ul>
+<li><p><a href="#font-styles-with-starling.text.textformat">Font styles with <code>starling.text.TextFormat</code></a></p></li>
+<li><p><a href="#style-properties-and-themes">Style properties and themes</a></p></li>
+</ul>
+<h2 id="font-styles-with-starling.text.textformat">Font styles with <code>starling.text.TextFormat</code></h2>
+<p>Starling 2 introduced a new <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> class that defines common font styles used by all types of text, including bitmap fonts and TTF/OTF fonts. Previously, to customize font styles on Feathers <a href="text-renderers.html">text renderers</a>, you needed to use different classes and set different properties, depending on which text renderer you were using. For instance, <a href="text-block-text-renderer.html"><code>TextBlockTextRenderer</code></a> has an <code>elementFormat</code> property of type <code>flash.text.engine.ElementFormat</code> while <a href="text-field-text-renderer.html"><code>TextFieldTextRenderer</code></a> has a <code>textFormat</code> property of type <code>flash.text.TextFormat</code>. Now, all text renderers have a unified way to support the <code>starling.text.TextFormat</code> class.</p>
+<p>In fact, the font styles don't need to be set directly on the text renderer anymore. Instead, you can set them on the component that uses the text renderer, such as a <code>Label</code> or <code>Button</code>. They parent component will automatically pass them down to the text renderer.</p>
+<p>Let's customize the font styles on a <a href="label.html"><code>Label</code></a> component to see how it works:</p>
+<pre class="code"><code>var label:Label = new Label();
+label.text = &quot;Hello World&quot;;
+label.fontStyles = new TextFormat( &quot;_sans&quot;, 20, 0xff0000 );
+this.addChild( label );</code></pre>
+<p>That's it! In the vast majority of cases, you won't need to deal with the text renderer factories at all.</p>
+<p>If we wanted the <code>Label</code> to use different font styles when disabled, we can do that easily too:</p>
+<pre class="code"><code>label.disabledFontStyles = new TextFormat( &quot;_sans&quot;, 20, 0x999999 );</code></pre>
+<p>Most components that contain a text renderer will now have <code>fontStyles</code> and <code>disabledFontStyles</code> properties. If a component can be toggled or selected, it may also have a <code>selectedFontStyles</code> property.</p>
+<p>Finally, if a component supports a more complex set of mutiple states, such as the touch states in a <code>Button</code>, it will have a <code>setFontStylesForState()</code> method. This method accepts the name of the state along with a <code>TextFormat</code> object to use when the component is in that state. In the following example, we set separate font styles for the &quot;down&quot; and &quot;hover&quot; states of a <a href="button.html"><code>Button</code></a>:</p>
+<pre class="code"><code>var button:Button = new Button();
+button.setFontStylesForState( ButtonState.DOWN, new TextFormat( &quot;_sans&quot;, 20, 0xffffff ) );
+button.setFontStylesForState( ButtonState.HOVER, new TextFormat( &quot;_sans&quot;, 20, 0xff9999 ) );</code></pre>
+<h2 id="style-properties-and-themes">Style properties and themes</h2>
+<p>In previous versions of Feathers, it was easy to run into conflicts with the theme when attempting to skin components. To avoid this issue, you could use the <a href="http://feathersui.com/api-reference/feathers/skins/AddOnFunctionStyleProvider.html"><code>AddOnFunctionStyleProvider</code></a> class, set the <a href="../api-reference/feathers/core/FeathersControl.html#styleProvider"><code>styleProvider</code></a> property to <code>null</code>, wait until a component initialized, or <a href="extending-themes.html">extend the theme</a>. However, each of these options could be somewhat cumbersome for minor tweaks to a single component's appearance.</p>
+<p>Starting with Feathers 3.1, certain properties are now considered &quot;styles&quot;. If you set a &quot;style property&quot; outside of the theme, you don't need to worry about the theme replacing it later. However, any other styles from the theme won't be affected. As an example, if you wanted to customize a button's font styles outside the theme, but keep the background skin from the theme, it's easy.</p>
+<pre class="code"><code>var button:Button = new Button();
+button.label = &quot;Click Me&quot;;
+//this can&#39;t be replaced by the theme
+button.fontStyles = new TextFormat( &quot;_sans&quot;, 20, 0xff0000 );
+this.addChild( button );</code></pre>
+<p>To see how style are now separated from other properties in the API reference, see the <a href="../api-reference/feathers/controls/Button.html#styleSummary"><code>Button</code> component styles</a> as an example.</p>
+<h3 id="minimum-dimensions-in-the-theme">Minimum dimensions in the theme</h3>
+<p>Be aware that if you set a regular property in a theme, it may still conflict with code outside of the them. For example, you should not set the <code>minWidth</code> and <code>minHeight</code> properties directly on a component in a theme. These properties are <strong>not</strong> considered styles, and you may run into conflicts if you also try to set them outside of the theme.</p>
+<pre class="code"><code>//inside the theme
+private function setButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new ImageSkin( texture );
+    button.minWidth = 40; //don&#39;t do this!
+}</code></pre>
+<p>Instead, set <code>minWidth</code> and <code>minHeight</code> on the component's skin:</p>
+<pre class="code"><code>//inside the theme
+private function setButtonStyles( button:Button ):void
+{
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.minWidth = 40;
+    skin.minHeight = 20;
+    button.defaultSkin = backgroundSkin;
+}</code></pre>
+<p>If a component doesn't have explicit dimensions, it will always use the skin's dimensions for measurement. With that mind, setting dimensions on the button's skin in the code above is virtually the same as setting dimensions directly on the button.</p>
+<p>What if a component doesn't need to display a background skin? Consider using a transparent background skin, in that case. You might simply pass in a <code>starling.display.Quad</code> with its <code>alpha</code> property set to <code>0</code>:</p>
+<pre class="code"><code>var backgroundSkin:Quad = new Quad( 40, 20 );
+backgroundSkin.alpha = 0;
+component.backgroundSkin = backgroundSkin;</code></pre>
+<p>Starling will not ask the GPU to render a fully transparent display object, so this background cannot affect draw calls or performance. However, the dimensions of the <code>Quad</code> will be treated as minimum dimensions for the component.</p>
+<aside class="info">
+When a display object doesn't have <code>minWidth</code> and <code>minHeight</code> properties, like a <code>Quad</code>, its regular <code>width</code> and <code>height</code> properties also serve as minimum values. If you need <code>minWidth</code> and <code>minHeight</code> to have smaller values than <code>width</code> and <code>height</code>, respectively, consider using <code>feathers.skins.ImageSkin</code>.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="migration-guide-3.0.html">Feathers 3.0 Migration Guide</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

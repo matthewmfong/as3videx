@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers SoundPlayer component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-soundplayer-component">How to use the Feathers <code>SoundPlayer</code> component</h1>
+<p>The <a href="../api-reference/feathers/media/SoundPlayer.html"><code>SoundPlayer</code></a> class provides audio playback capabilities using a <code>flash.media.Sound</code> object. Sound files may be loaded from a URL or any <code>Sound</code> object may be passed in. <a href="media-player-controls.html">Media player controls</a> may be added as children to display information such as the current time or to control playback by seeking or pausing the audio. <code>SoundPlayer</code> is a subclass of <a href="layout-group.html"><code>LayoutGroup</code></a>, so its children may be positioned and sized using layouts.</p>
+<figure>
+<img src="images/sound-player.png" srcset="images/sound-player@2x.png 2x" alt="Screenshot of a Feathers SoundPlayer component" />
+<figcaption>
+A <code>SoundPlayer</code> component with controls skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#controls">Controls</a></p></li>
+<li><p><a href="#layout">Layout</a></p></li>
+<li><p><a href="#controlling-playback-programatically">Controlling playback programmatically</a></p></li>
+<li><p><a href="#skinning-a-soundplayer">Skinning a <code>SoundPlayer</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>SoundPlayer</code> component and add it to the display list:</p>
+<pre class="code"><code>var player:SoundPlayer = new SoundPlayer();
+this.addChild( player );</code></pre>
+<p>To play a sound file, pass the URL (or a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/media/Sound.html"><code>flash.media.Sound</code></a> object) to the <a href="../api-reference/feathers/media/SoundPlayer.html#soundSource"><code>soundSource</code></a> property:</p>
+<pre class="code"><code>player.soundSource = &quot;http://example.com/sound.mp3&quot;;</code></pre>
+<p>Next, we'll add some components as children to control playback.</p>
+<h2 id="controls">Controls</h2>
+<p>Let's give the <code>SoundPlayer</code> a <a href="../api-reference/feathers/media/PlayPauseToggleButton.html"><code>PlayPauseToggleButton</code></a> and a <a href="../api-reference/feathers/media/SeekSlider.html"><code>SeekSlider</code></a>. It's as simple as adding them as children of the <code>SoundPlayer</code>:</p>
+<pre class="code"><code>var button:PlayPauseToggleButton = new PlayPauseToggleButton();
+player.addChild( button );
+
+var slider:SeekSlider = new SeekSlider();
+player.addChild( slider );</code></pre>
+<p>There's no need to add event listeners for these controls. You simply need to add them as children of the <code>SoundPlayer</code>, and everything will be set up automatically.</p>
+<aside class="info">
+The complete list of <a href="media-player-controls.html">media player controls</a> includes several more pre-built components that you can add to a <code>SoundPlayer</code>.
+</aside>
+<p>In the next section, we'll position these two children using a layout.</p>
+<h2 id="layout">Layout</h2>
+<p>Like a <a href="layout-group.html"><code>LayoutGroup</code></a>, a <code>SoundPlayer</code> supports using layouts to automatically position and size its children. Let's pass a <a href="../api-reference/feathers/layout/HorizontalLayout.html"><code>HorizontalLayout</code></a> to the <a href="../api-reference/feathers/controls/LayoutGroup.html#layout"><code>layout</code></a> property of the <code>SoundPlayer</code>:</p>
+<pre class="code"><code>var layout:HorizontalLayout = new HorizontalLayout();
+layout.gap = 10;
+group.layout = layout;</code></pre>
+<p>Here, we've set the <a href="../api-reference/feathers/layout/HorizontalLayout.html#gap"><code>gap</code></a> property, but <code>HorizontalLayout</code> provides many more useful features, including padding and alignment. See <a href="horizontal-layout.html">How to use <code>HorizontalLayout</code> with Feathers containers</a> for complete details.</p>
+<p>If we want our <code>SeekSlider</code> to stretch to fill as much space as possible within the <code>SoundPlayer</code>, we can pass in <a href="../api-reference/feathers/layout/HorizontalLayoutData.html"><code>HorizontalLayoutData</code></a>:</p>
+<pre class="code"><code>var sliderLayoutData:HorizontalLayoutData = new HorizontalLayoutData();
+sliderLayoutData.percentWidth = 100;
+slider.layoutData = sliderLayoutData;</code></pre>
+<p>Now, because we've set the <a href="../api-reference/feathers/layout/HorizontalLayoutData.html#percentWidth"><code>percentWidth</code></a> property, when the width of the <code>SoundPlayer</code> changes, the width of the <code>SeekSlider</code> will change too.</p>
+<h2 id="controlling-playback-programmatically">Controlling playback programmatically</h2>
+<p>By default, the <code>SoundPlayer</code> will automatically start playing its <code>soundSource</code>. We can use the <a href="../api-reference/feathers/media/SoundPlayer.html#autoPlay"><code>autoPlay</code></a> property to change this behavior:</p>
+<pre class="code"><code>player.autoPlay = false;</code></pre>
+<p>If <code>autoPlay</code> is set to <code>false</code>, we can call <code>play()</code> to begin playback manually:</p>
+<pre class="code"><code>player.play();</code></pre>
+<p>To pause, we can call <code>pause()</code> to pause playback at the current position:</p>
+<pre class="code"><code>player.pause();</code></pre>
+<p>The <code>togglePlayPause()</code> method may be called to toggle between the play and pause states:</p>
+<pre class="code"><code>player.togglePlayPause();</code></pre>
+<p>To stop playback and return the sound to the beginning, we may call <code>stop()</code>:</p>
+<pre class="code"><code>player.stop();</code></pre>
+<p>The <code>seek()</code> function may be called to change the current time:</p>
+<pre class="code"><code>player.seek( 5.0 );</code></pre>
+<p>The time is measured in seconds.</p>
+<p>To change the volume, we can pass a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/media/SoundTransform.html"><code>flash.media.SoundTransform</code></a> object to the <a href="../api-reference/feathers/media/SoundPlayer.html#soundTransform"><code>soundTransform</code></a> property:</p>
+<pre class="code"><code>player.soundTransform = new SoundTransform( 0.5 );</code></pre>
+<h2 id="skinning-a-soundplayer">Skinning a <code>SoundPlayer</code></h2>
+<p>As mentioned above, <code>SoundPlayer</code> is a subclass of <code>LayoutGroup</code>. For more detailed information about the skinning options available to <code>SoundPlayer</code>, see <a href="layout-group.html">How to use the Feathers <code>LayoutGroup</code> component</a>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/media/SoundPlayer.html"><code>feathers.media.SoundPlayer</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

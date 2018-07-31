@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Getting started with MXML in the Feathers SDK - Feathers SDK and MXML Help - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+	</style>
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="getting-started-with-mxml-in-the-feathers-sdk">Getting started with MXML in the Feathers SDK</h1>
+<p>In the following beginner-level tutorial, we'll create our first Feathers SDK application that includes a simple <a href="../button.html"><code>Button</code></a> component. We'll set some properties, listen for an event, and skin the button with a theme.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><p><a href="installation-instructions.html">Download the Feathers SDK</a>, and set it up in your favorite development environment.</p></li>
+<li><p>Add <code>MetalWorksMobileTheme.swc</code>, included with the Feathers SDK, to your project's build settings. You can find this SWC inside the Feathers SDK. Look for <code>frameworks/themes/MetalWorksMobileTheme/MetalWorksMobileTheme.swc</code>.</p></li>
+</ul>
+<h2 id="final-result">Final Result</h2>
+<p><a href="http://feathersui.com/examples/hello-world/"><img src="../images/feathers-hello-world.jpg" alt="feathers-hello-world.jpg" /></a></p>
+<h2 id="walkthrough">Walkthrough</h2>
+<p>Let's create a new project. The main MXML class will be based on the <code>feathers.core.Application</code> component. We'll start with the following code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;f:Application</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">&lt;/f:Application&gt;</span></a></code></pre></div>
+<p>The Feathers namespace must be included in your MXML document to add Feathers components. This identifier for this namespace is <code>library://ns.feathersui.com/mxml</code>. To reference a Feathers component, you must use the <code>f:</code> prefix before the name of the class. We're using the <code>Application</code> component, so the XML element should be <code>&lt;f:Application/&gt;</code>.</p>
+<h3 id="theme">Theme</h3>
+<p>Next, we want to provide some skins for our components with a <a href="../themes.html">theme</a>. By default, the Feathers components are not skinned. However, several example <em>themes</em> are included with Feathers to easily provide sample skins to all components. A theme can be instantiated by setting the <code>theme</code> property on the <code>Application</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;f:Application</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">    theme=</span><span class="st">&quot;feathers.themes.MetalWorksMobileTheme&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">&lt;/f:Application&gt;</span></a></code></pre></div>
+<p>When a new component initializes, the theme will create appropriate skins, including backgrounds, icons, text formats, and skins for sub-components, and pass them in to each component automatically.</p>
+<aside class="info">
+In the Prerequisites section above, we added <code>MetalWorksMobileTheme.swc</code> to our project. If the compiler gives us errors because it cannot find <code>MetalWorksMobileTheme</code>, we may have forgotten to add this SWC file.
+</aside>
+<h3 id="create-a-button-component">Create a <code>Button</code> component</h3>
+<p>Let's add a <a href="../button.html"><code>Button</code></a> as a child of the <code>Application</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;f:Application</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="ot">    theme=</span><span class="st">&quot;feathers.themes.MetalWorksMobileTheme&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="kw">&lt;f:Button</span><span class="ot"> label=</span><span class="st">&quot;Click Me&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">&lt;/f:Application&gt;</span></a></code></pre></div>
+<p>It's as simple as adding a <code>&lt;f:Button/&gt;</code> element as a child of the <code>&lt;f:Application/&gt;</code> element. As you can see, we've set the <code>label</code> property of the <code>Button</code> using an XML attribute.</p>
+<h3 id="listen-for-events">Listen for events</h3>
+<p>Now, let's add an event listener to the button:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">&lt;f:Button</span><span class="ot"> label=</span><span class="st">&quot;Click Me&quot;</span><span class="ot"> triggered=</span><span class="st">&quot;button_triggeredHandler(event)&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"> </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">&lt;fx:Script&gt;</span><span class="bn">&lt;![CDATA[</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    private function button_triggeredHandler( event:Event ):void</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    {</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"> </a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="bn">]]&gt;</span><span class="kw">&lt;/fx:Script&gt;</span></a></code></pre></div>
+<p>Similar to setting a property, we can add an event listener using an attribute with the string value of the event's type. The value of <code>Event.TRIGGERED</code> constant is <code>&quot;triggered&quot;</code>, so that's what we use in the MXML.</p>
+<p>We need to define the listener in ActionScript. To add ActionScript code to an MXML class, we need to create a <code>&lt;fx:Script/&gt;</code> element. Inside this element, we can add properties and methods just like we would in an ActionScript class.</p>
+<aside class="info">
+Because ActionScript code may contain characters that are not valid XML, we must add <code>&lt;![CDATA[</code> at the beginning of a script block and <code>]]&gt;</code> at the end.
+</aside>
+<p>We will want to refer to our button as a variable in ActionScript, so we should add an <code>id</code> to it:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">&lt;f:Button</span><span class="ot"> id=</span><span class="st">&quot;button&quot;</span><span class="ot"> label=</span><span class="st">&quot;Click Me&quot;</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="ot">    triggered=</span><span class="st">&quot;button_triggeredHandler(event)&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>Our listener function should look something like this:</p>
+<pre class="code"><code>private function button_triggeredHandler( event:Event ):void
+{
+    TextCallout.show( &quot;Hi, I&#39;m Feathers!\nHave a nice day.&quot;, this.button );
+}</code></pre>
+<p>The <code>Event.TRIGGERED</code> listener displays a message in a <code>TextCallout</code> component. We've referenced the button that we created in MXML using the <code>button</code> variable name. The <code>TextCallout</code> component is automatically skinned by the theme, just like the <code>Button</code>.</p>
+<h3 id="layouts">Layouts</h3>
+<p>Finally, let's adjust the layout a bit to put the button in the center of the screen:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">&lt;f:layout&gt;</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">    <span class="kw">&lt;f:AnchorLayout/&gt;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">&lt;/f:layout&gt;</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"> </a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">&lt;f:Button</span><span class="ot"> id=</span><span class="st">&quot;button&quot;</span><span class="ot"> label=</span><span class="st">&quot;Click Me&quot;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="ot">    triggered=</span><span class="st">&quot;button_triggeredHandler(event)&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="kw">&lt;f:layoutData&gt;</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">        <span class="kw">&lt;f:AnchorLayoutData</span><span class="ot"> horizontalCenter=</span><span class="st">&quot;0&quot;</span><span class="ot"> verticalCenter=</span><span class="st">&quot;0&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="kw">&lt;/f:layoutData&gt;</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="kw">&lt;/f:Button&gt;</span></a></code></pre></div>
+<p>Previously, we learned that there are two ways to set a property of a component. The first way to set a property was to add an attribute. We've set the <code>horizontalCenter</code> and <code>verticalCenter</code> properties on an <code>AnchorLayoutData</code> instance in the same way.</p>
+<p>Sometimes, it may be easier to set properties by adding child element with the property's name (prefixed by the namespace). In the code above, we set the <code>layout</code> property of the <code>LayoutGroup</code> to an <a href="../anchor-layout.html"><code>AnchorLayout</code></a> instance, and we set the <code>layoutData</code> property of the <code>Button</code> to an <code>AnchorLayoutData</code> instance.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>That should get you started with the very basics of working with the Feathers SDK and MXML. For more detailed information about the capabilities of MXML, read <a href="mxml.html">The complete guide to MXML in the Feathers SDK</a></p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

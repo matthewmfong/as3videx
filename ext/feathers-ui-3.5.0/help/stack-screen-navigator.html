@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers StackScreenNavigator component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-stackscreennavigator-component">How to use the Feathers <code>StackScreenNavigator</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/StackScreenNavigator.html"><code>StackScreenNavigator</code></a> class supports navigation between screens or menus, with a history stack that makes it simple to return to the previous screen. Events dispatched from the active screen can be used to push a new screen onto the stack, to pop the active screen, or even to call a function. When a new screen is pushed onto the stack, the previous screen may save its current state to be restored later.</p>
+<p>Navigation can be enhanced with animation, called a <a href="transitions.html"><em>transition</em></a>. Feathers provides a number of transitions out of the box, and a simple API allows anyone to create custom transitions. Separate transitions may be defined on a <code>StackScreenNavigator</code> for both push and pop actions, but an individual screen may also define its own unique transitions that are different from these defaults.</p>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#navigation">Navigation</a></p></li>
+<li><p><a href="#animated-transitions">Animated Transitions</a></p></li>
+<li><p><a href="#property-injection">Property Injection</a></p></li>
+<li><p><a href="#advanced-functionality">Advanced Functionality</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>StackScreenNavigator</code> component and add it to the display list:</p>
+<pre class="code"><code>this._navigator = new StackScreenNavigator();
+this.addChild( this._navigator );</code></pre>
+<p>You may set its <code>width</code> and <code>height</code>, but that's optional because the <code>StackScreenNavigator</code> will automatically resize itself to fill the entire stage, if you don't provide explicit dimensions.</p>
+<p>To add a new screen that the navigator can show, call <a href="../api-reference/feathers/controls/StackScreenNavigator.html#addScreen()"><code>addScreen()</code></a> and pass in an ID string to associate with the screen along with a <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html"><code>StackScreenNavigatorItem</code></a>:</p>
+<pre class="code"><code>var mainMenuItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( MainMenuScreen );
+this._navigator.addScreen( &quot;mainMenu&quot;, mainMenuItem );</code></pre>
+<p>This screen's ID is <code>&quot;mainMenu&quot;</code>. We'll use this ID later when we ask the screen navigator to display this screen. There are a number of other APIs that require this ID too.</p>
+<p>The first argument required by the <code>StackScreenNavigatorItem</code> constructor may be one of three types. We can pass in a <code>Class</code> to instantiate, a display object that has already been instantiated, or a <code>Function</code> that returns a display object. In most cases, a <code>Class</code> is recommended. For more details, see the <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html#screen"><code>screen</code></a> property.</p>
+<aside class="info">
+In the example above, <code>MainMenuScreen</code> is another class that we create in our project that extends the <a href="screen.html"><code>Screen</code></a> class. In general, it's best to extend a class that implements the <code>IScreen</code> interface, like <a href="screen.html"><code>Screen</code></a>, <a href="panel-screen.html"><code>PanelScreen</code></a>, or <a href="scroll-screen.html"><code>ScrollScreen</code></a>. Each offers different features. For instance, <code>Screen</code> is the most basic with optional support for layouts, while <code>PanelScreen</code> offers layouts, scrolling, and a customizable header and footer.
+</aside>
+<p>To show the first screen, called the <em>root screen</em>, set the <a href="../api-reference/feathers/controls/StackScreenNavigator.html#rootScreenID"><code>rootScreenID</code></a> property. We'll set it to the <code>&quot;mainMenu&quot;</code> string that we registered with <code>addScreen()</code> earlier:</p>
+<pre class="code"><code>this._navigator.rootScreenID = &quot;mainMenu&quot;;</code></pre>
+<p>To access the currently visible screen, use the <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#activeScreen"><code>activeScreen</code></a> property.</p>
+<pre class="code"><code>var mainMenu:MainMenuScreen = MainMenuScreen( this._navigator.activeScreen );</code></pre>
+<p>We can also use <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#activeScreenID"><code>activeScreenID</code></a> to get the ID of the active screen. In this case, again, it would be <code>&quot;mainMenu&quot;</code>.</p>
+<h2 id="navigation">Navigation</h2>
+<p>If the active screen dispatches an event, the <code>StackScreenNavigator</code> can listen for it to automatically navigate to another screen.</p>
+<p>Before we get to that, let's make a couple of changes to our existing code. First, let's move the main menu screen's ID into a constant. Then, let's add a second screen.</p>
+<pre class="code"><code>private static const MAIN_MENU:String = &quot;mainMenu&quot;;
+private static const OPTIONS:String = &quot;options&quot;;</code></pre>
+<p>The constants will help us avoid typing mistakes that the compiler can easily catch. Let's use the <code>MAIN_MENU</code> constant in the call to <code>addScreen()</code>:</p>
+<pre class="code"><code>var mainMenuItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( MainMenuScreen );
+this._navigator.addScreen( MAIN_MENU, mainMenuItem );</code></pre>
+<p>You probably noticed that we defined an <code>OPTIONS</code> constant too. Let's add the options screen that goes with it:</p>
+<pre class="code"><code>var optionsItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( OptionsScreen );
+this._navigator.addScreen( OPTIONS, optionsItem );</code></pre>
+<p>Now that we have a second screen, let's look at how we can navigate from the main menu to the options screen.</p>
+<h3 id="dispatch-events-from-the-screen">Dispatch events from the screen</h3>
+<p>The best way to navigate from one screen to another is to dispatch an event from the currently active screen. Using the <code>StackScreenNavigatorItem</code>, we can associate an event with either a push or a pop action. The <code>StackScreenNavigator</code> will automatically navigate to a different screen when one of these events is dispatched.</p>
+<h4 id="pushing-a-new-screen-onto-the-stack">Pushing a new screen onto the stack</h4>
+<p>Let's map an event from the main menu screen that will push the options screen onto the stack:</p>
+<pre class="code"><code>var mainMenuItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( MainMenuScreen );
+mainMenuItem.setScreenIDForPushEvent( MainMenuScreen.SHOW_OPTIONS, OPTIONS );
+this._navigator.addScreen( MAIN_MENU, mainMenuItem );</code></pre>
+<p>Using <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html#setScreenIDForPushEvent()"><code>setScreenIDForPushEvent()</code></a>, we tell the <code>StackScreenNavigatorItem</code> that the screen navigator should push the screen with the <code>OPTIONS</code> ID onto the stack when <code>MainMenuScreen.SHOW_OPTIONS</code> is dispatched by the <code>MainMenuScreen</code>.</p>
+<p>Inside the <code>MainMenuScreen</code> class, we can add the constant named <code>SHOW_OPTIONS</code> for the event:</p>
+<pre class="code"><code>public static const SHOW_OPTIONS:String = &quot;showOptions&quot;;</code></pre>
+<p>Then, we might dispatch this event when a button is triggered:</p>
+<pre class="code"><code>protected function optionsButton_triggeredHandler( event:Event ):void
+{
+    this.dispatchEventWith( SHOW_OPTIONS );
+}</code></pre>
+<p>Sometimes, when we push a new screen onto the stack, we want to save the state of the old screen so that we can restore it later when we pop the new screen and return to the old screen again. We can include some extra data with the event that we dispatch, and the <code>StackScreenNavigator</code> will automatically restore that data later.</p>
+<p>As an example, let's say that we want to save the scroll position of a <code>List</code> so that the user doesn't lose their place when they return to this screen. Let's add a property to the screen for this saved scroll position:</p>
+<pre class="code"><code>public var savedVerticalScrollPosition:Number = 0;</code></pre>
+<p>When we initially create the <code>List</code>, we can set its <code>verticalScrollPosition</code> property.</p>
+<pre class="code"><code>this.list.verticalScrollPosition = this.savedVerticalScrollPosition;</code></pre>
+<p>We've set the default value to <code>0</code>, which is the same default that the <code>List</code> would start with normally. At this point, everything should behave the same as it did previously.</p>
+<p>When we push a new screen, we can create a set of key-value pairs (an <code>Object</code>) to map a property names to values. We'll save the <code>verticalScrollPosition</code> property of the <code>List</code> as one of these values. When we dispatch the event to push a new screen, we'll pass the <code>Object</code> to the event's <code>data</code> property:</p>
+<pre class="code"><code>protected function optionsButton_triggeredHandler( event:Event ):void
+{
+    var savedProperties:Object =
+    {
+        savedVerticalScrollPosition: this.list.verticalScrollPosition
+    };
+    this.dispatchEventWith( SHOW_OPTIONS, false, savedProperties );
+}</code></pre>
+<p>Notice that we store the value using the name <code>savedVerticalScrollPosition</code> to match up with the <code>public</code> property that we defined a moment ago. The <code>StackScreenNavigator</code> will automatically use this property name to restore the value later when the new screen is popped and this screen is restored.</p>
+<h4 id="popping-the-active-screen-from-the-stack">Popping the active screen from the stack</h4>
+<p>Next, let's add an event to pop the options screen from the top of the stack and return to the main menu screen:</p>
+<pre class="code"><code>var optionsItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( OptionsScreen );
+optionsItem.addPopEvent( Event.COMPLETE );</code></pre>
+<p>To register an event that should pop the active screen, we call <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html#addPopEvent()"><code>addPopEvent()</code></a> on the <code>StackScreenNavigatorItem</code>. In this case, we simply pass in the <code>Event.COMPLETE</code> constant. We don't need to pass in the ID for the main menu screen because <code>StackScreenNavigator</code> keeps track of its own history.</p>
+<p>Inside <code>OptionsScreen</code>, we might dispatch an event when a button is triggered, similar to how we did it in <code>MainMenuScreen</code>:</p>
+<pre class="code"><code>protected function optionsButton_triggeredHandler( event:Event ):void
+{
+    this.dispatchEventWith( Event.COMPLETE );
+}</code></pre>
+<p>Now, we can navigate back and forth between the two screens.</p>
+<p>We can call <code>setScreenIDForPushEvent()</code> and <code>addPopEvent()</code> as many times as needed to listen for multiple events.</p>
+<h2 id="animated-transitions">Animated Transitions</h2>
+<p>As we learned above, we can either push a new screen onto the top of the stack to show it, or we can pop a screen from the stack to hide it. Each of these actions can be animated, improving the user experience and adding a little bit of life to our games and apps. This animation during navigation is called a <a href="transitions.html"><em>transition</em></a>, and we can specify transitions for both push and pop actions.</p>
+<p>We can find a number of useful transition classes in the <a href="../api-reference/feathers/motion/package-detail.html"><code>feathers.motion</code></a> package. One example is the <a href="../api-reference/feathers/motion/Slide.html"><code>Slide</code></a> class, which slides the old screen out of view by animating its <code>x</code> or <code>y</code> property, while simultaneously animating the new screen into view.</p>
+<p><code>StackScreenNavigator</code> supports separate transitions for push and pop actions. This lets us clearly show, visually, that a screen is being added or removed from the stack. Using the <code>Slide</code> transition, we might want a new screen to slide to the left when it is pushed, and a screen being popped should slide in the opposite direction -- to the right.</p>
+<p>Each of the built-in transition classes has one or more static methods that you can call to create the <em>transition function</em> that the screen navigator calls when pushing or poping a screen. In this case, let's call <a href="../api-reference/feathers/motion/Slide.html#createSlideLeftTransition()"><code>Slide.createSlideLeftTransition()</code></a> and <a href="../api-reference/feathers/motion/Slide.html#createSlideRightTransition()"><code>Slide.createSlideRightTransition()</code></a>.</p>
+<p>We can pass the results to the <a href="../api-reference/feathers/controls/StackScreenNavigator.html#pushTransition"><code>pushTransition</code></a> and <a href="../api-reference/feathers/controls/StackScreenNavigator.html#popTransition"><code>popTransition</code></a> properties on the screen navigator:</p>
+<pre class="code"><code>this._navigator.pushTransition = Slide.createSlideLeftTransition();
+this._navigator.popTransition = Slide.createSlideRightTransition();</code></pre>
+<p>In the code above, we don't need to pass any arguments to <code>Slide.createSlideLeftTransition()</code> or <code>Slide.createSlideRightTransition()</code>. However, these functions expose some optional parameters that we can customize, if desired. For instance, we might want to customize the duration of the animation (in seconds) and the easing function:</p>
+<pre class="code"><code>this._navigator.pushTransition = Slide.createSlideLeftTransition( 0.75, Transitions.EASE_IN_OUT );</code></pre>
+<p>Now, the animation will last a little longer while easing in and out.</p>
+<aside class="info">
+See <a href="transitions.html">Transitions for Feathers screen navigators</a> for a more detailed look at the available transitions, including instructions for creating custom transitions.
+</aside>
+<h3 id="custom-transitions-for-individual-screens">Custom transitions for individual screens</h3>
+<p>Let's say that we want the push and pop transitions for most screens to be the same throughout our app. However, we have a screen for quick settings changes that we want to slide in from the bottom to cover up the existing screen. Then, when the quick settings panel is closed, it should slide down to reveal the previous screen below.</p>
+<pre class="code"><code>var quickSettingsItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( QuickSettingsScreen );
+quickSettingsItem.addPopEvent( Event.COMPLETE );
+quickSettingsItem.pushTransition = Cover.createCoverUpTransition();
+quickSettingsItem.popTransition = Reveal.createRevealDownTransition();</code></pre>
+<p>It's as easy as setting the <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html#pushTransition"><code>pushTransition</code></a> and <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html#popTransition"><code>popTransition</code></a> properties on the <code>StackScreenNavigatorItem</code>.</p>
+<h3 id="events-when-transitions-start-and-complete">Events when transitions start and complete</h3>
+<p>A <code>StackScreenNavigator</code> dispatches <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#event:transitionStart"><code>FeathersEventType.TRANSITION_START</code></a> when a new screen is being shown and the transition animation begins. Similarly, it dispatches <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#event:transitionComplete"><code>FeathersEventType.TRANSITION_COMPLETE</code></a> when the transition animation has ended.</p>
+<aside class="info">
+If a specific screen needs to know when its transition in (or out) starts or completes, we can listen for different events that provide more control. See <a href="screen.html">How to use the Feathers <code>Screen</code> component</a> (or <a href="scroll-screen.html"><code>ScrollScreen</code></a> or <a href="panel-screen.html"><code>PanelScreen</code></a>) for details.
+</aside>
+<p>Let's listen for <code>FeathersEventType.TRANSITION_COMPLETE</code>:</p>
+<pre class="code"><code>this._navigator.addEventListener( FeathersEventType.TRANSITION_COMPLETE, navigator_transitionCompleteHandler );</code></pre>
+<p>The event listener might look like this:</p>
+<pre class="code"><code>private function navigator_transitionCompleteHandler( event:Event ):void
+{
+    // do something after the transition animation
+}</code></pre>
+<h2 id="property-injection">Property Injection</h2>
+<p>Optionally, we can pass properties to the screen before it is shown. If we have multiple screens that need to share some data, this is a useful way to ensure that each screen has access to it. For instance, we might have an <code>OptionsData</code> class that stores things like audio volume and other common options. We'd want to pass that to the <code>OptionsScreen</code> to let the user change the volume, obviously. We'd also want to pass it to other screens that play audio so that it plays at the correct volume.</p>
+<p>In the class where we create the <code>StackScreenNavigator</code>, let's create an <code>OptionsData</code> instance too. In a moment, we'll pass it to each screen that needs it.</p>
+<pre class="code"><code>this._optionsData = new OptionsData();</code></pre>
+<p>Now, when we add our <code>OptionsScreen</code> to the <code>StackScreenNavigator</code>, we pass it the <code>OptionsData</code> instance in using the <a href="../api-reference/feathers/controls/StackScreenNavigatorItem.html#properties"><code>properties</code></a> property on the <code>StackScreenNavigatorItem</code>:</p>
+<pre class="code"><code>var optionsItem:StackScreenNavivatorItem = new StackScreenNavigatorItem( OptionsScreen );
+optionsItem.properties.options = this._optionsData;</code></pre>
+<p>In <code>OptionsScreen</code>, we need to add a variable or a getter and setter named <code>options</code> to match up with <code>optionsItem.properties.options</code>:</p>
+<pre class="code"><code>protected var _options:OptionsData;
+ 
+public function get options():OptionsData
+{
+    return this._options;
+}
+ 
+public function set options( value:OptionsData ):void
+{
+    this._options = value;
+}</code></pre>
+<p>We want to update the screen when the <code>options</code> property changes, so we should invalidate the screen, and the <code>draw()</code> function will be called again:</p>
+<pre class="code"><code>public function set options( value:OptionsData ):void
+{
+    if(this._options == value)
+    {
+        return;
+    }
+    this._options = value;
+    this.invalidate( INVALIDATION_FLAG_DATA );
+}</code></pre>
+<aside class="warn">
+Objects that are passed by value (like <code>Number</code>, <code>Boolean</code>, and <code>int</code>) should not be used directly with property injection. Each screen will get a copy instead of a reference, so if one screen changes the value, another won't see the change. Always combine simple values like this together into a custom class that can be passed by reference.
+</aside>
+<h2 id="advanced-functionality">Advanced Functionality</h2>
+<p><code>StackScreenNavigator</code> offers a number of advanced features to customize navigation behavior.</p>
+<h3 id="call-a-function-instead-of-navigating-to-a-different-screen">Call a function instead of navigating to a different screen</h3>
+<p>The <code>StackScreenNavigatorItem</code> event map can be used for more than simply navigating from one screen to another. You can also call a function when an event or signal is dispatched. Let's add a new event to the main menu that will be dispatched when an &quot;About Our Product&quot; button is clicked. We want it to open a website in the browser.</p>
+<pre class="code"><code>var mainMenuItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( MainMenuScreen );
+mainMenuItem.setScreenIDForPushEvent( MainMenuScreen.SHOW_OPTIONS, OPTIONS );
+mainMenuItem.setFunctionForPushEvent( MainMenuScreen.LINK_TO_HOME_PAGE, openHomePageLink );</code></pre>
+<p>The function may optionally receives the event listener arguments.</p>
+<pre class="code"><code>protected function openHomePageLink():void
+{
+    navigateToURL( new URLRequest( &quot;http://www.example.com/&quot; ), &quot;_blank&quot; );
+}</code></pre>
+<p>Optionally, the function may receive the listener arguments for the event dispatched by the screen, if needed:</p>
+<pre class="code"><code>protected function openHomePageLink( event:Event ):void</code></pre>
+<h3 id="listen-to-signals-instead-of-events">Listen to signals instead of events</h3>
+<p>Alternatively, you may use the <a href="https://github.com/robertpenner/as3-signals">as3-signals</a> library instead of events to trigger navigation. Feathers doesn't actually require as3-signals as a dependency, but at runtime, Feathers will check to see if as3-signals is compiled into the SWF. If it is, then the screen navigator will enable special behavior to check if the event map is referring to an event or a signal.</p>
+<p>If as3-signals has been detected, the <code>StackScreenNavigator</code> will first check a screen for a signal that's a public property before falling back to adding an event listener. For example, if the event map defines an <code>&quot;complete&quot;</code> key, the <code>StackScreenNavigator</code> will check of the screen has a property named <code>complete</code>. If the property exists, in must implement the <code>ISignal</code> interface. If both of these conditions are true, a listener will be added to the signal. If either condition is false, then the <code>StackScreenNavigator</code> will fall back to adding a listener for the <code>&quot;complete&quot;</code> event instead.</p>
+<p>Let's rework the example above to use signals instead of events. Let's start with changing how <code>MainMenuScreen</code> is added to the <code>StackScreenNavigator</code>:</p>
+<pre class="code"><code>var mainMenuItem:StackScreenNavigatorItem = new StackScreenNavigatorItem( MainMenuScreen );
+mainMenuItem.setScreenIDForPushEvent( &quot;onOptions&quot;, OPTIONS );
+this._navigator.addScreen( MAIN_MENU, mainMenuItem );</code></pre>
+<p>Inside <code>MainMenuScreen</code>, we add a signal called <code>onOptions</code> that will automatically be detected when the <code>StackScreenNavigator</code> reads the event map:</p>
+<pre class="code"><code>protected var _onOptions:Signal = new Signal();
+ 
+public function get onOptions():ISignal
+{
+    return this._onOptions;
+}</code></pre>
+<p>The <code>MainMenuScreen</code> might dispatch <code>onOptions</code> when a button is triggered:</p>
+<pre class="code"><code>protected function optionsButton_triggeredHandler( event:Event ):void
+{
+    this._onOptions.dispatch();
+}</code></pre>
+<p>Modifying <code>OptionsScreen</code> to use signals instead of events would be the same.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/StackScreenNavigator.html"><code>feathers.controls.StackScreenNavigator</code> API Documentation</a></p></li>
+<li><p><a href="transitions.html">Transitions for Feathers screen navigators</a></p></li>
+<li><p><a href="screen.html">How to use the Feathers <code>Screen</code> component</a></p></li>
+<li><p><a href="panel-screen.html">How to use the Feathers <code>ScrollScreen</code> component</a></p></li>
+<li><p><a href="panel-screen.html">How to use the Feathers <code>PanelScreen</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Creating custom Feathers themes - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="creating-custom-feathers-themes">Creating custom Feathers themes</h1>
+<p>Many apps, including games, require heavy branding that involves styling every Feathers component with custom skins and fonts. In these cases, the example themes included with Feathers won't offer enough customization options to match the designer's vision. We will need a custom theme, built from scratch.</p>
+<aside class="info">
+If you haven't read <a href="skinning.html">Skinning Feathers components</a> yet, start there first to learn about how to do basic skinning without themes.
+</aside>
+<h2 id="creating-a-theme-class">Creating a theme class</h2>
+<p>Let's create a new theme from scratch. We'll create a subclass of <a href="../api-reference/feathers/themes/StyleNameFunctionTheme.html"><code>StyleNameFunctionTheme</code></a>:</p>
+<pre class="code"><code>package
+{
+    public class CustomTheme extends StyleNameFunctionTheme
+    {
+        public function CustomTheme()
+        {
+            super();
+        }
+
+        private function initialize():void
+        {
+
+        }
+    }
+}</code></pre>
+<p>We've added a function named <code>initialize()</code>. We'll soon fill this function with calls to other functions that get different parts of the theme ready to use. However, before we can call <code>initialize()</code>, we need to decide how we're going to manage our assets like textures and fonts. We don't want to call this function until all assets are fully loaded.</p>
+<h2 id="managing-assets">Managing assets</h2>
+<p>There are two ways to include assets with a theme. Each has its own advantages and disadvantages, and we'll need to pick which one works best for the specific app that we're building.</p>
+<h3 id="embedded-assets">Embedded assets</h3>
+<p>The simplest way to include assets to <em>embed</em> the assets at compile time. This approach lets us simply instantiate the classes when they are needed, and we don't need to wait for an event to indicate that they are ready. However, embedding files will increase the memory that our app requires at runtime. On mobile, memory can be limited, and this approach will restrict how many textures that we can keep in memory simultaneously. For a small set of assets, that may be a small price to pay for convenience. For multiple texture atlases, using up memory that we might need at runtime is often unacceptable.</p>
+<p>Let's start by embedding a <a href="http://wiki.starling-framework.org/manual/textures_and_images#texture_atlases">texture atlas</a> in our <code>CustomTheme</code> class:</p>
+<pre class="code"><code>[Embed(source=&quot;/../assets/images/atlas.png&quot;)]
+private static const ATLAS_BITMAP:Class;
+
+[Embed(source=&quot;/../assets/images/atlas.xml&quot;,mimeType=&quot;application/octet-stream&quot;)]
+private static const ATLAS_XML:Class;</code></pre>
+<p>A texture atlas requires of two files, an image and an XML file. Let's add a member variable to our theme to hold the <a href="http://doc.starling-framework.org/core/starling/textures/TextureAtlas.html"><code>TextureAtlas</code></a> once it is created:</p>
+<pre class="code"><code>private var atlas:TextureAtlas;</code></pre>
+<p>Now, we'll add a function named <code>createTextureAtlas()</code> that will instantiate the <code>TextureAtlas</code> using our embedded assets:</p>
+<pre class="code"><code>private function createTextureAtlas():void
+{
+    var atlasTexture:Texture = Texture.fromEmbeddedAsset( ATLAS_BITMAP );
+    var atlasXML:XML = XML( new ATLAS_XML() );
+    this.atlas = new TextureAtlas( atlasTexture, atlasXML );
+}</code></pre>
+<p>In the <code>CustomTheme</code> constructor, we'll call <code>createTextureAtlas()</code>, and then we can immediately call <code>initialize()</code>:</p>
+<pre class="code"><code>public function CustomTheme()
+{
+    super();
+    this.createTextureAtlas();
+    this.initialize();
+}</code></pre>
+<p>If our theme requires other embedded assets, such as bitmap fonts or additional texture atlases, we simply need to instantiate these assets before we call <code>initialize()</code>.</p>
+<h3 id="loading-assets-at-runtime">Loading assets at runtime</h3>
+<p>Another approach to including assets with a theme is to load them from external files at runtime. Starling's <a href="http://doc.starling-framework.org/core/starling/utils/AssetManager.html"><code>AssetManager</code></a> supports loading a set of multiple files at runtime, and it provides conveniences like automatically converting bitmaps to textures and registering bitmap fonts. Once everything is loaded, our assets will use less memory than if they were embedded, meaning that we can pack in more textures and things. Loading assets doesn't happen instantaneously, though, and we cannot initialize the theme until the <code>AssetManager</code> finishes loading our assets. Additionally, our app will need to wait before it can instantiate Feathers components.</p>
+<p>Similar to the previous example that used embedded assets, we want to load a <a href="http://wiki.starling-framework.org/manual/textures_and_images#texture_atlases">texture atlas</a> to be used by our <code>CustomTheme</code> class. We'll need two files for the texture atlas, we'll call them <code>atlas.png</code> and <code>atlas.xml</code>.</p>
+<aside class="info">
+When packaging an AIR application, we need to manually add each of the files that we want to include with our app to our project's settings. They will not be included automatically, even if we put them into the same folder as our source code. Every development environment provides a different UI for including files with an AIR application, so please refer to the appropriate IDE documentation for details.
+</aside>
+<p>Let's define a couple of member variables, one for the texture atlas, and one for the <code>AssetManager</code> that will load the required files:</p>
+<pre class="code"><code>private var atlas:TextureAtlas;
+private var assets:AssetManager;</code></pre>
+<p>Now, we'll add a function named <code>loadAssets()</code> that will instantiate the <code>AssetManager</code> and enqueue the asset files:</p>
+<pre class="code"><code>private function loadAssets():void
+{
+    this.assets = new AssetManager();
+    this.assets.enqueue( &quot;atlas.png&quot; );
+    this.assets.enqueue( &quot;atlas.xml&quot; );
+    this.assets.loadQueue( this.assets_onProgress );
+}</code></pre>
+<p>At the end, we call <code>loadQueue()</code> on the <code>AssetManager</code> to load our assets. We need to pass a callback to this function so that we know when the assets finish loading. The callback accepts a single parameter, a variable with a value between <code>0.0</code> and <code>1.0</code>. Once this value is equal to <code>1.0</code>, our assets have fully loaded:</p>
+<pre class="code"><code>private function assets_onProgress( progress:Number ):void
+{
+    if( progress &lt; 1.0 )
+    {
+        return;
+    }
+    this.atlas = this.assets.getTextureAtlas( &quot;atlas&quot; );
+    this.initialize();
+    this.dispatchEventWith( Event.COMPLETE );
+}</code></pre>
+<p>If the assets aren't loaded, we simply return. Once the assets are ready, we can access the <code>TextureAtlas</code> from the <code>AssetManager</code>. We pass the name of the texture atlas to the <a href="http://doc.starling-framework.org/core/starling/utils/AssetManager.html#getTextureAtlas()"><code>getTextureAtlas()</code></a> function. The name of a texture atlas is the image's file name, without the extension. In this case, our file is named <code>atlas.png</code>, so we pass <code>&quot;atlas&quot;</code> to <code>getTextureAtlas()</code>.</p>
+<p>Once we've set the <code>atlas</code> member variable, we can call <code>initialize()</code>. If our custom theme needed to load more assets, we'd want to get them all from the <code>AssetManager</code> before calling <code>initialize()</code>.</p>
+<p>Finally, we want to inform the rest of our app that it can proceed, so we'll dispatch <code>Event.COMPLETE</code>. The app can listen for this event very easily:</p>
+<pre class="code"><code>this.theme = new CustomTheme();
+this.theme.addEventListener( Event.COMPLETE, theme_completeHandler );</code></pre>
+<p>Once the listener is called, the app is free to start instantiating components, and the theme will style them automatically.</p>
+<h2 id="styling-components">Styling components</h2>
+<p>Once our assets are loaded, we can start setting up the functions called to style each component in our app. Inside one of these functions, styling is simply a matter of directly setting a component's properties. It's the same type of styling you would do if you were using Feathers without a theme. For example, we might set some styles on a <a href="button.html"><code>Button</code></a>:</p>
+<pre class="code"><code>private function setButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new Image( this.atlas.getTexture( &quot;button-up&quot; ) );
+    button.downSkin = new Image( this.atlas.getTexture( &quot;button-down&quot; ) );
+
+    button.padding = 20;
+    button.gap = 15;
+
+    button.fontStyles = new TextFormat( &quot;_sans&quot;, 18, 0x333333 );
+}</code></pre>
+<p>In our <code>initialize()</code> function, let's call a new function that we'll create in a moment, named <code>initializeStyleProviders()</code>:</p>
+<pre class="code"><code>private function initialize():void
+{
+    this.initializeStyleProviders();
+}</code></pre>
+<p>Now, let's create <code>initializeStyleProviders()</code> and set up our first style provider, the one for the <code>Button</code> class:</p>
+<pre class="code"><code>private function initializeStyleProviders():void
+{
+    // button
+    this.getStyleProviderForClass( Button ).defaultStyleFunction = this.setButtonStyles;
+}</code></pre>
+<p><a href="../api-reference/feathers/themes/StyleNameFunctionTheme.html#getStyleProviderForClass()"><code>getStyleProviderForClass()</code></a> returns a <a href="../api-reference/feathers/skins/StyleNameFunctionStyleProvider.html"><code>StyleNameFunctionStyleProvider</code></a>.</p>
+<p><code>StyleNameFunctionStyleProvider</code> has two main capabilities. Its <a href="../api-reference/feathers/skins/StyleNameFunctionStyleProvider.html#defaultStyleFunction"><code>defaultStyleFunction</code></a> property sets the function that will be called for the most common variation of a particular component. Using the code above, if we create regular old button, we want our <code>setButtonStyles()</code> function to be called.</p>
+<p>However, it's common for different variations of the same component to exist together in one app. For instance, some buttons may be visually highlighted in red to indicate that something potentially dangerous is about to happen, like deleting some data. The <a href="../api-reference/feathers/controls/Button.html#ALTERNATE_STYLE_NAME_DANGER_BUTTON"><code>Button.ALTERNATE_STYLE_NAME_DANGER_BUTTON</code></a> constant is defined by Feathers to help differentiate this variation of a button. You can add this style name to the component to tell the theme that it should be styled differently:</p>
+<pre class="code"><code>button.styleNameList.add( Button.ALTERNATE_STYLE_NAME_DANGER_BUTTON );</code></pre>
+<p>Inside our theme, we can add a new function for this button variation. We'll name it <code>setDangerButtonStyles()</code>:</p>
+<pre class="code"><code>private function setDangerButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new Image( this.atlas.getTexture( &quot;danger-button-up&quot; ) );
+    button.downSkin = new Image( this.atlas.getTexture( &quot;danger-button-down&quot; ) );
+
+    button.padding = 20;
+    button.gap = 15;
+
+    button.fontStyles = new TextFormat( &quot;_sans&quot;, 18, 0x333333 );
+}</code></pre>
+<p>Now, we can use the <a href="../api-reference/feathers/skins/StyleNameFunctionStyleProvider.html#setFunctionForStyleName()"><code>setFunctionForStyleName()</code></a> on the <code>StyleNameFunctionStyleProvider</code>:</p>
+<pre class="code"><code>this.getStyleProviderForClass( Button )
+    .setFunctionForStyleName( Button.ALTERNATE_STYLE_NAME_DANGER_BUTTON, this.setDangerButtonStyles );</code></pre>
+<p>If a component has this style name, the default <code>setButtonStyles()</code> function won't be called. Instead, <code>setDangerButtonStyles()</code> will be called.</p>
+<h3 id="styling-sub-components">Styling sub-components</h3>
+<p>Some components have sub-components that need to be skinned too. For instance, the <a href="slider.html"><code>Slider</code></a> component has a thumb that is a <a href="button.html"><code>Button</code></a>. These sub-components may be skinned using style names provided by their parent component. For instance, we can use <a href="../api-reference/feathers/controls/Slider.html#DEFAULT_CHILD_STYLE_NAME_THUMB"><code>Slider.DEFAULT_CHILD_STYLE_NAME_THUMB</code></a> to skin the thumb of a slider.</p>
+<pre class="code"><code>this.getStyleProviderForClass( Button )
+    .setFunctionForStyleName( Slider.DEFAULT_CHILD_STYLE_NAME_THUMB, this.setSliderThumbStyles );</code></pre>
+<p>Components usually provide a way to customize a sub-component's style name, in case something other than the default is needed. For a <code>Slider</code>, we can set the <a href="../api-reference/feathers/controls/Slider.html#customThumbStyleName"><code>customThumbStyleName</code></a> property:</p>
+<pre class="code"><code>slider.customThumbStyleName = &quot;custom-thumb&quot;;</code></pre>
+<p>Then, we can use that custom style name just like we would for other variations of a component:</p>
+<pre class="code"><code>this.getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;custom-thumb&quot;, this.setSliderThumbStyles );</code></pre>
+<h2 id="setting-global-defaults">Setting global defaults</h2>
+<p>Certain global properties are frequently set by a theme. For instance, we might want to set <a href="../api-reference/feathers/core/FeathersControl.html#defaultTextRendererFactory"><code>FeathersControl.defaultTextRendererFactory</code></a> and <a href="../api-reference/feathers/core/FeathersControl.html#defaultTextEditorFactory"><code>FeathersControl.defaultTextEditorFactory</code></a> in our custom theme, depending on how we prefer to render text or edit it in a <a href="text-input.html"><code>TextInput</code></a>.</p>
+<p>Let's create an <code>initializeGlobals()</code> function:</p>
+<pre class="code"><code>private function initializeGlobals():void
+{
+    FeathersControl.defaultTextRendererFactory = function():ITextRenderer
+    {
+        return new TextBlockTextRenderer();
+    };
+
+    FeathersControl.defaultTextEditorFactory = function():ITextEditor
+    {
+        return new StageTextTextEditor();
+    };
+}</code></pre>
+<p>We can call this function before the call to <code>initializeStyleProviders()</code> in <code>initialize()</code>:</p>
+<pre class="code"><code>private function initialize():void
+{
+    this.initializeGlobals();
+    this.initializeStyleProviders();
+}</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="themes.html">Introduction to Feathers themes</a></p></li>
+<li><p><a href="extending-themes.html">Extending Feathers example themes</a></p></li>
+<li><p><a href="style-providers.html">An in-depth look at Feathers style providers</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

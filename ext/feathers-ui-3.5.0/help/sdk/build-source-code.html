@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Build the Feathers SDK from Source Code - Feathers SDK and MXML Help - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="build-the-feathers-sdk-from-source-code">Build the Feathers SDK from Source Code</h1>
+<p>The document explains how to build the Feathers SDK from source code.</p>
+<aside class="warn">
+Most developers should use the <a href="installation-instructions.html">Feathers SDK Manager</a> instead. This tutorial is meant for advanced developers who want to modify the Feathers SDK compiler source code to contribute or to create a fork.
+</aside>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><a href="http://ant.apache.org">Apache Ant</a></li>
+<li>Java 8 (update 101 or newer)</li>
+<li>playerglobal.swc for Flash Player 19.0 (Download from <a href="https://helpx.adobe.com/flash-player/kb/archived-flash-player-versions.html">Archived Flash Player versions</a>)</li>
+<li>Adobe AIR SDK 19.0 <em>without</em> the ASC 2.0 compiler (Download from <a href="https://helpx.adobe.com/air/kb/archived-air-sdk-version.html">Archived Adobe AIR SDK versions</a>)</li>
+<li>Adobe Flash Player projector content debugger (Download from <a href="https://www.adobe.com/support/flashplayer/downloads.html">Adobe Flash Player Downloads</a>)</li>
+</ul>
+<p>Note: When you prepare the Feathers SDK for use in an IDE as the final step, you will be allowed to target newer versions of Flash Player and AIR. These older versions of Flash Player and AIR are only required when building the source code.</p>
+<h2 id="build-steps">Build Steps</h2>
+<ol>
+<li><p>Clone the repository from Github:</p>
+<pre><code> git clone --recursive git@github.com:joshtynjala/flex-sdk.git ./feathers-sdk</code></pre>
+<p>You must include the <code>--recursive</code> flag to load the required sub-modules for Starling Framework and Feathers.</p></li>
+<li><p>Copy <code>env-template.properties</code> to a new file named <code>env.properties</code>. In this file, define the <code>env.PLAYERGLOBAL_HOME</code>, <code>env.AIR_HOME</code>, and <code>env.FLASHPLAYER_DEBUGGER</code> properties. These are required by the build script.</p></li>
+<li><p>Run the following command:</p>
+<pre><code> ant main</code></pre>
+<p>When asked if you want to integrate with Adobe's embedded font support, type <code>y</code> and press the <code>Enter</code> key.</p></li>
+<li><p>Continue by following the instructions to <a href="build-binary-distribution.html">Build the Feathers SDK from a Binary Distribution</a>.</p></li>
+</ol>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

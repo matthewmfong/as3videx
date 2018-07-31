@@ -17,6 +17,10 @@ import feathers.layout.VerticalAlign;
 
 import org.osflash.signals.Signal;
 
+import spark.components.Callout;
+
+import starling.core.Starling;
+
 import starling.display.DisplayObject;
 
 import starling.display.Image;
@@ -47,7 +51,7 @@ public class HighlightCallout extends Sprite {
     public var addDeleteMode:String;
 
     public var highlightSignal:Signal;
-    private var callout:Callout;
+    private var callout:feathers.controls.Callout;
     public static var caller:*;
 
     public function HighlightCallout() {
@@ -69,14 +73,20 @@ public class HighlightCallout extends Sprite {
     public static function showCallout(target:DisplayObject,
                                        highlightable:Array = null,
                                        deletable:Array = null,
-                                       callReference:* = null):Callout {
+                                       callReference:* = null):feathers.controls.Callout {
         caller = callReference;
+
+        var flexCallout:spark.components.Callout = new spark.components.Callout();
+
+
+        Starling.current.nativeOverlay.addChild(flexCallout);
+        flexCallout.open(Starling.current.nativeOverlay, true);
 
         var content:HighlightCallout = new HighlightCallout();
         content.setColours(highlightable, deletable);
 
         StarlingWidget.allWidgetSwapStarlingNative();
-        var callout:Callout = Callout.show(content, target, new <String>[RelativePosition.TOP] );
+        var callout:feathers.controls.Callout = feathers.controls.Callout.show(content, target, new <String>[RelativePosition.TOP] );
         callout.closeOnTouchEndedOutside = false;
         callout.disposeContent = true;
         content.callout = callout;

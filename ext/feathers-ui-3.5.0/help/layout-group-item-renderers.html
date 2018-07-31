@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Creating custom item renderers with the Layout Group container - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="creating-custom-item-renderers-with-the-layoutgroup-container">Creating custom item renderers with the <code>LayoutGroup</code> container</h1>
+<p>The <a href="layout-group.html"><code>LayoutGroup</code></a> container is a simple Feathers component that holds children and provides the ability to specify a layout. This makes an ideal base for any <a href="index.html#custom-components">custom component</a>, but it's especially useful for custom item renderers in the <a href="list.html"><code>List</code></a>, <a href="data-grid.html"><code>DataGrid</code></a>, <a href="tree.html"><code>Tree</code></a> and <a href="grouped-list.html"><code>GroupedList</code></a> components.</p>
+<p>Feathers includes several subclasses of <code>LayoutGroup</code> that are designed specifically to help you get started creating custom item renderers (or &quot;cell&quot; renderers in a <code>DataGrid</code>).</p>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html"><code>LayoutGroupListItemRenderer</code></a> can be used as an item renderer in a <a href="list.html"><code>List</code></a>.</p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupDataGridCellRenderer.html"><code>LayoutGroupDataGridCellRenderer</code></a> can be used as a cell renderer in a <a href="data-grid.html"><code>DataGrid</code></a>.</p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupTreeItemRenderer.html"><code>LayoutGroupTreeItemRenderer</code></a> can be used as an item renderer in a <a href="tree.html"><code>Tree</code></a>.</p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupGroupedListItemRenderer.html"><code>LayoutGroupGroupedListItemRenderer</code></a> can be used as an item renderer in a <a href="grouped-list.html"><code>GroupedList</code></a>.</p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupGroupedListHeaderOrFooterRenderer.html"><code>LayoutGroupGroupedListHeaderOrFooterRenderer</code></a> can be used as either a header renderer or a footer renderer in a <a href="grouped-list.html"><code>GroupedList</code></a>.</p></li>
+</ul>
+<p>All of these classes implement the required functions from their respective interfaces, to save you time on bootstrapping code, and they provide a couple of useful functions that you can override the update the layout and the parse the data without worrying about the lowest level parts of the Feathers component architecture.</p>
+<p>Below, we will look at how to create a simple custom item renderer by extending one of these classes. At the very end, the complete source code for a simple custom item renderer will be provided to offer a starting point for other custom item renderers.</p>
+<aside class="info">
+These base classes for item renderers based on <code>LayoutGroup</code> provide the easiest way to build custom item renderers in Feathers. However, they have the risk of slightly lower performance. For a more advanced approach at a lower level in the Feathers architecture, please see <a href="feathers-control-item-renderers.html">Creating custom Item Renderers with <code>FeathersControl</code> and <code>IListItemRenderer</code></a> instead.
+</aside>
+<h2 id="the-simplest-item-renderer">The Simplest Item Renderer</h2>
+<p>Let's implement a very simple item renderer. It will contain a <a href="label.html"><code>Label</code></a> component to display some text and it will be possible to customize some padding around the edges.</p>
+<p>When it's finished, we'll want to use it like this:</p>
+<pre class="code"><code>var list:List = new List();
+list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:CustomLayoutGroupItemRenderer = new CustomLayoutGroupItemRenderer();
+    itemRenderer.padding = 10;
+    return itemRenderer;
+};
+list.dataProvider = new ArrayCollection(
+[
+    { label: &quot;One&quot; },
+    { label: &quot;Two&quot; },
+    { label: &quot;Three&quot; },
+    { label: &quot;Four&quot; },
+    { label: &quot;Five&quot; },
+]);
+this.addChild(list);</code></pre>
+<p>Notice that we set a <code>padding</code> property to adjust the layout. The item renderer will get the text for its <code>Label</code> sub-component from the <code>label</code> property of an item in the data provider.</p>
+<p>We could go crazy and add background skins, icons, the ability to customize the which field from the item that the label text comes from, and many more things. We're going to keep it simple for now because this is just a basic example.</p>
+<p>For this example, we're creating an item renderer for a <a href="list.html"><code>List</code></a> component, but it will be virtually the exact same process to create an item renderer for a <code>Tree</code> or <code>GroupedList</code> component, or a header renderer or footer renderer for a <code>GroupedList</code> component. You simply need to change the class that you extend.</p>
+<h2 id="implementation-details">Implementation Details</h2>
+<p>Let's start out with the basic framework for our custom item renderer. We want to subclass <a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html"><code>feathers.controls.renderers.LayoutGroupListItemRenderer</code></a>:</p>
+<pre class="code"><code>package
+{
+    import feathers.controls.renderers.LayoutGroupListItemRenderer;
+ 
+    public class CustomLayoutGroupItemRenderer extends LayoutGroupListItemRenderer
+    {
+        public function CustomLayoutGroupItemRenderer()
+        {
+        }
+    }
+}</code></pre>
+<p>This base class implements the <a href="../api-reference/feathers/controls/renderers/IListItemRenderer.html"><code>IListItemRenderer</code></a> interface, so the <a href="../api-reference/feathers/controls/renderers/IListItemRenderer.html#data"><code>data</code></a>, <a href="../api-reference/feathers/controls/renderers/IListItemRenderer.html#index"><code>index</code></a>, and <a href="../api-reference/feathers/controls/renderers/IListItemRenderer.html#owner"><code>owner</code></a> properties that the <code>List</code> component require on an item renderer are already there for us.</p>
+<h3 id="adding-children">Adding Children</h3>
+<p>We want to display a <a href="label.html"><code>Label</code></a> component, so let's add a member variable for it:</p>
+<pre class="code"><code>protected var _label:Label;</code></pre>
+<p>Next, we want to create a new instance and add it as a child. We need to override <code>initialize()</code> function:</p>
+<pre class="code"><code>override protected function initialize():void
+{
+    this._label = new Label();
+    this.addChild(this._label);
+}</code></pre>
+<p>The <code>initialize()</code> function is called once the very first time that the component is added to the stage. It's a good place to create sub-components and other children and possibly to do things like add event listeners that you don't intend to remove until the component is disposed. In general, it is better to use <code>initialize()</code> for this sort of thing instead of the constructor.</p>
+<aside class="info">
+For more information about the <code>initialize()</code> function and other parts of the Feathers architecture, see <a href="component-properties-methods.html">Anatomy of a Feathers Component</a>.
+</aside>
+<h3 id="parsing-the-data">Parsing the data</h3>
+<p>Next, we want to access the item renderer's <a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html#data"><code>data</code></a> property and display something in our <code>Label</code> component. Override the convenient <a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html#commitData()"><code>commitData()</code></a> function to do this:</p>
+<pre class="code"><code>override protected function commitData():void
+{
+    if(this._data)
+    {
+        this._label.text = this._data.label;
+    }
+    else
+    {
+        this._label.text = null;
+    }
+}</code></pre>
+<p>For this particular item renderer, we're requiring all items in the data provider to have a <code>label</code> property that holds the text to display in the <code>Label</code> component. If we were building a generic item renderer, ideally, we might like to make that field name customizable, like the <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html#labelField"><code>labelField</code></a> property in <a href="default-item-renderers.html"><code>DefaultListItemRenderer</code></a>. However, let's keep it simple for this example.</p>
+<p>Don't forget to handle the case where the data property is <code>null</code>. You don't want any runtime errors causing you trouble.</p>
+<h3 id="adjusting-the-layout">Adjusting the layout</h3>
+<p>Let's handle how the <code>Label</code> sub-component will be positioned and sized within the item renderer. We generally want to use a fluid layout that can handle changes in the dimensions of the item renderer (which are ultimately controlled by the parent <code>List</code> component). <a href="anchor-layout.html"><code>AnchorLayout</code></a> is ideal for this situation.</p>
+<p>At the beginning of the <code>initialize()</code> function, let's create our <code>AnchorLayout</code> instance:</p>
+<pre class="code"><code>override protected function initialize():void
+{
+    this.layout = new AnchorLayout();</code></pre>
+<p>Now, in order to have the <code>AnchorLayout</code> control the <code>Label</code> component's positioning and dimensions, we need to pass an <a href="../api-reference/feathers/layout/AnchorLayoutData.html"><code>AnchorLayoutData</code></a> instance to the <code>Label</code> component. Let's do that next:</p>
+<pre class="code"><code>override protected function initialize():void
+{
+    this.layout = new AnchorLayout();
+ 
+    var labelLayoutData:AnchorLayoutData = new AnchorLayoutData();
+    labelLayoutData.top = 0;
+    labelLayoutData.right = 0;
+    labelLayoutData.bottom = 0;
+    labelLayoutData.left = 0;
+ 
+    this._label = new Label();
+    this._label.layoutData = this._labelLayoutData;</code></pre>
+<p>We've constrained the <code>Label</code> component to all four edges of the item renderer. If the item renderer's width grows or shrinks, the <code>Label</code> component will be resized appropriately.</p>
+<p>With that finished, we now have a fully working item renderer. However, we probably don't want the <code>Label</code> component to fill the item renderer right up to the edges. We probably want a little space around the edge to allow the labels to breathe when they appear next to each other in the list. Let's add a <code>padding</code> property to customize this spacing around the edges:</p>
+<pre class="code"><code>protected var _padding:Number = 0;
+ 
+public function get padding():Number
+{
+    return this._padding;
+}
+ 
+public function set padding(value:Number):void
+{
+    if(this._padding == value)
+    {
+        return;
+    }
+    this._padding = value;
+    this.invalidate(INVALIDATION_FLAG_LAYOUT);
+}</code></pre>
+<p>When we change a property that requires the component to change something about its appearance, we need to call the <a href="../api-reference/feathers/core/FeathersControl.html#invalidate()"><code>invalidate()</code></a> function. This will tell the component that it needs to update its appearance before the next time that Starling renders to the screen. We'll explain that constant, <code>INVALIDATION_FLAG_LAYOUT</code>, in a moment.</p>
+<aside class="info">
+For more information about the <code>invalidate()</code> function and other parts of the Feathers architecture, see <a href="component-properties-methods.html">Anatomy of a Feathers Component</a>.
+</aside>
+<p>The base class offers a <a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html#preLayout()"><code>preLayout()</code></a> function that you can override to update layout properties on children <em>before</em> the layout code is run. We're going to update the <code>Label</code> component's <code>AnchorLayoutData</code> in this function:</p>
+<pre class="code"><code>override protected function preLayout():void
+{
+    var labelLayoutData:AnchorLayoutData = AnchorLayoutData(this._label.layoutData);
+    labelLayoutData.top = this._padding;
+    labelLayoutData.right = this._padding;
+    labelLayoutData.bottom = this._padding;
+    labelLayoutData.left = this._padding;
+}</code></pre>
+<p>If we had additional children in the item renderer, we'd adjust their <code>layoutData</code> properties in this function too. With <code>AnchorLayoutData</code>, we're not limited to constraining children to the edges of their parent container. We can also position those children relative to the center of the container, both horizontally and vertical. We can even position children relative to each other too! For complete details, see <a href="anchor-layout.html">How to use <code>AnchorLayout</code> in Feathers containers</a>.</p>
+<p>The base class also offers a <a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html#postLayout()"><code>postLayout()</code></a> function that can be overridden to update anything <em>after</em> the layout code has run. We won't be using that one here, though.</p>
+<h2 id="source-code">Source Code</h2>
+<p>The complete source code for the <code>CustomLayoutGroupItemRenderer</code> class is included below:</p>
+<pre class="code"><code>package
+{
+    import feathers.controls.Label;
+    import feathers.controls.renderers.LayoutGroupListItemRenderer;
+    import feathers.layout.AnchorLayout;
+    import feathers.layout.AnchorLayoutData;
+ 
+    public class CustomLayoutGroupItemRenderer extends LayoutGroupListItemRenderer
+    {
+        public function CustomLayoutGroupItemRenderer()
+        {
+        }
+ 
+        protected var _label:Label;
+ 
+        protected var _padding:Number = 0;
+ 
+        public function get padding():Number
+        {
+            return this._padding;
+        }
+ 
+        public function set padding(value:Number):void
+        {
+            if(this._padding == value)
+            {
+                return;
+            }
+            this._padding = value;
+            this.invalidate(INVALIDATION_FLAG_LAYOUT);
+        }
+ 
+        override protected function initialize():void
+        {
+            this.layout = new AnchorLayout();
+ 
+            var labelLayoutData:AnchorLayoutData = new AnchorLayoutData();
+            labelLayoutData.top = 0;
+            labelLayoutData.right = 0;
+            labelLayoutData.bottom = 0;
+            labelLayoutData.left = 0;
+ 
+            this._label = new Label();
+            this._label.layoutData = labelLayoutData;
+            this.addChild(this._label);
+        }
+ 
+        override protected function commitData():void
+        {
+            if(this._data &amp;&amp; this._owner)
+            {
+                this._label.text = this._data.label;
+            }
+            else
+            {
+                this._label.text = null;
+            }
+        }
+ 
+        override protected function preLayout():void
+        {
+            var labelLayoutData:AnchorLayoutData = AnchorLayoutData(this._label.layoutData);
+            labelLayoutData.top = this._padding;
+            labelLayoutData.right = this._padding;
+            labelLayoutData.bottom = this._padding;
+            labelLayoutData.left = this._padding;
+        }
+    }
+}</code></pre>
+<h2 id="next-steps">Next Steps</h2>
+<p>Looking to do more with your custom item renderer? Check out the <a href="cookbook/index.html">Feathers Cookbook</a> for &quot;recipes&quot; that show you how to implement typical features in custom item renderers and in other Feathers UI components.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="item-renderers.html">Introduction to Custom Item Renderers</a></p></li>
+<li><p><a href="cookbook/index.html#custom_item_renderers">Feathers Cookbook: Recipes for Custom Item Renderers</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupListItemRenderer.html"><code>feathers.controls.renderers.LayoutGroupListItemRenderer</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupDataGridCellRenderer.html"><code>feathers.controls.renderers.LayoutGroupDataGridCellRenderer</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupTreeItemRenderer.html"><code>feathers.controls.renderers.LayoutGroupTreeItemRenderer</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupGroupedListItemRenderer.html"><code>feathers.controls.renderers.LayoutGroupGroupedListItemRenderer</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/controls/renderers/LayoutGroupGroupedListHeaderOrFooterRenderer.html"><code>feathers.controls.renderers.LayoutGroupGroupedListHeaderOrFooterRenderer</code> API Documentation</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Build the Feathers SDK from a Binary Distribution - Feathers SDK and MXML Help - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="build-the-feathers-sdk-from-a-binary-distribution">Build the Feathers SDK from a Binary Distribution</h1>
+<p>The document explains how to build the Feathers SDK from a binary distribution. The build process downloads the Adobe AIR SDK, playerglobal.swc, and some font embedding utilities from the Adobe Flex SDK that are not open source. When finished, the Feathers SDK will be ready to use with a supported IDE.</p>
+<aside class="warn">
+Most developers should use the <a href="installation-instructions.html">Feathers SDK Manager</a> instead. This tutorial is meant for advanced developers who want to modify the Feathers SDK compiler source code to contribute or to create a fork.
+</aside>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>A <em>binary distribution</em> of the Feathers SDK</li>
+<li><a href="http://ant.apache.org/">Apache Ant</a></li>
+<li>Java 8 (update 101 or newer)</li>
+</ul>
+<h2 id="build-steps">Build Steps</h2>
+<ol>
+<li><p>Extract the Feathers SDK binary distribution into a directory.</p></li>
+<li><p>In the Feathers SDK directory, run the following command:</p>
+<pre><code> ant -f installer.xml</code></pre>
+<p>If you want to target a specific version of Flash Player and AIR, you may modify the command to specify the required versions:</p>
+<pre><code> ant -f installer.xml -Dflash.sdk.version=22.0 -Dair.sdk.version=22.0</code></pre></li>
+<li><p>When prompted to install each dependency, type <code>y</code> and press Enter.</p></li>
+</ol>
+<p>That's it! The Feathers SDK may now be used with Flash Builder 4.7 and other supported IDEs.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Some versions of Java do not support the level of encryption used on the servers that provide some the Feathers dependencies. You may encounter the following error message:</p>
+<pre class="code"><code>javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure
+    at sun.security.ssl.Alerts.getSSLException(Alerts.java:192)
+    at sun.security.ssl.Alerts.getSSLException(Alerts.java:154)
+    at sun.security.ssl.SSLSocketImpl.recvAlert(SSLSocketImpl.java:2023)
+    at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:1125)
+    at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+    at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+    at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+    at sun.net.www.protocol.https.HttpsClient.afterConnect(HttpsClient.java:559)
+    at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:185)
+    at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
+    at org.apache.tools.ant.taskdefs.Get$GetThread.openConnection(Get.java:690)
+    at org.apache.tools.ant.taskdefs.Get$GetThread.openConnection(Get.java:715)
+    at org.apache.tools.ant.taskdefs.Get$GetThread.get(Get.java:606)
+    at org.apache.tools.ant.taskdefs.Get$GetThread.run(Get.java:596)</code></pre>
+<p>To fix this issue, you must download and install the <a href="http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html">Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files</a>.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Feathers coding conventions for contributors - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="feathers-coding-conventions-for-contributors">Feathers coding conventions for contributors</h1>
+<p>This is the code formatting style used within the <a href="index.html">Feathers</a> library. When contributing code to Feathers, you are required to use this style. <a href="https://help.github.com/articles/using-pull-requests">Pull Requests</a> to the <a href="https://github.com/joshtynjala/feathers">Feathers project on Github</a> that are formatted with a different style will be rejected. The author respects that you may have your own personal style, and the author would attempt to follow your style if he were to contribute to your open source project. Save him some time so that he doesn't need to manually reformat your contributed code.</p>
+<p>If you are not contributing code to Feathers, then please feel no obligation to follow this style guide when working with the library. This guide is aimed at developers who wish to contribute bug fixes and enhancements to Feathers.</p>
+<p>The terms &quot;public&quot; and &quot;private&quot; are used below in a general sense. When the specific <code>public</code> or <code>private</code> namespace is referenced, it will be clearly styled. When not marked as a namespace, public refers to any API that is meant to be exposed to someone using a particular class. It may include things like <code>public</code> members and <code>protected</code> members that are meant to be accessed in subclasses. Similarly, private refers to APIs that are meant to be used only internally. Private APIs may be part of the <code>protected</code> namespace, but using these APIs in subclasses is an at-your-own-risk convenience only.</p>
+<h2 id="whitespace">Whitespace</h2>
+<ul>
+<li><p>Use tabs to indent lines of code. Do not use spaces for indentation.</p></li>
+<li><p>Place one space before and after operators like +, -, *, /, ?, :, &lt;, &gt;, ==, etc.</p></li>
+<li><p>Place no spaces between if/for/while/etc. and the opening parenthesis.</p></li>
+<li><p>One empty line should appear between functions.</p></li>
+<li><p>All blocks should be indented by one tab more than their parent block.</p></li>
+</ul>
+<h2 id="line-length">Line Length</h2>
+<ul>
+<li><p>Try to keep lines shorter than 80 characters. If a statement is longer than 80 characters, try to break it before 80, and continue on the next line with one indent more than the first line.</p></li>
+<li><p>Particularly messy <code>if</code> statements should be organized with extra parentheses and new lines to make them as readable as possible. It may be better to break up parts into separate variables.</p></li>
+</ul>
+<h2 id="braces">Braces</h2>
+<ul>
+<li><p>All opening braces <code>{</code> should be placed on a new line. Braces should not appear at the end of the line.</p></li>
+<li><p>All if/for/while and other constructs must always use braces, even if the language considers them optional for content that is only one line.</p></li>
+</ul>
+<h2 id="naming">Naming</h2>
+<ul>
+<li><p>Names should be descriptive and clear. Extreme brevity is not a goal.</p></li>
+<li><p>When an API is similar to one in Apache Flex or in Adobe's ActionScript 3.0 components in Animate CC, the same name or a similar one is recommended for use in Feathers.</p></li>
+<li><p>Names should not be abbreviated, in most cases. Commonly recognized acronyms are generally acceptable. Acronyms should have every letter capitalized.</p></li>
+<li><p>Classes should use <code>CamelCaseNames</code>, and they must start with a capital letter.</p></li>
+<li><p>Variable and functions should use <code>camelCaseNames</code>, and they must start with a lower-case letter.</p></li>
+<li><p>However, private member variables or variables associated with a getter or setter should start with an underscore <code>_</code> followed by a lower-case letter.</p></li>
+</ul>
+<h2 id="access-levels">Access Levels</h2>
+<ul>
+<li><p>In general, properties and methods should be <code>public</code> or <code>protected</code>. Use of <code>private</code> is discouraged because it limits developers trying to extend components.</p></li>
+<li><p>Custom namespaces are strongly discouraged.</p></li>
+</ul>
+<h2 id="class-organization">Class Organization</h2>
+<p>In general, classes should be organized in the following manner:</p>
+<ol>
+<li><p><code>static</code> Variables</p></li>
+<li><p><code>static</code> Functions</p></li>
+<li><p>Constructor</p></li>
+<li><p>Member Variables and Properties</p></li>
+<li><p><code>public</code> Member Functions</p></li>
+<li><p><code>protected</code> Member Functions</p></li>
+<li><p><code>private</code> Member Functions</p></li>
+</ol>
+<h3 id="additional-notes-on-class-organization">Additional Notes on Class Organization</h3>
+<ul>
+<li><p>Public getters and setters should appear immediately after the private variable that they expose.</p></li>
+<li><p>In general, within a function category (such as <code>public</code> or <code>protected</code>), overridden functions should appear first, followed by new functions, followed by event listeners. If there's a mix of event listeners and signal listeners, signal listeners should appear before event listeners.</p></li>
+<li><p>Static functions should follow the same access level ordering as member functions.</p></li>
+</ul>
+<h2 id="the-this-keyword">The this keyword</h2>
+<p>The <code>this</code> keyword should be used to reference member variables and functions. The author is particularly serious about this one, in case you didn't notice when you looked at the Feathers source code.</p>
+<h2 id="documentation">Documentation</h2>
+<ul>
+<li><p>Use <a href="http://help.adobe.com/en_US/flex/using/WSd0ded3821e0d52fe1e63e3d11c2f44bb7b-7fed.html">asdoc comments</a> for all public APIs.</p></li>
+<li><p>Mark private APIs <code>@private</code> so that they are hidden from the generated HTML. If needed, they may still contain a description, but it will only be seen when reading the source code.</p></li>
+<li><p>Use <code>&lt;code&gt;&lt;/code&gt;</code> tags when referring to specific classes, variables, properties, and functions in your descriptions.</p></li>
+<li><p>Consider adding a <code>@see</code> tag when you refer to other public APIs or classes.</p></li>
+<li><p>When referring to a measurement of some sort, such as dimensions or time, <em>always</em> include the unit, such as pixels or seconds.</p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

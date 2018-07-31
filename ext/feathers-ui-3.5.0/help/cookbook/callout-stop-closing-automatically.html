@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to stop a Callout from closing automatically after touch or keyboard input - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-stop-a-callout-from-closing-automatically-after-touch-or-keyboard-input">How to stop a <code>Callout</code> from closing automatically after touch or keyboard input</h1>
+<p>Normally, a <a href="../callout.html"><code>Callout</code></a> component will close itself when the user touches anywhere else on stage or when they press the back button on Android or the <code>Esc</code> key on desktop. You may modify this default behavior so that the <code>Callout</code> may only be closed programatically, if needed.</p>
+<p>Let's start by creating a <code>Callout</code>. In this case, we probably want to ensure that it isn't modal, so that touches can reach components below the <code>Callout</code>. That's why we pass the <code>false</code> at the end.</p>
+<pre class="code"><code>var callout:Callout = Callout.show( content, origin, Callout.DIRECTION_ANY, false );</code></pre>
+<p>Now, let's ensure that the <code>Callout</code> doesn't close when touching anywhere else:</p>
+<pre class="code"><code>callout.closeOnTouchBeganOutside = false;
+callout.closeOnTouchEndedOutside = false;</code></pre>
+<p>We simply set the <a href="../../api-reference/feathers/controls/Callout.html#closeOnTouchBeganOutside"><code>closeOnTouchBeganOutside</code></a> and <a href="../../api-reference/feathers/controls/Callout.html#closeOnTouchEndedOutside"><code>closeOnTouchEndedOutside</code></a> properties to <code>false</code>.</p>
+<p>Next, let's make sure that the keyboard cannot close the <code>Callout</code> either:</p>
+<pre class="code"><code>callout.closeOnKeys = null;</code></pre>
+<p>The <a href="../../api-reference/feathers/controls/Callout.html#closeOnKeys"><code>closeOnKeys</code></a> property is normally a <code>Vector.&lt;int&gt;</code>, but we can set it to <code>null</code> to say that no keys can close the <code>Callout</code>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../callout.html">How to use the Feathers <code>Callout</code> component</a></p></li>
+<li><p><a href="callout-restrict-disposal.html">Feathers Cookbook: How to close a <code>Callout</code> without disposing it (or without disposing its content)</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

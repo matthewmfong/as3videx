@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="TapToSelect,feathers.utils.touch.TapToSelect,callback,currentState,customHitTest,customHitTest,customHitTest,customHitTest,delay,downState,eventType,hoverState,isEnabled,isEnabled,isEnabled,isEnabled,keepDownStateOnRollOut,longPressDuration,tapCount,tapToDeselect,tapToSelect,tapToTrigger,target,target,target,target,upState"><title>feathers.utils.touch.TapToSelect</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'TapToSelect - Feathers User Interface Controls for Starling Framework API Reference';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Feathers 3.5.0 API Reference</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?feathers/utils/touch/TapToSelect.html&amp;feathers/utils/touch/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><picture><img src="../../../images/logo.jpg" srcset="../../../images/logo@2x.jpg 2x" class="logoImage" alt=" Feathers Logo " title=" Feathers Logo "></picture></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">TapToSelect</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("TapToSelect"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">feathers.utils.touch</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  TapToSelect</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">TapToSelect  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Feathers 2.3.0</td></tr></table><p></p><p></p><p></p>
+	 Changes the <code>isSelected</code> property of the target when the
+	 target is tapped (which will dispatch <code>Event.CHANGE</code>).
+	 Conveniently handles all <code>TouchEvent</code> listeners automatically.
+	 Useful for custom item renderers that should be selected when tapped.
+	 	 <p>In the following example, a custom item renderer will be selected when
+	 tapped:</p>
+	 	            <div class="listing" version="3.0"><pre>
+public class CustomItemRenderer extends LayoutGroupListItemRenderer
+{
+    public function CustomItemRenderer()
+    {
+        super();
+        this._tapToSelect = new TapToSelect(this);
+    }
+    
+    private var _tapToSelect:TapToSelect;
+}</pre></div>
+	 	            <p>Note: When combined with a <code>TapToTrigger</code> instance, the
+	 <code>TapToSelect</code> instance should be created second because
+	 <code>Event.TRIGGERED</code> should be dispatched before
+	 <code>Event.CHANGE</code>.</p>
+	 
+	           <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso"><a href="TapToTrigger.html" target="">feathers.utils.touch.TapToTrigger</a><br/><a href="LongPress.html" target="">feathers.utils.touch.LongPress</a></div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#customHitTest" class="signatureLink">customHitTest</a> : Function<div class="summaryTableDescription">
+		 In addition to a normal call to hitTest(), a custom
+		 function may impose additional rules that determine if the target
+		 should be selected.</div></td><td class="summaryTableOwnerCol">TapToSelect</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#isEnabled" class="signatureLink">isEnabled</a> : Boolean<div class="summaryTableDescription">
+		 May be set to false to disable selection temporarily
+		 until set back to true.</div></td><td class="summaryTableOwnerCol">TapToSelect</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#tapToDeselect" class="signatureLink">tapToDeselect</a> : Boolean<div class="summaryTableDescription">
+		 May be set to true to allow the target to be deselected
+		 when tapped.</div></td><td class="summaryTableOwnerCol">TapToSelect</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#target" class="signatureLink">target</a> : <a href="../../../feathers/core/IToggle.html">IToggle</a><div class="summaryTableDescription">
+		 The target component that should be selected when tapped.</div></td><td class="summaryTableOwnerCol">TapToSelect</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#TapToSelect()" class="signatureLink">TapToSelect</a>(target:<a href="../../../feathers/core/IToggle.html">IToggle</a> = null)</div><div class="summaryTableDescription">
+		 Constructor.</div></td><td class="summaryTableOwnerCol">TapToSelect</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="customHitTest"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">customHitTest</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>customHitTest:Function</code><p></p><p></p><p>
+		 In addition to a normal call to <code>hitTest()</code>, a custom
+		 function may impose additional rules that determine if the target
+		 should be selected. Called on <code>TouchPhase.BEGAN</code>.
+		 
+		 <p>The function must have the following signature:</p>
+		 
+		 <pre>function(localPosition:Point):Boolean;</pre>
+		 
+		 <p>The function should return <code>true</code> if the target should
+		 be selected, and <code>false</code> if it should not be selected.</p>
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get customHitTest():Function</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set customHitTest(value:Function):void</code><br/></div><a name="propertyDetail"></a><a name="isEnabled"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isEnabled</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>isEnabled:Boolean</code><p></p><p></p><p>
+		 May be set to <code>false</code> to disable selection temporarily
+		 until set back to <code>true</code>.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isEnabled():Boolean</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set isEnabled(value:Boolean):void</code><br/></div><a name="propertyDetail"></a><a name="tapToDeselect"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">tapToDeselect</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>tapToDeselect:Boolean</code><p></p><p></p><p>
+		 May be set to <code>true</code> to allow the target to be deselected
+		 when tapped.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get tapToDeselect():Boolean</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set tapToDeselect(value:Boolean):void</code><br/></div><a name="propertyDetail"></a><a name="target"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">target</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>target:<a href="../../../feathers/core/IToggle.html">IToggle</a></code><p></p><p></p><p>
+		 The target component that should be selected when tapped.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get target():<a href="../../../feathers/core/IToggle.html">IToggle</a></code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set target(value:<a href="../../../feathers/core/IToggle.html">IToggle</a>):void</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="TapToSelect()"></a><a name="TapToSelect(feathers.core.IToggle)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">TapToSelect</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function TapToSelect(target:<a href="../../../feathers/core/IToggle.html">IToggle</a> = null)</code><p></p><p>
+		 Constructor.
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:<a href="../../../feathers/core/IToggle.html">IToggle</a></code> (default = <code>null</code>)<code></code></td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer><a href="https://feathersui.com/" target="_top">Feathers</a> | <a href="https://github.com/BowlerHatLLC/feathers" target="_top">Github Project</a> | <a href="https://forum.starling-framework.org/forum/feathers" target="_top">Support Forum</a></footer><br/>Thu Jun 21 2018, 07:04 AM -07:00  </center></div></body></html><!--Feathers | Github Project | Support Forum<br/>Thu Jun 21 2018, 07:04 AM -07:00  -->

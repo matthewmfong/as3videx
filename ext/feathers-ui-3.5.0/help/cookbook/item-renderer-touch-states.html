@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to support multiple touch states in a custom item renderer - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-support-multiple-touch-states-in-a-custom-item-renderer">How to support multiple touch states in a custom item renderer</h1>
+<p>We've already <a href="item-renderer-background-skin.html">added a background skin to an item renderer</a>, but maybe we to display different background skins depending on if the user is touching the item renderer or not. We might also be interested in displaying different icons or changing the text styles on different touch phases.</p>
+<p>Let's use the <a href="../../api-reference/feathers/utils/TouchToState.html"><code>TouchToState</code></a> utility to map the touch phases to states, and then we can choose a background skin (or anything else) based on the current state.</p>
+<aside class="info">
+Note: <a href="../layout-group-item-renderers">Item renderers based on <code>LayoutGroup</code></a> already have a background skin, but you may use <code>TouchToState</code> to support additional custom states.
+</aside>
+<h2 id="background-skins">Background skins</h2>
+<p>Let's start by adding separate background skins for the up, down, and hover states to our custom item renderer:</p>
+<pre class="code"><code>private var _backgroundUpSkin:DisplayObject;
+ 
+public function get backgroundUpSkin():DisplayObject
+{
+    return this._backgroundUpSkin;
+}
+ 
+public function set backgroundUpSkin(value:DisplayObject):void
+{
+    if(this._backgroundUpSkin == value)
+    {
+        return;
+    }
+    this._backgroundUpSkin = value;
+    this.invalidate(INVALIDATION_FLAG_SKIN);
+}
+
+private var _backgroundDownSkin:DisplayObject;
+ 
+public function get backgroundDownSkin():DisplayObject
+{
+    return this._backgroundDownSkin;
+}
+ 
+public function set backgroundDownSkin(value:DisplayObject):void
+{
+    if(this._backgroundDownSkin == value)
+    {
+        return;
+    }
+    this._backgroundDownSkin = value;
+    this.invalidate(INVALIDATION_FLAG_SKIN);
+}
+
+private var _backgroundHoverSkin:DisplayObject;
+ 
+public function get backgroundHoverSkin():DisplayObject
+{
+    return this._backgroundHoverSkin;
+}
+ 
+public function set backgroundHoverSkin(value:DisplayObject):void
+{
+    if(this._backgroundHoverSkin == value)
+    {
+        return;
+    }
+    this._backgroundHoverSkin = value;
+    this.invalidate(INVALIDATION_FLAG_SKIN);
+}</code></pre>
+<p>Later, we'll see how to pass one of these to our original <code>backgroundSkin</code> property, depending on the current state.</p>
+<h2 id="states">States</h2>
+<p>Let's start out by tracking whether the user is touching the item renderer or not. If we use terms that you might associate with a button, this will require a default &quot;up&quot; state and a &quot;down&quot; state for when it is pressed.</p>
+<p>First, let's define a <code>_currentState</code> variable to keep track of which state the item renderer is in:</p>
+<pre class="code"><code>private var _currentState = ButtonState.UP;</code></pre>
+<p>We'll borrow the values defined by the <code>feathers.controls.ButtonState</code> class. The default value will be <code>ButtonState.UP</code>. The <code>ButtonState</code> class defines a number of other constants like <code>ButtonState.DOWN</code>, <code>ButtonState.HOVER</code>, and <code>ButtonState.DISABLED</code>.</p>
+<p>Next, let's create the <code>TouchToState</code> utility inside an override of <code>initialize()</code>:</p>
+<pre class="code"><code>private var _touchToState:TouchToState;
+
+override protected function initialize():void
+{
+    super.initialize(); //don&#39;t forget this!
+
+    this._touchToState = new TouchToState(this, setCurrentState);
+}</code></pre>
+<p>We'll need to add the <code>setCurrentState()</code> function that is used by <code>TouchToState</code> to notify us when the state should change:</p>
+<pre class="code"><code>private function setCurrentState(newState:String):void
+{
+    this._currentState = newState;
+    this.updateBackgroundSkin();
+}</code></pre>
+<p>Inside the <code>updateBackgroundSkin()</code> function, we can choose the correct background skin based on the value of <code>_currentState</code>:</p>
+<pre class="code"><code>private function updateBackgroundSkin():void
+{
+    if(this._currentState == ButtonState.DOWN &amp;&amp;
+        this._backgroundDownSkin != null)
+    {
+        this.backgroundSkin = this._backgroundDownSkin;
+    }
+    else if(this._currentState == ButtonState.HOVER &amp;&amp;
+        this._backgroundHoverSkin != null)
+    {
+        this.backgroundSkin = this._backgroundHoverSkin;
+    }
+    else
+    {
+        this.backgroundSkin = this._backgroundUpSkin;
+    }
+}</code></pre>
+<p>You'll notice that we check if <code>_backgroundDownSkin</code> and <code>_backgroundHoverSkin</code> are <code>null</code>. This will allow us to fall back to using the <code>_backgroundUpSkin</code>, if we decide that we don't need skins for every states.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../item-renderers.html">Introduction to Custom Item Renderers</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

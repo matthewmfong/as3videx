@@ -1,0 +1,2891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Feathers 3.0 Migration Guide - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="feathers-3.0-migration-guide">Feathers 3.0 Migration Guide</h1>
+<p>This guide explains how to migrate an application created with a previous version of Feathers to Feathers 3.0. Some APIs have been removed and others have been deprecated. New classes like <code>ImageSkin</code> make it easier to skin components while optimizing memory and performance.</p>
+<ul>
+<li><p><a href="#skinning-changes">Skinning Changes</a></p>
+<ul>
+<li><p><a href="#removal-of-scale9image-scale3image-and-tiled-image">Removal of <code>Scale9Image</code>, <code>Scale3Image</code>, and <code>TiledImage</code></a></p></li>
+<li><p><a href="#the-new-imageskin-class">The new <code>ImageSkin</code> class</a></p></li>
+<li><p><a href="#setting-font-styles-on-text-renderers">Setting font styles on text renderers</a></p></li>
+<li><p><a href="#removal-of-standardicons.listdrilldownaccessorytexture">Removal of <code>StandardIcons.listDrillDownAccessoryTexture</code></a></p></li>
+</ul></li>
+<li><p><a href="#savemeasurements-replaces-setsizeinternal"><code>saveMeasurements()</code> replaces <code>setSizeInternal()</code></a></p></li>
+<li><p><a href="#return-type-api-changes">Return type API changes</a></p></li>
+<li><p><a href="#multi-resolution-development-with-feathers">Multi-Resolution Development with Feathers</a></p></li>
+<li><p><a href="#duplicate-constants-moved-to-shared-classes">Duplicate constants moved to shared classes</a></p></li>
+<li><p><a href="#backwards-compatibility-with-feathers-compat">Backwards compatibility with <code>feathers-compat</code></a></p></li>
+<li><p><a href="#appendix-list-of-removed-apis">Appendix: List of Removed APIs</a></p></li>
+<li><p><a href="#appendix-list-of-deprecated-apis">Appendix: List of Deprecated APIs</a></p></li>
+<li><p><a href="#appendix-find-and-replace-regular-expressions">Appendix: Find and Replace Regular Expressions</a></p></li>
+</ul>
+<h2 id="skinning-changes">Skinning Changes</h2>
+<h3 id="removal-of-scale9image-scale3image-and-tiledimage">Removal of <code>Scale9Image</code>, <code>Scale3Image</code>, and <code>TiledImage</code></h3>
+<p>Starling 2.0 now offers these features natively!</p>
+<p>To replace <code>Scale9Image</code>, create an <code>Image</code> and set its <code>scale9Grid</code> property:</p>
+<pre class="code"><code>var image:Image = new Image( texture );
+image.scale9Grid = new Rectangle( 2, 2, 3, 6 );
+this.addChild( image );</code></pre>
+<p>To replace <code>Scale3Image</code>, create an <code>Image</code> and set its <code>scale9Grid</code> property. For horizontal scaling, set the grid's height to the full height of the texture. For vertical scaling, set the grid's width to the full width of the texture. In the following example, the <code>Image</code> can be scaled horizontally like the old <code>Scale3Image</code>:</p>
+<pre class="code"><code>var image:Image = new Image( texture );
+image.scale9Grid = new Rectangle( 2, 0, 3, texture.frameHeight );
+this.addChild( image );</code></pre>
+<p>To replace <code>TiledImage</code>, create an <code>Image</code> and set the <code>tileGrid</code> property to an empty <code>Rectangle</code>:</p>
+<pre class="code"><code>var image:Image = new Image( texture );
+image.tileGrid = new Rectangle();
+this.addChild( image );</code></pre>
+<h3 id="the-new-imageskin-class">The new <code>ImageSkin</code> class</h3>
+<p><a href="../api-reference/feathers/skins/ImageSkin.html"><code>feathers.skin.ImageSkin</code></a> provides a more optimized way to skin Feathers components that have multiple states, such as <code>Button</code> and <code>TextInput</code>.</p>
+<p>Previously, the easiest way to skin these components involved creating separate display objects for each state. For instance, a <code>Button</code> might have a default skin, a down skin, a hover skin, and a disabled skin. You would create four separate <code>Image</code> objects with four textures.</p>
+<p>From an optimization perspective, it would be better to use a single <code>Image</code> and simply reuse it with all four textures. Previously, we could do that by using the <code>stateToSkinFunction</code> property, but it's wasn't very intuitive, so many developers preferred to use separate display objects for each state. The <code>ImageSkin</code> class takes advantage of new capabilities in Starling 2.0 to make using multiple textures easy.</p>
+<p>Let's take a look at how a button can use <code>ImageSkin</code>:</p>
+<pre class="code"><code>var skin:ImageSkin = new ImageSkin( defaultTexture );
+skin.setTextureForState( ButtonState.DOWN, downTexture );
+skin.setTextureForState( ButtonState.DISABLED, disabledTexture );
+skin.scale9Grid = SCALE_9_GRID;
+button.defaultSkin = skin;</code></pre>
+<p>Each state can display a different texture, and the <code>ImageSkin</code> automatically detects when the button's state changes. If a texture isn't specified for the current state, the default texture will be used.</p>
+<aside class="info">
+<code>ImageSkin</code> is a subclass of <code>starling.display.Image</code>, so all properties like <code>scale9Grid</code> and <code>tileGrid</code> are available too!
+</aside>
+<p>In addition to being used for background skins, <code>ImageSkin</code> can also be used for the icon on buttons, text inputs, and item renderers.</p>
+<h3 id="setting-font-styles-on-text-renderers">Setting font styles on text renderers</h3>
+<p><a href="text-renderers.html">Text renderers</a> in Feathers components can now change their own font styles when their parent component changes state. Previously, the <code>Button</code> class managed multiple sets of properties for different states (like <code>defaultLabelProperties</code> and <code>downLabelProperties</code>) using objects that were not strictly type-checked at compile-time. The new approach is stricter, and easier to customize outside of the theme:</p>
+<pre class="code"><code>button.labelFactory = function():ITextRenderer
+{
+    var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+    textRenderer.styleProvider = null; // avoid conflicts with the theme
+    textRenderer.textFormat = new BitmapFontTextFormat( &quot;My Font&quot;, BitmapFont.NATIVE_SIZE, 0xffffff );
+    return textRenderer;
+};</code></pre>
+<p>In the code above, we create a <a href="bitmap-font-text-renderer.html"><code>BitmapFontTextRenderer</code></a> and we use the <code>textFormat</code> property to set its font styles in the <code>labelFactory</code> of a <code>Button</code>.</p>
+<p>On the <code>BitmapFontTextRenderer</code>, we can call the <code>setTextFormatForState()</code> function to pass in different font styles of each of the button's states. Let's do that in the same <code>labelFactory</code>:</p>
+<pre class="code"><code>textRenderer.setTextFormatForState( ButtonState.DOWN,
+    new BitmapFontTextFormat( &quot;My Font&quot;, BitmapFont.NATIVE_SIZE, 0xffcc00 ) );
+
+textRenderer.setTextFormatForState( ButtonState.DISABLED,
+    new BitmapFontTextFormat( &quot;My Font&quot;, BitmapFont.NATIVE_SIZE, 0x999999 ) );</code></pre>
+<aside class="info">
+To display text with a different text renderer, the approach is mostly the same, but each text renderer has its own way to set font styles. To use a <code>TextBlockTextRenderer</code>, pass the default font styles to the <code>elementFormat</code> property. Call the <code>setElementFormatForState()</code> function to pass in font styles for different states.
+</aside>
+<p>If you prefer to keep all of your styling code in your theme, you can <a href="extending-themes.html">create a new style name</a> for the text renderer class. On a <code>Button</code>, you'd pass this custom style name to the <code>customLabelStyleName</code> property:</p>
+<pre class="code"><code>button.customLabelStyleName = &quot;my-custom-text-renderer&quot;;</code></pre>
+<p>In your theme, you'd add a new styling function for <code>BitmapFontTextRenderer</code>.</p>
+<pre class="code"><code>getStyleProviderForClass( BitmapFontTextRenderer )
+    .setFunctionForStyleName( &quot;my-custom-text-renderer&quot;, setCustomTextRendererStyles );</code></pre>
+<p>Just like above, we can set the default font styles, and styles for different states:</p>
+<pre class="code"><code>function setCustomTextRendererStyles( textRenderer: BitmapFontTextRenderer ):void
+{
+    textRenderer.textFormat = new BitmapFontTextFormat( &quot;My Font&quot;, BitmapFont.NATIVE_SIZE, 0xffffff );
+    textRenderer.setElementFormatForState( ButtonState.DOWN,
+        new BitmapFontTextFormat( &quot;My Font&quot;, BitmapFont.NATIVE_SIZE, 0xffcc00 ) );
+    textRenderer.setElementFormatForState( ButtonState.DISABLED,
+        new BitmapFontTextFormat( &quot;My Font&quot;, BitmapFont.NATIVE_SIZE, 0x999999 ) );
+}</code></pre>
+<h3 id="removal-of-standardicons.listdrilldownaccessorytexture">Removal of <code>StandardIcons.listDrillDownAccessoryTexture</code></h3>
+<p>This static property was previously used to return a special icon for item renderers inside <code>accessorySourceFunction</code>. In Feathers 3.0, you should add the <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html#ALTERNATE_STYLE_NAME_DRILL_DOWN"><code>DefaultListItemRenderer.ALTERNATE_STYLE_NAME_DRILL_DOWN</code></a> constant to the item renderer's <code>styleNameList</code> instead. The theme will detect this style name, and it will pass a drill down icon to the item renderer.</p>
+<aside class="info">
+<code>DefaultGroupedListItemRenderer</code> also defines a <a href="../api-reference/feathers/controls/renderers/DefaultGroupedListItemRenderer.html#ALTERNATE_STYLE_NAME_DRILL_DOWN"><code>ALTERNATE_STYLE_NAME_DRILL_DOWN</code> constant</a>.
+</aside>
+<p>If some of the items in the list should not display a drill down icon, use the <a href="../api-reference/feathers/controls/List.html#setItemRendererFactoryWithID()"><code>setItemRendererFactoryWithID()</code></a> and <a href="../api-reference/feathers/controls/List.html#factoryIDFunction"><code>factoryIDFunction</code></a> to pass multiple item renderer factories to the <code>List</code> or <code>GroupedList</code>.</p>
+<pre class="code"><code>list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+    itemRenderer.styleNameList.add( DefaultListItemRenderer.ALTERNATE_STYLE_NAME_DRILL_DOWN );
+    return itemRenderer;
+};</code></pre>
+<p>If all items in the list should have a drill down icon, you may use <code>customItemRendererStyleName</code> instead:</p>
+<pre class="code"><code>list.customItemRendererStyleName = DefaultListItemRenderer.ALTERNATE_STYLE_NAME_DRILL_DOWN;</code></pre>
+<h2 id="savemeasurements-replaces-setsizeinternal"><code>saveMeasurements()</code> replaces <code>setSizeInternal()</code></h2>
+<p>Custom component developers should migrate to the new <code>saveMeasurements()</code> as a replacement for <code>setSizeInternal()</code>, which is now considered deprecated.</p>
+<p>In addition to the more intuitive name, <code>saveMeasurements()</code> now allows components to dynamically calculate minimum width and height:</p>
+<pre class="code"><code>this.saveMeasurements(newWidth, newHeight, newMinWidth, newMinHeight);</code></pre>
+<p>To maintain the previous behavior, you may pass a value of <code>0</code> for the minimum dimensions:</p>
+<pre class="code"><code>this.saveMeasurements(newWidth, newHeight, 0, 0);</code></pre>
+<p>You might also consider setting the minimum dimensions to the same as the regular dimensions:</p>
+<pre class="code"><code>this.saveMeasurements(newWidth, newHeight, newWidth, newHeight);</code></pre>
+<p>All of the core Feathers components now calculate minimum dimensions, if they are not set explicitly.</p>
+<h2 id="return-type-api-changes">Return type API changes</h2>
+<p>The <a href="drawers.html"><code>Drawers</code></a> component now requires its content and drawers to be Feathers components. Previously, <code>starling.display.Sprite</code> was allowed. To replace <code>Sprite</code> as a generic container, consider using <a href="layout-group.html"><code>LayoutGroup</code></a> instead.</p>
+<p>The <a href="../api-reference/feathers/core/INativeFocusOwner.html"><code>INativeFocusOwner</code></a> interface now returns type <code>Object</code> for its <code>nativeFocus</code> property to allow objects like <code>flash.text.StageText</code> to receive focus. Previously, the return type was <code>flash.display.InteractiveObject</code>.</p>
+<h2 id="multi-resolution-development-with-feathers">Multi-Resolution Development with Feathers</h2>
+<p>Feathers 3.0 fully embraces Starling's <code>contentScaleFactor</code> system described in <a href="http://wiki.starling-framework.org/manual/multi-resolution_development">Starling Multi-Resolution Development</a>. Feathers even has some tricks up its sleeve to make it easy to scale to any mobile device's screen, while using its native aspect ratio.</p>
+<h3 id="screendensityscalefactormanager"><code>ScreenDensityScaleFactorManager</code></h3>
+<p>The <a href="../api-reference/feathers/utils/ScreenDensityScaleFactorManager.html"><code>ScreenDensityScaleFactorManager</code></a> class provides a convienent way to automatically calculate an appropriate <code>contentScaleFactor</code> value while maintaining the aspect ratio of any mobile device's screen. It uses a system inspired by Android that takes into account the screen density and the screen's resolution.</p>
+<p>The following example shows how to use <code>ScreenDensityScaleFactorManager</code> by modifying the sample <a href="http://wiki.starling-framework.org/manual/startup_code">Startup Code</a> from the Starling wiki.</p>
+<pre class="code"><code>public class Startup extends Sprite
+{
+    private var mStarling:Starling;
+    private var mScaler:ScreenDensityScaleFactorManager;
+ 
+    public function Startup()
+    {
+        mStarling = new Starling( Game, stage );
+        mScaler = new ScreenDensityScaleFactorManager( mStarling );
+        mStarling.start();
+    }
+}</code></pre>
+<p>You don't need to set the dimensions of Starling's view port, or the <code>stageWidth</code> and <code>stageHeight</code> properties of the Starling stage. <code>ScreenDensityScaleFactorManager</code> handles it all for you — even when the device's orientation changes.</p>
+<p><code>ScreenDensityScaleFactorManager</code> is considered optional, and if you'd prefer to manage the Starling view port and stage size manually using the techniques in <a href="http://wiki.starling-framework.org/manual/multi-resolution_development">Multi-Resolution Development</a>, Feathers fully supports that approach too.</p>
+<h3 id="changes-to-example-themes">Changes to example themes</h3>
+<p>The example themes have been modified to allow Starling to automatically scale assets using <code>contentScaleFactor</code>. The textures in these themes now use a scale factor value of 2.</p>
+<p>The themes no longer have <code>scale</code> variable that is calculated using the screen density. Pixel dimensions and font sizes are now the same for all scale factors.</p>
+<p>If subclasses of example themes define <code>scale9Grid</code> rectangles, the values may need to be scaled down to continue working in Feathers 3.0. Previously, these themes defined textures with scale factor 1, and then scaled them up or down manually using the <code>scale</code> variable. Since the textures now use scale factor 2, the old <code>scale9Grid</code> values should be divided by 2. Note: If the original values in the <code>scale9Grid</code> are odd numbers, rounding up may work, but the skin may need to be widened by an extra pixel to get an even number width or height.</p>
+<h2 id="duplicate-constants-moved-to-shared-classes">Duplicate constants moved to shared classes</h2>
+<p>In previous versions of Feathers, a number of constants were duplicated across many classes. For instance, you could find <code>HORIZONTAL_ALIGN_LEFT</code> on such classes as <code>Button</code>, <code>DefaultListItemRenderer</code>, <code>HorizontalLayout</code>, and <code>TiledRowsLayout</code> (and elsewhere too!). In Feathers 3.0, you can now use a shared <code>HorizontalAlign.LEFT</code> constant. Put another way, once you've used <code>HorizontalAlign.LEFT</code> constant with one class, you'll know exactly where to find when you need it in the future for any other class.</p>
+<p>Other duplicate constants have been consolidated in the same way. The following classes with shared constants have been added to Feathers:</p>
+<ul>
+<li><p><a href="../api-reference/feathers/layout/AutoSizeMode.html"><code>feathers.controls.AutoSizeMode</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/ButtonState.html"><code>feathers.controls.ButtonState</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/DecelerationRate.html"><code>feathers.controls.DecelerationRate</code></a></p></li>
+<li><p><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html"><code>feathers.controls.ScrollBarDisplayMode</code></a></p></li>
+<li><p><a href="../api-reference/feathers/controls/ScrollInteractionMode.html"><code>feathers.controls.ScrollInteractionMode</code></a></p></li>
+<li><p><a href="../api-reference/feathers/controls/ScrollPolicy.html"><code>feathers.controls.ScrollPolicy</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/TextInputState.html"><code>feathers.controls.TextInputState</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/Direction.html"><code>feathers.layout.Direction</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/HorizontalAlign.html"><code>feathers.layout.HorizontalAlign</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/RelativePosition.html"><code>feathers.layout.RelativePosition</code></a></p></li>
+<li><p><a href="../api-reference/feathers/layout/VerticalAlign.html"><code>feathers.layout.VerticalAlign</code></a></p></li>
+</ul>
+<aside class="info">
+See <a href="#appendix-list-of-deprecated-apis">Appendix: List of Deprecated APIs</a> for details about which deprecated constants map to the new shared constants.
+</aside>
+<p>The original duplicate constants are considered deprecated. They will remain available in order to maintain backward compatibility for a short time. However, they will be removed at some point in the future.</p>
+<p>In general, a deprecated API in Feathers will not be removed until six months have passed or two minor updates have been released (whichever takes longer). However, due to the impact of this change, the deprecated constants will not be removed until 18 months have passed or one major update has been released (again, whichever takes longer). This should give developers more time to migrate.</p>
+<p>Additionally, take a look at <a href="#appendix-find-and-replace-regular-expressions">Appendix: Find and Replace Regular Expressions</a> to find a set of regular expressions to help automate the process of migrating to these new shared constants.</p>
+<h2 id="backwards-compatibility-with-feathers-compat">Backwards compatibility with <code>feathers-compat</code></h2>
+<p>The <a href="https://github.com/BowlerHatLLC/feathers-compat"><code>feathers-compat</code></a> project is a backwards compatibility library that is designed to make migration to Feathers 3.0 easier. It includes a number classes that were removed from Feathers 3.0. If you relied on these classes with earlier versions of Feathers, use <code>feathers-compat</code> to get your project up and running more quickly when upgrading to Starling 2.0 and Feathers 3.0. Then, you can take a little extra time to migrate your existing code.</p>
+<p>For example, if you used <code>SmartDisplayObjectValueSelector</code> for skinning, you are strongly encouraged to switch to the new, more intuitive <code>ImageSkin</code>. However, you can add <code>feathers-compat</code> to your project, and you'll be able to continue using <code>SmartDisplayObjectValueSelector</code> and save the migration to <code>ImageSkin</code> for a later time.</p>
+<p><a href="https://github.com/BowlerHatLLC/feathers-compat">Download <code>feathers-compat</code> from Github</a></p>
+<h2 id="appendix-list-of-removed-apis">Appendix: List of Removed APIs</h2>
+<p>The following table lists all removed APIs, organized alphabetically. The replacement API or migration instructions appear next to each listed API.</p>
+<table>
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Removed API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>BitmapFontTextRenderer.snapToPixels</code></td>
+<td>Use the <a href="../api-reference/feathers/controls/BitmapFontTextRenderer.html#pixelSnapping"><code>pixelSnapping</code></a> property instead, which is also the name of the new property on <code>starling.display.Mesh</code>.</td>
+</tr>
+<tr class="even">
+<td><code>ImageLoader.snapToPixels</code></td>
+<td>Use the <a href="../api-reference/feathers/controls/ImageLoader.html#pixelSnapping"><code>pixelSnapping</code></a> property instead, which is also the name of the new property on <code>starling.display.Mesh</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>ImageLoader.smoothing</code></td>
+<td>Use the <a href="../api-reference/feathers/controls/ImageLoader.html#textureSmoothing"><code>textureSmoothing</code></a> property instead, which is also the new name of the property on <code>starling.display.Image</code>.</td>
+</tr>
+<tr class="even">
+<td><code>OldFadeNewSlideTransitionManager</code></td>
+<td>Switch to <code>StackScreenNavigator</code> to get full support for navigation history. Create a custom <code>pushTransition</code> and <code>popTransition</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>Scale3Image</code></td>
+<td>Create a <code>starling.display.Image</code> and set its <code>scale9Grid</code> property.</td>
+</tr>
+<tr class="even">
+<td><code>Scale3Textures</code></td>
+<td>See instructions for <code>Scale3Image</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>Scale9Image</code></td>
+<td>Create a <code>starling.display.Image</code> and set its <code>scale9Grid</code> property.</td>
+</tr>
+<tr class="even">
+<td><code>Scale9Textures</code></td>
+<td>See instructions for <code>Scale9Image</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>Scale9ImageStateValueSelector</code></td>
+<td>Create a <a href="../api-reference/feathers/skins/ImageSkin.html"><code>feathers.skins.ImageSkin</code></a> and call <code>setTextureForState()</code> to use multiple textures.</td>
+</tr>
+<tr class="even">
+<td><code>ScreenFadeTransitionManager</code></td>
+<td>Use <code>Fade</code> transition.</td>
+</tr>
+<tr class="odd">
+<td><code>ScreenSlidingStackTransitionManager</code></td>
+<td>Switch to <code>StackScreenNavigator</code> to get full support for navigation history. Use <code>Slide</code> for <code>pushTransition</code> and <code>popTransition</code>.</td>
+</tr>
+<tr class="even">
+<td><code>SmartDisplayObjectStateValueSelector</code></td>
+<td>Create a <a href="../api-reference/feathers/skins/ImageSkin.html"><code>feathers.skins.ImageSkin</code></a> and call <code>setTextureForState()</code> to use multiple textures.</td>
+</tr>
+<tr class="odd">
+<td><code>StandardIcons.listDrillDownAccessoryTexture</code></td>
+<td>Add <a href="../api-reference/feathers/controls/renderers/DefaultListItemRenderer.html#ALTERNATE_STYLE_NAME_DRILL_DOWN"><code>DefaultListItemRenderer.ALTERNATE_STYLE_NAME_DRILL_DOWN</code></a> to the item renderer's <code>styleNameList</code>.</td>
+</tr>
+<tr class="even">
+<td><code>TextBlockTextRenderer.snapToPixels</code></td>
+<td>Use the <a href="../api-reference/feathers/controls/TextBlockTextRenderer.html#pixelSnapping"><code>pixelSnapping</code></a> property instead, which is also the name of the new property on <code>starling.display.Mesh</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>TextFieldTextRenderer.snapToPixels</code></td>
+<td>Use the <a href="../api-reference/feathers/controls/TextFieldTextRenderer.html#pixelSnapping"><code>pixelSnapping</code></a> property instead, which is also the name of the new property on <code>starling.display.Mesh</code>.</td>
+</tr>
+<tr class="even">
+<td><code>TiledImage</code></td>
+<td>Create a <code>starling.display.Image</code> and set the <code>tileGrid</code> property.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix-list-of-deprecated-apis">Appendix: List of Deprecated APIs</h2>
+<p>The following tables list all deprecated APIs, organized by class. The replacement API or migration instructions appear next to each listed property or method.</p>
+<aside class="warn">
+APIs that are deprecated have not been removed yet, but they will be removed at some point in the future. You are encouraged to migrate as soon as possible.
+</aside>
+<h3 id="featherscontrol"><code>FeathersControl</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>setSizeInternal()</code></td>
+<td><a href="../api-reference/feathers/core/FeathersControl.html#saveMeasurements()"><code>saveMeasurements()</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="alert"><code>Alert</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="autocomplete"><code>AutoComplete</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="basedefaultitemrenderer"><code>BaseDefaultItemRenderer</code></h3>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.STATE_UP_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.STATE_DOWN_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.STATE_HOVER_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.STATE_DISABLED_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.ACCESSORY_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.ACCESSORY_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.ACCESSORY_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>BaseDefaultItemRenderer.ACCESSORY_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>BaseDefaultItemRenderer.ACCESSORY_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="button"><code>Button</code></h3>
+<table>
+<colgroup>
+<col style="width: 54%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>stateToSkinFunction</code></td>
+<td>Pass an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a> to the <code>defaultSkin</code> property.</td>
+</tr>
+<tr class="even">
+<td><code>stateToIconFunction</code></td>
+<td>Pass an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a> to the <code>defaultIcon</code> property.</td>
+</tr>
+<tr class="odd">
+<td><code>stateToLabelPropertiesFunction</code></td>
+<td>Set the font styles directly on the text renderer and use the <code>ButtonState</code> constants to set font styles for each state.</td>
+</tr>
+<tr class="even">
+<td><code>upLabelProperties</code></td>
+<td>Set font styles on text renderer using <code>ButtonState.UP</code></td>
+</tr>
+<tr class="odd">
+<td><code>downLabelProperties</code></td>
+<td>Set font styles on text renderer using <code>ButtonState.DOWN</code></td>
+</tr>
+<tr class="even">
+<td><code>hoverLabelProperties</code></td>
+<td>Set font styles on text renderer using <code>ButtonState.HOVER</code></td>
+</tr>
+<tr class="odd">
+<td><code>disabledLabelProperties</code></td>
+<td>Set font styles on text renderer using <code>ButtonState.DISABLED</code></td>
+</tr>
+<tr class="even">
+<td><code>Button.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Button.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Button.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="buttongroup"><code>ButtonGroup</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ButtonGroup.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ButtonGroup.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ButtonGroup.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ButtonGroup.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ButtonGroup.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ButtonGroup.HORIZONTAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#JUSTIFY"><code>HorizontalAlign.JUSTIFY</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ButtonGroup.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ButtonGroup.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ButtonGroup.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ButtonGroup.VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#JUSTIFY"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="callout"><code>Callout</code></h3>
+<table>
+<colgroup>
+<col style="width: 54%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>supportedDirections</code></td>
+<td><code>supportedPositions</code></td>
+</tr>
+<tr class="even">
+<td><code>Callout.ARROW_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Callout.ARROW_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Callout.ARROW_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Callout.ARROW_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Callout.DIRECTION_ANY</code></td>
+<td><code>null</code></td>
+</tr>
+<tr class="odd">
+<td><code>Callout.DIRECTION_HORIZONTAL</code></td>
+<td><code>new &lt;String&gt;[RelativePosition.RIGHT, RelativePosition.LEFT]</code></td>
+</tr>
+<tr class="even">
+<td><code>Callout.DIRECTION_VERTICAL</code></td>
+<td><code>new &lt;String&gt;[RelativePosition.BOTTOM, RelativePosition.TOP]</code></td>
+</tr>
+<tr class="odd">
+<td><code>Callout.DIRECTION_TOP</code></td>
+<td><code>new &lt;String&gt;[RelativePosition.TOP]</code></td>
+</tr>
+<tr class="even">
+<td><code>Callout.DIRECTION_RIGHT</code></td>
+<td><code>new &lt;String&gt;[RelativePosition.RIGHT]</code></td>
+</tr>
+<tr class="odd">
+<td><code>Callout.DIRECTION_BOTTOM</code></td>
+<td><code>new &lt;String&gt;[RelativePosition.BOTTOM]</code></td>
+</tr>
+<tr class="even">
+<td><code>Callout.DIRECTION_LEFT</code></td>
+<td><code>new &lt;String&gt;[RelativePosition.LEFT]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="check"><code>Check</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Check.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.STATE_UP_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.STATE_DOWN_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.STATE_HOVER_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.STATE_DISABLED_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Check.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Check.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="datetimespinner"><code>DateTimeSpinner</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DateTimeSpinner.EDITING_MODE_DATE</code></td>
+<td><a href="../api-reference/feathers/controls/DateTimeMode.html#DATE"><code>DateTimeMode.DATE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DateTimeSpinner.EDITING_MODE_TIME</code></td>
+<td><a href="../api-reference/feathers/controls/DateTimeMode.html#TIME"><code>DateTimeMode.TIME</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DateTimeSpinner.EDITING_MODE_DATE_AND_TIME</code></td>
+<td><a href="../api-reference/feathers/controls/DateTimeMode.html#DATE_AND_TIME"><code>DateTimeMode.DATE_AND_TIME</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="defaultgroupedlistitemrenderer"><code>DefaultGroupedListItemRenderer</code></h2>
+<table>
+<colgroup>
+<col style="width: 88%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.STATE_UP_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.STATE_DOWN_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.STATE_HOVER_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.STATE_DISABLED_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.ACCESSORY_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.ACCESSORY_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.ACCESSORY_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.ACCESSORY_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.ACCESSORY_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultGroupedListItemRenderer.LAYOUT_ORDER_LABEL_ICON_ACCESSORY</code></td>
+<td><a href="../api-reference/feathers/controls/ItemRendererLayoutOrder.html#LABEL_ICON_ACCESSORY"><code>ItemRendererLayoutOrder.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultGroupedListItemRenderer.LAYOUT_ORDER_LABEL_ACCESSORY_ICON</code></td>
+<td><a href="../api-reference/feathers/controls/ItemRendererLayoutOrder.html#LABEL_ACCESSORY_ICON"><code>ItemRendererLayoutOrder.MANUAL</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="defaultlistitemrenderer"><code>DefaultListItemRenderer</code></h3>
+<table>
+<colgroup>
+<col style="width: 82%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.STATE_UP_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.STATE_DOWN_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.STATE_HOVER_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.STATE_DISABLED_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.ACCESSORY_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.ACCESSORY_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.ACCESSORY_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.ACCESSORY_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.ACCESSORY_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>DefaultListItemRenderer.LAYOUT_ORDER_LABEL_ICON_ACCESSORY</code></td>
+<td><a href="../api-reference/feathers/controls/ItemRendererLayoutOrder.html#LABEL_ICON_ACCESSORY"><code>ItemRendererLayoutOrder.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>DefaultListItemRenderer.LAYOUT_ORDER_LABEL_ACCESSORY_ICON</code></td>
+<td><a href="../api-reference/feathers/controls/ItemRendererLayoutOrder.html#LABEL_ACCESSORY_ICON"><code>ItemRendererLayoutOrder.MANUAL</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="drawers"><code>Drawers</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Drawers.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Drawers.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Drawers.DOCK_MODE_LANDSCAPE</code></td>
+<td><a href="../api-reference/feathers/layout/Orientation.html#LANDSCAPE"><code>Orientation.LANDSCAPE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Drawers.DOCK_MODE_PORTRAIT</code></td>
+<td><a href="../api-reference/feathers/layout/Orientation.html#PORTRAIT"><code>Orientation.PORTRAIT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Drawers.DOCK_MODE_BOTH</code></td>
+<td><a href="../api-reference/feathers/layout/Orientation.html#BOTH"><code>Orientation.BOTH</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Drawers.DOCK_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/layout/Orientation.html#NONE"><code>Orientation.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Drawers.OPEN_GESTURE_DRAG_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/DragGesture.html#CONTENT"><code>DragGesture.CONTENT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Drawers.OPEN_GESTURE_DRAG_CONTENT_EDGE</code></td>
+<td><a href="../api-reference/feathers/controls/DragGesture.html#EDGE"><code>DragGesture.EDGE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Drawers.OPEN_GESTURE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/DragGesture.html#NONE"><code>DragGesture.NONE</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="groupedlist"><code>GroupedList</code></h3>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>GroupedList.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>GroupedList.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>GroupedList.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="header"><code>Header</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Header.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Header.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Header.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Header.TITLE_ALIGN_PREFER_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Header.TITLE_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Header.TITLE_ALIGN_PREFER_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="imageloader"><code>ImageLoader</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ImageLoader.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ImageLoader.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ImageLoader.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ImageLoader.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ImageLoader.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ImageLoader.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="label"><code>Label</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="layoutgroup"><code>LayoutGroup</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>LayoutGroup.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>LayoutGroup.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="list"><code>List</code></h3>
+<table>
+<colgroup>
+<col style="width: 69%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>List.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>List.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>List.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="numericstepper"><code>NumericStepper</code></h3>
+<table>
+<colgroup>
+<col style="width: 77%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>NumericStepper.BUTTON_LAYOUT_MODE_SPLIT_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/controls/StepperButtonLayoutMode.html#SPLIT_HORIZONTAL"><code>StepperButtonLayoutMode.SPLIT_HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>NumericStepper.BUTTON_LAYOUT_MODE_SPLIT_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/controls/StepperButtonLayoutMode.html#SPLIT_VERTICAL"><code>StepperButtonLayoutMode.SPLIT_VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>NumericStepper.BUTTON_LAYOUT_MODE_RIGHT_SIDE_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/controls/StepperButtonLayoutMode.html#RIGHT_SIDE_VERTICAL"><code>StepperButtonLayoutMode.RIGHT_SIDE_VERTICAL</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pageindicator"><code>PageIndicator</code></h3>
+<table>
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>PageIndicator.INTERACTION_MODE_PREVIOUS_NEXT</code></td>
+<td><a href="../api-reference/feathers/controls/PageIndicatorInteractionMode.html#PREVIOUS_NEXT"><code>PageIndicatorInteractionMode.PREVIOUS_NEXT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PageIndicator.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PageIndicator.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PageIndicator.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PageIndicator.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PageIndicator.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PageIndicator.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PageIndicator.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PageIndicator.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="panel"><code>Panel</code></h3>
+<table>
+<colgroup>
+<col style="width: 69%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Panel.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Panel.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Panel.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="panelscreen"><code>PanelScreen</code></h3>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>PanelScreen.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>PanelScreen.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>PanelScreen.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pickerlist"><code>PickerList</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="progressbar"><code>ProgressBar</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ProgressBar.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ProgressBar.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="radio"><code>Radio</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Radio.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.STATE_UP_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.STATE_DOWN_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.STATE_HOVER_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.STATE_DISABLED_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Radio.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Radio.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="screen"><code>Screen</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Screen.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Screen.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="screennavigator"><code>ScreenNavigator</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ScreenNavigator.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScreenNavigator.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrollbar"><code>ScrollBar</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ScrollBar.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollBar.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollBar.TRACK_LAYOUT_MODE_SINGLE</code></td>
+<td><a href="../api-reference/feathers/controls/TrackLayoutMode.html#SINGLE"><code>TrackLayoutMode.SINGLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollBar.TRACK_LAYOUT_MODE_MIN_MAX</code></td>
+<td><a href="../api-reference/feathers/controls/TrackLayoutMode.html#SPLIT"><code>TrackLayoutMode.SPLIT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrollcontainer"><code>ScrollContainer</code></h3>
+<table>
+<colgroup>
+<col style="width: 77%" />
+<col style="width: 22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ScrollContainer.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollContainer.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollContainer.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrollscreen"><code>ScrollScreen</code></h3>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ScrollScreen.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollScreen.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollScreen.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scrolltext"><code>ScrollText</code></h3>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ScrollText.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ScrollText.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ScrollText.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="simplescrollbar"><code>SimpleScrollBar</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>SimpleScrollBar.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>SimpleScrollBar.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="slider"><code>Slider</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Slider.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Slider.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Slider.TRACK_LAYOUT_MODE_SINGLE</code></td>
+<td><a href="../api-reference/feathers/controls/TrackLayoutMode.html#SINGLE"><code>TrackLayoutMode.SINGLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Slider.TRACK_LAYOUT_MODE_MIN_MAX</code></td>
+<td><a href="../api-reference/feathers/controls/TrackLayoutMode.html#SPLIT"><code>TrackLayoutMode.SPLIT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Slider.TRACK_SCALE_MODE_DIRECTIONAL</code></td>
+<td><a href="../api-reference/feathers/controls/TrackScaleMode.html#DIRECTIONAL"><code>TrackScaleMode.DIRECTIONAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Slider.TRACK_SCALE_MODE_EXACT_FIT</code></td>
+<td><a href="../api-reference/feathers/controls/TrackScaleMode.html#EXACT_FIT"><code>TrackScaleMode.EXACT_FIT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>Slider.TRACK_INTERACTION_MODE_TO_VALUE</code></td>
+<td><a href="../api-reference/feathers/controls/TrackInteractionMode.html#TO_VALUE"><code>TrackInteractionMode.TO_VALUE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>Slider.TRACK_INTERACTION_MODE_BY_PAGE</code></td>
+<td><a href="../api-reference/feathers/controls/TrackInteractionMode.html#BY_PAGE"><code>TrackInteractionMode.BY_PAGE</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="soundplayer"><code>SoundPlayer</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="spinnerlist"><code>SpinnerList</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="stackscreennavigator"><code>StackScreenNavigator</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>StackScreenNavigator.AUTO_SIZE_MODE_STAGE</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#STAGE"><code>AutoSizeMode.STAGE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>StackScreenNavigator.AUTO_SIZE_MODE_CONTENT</code></td>
+<td><a href="../api-reference/feathers/controls/AutoSizeMode.html#CONTENT"><code>AutoSizeMode.CONTENT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabbar"><code>TabBar</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TabBar.DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TabBar.DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TabBar.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TabBar.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TabBar.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TabBar.HORIZONTAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#JUSTIFY"><code>HorizontalAlign.JUSTIFY</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TabBar.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TabBar.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TabBar.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TabBar.VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#JUSTIFY"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="textarea"><code>TextArea</code></h3>
+<table>
+<colgroup>
+<col style="width: 72%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>stateToSkinFunction</code></td>
+<td>Pass an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a> to the <code>backgroundSkin</code> property.</td>
+</tr>
+<tr class="even">
+<td><code>TextArea.STATE_ENABLED</code></td>
+<td><a href="../api-reference/feathers/controls/TextInputState.html#ENABLED"><code>TextInputState.ENABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/TextInputState.html#DISABLED"><code>TextInputState.DISABLED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.STATE_FOCUSED</code></td>
+<td><a href="../api-reference/feathers/controls/TextInputState.html#FOCUSED"><code>TextInputState.FOCUSED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.SCROLL_POLICY_AUTO</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.SCROLL_POLICY_ON</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.SCROLL_POLICY_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.SCROLL_BAR_DISPLAY_MODE_FIXED</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.SCROLL_BAR_DISPLAY_MODE_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.SCROLL_BAR_DISPLAY_MODE_NONE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.SCROLL_BAR_DISPLAY_MODE_FIXED_FLOAT</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.VERTICAL_SCROLL_BAR_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.VERTICAL_SCROLL_BAR_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.INTERACTION_MODE_TOUCH</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.INTERACTION_MODE_MOUSE</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.INTERACTION_MODE_TOUCH_AND_SCROLL_BARS</code></td>
+<td><a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.MOUSE_WHEEL_SCROLL_DIRECTION_VERTICAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.MOUSE_WHEEL_SCROLL_DIRECTION_HORIZONTAL</code></td>
+<td><a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextArea.DECELERATION_RATE_NORMAL</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#NORMAL"><code>DecelerationRate.NORMAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextArea.DECELERATION_RATE_FAST</code></td>
+<td><a href="../api-reference/feathers/controls/DecelerationRate.html#FAST"><code>DecelerationRate.FAST</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="textinput"><code>TextInput</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>stateToSkinFunction</code></td>
+<td>Pass an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a> to the <code>backgroundSkin</code> property.</td>
+</tr>
+<tr class="even">
+<td><code>stateToIconFunction</code></td>
+<td>Pass an <a href="../api-reference/feathers/skins/ImageSkin.html"><code>ImageSkin</code></a> to the <code>defaultIcon</code> property.</td>
+</tr>
+<tr class="odd">
+<td><code>TextInput.STATE_ENABLED</code></td>
+<td><a href="../api-reference/feathers/controls/TextInputState.html#ENABLED"><code>TextInputState.ENABLED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextInput.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/TextInputState.html#DISABLED"><code>TextInputState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextInput.STATE_FOCUSED</code></td>
+<td><a href="../api-reference/feathers/controls/TextInputState.html#FOCUSED"><code>TextInputState.FOCUSED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextInput.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextInput.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TextInput.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TextInput.VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#JUSTIFY"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="togglebutton"><code>ToggleButton</code></h3>
+<table>
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ToggleButton.STATE_UP</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP"><code>ButtonState.UP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.STATE_DOWN</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN"><code>ButtonState.DOWN</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.STATE_HOVER</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER"><code>ButtonState.HOVER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.STATE_DISABLED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED"><code>ButtonState.DISABLED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.STATE_UP_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.STATE_DOWN_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.STATE_HOVER_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.STATE_DISABLED_AND_SELECTED</code></td>
+<td><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.ICON_POSITION_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#TOP"><code>RelativePosition.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.ICON_POSITION_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT"><code>RelativePosition.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.ICON_POSITION_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#BOTTOM"><code>RelativePosition.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.ICON_POSITION_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT"><code>RelativePosition.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.ICON_POSITION_MANUAL</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#MANUAL"><code>RelativePosition.MANUAL</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.ICON_POSITION_LEFT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#LEFT_BASELINE"><code>RelativePosition.LEFT_BASELINE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.ICON_POSITION_RIGHT_BASELINE</code></td>
+<td><a href="../api-reference/feathers/layout/RelativePosition.html#RIGHT_BASELINE"><code>RelativePosition.RIGHT_BASELINE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleButton.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleButton.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="toggleswitch"><code>ToggleSwitch</code></h3>
+<table>
+<colgroup>
+<col style="width: 56%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ToggleSwitch.TRACK_LAYOUT_MODE_SINGLE</code></td>
+<td><a href="../api-reference/feathers/controls/TrackLayoutMode.html#SINGLE"><code>TrackLayoutMode.SINGLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>ToggleSwitch.TRACK_LAYOUT_MODE_ON_OFF</code></td>
+<td><a href="../api-reference/feathers/controls/TrackLayoutMode.html#SPLIT"><code>TrackLayoutMode.SPLIT</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>ToggleSwitch.LABEL_ALIGN_MIDDLE</code></td>
+<td>No replacement. It was a workaround for incorrect height returned by <code>TextBlockTextRenderer</code>, and that has been fixed.</td>
+</tr>
+<tr class="even">
+<td><code>ToggleSwitch.LABEL_ALIGN_BASELINE</code></td>
+<td>No replacement. It was a workaround for incorrect height returned by <code>TextBlockTextRenderer</code>, and that has been fixed.</td>
+</tr>
+<tr class="odd">
+<td><code>labelAlign</code></td>
+<td>No replacement. It was a workaround for incorrect height returned by <code>TextBlockTextRenderer</code>, and that has been fixed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="webview"><code>WebView</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="videoplayer"><code>VideoPlayer</code></h3>
+<p>No APIs are deprecated.</p>
+<h3 id="flowlayout"><code>FlowLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>FlowLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>FlowLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>FlowLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>FlowLayout.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>FlowLayout.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>FlowLayout.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="horizontallayout"><code>HorizontalLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>HorizontalLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>HorizontalLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>HorizontalLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>HorizontalLayout.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>HorizontalLayout.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>HorizontalLayout.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>HorizontalLayout.VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.JUSTIFY#BOTTOM"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="horizontalspinnerlayout"><code>HorizontalSpinnerLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>HorizontalSpinnerLayout.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>HorizontalSpinnerLayout.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>HorizontalSpinnerLayout.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>HorizontalSpinnerLayout.VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.JUSTIFY#BOTTOM"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tiledcolumnslayout"><code>TiledColumnsLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TiledColumnsLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.TILE_HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.TILE_HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.TILE_HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.TILE_HORIZONTAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#JUSTIFY"><code>HorizontalAlign.JUSTIFY</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.TILE_VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.TILE_VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledColumnsLayout.TILE_VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledColumnsLayout.TILE_VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#JUSTIFY"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tiledrowslayout"><code>TiledRowsLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TiledRowsLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.TILE_HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.TILE_HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.TILE_HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.TILE_HORIZONTAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#JUSTIFY"><code>HorizontalAlign.JUSTIFY</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.TILE_VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.TILE_VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TiledRowsLayout.TILE_VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TiledRowsLayout.TILE_VERTICAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#JUSTIFY"><code>VerticalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="timelabel"><code>TimeLabel</code></h3>
+<table>
+<colgroup>
+<col style="width: 67%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>TimeLabel.DISPLAY_MODE_CURRENT_TIME</code></td>
+<td><a href="../api-reference/feathers/media/MediaTimeMode.html#CURRENT_TIME"><code>MediaTimeMode.CURRENT_TIME</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TimeLabel.DISPLAY_MODE_TOTAL_TIME</code></td>
+<td><a href="../api-reference/feathers/media/MediaTimeMode.html#CURRENT_TIME"><code>MediaTimeMode.TOTAL_TIME</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>TimeLabel.DISPLAY_MODE_REMAINING_TIME</code></td>
+<td><a href="../api-reference/feathers/media/MediaTimeMode.html#CURRENT_TIME"><code>MediaTimeMode.REMAINING_TIME</code></a></td>
+</tr>
+<tr class="even">
+<td><code>TimeLabel.DISPLAY_MODE_CURRENT_AND_TOTAL_TIMES</code></td>
+<td><a href="../api-reference/feathers/media/MediaTimeMode.html#CURRENT_TIME"><code>MediaTimeMode.CURRENT_AND_TOTAL_TIMES</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="verticallayout"><code>VerticalLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>VerticalLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>VerticalLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>VerticalLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#JUSTIFY"><code>HorizontalAlign.JUSTIFY</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>VerticalLayout.VERTICAL_ALIGN_TOP</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#TOP"><code>VerticalAlign.TOP</code></a></td>
+</tr>
+<tr class="even">
+<td><code>VerticalLayout.VERTICAL_ALIGN_MIDDLE</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#MIDDLE"><code>VerticalAlign.MIDDLE</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>VerticalLayout.VERTICAL_ALIGN_BOTTOM</code></td>
+<td><a href="../api-reference/feathers/layout/VerticalAlign.html#BOTTOM"><code>VerticalAlign.BOTTOM</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="verticalspinnerlayout"><code>VerticalSpinnerLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>VerticalSpinnerLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>VerticalSpinnerLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>VerticalSpinnerLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>VerticalSpinnerLayout.HORIZONTAL_ALIGN_JUSTIFY</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#JUSTIFY"><code>HorizontalAlign.JUSTIFY</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="waterfalllayout"><code>WaterfallLayout</code></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated API</th>
+<th>How to Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>WaterfallLayout.HORIZONTAL_ALIGN_LEFT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#LEFT"><code>HorizontalAlign.LEFT</code></a></td>
+</tr>
+<tr class="even">
+<td><code>WaterfallLayout.HORIZONTAL_ALIGN_CENTER</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#CENTER"><code>HorizontalAlign.CENTER</code></a></td>
+</tr>
+<tr class="odd">
+<td><code>WaterfallLayout.HORIZONTAL_ALIGN_RIGHT</code></td>
+<td><a href="../api-reference/feathers/layout/HorizontalAlign.html#RIGHT"><code>HorizontalAlign.RIGHT</code></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="appendix-find-and-replace-regular-expressions">Appendix: Find and Replace Regular Expressions</h2>
+<p>Many IDEs and text editors offer the ability to use regular expressions to <strong>Find and Replace</strong> text in a file. You may use the following regular expressions to accelerate the Feathers 3.0 migration process.</p>
+<aside class="info">
+These regular expressions are provided for convenience only, and they may not work perfectly in all cases. After making replacements, be sure to double-check the modified code to verify that no unexpected errors were introduced.
+</aside>
+<table>
+<colgroup>
+<col style="width: 67%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Find</th>
+<th>Replace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>\w+\.HORIZONTAL_ALIGN_(\w+)</code></td>
+<td><code>HorizontalAlign.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.VERTICAL_ALIGN_(\w+)</code></td>
+<td><code>VerticalAlign.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.ICON_POSITION_(\w+)</code></td>
+<td><code>RelativePosition.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.ACCESSORY_POSITION_(\w+)</code></td>
+<td><code>RelativePosition.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.AUTO_SIZE_MODE_(\w+)</code></td>
+<td><code>AutoSizeMode.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.SCROLL_POLICY_(\w+)</code></td>
+<td><code>ScrollPolicy.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.SCROLL_BAR_DISPLAY_MODE_(\w+)</code></td>
+<td><code>ScrollBarDisplayMode.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>(?&lt;=[\s\,\(])(?!Callout)(?:\w+)\.DIRECTION_(\w+)</code></td>
+<td><code>Direction.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.MOUSE_WHEEL_SCROLL_DIRECTION_(\w+)</code></td>
+<td><code>Direction.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.VERTICAL_SCROLL_BAR_POSITION_(\w+)</code></td>
+<td><code>RelativePosition.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.DECELERATION_RATE_(\w+)</code></td>
+<td><code>DecelerationRate.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>(?:(?&lt;=[\s\,\(])(?!PageIndicator)(?:\w+))\.INTERACTION_MODE_(\w+)</code></td>
+<td><code>ScrollInteractionMode.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>(?:TextInput|TextArea).STATE_(\w+)</code></td>
+<td><code>TextInputState.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>(?:Button|ToggleButton|Check|Radio).STATE_(\w+)</code></td>
+<td><code>ButtonState.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+ItemRenderer.STATE_(\w+)</code></td>
+<td><code>ButtonState.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.TRACK_LAYOUT_MODE_SINGLE</code></td>
+<td><code>TrackLayoutMode.SINGLE</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.TRACK_LAYOUT_MODE_(MIN_MAX|ON_OFF)</code></td>
+<td><code>TrackLayoutMode.SPLIT</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.TRACK_SCALE_MODE_(\w+)</code></td>
+<td><code>TrackScaleMode.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.TRACK_INTERACTION_MODE_(\w+)</code></td>
+<td><code>TrackInteractionMode.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.EDITING_MODE_(\w+)</code></td>
+<td><code>DateTimeMode.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.DOCK_MODE_(\w+)</code></td>
+<td><code>Orientation.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>TimeLabel\.DISPLAY_MODE_(\w+)</code></td>
+<td><code>MediaTimeMode.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>Header\.TITLE_ALIGN(_PREFER){0,1}_(\w+)</code></td>
+<td><code>HorizontalAlign.$2</code></td>
+</tr>
+<tr class="even">
+<td><code>Drawers\.OPEN_MODE_(\w+)</code></td>
+<td><code>RelativeDepth.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>Drawers\.OPEN_GESTURE_(DRAG_)?(CONTENT_)?(\w+)</code></td>
+<td><code>DragGesture.$3</code></td>
+</tr>
+<tr class="even">
+<td><code>\w+\.LAYOUT_ORDER_(\w+)</code></td>
+<td><code>ItemRendererLayoutOrder.$1</code></td>
+</tr>
+<tr class="odd">
+<td><code>\w+\.BUTTON_LAYOUT_MODE_(\w+)</code></td>
+<td><code>StepperButtonLayoutMode.$1</code></td>
+</tr>
+<tr class="even">
+<td><code>PageIndicator.INTERACTION_MODE_(\w+)</code></td>
+<td><code>PageIndicatorInteractionMode.$1</code></td>
+</tr>
+</tbody>
+</table>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

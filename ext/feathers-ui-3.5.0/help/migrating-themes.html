@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Migrating legacy themes to Feathers 2.0 - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="migrating-legacy-themes-to-feathers-2.0">Migrating legacy themes to Feathers 2.0</h1>
+<p>Feathers 2.0 includes a <a href="skinning.html">new skinning architecture</a>. The <a href="../api-reference/feathers/core/DisplayListWatcher.html"><code>DisplayListWatcher</code></a> class that legacy themes extended still exists, and you can continue using it for the foreseeable future. However, if you're ready to modernize your theme to take advantage of the new style provider system, you will need to make a number of fundamental changes to your themes.</p>
+<h2 id="extend-a-new-class-stylenamefunctiontheme">Extend a new class: <code>StyleNameFunctionTheme</code></h2>
+<p>A legacy theme will extend the <a href="../api-reference/feathers/core/DisplayListWatcher.html"><code>feathers.core.DisplayListWatcher</code></a> class.</p>
+<pre class="code"><code>// legacy
+public class CustomTheme extends DisplayListWatcher</code></pre>
+<p>To create a modern theme, extend <a href="../api-reference/feathers/themes/StyleNameFunctionTheme.html"><code>feathers.themes.StyleNameFunctionTheme</code></a> instead.</p>
+<pre class="code"><code>// modern
+public class CustomTheme extends StyleNameFunctionTheme</code></pre>
+<p>After this change, if you try to compile, you will probably see a number of errors. We need to make a few more changes, but they're pretty straightforward.</p>
+<h2 id="replace-calls-to-setinitializerforclass">Replace calls to <code>setInitializerForClass()</code></h2>
+<p>The modern <a href="../api-reference/feathers/themes/StyleNameFunctionTheme.html"><code>StyleNameFunctionTheme</code></a> still calls functions that set properties on components, similar to legacy themes. You can still use strings (called style names) to differentiate between components of the same type that need to have different appearances. The API has changed a bit for setting these functions, though.</p>
+<p>When using a legacy theme, you might call <a href="../api-reference/feathers/core/DisplayListWatcher.html#setInitializerForClass()"><code>setInitializerForClass()</code></a> and pass in a class and a function. You could optionally pass in a style name as the optional third argument, to specify function for alternate styles:</p>
+<pre class="code"><code>// legacy
+this.setInitializerForClass( Button, setButtonStyles );
+this.setInitializerForClass( Button, setCustomButtonStyles, &quot;my-custom-button&quot; );</code></pre>
+<p>In a modern theme, you first ask for then global style provider for a specific class. Then, you can either set its default style function or set a function for a specific style name:</p>
+<pre class="code"><code>// modern
+this.getStyleProviderForClass(Button).defaultStyleFunction = setButtonStyles;
+this.getStyleProviderForClass(Button).setFunctionForStyleName( &quot;my-custom-button&quot;, setCustomButtonStyles );</code></pre>
+<h3 id="the-quick-and-dirty-way">The quick-and-dirty way</h3>
+<p>Replacing every call to <code>setInitializerForClass()</code> can be time consuming and tedious. If you need to migrate faster, and you want to worry about cleaning things up later, you can copy the following function into your theme class:</p>
+<pre class="code"><code>public function setInitializerForClass(type:Class, styleFunction:Function, styleName:String = null):void
+{
+    var styleProvider:StyleNameFunctionStyleProvider = this.getStyleProviderForClass(type);
+    if(styleName)
+    {
+        styleProvider.setFunctionForStyleName(styleName, styleFunction);
+    }
+    else
+    {
+        styleProvider.defaultStyleFunction = styleFunction;
+    }
+}</code></pre>
+<p>As you can see, it implements <code>setInitializerForClass()</code> with the same function signature, but it uses style providers under the hood.</p>
+<h2 id="replace-calls-to-setinitializerforclassandsubclasses">Replace calls to <code>setInitializerForClassAndSubclasses()</code></h2>
+<p>There is no direct replacement for this function. It mainly existed to work around limitations in the legacy architecture where a subclass wouldnt be automatically skinned like its superclass. A modern theme will treat subclasses the same as their superclasses (unless a component chooses to opt out), so this function is no longer necessary for its original purpose.</p>
+<p>Here's an example of calling <a href="../api-reference/feathers/core/DisplayListWatcher.html#setInitializerForClassAndSubclasses()"><code>setInitializerForClassAndSubclasses()</code></a> in a legacy theme:</p>
+<pre class="code"><code>// legacy
+this.setInitializerForClassAndSubclasses( Scroller, setScrollerStyles );</code></pre>
+<p>You should switch to calling that function directly when you style the subclasses. For instance, if you have a function that sets common styles on the <code>Scroller</code> class, you would call that function in a function that sets specific styles on the <code>List</code> class.</p>
+<pre class="code"><code>// modern
+protected function setListStyles( list:List ):void
+{
+    this.setScrollerStyles( list );
+ 
+    // set other styles here
+}</code></pre>
+<p>When an instance of the <code>List</code> class (or any of its subclasses) needs to be styled, <code>setScrollerStyles()</code> will be called too.</p>
+<h2 id="replace-calls-to-exclude">Replace calls to <code>exclude()</code></h2>
+<p>In a legacy theme, you could exclude a component from being skinned by passing it to the <a href="../api-reference/feathers/core/DisplayListWatcher.html#exclude()"><code>exclude()</code></a> function defined by <code>DisplayListWatcher</code>.</p>
+<pre class="code"><code>// legacy
+theme.exclude( button );</code></pre>
+<p>In a modern theme, you can remove a component's style provider:</p>
+<pre class="code"><code>// modern
+button.styleProvider = null;</code></pre>
+<p>Make sure you do that before the component initializes. That's when the theme is asked to style the component. By default, a component will initialize when it is added to the stage.</p>
+<h2 id="replace-name-with-style-name">Replace &quot;name&quot; with &quot;style name&quot;</h2>
+<p>In order to fix some issues developers had using <a href="http://doc.starling-framework.org/core/starling/display/DisplayObjectContainer.html#getChildByName()"><code>getChildByName()</code></a>, Feathers no longer uses the <a href="http://doc.starling-framework.org/core/starling/display/DisplayObject.html#name"><code>name</code></a> and <code>nameList</code> properties to indicate to the theme that it should give a component an alternate visual appearance.</p>
+<p>In a legacy theme, you might add a string to the <code>nameList</code> property (or set the <code>name</code> property directly):</p>
+<pre class="code"><code>// legacy
+button.nameList.add( &quot;my-custom-button&quot; );
+// or
+button.name = &quot;my-custom-button&quot;;</code></pre>
+<p>In a modern theme, you should use the <a href="../api-reference/feathers/core/FeathersControl.html#styleNameList"><code>styleNameList</code></a> or <a href="../api-reference/feathers/core/FeathersControl.html#styleName"><code>styleName</code></a> properties instead:</p>
+<pre class="code"><code>// modern
+button.styleNameList.add( &quot;my-custom-button&quot; );
+// or
+button.styleName = &quot;my-custom-button&quot;;</code></pre>
+<p>The <code>nameList</code> property still exists in Feathers 2.0 and 2.1, but it is completely removed in Feathers 2.2 and newer. In the versions where it still exists, it simply maps to the <code>styleNameList</code> property so that legacy code will continue to work.</p>
+<p>The <a href="http://doc.starling-framework.org/core/starling/display/DisplayObject.html#name"><code>name</code></a> property is no longer used for styling Feathers components at all. It does not map to the <code>styleName</code> property the way that <code>nameList</code> maps to the <code>styleNameList</code> property. This change makes a strict distinction between <code>name</code> and <code>styleName</code> in order to fix issues using <code>getChildByName()</code> with Feathers components.</p>
+<p>Constants for alternate style names have also been renamed. For example, constants like <code>Button.ALTERNATE_NAME_DANGER</code> that contain <code>NAME</code> have been renamed with <code>STYLE_NAME</code> instead. To reference the alternate style name for a &quot;danger&quot; button, use the new constant <code>Button.ALTERNATE_STYLE_NAME_DANGER</code> instead.</p>
+<p>Similarly, constants like <code>Slider.DEFAULT_CHILD_NAME_THUMB</code> switched from <code>NAME</code> to <code>STYLE_NAME</code>. To reference the default style name of the slider's thumb, use <code>Slider.DEFAULT_CHILD_STYLE_NAME_THUMB</code> instead.</p>
+<p>Finally, properties like <code>customThumbName</code> on the slider component switch from <code>Name</code> to <code>StyleName</code>. To set a custom style name for a slider's thumb, use the <code>customThumbStyleName</code> property instead.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="skinning.html">Skinning Feathers components</a></p></li>
+<li><p><a href="themes.html">Introduction to Feathers themes</a></p></li>
+<li><p><a href="extending-themes.html">Extending Feathers example themes</a></p></li>
+<li><p><a href="extending-themes.html">Custom Feathers themes</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

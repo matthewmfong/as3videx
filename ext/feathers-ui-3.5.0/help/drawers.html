@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Drawers component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-drawers-component">How to use the Feathers <code>Drawers</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Drawers.html"><code>Drawers</code></a> class provides a container that supports main content in the center with &quot;drawers&quot;, or slide-out menus, that may be opened and closed with a gesture around all four edges. Drawers may also be docked to remain open at all times, or based on the stage orientation. Drawers may be opened by listening to an event from the main content, such as one triggered by a button press.</p>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#open-drawers-with-events">Open drawers with events</a></p></li>
+<li><p><a href="#open-or-close-drawers-programatically">Open or close drawers programatically</a></p></li>
+<li><p><a href="#docked-drawers">Docked drawers</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>Drawers</code> component and add it to the display list:</p>
+<pre class="code"><code>var drawers:Drawers = new Drawers();
+this.addChild( drawers );</code></pre>
+<p>You may also set its width and height, but that's optional because the <code>Drawers</code> will automatically resize itself to fill the entire stage if you don't provide explicit dimensions.</p>
+<p>First, we'll want to set its main content:</p>
+<pre class="code"><code>var navigator:ScreenNavigator = new ScreenNavigator();
+drawers.content = navigator;</code></pre>
+<p>The main content will always fill the entire width and height of the <code>Drawers</code> container. In this case, we've created a <a href="screen-navigator.html"><code>ScreenNavigator</code></a> component. To properly demonstrate the capabilities of the <code>Drawers</code> component, we need a bit of boilerplate code. Let's quickly add some screens to the <code>ScreenNavigator</code>:</p>
+<pre class="code"><code>navigator.addScreen( &quot;start&quot;, new ScreenNavigatorItem( StartScreen ) );
+navigator.addScreen( &quot;options&quot;, new ScreenNavigatorItem( OptionsScreen ) );
+navigator.showScreen( &quot;start&quot; );</code></pre>
+<p>The <code>StartScreen</code> and <code>OptionsScreen</code> classes extend <a href="panel-screen.html"><code>PanelScreen</code></a>. We'll simply start out by displaying a title, and we'll add a bit more later:</p>
+<pre class="code"><code>package
+{
+    import feathers.controls.PanelScreen;
+ 
+    public class StartScreen extends PanelScreen
+    {
+        public function StartScreen()
+        {
+        }
+ 
+        override protected function initialize():void
+        {
+            super.initialize();
+            this.title = &quot;Start&quot;;
+        }
+    }
+}</code></pre>
+<p>The initial code for these two classes is almost identical, so the <code>OptionScreen</code> class is not shown. To create the <code>OptionsScreen</code>, copy the code from the <code>StartScreen</code> and change the class and constructor names to <code>OptionsScreen</code> and change the title to <code>&quot;Options&quot;</code>. That's it!</p>
+<p>Next, we'll want to add some content to a drawer. Let's add a <a href="list.html"><code>List</code></a> component to act as a menu.</p>
+<pre class="code"><code>var list:List = new List();
+list.dataProvider = new ArrayCollection(
+[
+    { screen: &quot;start&quot;, label: &quot;Start&quot; },
+    { screen: &quot;options&quot;, label: &quot;Options&quot; },
+]);
+list.selectedIndex = 0;
+list.addEventListener( Event.CHANGE, list_changeHandler );</code></pre>
+<p>The list's <a href="../api-reference/feathers/controls/List.html#event:change"><code>Event.CHANGE</code></a> listener looks like this:</p>
+<pre class="code"><code>function list_changeHandler( event:Event ):void
+{
+     var screen:String = list.selectedItem.screen;
+     navigator.showScreen( screen );
+}</code></pre>
+<p>To use the list as a drawer, simply set the <a href="../api-reference/feathers/controls/Drawers.html#leftDrawer"><code>leftDrawer</code></a> property:</p>
+<pre class="code"><code>drawers.leftDrawer = list;</code></pre>
+<p>For simplicity, we'll only focus on the left drawer in these code examples. However, drawers may be placed on all four sides of the main content, so every property or method with the word <code>left</code> in the name will have a cousin with <code>top</code>, <code>right</code>, or <code>bottom</code> in the name.</p>
+<p>If you run the code right now, you will see the <code>StartScreen</code> displayed and nothing else. If you touch near the left edge of the <code>StartScreen</code>, you can drag to the right to reveal the list with the two screens. Select the Options item in the list, and the options screen will be displayed. Tap the main content to close the drawer.</p>
+<h2 id="open-drawers-with-events">Open Drawers with Events</h2>
+<p>It's often common to open a drawer with a <a href="button.html">button</a>. Let's add a button to header in our <code>StartScreen</code> and dispatch an event when it is triggered:</p>
+<pre class="code"><code>this.headerFactory = function():Header
+{
+    var header:Header = new Header();
+
+    var menuButton:Button = new Button();
+    menuButton.label = &quot;Menu&quot;;
+    menuButton.addEventListener( Event.TRIGGERED, menuButton_triggeredHandler );
+    header.leftItems = new &lt;DisplayObject&gt;
+    [
+        menuButton
+    ];
+
+    return header;
+};</code></pre>
+<p>The button's <a href="../api-reference/feathers/controls/Button.html#event:triggered"><code>Event.TRIGGERED</code></a> listener looks like this:</p>
+<pre class="code"><code>private function menuButton_triggeredHandler(event:Event):void
+{
+    this.dispatchEventWith( &quot;showMenu&quot; );
+}</code></pre>
+<p>Now, the <code>Drawers</code> container can listen for that event to open a drawer:</p>
+<pre class="code"><code>drawers.leftDrawerToggleEventType = &quot;showMenu&quot;;</code></pre>
+<p>In production code, you probably want to make the <code>&quot;showMenu&quot;</code> event type into a constant somewhere that various classes can access it.</p>
+<p>Now, when you press the new menu button in the <code>StartScreen</code> header, the left drawer will open.</p>
+<h2 id="open-or-close-drawers-programatically">Open or close drawers programatically</h2>
+<p>If you want to programmatically open or close a drawer, you can simply call a function:</p>
+<pre class="code"><code>drawers.toggleLeftDrawer();</code></pre>
+<p><a href="../api-reference/feathers/controls/Drawers.html#toggleLeftDrawer()"><code>toggleLeftDrawer()</code></a> takes one argument, to specify a duration in seconds of the open or close animation. You can omit this argument, like the code above, and it will use the value of the <a href="../api-reference/feathers/controls/Drawers.html#openOrCloseDuration"><code>openOrCloseDuration</code></a> property instead.</p>
+<p>In our example above, we might want to modify the listener for the list's <code>Event.CHANGE</code> to close the drawer after telling the <a href="screen-navigator.html"><code>ScreenNavigator</code></a> to show a different screen:</p>
+<pre class="code"><code>function list_changeHandler( event:Event ):void
+{
+     var screen:String = list.selectedItem.screen;
+     navigator.showScreen( screen );
+     drawers.toggleLeftDrawer();
+}</code></pre>
+<p>You may easily check the <a href="../api-reference/feathers/controls/Drawers.html#isLeftDrawerOpen"><code>isLeftDrawerOpen</code></a> property to see if a drawer is open:</p>
+<pre class="code"><code>if( drawers.isLeftDrawerOpen )
+{
+    // do something
+}</code></pre>
+<h2 id="docked-drawers">Docked Drawers</h2>
+<p>If you would prefer that a drawer is open all of the time, you can &quot;dock&quot; it. When a drawer is docked, it cannot be closed. Think of it like a permanent side bar, rather than a menu that you can show and hide. Let's dock the drawer:</p>
+<pre class="code"><code>drawers.leftDrawerDockMode = Drawers.DOCK_MODE_BOTH;</code></pre>
+<p>When using <a href="../api-reference/feathers/controls/Drawers.html#DOCK_MODE_BOTH"><code>Drawers.DOCK_MODE_BOTH</code></a>, you will not need a gesture or an event to open a drawer. It will remain open in all orientations.</p>
+<p>There are three other options. <a href="../api-reference/feathers/controls/Drawers.html#DOCK_MODE_PORTRAIT"><code>Drawers.DOCK_MODE_PORTRAIT</code></a> and <a href="../api-reference/feathers/controls/Drawers.html#DOCK_MODE_LANDSCAPE"><code>Drawers.DOCK_MODE_LANDSCAPE</code></a> allow you to dock a drawer, depending on the stage orientation. In one orientation, the drawer will be docked. In the other, it can be opened with a gesture or an event. The default docking value is <a href="../api-reference/feathers/controls/Drawers.html#DOCK_MODE_NONE"><code>Drawers.DOCK_MODE_NONE</code></a> where a drawer is not docked at all and must be opened with a gesture or an event.</p>
+<p>If needed, you may check the <a href="../api-reference/feathers/controls/Drawers.html#isLeftDrawerDocked"><code>isLeftDrawerDocked</code></a> property to see if a drawer is docked:</p>
+<pre class="code"><code>if( drawers.isLeftDrawerDocked )
+{
+    // do something
+}</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/Drawers.html"><code>feathers.controls.Drawers</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

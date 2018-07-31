@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Keyboard focus management in Feathers - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="keyboard-focus-management-in-feathers">Keyboard focus management in Feathers</h1>
+<p>In desktop apps, users expect to be able to use the Tab key to navigate between focusable UI components, and they expect to be able to use the keyboard to do things like press buttons or adjust sliders. On smart TVs, the remote typically provides a d-pad or another input method for passing focus up, down, to the left, or to the right.</p>
+<p>Feathers provides optional focus management support with the <a href="../api-reference/feathers/core/FocusManager.html"><code>FocusManager</code></a> class. Typically, you can enable the <code>FocusManager</code> when your app starts up, and it will &quot;just work&quot;. However, there are ways to customize the focus behavior if your app has special requirements.</p>
+<aside class="info">
+The example themes enable focus management automatically on both desktop and mobile.
+</aside>
+<h2 id="enabling-the-focus-manager">Enabling the Focus Manager</h2>
+<p>To enable focus management, only one line is required when your app first starts up:</p>
+<pre class="code"><code>FocusManager.setEnabledForStage( this.stage, true );</code></pre>
+<p>That's it! You will be able to use Tab and Shift+Tab to navigate between focusable components in your app when using a keyboard, or you can use the d-pad on a smart TV remote. Some platforms will also dispatch appropriate d-pad events when using a game controller.</p>
+<p>If you are building an AIR desktop app with multiple Starling instances in multiple windows, you will need to enable focus management for each stage with separate calls to <a href="../api-reference/feathers/core/FocusManager.html#setEnabledForStage()"><code>setEnabledForStage()</code></a>.</p>
+<h2 id="changing-focus-programmatically">Changing Focus Programmatically</h2>
+<p>You can manually tell the <code>FocusManager</code> to change which component is current focused:</p>
+<pre class="code"><code>var focusManager:IFocusManager = FocusManager.getFocusManagerForStage( this.stage );
+focusManager.focus = button;</code></pre>
+<p>It's as simple as setting the <a href="../api-reference/feathers/core/IFocusManager.html#focus"><code>focus</code></a> property on the <a href="../api-reference/feathers/core/IFocusManager.html"><code>IFocusManager</code></a>.</p>
+<p>To clear focus so that no component is focused, set this property to <code>null</code>:</p>
+<pre class="code"><code>var focusManager:IFocusManager = FocusManager.getFocusManagerForStage( this.stage );
+focusManager.focus = null;</code></pre>
+<h2 id="customizing-focus-order">Customizing focus order</h2>
+<p>By default, when the user changes focus with Tab or Shift+Tab on the keyboard, Feathers will pass focus using display list ordering. With <a href="http://doc.starling-framework.org/core/starling/display/DisplayObjectContainer.html#getChildIndex()"><code>getChildIndex()</code></a> and other standard display list APIs, the focus manager will search the display list in a generally intuitive order to find the next (or previous) child that can receive focus.</p>
+<p>If things end up a bit out of the ordering that you expected, you can customize the focus order using the <a href="../api-reference/feathers/core/IFocusDisplayObject.html#nextTabFocus"><code>nextTabFocus</code></a> and <a href="../api-reference/feathers/core/IFocusDisplayObject.html#previousTabFocus"><code>previousTabFocus</code></a> properties:</p>
+<pre class="code"><code>var button1:Button = new Button();
+this.addChild( button1 );
+ 
+var button2:Button = new Button();
+this.addChild( button2 );
+ 
+button1.nextTabFocus = button2;
+button2.previousTabFocus = button1;</code></pre>
+<p>When using a d-pad to change focus, the focus manager uses special heuristics to determine which component should be given focus next, based on which direction is chosen (up, down, left, or right).</p>
+<p>If needed, you may customize the focus order for d-pad using the <a href="../api-reference/feathers/core/IFocusDisplayObject.html#nextUpFocus"><code>nextUpFocus</code></a>, <a href="../api-reference/feathers/core/IFocusDisplayObject.html#nextDownFocus"><code>nextDowbFocus</code></a>, <a href="../api-reference/feathers/core/IFocusDisplayObject.html#nextLeftFocus"><code>nextLeftFocus</code></a>, and <a href="../api-reference/feathers/core/IFocusDisplayObject.html#nextRightFocus"><code>nextRightFocus</code></a> properties.</p>
+<h2 id="focus-and-pop-ups">Focus and pop-Ups</h2>
+<p>The focus manager and the <a href="pop-ups.html">pop-up manager</a> know how to communicate. If a pop-up is modal, a new focus manager will be created and it will gain exclusive control over keyboard focus. Until the modal pop-up is closed, nothing below the modal overlay will be able to receive focus. Multiple modal pop-ups will add additional focus managers to the stack that will ensure that each modal layer blocks keyboard focus to anything below.</p>
+<p>If a pop-up is not modal, then the same focus manager will remain active and everything will be able to receive focus, including the pop-up and everything below the pop-up.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/core/FocusManager.html"><code>feathers.core.FocusManager</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

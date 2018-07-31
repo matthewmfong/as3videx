@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Why does my Feathers app throw &quot;Error - Feathers FAQ - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+</div>
+</header>
+<article>
+<h1 id="why-does-my-feathers-app-throw-error-1056-cannot-create-property-elementformat">Why does my Feathers app throw &quot;Error #1056: Cannot create property <code>elementFormat</code>&quot;?</h1>
+<aside class="info">
+<p>Before Feathers 3.1, different <a href="../text-renderers.html">text renderers</a> each had unique ways to set font styles. For instance, <a href="../text-block-text-renderer.html"><code>TextBlockTextRenderer</code></a> used <code>flash.text.engine.ElementFormat</code>, but <a href="../text-field-text-renderer.html"><code>TextFieldTextRenderer</code></a> used <code>flash.text.TextFormat</code> instead. Today, the architecture has been redesigned to allow developers to set font styles on any text renderer using <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a>.</p>
+If you are using Feathers 3.1 or newer, <strong>this document is considered obsolete</strong>. It remains available to assist developers who need to support legacy apps that are still using older versions of Feathers.
+</aside>
+<p>This error usually pops up when we try to ask a component in our application to use a different <a href="../text-renderers.html">text renderer</a> (or a different <a href="../text-editors.html">text editor</a>) than the <a href="../themes.html">theme</a> expects. A theme will usually standardize on one type of text renderer for all components, so when we try to use a different one, it doesn't know that it should set font styles in a different way.</p>
+<p>Sometimes, though, we need to use a different text renderer than the theme uses as its default. Feathers certainly allows mixing and matching text renderers, but we need to tell the theme about what we're doing. We have a couple of options.</p>
+<aside class="info">
+In the following examples, let's assume that we want to give a <code>Button</code> component a different text renderer for its label. Maybe we want to use <code>TextFieldTextRenderer</code> instead, so that we can set its <code>isHTML</code> property to <code>true</code>.
+</aside>
+<h2 id="option-1-remove-the-style-provider">Option 1: Remove the style provider</h2>
+<p>We can simply tell the <code>Button</code> not to use the theme by removing its style provider:</p>
+<pre class="code"><code>button.styleProvider = null;</code></pre>
+<p>By setting the <code>styleProvider</code> property to <code>null</code>, our component won't be skinned by the theme at all.</p>
+<p>However, this will also remove things like background skin, padding, and other properties that we may want to keep. In many cases, this may not be an acceptable option unless we want to change everything about the appearance of a component, and not just the font styles.</p>
+<h2 id="option-2-create-a-new-style-name">Option 2: Create a new style name</h2>
+<p>The better option is to create a new <em>style name</em> for the component. The theme offers textures and things for the default styles that we want to keep, and we'll use those while customizing the font styles for our different text renderer.</p>
+<p>Similar to how we might add <code>Button.ALTERNATE_STYLE_NAME_BACK_BUTTON</code> to the <code>styleNameList</code> of a <code>Button</code>, we can use our own custom strings too:</p>
+<pre class="code"><code>button.styleNameList.add( &quot;my-custom-button&quot; );</code></pre>
+<p>Now, we need to tell the theme about our custom style name. Let's start by creating the function that should be called to style the button when this style name has been added. Inside the theme, let's create a function named <code>setMyCustomButtonStyles()</code>:</p>
+<pre class="code"><code>protected function setMyCustomButtonStyles( button:Button ):void
+{
+
+}</code></pre>
+<p>We'll add some code to the function's body in a moment. Let's make sure the theme knows how to call this function before we do that.</p>
+<p>Inside the theme's <code>initializeStyleProviders()</code> function, we'll add our <code>&quot;my-custom-button&quot;</code> style name to the theme's style provider for the <code>Button</code> class:</p>
+<pre class="code"><code>override protected function initializeStyleProviders():void
+{
+    super.initializeStyleProviders();
+    this.getStyleProviderForClass( Button ).setFunctionForStyleName(
+        &quot;my-custom-button&quot;, this.setMyCustomButtonStyles );
+}</code></pre>
+<p>Now that everything is hooked up in the theme, let's style the button in the body of the <code>setMyCustomButtonStyles()</code> function. We'll start by copying some code from the existing function for styling buttons:</p>
+<pre class="code"><code>// this is the default function for buttons
+protected function setButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new Image( this.buttonUpSkinTexture );
+    button.downSkin = new Image( this.buttonDownSkinTexture );
+    button.padding = 20;
+    button.defaultLabelProperties.elementFormat = this.buttonElementFormat;
+}</code></pre>
+<p>We're interested in the background skins and the padding, but we don't want to set the <code>elementFormat</code> property, since we're using a different <code>TextBlockTextRenderer</code>.</p>
+<pre class="code"><code>protected function setMyCustomButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new Image( this.buttonUpSkinTexture );
+    button.downSkin = new Image( this.buttonDownSkinTexture );
+    button.padding = 20;
+
+    // we&#39;ll set different font styles here
+}</code></pre>
+<p>Let's finish up by telling the <code>Button</code> to use a different text renderer, and then we'll set the appropriate font styles:</p>
+<pre class="code"><code>protected function customTextRendererFactory():ITextRenderer
+{
+    return new TextFieldTextRenderer();
+}
+
+protected function setMyCustomButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new Image( this.buttonUpSkinTexture );
+    button.downSkin = new Image( this.buttonDownSkinTexture );
+    button.padding = 20;
+
+    button.textRendererFactory = this.customTextRendererFactory;
+    button.defaultLabelProperties.textFormat = new TextFormat( &quot;_sans&quot;, 20, 0x000000 );
+}</code></pre>
+<p>For more details about extending a theme and creating a custom style name, see <a href="../extending-themes.html">Extending Feathers Themes</a>.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

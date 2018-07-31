@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Radio component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-radio-component">How to use the Feathers <code>Radio</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Radio.html"><code>Radio</code></a> component is actually a <a href="toggle-button.html"><code>ToggleButton</code></a> component, but it is given a different visual appearance. Typically, multiple <code>Radio</code> instances are added to a <a href="../api-reference/feathers/core/ToggleGroup.html"><code>ToggleGroup</code></a> to ensure that only one <code>Radio</code> in the group is selected at a time.</p>
+<figure>
+<img src="images/radio.png" srcset="images/radio@2x.png 2x" alt="Screenshot of a Feathers Radio component" />
+<figcaption>
+<code>Radio</code> components skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#using-togglegroup">Using <code>ToggleGroup</code></a></p></li>
+<li><p><a href="#skinning-a-radio">Skinning a <code>Radio</code></a></p></li>
+<li><p><a href="#user-experience">User Experience</a></p></li>
+</ul>
+<h2 id="using-togglegroup">Using <code>ToggleGroup</code></h2>
+<p>If no <a href="../api-reference/feathers/core/ToggleGroup.html"><code>ToggleGroup</code></a> is provided, a <code>Radio</code> will automatically add itself to <a href="../api-reference/feathers/controls/Radio.html#defaultRadioGroup"><code>Radio.defaultRadioGroup</code></a>. In general, though, you should always create a <code>ToggleGroup</code> for a distinct set of radio buttons.</p>
+<pre class="code"><code>var group:ToggleGroup = new ToggleGroup();
+ 
+var radio1:Radio = new Radio();
+radio1.label = &quot;One&quot;;
+radio1.toggleGroup = group;
+this.addChild( radio1 );
+ 
+var radio2:Radio = new Radio();
+radio2.label = &quot;Two&quot;;
+radio2.toggleGroup = group;
+this.addChild( radio2 );
+ 
+var radio3:Radio = new Radio();
+radio3.label = &quot;Three&quot;;
+radio3.toggleGroup = group;
+this.addChild( radio3 );</code></pre>
+<p>Simply pass the <code>ToggleGroup</code> instance to the <a href="../api-reference/feathers/controls/Radio.html#toggleGroup"><code>toggleGroup</code></a> property of a <code>Radio</code> instance.</p>
+<p>Listen for the <a href="../api-reference/feathers/core/ToggleGroup.html#event:change"><code>Event.CHANGE</code></a> event dispatched by the toggle group to know when the selected radio button has changed.</p>
+<pre class="code"><code>group.addEventListener( Event.CHANGE, group_changeHandler );</code></pre>
+<p>A listener might look like this:</p>
+<pre class="code"><code>function group_changeHandler( event:Event ):void
+{
+    var group:ToggleGroup = ToggleGroup( event.currentTarget );
+    trace( &quot;group.selectedIndex:&quot;, group.selectedIndex );
+}</code></pre>
+<p>Use the <a href="../api-reference/feathers/core/ToggleGroup.html#selectedIndex"><code>selectedIndex</code></a> to get the numeric index of the selected radio button (based on the order that the radio buttons were added to the toggle group). The <a href="../api-reference/feathers/core/ToggleGroup.html#selectedItem"><code>selectedItem</code></a> will reference the selected radio button directly:</p>
+<pre class="code"><code>var radio:Radio = Radio( group.selectedItem );
+trace( &quot;radio.label:&quot;, radio.label );</code></pre>
+<h2 id="skinning-a-radio">Skinning a <code>Radio</code></h2>
+<p>A skinned <code>Radio</code> component usually has no background (or a transparent one) and the touch states of the radio are displayed through the icon skins. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/Radio.html"><code>Radio</code> API reference</a>.</p>
+<aside class="info">
+As mentioned above, <code>Radio</code> is a subclass of <code>ToggleButton</code>. For more detailed information about the skinning options available to <code>Radio</code>, see <a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a>.
+</aside>
+<h2 id="user-experience">User Experience</h2>
+<p>In general, a set of <code>Radio</code> controls should be used only when there are three or more choices that a user must make. If there are only two choices, a <code>Check</code> or a <code>ToggleSwitch</code> may be more appropriate. If there are so many choices that a set of <code>Radio</code> controls will fill a significant amount of space on screen, a <code>PickerList</code> is probably a better choice. The default item renderer of a <code>PickerList</code> is also a subclass of <code>ToggleButton</code>, so it's possible to style the list's items to look like radio buttons, if you prefer.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/Radio.html"><code>feathers.controls.Radio</code> API Documentation</a></p></li>
+<li><p><a href="../api-reference/feathers/core/ToggleGroup.html"><code>feathers.core.ToggleGroup</code> API Documentation</a></p></li>
+<li><p><a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

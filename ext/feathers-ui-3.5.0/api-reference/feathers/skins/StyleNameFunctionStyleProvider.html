@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../override.css" type="text/css"><meta name="keywords" content="StyleNameFunctionStyleProvider,feathers.skins.StyleNameFunctionStyleProvider,addOnFunction,callBeforeOriginalStyleProvider,conditionalFunction,defaultColor,defaultStyleFunction,defaultTexture,disabledColor,disabledTexture,explicitHeight,explicitMaxHeight,explicitMaxWidth,explicitMinHeight,explicitMinWidth,explicitWidth,falseStyleProvider,maxHeight,maxWidth,minHeight,minTouchHeight,minTouchWidth,minWidth,originalStyleProvider,selectedColor,selectedTexture,stateContext,styleFunction,trueStyleProvider,applyStyles,applyStyles,applyStyles,applyStyles,clearStyleProvider,dispose,getColorForState,getRegisteredClasses,getStyleProvider,getTextureForState,hasStyleProvider,setColorForState,setFunctionForStyleName,setTextureForState"><title>feathers.skins.StyleNameFunctionStyleProvider</title></head><body><script language="javascript" type="text/javascript" src="../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../help.js"></script><script language="javascript" type="text/javascript" src="../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'StyleNameFunctionStyleProvider - Feathers User Interface Controls for Starling Framework API Reference';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Feathers 3.5.0 API Reference</td><td class="titleTableTopNav" align="right"><a href="../../package-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../class-summary.html" onclick="loadClassListFrame('../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../all-index-A.html" onclick="loadClassListFrame('../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../index.html?feathers/skins/StyleNameFunctionStyleProvider.html&amp;feathers/skins/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><picture><img src="../../images/logo.jpg" srcset="../../images/logo@2x.jpg 2x" class="logoImage" alt=" Feathers Logo " title=" Feathers Logo "></picture></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">StyleNameFunctionStyleProvider</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("StyleNameFunctionStyleProvider"); titleBar_setSubNav(false,true,false,false,false,false,false,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">feathers.skins</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  StyleNameFunctionStyleProvider</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">StyleNameFunctionStyleProvider  <img src="../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../feathers/skins/IStyleProvider.html">IStyleProvider</a></td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Feathers 2.0.0</td></tr></table><p></p><p></p><p></p>
+	 Similar to <code>FunctionStyleProvider</code>, sets styles on a Feathers
+	 UI component by passing it to a function, but also provides a way to
+	 define alternate functions that may be called based on the contents of
+	 the component's <code>styleNameList</code>.
+	 	 <p>Alternate functions may be registered with the style provider by
+	 calling <code>setFunctionForStyleName()</code> and passing in a style
+	 name and a function. For each style name in the component's
+	 <code>styleNameList</code>, the style provider will search its registered
+	 style names to see if a function should be called. If none of a
+	 component's style names have been registered with the style provider (or
+	 if the component has no style names), then the default style function
+	 will be called.</p>
+	 	            <p>If a component's <code>styleNameList</code> contains multiple values,
+	 each of those values is eligible to trigger a call to a function
+	 registered with the style provider. In other words, adding multiple
+	 values to a component's <code>styleNameList</code> may be used to call
+	 multiple functions.</p>
+	 	            <p>In the following example, a <code>StyleNameFunctionStyleProvider</code> is
+	 created with a default style function (passed to the constructor) and
+	 an alternate style function:</p>
+	              <div class="listing" version="3.0"><pre>
+var styleProvider:StyleNameFunctionStyleProvider = new StyleNameFunctionStyleProvider( function( target:Button ):void
+{
+    target.defaultSkin = new Image( defaultTexture );
+    // set other styles...
+});
+styleProvider.setFunctionForStyleName( "alternate-button", function( target:Button ):void
+{
+    target.defaultSkin = new Image( alternateTexture );
+    // set other styles...
+});
+
+var button:Button = new Button();
+button.label = "Click Me";
+button.styleProvider = styleProvider;
+this.addChild(button);
+
+var alternateButton:Button = new Button()
+button.label = "No, click me!";
+alternateButton.styleProvider = styleProvider;
+alternateButton.styleNameList.add( "alternate-button" );
+this.addChild( alternateButton );</pre></div>
+	 	         <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso"><a href="../../../help/skinning.html" target="_top">Skinning Feathers components</a></div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#defaultStyleFunction" class="signatureLink">defaultStyleFunction</a> : Function<div class="summaryTableDescription">
+		 The target Feathers UI component is passed to this function when
+		 applyStyles() is called and the component's
+		 styleNameList doesn't contain any style names that are
+		 set with setFunctionForStyleName().</div></td><td class="summaryTableOwnerCol">StyleNameFunctionStyleProvider</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#StyleNameFunctionStyleProvider()" class="signatureLink">StyleNameFunctionStyleProvider</a>(styleFunction:Function = null)</div><div class="summaryTableDescription">
+		 Constructor.</div></td><td class="summaryTableOwnerCol">StyleNameFunctionStyleProvider</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#applyStyles()" class="signatureLink">applyStyles</a>(target:<a href="../../feathers/core/IFeathersControl.html">IFeathersControl</a>):void</div><div class="summaryTableDescription">
+		 
+		 Applies styles to a specific Feathers UI component, unless that
+		 component has been excluded.</div></td><td class="summaryTableOwnerCol">StyleNameFunctionStyleProvider</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#setFunctionForStyleName()" class="signatureLink">setFunctionForStyleName</a>(styleName:String, styleFunction:Function):void</div><div class="summaryTableDescription">
+		 The target Feathers UI component is passed to this function when
+		 applyStyles() is called and the component's
+		 styleNameList contains the specified style name.</div></td><td class="summaryTableOwnerCol">StyleNameFunctionStyleProvider</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="defaultStyleFunction"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">defaultStyleFunction</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>defaultStyleFunction:Function</code><p></p><p></p><p>
+		 The target Feathers UI component is passed to this function when
+		 <code>applyStyles()</code> is called and the component's
+		 <code>styleNameList</code> doesn't contain any style names that are
+		 set with <code>setFunctionForStyleName()</code>.
+		 		 <p>The function is expected to have the following signature:</p>
+		 <pre>function( item:IFeathersControl ):void</pre>
+		 		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get defaultStyleFunction():Function</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set defaultStyleFunction(value:Function):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="StyleNameFunctionStyleProvider.html#setFunctionForStyleName()" target="">setFunctionForStyleName()</a></div></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="StyleNameFunctionStyleProvider()"></a><a name="StyleNameFunctionStyleProvider(Function)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">StyleNameFunctionStyleProvider</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function StyleNameFunctionStyleProvider(styleFunction:Function = null)</code><p></p><p>
+		 Constructor.
+		 </p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">styleFunction</span>:Function</code> (default = <code>null</code>)<code></code></td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="applyStyles()"></a><a name="applyStyles(feathers.core.IFeathersControl)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">applyStyles</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function applyStyles(target:<a href="../../feathers/core/IFeathersControl.html">IFeathersControl</a>):void</code><p></p><p></p><p>
+		 
+		 Applies styles to a specific Feathers UI component, unless that
+		 component has been excluded.
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">target</span>:<a href="../../feathers/core/IFeathersControl.html">IFeathersControl</a></code></td></tr></table></p></div><a name="setFunctionForStyleName()"></a><a name="setFunctionForStyleName(String,Function)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">setFunctionForStyleName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function setFunctionForStyleName(styleName:String, styleFunction:Function):void</code><p></p><p></p><p>
+		 The target Feathers UI component is passed to this function when
+		 <code>applyStyles()</code> is called and the component's
+		 <code>styleNameList</code> contains the specified style name.
+		 		 <p>The function is expected to have the following signature:</p>
+		 <pre>function( item:IFeathersControl ):void</pre>
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">styleName</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">styleFunction</span>:Function</code></td></tr></table></p><p><span class="label">See also</span></p><div class="seeAlso"><a href="StyleNameFunctionStyleProvider.html#defaultStyleFunction" target="">defaultStyleFunction</a></div></div><br/><br/><hr><br/><p></p><center class="copyright"><footer><a href="https://feathersui.com/" target="_top">Feathers</a> | <a href="https://github.com/BowlerHatLLC/feathers" target="_top">Github Project</a> | <a href="https://forum.starling-framework.org/forum/feathers" target="_top">Support Forum</a></footer><br/>Thu Jun 21 2018, 07:04 AM -07:00  </center></div></body></html><!--Feathers | Github Project | Support Forum<br/>Thu Jun 21 2018, 07:04 AM -07:00  -->

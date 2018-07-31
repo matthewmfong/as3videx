@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to set additional properties on the buttons in a ButtonGroup - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-set-additional-properties-on-the-buttons-in-a-buttongroup">How to set additional properties on the buttons in a <code>ButtonGroup</code></h1>
+<p><a href="../button-group.html"><code>ButtonGroup</code></a> supports setting a number of properties on its buttons through its <a href="../../api-reference/feathers/controls/ButtonGroup.html#dataProvider"><code>dataProvider</code></a> property, like <a href="../../api-reference/feathers/controls/Button.html#label"><code>label</code></a> and <a href="../../api-reference/feathers/core/FeathersControl.html#isEnabled"><code>isEnabled</code></a>. Sometimes, we may need to set additional properties on the buttons. <code>ButtonGroup</code> makes it easy to customize how its <code>dataProvider</code> is interpreted with the <a href="../../api-reference/feathers/controls/ButtonGroup.html#dataProvider"><code>buttonInitializer</code></a> property.</p>
+<p>The <code>buttonInitializer</code> is a function that is called for each item in the data provider. The <code>ButtonGroup</code> passes in a <a href="../button.html"><code>Button</code></a> and an item from the data provider. The function signature looks like this:</p>
+<pre class="code"><code>function( button:Button, item:Object ):void</code></pre>
+<p>If we want the <code>ButtonGroup</code> to support additional properties on its buttons, we can pass in a custom <code>buttonInitializer</code>. First, though, let's save a reference to the default <code>buttonInitializer</code> in a variable because we want to preserve the default behavior:</p>
+<pre class="code"><code>var group:ButtonGroup = new ButtonGroup();
+var defaultButtonInitializer:Function = group.buttonInitializer;</code></pre>
+<p>Now, we can create our own custom <code>buttonInitializer</code> function that sets additional properties:</p>
+<pre class="code"><code>function customButtonInitializer( button:Button, item:Object ):void
+{
+    // keep the default behavior
+    defaultButtonInitializer( button, item );
+ 
+    // then add new properties!
+    button.scaleWhenDown = item.scaleWhenDown;
+}
+
+group.buttonInitializer = customButtonInitializer;</code></pre>
+<p>Notice that we call the <code>defaultButtonInitializer</code> first. We still want to set properties like <code>label</code> and <code>isEnabled</code> and add listeners like <code>Event.TRIGGERED</code>.</p>
+<p>Afterwards, we've also chosen to copy the <code>scaleWhenDown</code> property from the item to the button.</p>
+<p>If we wanted to make some properties optional, we could call <code>hasOwnProperty()</code> before setting them, like this:</p>
+<pre class="code"><code>if( item.hasOwnProperty( &quot;scaleWhenDown&quot; ) )
+{
+    button.scaleWhenDown = item.scaleWhenDown;
+}</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../button-group.html">How to use the Feathers <code>ButtonGroup</code> component</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers ButtonGroup component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-buttongroup-component">How to use the Feathers <code>ButtonGroup</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/ButtonGroup.html"><code>ButtonGroup</code></a> class displays a set of <a href="button.html">buttons</a> displayed one after the other in a simple horizontal or vertical layout. It is best used for a set of related buttons that generally look the same and are meant to be displayed together meaningfully. For instance, an alert dialog populates its OK/Cancel/Yes/No/etc. buttons using a <code>ButtonGroup</code>.</p>
+<figure>
+<img src="images/button-group.png" srcset="images/button-group@2x.png 2x" alt="Screenshot of Feathers a ButtonGroup component" />
+<figcaption>
+A <code>ButtonGroup</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-buttongroup">Skinning a <code>ButtonGroup</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>ButtonGroup</code> control and add it to the display list:</p>
+<pre class="code"><code>var group:ButtonGroup = new ButtonGroup();
+this.addChild(group);</code></pre>
+<p>This won't display anything because we haven't populated the data provider with information about the buttons we want. Let's do that next:</p>
+<pre class="code"><code>group.dataProvider = new ArrayCollection(
+[
+    { label: &quot;One&quot;, triggered: oneButton_triggeredHandler },
+    { label: &quot;Two&quot;, triggered: twoButton_triggeredHandler },
+    { label: &quot;Three&quot;, triggered: threeButton_triggeredHandler },
+]);</code></pre>
+<p>Like the <a href="list.html"><code>List</code></a> or <a href="tab-bar.html"><code>TabBar</code></a> components, the <code>ButtonGroup</code> uses an implementation of <a href="../api-reference/feathers/data/IListCollection.html"><code>IListCollection</code></a>, such as <a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a> or <a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a>, as its data provider.</p>
+<p>A number of fields in each item from the collection are automatically detected by the button group. For instance, we set the <code>label</code> on each button above. Each of a button's icon states may also be used here, along with <code>isToggle</code> and <code>isSelected</code> to make them into toggling buttons.</p>
+<aside class="info">
+For full details about which properties can be set on tabs, see the description of the <a href="../api-reference/feathers/controls/buttonGroup.html#dataProvider"><code>dataProvider</code></a> property.
+</aside>
+<p>Additionally, we can add a few event listeners to each button, including <code>Event.TRIGGERED</code> and <code>Event.CHANGE</code> (using the <code>String</code> values, <code>triggered</code> and <code>change</code>). In the example above, we add a listener to <code>triggered</code>. The listener on the first item might look something like this:</p>
+<pre class="code"><code>function oneButton_triggeredHandler( event:Event ):void
+{
+    var button:Button = Button( event.currentTarget );
+    trace( &quot;button triggered:&quot;, button.label );
+}</code></pre>
+<h2 id="skinning-a-buttongroup">Skinning a <code>ButtonGroup</code></h2>
+<p>A button group's buttons may all be skinned, with the first and last buttons having optional custom styles. A few other properties exist to customize the layout. For full details about which properties are available, see the <a href="../api-reference/feathers/controls/ButtonGroup.html"><code>ButtonGroup</code> API reference</a>. We'll look at a few of the most common ways of styling a button group below.</p>
+<h3 id="layout">Layout</h3>
+<p>The <code>ButtonGroup</code> has a strict horizontal or vertical layout that you can customize using the <a href="../api-reference/feathers/controls/ButtonGroup.html#direction"><code>direction</code></a> property. Additionally, you can set the <a href="../api-reference/feathers/controls/ButtonGroup.html#gap"><code>gap</code></a> between buttons, including special gaps for the first and last buttons.</p>
+<pre class="code"><code>group.direction = Direction.VERTICAL;
+group.gap = 10;
+group.lastGap = 20;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/ButtonGroup.html#firstGap"><code>firstGap</code></a> and <a href="../api-reference/feathers/controls/ButtonGroup.html#lastGap"><code>lastGap</code></a> are completely optional, and if they are not defined, the regular <code>gap</code> value will be used.</p>
+<p>With a vertical layout, each button's width will match the width of the button group. Similarly, with a horizontal layout, the buttons will fill the entire height.</p>
+<h3 id="skinning-the-buttons">Skinning the Buttons</h3>
+<p>This section only explains how to access the button sub-components. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/ButtonGroup.html#DEFAULT_CHILD_STYLE_NAME_BUTTON"><code>ButtonGroup.DEFAULT_CHILD_STYLE_NAME_BUTTON</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( ButtonGroup.DEFAULT_CHILD_STYLE_NAME_BUTTON, setButtonGroupButtonStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setButtonGroupButtonStyles( button:Button ):void
+{
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    button.defaultSkin = skin;
+    button.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>group.customButtonStyleName = &quot;my-custom-button&quot;;</code></pre>
+<p>You can set the styling function for the <a href="../api-reference/feathers/controls/ButtonGroup.html#customButtonStyleName"><code>customButtonStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;my-custom-button&quot;, setButtonGroupCustomButtonStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/ButtonGroup.html#buttonFactory"><code>buttonFactory</code></a> to provide skins for the buttons:</p>
+<pre class="code"><code>group.buttonFactory = function():Button
+{
+    var button:Button = new Button();
+
+    //skin the buttons here, if you&#39;re not using a theme
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    button.defaultSkin = skin;
+    button.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );
+
+    return button;
+};</code></pre>
+<h3 id="skinning-the-first-and-last-buttons">Skinning the First and Last Buttons</h3>
+<p>This section only explains how to access the first and last button sub-components. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<p>The button group's first and last buttons will have the same skins as the other buttons by default. However, their skins may be customized separately, if desired.</p>
+<p>For the first button, you can customize the style name with <a href="../api-reference/feathers/controls/ButtonGroup.html#customFirstButtonStyleName"><code>customFirstButtonStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/ButtonGroup.html#firstButtonFactory"><code>firstButtonFactory</code></a>.</p>
+<p>For the last button, you can customize the style name with <a href="../api-reference/feathers/controls/ButtonGroup.html#customLastButtonStyleName"><code>customLastButtonStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/ButtonGroup.html#lastButtonFactory"><code>lastButtonFactory</code></a>.</p>
+<p>Separate skins for the first and last buttons are completely optional.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/ButtonGroup.html"><code>feathers.controls.ButtonGroup</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Adding tool-tips to Feathers components - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="adding-tool-tips-to-feathers-components">Adding tool-tips to Feathers components</h1>
+<p>In desktop apps, users expect to be able to hover their mouse over a UI control to see a tool tip with extra information about the control. Feathers provides optional tool-tip support with the <a href="../api-reference/feathers/core/ToolTipManager.html"><code>ToolTipManager</code></a> class, if your app needs these capabilities.</p>
+<aside class="info">
+In general, you should only enable tool-tip management in desktop apps. Mobile apps don't support mouse hover, so tool-tips will never be shown.
+</aside>
+<h2 id="enabling-the-tool-tip-manager">Enabling the Tool-Tip Manager</h2>
+<p>To enable tool tips, only one line is required when your app first starts up:</p>
+<pre class="code"><code>ToolTipManager.setEnabledForStage( this.stage, true );</code></pre>
+<p>That's it! You will be able to set the <a href="../api-reference/feathers/core/FeathersControl.html#toolTip"><code>toolTip</code></a> property of any component, and the tool-tip will appear when the user hovers their mouse over the component.</p>
+<p>If you are building an AIR desktop app with multiple Starling instances in multiple windows, you will need to enable tool-tips management for each stage with separate calls to <a href="../api-reference/feathers/core/ToolTipManager.html#setEnabledForStage()"><code>setEnabledForStage()</code></a>.</p>
+<h2 id="setting-a-components-tool-tip">Setting a component's tool-tip</h2>
+<p>In the following example, a <a href="button.html"><code>Button</code></a> is given a tool-tip:</p>
+<pre class="code"><code>var button:Button = new Button();
+button.label = &quot;Click Me&quot;;
+button.toolTip = &quot;Some useful information&quot;;</code></pre>
+<p>All Feathers components have a <a href="../api-reference/feathers/core/FeathersControl.html#toolTip"><code>toolTip</code></a> property.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/core/ToolTipManager.html"><code>feathers.core.ToolTipManager</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

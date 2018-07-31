@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers PageIndicator component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-pageindicator-component">How to use the Feathers <code>PageIndicator</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/PageIndicator.html"><code>PageIndicator</code></a> component displays a series of symbols, with one being highlighted, to show the user which index among a limited set is selected. Typically, it is paired with a <a href="list.html"><code>List</code></a> or a similar component that supports scrolling and paging. The user can tap the <code>PageIndicator</code> to either side of the selected symbol to navigate forward or backward.</p>
+<figure>
+<img src="images/page-indicator.png" srcset="images/page-indicator@2x.png 2x" alt="Screenshot of a Feathers PageIndicator component" />
+<figcaption>
+A <code>PageIndicator</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-pageindicator">Skinning a <code>PageIndicator</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>PageIndicator</code> control, give it a number of pages, and add it to the display list.</p>
+<pre class="code"><code>var pages:PageIndicator = new PageIndicator();
+pages.pageCount = 5;
+this.addChild( pages );</code></pre>
+<p>The number of symbols that a page indicator displays is controlled by the <a href="../api-reference/feathers/controls/PageIndicator.html#pageCount"><code>pageCount</code></a> property. You'll see that the first symbol is automatically selected. If you tap the page indicator on the right side, it will advance to the next index.</p>
+<p>If we want to react to the selected index changing, we can add a listener for <a href="../api-reference/feathers/controls/PageIndicator.html#event:change"><code>Event.CHANGE</code></a>:</p>
+<pre class="code"><code>pages.addEventListener( Event.CHANGE, pageIndicator_changeHandler );</code></pre>
+<p>The listener might look something like this:</p>
+<pre class="code"><code>function pageIndicator_changeHandler( event:Event ):void
+{
+    var pages:PageIndicator = PageIndicator( event.currentTarget );
+    trace( &quot;selected index:&quot;, pages.selectedIndex );
+}</code></pre>
+<h2 id="skinning-a-pageindicator">Skinning a <code>PageIndicator</code></h2>
+<p>You can customize the layout of a page indicator, and you can customize the appearance of a its &quot;normal&quot; and &quot;selected&quot; symbols. For full details about which properties are available, see the <a href="../api-reference/feathers/controls/PageIndicator.html"><code>PageIndicator</code> API reference</a>. We'll look at a few of the most common ways of styling a list below.</p>
+<h3 id="layout">Layout</h3>
+<p>You may set the <a href="../api-reference/feathers/controls/PageIndicator.html#direction"><code>direction</code></a> of a page indicator to <a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a> or <a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a>. The default layout direction is horizontal. Below, we change it to vertical:</p>
+<pre class="code"><code>pages.direction = Direction.VERTICAL;</code></pre>
+<p>We can set other layout properies, such as the <a href="../api-reference/feathers/controls/PageIndicator.html#gap"><code>gap</code></a> between symbols, the padding around the edges, and the alignment, both <a href="../api-reference/feathers/controls/PageIndicator.html#horizontalAlign"><code>horizontalAlign</code></a> and <a href="../api-reference/feathers/controls/PageIndicator.html#verticalAlign"><code>verticalAlign</code></a>:</p>
+<pre class="code"><code>pages.gap = 4;
+pages.paddingTop = 4;
+pages.paddingRight = 4;
+pages.paddingBottom = 4;
+pages.paddingLeft = 10;
+pages.horizontalAlign = HorizontalAlign.CENTER;
+pages.verticalAlign = VerticalAlign.MIDDLE;</code></pre>
+<h3 id="symbol-skins">Symbol Skins</h3>
+<p>The symbols may be created using the <a href="../api-reference/feathers/controls/PageIndicator.html#normalSymbolFactory"><code>normalSymbolFactory</code></a> and <a href="../api-reference/feathers/controls/PageIndicator.html#selectedSymbolFactory"><code>selectedSymbolFactory</code></a> for normal and selected symbols, respectively. These functions may return any type of Starling display object. Below, we return Starling Images with different textures for normal and selected states:</p>
+<pre class="code"><code>pages.normalSymbolFactory = function():DisplayObject
+{
+    return new Image( normalSymbolTexture );
+};
+ 
+pages.selectedSymbolFactory = function():DisplayObject
+{
+    return new Image( selectedSymbolTexture );
+};</code></pre>
+<p>The page indicator will automatically reuse symbols if the page count or the selected index changes.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/PageIndicator.html"><code>feathers.controls.PageIndicator</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

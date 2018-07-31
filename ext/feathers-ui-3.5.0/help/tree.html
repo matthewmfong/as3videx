@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Tree component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-tree-component">How to use the Feathers <code>Tree</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Tree.html"><code>Tree</code></a> class renders a series of items from a hierarchical data source similarly to a <code>List</code>, but branches may be opened and close to reveal hidden data. It includes support for selection, scrolling, custom layouts, layout virtualization, and custom item renderers.</p>
+<figure>
+<img src="images/tree.png" srcset="images/tree@2x.png 2x" alt="Screenshot of a Feathers Tree component" />
+<figcaption>
+A <code>Tree</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#selection">Selection</a></p></li>
+<li><p><a href="#skinning-a-tree">Skinning a <code>Tree</code></a></p></li>
+<li><p><a href="#custom-item-renderers">Custom item renderers</a></p></li>
+<li><p><a href="#multiple-item-renderer-factories">Multiple item renderer factories</a></p></li>
+<li><p><a href="#customize-scrolling-behavior">Customize scrolling behavior</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>Tree</code> control and add it to the display list:</p>
+<pre class="code"><code>var tree:Tree = new Tree();
+tree.width = 250;
+tree.height = 300;
+this.addChild( tree );</code></pre>
+<p>Next, we want the tree to display some items, so let's create an <a href="../api-reference/feathers/data/ArrayHierarchicalCollection.html"><code>ArrayHierarchicalCollection</code></a> as its data provider. In the example below, a specially-formatted set of objects is passed to the <code>ArrayHierarchicalCollection</code>:</p>
+<pre class="code"><code>var groceryList:ArrayHierarchicalCollection = new ArrayHierarchicalCollection(
+[
+    {
+        text: &quot;Node 1&quot;,
+        children:
+        [
+            {
+                text: &quot;Node 1A&quot;,
+                children:
+                [
+                    { text: &quot;Node 1A-I&quot; },
+                    { text: &quot;Node 1A-II&quot; },
+                ]
+            },
+            { text: &quot;Node 1B&quot; },
+        ]
+    },
+    { text: &quot;Node 2&quot; },
+    {
+        text: &quot;Node 3&quot;,
+        children:
+        [
+            { text: &quot;Node 3A&quot; },
+            { text: &quot;Node 3B&quot; },
+            { text: &quot;Node 3C&quot; },
+        ]
+    }
+]);
+tree.dataProvider = groceryList;</code></pre>
+<p><code>ArrayHierarchicalCollection</code> wraps a regular ActionScript <code>Array</code>, and it adds special events and things that the <code>Tree</code> uses to add, update, and remove item renderers in real time. The wrapped <code>Array</code> contains objects that represent items to display in the tree, which can be branches or just simple items. Each branch object has a <code>children</code> property (you can <a href="../api-reference/feathers/data/ArrayChildrenHierarchicalCollectionDataDescriptor.html#childrenField">customize this property name</a>, if you prefer) that contains another <code>Array</code> of the child objects in the branch. Branches may be nested any number of levels deep.</p>
+<aside class="info">
+<p><code>ArrayHierarchicalCollection</code> is one of multiple classes that implement the <code>IHierarchicalCollection</code> interface. <code>IHierarchicalCollection</code> wraps any type of data to provide a common API that the <code>Tree</code> component can understand. Out of the box, we may use these collection implementations:</p>
+<ul>
+<li><a href="../api-reference/feathers/data/ArrayHierarchicalCollection.html"><code>ArrayHierarchicalCollection</code></a> for data based on an <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html"><code>Array</code></a></li>
+<li><a href="../api-reference/feathers/data/VectorHierarchicalCollection.html"><code>VectorHierarchicalCollection</code></a> for data based on a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Vector.html"><code>Vector</code></a></li>
+<li><a href="../api-reference/feathers/data/XMLListHierarchicalCollection.html"><code>XMLListHierarchicalCollection</code></a> for data based on an <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/XMLList.html"><code>XMLList</code></a></li>
+</ul>
+It's even possible for anyone to create new <code>IHierarhicalCollection</code> implementations to display custom data types, if needed.
+</aside>
+<p>Now, we need to tell the item renderers how to display the data. The tree simply passes each item from the data provider to an item renderer, and it is the item renderer's responsibility to interpret the properties of an item.</p>
+<p>By default, a tree renders items from the data provider using the <a href="default-item-renderers.html"><code>DefaultTreeItemRenderer</code></a> component. This default item renderer has many options for displaying strings, textures, and even adding display objects from the data provider as children. Let's look at a couple of these properties right now.</p>
+<p>Start by taking a moment to review one of the items from the data provider:</p>
+<pre class="code"><code>{ text: &quot;Node 2&quot; }</code></pre>
+<p>The item's <code>text</code> property contains a string. We can tell the default item renderer to use the value from this property to display a label.</p>
+<pre class="code"><code>tree.itemRendererFactory = function():ITreeItemRenderer
+{
+    var itemRenderer:DefaultTreeItemRenderer = new DefaultTreeItemRenderer();
+    itemRenderer.labelField = &quot;text&quot;;
+    return itemRenderer;
+};</code></pre>
+<p>When using the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#labelField"><code>labelField</code></a>, the default item renderer will automatically create a <a href="text-renderers.html">text renderer</a> to display the string.</p>
+<p>We could also display textures in the item renderer. Consider this modified item, with an extra <code>thumbnail</code> field:</p>
+<pre class="code"><code>{ text: &quot;Node 2&quot;, thumbnail: textureAtlas.getTexture( &quot;my-texture&quot; ) }</code></pre>
+<p>We can tell the item renderers to use this property too:</p>
+<pre class="code"><code>tree.itemRendererFactory = function():ITreeItemRenderer
+{
+    var itemRenderer:DefaultTreeItemRenderer = new DefaultTreeItemRenderer();
+    itemRenderer.labelField = &quot;text&quot;;
+    itemRenderer.iconSourceField = &quot;thumbnail&quot;
+    return itemRenderer;
+};</code></pre>
+<p>When you set the <a href="../api-reference/feathers/controls/renderers/BaseDefaultItemRenderer.html#iconSourceField"><code>iconSourceField</code></a>, the item renderer will automatically create an <a href="image-loader.html"><code>ImageLoader</code></a> to display the texture. You may also use <code>iconSourceField</code> to ask the <code>ImageLoader</code> to display an image loaded from a URL instead of a texture. The value is passed to the <a href="../api-reference/feathers/controls/ImageLoader.html#source"><code>source</code></a> property of the <code>ImageLoader</code>.</p>
+<p>The default item renderers can support up to three children, including a label, an icon, and a third one, called an <em>accessory</em>. In addition to <code>labelField</code> and <code>iconSourceField</code> properties, a default item renderer's children may be customized with several other similar properties. Please see <a href="default-item-renderers.html">How to use the default Feathers item renderer with <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code></a> for complete details.</p>
+<h2 id="selection">Selection</h2>
+<p>The <code>Tree</code> component may have one selected item. You can access information about selection through the <a href="../api-reference/feathers/controls/List.html#selectedLocation"><code>selectedLocation</code></a> and <a href="../api-reference/feathers/controls/Tree.html#selectedItem"><code>selectedItem</code></a> properties. If there is no selection, the value of <code>selectedLocation</code> will be an empty <code>Vector.&lt;int&gt;</code> and the value of <code>selectedItem</code> will be <code>null</code>.</p>
+<p>To listen for when the selection changes, listen to <a href="../api-reference/feathers/controls/Tree.html#event:change"><code>Event.CHANGE</code></a>:</p>
+<pre class="code"><code>tree.addEventListener( Event.CHANGE, tree_changeHandler );</code></pre>
+<p>The listener might look something like this:</p>
+<pre class="code"><code>private function tree_changeHandler( event:Event ):void
+{
+    var tree:Tree = Tree( event.currentTarget );
+    trace( &quot;selectedLocation:&quot;, tree.selectedLocation );
+}</code></pre>
+<p>You can manually change the selection, if needed:</p>
+<pre class="code"><code>tree.selectedLocation = new &lt;int&gt;[0, 4];</code></pre>
+<p>Selection indices start at <code>0</code>, so the above code would select the fifth item in the first branch of the tree.</p>
+<p>If you prefer, you can change selection by passing in an item from the data provider:</p>
+<pre class="code"><code>tree.selectedItem = item;</code></pre>
+<p>If needed, you can clear selection manually by setting <code>selectedLocation</code> to an empty value:</p>
+<pre class="code"><code>tree.selectedLocation = new &lt;int&gt;[];</code></pre>
+<p>Or you can set <code>selectedItem</code> to <code>null</code>:</p>
+<pre class="code"><code>tree.selectedItem = null;</code></pre>
+<p>To disable selection completely, use the <a href="../api-reference/feathers/controls/Tree.html#isSelectable"><code>isSelectable</code></a> property:</p>
+<pre class="code"><code>tree.isSelectable = false;</code></pre>
+<h2 id="skinning-a-tree">Skinning a <code>Tree</code></h2>
+<p>A tree has a background skin and a layout. Much of the ability to customize the appearance of a tree exists inside the item renderer components, such as their font styles and backgrounds for different states. For full details about which properties are available on a <code>Tree</code>, see the <a href="../api-reference/feathers/controls/Tree.html"><code>Tree</code> API reference</a>. We'll look at a few of the most common ways of styling a tree below.</p>
+<h3 id="background-skin">Background skin</h3>
+<p>We can give the tree a background skin that fills the entire width and height of the tree. In the following example, we pass in a <code>starling.display.Image</code>, but the skin may be any Starling display object:</p>
+<pre class="code"><code>var skin:Image = new Image( texture );
+skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+tree.backgroundSkin = skin;</code></pre>
+<p>It's as simple as setting the <a href="../api-reference/feathers/controls/Scroller.html#backgroundSkin"><code>backgroundSkin</code></a> property.</p>
+<p>We can give the tree a different background when it is disabled:</p>
+<pre class="code"><code>var skin:Image = new Image( texture );
+skin.scale9Grid = new Rectangle( 1, 3, 2, 6 );
+tree.backgroundDisabledSkin = skin;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#backgroundDisabledSkin"><code>backgroundDisabledSkin</code></a> is displayed when the tree is disabled. If the <code>backgroundDisabledSkin</code> isn't provided to a disabled tree, it will fall back to using the <code>backgroundSkin</code> in the disabled state.</p>
+<h3 id="layout">Layout</h3>
+<p>Padding may be added around the edges of the tree's content. This padding is different than any type of padding that may be provided by the <code>layout</code> property. The layout padding is applied inside the tree's content, but the tree's padding is applied outside of the content, and is generally used to show a bit of the background as a border around the content.</p>
+<pre class="code"><code>tree.paddingTop = 15;
+tree.paddingRight = 20;
+tree.paddingBottom = 15;
+tree.paddingLeft = 20;</code></pre>
+<p>If all four padding values should be the same, you may use the <a href="../api-reference/feathers/controls/Scroller.html#padding"><code>padding</code></a> property to quickly set them all at once:</p>
+<pre class="code"><code>tree.padding = 20;</code></pre>
+<p>The default layout for a tree is to display the items vertically one after the other. We can change that to a horizontal layout, a tiled layout, or even a completely <a href="custom-layouts.html">custom layout algorithm</a>. Let's switch to a <a href="horizontal-layout.html"><code>HorizontalLayout</code></a> and customize it a bit:</p>
+<pre class="code"><code>var layout:HorizontalLayout = new HorizontalLayout();
+layout.verticalAlign = VerticalAlign.JUSTIFY;
+layout.gap = 10;
+layout.padding = 15;
+tree.layout = layout;</code></pre>
+<p>When the tree automatically defaults to a <a href="vertical-layout.html"><code>VerticalLayout</code></a>, it also updates its scroll policy so that it will scroll vertically with elastic edges and will only scroll horizontally if the content is larger than the view port. If we're switching to a horizontal layout, the scroll policies won't be updated automatically, so we should also manually adjust the scroll policies:</p>
+<pre class="code"><code>tree.horizontalScrollPolicy = ScrollPolicy.AUTO;
+tree.verticalScrollPolicy = ScrollPolicy.OFF;</code></pre>
+<h4 id="layout-virtualization">Layout Virtualization</h4>
+<p>Generally, a tree will use something called <em><a href="faq/layout-virtualization.html">layout virtualization</a></em> by default because it offers significant performance improvements. When using a virtual layout, a tree will display a limited number of item renderers at a time (usually only those that are visible in the view port) to avoid using massive amounts of memory. This means that data providers can contain thousands, or even tens of thousands, of items without a large performance impact. Additionally, the tree will reuse that small number of item renderers to display different items as it scrolls. This keeps the runtime from creating many temporary objects that need to be garbage collected. To learn more, see <a href="faq/layout-virtualization.html">FAQ: What is layout virtualization?</a></p>
+<h3 id="skinning-the-scroll-bars">Skinning the Scroll Bars</h3>
+<p>This section only explains how to access the horizontal scroll bar and vertical scroll bar sub-components. Please read <a href="scroll-bar.html">How to use the Feathers <code>ScrollBar</code> component</a> (or <a href="simple-scroll-bar.html"><code>SimpleScrollBar</code></a>) for full details about the skinning properties that are available on scroll bar components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/Scroller.html#DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR"><code>Scroller.DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR</code></a> style name for the horizontal scroll bar and the <a href="../api-reference/feathers/controls/Scroller.html#DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR"><code>Scroller.DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR</code></a> style name for the vertical scroll bar.</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( Scroller.DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR, setHorizontalScrollBarStyles );
+getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( Scroller.DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR, setVerticalScrollBarStyles );</code></pre>
+<p>The styling function for the horizontal scroll bar might look like this:</p>
+<pre class="code"><code>private function setHorizontalScrollBarStyles(scrollBar:ScrollBar):void
+{
+    scrollBar.trackLayoutMode = TrackLayoutMode.SINGLE;
+}</code></pre>
+<p>You can override the default style names to use different ones in your theme, if you prefer:</p>
+<pre class="code"><code>tree.customHorizontalScrollBarStyleName = &quot;custom-horizontal-scroll-bar&quot;;
+tree.customVerticalScrollBarStyleName = &quot;custom-vertical-scroll-bar&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/Scroller.html#customHorizontalScrollBarStyleName"><code>customHorizontalScrollBarStyleName</code></a> and the <a href="../api-reference/feathers/controls/Scroller.html#customVerticalScrollBarStyleName"><code>customVerticalScrollBarStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( &quot;custom-horizontal-scroll-bar&quot;, setCustomHorizontalScrollBarStyles );
+getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( &quot;custom-vertical-scroll-bar&quot;, setCustomVerticalScrollBarStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollBarFactory"><code>horizontalScrollBarFactory</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollBarFactory"><code>verticalScrollBarFactory</code></a> to provide skins for the tree's scroll bars:</p>
+<pre class="code"><code>tree.horizontalScrollBarFactory = function():ScrollBar
+{
+    var scrollBar:ScrollBar = new ScrollBar();
+
+    //skin the scroll bar here, if not using a theme
+    scrollBar.trackLayoutMode = TrackLayoutMode.SINGLE;
+
+    return scrollBar;
+}</code></pre>
+<h3 id="skinning-the-item-renderers">Skinning the Item Renderers</h3>
+<p>This section only explains how to access the item renderer sub-components. Please read <a href="default-item-renderers.html">How to use the default Feathers item renderer with <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code></a> for full details about the skinning properties that are available on the default item renderers.</p>
+<p><a href="item-renderers.html">Custom item renderers</a> may be accessed similarly, but they won't necessarily have the same styling properties as the default item renderers. When using custom item renderers, you may easily replace references to the <a href="../api-reference/feathers/controls/renderers/DefaultTreeItemRenderer.html"><code>DefaultTreeItemRenderer</code></a> class in the code below with references to your custom item renderer class.</p>
+<h4 id="with-a-theme-1">With a Theme</h4>
+<p>If you are creating a <a href="themes.html">theme</a>, you can set a function for the default styles like this:</p>
+<pre class="code"><code>getStyleProviderForClass( DefaultTreeItemRenderer ).defaultStyleFunction = setItemRendererStyles;</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setItemRendererStyles(itemRenderer:DefaultTreeItemRenderer):void
+{
+    var skin:ImageSkin = new ImageSkin( upTexture );
+    skin.setTextureForState( ButtonState.DOWN, downTexture );
+    skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+    itemRenderer.defaultSkin = skin;
+    itemRenderer.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xc3c3c3 );
+}</code></pre>
+<p>If you want to customize a specific item renderer to look different than the default, you may use a custom style name to call a different function:</p>
+<pre class="code"><code>tree.customItemRendererStyleName = &quot;custom-item-renderer&quot;;</code></pre>
+<p>You can set the function for the custom <a href="../api-reference/feathers/controls/Tree.html#customItemRendererStyleName"><code>customItemRendererStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( DefaultTreeItemRenderer )
+    .setFunctionForStyleName( &quot;custom-item-renderer&quot;, setCustomItemRendererStyles );</code></pre>
+<h4 id="without-a-theme-1">Without a theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/Tree.html#itemRendererFactory"><code>itemRendererFactory</code></a> to provide skins for the tree's item renderers:</p>
+<pre class="code"><code>tree.itemRendererFactory = function():ITreeItemRenderer
+{
+    var itemRenderer:DefaultTreeItemRenderer = new DefaultTreeItemRenderer();
+
+    //set item renderer styles here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( upTexture );
+    skin.setTextureForState( ButtonState.DOWN, downTexture );
+    skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+    itemRenderer.defaultSkin = skin;
+    itemRenderer.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xc3c3c3 );
+
+    return itemRenderer;
+}</code></pre>
+<h2 id="custom-item-renderers">Custom item renderers</h2>
+<p>If the default item renderer doesn't have the features that you need, the <code>Tree</code> component offers the ability to use <a href="item-renderers.html">custom item renderers</a> instead. Custom item renderers must be Feathers components that implement the <a href="../api-reference/feathers/controls/renderers/ITreeItemRenderer.html"><code>ITreeItemRenderer</code></a> interface.</p>
+<aside class="info">
+For full details about implementing custom item renderers, see <a href="item-renderers.html">Creating custom item renderers for the Feathers <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code> components</a>.
+</aside>
+<p>The easiest way to tell a tree to display its data using a custom item renderer is to set the <a href="../api-reference/feathers/controls/Tree.html#itemRendererType"><code>itemRendererType</code></a> property:</p>
+<pre class="code"><code>tree.itemRendererType = ExampleCustomItemRenderer;</code></pre>
+<p>Sometimes, you might want to change some properties on each item renderer as it is created. You can use the <a href="../api-reference/feathers/controls/Tree.html#itemRendererFactory"><code>itemRendererFactory</code></a> property instead of <code>itemRendererType</code> to call a function that returns a newly created item renderer:</p>
+<pre class="code"><code>tree.itemRendererFactory = function():ITreeItemRenderer
+{
+    var itemRenderer:ExampleCustomItemRenderer = new ExampleCustomItemRenderer();
+    itemRenderer.exampleProperty = 20;
+    return itemRenderer;
+}</code></pre>
+<h3 id="listening-to-events-from-custom-item-renderers">Listening to Events from Custom Item Renderers</h3>
+<p>Listening to events dispatched by a custom item renderer isn't too difficult. Simply dispatch the event normally from the item renderer. No need for bubbling. As an example, let's say that we want to dispatch <code>Event.COMPLETE</code> from an item renderer when something happens:</p>
+<pre class="code"><code>function someEventHandler( event:Event ):void
+{
+    this.dispatchEventWith( Event.COMPLETE );
+}</code></pre>
+<p>On our tree, first we need to listen for <code>FeathersEventType.RENDERER_ADD</code>:</p>
+<pre class="code"><code>tree.addEventListener( FeathersEventType.RENDERER_ADD, tree_rendererAddHandler );</code></pre>
+<p>Inside the listener for <code>FeathersEventType.RENDERER_ADD</code>, we add a listener for our event dispatched by the item renderer:</p>
+<pre class="code"><code>function tree_rendererAddHandler( event:Event, itemRenderer:ITreeItemRenderer ):void
+{
+    itemRenderer.addEventListener( Event.COMPLETE, itemRenderer_customCompleteHandler );
+}
+ 
+function itemRenderer_customCompleteHandler( event:Event ):void
+{
+    var itemRenderer:ITreeItemRenderer = ITreeItemRenderer( event.currentTarget );
+}</code></pre>
+<p>Finally, we want to be sure to remove the listeners from the item renderers, so we should also listen for <code>FeathersEventType.RENDERER_REMOVE</code>:</p>
+<pre class="code"><code>tree.addEventListener( FeathersEventType.RENDERER_REMOVE, tree_rendererRemoveHandler );</code></pre>
+<p>The listener for <code>FeathersEventType.RENDERER_REMOVE</code> looks very similar to the listener for <code>FeathersEventType.RENDERER_ADD</code>:</p>
+<pre class="code"><code>function tree_rendererRemoveHandler( event:Event, itemRenderer:ITreeItemRenderer ):void
+{
+    itemRenderer.removeEventListener( Event.COMPLETE, itemRenderer_customCompleteHandler );
+}</code></pre>
+<h2 id="multiple-item-renderer-factories">Multiple item renderer factories</h2>
+<p>A tree may display differnent item renderers for different items in the data provider. We can use the <a href="../api-reference/feathers/controls/Tree.html#setItemRendererFactoryWithID()"><code>setItemRendererFactoryWithID()</code></a> method to pass in more than one item renderer factory:</p>
+<pre class="code"><code>function regularItemFactory():ITreeItemRenderer
+{
+    return new DefaultTreeItemRenderer();
+}
+tree.setItemRendererFactoryWithID( &quot;regular-item&quot;, regularItemFactory );
+
+function headerItemFactory():ITreeItemRenderer
+{
+    return new CustomItemRenderer();
+}
+tree.setItemRendererFactoryWithID( &quot;header-item&quot;, headerItemFactory );</code></pre>
+<p>Each factory should be given a unique <code>String</code> identifier. We'll use these values in a moment.</p>
+<p>The <a href="../api-reference/feathers/controls/Tree.html#factoryIDFunction"><code>factoryIDFunction</code></a> is used to determine which item renderer factory should be used for a particular item. In the example below, we use <code>factoryIDFunction</code> to give the first item in the data provider a different item renderer than the other items:</p>
+<pre class="code"><code>tree.factoryIDFunction = function( item:Object, location:Vector.&amp;lt;int&amp;gt; ):String
+{
+    if(location[0] == 0)
+    {
+        return &quot;header-item&quot;;
+    }
+    return &quot;regular-item&quot;;
+};</code></pre>
+<p>This function should accept two arguments. The first is the item from the data provider, and the second is the item's location in the data provider. The location is a <code>Vector.&lt;int&gt;</code>. We can use this location, or one of the properties of the item, to determine which item renderer factory to use. The function should return one of the <code>String</code> identifiers that we passed to <code>setItemRendererFactoryWithID()</code>.</p>
+<h2 id="customize-scrolling-behavior">Customize scrolling behavior</h2>
+<p>A number of properties are available to customize scrolling behavior and the scroll bars.</p>
+<h3 id="interaction-modes">Interaction Modes</h3>
+<p>Scrolling containers provide two main interaction modes, which can be changed using the <a href="../api-reference/feathers/controls/Scroller.html#interactionMode"><code>interactionMode</code></a> property.</p>
+<p>By default, you can scroll using touch, just like you would on many mobile devices including smartphones and tablets. This mode allows you to grab the container anywhere within its bounds and drag it around to scroll. This mode is defined by the constant, <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a>.</p>
+<p>Alternatively, you can set <code>interactionMode</code> to <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a>. This mode allows you to scroll using the horizontal or vertical scroll bar sub-components. You can also use the mouse wheel to scroll vertically.</p>
+<p>Finally, you can set <code>interactionMode</code> to <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a>. This mode allows you to scroll both by dragging the container's content and by using the scroll bars.</p>
+<h3 id="scroll-bar-display-mode">Scroll Bar Display Mode</h3>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#scrollBarDisplayMode"><code>scrollBarDisplayMode</code></a> property controls how and when scroll bars are displayed. This value may be overridden by the scroll policy, as explained below.</p>
+<p>The default value is <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a>, which displays the scroll bars as an overlay above the view port's content, rather than affecting the size of the view port. When the scroll bars are floating, they fade out when the container is not actively scrolling. This is a familiar behavior for scroll bars in the touch interaction mode. In the mouse interaction mode, the scroll bars will appear when the mouse hovers over them and then disappear when the hover ends.</p>
+<p>To completely hide the scroll bars, but still allow scrolling, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a>.</p>
+<p>If you want the scroll bars to always be visible outside of the content in a fixed position, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a>. This is best for traditional desktop scrollable content.</p>
+<p>Finally, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED_FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a> to display the scroll bar as an overlay above the view port's content, but it does not fade away.</p>
+<h3 id="scroll-policies">Scroll Policies</h3>
+<p>The two previous properties control how scrolling works. The <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollPolicy"><code>horizontalScrollPolicy</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollPolicy"><code>verticalScrollPolicy</code></a> properties control whether scrolling is enabled or not.</p>
+<p>The default scroll policy for both directions is <a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a>. If the content's width is greater than the view port's width, the container may scroll horizontally (same for height and vertical scrolling). If not, then the container will not scroll in that direction. In addition to the <code>scrollBarDisplayMode</code>, this can affect whether the scroll bar is visible or not.</p>
+<p>You can completely disable scrolling in either direction, set the scroll policy to <a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a>. The scroll bar will not be visible, and the container won't scroll, even if the content is larger than the view port.</p>
+<p>Finally, you can ensure that scrolling is always enabled by setting the scroll policy to <a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a>. If combined with <code>hasElasticEdges</code> in the touch interaction mode, it will create a playful edge that always bounces back, even when the content is smaller than the view port. If using the mouse interaction mode, the scroll bar may always be visible under the same circumstances, though it may be disabled if the content is smaller than the view port.</p>
+<h3 id="paging">Paging</h3>
+<p>Set the <a href="../api-reference/feathers/controls/Scroller.html#snapToPages"><code>snapToPages</code></a> property to true to make the scroll position snap to the nearest full page. A page is defined as a multiple of the view ports width or height. If the view port is 100 pixels wide, then the first horizontal page starts at 0 pixels, the second at 100, and the third at 200.</p>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#pageWidth"><code>pageWidth</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#pageHeight"><code>pageHeight</code></a> properties may be used to customize the size of a page. Rather than using the full view port width or height, any pixel value may be specified for page snapping.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/Tree.html"><code>feathers.controls.Tree</code> API Documentation</a></p></li>
+<li><p><a href="default-item-renderers.html">How to use the default Feathers item renderer with <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code></a></p></li>
+<li><p><a href="item-renderers.html">Creating custom item renderers for the Feathers <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code> components</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

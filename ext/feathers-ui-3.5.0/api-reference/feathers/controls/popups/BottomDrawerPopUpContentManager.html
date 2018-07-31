@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="BottomDrawerPopUpContentManager,feathers.controls.popups.BottomDrawerPopUpContentManager,calloutFactory,closeButtonFactory,closeButtonLabel,customCloseButtonStyleName,customPanelStyleName,fitContentMinWidthToOrigin,gap,isModal,isModal,isOpen,isOpen,isOpen,isOpen,isOpen,margin,marginBottom,marginLeft,marginRight,marginTop,openCloseDuration,openCloseEase,openOrCloseDuration,openOrCloseEase,overlayFactory,overlayFactory,overlayFactory,overlayFactory,panelFactory,primaryDirection,prompt,prompt,supportedPositions,close,close,close,close,close,dispose,dispose,dispose,dispose,dispose,open,open,open,open,open"><title>feathers.controls.popups.BottomDrawerPopUpContentManager</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+				asdocTitle = 'BottomDrawerPopUpContentManager - Feathers User Interface Controls for Starling Framework API Reference';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<script type="text/javascript">
+			scrollToNameAnchor();
+		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">Feathers 3.5.0 API Reference</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?feathers/controls/popups/BottomDrawerPopUpContentManager.html&amp;feathers/controls/popups/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><picture><img src="../../../images/logo.jpg" srcset="../../../images/logo@2x.jpg 2x" class="logoImage" alt=" Feathers Logo " title=" Feathers Logo "></picture></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">BottomDrawerPopUpContentManager</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
+				<!--
+				
+					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("BottomDrawerPopUpContentManager"); titleBar_setSubNav(false,true,false,false,false,false,true,false,true,false,false	,false,false,false,false,false);}	
+				-->
+			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">feathers.controls.popups</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  BottomDrawerPopUpContentManager</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">BottomDrawerPopUpContentManager  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> starling.events.EventDispatcher</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../../feathers/controls/popups/IPersistentPopUpContentManager.html">IPersistentPopUpContentManager</a>,  <a href="../../../feathers/controls/popups/IPopUpContentManagerWithPrompt.html">IPopUpContentManagerWithPrompt</a></td></tr></table><p></p><table cellpadding="0" cellspacing="0" border="0"><tr><td style="white-space:nowrap" valign="top"><b> Product Version :&nbsp;</b></td><td>Feathers 2.3.0</td></tr></table><p></p><p></p><p></p>
+	 Displays pop-up content as a mobile-style drawer that opens from the
+	 bottom of the stage.
+	 	 <p></p><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#closeButtonFactory" class="signatureLink">closeButtonFactory</a> : Function = null<div class="summaryTableDescription">
+		 Creates the Button that closes the pop-up.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#closeButtonLabel" class="signatureLink">closeButtonLabel</a> : String<div class="summaryTableDescription">
+		 The text to display in the label of the close button.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#customCloseButtonStyleName" class="signatureLink">customCloseButtonStyleName</a> : String = "null"<div class="summaryTableDescription">
+		 Adds a style name to the close button.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#customPanelStyleName" class="signatureLink">customPanelStyleName</a> : String = "null"<div class="summaryTableDescription">
+		 Adds a style name to the Panel that wraps the content.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#isOpen" class="signatureLink">isOpen</a> : Boolean<div class="summaryTableDescription">[read-only] 
+		 
+		 Indicates if the pop-up content is open or not.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#openOrCloseDuration" class="signatureLink">openOrCloseDuration</a> : Number<div class="summaryTableDescription">
+		 The duration, in seconds, of the animation to open or close the
+		 pop-up.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#openOrCloseEase" class="signatureLink">openOrCloseEase</a> : Object<div class="summaryTableDescription">
+		 The easing function used for opening or closing the pop-up.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#overlayFactory" class="signatureLink">overlayFactory</a> : Function<div class="summaryTableDescription">
+		 This function may be used to customize the modal overlay displayed by
+		 the pop-up manager.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#panelFactory" class="signatureLink">panelFactory</a> : Function = null<div class="summaryTableDescription">
+		 Creates the Panel that wraps the content.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#prompt" class="signatureLink">prompt</a> : String<div class="summaryTableDescription">
+		 A prompt to display in the panel's title.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#BottomDrawerPopUpContentManager()" class="signatureLink">BottomDrawerPopUpContentManager</a>()</div><div class="summaryTableDescription">
+		 Constructor.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#close()" class="signatureLink">close</a>():void</div><div class="summaryTableDescription">
+		 
+		 Closes the pop-up content.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#dispose()" class="signatureLink">dispose</a>():void</div><div class="summaryTableDescription">
+		 
+		 Cleans up the manager.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#open()" class="signatureLink">open</a>(content:DisplayObject, source:DisplayObject):void</div><div class="summaryTableDescription">
+		 
+		 Displays the pop-up content.</div></td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr></table></div><a name="eventSummary"></a><div class="summarySection"><div class="summaryTableTitle">Events</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableEvent"><tr><th>&nbsp;</th><th colspan="2">Event</th><th> Summary </th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:close" class="signatureLink">close</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when the pop-up content closes.</td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#event:open" class="signatureLink">open</a></div></td><td class="summaryTableDescription summaryTableCol">Dispatched when the pop-up content opens.</td><td class="summaryTableOwnerCol">BottomDrawerPopUpContentManager</td></tr></table></div><script language="javascript" type="text/javascript"><!--
+										showHideInherited();
+										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="closeButtonFactory"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">closeButtonFactory</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>public var closeButtonFactory:Function = null</code><p></p><p></p><p>
+		 Creates the <code>Button</code> that closes the pop-up.
+		 		 <p>In the following example, a custom close button factory is provided:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.closeButtonFactory = function():Button
+{
+    var closeButton:Button = new Button();
+    closeButton.defaultSkin = new Image( texture );
+    return closeButton;
+};</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../../feathers/controls/Button.html" target="">feathers.controls.Button</a></div></div><a name="propertyDetail"></a><a name="closeButtonLabel"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">closeButtonLabel</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>closeButtonLabel:String</code><p></p><p></p><p>
+		 The text to display in the label of the close button.
+		 		 <p>In the following example, a custom close button label is provided:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.closeButtonLabel = "Save";</pre></div>
+		 		 </p><p> The default value is <code>"Done"</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get closeButtonLabel():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set closeButtonLabel(value:String):void</code><br/></div><a name="propertyDetail"></a><a name="customCloseButtonStyleName"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">customCloseButtonStyleName</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var customCloseButtonStyleName:String = "null"</code><p></p><p></p><p>
+		 Adds a style name to the close button.
+		 		 <p>In the following example, a custom style name is provided:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.customCloseButtonStyleName = "my-custom-close-button";</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../../feathers/controls/Button.html" target="">feathers.controls.Button</a></div></div><a name="propertyDetail"></a><a name="customPanelStyleName"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">customPanelStyleName</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var customPanelStyleName:String = "null"</code><p></p><p></p><p>
+		 Adds a style name to the <code>Panel</code> that wraps the content.
+		 		 <p>In the following example, a custom style name is provided:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.customPanelStyleName = "my-custom-pop-up-panel";</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../../feathers/controls/Panel.html" target="">feathers.controls.Panel</a></div></div><a name="propertyDetail"></a><a name="isOpen"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">isOpen</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>isOpen:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p>
+		 
+		 Indicates if the pop-up content is open or not.
+		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get isOpen():Boolean</code><br/></div><a name="propertyDetail"></a><a name="openOrCloseDuration"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">openOrCloseDuration</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>openOrCloseDuration:Number</code><p></p><p></p><p>
+		 The duration, in seconds, of the animation to open or close the
+		 pop-up.
+		 		 <p>In the following example, the duration is changed to 2 seconds:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.openOrCloseDuration = 2.0;</pre></div>
+		 		 </p><p> The default value is <code>0.5</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get openOrCloseDuration():Number</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set openOrCloseDuration(value:Number):void</code><br/></div><a name="propertyDetail"></a><a name="openOrCloseEase"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">openOrCloseEase</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>openOrCloseEase:Object</code><p></p><p></p><p>
+		 The easing function used for opening or closing the pop-up.
+		 		 <p>In the following example, the animation ease is changed:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.openOrCloseEase = Transitions.EASE_IN_OUT;</pre></div>
+		 		 </p><p> The default value is <code>starling.animation.Transitions.EASE_OUT</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get openOrCloseEase():Object</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set openOrCloseEase(value:Object):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="http://doc.starling-framework.org/core/starling/animation/Transitions.html" target="_top">starling.animation.Transitions</a><br/><a href="BottomDrawerPopUpContentManager.html#openOrCloseDuration" target="">openOrCloseDuration</a></div></div><a name="propertyDetail"></a><a name="overlayFactory"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">overlayFactory</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>overlayFactory:Function</code><p></p><p></p><p>
+		 This function may be used to customize the modal overlay displayed by
+		 the pop-up manager. If the value of <code>overlayFactory</code> is
+		 <code>null</code>, the pop-up manager's default overlay factory will
+		 be used instead.
+		 		 <p>This function is expected to have the following signature:</p>
+		 <pre>function():DisplayObject</pre>
+		 		 <p>In the following example, the overlay is customized:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.overlayFactory = function():DisplayObject
+{
+    var quad:Quad = new Quad(1, 1, 0xff00ff);
+    quad.alpha = 0;
+    return quad;
+};</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get overlayFactory():Function</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set overlayFactory(value:Function):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../../feathers/core/PopUpManager.html#overlayFactory" target="">feathers.core.PopUpManager.overlayFactory</a></div></div><a name="propertyDetail"></a><a name="panelFactory"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">panelFactory</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var panelFactory:Function = null</code><p></p><p></p><p>
+		 Creates the <code>Panel</code> that wraps the content.
+		 		 <p>In the following example, a custom panel factory is provided:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.panelFactory = function():Panel
+{
+    var panel:Panel = new Panel();
+    panel.backgroundSkin = new Image( texture );
+    return panel;
+};</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../../feathers/controls/Panel.html" target="">feathers.controls.Panel</a></div></div><a name="propertyDetail"></a><a name="prompt"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">prompt</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>prompt:String</code><p></p><p></p><p>
+		 A prompt to display in the panel's title.
+		 
+		 <p>Note: If using this manager with a component that has its own
+		 prompt (like <code>PickerList</code>), this value may be overridden
+		 by the component.</p>
+		 		 <p>In the following example, a custom title is provided:</p>
+		 		 <div class="listing" version="3.0"><pre>
+manager.prompt = "Pick a value";</pre></div>
+		 		 </p><p> The default value is <code>null</code>.</p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get prompt():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set prompt(value:String):void</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="BottomDrawerPopUpContentManager()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">BottomDrawerPopUpContentManager</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function BottomDrawerPopUpContentManager()</code><p></p><p>
+		 Constructor.
+		 </p></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="close()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">close</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function close():void</code><p></p><p></p><p>
+		 
+		 Closes the pop-up content. If it is not opened, nothing happens.
+		 </p></div><a name="dispose()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">dispose</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function dispose():void</code><p></p><p></p><p>
+		 
+		 Cleans up the manager.
+		 </p></div><a name="open()"></a><a name="open(starling.display.DisplayObject,starling.display.DisplayObject)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">open</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function open(content:DisplayObject, source:DisplayObject):void</code><p></p><p></p><p>
+		 
+		 Displays the pop-up content.
+		 		 </p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">content</span>:DisplayObject</code> &mdash; 	The content for the pop-up content manager to display.
+		 </td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">source</span>:DisplayObject</code> &mdash; 	The source of the pop-up. May be used to position and/or size the pop-up. May be completely ignored instead.
+		 </td></tr></table></p></div><div class="detailSectionHeader"> Event Detail </div><a name="event:close"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">close</td><td class="detailHeaderType"> Event </td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>starling.events.Event</code><br/><span class="label">Event.type property = </span><code>starling.events.Event.CLOSE</code><br/><p></p><p></p><p>
+	 Dispatched when the pop-up content closes.
+	 	 <p>The properties of the event object have the following values:</p>
+	 <table class="innertable" ><tr><th>Property</th><th>Value</th></tr><tr><td><code>bubbles</code></td><td>false</td></tr><tr><td><code>currentTarget</code></td><td>The Object that defines the
+	   event listener that handles the event. For example, if you use
+	   <code>myButton.addEventListener()</code> to register an event listener,
+	   myButton is the value of the <code>currentTarget</code>.</td></tr><tr><td><code>data</code></td><td>null</td></tr><tr><td><code>target</code></td><td>The Object that dispatched the event;
+	   it is not always the Object listening for the event. Use the
+	   <code>currentTarget</code> property to always access the Object
+	   listening for the event.</td></tr></table>
+	 	 </p></div><a name="event:open"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">open</td><td class="detailHeaderType"> Event </td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><span class="label">Event Object Type: </span><code>starling.events.Event</code><br/><span class="label">Event.type property = </span><code>starling.events.Event.OPEN</code><br/><p></p><p></p><p>
+	 Dispatched when the pop-up content opens.
+	 	 <p>The properties of the event object have the following values:</p>
+	 <table class="innertable" ><tr><th>Property</th><th>Value</th></tr><tr><td><code>bubbles</code></td><td>false</td></tr><tr><td><code>currentTarget</code></td><td>The Object that defines the
+	   event listener that handles the event. For example, if you use
+	   <code>myButton.addEventListener()</code> to register an event listener,
+	   myButton is the value of the <code>currentTarget</code>.</td></tr><tr><td><code>data</code></td><td>null</td></tr><tr><td><code>target</code></td><td>The Object that dispatched the event;
+	   it is not always the Object listening for the event. Use the
+	   <code>currentTarget</code> property to always access the Object
+	   listening for the event.</td></tr></table>
+	 	 </p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer><a href="https://feathersui.com/" target="_top">Feathers</a> | <a href="https://github.com/BowlerHatLLC/feathers" target="_top">Github Project</a> | <a href="https://forum.starling-framework.org/forum/feathers" target="_top">Support Forum</a></footer><br/>Thu Jun 21 2018, 07:04 AM -07:00  </center></div></body></html><!--Feathers | Github Project | Support Forum<br/>Thu Jun 21 2018, 07:04 AM -07:00  -->

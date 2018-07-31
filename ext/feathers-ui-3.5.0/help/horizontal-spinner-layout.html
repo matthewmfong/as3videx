@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Using HorizontalSpinnerLayout in the Feathers SpinnerList component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="using-horizontalspinnerlayout-in-the-feathers-spinnerlist-component">Using <code>HorizontalSpinnerLayout</code> in the Feathers <code>SpinnerList</code> component</h1>
+<p>The <a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html"><code>HorizontalSpinnerLayout</code></a> class may be used by the <a href="spinner-list.html"><code>SpinnerList</code></a> component to display items from left to right in a single row, repeating items infinitely if the number of items in the data provider allows for it. It supports a number of useful options for adjusting the spacing and alignment.</p>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>HorizontalSpinnerLayout</code> and pass it to a <a href="spinner-list.html"><code>SpinnerList</code></a>:</p>
+<pre class="code"><code>var layout:HorizontalSpinnerLayout = new HorizontalSpinnerLayout();
+ 
+var list:SpinnerList = new SpinnerList();
+list.layout = layout;
+this.addChild( list );</code></pre>
+<p>There are a number of simple properties that may be used to affect the layout. The most common are padding and gap.</p>
+<p>The <em>padding</em> is the space around the content that the layout positions and sizes. You may set padding on the left and right sides of the container separately. Below, we set the <a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html#paddingLeft"><code>paddingLeft</code></a> to <code>10</code> pixels and the <a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html#paddingRight"><code>paddingRight</code></a> to <code>15</code> pixels:</p>
+<pre class="code"><code>layout.paddingRight = 15;
+layout.paddingLeft = 10;</code></pre>
+<p>The <em>gap</em> is the space between items. Let's set the <a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html#gap"><code>gap</code></a> property to <code>5</code> pixels:</p>
+<pre class="code"><code>layout.gap = 5;</code></pre>
+<p>We can <em>align</em> the items in the layout using the <a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html#verticalAlign"><code>verticalAlign</code></a> property. Let's adjust it so that the content will be aligned to the center:</p>
+<pre class="code"><code>layout.verticalAlign = VerticalAlign.CENTER;</code></pre>
+<h2 id="virtual-horizontal-spinner-layout">Virtual Horizontal Spinner Layout</h2>
+<p>In a <a href="list.html"><code>SpinnerList</code></a>, the layout may be <em>virtualized</em>, meaning that some items in the layout will not actually exist if they are not visible. This helps to improve performance of a scrolling list because only a limited number of item renderers will be created at any given moment. If the list's data provider is very large, a virtual layout is essential, even on desktop computers that have incredible processing power compared to mobile devices.</p>
+<p>A virtualized layout will need as estimate about how big a &quot;virtual&quot; item renderer should be. You should set the <a href="../api-reference/feathers/controls/List.html#typicalItem"><code>typicalItem</code></a> property of the list to have it determine the <em>typical</em> width and height of an item renderer to use as this estimated value. If you don't pass in a typical item, the first item in the data provider is used for this estimate.</p>
+<p>By default <a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html#useVirtualLayout"><code>useVirtualLayout</code></a> is <code>true</code> for containers that support it. You may disable virtual layouts by setting it to <code>false</code>. When a layout is not virtualized, every single item renderer must be created by the component. If a list has thousands of items, this means that thousands of item renderers need to be created. This can lead to significant performance issues, especially on mobile. In general, you should rarely disable <code>useVirtualLayout</code>.</p>
+<pre class="code"><code>layout.useVirtualLayout = false;</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/layout/HorizontalSpinnerLayout.html"><code>feathers.layout.HorizontalSpinnerLayout</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

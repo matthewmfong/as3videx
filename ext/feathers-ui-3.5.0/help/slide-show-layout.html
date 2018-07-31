@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Slide Show Layout in Feathers containers - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="using-slideshowlayout-in-feathers-containers">Using <code>SlideShowLayout</code> in Feathers containers</h1>
+<p>The <a href="../api-reference/feathers/layout/SlideShowLayout.html"><code>SlideShowLayout</code></a> class may be used by containers that support layout, such as <a href="list.html"><code>List</code></a> and <a href="scroll-container.html"><code>ScrollContainer</code></a>, to display one item at a time and scroll page by page.</p>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a slide show layout and pass it to a <a href="scroll-container.html"><code>ScrollContainer</code></a>:</p>
+<pre class="code"><code>var layout:SlideShowLayout = new SlideShowLayout();
+ 
+var container:ScrollContainer = new ScrollContainer();
+container.layout = layout;
+this.addChild( container );</code></pre>
+<p>There are a number of simple properties that may be used to affect positioning and sizing of items in the layout. Let's look at some of the most common.</p>
+<h3 id="direction">Direction</h3>
+<p>A <code>SlideShowLayout</code> positions items horizontally, from left to right, by default. Alternatively, you can tell the layout to position items vertically, from top to bottom, instead:</p>
+<pre class="code"><code>layout.direction = Direction.VERTICAL;</code></pre>
+<p>The <a href="../api-reference/feathers/layout/SlideShowLayout.html#direction"><code>direction</code></a> property may be set to <a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a> or <a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a>.</p>
+<h3 id="spacing">Spacing</h3>
+<p>The <em>padding</em> is the minimum space around the edges of each item in container. Let's set the <a href="../api-reference/feathers/layout/SlideShowLayout.html#padding"><code>padding</code></a> property to <code>12</code> pixels:</p>
+<pre class="code"><code>layout.padding = 12;</code></pre>
+<p>If needed, the padding on each side of the container may be set separately. Below, we set the <a href="../api-reference/feathers/layout/SlideShowLayout.html#paddingTop"><code>paddingTop</code></a> and <a href="../api-reference/feathers/layout/SlideShowLayout.html#paddingBottom"><code>paddingBottom</code></a> properties to <code>10</code> pixels, and we set the <a href="../api-reference/feathers/layout/SlideShowLayout.html#paddingLeft"><code>paddingLeft</code></a> and <a href="../api-reference/feathers/layout/SlideShowLayout.html#paddingRight"><code>paddingRight</code></a> to <code>15</code> pixels:</p>
+<pre class="code"><code>layout.paddingTop = 10;
+layout.paddingRight = 15;
+layout.paddingBottom = 10;
+layout.paddingLeft = 15;</code></pre>
+<h3 id="alignment">Alignment</h3>
+<p>We can <em>align</em> each item within its own page using the <a href="../api-reference/feathers/layout/SlideShowLayout.html#horizontalAlign"><code>horizontalAlign</code></a> and <a href="../api-reference/feathers/layout/SlideShowLayout.html#verticalAlign"><code>verticalAlign</code></a> properties. Alignment only applies when the item does not fill the entire width or height of the page.</p>
+<p>Let's adjust the alignments so that the content will be aligned to the top and left:</p>
+<pre class="code"><code>layout.horizontalAlign = HorizontalAlign.LEFT;
+layout.verticalAlign = VerticalAlign.TOP;</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/layout/SlideShowLayout.html"><code>feathers.layout.SlideShowLayout</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

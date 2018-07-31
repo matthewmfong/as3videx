@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>ILayoutDisplayObject and ILayoutData - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="ilayoutdisplayobject-and-ilayoutdata"><code>ILayoutDisplayObject</code> and <code>ILayoutData</code></h1>
+<p>Some layouts may allow developers to customize individual display objects by adding optional <em>layout data</em>. All Feathers components have a <a href="../api-reference/feathers/layout/ILayoutDisplayObject.html#layoutData"><code>layoutData</code></a> property that can be used to specify additional information about the component that the parent container's layout can use for measurement and positioning.</p>
+<aside class="info">
+This document explains advanced layout features. It builds on the basics explained in <a href="custom-layouts.html">Introduction to Custom Feathers Layouts</a>.
+</aside>
+<h2 id="ilayoutdisplayobject">ILayoutDisplayObject</h2>
+<p>Any display object that may implement the <a href="../api-reference/feathers/layout/ILayoutDisplayObject.html"><code>ILayoutDisplayObject</code></a> interface to support more advanced layout features when added as children of Feathers containers. The base <a href="../api-reference/feathers/core/FeathersControl.html"><code>FeathersControl</code></a> class implements this interface, so most custom components will automatically support the ability to specify layout data.</p>
+<p>The <code>ILayoutDisplayObject</code> interface defines two properties and an event.</p>
+<p>The <a href="../api-reference/feathers/layout/ILayoutDisplayObject.html#includeInLayout"><code>includeInLayout</code></a> property may be set to <code>false</code> to tell a layout to completely ignore a display object. The object won't affect the measurement of the container and the layout won't position, resize, or otherwise transform the display object. This can be used to position a display object manually, but to keep it in the same container as other display objects that need to be in a layout.</p>
+<p>The <a href="../api-reference/feathers/layout/ILayoutDisplayObject.html#layoutData"><code>layoutData</code></a> property is used to set additional properties on the display object that are specific to the layout.</p>
+<p><a href="../api-reference/feathers/events/FeathersEventType.html#LAYOUT_DATA_CHANGE"><code>FeathersEventType.LAYOUT_DATA_CHANGE</code></a> should be dispatched by the display object when a property of the <code>ILayoutData</code> object is changed. This is to inform the container that the layout may be affected by this change to the layout data. The display object should listen for <a href="../api-reference/feathers/layout/ILayoutData.html#event:change"><code>Event.CHANGE</code></a> on the layout data to know when this event should be dispatched.</p>
+<h2 id="ilayoutdata">ILayoutData</h2>
+<p>The <a href="../api-reference/feathers/layout/ILayoutData.html"><code>ILayoutData</code></a> interface defines one required event and no properties or methods. Other properties will be specific to the layout.</p>
+<p><a href="../api-reference/feathers/layout/ILayoutData.html#event:change"><code>Event.CHANGE</code></a> should be dispatched when the value any property of the layout data changes.</p>
+<h2 id="example">Example</h2>
+<p>Let's expand on the example layout presented in <a href="custom-layouts.html">Introduction to Custom Feathers Layouts</a>. We'd like to provide an <code>ILayoutData</code> implementation that allows us to set a <code>percentWidth</code> property for each item.</p>
+<p>To begin, we'll implement <code>ILayoutData</code> with a new <code>SimpleVerticalLayoutData</code> class:</p>
+<pre class="code"><code>package feathersx.layout
+{
+    import feathers.layout.ILayoutData;
+    import starling.events.EventDispatcher;
+ 
+    [Event(name=&quot;change&quot;,type=&quot;starling.events.Event&quot;)]
+ 
+    public class SimpleVerticalLayoutData extends EventDispatcher implements ILayoutData
+    {
+        public function SimpleVerticalLayoutData()
+        {
+ 
+        }
+ 
+        protected var _percentWidth:Number = NaN;
+ 
+        public function get percentWidth():Number
+        {
+            return this._percentWidth;
+        }
+ 
+        public function set percentWidth(value:Number):void
+        {
+            if(this._percentWidth == value)
+            {
+                return;
+            }
+            this._percentWidth = value;
+            this.dispatchEventWidth( Event.CHANGE );
+        }
+    }
+}</code></pre>
+<p>The class needs to extend <a href="http://doc.starling-framework.org/core/starling/events/EventDispatcher.html"><code>starling.events.EventDispatcher</code></a> in order to be able to dispatch <code>Event.CHANGE</code> when its <code>percentWidth</code> property changes. The metadata for this event appears above the class definition. Obviously, we implement the <code>ILayoutData</code> interface.</p>
+<p>The <code>percentWidth</code> getter and setter are also defined. The getter simply returns the <code>_percentWidth</code> member variable used to store the value. The setter checks if the value has changed. If so, it stores the new value in the <code>_percentWidth</code> member variable and then dispatches <code>Event.CHANGE</code>.</p>
+<p>Notice that the member variable is initialized to <code>NaN</code>. We're going to use <code>isNaN()</code> in our layout to check if a display object's width should be set using <code>percentWidth</code> or if the existing width should be used as-is, like it is in the original class. We'll specify percentages in the range <code>0</code> to <code>100</code>.</p>
+<p>If we want to pass this layout data to a Feathers component, we might do it like this:</p>
+<pre class="code"><code>var buttonLayoutData:SimpleVerticalLayoutData = new SimpleVerticalLayoutData();
+buttonLayoutData.percentWidth = 100;
+ 
+var button:Button = new Button();
+button.label = &quot;Click Me&quot;;
+button.layoutData = buttonLayoutData;
+this.addChild( button );</code></pre>
+<p>Next, let's make some modifications to the <code>SimpleVerticalLayout</code> class in order to support this new layout data. We'll start by changing the <code>layout()</code> function a bit:</p>
+<pre class="code"><code>var maxItemWidth:Number = 0;
+var itemCount:int = items.length;
+for(var i:int = 0; i &lt; itemCount; i++)
+{
+    var item:DisplayObject = items[i];
+    // skip items that aren&#39;t included in the layout
+    if(item is ILayoutDisplayObject &amp;&amp; !ILayoutDisplayObject(item).includeInLayout)
+    {
+        continue;
+    }
+    // special case for Feathers components
+    if(item is IFeathersControl)
+    {
+        IFeathersControl(item).validate();
+    }
+ 
+    // used for the final content width below
+    maxItemWidth = Math.max(maxItemWidth, item.width);
+}
+ 
+var viewPortWidth:Number = explicitWidth;
+var viewPortHeight:Number = explicitHeight;
+if(isNaN(viewPortWidth))
+{
+    viewPortWidth = Math.max(minWidth, Math.min(maxWidth, maxItemWidth));
+}
+if(isNaN(explicitHeight))
+{
+    viewPortHeight = Math.max(minHeight, Math.min(maxHeight, positionY));
+}
+ 
+var positionY:Number = startY;
+for(i = 0; i &lt; itemCount; i++)
+{
+    item = items[i];
+    var layoutItem:ILayoutDisplayObject = item as ILayoutDisplayObject;
+ 
+    if(layoutItem)
+    {
+        if(!layoutItem.includeInLayout)
+        {
+            continue;
+        }
+ 
+        var layoutData:SimpleVerticalLayoutData = layoutItem.layoutData as SimpleVerticalLayoutData;
+        if(layoutData)
+        {
+            var percentWidth:Number = layoutData.percentWidth;
+            if(!isNaN(percentWidth))
+            {
+                // change the item&#39;s width if percent width is a valid number
+                item.width = viewPortWidth * percentWidth / 100;
+            }
+        }
+    }
+    if(item is IFeathersControl)
+    {
+        IFeathersControl(item).validate();
+    }
+    item.x = startX;
+    item.y = positionY;
+    positionY += item.height + this._gap;
+}</code></pre>
+<p>There are a number of changes, which might be a bit intimidating, but they're easier to digest individually.</p>
+<p>First, you'll probably notice that the loop over the items has been changed into two loops. As before, in order to properly measure the width of the container, if the <code>explicitWidth</code> has not been specified in the <code>ViewPortBounds</code>, we first need to get the maximum width of an item. However, now we have the <code>percentWidth</code> values in each item's layout data. In order to calculate the width of each item as a percentage of the view port width, we need to split the loop into two and calculate <code>viewPortWidth</code> as soon as possible so that we can use it in the second loop.</p>
+<p>In the second loop, in addition to checking <code>includeInLayout</code> if the item is an <code>ILayoutDisplayObject</code>, we now also try to use the <code>layoutData</code> property. We cast its value as <code>SimpleVerticalLayoutData</code>, the class we defined previously. If the item has layout data, we check the value of <code>percentWidth</code> using <code>isNaN()</code>. If it's a valid numeric value, we change the display object's width by multiplying the <code>viewPortWidth</code> variable by <code>percentWidth</code> and dividing by <code>100</code>. Once the width is set, we continue on with positioning like we did in the old version of this class. As we noted previously, we moved the calculation of <code>minItemWidth</code> to the first loop.</p>
+<p>The <code>getScrollPositionForIndex()</code> function does not need to be changed. It is meant to be called after the <code>layout()</code> function, so the <code>percentWidth</code> values are already processed.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/layout/ILayoutDisplayObject.html"><code>feathers.layout.ILayoutDisplayObject</code> API Reference</a></p></li>
+<li><p><a href="../api-reference/feathers/layout/ILayoutData.html"><code>feathers.layout.ILayoutData</code> API Reference</a></p></li>
+<li><p><a href="custom-layouts.html">Introduction to Custom Feathers Layouts</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

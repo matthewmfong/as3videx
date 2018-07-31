@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Feathers Frequently Asked Questions (FAQ) - Feathers FAQ - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+</div>
+</header>
+<article>
+<h1 id="feathers-frequently-asked-questions-faq">Feathers Frequently Asked Questions (FAQ)</h1>
+<p>Frequently asked questions about <a href="https://feathersui.com/">Feathers</a>.</p>
+<h2 id="general-questions">General Questions</h2>
+<h3 id="who-is-behind-the-development-of-feathers">Who is behind the development of Feathers?</h3>
+<p>Feathers is designed and developed by <a href="https://twitter.com/joshtynjala">Josh Tynjala</a>, an experienced, frontend software developer who has worked in the Adobe Flash ecosystem since 2004. He has years of experience developing custom Flash user interface components, and he has built many apps with Adobe Flash Player and Adobe AIR for web, desktop, and mobile.</p>
+<p>Feathers originated during a time when Josh was developing mobile games for iOS and Android with Adobe AIR. Josh needed UI components that offered excellent performance, touch-centric behavior, and flexible skinning options. None of the Flash UI frameworks at the time were optimized for mobile, and everything was designed for a keyboard and mouse instead of touch screens. He needed to start fresh — focusing on mobile first.</p>
+<p>Before long, Josh released Feathers as an open source project, built on top of the excellent <a href="http://starling-framework.org/">Starling Framework</a>. Feathers soon gained the attention of Adobe, and Josh continues to expand the Feathers library with the company's support.</p>
+<h3 id="where-did-the-name-feathers-come-from">Where did the name &quot;Feathers&quot; come from?</h3>
+<p>A bird's feathers provide functional and aesthetic benefits that I think closely match how user interface components can enhance a graphics library like <a href="http://starling-framework.org/">Starling Framework</a>.</p>
+<h3 id="where-can-i-download-the-most-recent-stable-version-of-feathers">Where can I download the most recent stable version of Feathers?</h3>
+<p>Visit the <a href="https://feathersui.com/">Feathers website</a> for the most recent stable version of Feathers.</p>
+<h3 id="where-can-i-download-the-most-recent-unstabledevelopmentbeta-version-of-feathers">Where can I download the most recent unstable/development/beta version of Feathers?</h3>
+<p>Visit the <a href="https://github.com/BowlerHatLLC/feathers">Feathers project on Github</a> for the newest Feathers code that will eventually become a part of the next stable version. Watch out for bugs!</p>
+<h3 id="how-do-i-know-that-you-wont-abandon-feathers-next-week">How do I know that you won't abandon Feathers next week?</h3>
+<p>Though Feathers is an independent open source project, development of Feathers is supported by Adobe. As a first step in this partnership, Feathers is included with the <a href="http://gaming.adobe.com/technologies/gamingsdk/">Adobe Gaming SDK</a>, along with Starling Framework and other tools for developing games with Adobe technologies. Looking forward, Adobe plans to integrate Starling Framework and Feathers more tightly into its upcoming design and development tools.</p>
+<h3 id="where-can-i-get-help">Where can I get help?</h3>
+<p>Please visit the <a href="http://forum.starling-framework.org/forum/feathers">Feathers forum</a>. Be sure to try a couple of searches to see if someone else has had the same issue. Maybe your questions have been answered already. If not, then feel free to start a new thread.</p>
+<h3 id="how-can-i-contribute">How can I contribute?</h3>
+<p>Feel free to <a href="https://github.com/BowlerHatLLC/feathers/issues">report bugs and request features</a> on Github at any time.</p>
+<p>Pull requests are welcome for bug fixes. Before submitting a pull request, be sure to take a look at the <a href="../coding-conventions.html">Feathers Coding Conventions for Contributors</a>. All code in Feathers is expected to match the coding style described in that document. Contributions that don't follow the coding conventions may be given a lower priority due to the extra effort required to reformat your code.</p>
+<p>For new components and other major contributions, I encourage you to create your own project on <a href="https://github.com/">Github</a> as an extension to Feathers or as a fork. <a href="https://twitter.com/joshtynjala">Send me a link</a>, and I'll be happy to share it with the community. If enough developers show interest in your project, and there's demand for including it in the core Feathers library, we can discuss the details further.</p>
+<h2 id="technical-requirements">Technical Requirements</h2>
+<h3 id="what-operating-systems-can-run-apps-made-with-feathers">What operating systems can run apps made with Feathers?</h3>
+<p>Feathers uses <a href="http://www.adobe.com/products/air.html">Adobe AIR</a>, which can create completely standalone, native apps on iOS, Android (including Barnes &amp; Noble's NOOK devices, Amazon's Kindle devices, and the OUYA console), Windows, and macOS. It also works with the Adobe Flash Player plugin in web browsers.</p>
+<h3 id="doesnt-adobe-air-require-a-separate-runtime-to-be-installed">Doesn't Adobe AIR require a separate runtime to be installed?</h3>
+<p>Not anymore. Adobe AIR's <em>captive runtime</em> feature lets you bundle everything you need into one package. It makes your app's install size a little bit bigger, but this isn't any different than linking in third party frameworks for graphics, audio, and scripting that you might need to build any kind of native app.</p>
+<p>If you prefer to use the separate runtime that Adobe provides, that's remains an option too. iOS support always requires the captive runtime, due to Apple's rules for distributing apps in their App Store.</p>
+<h3 id="which-versions-of-the-adobe-runtimes-are-supported-or-required">Which versions of the Adobe runtimes are supported or required?</h3>
+<p>Typically, the most recent version of Adobe AIR or Adobe Flash Player is supported. Feathers may still work with older versions, but it's not guaranteed. Be sure to check the README file for the current requirements.</p>
+<h3 id="which-version-of-starling-framework-is-supported-or-required">Which version of Starling Framework is supported or required?</h3>
+<p>Generally, the version of Feathers that is available from the <a href="https://feathersui.com/download/">Feathers website</a> will work with the most recent version of Starling Framework that is available from the <a href="http://gamua.com/starling/download/">official Starling download page</a>. Older versions of Starling may remain compatible with the latest version of Feathers, but they are not officially supported.</p>
+<p>Use the latest, bleeding edge code from the <a href="https://github.com/BowlerHatLLC/feathers">Feathers Github project</a> at your own risk. This code is in development, and it may be unstable at times. The newest code from the <a href="https://github.com/Gamua/Starling-Framework">Starling Github project</a> may be required to use it if Feathers has begun using new features or if anything in the Starling APIs has changed. Check the <a href="https://github.com/BowlerHatLLC/feathers/blob/master/README.md">Feathers README file</a> to see which version of Starling is currently required by the unstable version of Feathers.</p>
+<h3 id="does-feathers-support-visual-debugging-similar-to-inspect-element-in-web-browsers">Does Feathers support visual debugging similar to &quot;inspect element&quot; in web browsers?</h3>
+<p>Check out the <a href="https://github.com/joshtynjala/monsterdebugger-client-starling">monsterdebugger-client-starling</a> open source project. It adds support for Starling and Feathers to <a href="http://www.monsterdebugger.com/">Monster Debugger</a> by De Monsters.</p>
+<h2 id="architecture">Architecture</h2>
+<h3 id="why-dont-the-feathers-components-have-default-skins">Why don't the Feathers components have default skins?</h3>
+<p>Ideally, I'd love to provide a basic set of skins for all components that get applied automatically. However, there are some important considerations for optimizing texture atlases for the GPU, mobile performance and memory limits, and the inevitable customizations that are required for just about every app. These considerations often aren't present in a software-based UI framework due to how much easier it is to draw dynamic shapes at runtime in software than it is in hardware. Please see <a href="default-skins.html">this detailed explanation</a> for more information.</p>
+<h2 id="common-issues">Common Issues</h2>
+<p>A few tips for common issues you may encounter as a new Feathers user.</p>
+<h3 id="why-do-i-get-compiler-errors-that-some-classes-cannot-be-found-when-i-use-the-feathers-swc">Why do I get compiler errors that some classes cannot be found when I use the Feathers SWC?</h3>
+<p>Double check that your development environment has been set up correctly. Instructions are provided for setting up <a href="../flash-builder.html">Flash Builder</a>, <a href="../intellij-idea.html">IntelliJ IDEA</a>, <a href="../flash-pro.html">Animate CC</a>, and <a href="../flashdevelop.html">FlashDevelop</a>. Please see <a href="swc-missing-classes.html">this detailed explanation</a> for more information.</p>
+<h3 id="when-i-add-a-feathers-component-to-the-display-list-why-dont-i-see-anything">When I add a Feathers component to the display list, why don't I see anything?</h3>
+<p>Have you provided skins for the component? The Feathers components don't have default skins. Default skins would add unnecessary extra filesize to your projects and they wouldn't be very styleable due to the bitmap-centric nature of GPUs. On mobile, every byte counts (especially since Adobe AIR's captive runtime is rather large), and forcing every Feathers app to include a texture atlas for a default skin would be too much of a burden for many developers. Take a look at <a href="getting-started.html">Getting Started with Feathers</a> to see how to instantiate an example theme to help you get started. It's only one line of code.</p>
+<p>To quickly get up and running with some sample skins, you may want to use a <a href="../themes.html">theme</a>. Take a look at <a href="../getting-started.html">Getting Started with Feathers</a> to see how to instantiate an example theme to help you get started. It's only one line of code.</p>
+<h3 id="why-do-i-get-null-object-reference-runtime-errors-the-first-time-i-try-to-display-a-feathers-component">Why do I get null object reference runtime errors the first time I try to display a Feathers component?</h3>
+<p>Have you provided skins for the component? The Feathers components don't have default skins. Default skins would add unnecessary extra filesize to your projects, and they wouldn't be very styleable due to the bitmap-centric nature of GPUs. On mobile, every byte counts (especially since Adobe AIR's captive runtime is rather large), and forcing every Feathers app to include a texture atlas for default skins would be too much of a burden for many developers.</p>
+<p>To quickly get up and running with some sample skins, you may want to use a <a href="../themes.html">theme</a>. Take a look at <a href="../getting-started.html">Getting Started with Feathers</a> to see how to instantiate an example theme to help you get started. It's only one line of code.</p>
+<h3 id="why-do-the-feathers-component-skins-and-font-sizes-appear-very-small-when-i-run-my-app-on-a-mobile-device">Why do the Feathers component skins and font sizes appear very small when I run my app on a mobile device?</h3>
+<p>Did you chose a strategy for <a href="http://manual.starling-framework.org/en/#_multi_resolution_development">scaling Starling to multiple screen resolutions</a>? In addition to the techniques mentioned in the <em>Starling Manual</em>, Feathers also provides the <a href="../../api-reference/feathers/utils/ScreenDensityScaleFactorManager.html"><code>ScreenDensityScaleFactorManager</code></a> class to scale your application like native mobile apps on iOS and Android.</p>
+<h3 id="why-do-the-feathers-component-skins-and-font-sizes-appear-very-small-when-simulating-a-mobile-app-on-my-computer">Why do the Feathers component skins and font sizes appear very small when simulating a mobile app on my computer?</h3>
+<p>Your development environment may not be properly simulating the display density of the target mobile device. Please follow <a href="display-density.html">these instructions</a> for fixing this issue.</p>
+<h3 id="when-i-try-to-access-the-width-or-height-properties-of-a-feathers-component-why-do-i-get-0">When I try to access the <code>width</code> or <code>height</code> properties of a Feathers component, why do I get <code>0</code>?</h3>
+<p>You can call <code>component.validate()</code> to force a component to immediately measure itself and handle changes to its properties. Normally, a component will queue up a number of changes and process them all in one batch right before Starling renders a new frame. Please see <a href="zero-dimensions.html">this detailed explanation</a> for more information.</p>
+<h3 id="when-i-try-to-change-a-components-skins-why-do-i-always-see-the-themes-skins">When I try to change a component's skins, why do I always see the theme's skins?</h3>
+<p>Before Feathers 3.1, it was possible for the theme to replace styles that you set on a component before the component initialized. However, the architecture has been redesigned so that components will ignore a theme's styles if they are customized outside of the theme before initialization. If you are supporting a legacy application using a version of Feathers before 3.1, please see <a href="cannot-change-skins.html">this detailed explanation</a> for more information.</p>
+<h3 id="why-does-my-feathers-app-throw-error-1056-cannot-create-property-elementformat">Why does my Feathers app throw &quot;Error #1056: Cannot create property <code>elementFormat</code>&quot;?</h3>
+<p>Before Feathers 3.1, different <a href="../text-renderers.html">text renderers</a> each had unique ways of setting font styles that were not compatible. If you passed the wrong type of object to a text renderer, an error like this could occur. However, all text renderers now support customizing font styles using <code>starling.text.TextFormat</code>. If you are supporting a legacy application using a version of Feathers before 3.1, please see <a href="cannot-create-property-element-format.html">this detailed explanation</a> for more information.</p>
+<h3 id="why-are-there-so-many-draw-calls-arent-those-bad">Why are there so many draw calls? Aren't those bad?</h3>
+<p>Drawing text in the GPU involves many tradeoffs. Sometimes it is impossible to avoid extra draw calls. Sometimes, you can get increased performance in situations that require more draw calls. Feathers has been tuned to get the best performance most of the time, but there are options to control this behavior, if needed. Please see <a href="draw-calls.html">this detailed explanation</a> for more information.</p>
+<h3 id="why-do-my-custom-item-renderers-show-the-wrong-data">Why do my custom item renderers show the wrong data?</h3>
+<p>The <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code> components use something called <em>layout virtualization</em> to minimize the number of item renderers that need to be created at any time. Additionally, lists will reuse item renderers when they scroll off screen to display different data that has scrolled on screen. This provides a significant performance boost, especially on mobile.</p>
+<p>When you create a custom item renderer, you need to ensure that it is designed to properly update when the list asks it to display a different item from the data provider. Please see <a href="layout-virtualization.html">this detailed explanation</a> for more information.</p>
+<h3 id="why-cant-i-see-a-filter-in-a-list-or-scrollcontainer">Why can't I see a filter in a <code>List</code> or <code>ScrollContainer</code>?</h3>
+<p>Starling filters aren't compatible with the clipping rectangle. You need to turn off clipping.</p>
+<pre class="code"><code>list.clipContent = false;</code></pre>
+<p>This applies to any scrolling component or container, and a few others like <code>StackScreenNavigator</code> and <code>ScreenNavigator</code>.</p>
+<h3 id="why-isnt-the-text-visible-when-i-flatten-a-feathers-component">Why isn't the text visible when I flatten a Feathers component?</h3>
+<p>Unfortunately, <code>flash.text.TextField</code> often does not draw correctly <code>BitmapData</code> until a frame later. If you are using the Feathers <code>TextFieldTextRenderer</code>, it will wait a frame before uploading its text as a texture on the GPU. Since flattening happens immediately, the <code>TextField</code> won't be ready in time. The best workaround is to immediately validate the component and wait a frame before flattening.</p>
+<h3 id="how-do-i-create-a-list-where-each-item-renderer-can-have-a-different-height">How do I create a <code>List</code> where each item renderer can have a different height?</h3>
+<p>Pass in a <a href="../vertical-layout.html"><code>VerticalLayout</code></a> with its <a href="../../api-reference/feathers/layout/VerticalLayout.html#hasVariableItemDimensions"><code>hasVariableItemDimensions</code></a> property set to <code>true</code>. By default, <code>VerticalLayout</code> forces all item renderers to have the same height because this improves performance for most lists.</p>
+<h3 id="how-do-i-update-an-item-renderer-in-a-list-after-i-change-a-property-on-an-item">How do I update an item renderer in a list after I change a property on an item?</h3>
+<p>You can pass the item's index to <a href="../../api-reference/feathers/data/IListCollection.html#updateItemAt()"><code>updateItemAt()</code></a> on the list's data provider. The list will force the item renderer to redraw.</p>
+<pre class="code"><code>list.dataProvider.updateItemAt( itemIndex );</code></pre>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

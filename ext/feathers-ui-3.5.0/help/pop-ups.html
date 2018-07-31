@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Displaying pop-ups above other content in Feathers - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="displaying-pop-ups-above-other-content-in-feathers">Displaying pop-ups above other content in Feathers</h1>
+<p>Feathers includes a <a href="../api-reference/feathers/core/PopUpManager.html"><code>PopUpManager</code></a> that allows you to display content above the rest of your application. It provides options to make the pop-up modal and to center it on screen. You can customize the modal overlay to create any display object to block interaction with the content below the modal pop-up. You can even customize where pop-ups will appear on the display list.</p>
+<p>If the <a href="focus.html">focus management</a> is enabled, modal pop-ups will be given their own focus manager so that focus cannot be given to components below the modal overlay.</p>
+<h2 id="adding-pop-ps">Adding pop-ps</h2>
+<p><a href="../api-reference/feathers/core/PopUpManager.html#addPopUp()"><code>PopUpManager.addPopUp()</code></a> is used to add a display object as a pop up. You must create the display object beforehand:</p>
+<pre class="code"><code>var popUp:Image = new Image( texture );
+PopUpManager.addPopUp( popUp, true, true );</code></pre>
+<p>The first argument is simply the pop-up to add. It may be any Starling display object.</p>
+<p>The second argument, <code>isModal</code>, tells the <code>PopUpManager</code> whether the pop-up is modal or not. Modal pop-ups include an overlay that blocks touches and other interaction below the pop-up. Non-modal pop-ups allow you to continue interacting with anything below the pop-up while it is displayed.</p>
+<p><code>isCentered</code>, the third argument, tells the <code>PopUpManager</code> if it should center the pop-up on the stage or not. If the stage or the pop-up resizes, it will remain centered. The second and third arguments are optional. If omitted, the pop-up will be modal and centered.</p>
+<p>A fourth argument, also optional, allows you to pass in a custom factory for the modal overlay. By default, <a href="../api-reference/feathers/core/PopUpManager.html#overlayFactory"><code>PopUpManager.overlayFactory</code></a> is used to create the overlay, but you can customize it for individual pop-ups, if needed. We'll look at custom overlay factories further below.</p>
+<h2 id="removing-pop-ups">Removing pop-ups</h2>
+<p>There are two ways to remove pop-ups. The first is by calling <a href="../api-reference/feathers/core/PopUpManager.html#removePopUp()"><code>PopUpManager.removePopUp()</code></a>:</p>
+<pre class="code"><code>PopUpManager.removePopUp( popUp, true );</code></pre>
+<p>The first argument is the pop-up to remove. If the object passed in is not a pop-up, a runtime error will be thrown. The second argument is whether to dispose the pop-up or not.</p>
+<p>If you prefer, you may also use the standard <a href="http://doc.starling-framework.org/core/starling/display/DisplayObject.html#removeFromParent()"><code>removeFromParent()</code></a> function available to all Starling display objects:</p>
+<pre class="code"><code>popUp.removeFromParent( true );</code></pre>
+<p>The <code>PopUpManager</code> will automatically detect that the pop-up was removed. If modal, the overlay will be removed too.</p>
+<h2 id="centering-pop-ups">Centering pop-ups</h2>
+<p>There are two ways to center pop-ups, with different behavior.</p>
+<p>The first way to center a pop-up is to pass a value of <code>true</code> to the third argument of <code>PopUpManager.addPopUp()</code>, named <code>isCentered</code>. In this case, the pop-up will be centered immediately when it is added to the display list. Then, if the stage resizes or the pop-up itself resizes, the pop-up will be repositioned in order to remain centered. The pop-up manager can only detect when the pop-up resizes if it is a Feathers component. Normal Starling display objects do not dispatch an appropriate event to indicate if they have been resized.</p>
+<p>If you choose not to center a pop-up when you call <code>PopUpManager.addPopUp()</code>, you can center it manually by calling <a href="../api-reference/feathers/core/PopUpManager.html#centerPopUp()"><code>PopUpManager.centerPopUp()</code></a> and passing the pop-up as the only argument. This will center the pop-up only once. If the pop-up resizes or the stage resizes, you will need to call <code>PopUpManager.centerPopUp()</code> again to reposition it so that it remains centered.</p>
+<h2 id="customizing-the-popupmanager">Customizing the <code>PopUpManager</code></h2>
+<p>By customizing <a href="../api-reference/feathers/core/PopUpManager.html#overlayFactory"><code>PopUpManager.overlayFactory</code></a> you can change the appearance of the modal overlay. By default, this overlay is a fully transparent <a href="http://doc.starling-framework.org/core/starling/display/Quad.html"><code>Quad</code></a>. It will block touches to the content below, but it has no appearance.</p>
+<p>If you wanted to use a semi-transparent, colored Quad or another Starling display object for overlays, you can pass in a new <code>overlayFactory</code>:</p>
+<pre class="code"><code>PopUpManager.overlayFactory = function():DisplayObject
+{
+    var quad:Quad = new Quad(100, 100, 0x000000);
+    quad.alpha = 0.75;
+    return quad;
+};</code></pre>
+<p>In the example above, the modal overlay is a black <code>Quad</code> with 75% opacity.</p>
+<p>As mentioned above, you can customize the modal overlay for a specific pop-up only by passing in a custom overlay factory to <a href="../api-reference/feathers/core/PopUpManager.html#addPopUp()"><code>PopUpManager.addPopUp()</code></a>:</p>
+<pre class="code"><code>PopUpManager.addPopUp( popUp, true, true, function():DisplayObject
+{
+    var quad:Quad = new Quad(100, 100, 0x000000);
+    quad.alpha = 0.75;
+    return quad;
+});</code></pre>
+<p>You may customize the <a href="../api-reference/feathers/core/PopUpManager.html#root"><code>root</code></a> property of <code>PopUpManager</code>. This is the display object where pop-ups are added. By default, <code>PopUpManager</code> adds all pop-ups directly to the Starling stage.</p>
+<pre class="code"><code>var popUpContainer:Sprite = new Sprite();
+this.stage.addChild( popUpContainer );
+PopUpManager.root = popUpContainer;</code></pre>
+<p>In this case, we move pop-ups into a dedicated container on the stage. This might be useful for ensuring that other content always appears on top of all Feathers content, including the <code>PopUpManager</code>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/core/PopUpManager.html"><code>feathers.core.PopUpManager</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

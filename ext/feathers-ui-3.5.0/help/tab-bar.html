@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers TabBar component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-tabbar-component">How to use the Feathers <code>TabBar</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/TabBar.html"><code>TabBar</code></a> class displays a set of togglable buttons with a vertical or horizontal layout, where only one button at a time may be selected. A tab bar's tabs may be added or removed at runtime through its data provider, and the first and last tabs may be optionally styled differently. For instance, one could create a more &quot;pill&quot; shaped control that looks more like a segmented button bar than a set of tabs.</p>
+<figure>
+<img src="images/tab-bar.png" srcset="images/tab-bar@2x.png 2x" alt="Screenshot of a Feathers TabBar component" />
+<figcaption>
+A <code>TabBar</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-tabbar">Skinning a <code>TabBar</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>TabBar</code> control, set its data provider to display a few tabs, and add it to the display list:</p>
+<pre class="code"><code>var tabs:TabBar = new TabBar();
+tabs.dataProvider = new ArrayCollection(
+[
+    { label: &quot;One&quot; },
+    { label: &quot;Two&quot; },
+    { label: &quot;Three&quot; },
+]);
+this.addChild( tabs );</code></pre>
+<p>The <code>label</code> field in each item from the data provider will set the <a href="../api-reference/feathers/controls/Button.html#label"><code>label</code></a> property on the corresponding tab. In addition to the label, you can also provide an icon for a tab by setting the <code>defaultIcon</code> field, which gets passed to the tab's <a href="../api-reference/feathers/controls/Button.html#defaultIcon"><code>defaultIcon</code></a> property.</p>
+<aside class="info">
+For full details about which properties can be set on tabs, see the description of the <a href="../api-reference/feathers/controls/TabBar.html#dataProvider"><code>dataProvider</code></a> property.
+</aside>
+<p>To know when the selected tab changes, we need to listen to <a href="../api-reference/feathers/controls/TabBar.html#event:change"><code>Event.CHANGE</code></a>:</p>
+<pre class="code"><code>tabs.addEventListener( Event.CHANGE, tabs_changeHandler );</code></pre>
+<p>A listener might look something like this:</p>
+<pre class="code"><code>function tabs_changeHandler( event:Event ):void
+{
+    var tabs:TabBar = TabBar( event.currentTarget );
+    trace( &quot;selectedIndex:&quot;, tabs.selectedIndex );
+}</code></pre>
+<p>The <a href="../api-reference/feathers/controls/TabBar.html#selectedIndex"><code>selectedIndex</code></a> property indicates the zero-based index of the currently selected tab.</p>
+<h2 id="skinning-a-tabbar">Skinning a <code>TabBar</code></h2>
+<p>Except for a couple of layout properties, most of the skinning happens on the tabs. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/TabBar.html"><code>TabBar</code> API reference</a>. We'll look at a few of the most common ways of styling a tab bar below.</p>
+<h3 id="layout">Layout</h3>
+<p>For layout, you can set the <a href="../api-reference/feathers/controls/TabBar.html#direction"><code>direction</code></a> property to <a href="../api-reference/feathers/layout/Direction.html#HORIZONTAL"><code>Direction.HORIZONTAL</code></a> or <a href="../api-reference/feathers/layout/Direction.html#VERTICAL"><code>Direction.VERTICAL</code></a>.</p>
+<p>The <a href="../api-reference/feathers/controls/TabBar.html#gap"><code>gap</code></a> property sets the extra space, measured in pixels, between tabs. You can also use the <a href="../api-reference/feathers/controls/TabBar.html#firstGap"><code>firstGap</code></a> property to provide a different gap after the first tab, and the <a href="../api-reference/feathers/controls/TabBar.html#lastGap"><code>lastGap</code></a> property to provide a different gap before the last tab.</p>
+<p>The <a href="../api-reference/feathers/controls/TabBar.html#distributeTabSizes"><code>distributeTabSizes</code></a> property controls whether the combined size of tabs fill the entire length of the <code>TabBar</code> or if they use the minimum space required.</p>
+<h3 id="skinning-the-tabs">Skinning the Tabs</h3>
+<p>This section only explains how to access the tab sub-components, which are simply toggle buttons. Please read <a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a> for full details about the skinning properties that are available on <code>ToggleButton</code> components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/TabBar.html#DEFAULT_CHILD_STYLE_NAME_TAB"><code>TabBar.DEFAULT_CHILD_STYLE_NAME_TAB</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( ToggleButton )
+    .setFunctionForStyleName( TabBar.DEFAULT_CHILD_STYLE_NAME_TAB, setTabStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setTabStyles( tab:ToggleButton ):void
+{
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    tab.defaultSkin = skin;
+    tab.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>tabBar.customTabStyleName = &quot;custom-tab&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/TabBar.html#customTabStyleName"><code>customTabStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( ToggleButton )
+    .setFunctionForStyleName( &quot;custom-tab&quot;, setCustomTabStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/TabBar.html#tabFactory"><code>tabFactory</code></a> to provide skins for the tabs:</p>
+<pre class="code"><code>tabBar.tabFactory = function():ToggleButton
+{
+    var tab:ToggleButton = new ToggleButton();
+
+    //skin the tab here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    tab.defaultSkin = skin;
+    tab.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );
+
+    return tab;
+};</code></pre>
+<h3 id="skinning-the-first-and-last-tabs">Skinning the First and Last Tabs</h3>
+<p>This section only explains how to access the first and last tab sub-components. Please read <a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a> for full details about the skinning properties that are available on <code>ToggleButton</code> components.</p>
+<p>The tab bar's first and last tabs will have the same skins as the other tabs by default. However, their skins may be customized separately, if desired.</p>
+<p>For the first tab, you can customize the name with <a href="../api-reference/feathers/controls/TabBar.html#customFirstTabStyleName"><code>customFirstTabStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/TabBar.html#firstTabFactory"><code>firstTabFactory</code></a>.</p>
+<p>For the last tab, you can customize the name with <a href="../api-reference/feathers/controls/TabBar.html#customLastTabStyleName"><code>customLastTabStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/TabBar.html#lastTabFactory"><code>lastTabFactory</code></a>.</p>
+<p>Separate skins for the first and last tabs are completely optional.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/TabBar.html"><code>feathers.controls.TabBar</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

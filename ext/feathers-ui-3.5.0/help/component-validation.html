@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Creating a draw() function to validate a custom Feathers component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="creating-a-draw-function-to-validate-a-custom-feathers-component">Creating a <code>draw()</code> function to validate a custom Feathers component</h1>
+<p><code>FeathersControl</code> provides a single, simple <code>draw()</code> function that may be overridden for validation. In general, though, a little extra structure can go a long way to help organize a component's validation code. The core components in Feathers typically break up validation into three phases. If you're familiar with the component internals <a href="http://flex.apache.org/">Apache Flex</a> (formerly Adobe Flex), you should recognize that this is a similar, but also slightly simpler, approach.</p>
+<h2 id="phase-1-commit">Phase 1: Commit</h2>
+<p>The first phase passes properties to children. If a property change requires creating or destroying a child dynamically (such as item renderers in a list), it should happen here.</p>
+<h2 id="phase-2-measurement">Phase 2: Measurement</h2>
+<p>The second phase calculates the ideal dimensions of the component. In general, all children should be created by now, and they may need to be validated so that their own dimensions are known in case they affect the dimensions of their parent.</p>
+<h2 id="phase-3-layout">Phase 3: Layout</h2>
+<p>The third phase is for layout. Children are positioned and resized, using the <code>actualWidth</code> and <code>actualHeight</code> properties as the final dimensions of the component.</p>
+<p>These three phases are not a core part of <code>FeathersControl</code>. They are not required, but they provide a useful structure for organizing validation code. A class that provides a stricter, required structure may be introduced in a future version of Feathers, but it will likely live alongside the current <code>FeathersControl</code> rather than replace it.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="component-properties-methods.html">Anatomy of a Feathers Component</a></p></li>
+<li><p><a href="component-lifecycle.html">Feathers Component Lifecycle</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

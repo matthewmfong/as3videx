@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to prevent a List from scrolling when a child of a custom item renderer is touched - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-prevent-a-list-from-scrolling-when-a-child-of-a-custom-item-renderer-is-touched">How to prevent a List from scrolling when a child of a custom item renderer is touched</h1>
+<p>Sometimes, when you interact with the child of a custom item renderer, you want to ensure that the list won't start scrolling at the same time. For instance, if the child is a slider or another component that requires dragging, you don't want that drag to simultaneously scroll the list.</p>
+<p>How you implement this depends on the sub-component's type. Some components may dispatch useful events that indicate that the user has started dragging or scrolling something. For instance, some components, like sliders, will dispatch <a href="../../api-reference/feathers/events/FeathersEventType.html#BEGIN_INTERACTION"><code>FeathersEventType.BEGIN_INTERACTION</code></a> to indicate when the users begins interacting with them in a meaningful way. Others, like lists or scroll containers may dispatch <a href="../../api-reference/feathers/events/FeathersEventType.html#SCROLL_START"><code>FeathersEventType.SCROLL_START</code></a>.</p>
+<p>For most display objects, you can usually simply listen for <code>TouchEvent.TOUCH</code> on the child:</p>
+<pre class="code"><code>child.addEventListener( TouchEvent.TOUCH, child_touchHandler );</code></pre>
+<p>In the listener, we'll track the ID of the touch and then wait to see if the list starts scrolling:</p>
+<pre class="code"><code>protected function child_touchHandler( event:TouchEvent ):void
+{
+    if(!this._isEnabled)
+    {
+        this.childTouchID = -1;
+        return;
+    }
+ 
+    var child:DisplayObject = DisplayObject( event.currentTarget );
+    if(this.childTouchID &gt;= 0)
+    {
+        var touch:Touch = event.getTouch(child, TouchPhase.ENDED, this.childTouchID);
+        if(!touch)
+        {
+            return;
+        }
+        this._owner.removeEventListener( FeathersEventType.SCROLL_START, owner_scrollStartHandler );
+        this.childTouchID = -1;
+    }
+    else
+    {
+        touch = event.getTouch(child, TouchPhase.BEGAN);
+        if(!touch)
+        {
+            return;
+        }
+        this.childTouchID = touch.id;
+        this._owner.addEventListener( FeathersEventType.SCROLL_START, owner_scrollStartHandler );
+    }
+}</code></pre>
+<p>If the list attempts to start scrolling, it will dispatch <code>FeathersEventType.SCROLL_START</code>. If we call <a href="../../api-reference/feathers/controls/Scroller.html#stopScrolling()"><code>stopScrolling()</code></a> right away, this will tell the list that it should not scroll right now because we're busy with the touch:</p>
+<pre class="code"><code>protected function owner_scrollStartHandler( event:Event ):void
+{
+    if(this.childTouchID &lt; 0)
+    {
+        return;
+    }
+    // no need to listen anymore. the list won&#39;t try to scroll again with this touch.
+    this._owner.removeEventListener( FeathersEventType.SCROLL_START, owner_scrollStartHandler );
+ 
+    // no scrolling right now, please!
+    this._owner.stopScrolling();
+}</code></pre>
+<p>Scrolling will be stopped only when touches originate on the child. If touches originate elsewhere in the item renderer, the list will still be able to detect those touches and scroll by dragging, like mobile users expect.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../item-renderers.html">Introduction to Custom Item Renderers</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

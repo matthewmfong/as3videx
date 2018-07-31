@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to change font styles in a ButtonGroup component - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-change-font-styles-in-a-buttongroup-component">How to change font styles in a <code>ButtonGroup</code> component</h1>
+<p>A <a href="../button-group.html"><code>ButtonGroup</code></a> component contains one or more <a href="../button.html"><code>Button</code></a> sub-components that display some text. Let's look at how to change the font styles in the buttons outside of the theme.</p>
+<h2 id="the-button-font-styles">The button font styles</h2>
+<p>We can customize the buttons inside the button group's <a href="../../api-reference/feathers/controls/ButtonGroup.html#buttonFactory"><code>buttonFactory</code></a>. As long as we aren't setting any advanced font styles on the button's <a href="../text-renderers.html">text renderer</a> (and the theme isn't either), we can pass a <code>starling.text.TextFormat</code> directly to the button's <a href="../../api-reference/feathers/controls/Button.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>var group:ButtonGroup = new ButtonGroup();
+group.buttonFactory = function():Button
+{
+    var button:Button = new Button();
+    button.fontStyles = new TextFormat( &quot;Arial&quot;, 20, 0x3c3c3c );
+    return button;
+};</code></pre>
+<p>If we wanted to change the button's font styles inside the theme, we could set the <a href="../../api-reference/feathers/controls/ButtonGroup.html#customButtonStyleName"><code>customButtonStyleName</code></a> property on the <code>ButtonGroup</code> and <a href="../extending-themes.html">extend the theme</a>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../button-group.html">How to use the Feathers <code>ButtonGroup</code> component</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

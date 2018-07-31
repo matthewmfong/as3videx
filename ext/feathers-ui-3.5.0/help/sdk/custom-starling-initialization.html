@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Customize the initialization of Starling in a Feathers MXML application - Feathers SDK and MXML Help - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+	</style>
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="customize-the-initialization-of-starling-in-a-feathers-mxml-application">Customize the initialization of Starling in a Feathers MXML application</h1>
+<p>When you create a new Feathers application in MXML, Starling is initialized automatically by the compiler, behind the scenes. The default settings will work well for most Feathers apps to support common requirements — like stage and view port resizing, high DPI displays on desktop, and creating a theme. However, advanced developers may wish to customize some of these settings.</p>
+<p>In your project's application, you can add <code>[Frame]</code> metadata to provide your own custom class that initializes Starling:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;f:Application</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="kw">&lt;fx:Metadata&gt;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">        [Frame(factoryClass=&quot;com.example.CustomBootstrap&quot;)]</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw">&lt;/fx:Metadata&gt;</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">&lt;/f:Application&gt;</span></a></code></pre></div>
+<p>A simple startup class might look something like this:</p>
+<pre class="code"><code>package com.example
+{
+    import flash.display.Sprite;
+
+    import starling.core.Starling;
+
+    public class CustomBootstrap extends Sprite
+    {
+        public function CustomBootstrap()
+        {
+            this.stage.scaleMode = StageScaleMode.NO_SCALE;
+            this.stage.align = StageAlign.TOP_LEFT;
+
+            // we need to instantiate the theme before the root is created,
+            // so we pass null to the Starling constructor
+            this._starling = new Starling( null, this.stage );
+
+            // configure any other Starling properties here
+
+            // let&#39;s wait for the Stage 3D context to be created
+            this._starling.addEventListener( Event.CONTEXT3D_CREATE, starling_context3DCreateHandler );
+        }
+
+        private var _starling:Starling;
+
+        private function starling_context3DCreateHandler( event:Event ):void
+        {
+            //this listener shouldn&#39;t be called again if context is lost
+            this._starling.removeEventListener( Event.CONTEXT3D_CREATE, starling_context3DCreateHandler );
+
+            // the context is ready, so the theme can create its textures
+            new MetalWorksMobileTheme();
+
+            // finally, pass Starling the root class and get things started!
+            this._starling.rootClass = MyApp;
+            this._starling.start();
+        }
+    }
+}</code></pre>
+<p>You'll notice that we're manually instantiating the theme in our custom bootstrap class, rather than specifying it using the <code>theme</code> property in the main MXML application. Since we're replacing the default bootstrap code with our own, it becomes our responsibility to configure Starling and the theme.</p>
+<aside class="warn">
+The convenience properties available on the <code>Application</code> class, including <code>theme</code> and <code>context3DProfile</code>, will not work with a custom bootstrap class.
+</aside>
+<h2 id="pre-loading-assets">Pre-loading Assets</h2>
+<p>One reason to use a custom bootstrap is to preload your assets before starting your app. Let's expand the previous example by loading some files using the Starling <code>AssetManager</code>:</p>
+<pre class="code"><code>private var _assets:AssetManager;
+
+private function starling_context3DCreateHandler( event:Event ):void
+{
+    // the context is ready, so the AssetManager can create textures
+    this._assets = new AssetManager();
+    this._assets.enqueue( &quot;file1.png&quot; );
+    this._assets.enqueue( &quot;file2.xml&quot; );
+    this._assets.loadQueue( assets_onProgress );
+}</code></pre>
+<p>Similar to before, we wait until the Stage 3D context is ready. This time, we create the <code>AssetManager</code>, enqueue our assets, and start loading. We'll wait for the assets to load before we start Starling.</p>
+<aside class="info">
+At this point, we might consider displaying some kind of loading indicator on the native stage. A splash screen or a progress bar are both good options.
+</aside>
+<p>Next, let's implement the <code>assets_onProgress</code> function to track the loading progress of our assets:</p>
+<pre class="code"><code>private function assets_onProgress( ratio:Number ):void
+{
+    if( ratio &lt; 1 )
+    {
+        // you could update some kind of simple progress bar here
+        return;
+    }
+
+    this._starling.rootClass = MyApp;
+    this._starling.start();
+}</code></pre>
+<p>Once the assets are fully loaded, we can start Starling. If the app has a theme, we can instantiate it immediately before setting the <code>rootClass</code>, just like before.</p>
+<aside class="info">
+Any asynchronous task can be added to a custom bootstrap class, and it's easy to defer the instantiation of the root MXML application until everything is ready.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="http://wiki.starling-framework.org/manual/asset_management">Starling Manual: Asset Management</a></li>
+<li><a href="http://doc.starling-framework.org/current/starling/core/Starling.html#rootClass">The <code>rootClass</code> property API documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

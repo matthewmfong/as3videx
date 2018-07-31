@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>What is layout virtualization? - Feathers FAQ - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+</div>
+</header>
+<article>
+<h1 id="what-is-layout-virtualization">What is layout virtualization?</h1>
+<p>By default, all built-in layout classes in Feathers have <em>layout virtualization</em> enabled when used in a component that supports this type of layout. For instance, this feature is used by the <a href="../list.html"><code>List</code></a>, <a href="tree.html"><code>Tree</code></a>, and <a href="../grouped-list.html"><code>GroupedList</code></a> components to limit the number of item renderer instances that are created at any given time. This means that a list with one thousand items can perform nearly as fast as a list with only ten items because only the visible item renderers will be created.</p>
+<p>The list will also <strong>reuse</strong> the item renderers as the list scrolls and different items come into view. If you need to create a custom item renderer, you are responsible for ensuring that the item renderer will handle the situation where it is currently displaying one item from the data provider, and the list asks it to display a completely different item. You should not assume that the first item an item renderer receives in its <code>data</code> setter will be only item it will ever need to display.</p>
+<p>If you fail to design your item renderer in a way that allows it to update its appearance when the list asks it to display a new item, you may observe unwanted side effects. The items may appear in the wrong order, and you may see duplicate items that aren't supposed to be there.</p>
+<p>Most layouts that support virtualization have a <a href="../../api-reference/feathers/layout/IVirtualLayout.html#useVirtualLayout"><code>useVirtualLayout</code></a> property that may be set to <code>false</code>. However, unless the number of items in the list's data provider is very small, this may have a severe impact on performance. In general, <code>useVirtualLayout</code> should not be disabled.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../virtual-custom-layouts.html">Creating virtualized custom Feathers layouts</a></p></li>
+<li><p><a href="../item-renderers.html">Introduction to custom item renderers</a></p></li>
+<li><p><a href="../list.html">How to use the Feathers List component</a></p></li>
+<li><p><a href="../grouped-list.html">How to use the Feathers Grouped List component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

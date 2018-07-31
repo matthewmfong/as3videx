@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Setting up Feathers in Adobe Flash Builder - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="setting-up-feathers-in-adobe-flash-builder">Setting up Feathers in Adobe Flash Builder</h1>
+<p>Let's get your <a href="http://www.adobe.com/products/flash-builder.html">Flash Builder</a> development environment setup to use Feathers.</p>
+<aside class="info">
+These instructions apply to Flash Builder 4.7. Minor variations may exist between different versions of Flash Builder.
+</aside>
+<ol>
+<li><p>Follow Adobe's guide <a href="https://helpx.adobe.com/flash-builder/kb/overlay-air-sdk-flash-builder.html">How to update AIR SDK for Adobe Flash Builder 4.7</a> to ensure that Flash Builder is using the latest version of the <a href="https://www.adobe.com/go/air_sdk">Adobe AIR SDK</a>.</p></li>
+<li><p>Download the latest stable versions of <a href="http://feathersui.com/download/">Feathers</a> and <a href="http://gamua.com/starling/download/">Starling Framework</a>.</p></li>
+<li><p>In Flash Builder, select the <strong>File</strong> menu → <strong>New</strong> → <strong>ActionScript Mobile Project</strong>.</p></li>
+<li><p>Enter your <strong>Project name</strong>. The default Project location is usually okay.</p></li>
+<li><p>In the next section, select your preferred mobile platform settings for iOS and Android. Often, you will not need to change anything in this section. If you're unsure, you can update these values in the <code>-app.xml</code> file later. Click <strong>Next</strong>.</p></li>
+<li><p>In the final <strong>Build Paths</strong> section of the wizard, go to the <strong>Library path</strong> tab.</p></li>
+<li><p>Choose the <strong>Add SWC…</strong> button and select the location of <strong>starling.swc</strong>. Repeat for <strong>feathers.swc</strong>.</p>
+<p>Alternatively, you can choose <strong>Add SWC Folder…</strong> and select a folder where both Starling and Feathers SWCs are located.</p></li>
+<li><p>Click <strong>Finish</strong>.</p></li>
+<li><p>Open your project's <strong>-app.xml</strong> file. Inside the <code>&lt;initialWindow&gt;</code> section, add <code>&lt;renderMode&gt;direct&lt;/renderMode&gt;</code>.</p></li>
+</ol>
+<p>Your project is ready. If you're unsure how to proceed, start by using the code in the <strong>Create your Game</strong> section of the <a href="http://gamua.com/starling/first-steps/">Starling First Steps Tutorial</a>. Then take a look at the <a href="getting-started.html">Feathers Getting Started Tutorial</a>.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers TextCallout component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-textcallout-component">How to use the Feathers <code>TextCallout</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/TextCallout.html"><code>TextCallout</code></a> class is a special type of <a href="callout.html">callout</a> that simply renders a string as its content.</p>
+<figure>
+<img src="images/text-callout.png" srcset="images/text-callout@2x.png 2x" alt="Screenshot of a Feathers TextCallout component" />
+<figcaption>
+A <code>TextCallout</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-textcallout">Skinning a <code>TextCallout</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>We create a <code>TextCallout</code> a bit differently than other components. Rather than calling a constructor, we call the static function <a href="../api-reference/feathers/controls/TextCallout.html#show()"><code>TextCallout.show()</code></a>. Let's see how this works by displaying message in a <code>TextCallout</code> when we touch a button. First, let's create the button:</p>
+<pre class="code"><code>var button:Button = new Button();
+button.label = &quot;Click Me&quot;;
+button.addEventListener( Event.TRIGGERED, button_triggeredHandler );
+this.addChild( button );</code></pre>
+<p>Then, in the listener for the <code>Event.TRIGGERED</code> event, we create the callout:</p>
+<pre class="code"><code>function button_triggeredHandler( event:Event ):void
+{
+    var button:Button = Button( event.currentTarget );
+    var callout:TextCallout = TextCallout.show( &quot;Hello World&quot;, button );
+}</code></pre>
+<p>Two arguments are required. The first is the callout's text. This is a simple <code>String</code>. The callout will be automatically resized to fit its content, unless you set <code>width</code> or <code>height</code> manually. The second argument is the origin of the callout. When the callout is shown, it will be automatically positioned so that its arrow points at the origin display object.</p>
+<p>A text callout may be closed manually by calling the <a href="../api-reference/feathers/controls/Callout.html#close()"><code>close()</code></a> function.</p>
+<p>Additional arguments are available for <code>TextCallout.show()</code>, including the direction, whether the callout is modal, and factories for the callout and the modal overlay. See <a href="callout.html">How to use the Feathers <code>Callout</code> component</a> for full details.</p>
+<h2 id="skinning-a-textcallout">Skinning a <code>TextCallout</code></h2>
+<p>Callouts have a number of skin and style properties to let you customize their appearance. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/TextCallout.html"><code>TextCallout</code> API reference</a>. We'll look at a few of the most common ways of styling a text input below.</p>
+<aside class="info">
+As mentioned above, <code>TextCallout</code> is a subclass of <code>Callout</code>. For more detailed information about the skinning options available to <code>TextCallout</code>, see <a href="callout.html">How to use the Feathers <code>Callout</code> component</a>.
+</aside>
+<h3 id="font-styles">Font Styles</h3>
+<p>The input's callout styles may be customized using the <a href="../api-reference/feathers/controls/TextCallout.html#fontStyles"><code>fontStyles</code></a> property.</p>
+<pre class="code"><code>callout.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0x3c3c3c );</code></pre>
+<p>Pass in a <a href="http://doc.starling-framework.org/current/starling/text/TextFormat.html"><code>starling.text.TextFormat</code></a> object, which will work with any type of <a href="text-renderers.html">text renderer</a>.</p>
+<h3 id="skinning-a-textcallout-without-a-theme">Skinning a <code>TextCallout</code> without a theme</h3>
+<p>If you're not using a theme, you can specify a factory to create the callout, including setting skins, in a couple of different ways. The first is to set the <a href="../api-reference/feathers/controls/TextCallout.html#calloutFactory"><code>TextCallout.calloutFactory</code></a> static property to a function that provides skins for the callout. This factory will be called any time that <a href="../api-reference/feathers/controls/TextCallout.html#show()"><code>TextCallout.show()</code></a> is used to create a callout.</p>
+<pre class="code"><code>function skinnedTextCalloutFactory():TextCallout
+{
+    var callout:TextCallout = new TextCallout();
+
+    //set the styles here, if not using a theme
+    callout.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );
+    callout.backgroundSkin = new Image( myBackgroundTexture );
+    callout.topArrowSkin = new Image( myTopTexture );
+    
+    return callout;
+};
+TextCallout.calloutFactory = skinnedTextCalloutFactory;</code></pre>
+<p>Another option is to pass a callout factory to <code>TextCallout.show()</code>. This allows you to create a specific callout differently than the default global <code>TextCallout.calloutFactory</code>.</p>
+<pre class="code"><code>function skinnedTextCalloutFactory():Callout
+{
+    var callout:TextCallout = new TextCallout();
+
+    callout.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );
+    callout.backgroundSkin = new Image( myBackgroundTexture );
+    callout.topArrowSkin = new Image( myTopTexture );
+
+    return callout;
+};
+Callout.show( text, origin, directions, isModal, skinnedTextCalloutFactory );</code></pre>
+<p>You should generally always skin the callouts with a factory or with a theme instead of passing the skins to the <code>TextCallout</code> instance returned by calling <code>TextCallout.show()</code>. If you skin an callout after <code>TextCallout.show()</code> is called, it may not be positioned or sized correctly.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/TextCallout.html"><code>feathers.controls.TextCallout</code> API Documentation</a></li>
+<li><a href="callout.html">How to use the Feathers <code>Callout</code> component</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Why do Feathers component require so many draw calls? Aren't those bad? - Feathers FAQ - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+</div>
+</header>
+<article>
+<h1 id="why-do-feathers-components-require-so-many-draw-calls-arent-those-bad">Why do Feathers components require so many draw calls? Aren't those bad?</h1>
+<p>Displaying a text renderer often results in a new draw call. Contrary to popular belief, many draw calls aren't necessarily bad. It's good to reduce them when you can, but they aren't going to bring your apps to screeching halts. Sometimes, more draw calls are actually better for performance. There are cases where CPU usage from ActionScript will be high enough to negatively affect frame rates. We can improve frame rates by putting a larger burden on the GPU in order to reduce the CPU usage. Feathers does this, and its level of performance in many cases wouldn't be possible without those extra draw calls.</p>
+<p>Vector-based text capabilities provided by <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/text/TextField.html"><code>flash.text.TextField</code></a>, Flash Text Engine (FTE), or Text Layout Framework (TLF) can only be moved to the GPU by rendering the text in software, drawing to <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/display/BitmapData.html"><code>flash.display.BitmapData</code></a> and uploading the pixels to a texture. Each one of these text objects that you want to display in Starling requires a separate texture. Each new texture will trigger a state change that requires another draw call. When using vector-based fonts, this is a limitation that has no good solution. You can switch to bitmap fonts, but that's not always possible. For instance, to display many of the world's languages, you simply cannot use bitmap fonts because there will be too many different individual characters to fit into texture memory.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

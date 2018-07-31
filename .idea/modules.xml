@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" filepath="$PROJECT_DIR$/FeathersLIb/FeathersLIb.iml" />
       <module fileurl="file://$PROJECT_DIR$/as3videx.iml" filepath="$PROJECT_DIR$/as3videx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ext/feathers-ui-3.5.0/feathers.iml" filepath="$PROJECT_DIR$/ext/feathers-ui-3.5.0/feathers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ext/starling-2.4/starling.iml" filepath="$PROJECT_DIR$/ext/starling-2.4/starling.iml" />
     </modules>
   </component>
 </project>

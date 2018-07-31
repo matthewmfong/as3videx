@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Check component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-check-component">How to use the Feathers <code>Check</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Check.html"><code>Check</code></a> component is actually a <a href="toggle-button.html"><code>ToggleButton</code></a> component, but it is given a different visual appearance.</p>
+<figure>
+<img src="images/check.png" srcset="images/check@2x.png 2x" alt="Screenshot of Feathers a Check component" />
+<figcaption>
+<code>Check</code> components skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-check">Skinning a <code>Check</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>A <code>Check</code> component can be created much like a <code>ToggleButton</code>:</p>
+<pre class="code"><code>var check:Check = new Check();
+check.label = &quot;Click Me&quot;;
+check.isSelected = true;
+this.addChild( check );</code></pre>
+<p>See <a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a> for a more detailed look at this component's capabilities.</p>
+<h2 id="skinning-a-check">Skinning a <code>Check</code></h2>
+<p>A skinned <code>Check</code> component usually has no background (or a transparent one) and the touch states of the check are displayed through the icon skins. For full details about which properties are available, see the <a href="../api-reference/feathers/controls/Check.html"><code>Check</code> API reference</a>.</p>
+<aside class="info">
+As mentioned above, <code>Check</code> is a subclass of <code>ToggleButton</code>. For more detailed information about the skinning options available to <code>Check</code>, see <a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a>.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/Check.html"><code>feathers.controls.Check</code> API Documentation</a></p></li>
+<li><p><a href="toggle-button.html">How to use the Feathers <code>ToggleButton</code> component</a></p></li>
+<li><p><a href="toggle-switch.html">How to use the Feathers <code>ToggleSwitch</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

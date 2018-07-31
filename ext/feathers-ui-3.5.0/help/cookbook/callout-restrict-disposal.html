@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to close a Callout without disposing it (or without disposing its content) - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-close-a-callout-without-disposing-it-or-without-disposing-its-content">How to close a <code>Callout</code> without disposing it (or without disposing its content)</h1>
+<p>Normally, a <a href="../callout.html"><code>Callout</code></a> component will dispose itself (and its content) as soon as you close it. However, sometimes we might want to reuse it again, or we might want to reuse its content in another <code>Callout</code> (or elsewhere).</p>
+<h2 id="close-without-disposing-content">Close without disposing content</h2>
+<p>The <a href="../../api-reference/feathers/controls/Callout.html#disposeContent"><code>disposeContent</code></a> property may be set to <code>false</code> to tell the <code>Callout</code> that the content should be preserved when the <code>Callout</code> closes. Let's create a <code>Label</code> that we will show in a <code>Callout</code> every time that a <code>Button</code> is triggered.</p>
+<p>We'll start with a simple class that extends <a href="../layout-group.html"><code>LayoutGroup</code></a> and we'll create the <code>Label</code>, the <code>Button</code>, and add a listener for <code>Event.TRIGGERED</code> to the <code>Button</code>:</p>
+<pre class="code"><code>public class Example extends LayoutGroup
+{
+    public function Example()
+    {
+        super();
+        this.autoSizeMode = AutoSizeMode.STAGE;
+    }
+
+    private var _label:Label;
+    private var _button:Button;
+
+    override protected function initialize():void
+    {
+        this.layout = new AnchorLayout();
+
+        this._label = new Label();
+        this._label = &quot;Hello World&quot;;
+
+        var buttonLayoutData:AnchorLayoutData = new AnchorLayoutData();
+        buttonLayoutData.horizontalCenter = 0;
+        buttonLayoutData.verticalCenter = 0;
+        this._button = new Button();
+        this._button.label = &quot;Click Me&quot;;
+        this._button.layoutData = buttonLayoutData;
+        this._button.addEventListener( Event.TRIGGERED, button_triggeredHandler );
+        this.addChild( this._button );
+    }
+
+    private function button_triggeredHandler( event:Event ):void
+    {
+
+    }
+}</code></pre>
+<p>Next, in the event listener, we'll show the <code>Label</code> in a <code>Callout</code>:</p>
+<pre class="code"><code>var callout:Callout = Callout.show( this._label, this._button );
+callout.disposeContent = false;</code></pre>
+<p>By setting <a href="../../api-reference/feathers/controls/Callout.html#disposeContent"><code>disposeContent</code></a> to <code>false</code>, the same <code>Label</code> will be reused every time while a different <code>Callout</code> shows it. Each <code>Callout</code> will still dispose itself when it closes, of course. Only its content will be preserved.</p>
+<p>We have one last thing to remember; we need to ensure that the <code>Label</code> is disposed eventually, so let's override <code>dispose()</code> on the <code>LayoutGroup</code>:</p>
+<pre class="code"><code>override public function dispose():void
+{
+    if( this._label )
+    {
+        this._label.dispose();
+        this._label = null;
+    }
+    super.dispose();
+}</code></pre>
+<h2 id="close-without-disposing-itself">Close without disposing itself</h2>
+<p>This time around, let's keep showing the same <code>Callout</code> every time that the <code>Button</code> is triggered. We'll be using the the <a href="../../api-reference/feathers/controls/Callout.html#disposeOnSelfClose"><code>disposeOnSelfClose</code></a> property.</p>
+<p>Again, we'll start with a simple class:</p>
+<pre class="code"><code>public class Example extends LayoutGroup
+{
+    public function Example()
+    {
+        super();
+        this.autoSizeMode = AutoSizeMode.STAGE;
+    }
+
+    private var _callout:Callout;
+    private var _button:Button;
+
+    override protected function initialize():void
+    {
+        this.layout = new AnchorLayout();
+
+        var buttonLayoutData:AnchorLayoutData = new AnchorLayoutData();
+        buttonLayoutData.horizontalCenter = 0;
+        buttonLayoutData.verticalCenter = 0;
+        this._button = new Button();
+        this._button.label = &quot;Click Me&quot;;
+        this._button.layoutData = buttonLayoutData;
+        this._button.addEventListener( Event.TRIGGERED, button_triggeredHandler );
+        this.addChild( this._button );
+    }
+
+    private function button_triggeredHandler( event:Event ):void
+    {
+
+    }
+}</code></pre>
+<p>Notice that we haven't created the <code>Label</code> or the <code>Callout</code> yet. Let's do that now in the event listener:</p>
+<pre class="code"><code>if( this._callout )
+{
+    PopUpManager.addPopUp( this._callout, true, false );
+}
+else
+{
+    var label:Label = new Label();
+    label.text = &quot;Hello World&quot;;
+    this._callout = Callout.show( label, this._button );
+    this._callout.disposeOnSelfClose = false;
+}</code></pre>
+<p>The <a href="../../api-reference/feathers/controls/Callout.html#disposeOnSelfClose"><code>disposeOnSelfClose</code></a> property ensures that the <code>Callout</code> will not dispose itself when closed. Since the <code>Callout</code> isn't getting disposed, its content won't be disposed yet either. When we want to show it again, we simply need to add it back to the <a href="../pop-ups.html"><code>PopUpManager</code></a>.</p>
+<p>Similar to the previous example, we should make sure that the <code>Callout</code> gets disposed when our <code>LayoutGroup</code> is disposed.</p>
+<pre class="code"><code>override public function dispose():void
+{
+    if( this._callout )
+    {
+        this._callout.dispose();
+        this._callout = null;
+    }
+    super.dispose();
+}</code></pre>
+<p>As long as the <code>disposeContent</code> property is set to the default value of <code>true</code>, the <code>Label</code> will be disposed too, since it is a child of the <code>Callout</code>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../callout.html">How to use the Feathers <code>Callout</code> component</a></p></li>
+<li><p><a href="callout-stop-closing-automatically.html">How to stop a <code>Callout</code> from closing automatically after touch or keyboard input</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Set up the Feathers SDK in Adobe Flash Builder - Feathers SDK and MXML Help - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="set-up-the-feathers-sdk-in-adobe-flash-builder">Set up the Feathers SDK in Adobe Flash Builder</h1>
+<p>Let's get your <a href="http://www.adobe.com/products/flash-builder.html">Flash Builder</a> development environment setup to use the <a href="http://feathersui.com/sdk/">Feathers SDK</a>.</p>
+<aside class="info">
+These instructions apply to both Flash Builder 4.6 and Flash Builder 4.7.
+</aside>
+<h2 id="create-a-new-workspace-for-feathers-sdk-projects">Create a new workspace for Feathers SDK projects</h2>
+<p>First, we should to create a new workspace in Flash Builder. We're going to make some changes to the workspace settings so that Flash Builder works a little more smoothly with the Feathers SDK. We don't want to do that in a workspace that contains any Flex projects.</p>
+<ol>
+<li><p>Create a new workspace in Flash Builder by selecting <strong>File</strong> menu → <strong>Switch workspace</strong> → <strong>Other...</strong>.</p></li>
+<li><p>Choose a directory for the new workspace.</p></li>
+<li><p>Click <strong>OK</strong> to create the new workspace.</p></li>
+</ol>
+<p>Don't create a new project yet! We have a couple of things to tweak first.</p>
+<h2 id="add-the-feathers-sdk-to-flash-builder">Add the Feathers SDK to Flash Builder</h2>
+<ol>
+<li><p><a href="installation-instructions.html">Install the Feathers SDK</a> somewhere on your computer.</p></li>
+<li><p>Open the Flash Builder preferences on Mac OS X by going to the <strong>Flash Builder</strong> menu → <strong>Preferences</strong>. On Windows, select the <strong>Window</strong> menu → <strong>Preferences...</strong>.</p></li>
+<li><p>Expand the <strong>Flash Builder</strong> node on the list to the left of the preferences window, and select <strong>Installed Flex SDKs</strong>.</p></li>
+<li><p>Click the <strong>Add...</strong> button, and in the new window, choose the directory where you installed the Feathers SDK. Click <strong>OK</strong> when finished.</p></li>
+<li><p>Click the checkbox next to the Feathers SDK in the <strong>Name</strong> column to make this SDK the default for the workspace.</p></li>
+<li><p>Click <strong>Finish</strong>.</p></li>
+</ol>
+<h2 id="import-the-file-templates-for-the-feathers-sdk">Import the file templates for the Feathers SDK</h2>
+<p>Next, we're going to import custom templates for new MXML files. The default templates provided by Flash Builder don't work with Feathers components, so these custom templates will provide the right settings.</p>
+<ol>
+<li><p>Download the <a href="ide-file-templates/feathers-file-templates-flash-builder.xml" download>Feathers SDK file templates for Flash Builder 4.6 and 4.7</a>.</p></li>
+<li><p>Open the Flash Builder preferences on Mac OS X by going to the <strong>Flash Builder</strong> menu → <strong>Preferences</strong>. On Windows, select the <strong>Window</strong> menu → <strong>Preferences...</strong>.</p></li>
+<li><p>Expand the <strong>Flash Builder</strong> node on the list to the left of the preferences window, and select <strong>File Templates</strong>.</p></li>
+<li><p>Click the <strong>Import...</strong> button and choose the file templates that were downloaded in step 1.</p></li>
+</ol>
+<h2 id="how-to-create-a-project-for-a-mobile-application">How to create a project for a mobile application</h2>
+<p>Let's create a mobile application that uses Adobe AIR to target iOS or Android. If you need to create a web or desktop project, skip ahead to the next section.</p>
+<ol>
+<li><p>In Flash Builder, select the <strong>File</strong> menu → <strong>New</strong> → <strong>Flex Mobile Project</strong>. A new window will open to customize the project's settings.</p></li>
+<li><p>Enter your <strong>Project name</strong>. The default <strong>Project location</strong> is usually okay. Click <strong>Next</strong>.</p></li>
+<li><p>Under <strong>Application Template</strong>, choose <strong>Blank</strong>. Do not choose one of the other templates.</p></li>
+<li><p>Click <strong>Finish</strong>.</p></li>
+</ol>
+<h2 id="how-to-create-a-new-project-for-a-web-or-desktop-application">How to create a new project for a web or desktop application</h2>
+<p>Let's create a web or desktop application that can target Flash Player in a web browser or native desktop application. If you need to create a mobile project, take a look at the previous section.</p>
+<ol>
+<li><p>In Flash Builder, select the <strong>File</strong> menu → <strong>New</strong> → <strong>Flex Project</strong>. A new window will open to customize the project's settings.</p></li>
+<li><p>Enter your <strong>Project name</strong>. The default <strong>Project location</strong> is usually okay.</p></li>
+<li><p>Select either the <strong>Web</strong> or <strong>Desktop</strong> application type.</p></li>
+<li><p>Click <strong>Finish</strong>.</p></li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>Flash Builder can now use the Feathers SDK, and your first project is ready. If you're unsure how to proceed, take a look at the <a href="getting-started-mxml.html">Getting Started with Feathers and MXML tutorial</a>.</p>
+<h2 id="known-issues">Known Issues</h2>
+<ul>
+<li><p>Flash Builder code completion will always automatically insert the fully-qualified class name <code>starling.events.Event</code> in MXML <code>&lt;fx:Script&gt;</code> tags, even if <code>flash.events.Event</code> is not imported. Since there is no conflict, the <code>starling.events</code> package name may be manually removed, if desired.</p></li>
+<li><p>Unless the custom file templates are imported, creating a new project will not automatically define the Feathers MXML namespace in the new project's main application class. In this situation, the application class generated by Flash Builder must be edited manually to compile without errors.</p>
+Without the Feathers SDK file templates, a new application file generated by Flash Builder will look something like this: ``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<p><application xmlns:fx="http://ns.adobe.com/mxml/2009" layout="absolute"></p>
+<p></application> ```</p>
+This code will not compile. Import the custom file templates to avoid this issue. If you prefer not to use the custom file templates in your workspace, you may copy the following MXML: ``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<p><f:Application xmlns:f="library://ns.feathersui.com/mxml"
+      xmlns:fx="http://ns.adobe.com/mxml/2009"></p>
+<p></f:Application> ```</p></li>
+<li><p>When creating a new MXML component, no Feathers components will be listed when clicking the <strong>Browse</strong> button next to the <strong>Based on</strong> field that allows you to choose a superclass. Instead, you must manually type in the fully-qualified class name of the component. For example, to create an MXML component based on <a href="../layout-group.html"><code>LayoutGroup</code></a>, you should type in <code>feathers.controls.LayoutGroup</code>.</p></li>
+<li><p>In the <strong>Flex Theme</strong> section of a project's properties, do not change the selected theme or attempt to import a Feathers theme SWC. This may result in Eclipse error messages when opening the project properties. A Feathers theme may be set in your MXML application class using the <code>theme</code> property.</p></li>
+<li><p>When creating a new <strong>Flex Mobile Project</strong>, the <strong>View-Based Application</strong> and <strong>Tabbed Application</strong> options in the <strong>Application Template</strong> section cannot be used with the Feathers SDK. These templates are too closely tied to the Flex framework, and Flash Builder offers no way to customize the templates. Always choose the <strong>Blank</strong> template when creating a new mobile project.</p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

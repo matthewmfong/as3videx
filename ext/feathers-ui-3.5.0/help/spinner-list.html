@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers SpinnerList component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-spinnerlist-component">How to use the Feathers <code>SpinnerList</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/SpinnerList.html"><code>SpinnerList</code></a> class extends the <a href="list.html"><code>List</code></a> component to allow the user to change the selected item by scrolling. Typically, the selected item is positioned in the center of the list, and it may be visually highlighted in some way. A <code>SpinnerList</code> will often loop infinitely, repeating its items as the user scrolls.</p>
+<figure>
+<img src="images/spinner-list.png" srcset="images/spinner-list@2x.png 2x" alt="Screenshot of a Feathers SpinnerList component" />
+<figcaption>
+A <code>SpinnerList</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-spinnerlist">Skinning a <code>SpinnerList</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>SpinnerList</code> control and add it to the display list:</p>
+<pre class="code"><code>var list:SpinnerList = new SpinnerList();
+this.addChild( list );</code></pre>
+<p>Similar to a <code>List</code>, we can pass an <a href="../api-reference/feathers/data/IListCollection.html"><code>IListCollection</code></a> implementation, such as <a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a> or <a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a>, to the <a href="../api-reference/feathers/controls/List.html#dataProvider"><code>dataProvider</code></a> property:</p>
+<pre class="code"><code>list.dataProvider = new ArrayCollection(
+[
+    { text: &quot;Milk&quot;, thumbnail: textureAtlas.getTexture( &quot;milk&quot; ) },
+    { text: &quot;Eggs&quot;, thumbnail: textureAtlas.getTexture( &quot;eggs&quot; ) },
+    { text: &quot;Bread&quot;, thumbnail: textureAtlas.getTexture( &quot;bread&quot; ) },
+    { text: &quot;Chicken&quot;, thumbnail: textureAtlas.getTexture( &quot;chicken&quot; ) },
+]);</code></pre>
+<p>We'll set up the label and icon in the item renderer the same way too:</p>
+<pre class="code"><code>list.itemRendererFactory = function():IListItemRenderer
+{
+    var itemRenderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+    itemRenderer.labelField = &quot;text&quot;;
+    itemRenderer.iconSourceField = &quot;thumbnail&quot;;
+    return itemRenderer;
+};</code></pre>
+<p>We can listen for selection changes with <a href="../api-reference/feathers/controls/List.html#event:change"><code>Event.CHANGE</code></a>:</p>
+<pre class="code"><code>list.addEventListener( Event.CHANGE, list_changeHandler );</code></pre>
+<p>Likewise, we can use the <a href="../api-reference/feathers/controls/List.html#selectedIndex"><code>selectedIndex</code></a> and <a href="../api-reference/feathers/controls/List.html#selectedItem"><code>selectedItem</code></a> properties:</p>
+<pre class="code"><code>list.selectedIndex = 3;
+trace( list.selectedItem.text ); //Chicken</code></pre>
+<p>One way that <code>SpinnerList</code> behaves differently is that selection may not be disabled. A regular <code>List</code> may be used to display read-only content without selection, but the purpose of <code>SpinnerList</code> is to select an item. If you attempt to set the <a href="../api-reference/feathers/controls/List.html#isSelectable"><code>isSelectable</code></a> property to <code>false</code>, a runtime error will be thrown.</p>
+<h2 id="skinning-a-spinnerlist">Skinning a <code>SpinnerList</code></h2>
+<p>A spinner list provides a number of properties to customize its appearance. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/SpinnerList.html"><code>SpinnerList</code> API reference</a>. We'll look at a few of the most common properties below.</p>
+<aside class="info">
+As mentioned above, <code>SpinnerList</code> is a subclass of <code>List</code>. For more detailed information about the skinning options available to <code>SpinnerList</code>, see <a href="list.html">How to use the Feathers <code>List</code> component</a>.
+</aside>
+<h3 id="highlight-the-selected-item">Highlight the selected item</h3>
+<p>We can add a display object above the selected item to visually highlight it. For instance, we might display a border with a transparency in the center that reveals the selected item. In the following example, we pass in a <code>starling.display.Image</code> to the <a href="../api-reference/feathers/controls/SpinnerList.html#selectionOverlaySkin"><code>selectionOverlaySkin</code></a> property, but the skin may be any Starling display object:</p>
+<pre class="code"><code>list.selectionOverlaySkin = new Image( texture );</code></pre>
+<p>This skin will be displayed in the center of the list, positioned either horizontally or vertically, depending on which way the list may be scrolled.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/SpinnerList.html"><code>feathers.controls.SpinnerList</code> API Documentation</a></p></li>
+<li><p><a href="list.html">How to Use the Feathers <code>List</code> Component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

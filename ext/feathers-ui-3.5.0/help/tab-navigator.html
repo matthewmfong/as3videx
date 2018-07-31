@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers TabNavigator component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-tabnavigator-component">How to use the Feathers <code>TabNavigator</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/TabNavigator.html"><code>TabNavigator</code></a> class supports navigation between screens or pages using a <a href="tab-bar.html"><code>TabBar</code></a> sub-component.</p>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#navigation">Navigation</a></p></li>
+<li><p><a href="#animated-transitions">Animated Transitions</a></p></li>
+<li><p><a href="#property-injection">Property Injection</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>TabNavigator</code> component and add it to the display list:</p>
+<pre class="code"><code>var navigator:TabNavigator = new TabNavigator();
+this.addChild( navigator );</code></pre>
+<p>You may set its <code>width</code> and <code>height</code>, but that's optional because the <code>TabNavigator</code> will automatically resize itself to fill the entire stage, if you don't provide explicit dimensions.</p>
+<p>To add a new screen that the navigator can show, call <a href="../api-reference/feathers/controls/TabNavigator.html#addScreen()"><code>addScreen()</code></a> and pass in an ID string to associate with the screen along with a <a href="../api-reference/feathers/controls/TabNavigatorItem.html"><code>TabNavigatorItem</code></a>:</p>
+<pre class="code"><code>var newsFeedItem:TabNavigatorItem = new TabNavigatorItem( NewsFeedTab, &quot;News&quot; );
+navigator.addScreen( &quot;newsFeed&quot;, newsFeedItem );</code></pre>
+<p>This screen's ID is <code>&quot;newsFeed&quot;</code>. We can use use this ID later to programatically show the screen.</p>
+<p>The first argument required by the <code>TabNavigatorItem</code> constructor may be one of three types. We can pass in a <code>Class</code> to instantiate, a display object that has already been instantiated, or a <code>Function</code> that returns a display object. In most cases, a <code>Class</code> is recommended. For more details, see the <a href="../api-reference/feathers/controls/TabNavigatorItem.html#screen"><code>screen</code></a> property.</p>
+<aside class="info">
+In the example above, <code>NewsFeedTab</code> is another class that we create in our project that extends the <a href="screen.html"><code>Screen</code></a> class. In general, it's best to extend a class that implements the <code>IScreen</code> interface, like <a href="screen.html"><code>Screen</code></a>, <a href="panel-screen.html"><code>PanelScreen</code></a>, or <a href="scroll-screen.html"><code>ScrollScreen</code></a>. Each offers different features. For instance, <code>Screen</code> is the most basic with optional support for layouts, while <code>PanelScreen</code> offers layouts, scrolling, and a customizable header and footer.
+</aside>
+<p>The second argument required by the <code>TabNavigatorItem</code> is the label to display on the tab associated with the screen. In this case, we've set it to <code>&quot;News&quot;</code>.</p>
+<p>Finally, we can also pass in an icon to be displayed on the tab. However, this is optional, and we've skipped it in the example above.</p>
+<h2 id="navigation">Navigation</h2>
+<p>The active screen changes when the user selects a tab. When the first tab is added to a <code>TabNavigator</code>, it is automatically selected.</p>
+<p>To show a specific screen programatically, we can set the <a href="../api-reference/feathers/controls/TabNavigator.html#selectedIndex"><code>selectedIndex</code></a>:</p>
+<pre class="code"><code>navigator.selectedIndex = 1;</code></pre>
+<p>Alternatively, call <a href="../api-reference/feathers/controls/TabNavigator.html#showScreen()"><code>showScreen()</code></a>, and pass in the screen's ID. For this example, we'll use the <code>&quot;newsFeed&quot;</code> string that we registered with <code>addScreen()</code> earlier:</p>
+<pre class="code"><code>navigator.showScreen( &quot;newsFeed&quot; );</code></pre>
+<p>The <code>showScreen()</code> method supports an additional arugment that allows a custom animated transition between screens. We'll look at transitions in a moment.</p>
+<p>To access the currently visible screen, use the <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#activeScreen"><code>activeScreen</code></a> property.</p>
+<pre class="code"><code>var screen:NewsFeedTab = NewsFeedTab( navigator.activeScreen );</code></pre>
+<p>You can also use <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#activeScreenID"><code>activeScreenID</code></a> to get the ID of the active screen. In this case, again, it would be <code>&quot;newsFeed&quot;</code>.</p>
+<h2 id="animated-transitions">Animated Transitions</h2>
+<p>As we learned above, we can change to a new screen in a couple of different ways. The transition between two screens can also be animated, improving the user experience and adding a little bit of life to our games and apps. This animation during navigation is called a <a href="transitions.html"><em>transition</em></a>.</p>
+<p>We can find a number of useful transition classes in the <a href="../api-reference/feathers/motion/package-detail.html"><code>feathers.motion</code></a> package. One example is the <a href="../api-reference/feathers/motion/Fade.html"><code>Fade</code></a> class, which fades a screen by animating its <code>alpha</code> property.</p>
+<p>Each of the built-in transition classes has one or more static methods that you can call to create a <em>transition function</em> that tab navigator calls when navigating to a different screen. In this case, let's call <a href="../api-reference/feathers/motion/Fade.html#createFadeInTransition()"><code>Fade.createFadeInTransition()</code></a>.</p>
+<p>We can pass the result to the tab navigator's <a href="../api-reference/feathers/controls/TabNavigator.html#transition"><code>transition</code></a> property:</p>
+<pre class="code"><code>navigator.transition = Fade.createFadeInTransition();</code></pre>
+<p>In the code above, we didn't pass any arguments to <code>Fade.createFadeInTransition()</code>. However, this function exposes some optional parameters that we can customize, if desired. For instance, we might want to customize the duration of the animation (in seconds) and the easing function:</p>
+<pre class="code"><code>navigator.transition = Fade.createFadeInTransition( 0.75, Transitions.EASE_IN_OUT );</code></pre>
+<p>Now, the animation will last a little longer while easing in and out.</p>
+<aside class="info">
+See <a href="transitions.html">Transitions for Feathers screen navigators</a> for a more detailed look at the available transitions, including instructions for creating custom transitions.
+</aside>
+<h3 id="events-when-transitions-start-and-complete">Events when transitions start and complete</h3>
+<p>A <code>TabNavigator</code> dispatches <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#event:transitionStart"><code>FeathersEventType.TRANSITION_START</code></a> when a new screen is being shown and the transition animation begins. Similarly, it dispatches <a href="../api-reference/feathers/controls/supportClasses/BaseScreenNavigator.html#event:transitionComplete"><code>FeathersEventType.TRANSITION_COMPLETE</code></a> when the transition animation has ended.</p>
+<aside class="info">
+If a specific screen needs to know when its transition in (or out) starts or completes, we can listen for different events that provide a little more control. See <a href="screen.html">How to use the Feathers <code>Screen</code> component</a> (or <a href="scroll-screen.html"><code>ScrollScreen</code></a> or <a href="panel-screen.html"><code>PanelScreen</code></a>) for details.
+</aside>
+<p>Let's listen for <code>FeathersEventType.TRANSITION_COMPLETE</code>:</p>
+<pre class="code"><code>navigator.addEventListener( FeathersEventType.TRANSITION_COMPLETE, navigator_transitionCompleteHandler );</code></pre>
+<p>The event listener might look like this:</p>
+<pre class="code"><code>private function navigator_transitionCompleteHandler( event:Event ):void
+{
+    // do something after the transition animation
+}</code></pre>
+<h2 id="property-injection">Property Injection</h2>
+<p>Optionally, we can pass properties to the screen before it is shown. If we have multiple screens that need to share some data, this is a useful way to ensure that each screen has access to it. For instance, we might have an <code>OptionsData</code> class that stores things like audio volume and other common options. We'd want to pass that to the <code>OptionsScreen</code> to let the user change the volume, obviously. We'd also want to pass it to other screens that play audio so that it plays at the correct volume.</p>
+<p>When we create the <code>TabNavigator</code>, let's create an <code>OptionsData</code> instance too. In a moment, we'll pass it to each screen that needs it.</p>
+<pre class="code"><code>var optionsData:OptionsData = new OptionsData();</code></pre>
+<p>Now, when we add our <code>OptionsScreen</code> to the <code>TabNavigator</code>, we pass it the <code>OptionsData</code> instance in using the <a href="../api-reference/feathers/controls/TabNavigatorItem.html#properties"><code>properties</code></a> property on the <code>TabNavigatorItem</code>:</p>
+<pre class="code"><code>var optionsItem:TabNavigatorItem = new TabNavigatorItem( OptionsScreen );
+optionsItem.properties.options = optionsData;</code></pre>
+<p>In <code>OptionsScreen</code>, we need to add a variable or a getter and setter named <code>options</code> to match up with <code>optionsItem.properties.options</code>:</p>
+<pre class="code"><code>protected var _options:OptionsData;
+ 
+public function get options():OptionsData
+{
+    return this._options;
+}
+ 
+public function set options( value:OptionsData ):void
+{
+    this._options = value;
+}</code></pre>
+<p>We want to update the screen when the <code>options</code> property changes, so we should invalidate the screen, and the <code>draw()</code> function will be called again:</p>
+<pre class="code"><code>public function set options( value:OptionsData ):void
+{
+    if(this._options == value)
+    {
+        return;
+    }
+    this._options = value;
+    this.invalidate( INVALIDATION_FLAG_DATA );
+}</code></pre>
+<aside class="warn">
+Objects that are passed by value (like <code>Number</code>, <code>Boolean</code>, and <code>int</code>) should not be used directly with property injection. Each screen will get a copy instead of a reference, so if one screen changes the value, another won't see the change. Always combine simple values like this together into a custom class that can be passed by reference.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/TabNavigator.html"><code>feathers.controls.TabNavigator</code> API Documentation</a></p></li>
+<li><p><a href="transitions.html">Transitions for Feathers screen navigators</a></p></li>
+<li><p><a href="screen.html">How to use the Feathers <code>Screen</code> component</a></p></li>
+<li><p><a href="panel-screen.html">How to use the Feathers <code>ScrollScreen</code> component</a></p></li>
+<li><p><a href="panel-screen.html">How to use the Feathers <code>PanelScreen</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

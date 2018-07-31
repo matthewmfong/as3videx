@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers NumericStepper component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-numericstepper-component">How to use the Feathers <code>NumericStepper</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/NumericStepper.html"><code>NumericStepper</code></a> component displays a numeric value between a minimum and maximum. The value may be changed by pressing the increment or decrement <a href="button.html">buttons</a>. If editing is enabled (typically not enabled on mobile), the value may be changed by typing a value into a <a href="text-input.html">text input</a>.</p>
+<figure>
+<img src="images/numeric-stepper.png" srcset="images/numeric-stepper@2x.png 2x" alt="Screenshot of a Feathers NumericStepper component" />
+<figcaption>
+A <code>NumericStepper</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-numericstepper">Skinning a <code>NumericStepper</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>NumericStepper</code> control, set up its range of values, and add it to the display list.</p>
+<pre class="code"><code>var stepper:NumericStepper = new NumericStepper();
+stepper.minimum = 0;
+stepper.maximum = 100;
+stepper.value = 50;
+this.addChild( stepper );</code></pre>
+<p>The <a href="../api-reference/feathers/controls/NumericStepper.html#value"><code>value</code></a> property indicates the current value of the stepper, while the <a href="../api-reference/feathers/controls/NumericStepper.html#minimum"><code>minimum</code></a> and <a href="../api-reference/feathers/controls/NumericStepper.html#maximum"><code>maximum</code></a> properties establish a range of possible values. We can further control the stepper's behavior with the <a href="../api-reference/feathers/controls/NumericStepper.html#step"><code>step</code></a> property:</p>
+<pre class="code"><code>stepper.step = 1;</code></pre>
+<p>The <code>step</code> property controls how the numeric stepper's value is rounded as the user interacts with it. If we set the stepper's <code>step</code> to <code>1</code>, as we do above, the stepper will increment on whole numbers only, and it cannot have a value like <code>4.5</code>, for instance.</p>
+<p>Add a listener to the <a href="../api-reference/feathers/controls/NumericStepper.html#event:change"><code>Event.CHANGE</code></a> event to know when the <code>value</code> property changes:</p>
+<pre class="code"><code>stepper.addEventListener( Event.CHANGE, stepper_changeHandler );</code></pre>
+<p>The listener might look something like this:</p>
+<pre class="code"><code>function stepper_changeHandler( event:Event ):void
+{
+    var stepper:NumericStepper = NumericStepper( event.currentTarget );
+    trace( &quot;stepper.value changed:&quot;, stepper.value);
+}</code></pre>
+<h2 id="skinning-a-numericstepper">Skinning a <code>NumericStepper</code></h2>
+<p>The skins for a <code>NumericStepper</code> control are divided into three parts. There are the increment and decrement buttons and the text input. There are a few different layout modes that control where the buttons are placed relative to the text input. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/NumericStepper.html"><code>NumericStepper</code> API reference</a>. We'll look at a few of the most common properties below.</p>
+<h3 id="layout">Layout</h3>
+<p>The numeric stepper's layout can be customized to place the buttons in different locations. In the example below, we place the buttons on the right side of the text input, stacked vertically, like you see with many desktop numeric steppers using <a href="../api-reference/feathers/controls/StepperButtonLayoutMode.html#RIGHT_SIDE_VERTICAL"><code>StepperButtonLayoutMode.RIGHT_SIDE_VERTICAL</code></a>:</p>
+<pre class="code"><code>stepper.buttonLayoutMode = StepperButtonLayoutMode.RIGHT_SIDE_VERTICAL;</code></pre>
+<p>There are two additional options for <a href="../api-reference/feathers/controls/NumericStepper.html#buttonLayoutMode"><code>buttonLayoutMode</code></a>. You can use <a href="../api-reference/feathers/controls/StepperButtonLayoutMode.html#SPLIT_HORIZONTAL"><code>StepperButtonLayoutMode.SPLIT_HORIZONTAL</code></a> to place the decrement button on the left side of the text input and the increment button button on the right side. Similarly, you can use <a href="../api-reference/feathers/controls/StepperButtonLayoutMode.html#SPLIT_VERTICAL"><code>StepperButtonLayoutMode.SPLIT_VERTICAL</code></a> to place the increment button on top of the text input and the decrement button on the bottom.</p>
+<p>A gap may be placed between the text input and any button positioned next to it:</p>
+<pre class="code"><code>stepper.textInputGap = 10;</code></pre>
+<p>Simply set the <a href="../api-reference/feathers/controls/NumericStepper.html#buttonLayoutMode"><code>textInputGap</code></a> property to adjust this spacing.</p>
+<p>When the buttons are both placed on the same side of the text input, you can include a gap between them too:</p>
+<pre class="code"><code>stepper.buttonLayoutMode = StepperButtonLayoutMode.RIGHT_SIDE_VERTICAL;
+stepper.buttonGap = 3;</code></pre>
+<p>If the buttons are on different sides of the text input, the <a href="../api-reference/feathers/controls/NumericStepper.html#buttonLayoutMode"><code>buttonGap</code></a> property is ignored.</p>
+<h3 id="skinning-the-decrement-button">Skinning the Decrement Button</h3>
+<p>This section only explains how to access the decrement button sub-component. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/NumericStepper.html#DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON"><code>NumericStepper.DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( NumericStepper.DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON, setNumericStepperDecrementButtonStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setNumericStepperDecrementButtonStyles( button:Button ):void
+{
+    var skin:ImageSkin = new ImageSkin( upTexture );
+    skin.setTextureForState( ButtonState.DOWN, downTexture );
+    button.defaultSkin = skin;
+    button.defaultIcon = newImage( decrementIconTexture );
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>stepper.customDecrementButtonStyleName = &quot;custom-decrement-button&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/NumericStepper.html#customDecrementButtonStyleName"><code>customDecrementButtonStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Button )
+    .setFunctionForStyleName( &quot;custom-decrement-button&quot;, setNumericStepperCustomDecrementButtonStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/NumericStepper.html#decrementButtonFactory"><code>decrementButtonFactory</code></a> to provide skins for the numeric stepper's decrement button:</p>
+<pre class="code"><code>stepper.decrementButtonFactory = function():Button
+{
+    var button:Button = new Button();
+
+    //skin the decrement button here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( upTexture );
+    skin.setTextureForState( ButtonState.DOWN, downTexture );
+    button.defaultSkin = skin;
+    button.defaultIcon = newImage( decrementIconTexture );
+
+    return button;
+}</code></pre>
+<h3 id="skinning-the-increment-button">Skinning the Increment Button</h3>
+<p>This section only explains how to access the increment button sub-component. Please read <a href="button.html">How to use the Feathers <code>Button</code> component</a> for full details about the skinning properties that are available on <code>Button</code> components.</p>
+<p>The numeric stepper's increment button may be skinned similarly to the decrement button. The style name to use with <a href="themes.html">themes</a> is <a href="../api-reference/feathers/controls/NumericStepper.html#DEFAULT_CHILD_STYLE_NAME_INCREMENT_BUTTON"><code>NumericStepper.DEFAULT_CHILD_STYLE_NAME_INCREMENT_BUTTON</code></a> or you can customize the style name with <a href="../api-reference/feathers/controls/NumericStepper.html#customIncrementButtonStyleName"><code>customIncrementButtonStyleName</code></a>. If you aren't using a theme, then you can use <a href="../api-reference/feathers/controls/NumericStepper.html#incrementButtonFactory"><code>incrementButtonFactory</code></a>.</p>
+<aside class="info">
+<p>If your decrement button and increment buttons don't have icons, you can use <a href="../api-reference/feathers/controls/NumericStepper.html#decrementButtonLabel"><code>decrementButtonLabel</code></a> and <a href="../api-reference/feathers/controls/NumericStepper.html#incrementButtonLabel"><code>incrementButtonLabel</code></a> to set the button labels:</p>
+<pre class="code"><code>stepper.decrementButtonLabel = &quot;-&quot;;
+stepper.incrementButtonLabel = &quot;+&quot;;</code></pre>
+</aside>
+<h3 id="skinning-the-text-input">Skinning the Text Input</h3>
+<p>This section only explains how to access the text input sub-component. Please read <a href="text-input.html">How to use the Feathers <code>TextInput</code> component</a> for full details about the skinning properties that are available on <code>TextInput</code> components.</p>
+<h4 id="with-a-theme-1">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/NumericStepper.html#DEFAULT_CHILD_STYLE_NAME_TEXT_INPUT"><code>NumericStepper.DEFAULT_CHILD_STYLE_NAME_TEXT_INPUT</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( TextInput )
+    .setFunctionForStyleName( NumericStepper.DEFAULT_CHILD_STYLE_NAME_TEXT_INPUT, setNumericStepperTextInputStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setNumericStepperTextInputStyles( input:TextInput ):void
+{
+    input.backgroundSkin = new Image( backgroundTexture );
+    input.padding = 20;
+    input.isEditable = false;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>stepper.customTextInputStyleName = &quot;custom-text-input&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/NumericStepper.html#customTextInputStyleName"><code>customTextInputStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( TextInput )
+    .setFunctionForStyleName( &quot;custom-text-input&quot;, setNumericStepperCustomTextInputStyles );</code></pre>
+<h4 id="without-a-theme-1">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/NumericStepper.html#textInputFactory"><code>textInputFactory</code></a> provide skins for the numeric stepper's text input:</p>
+<pre class="code"><code>stepper.textInputFactory = function():TextInput
+{
+    var input:TextInput = new TextInput();
+
+    //skin the text input here, if not using a theme
+    input.backgroundSkin = new Image( backgroundTexture );
+    input.padding = 20;
+    input.isEditable = false;
+
+    return input;
+}</code></pre>
+<aside class="info">
+<p>On mobile devices with touch screens, you should generally set <a href="../api-reference/feathers/controls/TextInput.html#isEditable"><code>isEditable</code></a> on the numeric stepper's text input to <code>false</code> because editing the text may be frustrating or confusing for users. The hit area for the text input may be very small, and since it is positioned adjacent to the buttons, accuracy can be an issue. Moreover, on iOS, a clear button is displayed when a text input has focus, meaning that there may be very even less space to render the text when editing.</p>
+In this situation, it may be better to treat the text input as a label that simply displays the value.
+</aside>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/NumericStepper.html"><code>feathers.controls.NumericStepper</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

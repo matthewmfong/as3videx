@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to add a background skin to a custom item renderer based on FeathersControl and IListItemRenderer - Feathers Cookbook - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-add-a-background-skin-to-a-custom-item-renderer-based-on-featherscontrol-and-ilistitemrenderer">How to add a background skin to a custom item renderer based on <code>FeathersControl</code> and <code>IListItemRenderer</code></h1>
+<p>The example <a href="../feathers-control-item-renderers.html">custom item renderer with <code>FeathersControl</code> and <code>IListItemRenderer</code></a> offers an easy-to-understand foundation to build upon. It's pretty limited in features, though. For instance, you may want some kind of background skin.</p>
+<aside class="info">
+If you've created a <a href="../layout-group-item-renderers.html">custom item renderer based on <code>LayoutGroup</code></a>, you don't need to implement the background skin yourself. You can simply set the <a href="../../api-reference/feathers/controls/LayoutGroup.html#backgroundSkin"><code>backgroundSkin</code></a> property.
+</aside>
+<h2 id="a-backgroundskin-getter-and-setter">A backgroundSkin getter and setter</h2>
+<p>Let's start by adding a <code>backgroundSkin</code> property to our custom item renderer class:</p>
+<pre class="code"><code>private var _backgroundSkin:DisplayObject;
+ 
+public function get backgroundSkin():DisplayObject
+{
+    return this._backgroundSkin;
+}
+ 
+public function set backgroundSkin(value:DisplayObject):void
+{
+    if(this._backgroundSkin == value)
+    {
+        return;
+    }
+    if(this._backgroundSkin)
+    {
+        this.removeChild(this._backgroundSkin, true);
+    }
+    this._backgroundSkin = value;
+    if(this._backgroundSkin)
+    {
+        this.addChildAt(this._backgroundSkin, 0);
+    }
+    this.invalidate(INVALIDATION_FLAG_SKIN);
+}</code></pre>
+<p>Notice that if an old background skin already exists, we remove it. Then, if the new background skin isn't <code>null</code>, we add it as a child at index <code>0</code>. This will ensure that the background skin is always at the bottom.</p>
+<h3 id="resizing-the-background-skin">Resizing the background skin</h3>
+<p>As you may recall, the example custom item renderer based on <code>FeathersControl</code> and <code>IListItemRenderer</code> had a <code>layoutChildren()</code> function. Let's simply set the width and height of the background skin in there.</p>
+<pre class="code"><code>protected function layoutChildren():void
+{
+    if(this._backgroundSkin)
+    {
+        this._backgroundSkin.width = this.actualWidth;
+        this._backgroundSkin.height = this.actualHeight;
+    }
+ 
+    // position and resize other children here
+}</code></pre>
+<p>You probably also want to include the background skin with the measurement calculations inside the <code>autoSizeIfNeeded()</code> function:</p>
+<pre class="code"><code>var newWidth:Number = this.explicitWidth;
+if(needsWidth)
+{
+    newWidth = this._label.width + 2 * this._padding;
+    var backgroundWidth:Number = this._backgroundSkin.width;
+    if(backgroundWidth &gt; newWidth)
+    {
+        newWidth = backgroundWidth;
+    }
+}
+var newHeight:Number = this.explicitHeight;
+if(needsHeight)
+{
+    newHeight = this._label.height + 2 * this._padding;
+    var backgroundHeight:Number = this._backgroundSkin.height;
+    if(backgroundHeight &gt; newWidth)
+    {
+        newWidth = backgroundHeight;
+    }
+}</code></pre>
+<p>Instead of always using the current dimensions of the background skin for measurement, we could save the dimensions of the background skin in member variables when the <code>backgroundSkin</code> setter is called. Let's say that we call the variables <code>originalBackgroundSkinWidth</code> and <code>originalBackgroundSkinHeight</code>. This will allow us to always measure using the original dimensions of the background skin instead of basing the measurement on the <code>this._backgroundSkin.width</code> and <code>this._backgroundSkin.height</code> values that may get changed in <code>layoutChildren()</code>.</p>
+<h2 id="multiple-background-skins">Multiple background skins</h2>
+<p>The example code above adds only a single background skin. What if you want to display a different background skin for each touch phase?</p>
+<ul>
+<li><a href="item-renderer-touch-states.html">Cookbook: How to support multiple touch states in a custom item renderer</a></li>
+</ul>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../item-renderers.html">Introduction to Custom Item Renderers</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers Cookbook</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

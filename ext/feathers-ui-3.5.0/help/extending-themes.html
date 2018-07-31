@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Extending Feathers example themes - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="extending-feathers-example-themes">Extending Feathers example themes</h1>
+<p>Using one of the example <a href="themes.html">themes</a> included with Feathers, we can quickly style every Feathers component in our apps with a set of pre-made skins. This is a great way to get started with a new game, or an app with heavy branding, when we plan to integrate the final, custom design later. The example themes can even be useful for skinning productivity apps and things that don't require custom-designed branding and skins.</p>
+<p>Whatever our needs, eventually, we may need to make some style tweaks. Maybe we need to add icons to various buttons or we need to provide some alternate skins for certain components. Often, it's best to <a href="custom-themes.html">create a theme from scratch</a>. Other times, we might like how an existing theme looks, but we need to make a few minor tweaks here and there. The example themes included with Feathers are designed with basic extensibility in mind. Let's learn to modify the themes to add some extra custom styles.</p>
+<aside class="info">
+If you haven't read <a href="skinning.html">Skinning Feathers components</a> yet, start there first to learn about how to do basic skinning without themes.
+</aside>
+<h2 id="adding-an-alternate-style-function">Adding an alternate style function</h2>
+<p>Let's say that we're using <code>MetalWorksMobileTheme</code> in our app. Most of the skins meet our design requirements, but we need to create a special button in our app with a slightly different style.</p>
+<p>In this tutorial, we extend <code>MetalWorksMobileTheme</code>, one of the example themes included with Feathers. You will find a compiled SWC for this theme, and the full source code, inside the Feathers ZIP file in the <em>themes</em> directory.</p>
+<p>To get started, we'll subclass the <code>MetalWorksMobileTheme</code> class:</p>
+<pre class="code"><code>package com.example
+{
+    import feathers.themes.MetalWorksMobileTheme;
+ 
+    public class CustomTheme extends MetalWorksMobileTheme
+    {
+        public function CustomTheme()
+        {
+            super();
+        }
+    }
+}</code></pre>
+<p>Where we instantiate <code>MetalWorksMobileTheme</code> when our app first starts up, we must change it to instantiate our new subclass instead:</p>
+<pre class="code"><code>new CustomTheme();</code></pre>
+<p>Next, let's add a function that will provide different skins for our special button. Inside the <code>CustomTheme</code> class, add the following <code>setCustomButtonStyles()</code> function:</p>
+<pre class="code"><code>protected function setCustomButtonStyles( button:Button ):void
+{
+    button.defaultSkin = new Quad( 200, 60, 0xff0000 );
+    button.downSkin = new Quad( 200, 60, 0x000000 );
+    button.fontStyles = new TextFormat( &quot;_sans&quot;, 36, 0xffffff );
+    button.padding = 10;
+}</code></pre>
+<p>Now, we need to tell the theme how to use this function. The superclass defines a method named <code>initializeStyleProviders()</code> where all of the global style providers are registered with Feathers.</p>
+<p>Every example theme included with Feathers uses this same architecture. Themes provided by third-parties may work a bit differently, so you should refer to the third-party documentation for complete details.</p>
+<p>We want to override the <code>initializeStyleProviders()</code> function so that we can tell the <code>Button</code> global style provider about our <code>setCustomButtonStyles()</code> function:</p>
+<pre class="code"><code>override protected function initializeStyleProviders():void
+{
+    super.initializeStyleProviders(); // don&#39;t forget this!
+ 
+    this.getStyleProviderForClass( Button )
+        .setFunctionForStyleName( &quot;custom-button&quot;, this.setCustomButtonStyles );
+}</code></pre>
+<p>We call the <code>getStyleProviderForClass()</code> function to access the global style provider for the <code>Button</code> class. If a global style provider hasn't been registered yet, one will be created automatically.</p>
+<p>Because <code>MetalWorksMobileTheme</code> is a subclass of <code>StyleNameFunctionTheme</code>, the style provider returned by <code>getStyleProviderForClass()</code> is a <code>StyleNameFunctionStyleProvider</code>. We learned about this type of style provider in <a href="skinning.html">Skinning Feathers components</a>. It allows us to specify combinations of style names and functions to provide multiple skins for the same type of component.</p>
+<p>We call <code>setFunctionForStyleName()</code> and pass in a &quot;custom-button&quot; style name (you can use any string that you want, as long as it is unique to your app) and a reference to our <code>setCustomButtonStyles()</code> function that we defined earlier.</p>
+<p>That's all we need to add to the theme. Next, let's make a little tweak to the code that creates our special button:</p>
+<pre class="code"><code>var specialButton:Button = new Button();
+specialButton.label = &quot;Special!&quot;;
+specialButton.styleNameList.add( &quot;custom-button&quot; );
+this.addChild( specialButton );</code></pre>
+<p>We add the &quot;custom-button&quot; string to the button's <code>styleNameList</code>, and now the button will be skinned using our <code>setCustomButtonStyles()</code> function instead of the default function defined by <code>MetalWorksMobileTheme</code>.</p>
+<h2 id="adding-custom-components-to-a-theme">Adding custom components to a theme</h2>
+<p>By default, a custom component will inherit the default style provider from its super class. If you create a <code>CustomButton</code> class that extends <code>Button</code>, the subclass will automatically default to using <code>Button.globalStyleProvider</code>. If you want your component to simply use the same skins as its superclass, you don't need to do anything. It will happen automatically.</p>
+<p>However, if you want the subclass to use a different default style provider than its superclass, then you need to add a couple of properties to your component's class. First, it needs a static global style provider:</p>
+<pre class="code"><code>public class CustomComponent extends FeathersControl
+{
+    public static var globalStyleProvider:IStyleProvider;
+}</code></pre>
+<p>Second, it needs to override the non-static <code>defaultStyleProvider</code> getter:</p>
+<pre class="code"><code>override protected function get defaultStyleProvider():IStyleProvider
+{
+    return CustomComponent.globalStyleProvider;
+}</code></pre>
+<p>For the vast majority of components, the <code>defaultStyleProvider</code> getter should simply return the static global style provider.</p>
+<p>However, the default style provider can certainly be customized. For instance, the <code>ToggleButton</code> component will return <code>Button.globalStyleProvider</code> if <code>ToggleButton.globalStyleProvider</code> is <code>null</code>:</p>
+<pre class="code"><code>override protected function get defaultStyleProvider():IStyleProvider
+{
+    if( ToggleButton.globalStyleProvider )
+    {
+        return ToggleButton.globalStyleProvider;
+    }
+    return Button.globalStyleProvider;
+}</code></pre>
+<p>Similarly, your custom component could also provide a fallback default style provider from the superclass.</p>
+<p>To add the custom component to the theme, override the <code>initializeStyleProviders()</code> function, just like in the previous example:</p>
+<pre class="code"><code>override protected function initializeStyleProviders():void
+{
+    super.initializeStyleProviders(); // don&#39;t forget this!
+ 
+    this.getStyleProviderForClass(CustomComponent).defaultStyleFunction = 
+        this.setCustomComponentStyles;
+}</code></pre>
+<p>You can set the <code>defaultStyleFunction</code> on the <code>StyleNameFunctionStyleProvider</code>. If you have alternate styles for the custom component, you can also call <code>setFunctionForStyleName()</code>, just like you can with any other component.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="skinning.html">Skinning Feathers components</a></p></li>
+<li><p><a href="themes.html">Introduction to Feathers Themes</a></p></li>
+<li><p><a href="style-providers.html">An in-depth look at Feathers style providers</a></p></li>
+<li><p><a href="custom-themes.html">Creating custom Feathers Themes</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Why do the Feathers component skins and font sizes appear very small when simulating a mobile device on my computer? - Feathers FAQ - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+</div>
+</header>
+<article>
+<h1 id="why-do-the-feathers-component-skins-and-font-sizes-appear-very-small-when-simulating-a-mobile-device-on-my-computer">Why do the Feathers component skins and font sizes appear very small when simulating a mobile device on my computer?</h1>
+<p>Unfortunately, while many IDEs provide a list of common mobile devices to simulate, some will only simulate the stage dimensions of these devices, but not the screen density (also referred to as DPI or PPI) or the name of the platform. In those cases, your computer's screen density (which is often very different from a phone or tablet) and your desktop platform (Windows or Mac instead of iOS or Android) will be reported during testing. This can make Feathers behave in unexpected ways, such as scaling components incorrectly.</p>
+<p>Adobe AIR allows you to provide custom values for the screen density and platform name when testing a mobile app on your computer. This makes it easy to quickly simulate a variety of mobile devices. In most IDEs, you can customize the arguments passed to ADL (AIR Debug Launcher) to manually take advantage of this feature, even if the IDE doesn't support it automatically. The instructions below will walk you through this process for several popular development environments. You'll also find tips for other environments, including launching ADL from the command line.</p>
+<h4 id="adobe-flash-builder">Adobe Flash Builder</h4>
+<p>Ensure that the project type is an <strong>ActionScript Mobile Project</strong>. You can choose the simulated device in the <strong>Run Configurations</strong> and <strong>Debug Configurations</strong> dialogs. The screen density and platform name will be provided automatically for common devices.</p>
+<h4 id="adobe-animate-cc">Adobe Animate CC</h4>
+<p>Unfortunately, Animate CC (formerly known as Flash Professional CC) does not provide advanced options to customize the ADL testing environment with a screen density and platform name. In fact, to switch between different screen resolutions during testing, you need to manually adjust the stage width and height of your FLA file before you choose Test Movie. It's very cumbersome, and building Feathers apps with Animate is supported, but not recommended.</p>
+<p>For best results, run ADL from the command line after you compile your SWF in Animate. Please follow the instructions for <a href="#other-environments"><em>Other Environments</em></a>, specified below.</p>
+<h4 id="intellij-idea">IntelliJ IDEA</h4>
+<p>Ensure that the module type is an <strong>ActionScript application for AIR mobile platform</strong>. You can choose the simulated device in the <strong>Run/Debug Configurations</strong> dialog. The screen density and platform name will be provided automatically for common devices, and you can specify custom values, if needed.</p>
+<h4 id="other-environments">Other Environments</h4>
+<p><a href="http://help.adobe.com/en_US/air/build/WSfffb011ac560372f-6fa6d7e0128cca93d31-8000.html">AIR Debug Launcher</a> offers a few important command line options that will allow you to simulate any device's screen resolution, screen density, and platform name.</p>
+<ul>
+<li><p>The <code>-screensize</code> argument will specify the device's screen resolution. Some IDEs may provide this automatically, but it should always be specified on the command line.</p>
+<p>A number of predefined strings are available to simulate common devices. For instance, you can use <code>iPhone5Retina</code> to simulate an iPhone 5 with Retina display. The full list of predefined device strings is available in the <a href="http://help.adobe.com/en_US/air/build/WSfffb011ac560372f-6fa6d7e0128cca93d31-8000.html">ADL documentation</a>.</p>
+<p>If you want to simulate any device that doesn't have a predefined string, you can also pass in numeric values for the screen dimensions, in pixels. For example, the same iPhone device can be simulated by passing in <code>640×1096:640×1136</code> instead. The first set of dimensions is when the app is displayed with the OS chrome (status bars and things), and the second set of dimensions is when the app is displayed full screen.</p></li>
+<li><p>The <code>-XscreenDPI</code> argument will specify the simulated device's screen density. For example, the screen density of an iPhone 5 with Retina display is <code>326</code>.</p></li>
+<li><p>The <code>-XversionPlatform</code> argument will specify the simulated device's operating system. For example, you may use <code>IOS</code> or <code>AND</code>.</p></li>
+</ul>
+<h3 id="command-line">Command Line</h3>
+<p>Using the arguments we learned about above, let's see a couple of examples of how to launch ADL from the command line to simulate a mobile device.</p>
+<p>In the following example, a predefined device name is used, along with the screen density and the platform name used on Apple devices:</p>
+<pre class="code"><code>adl -screensize iPhone5Retina -XscreenDPI 326 -XversionPlatform IOS YourProject-app.xml</code></pre>
+<p>At the end of the command, you must specify the path to your AIR application descriptor.</p>
+<p>In the next example, we specify the screen resolution, density, and platform name of an Android phone:</p>
+<pre class="code"><code>adl -screensize 768x1240:768x1280 -XscreenDPI 318 -XversionPlatform AND YourProject-app.xml</code></pre>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../../api-reference/feathers/utils/ScreenDensityScaleFactorManager.html"><code>feathers.utils.ScreenDensityScaleFactorManager</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers FAQ</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

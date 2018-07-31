@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>The complete guide to MXML in the Feathers SDK - Feathers SDK and MXML Help - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+	</style>
+	<link rel="stylesheet" href="../css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="the-complete-guide-to-mxml-in-the-feathers-sdk">The complete guide to MXML in the Feathers SDK</h1>
+<p>The <a href="http://feathersui.com/sdk/">Feathers SDK</a> supports using MXML to declaratively layout user interfaces at compile time. MXML provides a number of features to reduce boilerplate ActionScript code and make user interface code more readable.</p>
+<ul>
+<li><a href="#add-children-to-containers">Add children to containers</a></li>
+<li><a href="#set-properties-on-objects">Set properties on objects</a></li>
+<li><a href="#add-event-listeners">Add event listeners</a></li>
+<li><a href="#include-actionscript-code-inside-an-mxml-class">Include ActionScript code inside an MXML class</a></li>
+<li><a href="#reference-mxml-objects-in-actionscript">Reference MXML objects in ActionScript</a></li>
+<li><a href="#bind-data-to-properties">Bind data to properties</a></li>
+<li><a href="#built-in-primitive-types">Built-in primitive types</a></li>
+<li><a href="#define-properties-on-an-mxml-class">Define properties on an MXML class</a></li>
+<li><a href="#define-metadata-on-an-mxml-class">Define metadata on an MXML class</a></li>
+<li><a href="#define-view-states-on-an-mxml-class">Define view states on an MXML class</a></li>
+<li><a href="#create-inline-sub-component-factories">Create inline sub-component factories</a></li>
+</ul>
+<h2 id="add-children-to-containers">Add children to containers</h2>
+<p>With only a quick glance at MXML code, we can easily recognize the relationship between a component and its parent container. Adding a child to a container is as simple as nesting an XML element inside another.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;f:LayoutGroup&gt;</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">&lt;f:Slider/&gt;</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">&lt;/f:LayoutGroup&gt;</span></a></code></pre></div>
+<h2 id="set-properties-on-objects">Set properties on objects</h2>
+<p>The properties of an object created in MXML may be set in one of two ways. First, we can set properties using XML attributes:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>Simple types like <code>Number</code>, <code>int</code>, <code>uint</code>, <code>String</code>, and <code>Boolean</code> can be set this way.</p>
+<p>Alternatively, we can pass more complex values to a property by referencing it using a child XML element:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;f:LayoutGroup&gt;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="kw">&lt;f:layout&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">        <span class="kw">&lt;f:HorizontalLayout</span><span class="ot"> padding=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="kw">&lt;/f:layout&gt;</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">&lt;/f:LayoutGroup&gt;</span></a></code></pre></div>
+<p>Here, we create a new instance of <code>HorizontalLayout</code>, set one of its properties, and then we pass it to the <code>layout</code> property.</p>
+<h2 id="add-event-listeners">Add event listeners</h2>
+<p>Similar to setting properties, we can listen for events by referencing the event type as an XML attribute:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">&lt;f:Slider</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ot">    change=</span><span class="st">&quot;slider_changeHandler(event)&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>We've added an event listener for <code>Event.CHANGE</code> to the <code>Slider</code>. In the next section, we'll learn how to write the ActionScript code for this event listener.</p>
+<h2 id="include-actionscript-code-inside-an-mxml-class">Include ActionScript code inside an MXML class</h2>
+<p>In the previous example, we listened for an event. Let's create the event listener function using ActionScript. We can add an <code>&lt;fx:Script&gt;</code> block to our MXML component to include ActionScript code:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">&lt;fx:Script&gt;</span><span class="bn">&lt;![CDATA[</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    private function button_triggeredHandler(event:Event):void</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">        trace( &quot;slider value changed!&quot; );</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    }</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="bn">]]&gt;</span><span class="kw">&lt;/fx:Script&gt;</span></a></code></pre></div>
+<h2 id="reference-mxml-objects-in-actionscript">Reference MXML objects in ActionScript</h2>
+<p>If we want to access the <code>value</code> property of the <code>Slider</code> in our event listener, we can give the <code>Slider</code> an id.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">&lt;f:Slider</span><span class="ot"> id=</span><span class="st">&quot;slider&quot;</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ot">    minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="ot">    change=</span><span class="st">&quot;slider_changeHandler(event)&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>Now, we can reference the <code>Slider</code> that we created in MXML like a member variable on an ActionScript class:</p>
+<pre class="code"><code>private function button_triggeredHandler(event:Event):void
+{
+    trace( &quot;slider value changed! &quot; + this.slider.value );
+}</code></pre>
+<h2 id="bind-data-to-properties">Bind data to properties</h2>
+<p>Data binding can save us time by skipping the boilerplate code for setting up event listeners and setting properties.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">&lt;f:LayoutGroup&gt;</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">    <span class="kw">&lt;f:layout&gt;</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">        <span class="kw">&lt;f:HorizontalLayout/&gt;</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    <span class="kw">&lt;/f:layout&gt;</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">    <span class="kw">&lt;f:Slider</span><span class="ot"> id=</span><span class="st">&quot;slider&quot;</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> value=</span><span class="st">&quot;10&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">    <span class="kw">&lt;f:Label</span><span class="ot"> text=</span><span class="st">&quot;{slider.value}&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">&lt;/f:LayoutGroup&gt;</span></a></code></pre></div>
+<p>Now, when the slider's <code>value</code> property changes, we display the value in a label.</p>
+<h2 id="built-in-primitive-types">Built-in primitive types</h2>
+<p>A number of primitive data types that we use frequently in ActionScript may also be used to create objects in MXML. For instance, the <code>Number</code>, <code>int</code>, and <code>uint</code> classes may define numeric values.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">&lt;fx:Number&gt;</span>32<span class="kw">&lt;/fx:Number&gt;</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">&lt;fx:Number&gt;</span>123.45<span class="kw">&lt;/fx:Number&gt;</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">&lt;fx:int&gt;</span>-650<span class="kw">&lt;/fx:int&gt;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">&lt;fx:uint&gt;</span>17925<span class="kw">&lt;/fx:uint&gt;</span></a></code></pre></div>
+<p>The <code>Boolean</code> class may be true or false:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">&lt;fx:Boolean&gt;</span>true<span class="kw">&lt;/fx:Boolean&gt;</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">&lt;fx:Boolean&gt;</span>false<span class="kw">&lt;/fx:Boolean&gt;</span></a></code></pre></div>
+<p>The <code>String</code> class represents text, including support for <code>&lt;![CDATA[ ]&gt;</code> to allow unescaped text:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">&lt;fx:String&gt;</span>Hello World<span class="kw">&lt;/fx:String&gt;</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">&lt;fx:String&gt;</span><span class="bn">&lt;![CDATA[</span>Complex strings using &lt;XML&gt; &amp; more!<span class="bn">]]&gt;</span><span class="kw">&lt;/fx:Boolean&gt;</span></a></code></pre></div>
+<p>The <code>Object</code> class may define sets of key-value pairs using both attributes and child elements:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">&lt;fx:Object</span><span class="ot"> numeric=</span><span class="st">&quot;35&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    <span class="kw">&lt;fx:text&gt;</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">        <span class="kw">&lt;fx:String&gt;</span>Message for you, friend!<span class="kw">&lt;/fx:String&gt;</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">    <span class="kw">&lt;/fx:text&gt;</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="kw">&lt;/fx:Object&gt;</span></a></code></pre></div>
+<p>Additionally, <code>Array</code> objects can be populated by adding multiple children:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">&lt;fx:Array&gt;</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">    <span class="kw">&lt;fx:Number&gt;</span>1<span class="kw">&lt;/fx:Number&gt;</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">    <span class="kw">&lt;fx:Number&gt;</span>2<span class="kw">&lt;/fx:Number&gt;</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="kw">&lt;fx:Number&gt;</span>3<span class="kw">&lt;/fx:Number&gt;</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">&lt;/fx:Array&gt;</span></a></code></pre></div>
+<p>Similarly, the <code>Vector</code> class defines a typed array:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">&lt;fx:Vector</span><span class="ot"> type=</span><span class="st">&quot;starling.display.DisplayObject&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="kw">&lt;fx:Button</span><span class="ot"> label=</span><span class="st">&quot;Back&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="kw">&lt;fx:Button</span><span class="ot"> label=</span><span class="st">&quot;Settings&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">&lt;/fx:Vector&gt;</span></a></code></pre></div>
+<h2 id="define-properties-on-an-mxml-class">Define properties on an MXML class</h2>
+<p>An <code>&lt;fx:Declarations&gt;</code> element may be used in an MXML class to create MXML objects that aren't user interface components.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">&lt;fx:Declarations&gt;</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">    <span class="kw">&lt;fx:Array</span><span class="ot"> id=</span><span class="st">&quot;items&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">        <span class="kw">&lt;fx:Object</span><span class="ot"> label=</span><span class="st">&quot;Bread&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">        <span class="kw">&lt;fx:Object</span><span class="ot"> label=</span><span class="st">&quot;Eggs&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">        <span class="kw">&lt;fx:Object</span><span class="ot"> label=</span><span class="st">&quot;Milk&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    <span class="kw">&lt;/fx:Array&gt;</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="kw">&lt;/fx:Declarations&gt;</span></a></code></pre></div>
+<p>Give the object an <code>id</code>, and it may be referenced in MXML for things like binding, and inside an ActionScript <code>&lt;fx:Script&gt;</code> element.</p>
+<h2 id="define-metadata-on-an-mxml-class">Define metadata on an MXML class</h2>
+<p>Metadata may be added to an MXML class using a <code>&lt;fx:Metadata&gt;</code> element. For instance, you might define a component's with metadata:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">&lt;fx:Metadata&gt;</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">    [Event(name=&quot;change&quot;,type=&quot;starling.events.Event&quot;)]</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw">&lt;/fx:Metadata&gt;</span></a></code></pre></div>
+<h2 id="define-view-states-on-an-mxml-class">Define view states on an MXML class</h2>
+<p>An MXML component that is based on a container class, such as <code>LayoutGroup</code>, <code>ScrollContainer</code>, or <code>Panel</code>, may define multiple view states with overrides that change an aspect of the component's default state. For example, changing between states may modify properties or event listeners, or child components may be added or removed.</p>
+<p>The <code>states</code> property may contain two or more <code>feathers.states.State</code> objects. The first state defines the default state when the component is instantiated.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">&lt;f:states&gt;</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;default&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;submittedForm&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="kw">&lt;/f:states&gt;</span></a></code></pre></div>
+<p>To switch between view states, set the <code>currentState</code> property to the name of the new state:</p>
+<pre class="code"><code>private function submitButton_onTriggered(event:Event):void
+{
+    this.currentState = &quot;submittedForm&quot;;
+}</code></pre>
+<p>The same property may be defined more than once in MXML by appending the name of the state where the value should be modified:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">&lt;f:Button</span><span class="ot"> label=</span><span class="st">&quot;Submit&quot;</span><span class="ot"> triggered=</span><span class="st">&quot;submitButton_onTriggered(event)&quot;</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="ot">    isEnabled=</span><span class="st">&quot;true&quot;</span><span class="ot"> isEnabled.submittedForm=</span><span class="st">&quot;false&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>In the example above, the button is enabled until the component enters the <code>&quot;submittedForm&quot;</code> state.</p>
+<p>Event listeners may be modified when the view state changes:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">&lt;f:Button</span><span class="ot"> label=</span><span class="st">&quot;Submit&quot;</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="ot">    triggered=</span><span class="st">&quot;submitButton_onTriggered(event)&quot;</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="ot">    triggered.submittedForm=</span><span class="st">&quot;showAlreadySubmittedError()&quot;</span></a></code></pre></div>
+<p>A component may be added in a specific view state only using the <code>includeIn</code> attribute:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">&lt;f:ProgressBar</span><span class="ot"> minimum=</span><span class="st">&quot;0&quot;</span><span class="ot"> maximum=</span><span class="st">&quot;100&quot;</span><span class="ot"> includeIn=</span><span class="st">&quot;submittedForm&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>This progress bar will only be added to its parent in the <code>&quot;submittedForm&quot;</code> state, and it will be removed in all other view states.</p>
+<p>Similarly, you may use the <code>excludeFrom</code> attribute to remove a component from its parent in a specific view state:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">&lt;f:Label</span><span class="ot"> text=</span><span class="st">&quot;Don&#39;t forget to click Submit!&quot;</span><span class="ot"> excludeFrom=</span><span class="st">&quot;submittedForm&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>This label will be removed once the form is submitted, but it will be visible in all other view states.</p>
+<h3 id="state-groups">State Groups</h3>
+<p>Consider the following set of states that might allow you to customize a view based on different types of user accounts:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">&lt;f:states&gt;</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;default&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;moderator&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;administrator&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="kw">&lt;/f:states&gt;</span></a></code></pre></div>
+<p>Let's say that we want certain functionality to be enabled only for moderators and administrators, but disabled for everyone else. We could do it like this:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">&lt;f:Check</span><span class="ot"> isEnabled=</span><span class="st">&quot;false&quot;</span><span class="ot"> isEnabled.administrator=</span><span class="st">&quot;true&quot;</span><span class="ot"> isEnabled.moderator=</span><span class="st">&quot;true&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>However, we can also add both the &quot;moderator&quot; and &quot;administrator&quot; states to a <em>state group</em>:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">&lt;f:states&gt;</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;default&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;moderator&quot;</span><span class="ot"> stateGroups=</span><span class="st">&quot;privileged&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">    <span class="kw">&lt;f:State</span><span class="ot"> name=</span><span class="st">&quot;administrator&quot;</span><span class="ot"> stateGroups=</span><span class="st">&quot;privileged&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="kw">&lt;/f:states&gt;</span></a></code></pre></div>
+<p>Using our new &quot;privileged&quot; state group, we can simply our code to make the same override apply to multiple states:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">&lt;f:Check</span><span class="ot"> isEnabled=</span><span class="st">&quot;false&quot;</span><span class="ot"> isEnabled.privileged=</span><span class="st">&quot;true&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<h2 id="create-inline-sub-component-factories">Create inline sub-component factories</h2>
+<p>When sub-components require a factory, we can define it in the MXML using <code>&lt;fx:Component&gt;</code> instead of writing the factory as a function in ActionScript code:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">&lt;f:List&gt;</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">    <span class="kw">&lt;f:itemRendererFactory&gt;</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">        <span class="kw">&lt;fx:Component&gt;</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">            <span class="kw">&lt;f:DefaultListItemRenderer</span><span class="ot"> labelField=</span><span class="st">&quot;text&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5">        <span class="kw">&lt;/fx:Component&gt;</span></a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">    <span class="kw">&lt;/f:itemRendererFactory&gt;</span></a>
+<a class="sourceLine" id="cb27-7" data-line-number="7">    <span class="kw">&lt;f:dataProvider&gt;</span></a>
+<a class="sourceLine" id="cb27-8" data-line-number="8">        <span class="kw">&lt;f:ArrayCollection&gt;</span></a>
+<a class="sourceLine" id="cb27-9" data-line-number="9">            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Milk&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb27-10" data-line-number="10">            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Eggs&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb27-11" data-line-number="11">            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Flour&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb27-12" data-line-number="12">            <span class="kw">&lt;fx:Object</span><span class="ot"> text=</span><span class="st">&quot;Sugar&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb27-13" data-line-number="13">        <span class="kw">&lt;/f:ArrayCollection&gt;</span></a>
+<a class="sourceLine" id="cb27-14" data-line-number="14">    <span class="kw">&lt;/f:dataProvider&gt;</span></a>
+<a class="sourceLine" id="cb27-15" data-line-number="15"><span class="kw">&lt;/f:List&gt;</span></a></code></pre></div>
+<p>In the MXML above, we create a <code>DefaultListItemRenderer</code> and set its <code>labelField</code> as an inline component.</p>
+<h3 id="fxcomponent-versus-factoryfrominstance"><code>&lt;fx:Component&gt;</code> versus <code>factoryFromInstance()</code></h3>
+<p>When using <code>&lt;fx:Component&gt;</code>, we may need to call functions defined in the main <code>&lt;fx:Script&gt;</code> element in the MXML file. Because <code>&lt;fx:Component&gt;</code> is considered a different class, we need to use the implicit <code>outerDocument</code> property to access the main scope of the MXML file.</p>
+<p>In the following example, we have a <code>PanelScreen</code> with a <code>Button</code> in its header. When the button is triggered, we want to call a function defined outside of the <code>&lt;fx:Component&gt;</code> element. This requires <code>outerDocument</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">&lt;f:PanelScreen</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">    <span class="kw">&lt;f:headerFactory&gt;</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">        <span class="kw">&lt;fx:Component&gt;</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">            <span class="kw">&lt;f:Header&gt;</span></a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">                <span class="kw">&lt;f:leftItems&gt;</span></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7">                    <span class="kw">&lt;fx:Vector</span><span class="ot"> type=</span><span class="st">&quot;starling.display.DisplayObject&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8">                        <span class="kw">&lt;f:Button</span><span class="ot"> label=</span><span class="st">&quot;Back&quot;</span></a>
+<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="ot">                            triggered=</span><span class="st">&quot;outerDocument.goBack()&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10">                    <span class="kw">&lt;/fx:Vector&gt;</span></a>
+<a class="sourceLine" id="cb28-11" data-line-number="11">                <span class="kw">&lt;/f:leftItems&gt;</span></a>
+<a class="sourceLine" id="cb28-12" data-line-number="12">            <span class="kw">&lt;/f:Header&gt;</span></a>
+<a class="sourceLine" id="cb28-13" data-line-number="13">        <span class="kw">&lt;/fx:Component&gt;</span></a>
+<a class="sourceLine" id="cb28-14" data-line-number="14">    <span class="kw">&lt;/f:headerFactory&gt;</span></a>
+<a class="sourceLine" id="cb28-15" data-line-number="15">    <span class="kw">&lt;fx:Script&gt;</span></a>
+<a class="sourceLine" id="cb28-16" data-line-number="16">    <span class="bn">&lt;![CDATA[</span></a>
+<a class="sourceLine" id="cb28-17" data-line-number="17">        public function goBack():void</a>
+<a class="sourceLine" id="cb28-18" data-line-number="18">        {</a>
+<a class="sourceLine" id="cb28-19" data-line-number="19">            this.dispatchEventWith( Event.COMPLETE );</a>
+<a class="sourceLine" id="cb28-20" data-line-number="20">        }</a>
+<a class="sourceLine" id="cb28-21" data-line-number="21">    <span class="bn">]]&gt;</span></a>
+<a class="sourceLine" id="cb28-22" data-line-number="22">    <span class="kw">&lt;/fx:Script&gt;</span></a>
+<a class="sourceLine" id="cb28-23" data-line-number="23"><span class="kw">&lt;/f:PanelScreen&gt;</span></a></code></pre></div>
+<p>When using <code>outerDocument</code>, we only have access to <code>public</code> APIs. Trying to call a <code>private</code> or <code>protected</code> function will result in an error.</p>
+<p>Perhaps we'd prefer to make that <code>goBack()</code> function <code>private</code>. We can do that by using <code>factoryFromInstance()</code> instead of <code>&lt;fx:Component&gt;</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">&lt;f:PanelScreen</span><span class="ot"> xmlns:fx=</span><span class="st">&quot;http://ns.adobe.com/mxml/2009&quot;</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="ot">    xmlns:f=</span><span class="st">&quot;library://ns.feathersui.com/mxml&quot;</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="ot">    headerFactory=</span><span class="st">&quot;{factoryFromInstance(customHeader)}&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">    <span class="kw">&lt;fx:Declarations&gt;</span></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">        <span class="kw">&lt;f:Header</span><span class="ot"> id=</span><span class="st">&quot;customHeader&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">            <span class="kw">&lt;f:leftItems&gt;</span></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">                <span class="kw">&lt;fx:Vector</span><span class="ot"> type=</span><span class="st">&quot;starling.display.DisplayObject&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8">                    <span class="kw">&lt;f:Button</span><span class="ot"> label=</span><span class="st">&quot;Back&quot;</span></a>
+<a class="sourceLine" id="cb29-9" data-line-number="9"><span class="ot">                        triggered=</span><span class="st">&quot;goBack()&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb29-10" data-line-number="10">                <span class="kw">&lt;/fx:Vector&gt;</span></a>
+<a class="sourceLine" id="cb29-11" data-line-number="11">            <span class="kw">&lt;/f:leftItems&gt;</span></a>
+<a class="sourceLine" id="cb29-12" data-line-number="12">        <span class="kw">&lt;/f:Header&gt;</span></a>
+<a class="sourceLine" id="cb29-13" data-line-number="13">    <span class="kw">&lt;/fx:Declarations&gt;</span></a>
+<a class="sourceLine" id="cb29-14" data-line-number="14">    <span class="kw">&lt;fx:Script&gt;</span></a>
+<a class="sourceLine" id="cb29-15" data-line-number="15">    <span class="bn">&lt;![CDATA[</span></a>
+<a class="sourceLine" id="cb29-16" data-line-number="16">        private function goBack():void</a>
+<a class="sourceLine" id="cb29-17" data-line-number="17">        {</a>
+<a class="sourceLine" id="cb29-18" data-line-number="18">            this.dispatchEventWith( Event.COMPLETE );</a>
+<a class="sourceLine" id="cb29-19" data-line-number="19">        }</a>
+<a class="sourceLine" id="cb29-20" data-line-number="20">    <span class="bn">]]&gt;</span></a>
+<a class="sourceLine" id="cb29-21" data-line-number="21">    <span class="kw">&lt;/fx:Script&gt;</span></a>
+<a class="sourceLine" id="cb29-22" data-line-number="22"><span class="kw">&lt;/f:PanelScreen&gt;</span></a></code></pre></div>
+<p>We can instantiate the <code>Header</code> component inside an <code>&lt;fx:Declarations&gt;</code> element. This will create the instance, but it will not be added to the display list. We give it an <code>id</code> so that it is assigned to a variable.</p>
+<p>Then, when we set the <code>headerFactory</code> property, we pass <code>customHeader</code> to <code>factoryFromInstance()</code>, and it will automatically create a factory that returns the <code>Header</code> instance that we created in <code>&lt;fx:Declarations&gt;</code>.</p>
+<p>Since the <code>Header</code> is defined inside the scope of our MXML file, we don't need to use <code>outerDocument</code>. We can call a <code>private</code> function directly.</p>
+<aside class="info">
+Passing a component to <code>factoryFromInstance()</code> only works when one instance is needed. In this case, a <code>PanelScreen</code> has only one header. If multiple instances are needed, such as how a <code>List</code> displays more than one item renderer, then <code>&lt;fx:Component&gt;</code> must be used.
+</aside>
+</article>
+<footer>
+<div class="content">
+<nav><a href="../index.html">Feathers 3.5.0 Help</a> &#8594; <a href="index.html">Feathers SDK and MXML Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

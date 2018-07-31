@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers ToggleButton component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-togglebutton-component">How to use the Feathers <code>ToggleButton</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/ToggleButton.html"><code>ToggleButton</code></a> class is a <a href="button.html">button</a> that may be selected and deselected when triggered. Like a button, a toggle button's skin, label, and icon can all be customized for each state, including separate styles for when the toggle button is selected and deselected.</p>
+<figure>
+<img src="images/toggle-button.png" srcset="images/toggle-button@2x.png 2x" alt="Screenshot of a Feathers ToggleButton component" />
+<figcaption>
+<code>ToggleButton</code> components skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-togglebutton">Skinning a <code>ToggleButton</code></a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>ToggleButton</code> control, give it a label, and add it to the display list:</p>
+<pre class="code"><code>var toggle:ToggleButton = new ToggleButton();
+toggle.label = &quot;Click Me&quot;;
+this.addChild( toggle );</code></pre>
+<p>A toggle button may be selected and deselected when it is triggered, or we can change the button's selection programatically by setting the <a href="../api-reference/feathers/controls/ToggleButton.html#isSelected"><code>isSelected</code></a> property:</p>
+<pre class="code"><code>button.isSelected = true;</code></pre>
+<p>If we listen to the <a href="../api-reference/feathers/controls/ToggleButton.html#event:change"><code>Event.CHANGE</code></a> event, we can track whether the user has triggered the button to change the selection:</p>
+<pre class="code"><code>toggle.addEventListener( Event.CHANGE, toggle_changeHandler );</code></pre>
+<p>Check for the new value of <code>isSelected</code> in the listener:</p>
+<pre class="code"><code>function toggle_changeHandler( event:Event ):void
+{
+    var toggle:ToggleButton = ToggleButton( event.currentTarget );
+    trace( &quot;toggle.isSelected has changed:&quot;, toggle.isSelected );
+}</code></pre>
+<h2 id="skinning-a-togglebutton">Skinning a <code>ToggleButton</code></h2>
+<p>A number of skins and styles may be customized on a toggle button, expanding on the options provided by <a href="button.html">buttons</a>. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/ToggleButton.html"><code>ToggleButton</code> API reference</a>. We'll look at a few of the most common properties below.</p>
+<h3 id="background-skins-labels-and-icons">Background skins, labels, and icons</h3>
+<p>In addition to the states provided by the <code>Button</code> class, the <code>ToggleButton</code> class supports some extra states that will be used when the button is selected.</p>
+<p>The <a href="../api-reference/feathers/controls/ToggleButton.html#defaultSelectedSkin"><code>defaultSelectedSkin</code></a> property works in a similar way to the <a href="../api-reference/feathers/controls/BasicButton.html#defaultSkin"><code>defaultSkin</code></a> property from the <code>Button</code> class. If the <code>ToggleButton</code> is selected, and a skin isn't provided for the current state, the <code>defaultSelectedSkin</code> will be used.</p>
+<p>The same <a href="../api-reference/feathers/controls/BasicButton.html#setSkinForState()"><code>setSkinForState()</code></a> may set skins for the selected states of a ToggleButton. In addition to the states available to a regular <code>Button</code>, the following states may be referenced for a <code>ToggleButton</code>:</p>
+<ul>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#UP_AND_SELECTED"><code>ButtonState.UP_AND_SELECTED</code></a></li>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#DOWN_AND_SELECTED"><code>ButtonState.DOWN_AND_SELECTED</code></a></li>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#HOVER_AND_SELECTED"><code>ButtonState.HOVER_AND_SELECTED</code></a></li>
+<li><a href="../api-reference/feathers/controls/ButtonState.html#DISABLED_AND_SELECTED"><code>ButtonState.DISABLED_AND_SELECTED</code></a></li>
+</ul>
+<p>Likewise, a <code>ToggleButton</code> provides the <a href="../api-reference/feathers/controls/ToggleButton.html#defaultSelectedIcon"><code>defaultSelectedIcon</code></a> property for styling the icon when selected. The <a href="../api-reference/feathers/controls/Button.html#setIconForState()"><code>setIconForState()</code></a> method may also use the extra states defined above, like <code>ButtonState.UP_AND_SELECTED</code> and <code>ButtonState.DOWN_AND_SELECTED</code>.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><p><a href="../api-reference/feathers/controls/ToggleButton.html"><code>feathers.controls.ToggleButton</code> API Documentation</a></p></li>
+<li><p><a href="button.html">How to use the Feathers <code>Button</code> component</a></p></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

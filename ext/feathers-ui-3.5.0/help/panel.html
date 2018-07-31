@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers Panel component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-panel-component">How to use the Feathers <code>Panel</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/Panel.html"><code>Panel</code></a> component is a container that supports layout and scrolling, similar to <a href="scroll-container.html"><code>ScrollContainer</code></a>, but it also adds a header and an optional footer above and below the content, respectively. This component is useful for creating windows and dialogs and making any kind of grouping that needs a header or title.</p>
+<figure>
+<img src="images/panel.png" srcset="images/panel@2x.png 2x" alt="Screenshot of a Feathers Panel component" />
+<figcaption>
+A <code>Panel</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#skinning-a-panel">Skinning a <code>Panel</code></a></p></li>
+<li><p><a href="#customize-scrolling-behavior">Customize scrolling behavior</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>Panel</code> container and add it to the display list:</p>
+<pre class="code"><code>var panel:Panel = new Panel();
+this.addChild( panel );</code></pre>
+<p>We can easily add a title to the panel's header by setting the <a href="../api-reference/feathers/controls/Panel.html#title"><code>title</code></a> property.</p>
+<pre class="code"><code>panel.title = &quot;Tools&quot;;</code></pre>
+<p>A <code>Panel</code> works a lot like any <a href="http://doc.starling-framework.org/core/starling/display/DisplayObjectContainer.html"><code>DisplayObjectContainer</code></a>, so you can use the standard <code>addChild()</code>, <code>removeChild()</code> and other display list manipulation functions.</p>
+<pre class="code"><code>var xPosition:Number = 0;
+for(var i:int = 0; i &lt; 5; i++)
+{
+    var quad:Quad = new Quad( 100, 100, 0xff0000 );
+    quad.x = xPosition;
+    panel.addChild( quad );
+    xPosition += quad.width + 10;
+}</code></pre>
+<p>The children of a <code>Panel</code> do not need to be Feathers UI controls. As you can see above, we've added some Starling <a href="http://doc.starling-framework.org/core/starling/display/Quad.html"><code>Quad</code></a> instances.</p>
+<p>By default, the <code>Panel</code> will automatically resize itself to fit the area that the children occupy (plus its header and footer). We can set the width and height manually, if desired, to override this behavior:</p>
+<pre class="code"><code>panel.width = 200;
+panel.height = 200;</code></pre>
+<h3 id="the-header">The Header</h3>
+<p>By default, a panel's header sub-component is an instance of the <a href="header.html"><code>Header</code></a> class. However, it can be any Feathers component. The only restriction is that the header must appear on the top edge of the panel and fill the entire panel width.</p>
+<p>You can customize the panel's header in a couple of different ways. The first way is to provide a custom <a href="../api-reference/feathers/controls/Panel.html#headerFactory"><code>headerFactory</code></a>:</p>
+<pre class="code"><code>panel.headerFactory = function():Header
+{
+    var header:Header = new Header();
+    
+    var closeButton:Button = new Button();
+    closeButton.label = &quot;Close&quot;;
+    closeButton.addEventListener( Event.TRIGGERED, closeButton_triggeredHandler );
+    header.rightItems = new &lt;DisplayObject&gt;[ closeButton ];
+    
+    return header;
+}</code></pre>
+<p>You can set any properties that you desire on the header inside this factory (including skins, but if you're using a theme, watch out for conflicts).</p>
+<p>Remember, the panel's header does not need to be a <code>Header</code> instance. It simply needs to be a Feathers component. If you wanted to make a <code>Panel</code> with a clickable header, you could provide a <code>headerFactory</code> that returns a <a href="button.html"><code>Button</code></a>:</p>
+<pre class="code"><code>panel.headerFactory = function():Button
+{
+    var button:Button = new Button();
+    button.addEventListener( Event.TRIGGERED, panelHeaderButton_triggeredHandler );
+    return button;
+}</code></pre>
+<p>In this case, you should also update the <a href="../api-reference/feathers/controls/Panel.html#headerTitleField"><code>headerTitleField</code></a> property so that the panel's title is correctly displayed by the button's <a href="../api-reference/feathers/controls/Button.html#label"><code>label</code></a>:</p>
+<pre class="code"><code>panel.headerTitleField = &quot;label&quot;;</code></pre>
+<p>Using a button as the panel's header might be useful for creating a panel that can collapse and expand.</p>
+<h3 id="the-footer">The Footer</h3>
+<p>By default, a panel doesn't have a footer. However, if you want to add a footer, it may be any Feathers component. The only restriction is that the footer must appear on the bottom edge of the panel and fill the entire panel width.</p>
+<p>You can customize the panel's footer in two ways. The first way is to provide a custom <a href="../api-reference/feathers/controls/Panel.html#footerFactory"><code>footerFactory</code></a>:</p>
+<pre class="code"><code>panel.footerFactory = function():LayoutGroup
+{
+    var footer:LayoutGroup = new LayoutGroup();
+    footer.styleNameList.add( LayoutGroup.ALTERNATE_STYLE_NAME_TOOLBAR );
+    return footer;
+}</code></pre>
+<p>You can set any properties that you desire on the footer inside this factory (including skins, but if you're using a theme, watch out for conflicts!). In this example, we're using a [<code>LayoutGroup</code>] with a &quot;toolbar&quot; alternate style name. Typically, a theme will use this style name to make a <code>LayoutGroup</code> look similar to <code>Header</code> and give it a horizontal layout (the exact behavior depends on the theme, but this is the most common behavior).</p>
+<h2 id="layout">Layout</h2>
+<p>We manually positioned the quads in the example code above. Instead, let's apply a <a href="horizontal-layout.html"><code>HorizontalLayout</code></a> to the children of a <code>Panel</code> to do the positioning manually:</p>
+<pre class="code"><code>var layout:HorizontalLayout = new HorizontalLayout();
+layout.gap = 10;
+panel.layout = layout;</code></pre>
+<p>Here, we've set the <a href="../api-reference/feathers/layout/HorizontalLayout.html#gap"><code>gap</code></a> property, but <code>HorizontalLayout</code> provides many more useful features. See <a href="horizontal-layout.html">How to use <code>HorizontalLayout</code> with Feathers containers</a> for complete details.</p>
+<aside class="info">
+Feathers comes with a number of different <a href="index.html#layouts">layouts</a>, in addition to <code>HorizontalLayout</code>.
+</aside>
+<h2 id="skinning-a-panel">Skinning a <code>Panel</code></h2>
+<p>The skins for a <code>Panel</code> control are divided into the header, the content, and the footer. Additionally, a panel may have background skins and various other styles. For full details about what skin and style properties are available, see the <a href="../api-reference/feathers/controls/Panel.html"><code>Panel</code> API reference</a>. We'll look at a few of the most common ways of styling a panel below.</p>
+<h3 id="background-skins">Background skins</h3>
+<p>We can give the <code>Panel</code> a background skin that stretches to fill the entire width and height of the panel. In the following example, we pass in a <code>starling.display.Image</code>, but the skin may be any Starling display object:</p>
+<pre class="code"><code>var skin:Image = new Image( texture );
+skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+panel.backgroundSkin = skin;</code></pre>
+<p>It's as simple as setting the <a href="../api-reference/feathers/controls/Scroller.html#backgroundSkin"><code>backgroundSkin</code></a> property.</p>
+<p>We can give the <code>Panel</code> a different background when it is disabled:</p>
+<pre class="code"><code>var skin:Image = new Image( texture );
+skin.scale9Grid = new Rectangle( 1, 3, 2, 6 );
+panel.backgroundDisabledSkin = skin;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#backgroundDisabledSkin"><code>backgroundDisabledSkin</code></a> is displayed when the panel is disabled. If the <code>backgroundDisabledSkin</code> isn't provided to a disabled panel, it will fall back to using the <code>backgroundSkin</code> in the disabled state.</p>
+<h3 id="internal-layout">Internal Layout</h3>
+<p>Padding may be added around the edges of the panel's content. This padding is different than any type of padding that may be provided by the layout. The layout padding is applied inside the panel's content, but the panel's padding is applied outside of the content, and is generally used to show a bit of the background as a border around the content.</p>
+<pre class="code"><code>panel.paddingTop = 15;
+panel.paddingRight = 20;
+panel.paddingBottom = 15;
+panel.paddingLeft = 20;</code></pre>
+<p>If all four padding values should be the same, you may use the <a href="../api-reference/feathers/controls/Scroller.html#padding"><code>padding</code></a> property to quickly set them all at once:</p>
+<pre class="code"><code>panel.padding = 20;</code></pre>
+<h3 id="skinning-the-header">Skinning the Header</h3>
+<p>This section only explains how to access the header sub-component. The header may be any type of Feathers control. Please read the appropriate documentation for full details about the skinning properties that are available on the component that is used for the header.</p>
+<aside class="info">
+For the default header, please read <a href="header.html">How to use the Feathers <code>Header</code> component</a> for full details about the skinning properties that are available on <code>Header</code> components.
+</aside>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/Panel.html#DEFAULT_CHILD_STYLE_NAME_HEADER"><code>Panel.DEFAULT_CHILD_STYLE_NAME_HEADER</code></a> style name.</p>
+<pre class="code"><code>getStyleProviderForClass( Header )
+    .setFunctionForStyleName( Panel.DEFAULT_CHILD_STYLE_NAME_HEADER, setPanelHeaderStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setPanelHeaderStyles( header:Header ):void
+{
+    header.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>panel.customHeaderStyleName = &quot;custom-header&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/Panel.html#customHeaderStyleName"><code>customHeaderStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( Header )
+    .setFunctionForStyleName( &quot;custom-header&quot;, setPanelCustomHeaderStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/Panel.html#headerFactory"><code>headerFactory</code></a> to provide skins for the panel's header:</p>
+<pre class="code"><code>panel.headerFactory = function():Header
+{
+    var header:Header = new Header();
+
+    //skin the header here, if not using a theme
+    header.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xcc0000 );
+
+    return header;
+}</code></pre>
+<h3 id="skinning-the-footer">Skinning the Footer</h3>
+<p>This section only explains how to access the footer sub-component. The footer may be any type of Feathers control. Please read the appropriate documentation for full details about the skinning properties that are available on the component that is used for the footer.</p>
+<h4 id="with-a-theme-1">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/Panel.html#DEFAULT_CHILD_STYLE_NAME_FOOTER"><code>Panel.DEFAULT_CHILD_STYLE_NAME_FOOTER</code></a> style name. In the following example, we'll assume that the footer is a <code>LayoutGroup</code>, but it could be any type of Feathers component.</p>
+<pre class="code"><code>getStyleProviderForClass( LayoutGroup )
+    .setFunctionForStyleName( Panel.DEFAULT_CHILD_STYLE_NAME_FOOTER, setPanelFooterStyles );</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setPanelFooterStyles( footer:LayoutGroup ):void
+{
+    var skin:Image = new Image( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    footer.backgroundSkin = skin;
+}</code></pre>
+<p>You can override the default style name to use a different one in your theme, if you prefer:</p>
+<pre class="code"><code>panel.customFooterStyleName = &quot;custom-footer&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/Panel.html#customFooterStyleName"><code>customFooterStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollContainer )
+    .setFunctionForStyleName( &quot;custom-footer&quot;, setPanelCustomFooterStyles );</code></pre>
+<h4 id="without-a-theme-1">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/Panel.html#footerFactory"><code>footerFactory</code></a> to provide skins for the panel's footer:</p>
+<pre class="code"><code>panel.footerFactory = function():LayoutGroup
+{
+    var footer:LayoutGroup = new LayoutGroup();
+
+    //skin the footer here, if not using a theme
+    var skin:Image = new Image( texture );
+    skin.scale9Grid = new Rectangle( 2, 3, 1, 6 );
+    footer.backgroundSkin = skin;
+
+    return footer;
+}</code></pre>
+<h3 id="skinning-the-scroll-bars">Skinning the Scroll Bars</h3>
+<p>This section only explains how to access the horizontal scroll bar and vertical scroll bar sub-components. Please read <a href="scroll-bar.html">How to use the Feathers <code>ScrollBar</code> component</a> (or <a href="simple-scroll-bar.html"><code>SimpleScrollBar</code></a>) for full details about the skinning properties that are available on scroll bar components.</p>
+<h4 id="with-a-theme-2">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/Scroller.html#DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR"><code>Scroller.DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR</code></a> style name for the horizontal scroll bar and the <a href="../api-reference/feathers/controls/Scroller.html#DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR"><code>Scroller.DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR</code></a> style name for the vertical scroll bar.</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( Scroller.DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR, setHorizontalScrollBarStyles );
+getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( Scroller.DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR, setVerticalScrollBarStyles );</code></pre>
+<p>The styling function for the horizontal scroll bar might look like this:</p>
+<pre class="code"><code>private function setHorizontalScrollBarStyles(scrollBar:ScrollBar):void
+{
+    scrollBar.trackLayoutMode = TrackLayoutMode.SINGLE;
+}</code></pre>
+<p>You can override the default style names to use different ones in your theme, if you prefer:</p>
+<pre class="code"><code>panel.customHorizontalScrollBarStyleName = &quot;custom-horizontal-scroll-bar&quot;;
+panel.customVerticalScrollBarStyleName = &quot;custom-vertical-scroll-bar&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/Scroller.html#customHorizontalScrollBarStyleName"><code>customHorizontalScrollBarStyleName</code></a> and the <a href="../api-reference/feathers/controls/Scroller.html#customVerticalScrollBarStyleName"><code>customVerticalScrollBarStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( &quot;custom-horizontal-scroll-bar&quot;, setCustomHorizontalScrollBarStyles );
+getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( &quot;custom-vertical-scroll-bar&quot;, setCustomVerticalScrollBarStyles,  );</code></pre>
+<h4 id="without-a-theme-2">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollBarFactory"><code>horizontalScrollBarFactory</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollBarFactory"><code>verticalScrollBarFactory</code></a> to provide skins for the panel's scroll bars:</p>
+<pre class="code"><code>panel.horizontalScrollBarFactory = function():ScrollBar
+{
+    var scrollBar:ScrollBar = new ScrollBar();
+
+    //skin the scroll bar here
+    scrollBar.trackLayoutMode = TrackLayoutMode.SINGLE;
+
+    return scrollBar;
+}</code></pre>
+<h2 id="customize-scrolling-behavior">Customize scrolling behavior</h2>
+<p>A number of properties are available to customize scrolling behavior and the scroll bars.</p>
+<h3 id="interaction-modes">Interaction Modes</h3>
+<p>Scrolling containers provide two main interaction modes, which can be changed using the <a href="../api-reference/feathers/controls/Scroller.html#interactionMode"><code>interactionMode</code></a> property.</p>
+<p>By default, you can scroll using touch, just like you would on many mobile devices including smartphones and tablets. This mode allows you to grab the container anywhere within its bounds and drag it around to scroll. This mode is defined by the constant, <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a>.</p>
+<p>Alternatively, you can set <code>interactionMode</code> to <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a>. This mode allows you to scroll using the horizontal or vertical scroll bar sub-components. You can also use the mouse wheel to scroll vertically.</p>
+<p>Finally, you can set <code>interactionMode</code> to <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a>. This mode allows you to scroll both by dragging the container's content and by using the scroll bars.</p>
+<h3 id="scroll-bar-display-mode">Scroll Bar Display Mode</h3>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#scrollBarDisplayMode"><code>scrollBarDisplayMode</code></a> property controls how and when scroll bars are displayed. This value may be overridden by the scroll policy, as explained below.</p>
+<p>The default value is <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a>, which displays the scroll bars as an overlay above the view port's content, rather than affecting the size of the view port. When the scroll bars are floating, they fade out when the container is not actively scrolling. This is a familiar behavior for scroll bars in the touch interaction mode. In the mouse interaction mode, the scroll bars will appear when the mouse hovers over them and then disappear when the hover ends.</p>
+<p>To completely hide the scroll bars, but still allow scrolling, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a>.</p>
+<p>If you want the scroll bars to always be visible outside of the content in a fixed position, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a>. This is best for traditional desktop scrollable content.</p>
+<p>Finally, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED_FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a> to display the scroll bar as an overlay above the view port's content, but it does not fade away.</p>
+<h3 id="scroll-policies">Scroll Policies</h3>
+<p>The two previous properties control how scrolling works. The <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollPolicy"><code>horizontalScrollPolicy</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollPolicy"><code>verticalScrollPolicy</code></a> properties control whether scrolling is enabled or not.</p>
+<p>The default scroll policy for both directions is <a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a>. If the content's width is greater than the view port's width, the panel may scroll horizontally (same for height and vertical scrolling). If not, then the panel will not scroll in that direction. In addition to the <code>scrollBarDisplayMode</code>, this can affect whether the scroll bar is visible or not.</p>
+<p>You can completely disable scrolling in either direction, set the scroll policy to <a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a>. The scroll bar will not be visible, and the panel won't scroll, even if the content is larger than the view port.</p>
+<p>Finally, you can ensure that scrolling is always enabled by setting the scroll policy to <a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a>. If combined with <code>hasElasticEdges</code> in the touch interaction mode, it will create a playful edge that always bounces back, even when the content is smaller than the view port. If using the mouse interaction mode, the scroll bar may always be visible under the same circumstances, though it may be disabled if the content is smaller than the view port.</p>
+<h3 id="paging">Paging</h3>
+<p>Set the <a href="../api-reference/feathers/controls/Scroller.html#snapToPages"><code>snapToPages</code></a> property to true to make the scroll position snap to the nearest full page. A page is defined as a multiple of the view ports width or height. If the view port is 100 pixels wide, then the first horizontal page starts at 0 pixels, the second at 100, and the third at 200.</p>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#pageWidth"><code>pageWidth</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#pageHeight"><code>pageHeight</code></a> properties may be used to customize the size of a page. Rather than using the full view port width or height, any pixel value may be specified for page snapping.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/Panel.html"><code>feathers.controls.Panel</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

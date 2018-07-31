@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>Setting up Feathers in IntelliJ IDEA - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="setting-up-feathers-in-intellij-idea">Setting up Feathers in IntelliJ IDEA</h1>
+<p>Let's get your <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> development environment ready to use Feathers.</p>
+<aside class="info">
+These instructions apply to IntelliJ IDEA 12. Minor variations may exist between different versions of IntelliJ IDEA.
+</aside>
+<ol>
+<li><p>Download the latest stable versions of <a href="http://feathersui.com/download/">Feathers</a> and <a href="http://gamua.com/starling/download/">Starling Framework</a>.</p></li>
+<li><p>In IDEA, select the <strong>File</strong> menu → <strong>New Project</strong>. A wizard will guide you through the creation process.</p></li>
+<li><p>Select <strong>Flash Module</strong> and enter your <strong>Project name</strong>. The default Project location is usually okay. The Module name and Module location will update automatically when you set values for your project, and the default values are usually okay. Click <strong>Next</strong>.</p></li>
+<li><p>In the next section, select the approporite <strong>Target platform</strong> (Web, Desktop, or Mobile) and select <strong>Pure ActionScript</strong>. For <strong>Output type</strong>, select <strong>Application</strong>. Select an appropriate <strong>Flex/AIR SDK</strong> (see below where to download the latest version of the AIR SDK). Then click <strong>Finish</strong>.</p>
+<p>You can download the latest <a href="http://www.adobe.com/devnet/air/air-sdk-download.html">Adobe AIR SDK and Compiler</a> from Adobe's website. This SDK can be used to target both Adobe AIR and Adobe Flash Player in the browser. Check the Feathers README file to see the minimum required versions of Adobe AIR and Flash Player for the version of Feathers that you are using.</p></li>
+<li><p>Now that the project is created, you will need to add Feathers and Starling Framework to the project. Select the <strong>File</strong> menu → <strong>Project Structure</strong>, then under <strong>Project Settings</strong> choose <strong>Libraries</strong>. Click the <strong>+</strong> (plus sign) at the top. Next, select <strong>ActionScript/Flex</strong> and specify the location of <strong>starling.swc</strong>.</p></li>
+<li><p>Follow the same steps to add <strong>feathers.swc</strong> as a library.</p></li>
+<li><p>Follow this step if you are targeting <strong>Adobe AIR</strong>. Skip to the next step if you are targeting Adobe Flash Player instead.</p>
+<p>Let's create create the Adobe AIR <em>application descriptor</em> file. Select <strong>Modules</strong> in the same <strong>Project Structure</strong> window that should still be open from the previous step. Expand your new module in the tree and select the default build configuration with the module's name. For mobile AIR apps, you'll want to navigate to the <strong>Android</strong> tab. For desktop AIR apps, navigate to the <strong>AIR Package</strong> tab instead.</p>
+<p>Under <strong>Application descriptor</strong>, choose <strong>Custom template</strong> and click <strong>Create…</strong>. The default values for the application descriptor are usually okay, so simply click <strong>Create</strong>. You can open the application descriptor file later to make changes, if needed. For mobile apps, if IDEA asks if you want to use the created application descriptor template for both Android and iOS, click <strong>Yes</strong>. Click <strong>OK</strong> in the <strong>Project Structure</strong> window.</p>
+<p>Open your module's new <strong>-app.xml</strong> file. Inside the <code>&lt;initialWindow&gt;</code> section, add <code>&lt;renderMode&gt;direct&lt;/renderMode&gt;</code> to enable Stage 3D.</p>
+<p>You may skip the next step and proceed to the conclusion.</p></li>
+<li><p>Follow this step if you are targeting <strong>Adobe Flash Player</strong>. Skip to the conclusion if you are targeting Adobe AIR instead.</p>
+<p>Open your modules <strong>index.template.html</strong> file in the <strong>html-template</strong> folder. Search for the following line of JavaScript:</p>
+<pre class="code"><code>var params = {};</code></pre>
+<p>Add the following line after it:</p>
+<pre class="code"><code>params.wmode = &quot;direct&quot;;</code></pre>
+<p>Next, look for the <code>&lt;object&gt;</code> HTML elements near the bottom of the document. Add the following <code>&lt;param&gt;</code> element inside <em>both</em> <code>&lt;object&gt;</code> elements.</p>
+<pre class="code"><code>&lt;param name=&quot;wmode&quot; value=&quot;direct&quot; /&gt;</code></pre></li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>Your project is ready. If you're unsure how to proceed, start by using the code in the <strong>Create your Game</strong> section of the <a href="http://gamua.com/starling/first-steps/">Starling First Steps Tutorial</a>. Then, take a look at the <a href="getting-started.html">Feathers Getting Started Tutorial</a>.</p>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>

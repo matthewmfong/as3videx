@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="pandoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<meta name="author" content="Josh Tynjala">
+	<title>How to use the Feathers DataGrid component - Feathers 3.5.0 Help</title>
+	<style type="text/css">code{white-space: pre;}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" href="css/feathers-help.css">
+</head>
+<body>
+<header>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+</div>
+</header>
+<article>
+<h1 id="how-to-use-the-feathers-datagrid-component">How to use the Feathers <code>DataGrid</code> component</h1>
+<p>The <a href="../api-reference/feathers/controls/DataGrid.html"><code>DataGrid</code></a> class displays a table of data. Each item in the data provider is displayed as a row, divided into columns for the item's fields. It includes support for selection, scrolling, layout virtualization to optimize rendering of large collections, and custom cell renderers.</p>
+<figure>
+<img src="images/data-grid.png" srcset="images/data-grid@2x.png 2x" alt="Screenshot of a Feathers DataGrid component" />
+<figcaption>
+<code>DataGrid</code> component skinned with <code>MetalWorksMobileTheme</code>
+</figcaption>
+</figure>
+<ul>
+<li><p><a href="#the-basics">The Basics</a></p></li>
+<li><p><a href="#selection">Selection</a></p></li>
+<li><p><a href="#skinning-a-data-grid">Skinning a <code>DataGrid</code></a></p></li>
+<li><p><a href="#custom-cell-renderers">Custom cell renderers</a></p></li>
+<li><p><a href="#customize-scrolling-behavior">Customize scrolling behavior</a></p></li>
+</ul>
+<h2 id="the-basics">The Basics</h2>
+<p>First, let's create a <code>DataGrid</code> control and add it to the display list:</p>
+<pre class="code"><code>var grid:DataGrid = new DataGrid();
+grid.width = 300;
+grid.height = 250;
+this.addChild( grid );</code></pre>
+<p>Next, we want the data grid to display some items, so let's create an <a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a> as its data provider.</p>
+<pre class="code"><code>var items:ArrayCollection = new ArrayCollection(
+[
+    { item: &quot;Chicken breast&quot;, dept: &quot;Meat&quot;, price: &quot;5.90&quot; },
+    { item: &quot;Bacon&quot;, dept: &quot;Meat&quot;, price: &quot;4.49&quot; },
+    { item: &quot;2% Milk&quot;, dept: &quot;Dairy&quot;, price: &quot;2.49&quot; },
+    { item: &quot;Butter&quot;, dept: &quot;Dairy&quot;, price: &quot;4.69&quot; },
+    { item: &quot;Lettuce&quot;, dept: &quot;Produce&quot;, price: &quot;1.29&quot; },
+    { item: &quot;Broccoli&quot;, dept: &quot;Produce&quot;, price: &quot;2.99&quot; },
+    { item: &quot;Whole Wheat Bread&quot;, dept: &quot;Bakery&quot;, price: &quot;2.49&quot; },
+    { item: &quot;English Muffins&quot;, dept: &quot;Bakery&quot;, price: &quot;2.99&quot; },
+]);
+grid.dataProvider = items;</code></pre>
+<p><code>ArrayCollection</code> wraps a regular ActionScript <code>Array</code>, and it adds special events and things that the <code>DataGrid</code> uses to add, update, and remove rows in real time.</p>
+<aside class="info">
+<p><code>ArrayCollection</code> is one of multiple classes that implement the <a href="../api-reference/feathers/data/IListCollection.html"><code>IListCollection</code></a> interface. <code>IListCollection</code> may wrap any type of data to provide a common API that the <code>DataGrid</code> component can understand. Out of the box, we may use these collection implementations:</p>
+<ul>
+<li><a href="../api-reference/feathers/data/ArrayCollection.html"><code>ArrayCollection</code></a> for data based on an <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Array.html"><code>Array</code></a></li>
+<li><a href="../api-reference/feathers/data/VectorCollection.html"><code>VectorCollection</code></a> for data based on a <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/Vector.html"><code>Vector</code></a></li>
+<li><a href="../api-reference/feathers/data/XMLListCollection.html"><code>XMLListCollection</code></a> for data based on an <a href="http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/XMLList.html"><code>XMLList</code></a></li>
+</ul>
+It's even possible for anyone to create new <code>IListCollection</code> implementations to display custom data types, if needed.
+</aside>
+<h3 id="columns">Columns</h3>
+<p>Now, we should define the columns in the data grid, so that it knows which fields from the data provider's items to display. Let's start by taking a moment to review one of the items from the data provider:</p>
+<pre class="code"><code>{ item: &quot;Broccoli&quot;, dept: &quot;Produce&quot;, price: &quot;2.99&quot; },</code></pre>
+<p>The item has three fields, <code>item</code>, <code>dept</code>, and <code>price</code>. We can define a <a href="../api-reference/feathers/controls/DataGridColumn.html"><code>DataGridColumn</code></a> for each of them, and pass them to the <code>columns</code> property in a collection.</p>
+<pre class="code"><code>grid.columns = new ArrayCollection(
+[
+    new DataGridColumn(&quot;item&quot;, &quot;Item&quot;),
+    new DataGridColumn(&quot;dept&quot;, &quot;Department&quot;),
+    new DataGridColumn(&quot;price&quot;, &quot;Unit Price&quot;),
+]);</code></pre>
+<p>As you can see in the code above, we can also customize the text to display in each column header. Setting the header text is optional, and the field name will be displayed when it is omitted.</p>
+<aside class="info">
+If you don't set the <code>columns</code> property, the data grid will attempt to populate it automatically. There's no guarantee that the columns will be displayed in any particular order, so it's usually a good idea to define the columns manually instead of relying on the automatic behavior.
+</aside>
+<h2 id="selection">Selection</h2>
+<p>The <code>DataGrid</code> component may have one selected item, which selects an entire row. You can access information about selection through the <a href="../api-reference/feathers/controls/DataGrid.html#selectedIndex"><code>selectedIndex</code></a> and <a href="../api-reference/feathers/controls/DataGrid.html#selectedItem"><code>selectedItem</code></a> properties. If there is no selection, the value of <code>selectedIndex</code> will be <code>-1</code> and the value of <code>selectedItem</code> will be <code>null</code>.</p>
+<p>To listen for when the selection changes, listen to <a href="../api-reference/feathers/controls/DataGrid.html#event:change"><code>Event.CHANGE</code></a>:</p>
+<pre class="code"><code>grid.addEventListener( Event.CHANGE, grid_changeHandler );</code></pre>
+<p>The listener might look something like this:</p>
+<pre class="code"><code>private function grid_changeHandler( event:Event ):void
+{
+    var grid:DataGrid = DataGrid( event.currentTarget );
+    trace( &quot;selectedIndex:&quot;, grid.selectedIndex );
+}</code></pre>
+<p>You can manually change the selection, if needed:</p>
+<pre class="code"><code>grid.selectedIndex = 4;</code></pre>
+<p>Selection indices start at <code>0</code>, so the above code would select the fifth row in the data grid.</p>
+<p>If you prefer, you can change selection by passing in an item from the data provider:</p>
+<pre class="code"><code>grid.selectedItem = item;</code></pre>
+<p>If needed, you can clear selection manually:</p>
+<pre class="code"><code>grid.selectedIndex = -1;</code></pre>
+<p>To disable selection completely, use the <a href="../api-reference/feathers/controls/DataGrid.html#isSelectable"><code>isSelectable</code></a> property:</p>
+<pre class="code"><code>grid.isSelectable = false;</code></pre>
+<p>To support the selection of more than one item, set the <a href="../api-reference/feathers/controls/DataGrid.html#allowMultipleSelection"><code>allowMultipleSelection</code></a> property to <code>true</code>:</p>
+<pre class="code"><code>grid.allowMultipleSelection = true;</code></pre>
+<h2 id="skinning-a-datagrid">Skinning a <code>DataGrid</code></h2>
+<p>A data grid has a main background skin and one for its headers. It also supports <em>divider</em> skins between headers and columns. Much of the ability to customize the appearance of a data grid exists inside the cell renderer and header renderer components, such as their font styles and backgrounds for different states. For full details about which properties are available on a <code>DataGrid</code>, see the <a href="../api-reference/feathers/controls/DataGrid.html"><code>DataGrid</code> API reference</a>. We'll look at a few of the most common ways of styling a data grid below.</p>
+<h3 id="background-skin">Background skin</h3>
+<p>We can give the data grid a background skin that fills the entire width and height of the data grid. In the following example, we pass in a <code>starling.display.Image</code>, but the skin may be any Starling display object:</p>
+<pre class="code"><code>var skin:Image = new Image( texture );
+skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+grid.backgroundSkin = skin;</code></pre>
+<p>It's as simple as setting the <a href="../api-reference/feathers/controls/Scroller.html#backgroundSkin"><code>backgroundSkin</code></a> property.</p>
+<p>We can give the data grid a different background when it is disabled:</p>
+<pre class="code"><code>var skin:Image = new Image( disabledTexture );
+skin.scale9Grid = new Rectangle( 1, 3, 2, 6 );
+grid.backgroundDisabledSkin = skin;</code></pre>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#backgroundDisabledSkin"><code>backgroundDisabledSkin</code></a> is displayed when the data grid is disabled. If the <code>backgroundDisabledSkin</code> isn't provided to a disabled data grid, it will fall back to using the <code>backgroundSkin</code> in the disabled state.</p>
+<h3 id="header-background-skin">Header background skin</h3>
+<p>The data grid's header may be skinned using the <a href="../api-reference/feathers/controls/DataGrid.html#headerBackgroundSkin"><code>headerBackgroundSkin</code></a> and <a href="../api-reference/feathers/controls/DataGrid.html#headerBackgroundDisabledSkin"><code>headerBackgroundDisabledSkin</code></a> properties:</p>
+<pre class="code"><code>var skin:Image = new Image( texture );
+skin.scale9Grid = new Rectangle( 1, 2, 2, 6 );
+grid.headerBackgroundSkin = skin;
+
+var skin2:Image = new Image( disabledTexture );
+skin.scale9Grid = new Rectangle( 2, 1, 3, 4 );
+grid.headerBackgroundSkin = skin2;</code></pre>
+<h3 id="dividers">Dividers</h3>
+<p>A data grid's columns may have dividers between them to enhance visual separation. Two types of dividers are available. Vertical dividers appear between the columns in the main scrolling view port of the data grid. Header dividers appear between the column's headers at the top of the data grid.</p>
+<p>In the following example, we provide the data grid's vertical dividers:</p>
+<pre class="code"><code>grid.verticalDividerFactory = function():DisplayObject
+{
+    return new Quad(1, 1, 0x000000);
+};</code></pre>
+<p>We used a simple <code>starling.display.Quad</code>, but it's also possible to skin the dividers with a texture using something like <code>feathers.skins.ImageSkin</code>. We can see the use of <code>ImageSkin</code> in the following example that provides the header dividers:</p>
+<pre class="code"><code>grid.headerDividerFactory = function():DisplayObject
+{
+    var dividerSkin:ImageSkin = new ImageSkin( dividerTexture );
+    dividerSkin.scale9Grid = new Rectangle( 1, 2, 2, 6 );
+    return dividerSkin;
+};</code></pre>
+<h3 id="skinning-the-scroll-bars">Skinning the Scroll Bars</h3>
+<p>This section only explains how to access the horizontal scroll bar and vertical scroll bar sub-components. Please read <a href="scroll-bar.html">How to use the Feathers <code>ScrollBar</code> component</a> (or <a href="simple-scroll-bar.html"><code>SimpleScrollBar</code></a>) for full details about the skinning properties that are available on scroll bar components.</p>
+<h4 id="with-a-theme">With a Theme</h4>
+<p>If you're creating a <a href="themes.html">theme</a>, you can target the <a href="../api-reference/feathers/controls/Scroller.html#DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR"><code>Scroller.DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR</code></a> style name for the horizontal scroll bar and the <a href="../api-reference/feathers/controls/Scroller.html#DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR"><code>Scroller.DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR</code></a> style name for the vertical scroll bar.</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( Scroller.DEFAULT_CHILD_STYLE_NAME_HORIZONTAL_SCROLL_BAR, setHorizontalScrollBarStyles );
+getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( Scroller.DEFAULT_CHILD_STYLE_NAME_VERTICAL_SCROLL_BAR, setVerticalScrollBarStyles );</code></pre>
+<p>The styling function for the horizontal scroll bar might look like this:</p>
+<pre class="code"><code>private function setHorizontalScrollBarStyles(scrollBar:ScrollBar):void
+{
+    scrollBar.trackLayoutMode = TrackLayoutMode.SINGLE;
+}</code></pre>
+<p>You can override the default style names to use different ones in your theme, if you prefer:</p>
+<pre class="code"><code>grid.customHorizontalScrollBarStyleName = &quot;custom-horizontal-scroll-bar&quot;;
+grid.customVerticalScrollBarStyleName = &quot;custom-vertical-scroll-bar&quot;;</code></pre>
+<p>You can set the function for the <a href="../api-reference/feathers/controls/Scroller.html#customHorizontalScrollBarStyleName"><code>customHorizontalScrollBarStyleName</code></a> and the <a href="../api-reference/feathers/controls/Scroller.html#customVerticalScrollBarStyleName"><code>customVerticalScrollBarStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( &quot;custom-horizontal-scroll-bar&quot;, setCustomHorizontalScrollBarStyles );
+getStyleProviderForClass( ScrollBar )
+    .setFunctionForStyleName( &quot;custom-vertical-scroll-bar&quot;, setCustomVerticalScrollBarStyles );</code></pre>
+<h4 id="without-a-theme">Without a Theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollBarFactory"><code>horizontalScrollBarFactory</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollBarFactory"><code>verticalScrollBarFactory</code></a> to provide skins for the data grid's scroll bars:</p>
+<pre class="code"><code>grid.horizontalScrollBarFactory = function():ScrollBar
+{
+    var scrollBar:ScrollBar = new ScrollBar();
+
+    //skin the scroll bar here, if not using a theme
+    scrollBar.trackLayoutMode = TrackLayoutMode.SINGLE;
+
+    return scrollBar;
+}</code></pre>
+<h3 id="skinning-the-cell-renderers">Skinning the Cell Renderers</h3>
+<p>This section only explains how to access the cell renderer sub-components. Please read <a href="default-item-renderers.html">How to use the default Feathers item renderer with <code>List</code>, <code>DataGrid</code>, <code>Tree</code>, and <code>GroupedList</code></a> for full details about the skinning properties that are available on the default cell renderers.</p>
+<aside class="info">
+Other components use the term <em>item</em> renderer, but <em>cell</em> is a bit more appropriate for a data grid, which divides the fields of each item into multiple cells.
+</aside>
+<p><a href="item-renderers.html">Custom cell renderers</a> may be accessed similarly, but they won't necessarily have the same styling properties as the default cell renderers. When using custom cell renderers, you may easily replace references to the <a href="../api-reference/feathers/controls/renderers/DefaultDataGridCellRenderer.html"><code>DefaultDataGridCellRenderer</code></a> class in the code below with references to your custom cell renderer class.</p>
+<h4 id="with-a-theme-1">With a Theme</h4>
+<p>If you are creating a <a href="themes.html">theme</a>, you can set a function for the default styles like this:</p>
+<pre class="code"><code>getStyleProviderForClass( DefaultDataGridCellRenderer ).defaultStyleFunction = setCellRendererStyles;</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setCellRendererStyles(cellRenderer:DefaultDataGridCellRenderer):void
+{
+    var skin:ImageSkin = new ImageSkin( upTexture );
+    skin.setTextureForState( ButtonState.DOWN, downTexture );
+    skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+    cellRenderer.defaultSkin = skin;
+    cellRenderer.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xc3c3c3 );
+}</code></pre>
+<p>If you want to customize a specific cell renderer to look different than the default, you may use a custom style name to call a different function:</p>
+<pre class="code"><code>grid.customCellRendererStyleName = &quot;custom-cell-renderer&quot;;</code></pre>
+<p>You can set the function for the custom <a href="../api-reference/feathers/controls/DataGrid.html#customCellRendererStyleName"><code>customCellRendererStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( DefaultDataGridCellRenderer )
+    .setFunctionForStyleName( &quot;custom-cell-renderer&quot;, setCustomCellRendererStyles );</code></pre>
+<h4 id="without-a-theme-1">Without a theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/DataGrid.html#cellRendererFactory"><code>cellRendererFactory</code></a> to provide skins for the data grid's cell renderers:</p>
+<pre class="code"><code>grid.cellRendererFactory = function():IDataGridCellRenderer
+{
+    var cellRenderer:DefaultDataGridCellRenderer = new DefaultDataGridCellRenderer();
+
+    //set cell renderer styles here, if not using a theme
+    var skin:ImageSkin = new ImageSkin( upTexture );
+    skin.setTextureForState( ButtonState.DOWN, downTexture );
+    skin.scale9Grid = new Rectangle( 2, 2, 1, 6 );
+    cellRenderer.defaultSkin = skin;
+    cellRenderer.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xc3c3c3 );
+
+    return cellRenderer;
+}</code></pre>
+<h3 id="skinning-the-header-renderers">Skinning the Header Renderers</h3>
+<p>The row of headers at the top of the data grid may be skinned.</p>
+<h4 id="with-a-theme-2">With a Theme</h4>
+<p>If you are creating a <a href="themes.html">theme</a>, you can set a function for the default styles like this:</p>
+<pre class="code"><code>getStyleProviderForClass( DefaultDataGridHeaderRenderer ).defaultStyleFunction = setHeaderRendererStyles;</code></pre>
+<p>The styling function might look like this:</p>
+<pre class="code"><code>private function setHeaderRendererStyles(headerRenderer:DefaultDataGridHeaderRenderer):void
+{
+    headerRenderer.backgroundSkin = new ImageSkin( texture );
+    headerRenderer.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xc3c3c3 );
+}</code></pre>
+<p>If you want to customize a specific header renderer to look different than the default, you may use a custom style name to call a different function:</p>
+<pre class="code"><code>grid.customHeaderRendererStyleName = &quot;custom-header-renderer&quot;;</code></pre>
+<p>You can set the function for the custom <a href="../api-reference/feathers/controls/DataGrid.html#customHeaderRendererStyleName"><code>customHeaderRendererStyleName</code></a> like this:</p>
+<pre class="code"><code>getStyleProviderForClass( DefaultDataGridHeaderRenderer )
+    .setFunctionForStyleName( &quot;custom-header-renderer&quot;, setCustomHeaderRendererStyles );</code></pre>
+<h4 id="without-a-theme-2">Without a theme</h4>
+<p>If you are not using a theme, you can use <a href="../api-reference/feathers/controls/DataGrid.html#headerRendererFactory"><code>headerRendererFactory</code></a> to provide skins for the data grid's header renderers:</p>
+<pre class="code"><code>grid.headerRendererFactory = function():IDataGridHeaderRenderer
+{
+    var headerRenderer:DefaultDataGridHeaderRenderer = new DefaultDataGridHeaderRenderer();
+
+    //set header renderer styles here, if not using a theme
+    headerRenderer.backgroundSkin = new ImageSkin( texture );
+    headerRenderer.fontStyles = new TextFormat( &quot;Helvetica&quot;, 20, 0xc3c3c3 );
+
+    return headerRenderer;
+}</code></pre>
+<h2 id="custom-cell-renderers">Custom cell renderers</h2>
+<p>If the default cell renderer doesn't have the features that you need, the <code>DataGrid</code> component offers the ability to use <a href="item-renderers.html">custom cell renderers</a> instead. Custom cell renderers must be Feathers components that implement the <a href="../api-reference/feathers/controls/renderers/IDataGridCellRenderer.html"><code>IDataGridCellRenderer</code></a> interface.</p>
+<aside class="info">
+For full details about implementing custom cell renderers, see <a href="item-renderers.html">Creating custom item renderers for the Feathers <code>List</code>, <code>DataGrid</code>, <code>Tree</code> and <code>GroupedList</code> components</a>.
+</aside>
+<p>You may set the <a href="../api-reference/feathers/controls/DataGrid.html#cellRendererFactory"><code>cellRendererFactory</code></a> property to specify a function that returns a newly created cell renderer:</p>
+<pre class="code"><code>grid.cellRendererFactory = function():IDataGridCellRenderer
+{
+    var cellRenderer:ExampleCustomCellRenderer = new ExampleCustomCellRenderer();
+    cellRenderer.exampleProperty = 20;
+    return cellRenderer;
+};</code></pre>
+<p>Additionally, each column may use different cell renderers, if necessary. In the following example, a column provides its own <code>cellRendererFactory</code> to override the default factory from the data grid:</p>
+<pre class="code"><code>var column:DataGridColumn = new DataGridColumn(&quot;text&quot;);
+column.cellRendererFactory = function():IDataGridCellRenderer
+{
+    return new CustomColumnCellRenderer();
+};</code></pre>
+<h3 id="custom-header-renderers">Custom header renderers</h3>
+<p>You may also provide a factory for custom header renderers. Custom header renderers must be Feathers components that implement the <a href="../api-reference/feathers/controls/renderers/IDataGridHeaderRenderer.html"><code>IDataGridHeaderRenderer</code></a> interface.</p>
+<p>You may set the <a href="../api-reference/feathers/controls/DataGrid.html#headerRendererFactory"><code>headerRendererFactory</code></a> property to specify a function that returns a newly created header renderer:</p>
+<pre class="code"><code>grid.headerRendererFactory = function():IDataGridHeaderRenderer
+{
+    var headerRenderer:ExampleCustomHeaderRenderer = new ExampleCustomHeaderRenderer();
+    headerRenderer.exampleProperty = 20;
+    return headerRenderer;
+};</code></pre>
+<p>Additionally, each column may use different header renderers, if necessary. In the following example, a column provides its own <code>headerRendererFactory</code> to override the default factory from the data grid:</p>
+<pre class="code"><code>var column:DataGridColumn = new DataGridColumn(&quot;text&quot;);
+column.headerRendererFactory = function():IDataGridHeaderRenderer
+{
+    return new CustomColumnHeaderRenderer();
+};</code></pre>
+<h3 id="listening-to-events-from-custom-cell-renderers">Listening to Events from Custom Cell Renderers</h3>
+<p>Listening to events dispatched by a custom cell renderer isn't too difficult. Simply dispatch the event normally from the cell renderer. No need for bubbling. As an example, let's say that we want to dispatch <code>Event.COMPLETE</code> from an cell renderer when something happens:</p>
+<pre class="code"><code>function someEventHandler( event:Event ):void
+{
+    this.dispatchEventWith( Event.COMPLETE );
+}</code></pre>
+<p>On our data grid, first we need to listen for <code>FeathersEventType.RENDERER_ADD</code>:</p>
+<pre class="code"><code>grid.addEventListener( FeathersEventType.RENDERER_ADD, grid_rendererAddHandler );</code></pre>
+<p>Inside the listener for <code>FeathersEventType.RENDERER_ADD</code>, we add a listener for our event dispatched by the cell renderer:</p>
+<pre class="code"><code>function grid_rendererAddHandler( event:Event ):void
+{
+    var cellRenderer:IDataGridCellRenderer = event.data as IDataGridCellRenderer;
+    if(!cellRenderer)
+    {
+        return;
+    }
+    cellRenderer.addEventListener( Event.COMPLETE, cellRenderer_customCompleteHandler );
+}
+ 
+function cellRenderer_customCompleteHandler( event:Event ):void
+{
+    var cellRenderer:IDataGridCellRenderer = IDataGridCellRenderer( event.currentTarget );
+    //do something to handle the event
+}</code></pre>
+<p>Finally, we want to be sure to remove the listeners from the cell renderers, so we should also listen for <code>FeathersEventType.RENDERER_REMOVE</code>:</p>
+<pre class="code"><code>grid.addEventListener( FeathersEventType.RENDERER_REMOVE, grid_rendererRemoveHandler );</code></pre>
+<p>The listener for <code>FeathersEventType.RENDERER_REMOVE</code> looks very similar to the listener for <code>FeathersEventType.RENDERER_ADD</code>:</p>
+<pre class="code"><code>function grid_rendererRemoveHandler( event:Event ):void
+{
+    var cellRenderer:IDataGridCellRenderer = event.data as IDataGridCellRenderer;
+    if(!cellRenderer)
+    {
+        return;
+    }
+    cellRenderer.removeEventListener( Event.COMPLETE, cellRenderer_customCompleteHandler );
+}</code></pre>
+<h2 id="customize-scrolling-behavior">Customize scrolling behavior</h2>
+<p>A number of properties are available to customize scrolling behavior and the scroll bars.</p>
+<h3 id="interaction-modes">Interaction Modes</h3>
+<p>Scrolling containers provide two main interaction modes, which can be changed using the <a href="../api-reference/feathers/controls/Scroller.html#interactionMode"><code>interactionMode</code></a> property.</p>
+<p>By default, you can scroll using touch, just like you would on many mobile devices including smartphones and tablets. This mode allows you to grab the container anywhere within its bounds and drag it around to scroll. This mode is defined by the constant, <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH"><code>ScrollInteractionMode.TOUCH</code></a>.</p>
+<p>Alternatively, you can set <code>interactionMode</code> to <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#MOUSE"><code>ScrollInteractionMode.MOUSE</code></a>. This mode allows you to scroll using the horizontal or vertical scroll bar sub-components. You can also use the mouse wheel to scroll vertically.</p>
+<p>Finally, you can set <code>interactionMode</code> to <a href="../api-reference/feathers/controls/ScrollInteractionMode.html#TOUCH_AND_SCROLL_BARS"><code>ScrollInteractionMode.TOUCH_AND_SCROLL_BARS</code></a>. This mode allows you to scroll both by dragging the container's content and by using the scroll bars.</p>
+<h3 id="scroll-bar-display-mode">Scroll Bar Display Mode</h3>
+<p>The <a href="../api-reference/feathers/controls/Scroller.html#scrollBarDisplayMode"><code>scrollBarDisplayMode</code></a> property controls how and when scroll bars are displayed. This value may be overridden by the scroll policy, as explained below.</p>
+<p>The default value is <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FLOAT"><code>ScrollBarDisplayMode.FLOAT</code></a>, which displays the scroll bars as an overlay above the view port's content, rather than affecting the size of the view port. When the scroll bars are floating, they fade out when the container is not actively scrolling. This is a familiar behavior for scroll bars in the touch interaction mode. In the mouse interaction mode, the scroll bars will appear when the mouse hovers over them and then disappear when the hover ends.</p>
+<p>To completely hide the scroll bars, but still allow scrolling, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#NONE"><code>ScrollBarDisplayMode.NONE</code></a>.</p>
+<p>If you want the scroll bars to always be visible outside of the content in a fixed position, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED"><code>ScrollBarDisplayMode.FIXED</code></a>. This is best for traditional desktop scrollable content.</p>
+<p>Finally, you can set <code>scrollBarDisplayMode</code> to <a href="../api-reference/feathers/controls/ScrollBarDisplayMode.html#FIXED_FLOAT"><code>ScrollBarDisplayMode.FIXED_FLOAT</code></a> to display the scroll bar as an overlay above the view port's content, but it does not fade away.</p>
+<h3 id="scroll-policies">Scroll Policies</h3>
+<p>The two previous properties control how scrolling works. The <a href="../api-reference/feathers/controls/Scroller.html#horizontalScrollPolicy"><code>horizontalScrollPolicy</code></a> and <a href="../api-reference/feathers/controls/Scroller.html#verticalScrollPolicy"><code>verticalScrollPolicy</code></a> properties control whether scrolling is enabled or not.</p>
+<p>The default scroll policy for both directions is <a href="../api-reference/feathers/controls/ScrollPolicy.html#AUTO"><code>ScrollPolicy.AUTO</code></a>. If the content's width is greater than the view port's width, the container may scroll horizontally (same for height and vertical scrolling). If not, then the container will not scroll in that direction. In addition to the <code>scrollBarDisplayMode</code>, this can affect whether the scroll bar is visible or not.</p>
+<p>You can completely disable scrolling in either direction, set the scroll policy to <a href="../api-reference/feathers/controls/ScrollPolicy.html#OFF"><code>ScrollPolicy.OFF</code></a>. The scroll bar will not be visible, and the container won't scroll, even if the content is larger than the view port.</p>
+<p>Finally, you can ensure that scrolling is always enabled by setting the scroll policy to <a href="../api-reference/feathers/controls/ScrollPolicy.html#ON"><code>ScrollPolicy.ON</code></a>. If combined with <code>hasElasticEdges</code> in the touch interaction mode, it will create a playful edge that always bounces back, even when the content is smaller than the view port. If using the mouse interaction mode, the scroll bar may always be visible under the same circumstances, though it may be disabled if the content is smaller than the view port.</p>
+<h2 id="related-links">Related Links</h2>
+<ul>
+<li><a href="../api-reference/feathers/controls/DataGrid.html"><code>feathers.controls.DataGrid</code> API Documentation</a></li>
+</ul>
+</article>
+<footer>
+<div class="content">
+<nav><a href="index.html">Feathers 3.5.0 Help</a></nav>
+<p class="copyright">Copyright 2012-2018 Bowler Hat LLC. All rights reserved.</p>
+</div>
+</footer>
+</body>
+</html>
