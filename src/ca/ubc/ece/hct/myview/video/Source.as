@@ -18,6 +18,12 @@ package ca.ubc.ece.hct.myview.video {
         private var _localPath:String;
         public function get localPath():String { return _localPath; }
 
+        public var bytesDownloaded:Number = 0;
+        public var totalBytes:Number = 1;
+
+        public var queuedForDownload:Boolean = false;
+        public var downloaded:Boolean = false;
+
         public function get filename():String {
             var urlSplit:Array = url.split("/");
             var filename:String = urlSplit[urlSplit.length - 1];
@@ -49,7 +55,7 @@ package ca.ubc.ece.hct.myview.video {
         public function Source() {
             keyframes = [];
             captions = new VideoCaptions();
-            downloadProgress = new Signal(Number); // normalized progress
+            downloadProgress = new Signal(Number, Number); // bytesDownloaded, totalBytes;
             downloadComplete = new Signal(Boolean);
         }
 
@@ -90,7 +96,10 @@ package ca.ubc.ece.hct.myview.video {
         }
 
         public function set progress(val:Number):void {
-            downloadProgress.dispatch(val);
+
+
+            bytesDownloaded = val;
+            downloadProgress.dispatch(val, totalBytes);
         }
 
         public function set complete(val:Boolean):void {

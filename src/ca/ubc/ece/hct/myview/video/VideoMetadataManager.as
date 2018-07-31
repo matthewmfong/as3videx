@@ -16,7 +16,9 @@ import com.greensock.*;
 	import com.greensock.loading.*;
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.display.*;
-	import flash.filesystem.File;
+
+import flash.events.Event;
+import flash.filesystem.File;
 import flash.net.SharedObject;
 import flash.utils.ByteArray;
 	import flash.utils.getTimer;
@@ -108,17 +110,38 @@ import flash.utils.ByteArray;
 				// if(vs[i].completedDownload)
 				
 				var sources:Array = vs[i].getSources();
+
+				var source:Source;
+
 				for(var j:int = 0; j<sources.length; j++) {
-					sources[j].localPath = checkIfFileExistsLocally(sources[j].url, sources[j].id);
+
+					source = (Source)(sources[j]);
+
+					source.localPath = checkIfFileExistsLocally(source.url, source.id);
+
+					if(source.localPath) {
+						source.downloaded = true;
+                        source.totalBytes = 1;
+						// make sure progress is set AFTER totalBytes,
+						// if(progress == totalBytes) triggers download complete signal to dispatch
+                        source.progress = 1;
+					}
 				}
 
 				var newSources:Array = pickSourcesToDownload(vs[i]);
 				for(var k:int = 0; k<newSources.length; k++) {
-					if(newSources[k].extension == "vtt" || newSources[k].extension == "srt") {
-                        sourcesToDownload.insertAt(0, newSources[k]);
-                    } else {
-                        sourcesToDownload.push(newSources[k]);
-                    }
+
+					source = (Source)(newSources[k]);
+
+					// download the small files first
+//					if(source.extension == "vtt" || source.extension == "srt" || source.extension == "xml") {
+//                        sourcesToDownload.insertAt(0, source);
+//                    } else {
+                        sourcesToDownload.push(source);
+//                    }
+
+                    source.queuedForDownload = true;
+
 				}
 			}
 
@@ -127,7 +150,7 @@ import flash.utils.ByteArray;
 //			for each(var source:Source in sourcesToDownload) {
 //				trace(source.url);
 //			}
-			downloadSources(sourcesToDownload);
+			downloadSources(sourcesToDownload, true);
 
 			function checkIfFileExistsLocally(url:String, mediaID:String):String {
 
@@ -187,14 +210,14 @@ import flash.utils.ByteArray;
 						case "vtt":
                         case "srt":
                             if(sources[i].localPath == null) {
-                                video.totalNumberOfSourcesToDownload++;
+//                                video.totalNumberOfSourcesToDownload++;
                                 urlsToDownload.push(sources[i]);
                             }
 							break;
                         case "atf":
                         case "xml":
                             if(sources[i].localPath == null) {
-                                video.totalNumberOfSourcesToDownload++;
+//                                video.totalNumberOfSourcesToDownload++;
                                 urlsToDownload.push(sources[i]);
                             }
                             break;
@@ -213,12 +236,12 @@ import flash.utils.ByteArray;
 				video.primarySource = maxPriorityIndex;
 
 				if(sources[maxPriorityIndex] && sources[maxPriorityIndex].localPath == null) {
-					video.totalNumberOfSourcesToDownload++;
+//					video.totalNumberOfSourcesToDownload++;
 					urlsToDownload.push(sources[maxPriorityIndex]);
 				}
-				else if(video.totalNumberOfSourcesToDownload == video.totalNumberOfSourcesDownloaded) {
-					video.progressDownloaded = 1;
-				}
+//				else if(video.totalNumberOfSourcesToDownload == video.totalNumberOfSourcesDownloaded) {
+//					video.progressDownloaded = 1;
+//				}
 
 //                trace("\t\txxx" + video.filename + " " + video.totalNumberOfSourcesToDownload);
 				return urlsToDownload;
@@ -459,33 +482,56 @@ import flash.utils.ByteArray;
 		}
 
 		private static var sourcesDownloaded:int;
+		private static var queue:LoaderMax;
 		private static function downloadSources(sourcesToDownload:Array, verbose:Boolean = false):void {
 			downloadingSources.dispatch();
 			sourcesDownloaded = 0;
 			// create a LoaderMax named "mainQueue" and set up onProgress, onComplete and onError listeners
-			var queue:LoaderMax = new LoaderMax({name:"mainQueue", autoLoad:true, onChildProgress:progressHandler, onChildComplete:completeHandler, onChildError:errorHandler});
+			queue =
+					new LoaderMax({name:"mainQueue",
+						maxConnections:1,
+						autoLoad:true,
+						onChildProgress:progressHandler,
+						onChildComplete:completeHandler,
+						onChildError:errorHandler});
 
 			if(verbose)
 				trace("Download Queue:");
+
+			// TODO: currently using i to identify the Dataloader later. A bit hacky, unfortunately.
 			for(var i:int = 0; i<sourcesToDownload.length; i++) {
 				if(verbose)
-					trace(sourcesToDownload[i].url);
-				sourcesToDownload[i].localPath = File.applicationStorageDirectory + "/" + videosFolder + "/" + sourcesToDownload[i].id + "-" + sourcesToDownload[i].filename;
-				queue.append( new DataLoader(sourcesToDownload[i].url, {name:i, format:"binary"}) );
+					trace((Source)(sourcesToDownload[i]).url);
+
+
+                (Source)(sourcesToDownload[i]).localPath = File.applicationStorageDirectory + "/" + videosFolder + "/" + (Source)(sourcesToDownload[i]).id + "-" + (Source)(sourcesToDownload[i]).filename;
+				var dataLoader:DataLoader =  new DataLoader((Source)(sourcesToDownload[i]).url, {name:i, format:"binary"});
+				dataLoader.auditSize();
+				dataLoader.addEventListener("auditedSize", auditedSize);
+
 			}
 
 			if(sourcesDownloaded == sourcesToDownload.length) {
 				downloadedSources.dispatch();
 			}
 
+			function auditedSize(event:Event):void {
+
+				(Source)(sourcesToDownload[event.target.name]).totalBytes = (DataLoader)(event.target).bytesTotal;
+                queue.append((DataLoader)(event.target));
+			}
+
 			function progressHandler(event:LoaderEvent):void {
-				sourcesToDownload[event.target.name].progress = event.target.progress;
+                (Source)(sourcesToDownload[event.target.name]).progress = event.target.bytesLoaded;
+                (Source)(sourcesToDownload[event.target.name]).totalBytes = event.target.bytesTotal;
 //			     trace("progress: " + event.target.progress + " " + sourcesToDownload[event.target.name].url);
 			}
 			function completeHandler(event:LoaderEvent):void {
-				var filename:String = sourcesToDownload[event.target.name].filename;
+				var filename:String = (Source)(sourcesToDownload[event.target.name]).filename;
 				var filenameSplit:Array = filename.split(".");
 				var extension:String = filenameSplit[filenameSplit.length - 1];
+
+                (Source)(sourcesToDownload[event.target.name]).downloaded = true;
 
 				var localFile:File = File.applicationStorageDirectory;
 
@@ -493,23 +539,23 @@ import flash.utils.ByteArray;
 					case "mp4":
 					case "mkv":
 					case "flv":
-						Util.writeBytesToFile(videosFolder + "/" + sourcesToDownload[event.target.name].id + "-" + sourcesToDownload[event.target.name].filename, event.target.content);
-						localFile.nativePath += ("/" + videosFolder + "/" + sourcesToDownload[event.target.name].id + "-" + sourcesToDownload[event.target.name].filename);
+						Util.writeBytesToFile(videosFolder + "/" + (Source)(sourcesToDownload[event.target.name]).id + "-" + (Source)(sourcesToDownload[event.target.name]).filename, event.target.content);
+						localFile.nativePath += ("/" + videosFolder + "/" + (Source)(sourcesToDownload[event.target.name]).id + "-" + (Source)(sourcesToDownload[event.target.name]).filename);
 						break;
                     case "vtt":
                     case "srt":
-                        Util.writeBytesToFile(captionsFolder + "/" + sourcesToDownload[event.target.name].id + "-" + sourcesToDownload[event.target.name].filename, event.target.content);
-                        localFile.nativePath += ("/" + captionsFolder + "/" + sourcesToDownload[event.target.name].id + "-" + sourcesToDownload[event.target.name].filename);
+                        Util.writeBytesToFile(captionsFolder + "/" + (Source)(sourcesToDownload[event.target.name]).id + "-" + (Source)(sourcesToDownload[event.target.name]).filename, event.target.content);
+                        localFile.nativePath += ("/" + captionsFolder + "/" + (Source)(sourcesToDownload[event.target.name]).id + "-" + (Source)(sourcesToDownload[event.target.name]).filename);
                         break;
                     case "atf":
                     case "xml":
-                        Util.writeBytesToFile(thumbnailsFolder + "/" + sourcesToDownload[event.target.name].filename, event.target.content);
-                        localFile.nativePath += ("/" + thumbnailsFolder + "/" + sourcesToDownload[event.target.name].filename);
+                        Util.writeBytesToFile(thumbnailsFolder + "/" + (Source)(sourcesToDownload[event.target.name]).filename, event.target.content);
+                        localFile.nativePath += ("/" + thumbnailsFolder + "/" + (Source)(sourcesToDownload[event.target.name]).filename);
                         break;
 				}
-				sourcesToDownload[event.target.name].localPath = localFile.nativePath;
-                sourcesToDownload[event.target.name].progress = 1;
-				sourcesToDownload[event.target.name].complete = true;
+                (Source)(sourcesToDownload[event.target.name]).localPath = localFile.nativePath;
+//                (Source)(sourcesToDownload[event.target.name]).progress = 1;
+//                (Source)(sourcesToDownload[event.target.name]).complete = true;
 
 				sourcesDownloaded++;
 				if(sourcesDownloaded == sourcesToDownload.length) {

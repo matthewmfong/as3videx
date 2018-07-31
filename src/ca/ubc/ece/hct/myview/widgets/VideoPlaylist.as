@@ -59,11 +59,11 @@ import flash.utils.getQualifiedClassName;
 			return total;
 		}
 
-		public function progress(obj:*, val:Number):void {
+		public function progress(obj:*, bytesDownloaded:Number, totalBytes:Number):void {
 			
 			progressDownloaded = addProgress()/mediaList.length;
 
-			downloadProgress.dispatch(this, progressDownloaded);
+			downloadProgress.dispatch(this, progressDownloaded, totalBytes);
 
 			if(progressDownloaded == 1) {
 				downloadComplete.dispatch(this, true)

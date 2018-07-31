@@ -40,23 +40,9 @@ public class VideoMetadata {
 		public var downloadComplete:Signal;
 		public var downloadCompleted:Boolean = false;
 		public var _progressDownloaded:Number;
-        public var totalNumberOfSourcesToDownload:Number;
-        public var totalNumberOfSourcesDownloaded:Number;
+//        public var totalNumberOfSourcesToDownload:Number;
+//        public var totalNumberOfSourcesDownloaded:Number;
 		public function get progressDownloaded():Number { return _progressDownloaded; }
-		public function set progressDownloaded(val:Number):void {
-			_progressDownloaded = val;
-			downloadProgress.dispatch(this, _progressDownloaded);
-			if(_progressDownloaded == 1 && totalNumberOfSourcesToDownload > 0) {
-				totalNumberOfSourcesDownloaded++;
-			}
-
-			if(totalNumberOfSourcesDownloaded == totalNumberOfSourcesToDownload) {
-//				trace(filename + " completed " + totalNumberOfSourcesDownloaded + " " + totalNumberOfSourcesToDownload)
-                downloadCompleted = true;
-                downloadComplete.dispatch(this, true);
-
-			}
-		}
 
 		public function VideoMetadata() {
 
@@ -65,11 +51,11 @@ public class VideoMetadata {
 			slides = new Vector.<Number>();
 			userData = new UserData();
 			crowdUserData = new HashMap();
-			downloadProgress = new Signal(VideoMetadata, Number);
-			downloadComplete = new Signal(VideoMetadata, Boolean);
-			progressDownloaded = 0;
-			totalNumberOfSourcesToDownload = 0;
-            totalNumberOfSourcesDownloaded = 0;
+			downloadProgress = new Signal(VideoMetadata, Number, Number); // this, bytesDownloaded, totalBytes
+			downloadComplete = new Signal(VideoMetadata);
+			_progressDownloaded = 0;
+//			totalNumberOfSourcesToDownload = 0;
+//            totalNumberOfSourcesDownloaded = 0;
 		}
 
 		public function addSource(id:String,
@@ -193,9 +179,30 @@ public class VideoMetadata {
 //			}
 //		}
 
-		public function progress(val:Number):void {
-			progressDownloaded = val;
-			downloadProgress.dispatch(this, val);
+		public function progress(bytesDownloaded:Number, totalBytes:Number):void {
+			var sources:Array = getSources();
+			var allSourceBytesDownloaded:Number = 0;
+			var allSourceTotalBytes:Number = 0;
+
+			for each(var source:Source in sources) {
+				if(source.downloaded || source.queuedForDownload) {
+                    allSourceBytesDownloaded += source.bytesDownloaded;
+                    allSourceTotalBytes += source.totalBytes;
+
+//                trace(source.url + ": " + source.bytesDownloaded + "/" + source.totalBytes + ": " + Math.round(source.bytesDownloaded/source.totalBytes * 10000)/100 + "%");
+                }
+			}
+
+			_progressDownloaded = allSourceBytesDownloaded / allSourceTotalBytes;
+
+//            trace(filename + ": " + allSourceBytesDownloaded + "/" + allSourceTotalBytes + ": " + Math.round(allSourceBytesDownloaded/allSourceTotalBytes * 10000)/100 + "%");
+
+			this.downloadProgress.dispatch(this, allSourceBytesDownloaded, allSourceTotalBytes);
+
+			if(allSourceBytesDownloaded == allSourceTotalBytes) {
+
+				downloadComplete.dispatch(this);
+			}
 		}
 
 //		public function complete(val:Boolean):void {

@@ -7,53 +7,21 @@
 ////////////////////////////////////////////////////////////////////////
 
 package ca.ubc.ece.hct.myview.widgets {
-import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.*;
-import ca.ubc.ece.hct.myview.thumbnail.Thumbnail;
-import ca.ubc.ece.hct.myview.thumbnail.ThumbnailSegment;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
-import ca.ubc.ece.hct.myview.video.VideoUtil;
-import ca.ubc.ece.hct.myview.widgets.filmstrip.Filmstrip;
 import ca.ubc.ece.hct.myview.widgets.filmstrip.MultiFilmstrip;
-import ca.ubc.ece.hct.myview.widgets.filmstrip.SimpleFilmstrip;
 import ca.ubc.ece.hct.myview.widgets.pixie.Pixie;
 import ca.ubc.ece.hct.myview.widgets.pixie.PixieV2;
 import ca.ubc.ece.hct.myview.widgets.player.*;
 import ca.ubc.ece.hct.myview.widgets.subtitleviewer.StarlingCaptionViewer;
-import ca.ubc.ece.hct.myview.widgets.subtitleviewer.SubtitleViewer;
-
-import feathers.controls.Button;
-import feathers.controls.Callout;
-
-import feathers.controls.ScrollContainer;
 
 import flash.display.StageDisplayState;
-
-import flash.filesystem.FileStream;
 import flash.geom.Rectangle;
-
 import flash.net.SharedObject;
-import flash.utils.ByteArray;
-import flash.utils.getTimer;
-
-import org.osflash.signals.Signal;
-
-import org.osflash.signals.natives.NativeSignal;
-import org.osflash.signals.natives.StarlingNativeSignal;
 
 import starling.core.Starling;
-
-import starling.display.Image;
-
-import starling.display.Quad;
-
 import starling.events.Event;
 import starling.events.KeyboardEvent;
-import starling.events.Touch;
-import starling.events.TouchEvent;
-import starling.events.TouchPhase;
-import starling.events.TouchPhase;
-import starling.textures.Texture;
 
 public class StarlingVideoPlayerView extends StarlingView {
 
@@ -291,7 +259,7 @@ public class StarlingVideoPlayerView extends StarlingView {
     private function setWidgets():void {
         centre.setWidget(_player);
         bottom.setWidget(_filmstrip);
-        left.setWidget(_captionViewer);
+        right.setWidget(_captionViewer);
         topToolbar.setWidget(_toolbar);
     }
 

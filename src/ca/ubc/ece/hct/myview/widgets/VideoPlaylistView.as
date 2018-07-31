@@ -40,8 +40,8 @@ import starling.text.TextFormat;
 
 public class VideoPlaylistView extends StarlingView {
 
-		public static const buttonDimensions:Rectangle = new Rectangle(0, 0, 150, 150);
-		public static const playlistButtonDimension:Rectangle = new Rectangle(0, 0, 150, 150);
+		public static const buttonDimensions:Rectangle = new Rectangle(0, 0, 200, 150);
+//		public static const playlistButtonDimension:Rectangle = new Rectangle(0, 0, 200, 150);
 		public static const gap:Number = 5;
 		public var mediaButtons:Array;
 		public var expandedPlaylistView:VideoPlaylistView;
@@ -96,7 +96,7 @@ public class VideoPlaylistView extends StarlingView {
 					button.x = xOffset;
 					button.y = yOffset;
 
-					xOffset += VideoPlaylistView.playlistButtonDimension.width + gap;
+					xOffset += buttonDimensions.width + gap;
 					if(xOffset + button.width > _width) {
 						xOffset = 10;
 						yOffset += button.height + gap;
@@ -114,7 +114,7 @@ public class VideoPlaylistView extends StarlingView {
 					button2.x = xOffset;
 					button2.y = yOffset;
 
-					xOffset += VideoPlaylistView.buttonDimensions.width + gap;
+					xOffset += buttonDimensions.width + gap;
 					if(xOffset + button2.width > _width) {
 						xOffset = 10;
 						yOffset += button2.height + gap;
@@ -322,14 +322,14 @@ class VideoPlaylistButton extends StarlingView {
 		addChild(title);
 	}
 
-	public function progress(obj:*, val:Number):void {
+	public function progress(obj:*, val:Number, val2:Number):void {
 
 		graphics.clear();
 		graphics.beginFill(0xff9999);
-		graphics.drawRectangle(0, 0, _width, _height);
+		graphics.drawRectangle(0, 0, _width, 20);
 		graphics.endFill();
 		graphics.beginFill(0x99ff99);
-		graphics.drawRectangle(0, 0, val*_width, _height);
+		graphics.drawRectangle(0, 0, val*_width, 20);
 		graphics.endFill();
 		title.text = playlist.listName + "\n Downloading \n" + (Math.round(val*100) + "%");
 
@@ -398,14 +398,16 @@ class VideoMetadataButton extends StarlingView {
         title.autoSize = TextFieldAutoSize.VERTICAL;
 //		title.touchable = false;
 		title.x = _width/2 - title.width/2;
-		title.y = _height/2 - title.height/2;
+//		title.y = _height/2 - title.height/2;
+        title.y = _height - title.height;
 
 		titleBG = new Shape();
-		titleBG.graphics.beginFill(0xffffff, 0.7);
+		titleBG.graphics.beginFill(0xffffff, 0.4);
 		titleBG.graphics.drawRect(0, 0, title.width, title.height);
 		titleBG.graphics.endFill();
 		titleBG.x = title.x;
-		titleBG.y = title.y;
+//		titleBG.y = title.y;
+        titleBG.y = _height - title.height;
 
 		addChild(titleBG);
 		addChild(title);
@@ -419,13 +421,16 @@ class VideoMetadataButton extends StarlingView {
 
 	}
 
-	public function downloadProgress(video:VideoMetadata, val:Number):void {
+	public function downloadProgress(video:VideoMetadata, bytesDownloaded:Number, totalBytes:Number):void {
+
+		var val:Number = bytesDownloaded/totalBytes;
+
 		graphics.clear();
 		graphics.beginFill(0xff9999);
-		graphics.drawRectangle(0, 0, _width, _height);
+		graphics.drawRectangle(0, 0, _width, 20);
 		graphics.endFill();
 		graphics.beginFill(0x99ff99);
-		graphics.drawRectangle(0, 0, val*_width, _height);
+		graphics.drawRectangle(0, 0, val*_width, 20);
 		graphics.endFill();
 
 		title.text = video.title + "\n Downloading \n" + (Math.round(val*100) + "%");
@@ -437,7 +442,7 @@ class VideoMetadataButton extends StarlingView {
 		completedLoading = false;
 	}
 
-	public function downloadComplete(video:VideoMetadata, val:Boolean):void {
+	public function downloadComplete(video:VideoMetadata):void {
 
 		if(!thumbnail) {
             thumbnail = new Thumbnail();
@@ -453,12 +458,14 @@ class VideoMetadataButton extends StarlingView {
 		graphics.drawRectangle(0, 0, _width, _height);
 		graphics.endFill();
 
-
         title.text = video.title;
 		titleBG.graphics.clear();
-		titleBG.graphics.beginFill(0xffffff, 0.7);
+		titleBG.graphics.beginFill(0xffffff, 0.4);
 		titleBG.graphics.drawRect(0, 0, title.width, title.height);
 		titleBG.graphics.endFill();
+
+		title.y = _height - title.height;
+		titleBG.y = _height - title.height;
 		completedLoading = true;
 	}
 
