@@ -28,7 +28,7 @@ import starling.textures.Texture;
 
 public class StarlingCaptionViewer extends StarlingWidget {
 
-    private var nativeSubtitleViewer:SubtitleViewer;
+    public var nativeSubtitleViewer:SubtitleViewer;
     private var bmpD:BitmapData;
     private var cacheView:Image;
     private var background:Quad;
@@ -42,8 +42,8 @@ public class StarlingCaptionViewer extends StarlingWidget {
 
         _captionViewer = this;
         nativeSubtitleViewer = new SubtitleViewer();
-        background = new Quad(1, 1, 0x000000);
-        background.alpha = 0;
+        background = new Quad(1, 1, 0xff0000);
+        background.alpha = 1;
 
         nativeSubtitleViewer.deselected.add(
                 function nativeDeselected(w:Widget):void {
@@ -117,7 +117,6 @@ public class StarlingCaptionViewer extends StarlingWidget {
     }
 
     override public function searchText(string:String):void {
-        trace(string);
         nativeSubtitleViewer.searchText(string);
     }
 
@@ -128,7 +127,7 @@ public class StarlingCaptionViewer extends StarlingWidget {
 
     private function moveNativeWidget():void {
         var zero:Point = localToGlobal(new Point(0, 0));
-        nativeSubtitleViewer.move(zero.x + x, zero.y + y);
+        nativeSubtitleViewer.move(zero.x, zero.y);
     }
 
     override public function setSize(width:Number, height:Number):void {
@@ -204,8 +203,6 @@ public class StarlingCaptionViewer extends StarlingWidget {
         highlightCallout.addEventListener(Event.CLOSE,
             function calloutClosed(e:Event):void {
                 nativeSubtitleViewer.deselect();
-//                trace(AnnotationCallout.caller);
-//                trace(AnnotationCallout.caller is StarlingWidget);
                 deselected.dispatch(AnnotationCallout.caller);
                 highlightCallout.removeEventListener(Event.CLOSE, calloutClosed);
             }

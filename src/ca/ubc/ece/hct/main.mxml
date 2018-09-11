@@ -3,7 +3,8 @@
                        xmlns:mx="library://ns.adobe.com/flex/mx"
                        xmlns:s="library://ns.adobe.com/flex/spark"
                        creationComplete="onCreationComplete()"
-                       showStatusBar="false">
+                       showStatusBar="false"
+                       backgroundAlpha="0">
 
     <fx:Script source="myview/VidexFlex.as" />
     <fx:Script><![CDATA[ ]]></fx:Script>

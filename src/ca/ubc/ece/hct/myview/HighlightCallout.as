@@ -82,6 +82,8 @@ public class HighlightCallout extends Sprite {
         Starling.current.nativeOverlay.addChild(flexCallout);
         flexCallout.open(Starling.current.nativeOverlay, true);
 
+        trace(flexCallout);
+
         var content:HighlightCallout = new HighlightCallout();
         content.setColours(highlightable, deletable);
 

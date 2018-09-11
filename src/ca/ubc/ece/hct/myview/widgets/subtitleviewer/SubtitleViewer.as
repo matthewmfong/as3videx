@@ -9,15 +9,12 @@
 package ca.ubc.ece.hct.myview.widgets.subtitleviewer {
 
 import ca.ubc.ece.hct.Range;
-import ca.ubc.ece.hct.myview.Colours;
-import ca.ubc.ece.hct.myview.AnnotationCallout;
 import ca.ubc.ece.hct.myview.Util;
-import ca.ubc.ece.hct.myview.ui.SearchBar;
-import ca.ubc.ece.hct.myview.widgets.player.PlayerEvent;
 import ca.ubc.ece.hct.myview.ui.UIScrollView;
 import ca.ubc.ece.hct.myview.video.VideoCaptions;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.widgets.Widget;
+import ca.ubc.ece.hct.myview.widgets.player.PlayerEvent;
 
 import flash.display.DisplayObject;
 import flash.display.Shape;
@@ -26,7 +23,6 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.geom.Rectangle;
 import flash.text.TextFormat;
-import flash.utils.getTimer;
 
 import org.osflash.signals.Signal;
 
@@ -210,7 +206,7 @@ public class SubtitleViewer extends Widget {
 			var subtitleWordId:int = 0;
 			mouseDown = false;
 
-			if(captions.cues.length > 0) {
+			if(captions && captions.cues && captions.cues.length > 0) {
 
 				for(var i:int = 0; i<captions.words.length; i++) {
 

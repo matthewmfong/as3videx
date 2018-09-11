@@ -11,6 +11,7 @@ import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.KeywordTag;
 import ca.ubc.ece.hct.myview.StarlingView;
 import ca.ubc.ece.hct.myview.UserDataViewMode;
+import ca.ubc.ece.hct.myview.common.Annotation;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 
 import org.osflash.signals.Signal;
@@ -33,6 +34,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
     public var selected:Signal;
     public var selecting:Signal; // Useful to make sure that highlights don't get applied until the mouse button is up
     public var deselected:Signal;
+    public var annotated:Signal;
     public var highlighted:Signal;
     public var unhighlighted:Signal;
     public var keywordTagged:Signal;
@@ -68,6 +70,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
         selected 						= new Signal(StarlingWidget, Range);
         selecting						= new Signal(StarlingWidget, Range);
         deselected 						= new Signal(StarlingWidget);
+        annotated                       = new Signal(StarlingWidget, Annotation);
         highlighted 					= new Signal(StarlingWidget, int, Range); // colour, interval
         unhighlighted 					= new Signal(StarlingWidget, int, Range); // colour, interval
         keywordTagged                   = new Signal(StarlingWidget, KeywordTag);
@@ -104,6 +107,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
         selected = null;
         selecting = null;
         deselected = null;
+        annotated = null;
         highlighted = null;
         unhighlighted = null;
         keywordTagged = null;
@@ -136,6 +140,7 @@ public class StarlingWidget extends StarlingView implements IWidget {
     public function select(interval:Range):void { }
     public function deselect():void { }
 
+    public function annotate(annotation:Annotation):void { }
     public function setHighlightsWriteMode(mode:String, colour:uint):void { }
     public function highlight(colour:int, interval:Range):void { }
     public function unhighlight(colour:int, interval:Range):void { }

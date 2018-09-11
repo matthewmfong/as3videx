@@ -18,10 +18,12 @@ import flash.display.Loader;
 
 	public class ImageLoader extends Sprite {
 
+		public var loaded:Boolean;
 		private var loader:Loader = new Loader();
 		private var _path:String;
 
 		public function ImageLoader(path:String = null) {
+			loaded = false;
 			loader = new Loader();
 			if(path != null)
 				load(path);
@@ -38,6 +40,7 @@ import flash.display.Loader;
 		private function loadComplete(e:Event):void {
 			loader.contentLoaderInfo.removeEventListener(IOErrorEvent.IO_ERROR, fallback);
 			loader.contentLoaderInfo.removeEventListener(Event.COMPLETE, loadComplete);
+			loaded = true;
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 

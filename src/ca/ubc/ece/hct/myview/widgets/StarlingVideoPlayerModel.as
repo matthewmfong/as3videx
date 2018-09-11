@@ -9,6 +9,7 @@
 package ca.ubc.ece.hct.myview.widgets {
 import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.*;
+import ca.ubc.ece.hct.myview.common.Annotation;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.widgets.IWidget;
 import ca.ubc.ece.hct.myview.widgets.Widget;
@@ -113,7 +114,7 @@ public class StarlingVideoPlayerModel {
     public var highlightWriteMode:String;
 
     public var widgets:Array;
-    private var _sendVCRTimer:Timer;
+//    private var _sendVCRTimer:Timer;
     private var _pingStateTimer:Timer;
 
     public function StarlingVideoPlayerModel() {
@@ -128,8 +129,8 @@ public class StarlingVideoPlayerModel {
 
         widgets = [];
 
-        _sendVCRTimer = new Timer(10000);
-        _sendVCRTimer.addEventListener(TimerEvent.TIMER, sendVCR);
+//        _sendVCRTimer = new Timer(10000);
+//        _sendVCRTimer.addEventListener(TimerEvent.TIMER, sendVCR);
 
         _pingStateTimer = new Timer(5000);
         _pingStateTimer.addEventListener(TimerEvent.TIMER, pingState);
@@ -144,7 +145,7 @@ public class StarlingVideoPlayerModel {
     }
 
     public function loadVideo(video:VideoMetadata):void {
-        _sendVCRTimer.start();
+//        _sendVCRTimer.start();
         _pingStateTimer.start();
         _video = video;
         playheadTime = 0;
@@ -159,6 +160,9 @@ public class StarlingVideoPlayerModel {
         for each(var widget:IWidget in widgets) {
             widget.loadVideo(video);
         }
+
+        sendVCR();
+
     }
 
     public function linkWidget(widget:StarlingWidget):void {
@@ -170,6 +174,7 @@ public class StarlingVideoPlayerModel {
         widget.selected.add(select);
         widget.selecting.add(selecting);
         widget.deselected.add(deselect);
+        widget.annotated.add(annotate);
         widget.highlighted.add(highlight);
         widget.unhighlighted.add(unhighlight);
         widget.playbackRateSet.add(setPlaybackRate);
@@ -194,6 +199,9 @@ public class StarlingVideoPlayerModel {
     }
 
     public function keyboardPlayPauseToggle():void {
+
+        sendVCR();
+
         if(playing) {
             playing = false;
             ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON("keyboard", "action", "stop", "time", playheadTime));
@@ -210,6 +218,9 @@ public class StarlingVideoPlayerModel {
     }
 
     public function keyboardSeek(time:Number):void {
+
+        sendVCR();
+
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON("keyboard", "action", "seek", "from", playheadTime, "to", time));
         for each(var widget:IWidget in widgets) {
             widget.receiveSeek(time);
@@ -217,6 +228,9 @@ public class StarlingVideoPlayerModel {
     }
 
     public function play(source:IWidget):void {
+
+        sendVCR();
+
         playing = true;
 //			trace(state);
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "play", "time", playheadTime));
@@ -228,6 +242,9 @@ public class StarlingVideoPlayerModel {
     }
 
     public function stop(source:IWidget):void {
+
+        sendVCR();
+
         playing = false;
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "stop", "time", playheadTime));
 //            ServerDataLoader.addLog(UserID.id, source + " stop playback at " + playheadTime);
@@ -238,6 +255,9 @@ public class StarlingVideoPlayerModel {
     }
 
     public function reachedEndOfVideo():void {
+
+        sendVCR();
+
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(null, "action", "reachedEndOfVideo"));
     }
 
@@ -274,6 +294,9 @@ public class StarlingVideoPlayerModel {
     }
 
     private function seek(source:IWidget, time:Number):void {
+
+        sendVCR();
+
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "seek", "from", playheadTime, "to", time));
 //            ServerDataLoader.addLog(UserID.id, source + " seek to " + time + " from " + playheadTime);
         for each(var widget:IWidget in widgets) {
@@ -313,6 +336,9 @@ public class StarlingVideoPlayerModel {
     }
 
     private function deselect(source:IWidget):void {
+
+        sendVCR();
+
         selection = new Range(0, 0);
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "deselect", "selection", selection));
 //            ServerDataLoader.addLog(UserID.id, source + " deselect");
@@ -323,6 +349,9 @@ public class StarlingVideoPlayerModel {
     }
 
     private function setPlaybackRate(source:IWidget, rate:Number):void {
+
+        sendVCR();
+
         playbackRate = rate;
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "set_playback_rate", "rate", rate));
 //            ServerDataLoader.addLog(UserID.id, source + " changed playbackRate to " + rate);
@@ -333,6 +362,9 @@ public class StarlingVideoPlayerModel {
     }
 
     private function setFullscreen(source:IWidget, fullscreen:Boolean):void {
+
+        sendVCR();
+
         this.fullscreen = fullscreen;
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "set_fullscreen", "fullscreen", fullscreen));
 
@@ -346,6 +378,9 @@ public class StarlingVideoPlayerModel {
     }
 
     private function setClosedCaptions(source:IWidget, closedCaptions:Boolean):void {
+
+        sendVCR();
+
         this.closedCaptions = closedCaptions;
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "set_cc", "cc", closedCaptions));
         for each(var widget:IWidget in widgets) {
@@ -389,8 +424,26 @@ public class StarlingVideoPlayerModel {
         }
     }
 
+
+    private function annotate(source:IWidget, annotation:Annotation):void {
+        _video.userData.annotate(annotation);
+
+        sendVCR();
+
+        ServerDataLoader.addLog_v2(UserID.id,
+                state,
+                eventToJSON(source, "action", "annotate",
+                                    "interval", annotation.interval,
+                                    "colour", "#" + annotation.colour.toString(16),
+                                    "note", annotation.note));
+        ServerDataLoader.annotate(UserID.id, _video.media_alias_id, annotation);
+    }
+
     private function highlight(source:IWidget, colour:int, interval:Range):void {
         _video.userData.highlight(colour, interval);
+
+
+        sendVCR();
 
         updateHighlights();
 
@@ -401,6 +454,9 @@ public class StarlingVideoPlayerModel {
     private function unhighlight(source:IWidget, colour:int, interval:Range):void {
 //        _video.userData.unhighlightAll(interval);
         _video.userData.unhighlight(colour, interval);
+
+
+        sendVCR();
 
         updateHighlights();
 
@@ -414,6 +470,9 @@ public class StarlingVideoPlayerModel {
 
     private function startPlayingHighlights(source:IWidget, colour:int):void {
 
+
+        sendVCR();
+
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "play_highlights", "colour", colour.toString(16)));
 //            ServerDataLoader.addLog(UserID.id, source + " startPlayingHighlights " + colour.toString(16))
         for each(var widget:IWidget in widgets) {
@@ -423,6 +482,9 @@ public class StarlingVideoPlayerModel {
     }
 
     private function stopPlayingHighlights(source:IWidget):void {
+
+
+        sendVCR();
         ServerDataLoader.addLog_v2(UserID.id, state, eventToJSON(source, "action", "stop_playing_highlights"));
 //			ServerDataLoader.addLog(UserID.id, "stopPlayingHighlights");
         for each(var widget:IWidget in widgets) {

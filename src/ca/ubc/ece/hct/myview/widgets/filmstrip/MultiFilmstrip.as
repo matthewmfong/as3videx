@@ -9,10 +9,12 @@
 package ca.ubc.ece.hct.myview.widgets.filmstrip {
 
 import ca.ubc.ece.hct.Range;
+import ca.ubc.ece.hct.myview.AnnotationCalloutFlash;
 import ca.ubc.ece.hct.myview.Colours;
 import ca.ubc.ece.hct.myview.AnnotationCallout;
 import ca.ubc.ece.hct.myview.AnnotationCallout;
 import ca.ubc.ece.hct.myview.Util;
+import ca.ubc.ece.hct.myview.common.Annotation;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.widgets.StarlingWidget;
 import ca.ubc.ece.hct.myview.widgets.Widget;
@@ -390,6 +392,14 @@ public class MultiFilmstrip extends StarlingWidget {
                             selected.dispatch(this, selectionRange);
                             TouchProcessor.PROCESS_TARGETS_WHILE_MOVING = false;
 
+//							AnnotationCalloutFlash.showCallout(
+//									new Point(touch.globalX, touch.globalY),
+//									this,
+//									Starling.current.nativeOverlay,
+//									null,
+//									selectionRange).
+//							annotateSignal.add(annotate);
+
                             highlightCallout = AnnotationCallout.showCallout(
                                     filmstrip.selectionHighlightSprite,
                                     Colours.colours,
@@ -418,6 +428,11 @@ public class MultiFilmstrip extends StarlingWidget {
 			}
 
 		}
+
+		override public function annotate(annotation:Annotation):void {
+			annotated.dispatch(this, annotation);
+		}
+
 
 		protected function mouseDown(e:MouseEvent):void {
 			if(e.currentTarget is Filmstrip) {

@@ -201,6 +201,8 @@ package ca.ubc.ece.hct.myview.ui {
 			if(_container != null) {
 				_container.graphics.clear();
 				_container.graphics.beginFill(bgColor, bgAlpha);
+//				_container.graphics.lineStyle(2, 0xff0000);
+//				_container.graphics.beginFill(0xff00ff, 1);
 				_container.graphics.drawRect(0, 0, _widthX, _heightX);
 				_container.graphics.endFill();
 			}
@@ -211,6 +213,7 @@ package ca.ubc.ece.hct.myview.ui {
 				_containerMask.graphics.drawRect(0, 0, _widthX, _heightX);
 				_containerMask.graphics.endFill();
 			}
+
 			if(_container != null) {
 				_container.mask = _containerMask;
 			}

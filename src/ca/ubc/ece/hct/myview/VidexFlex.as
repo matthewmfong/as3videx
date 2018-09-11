@@ -37,26 +37,30 @@ private var application_preferences_so:SharedObject;
 private var nativeApplicationUpdater:com.riaspace.nativeApplicationUpdater.NativeApplicationUpdater;
 
 public function onCreationComplete():void {
-
-    trace(this.width + " " + this.height);
-    trace(rootContainer.width + " " + rootContainer.height);
-
-    var installerType:String = "";
-    if(Capabilities.os.indexOf("Mac") >= 0) {
-        installerType = "dmg";
-    } else if(Capabilities.os.indexOf("Windows") >= 0) {
-        installerType = "exe";
+    if (stage) {
+        _init();
+    } else {
+        addEventListener(Event.ADDED_TO_STAGE, _init);
     }
+//    trace(this.width + " " + this.height);
+//    trace(rootContainer.width + " " + rootContainer.height);
 
-    nativeApplicationUpdater = new NativeApplicationUpdater();
-    nativeApplicationUpdater.updateURL =
-            "http://" + Constants.DOMAIN + "/tlef/version/update.php?" +
-            "course_string=" + COURSE::Name + "&" +
-            "installer_type=" + installerType + "&" +
-            "instructor=" + (CONFIG::Instructor == true ? 1 : 0);
-    trace("Checking update: " + nativeApplicationUpdater.updateURL);
-    nativeApplicationUpdater.addEventListener(UpdateEvent.INITIALIZED, update);
-    nativeApplicationUpdater.initialize();
+//    var installerType:String = "";
+//    if(Capabilities.os.indexOf("Mac") >= 0) {
+//        installerType = "dmg";
+//    } else if(Capabilities.os.indexOf("Windows") >= 0) {
+//        installerType = "exe";
+//    }
+//
+//    nativeApplicationUpdater = new NativeApplicationUpdater();
+//    nativeApplicationUpdater.updateURL =
+//            "http://" + Constants.DOMAIN + "/tlef/version/update.php?" +
+//            "course_string=" + COURSE::Name + "&" +
+//            "installer_type=" + installerType + "&" +
+//            "instructor=" + (CONFIG::Instructor == true ? 1 : 0);
+//    trace("Checking update: " + nativeApplicationUpdater.updateURL);
+//    nativeApplicationUpdater.addEventListener(UpdateEvent.INITIALIZED, update);
+//    nativeApplicationUpdater.initialize();
 }
 
 public function update(e:UpdateEvent):void {
@@ -135,6 +139,7 @@ private function _init(e:Event = null):void {
 
     stage.scaleMode = StageScaleMode.NO_SCALE;
     stage.align = StageAlign.TOP_LEFT;
+
 
     application_preferences_so = SharedObject.getLocal("app_preferences");
 

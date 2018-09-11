@@ -9,6 +9,7 @@
 package ca.ubc.ece.hct.myview {
 
 import ca.ubc.ece.hct.Range;
+import ca.ubc.ece.hct.myview.common.Annotation;
 
 import collections.HashMap;
 
@@ -29,6 +30,7 @@ public class UserData {
 		public var pauseRecord:Array;
 		public var playbackRateRecord:Array;
 		public var highlights:HashMap;
+		public var annotations:HashMap;
 		public var tags:Vector.<KeywordTag>;
 		
 		public function UserData() {
@@ -39,6 +41,8 @@ public class UserData {
 			highlights = new HashMap();
 			tags = new Vector.<KeywordTag>();
 			maxViewCount = 0;
+
+			annotations = new HashMap();
 
 		}
 
@@ -97,6 +101,12 @@ public class UserData {
 //			return max;
 //		}
 
+		public function annotate(annotation:Annotation):void {
+
+			annotations.put(annotation.id, annotation);
+
+		}
+
 		public function setHighlights(colourString:String, highlightsString:String):void {
 
 			if(highlightsString.length > 0) {
@@ -153,8 +163,6 @@ public class UserData {
 			
 			var rangeStart:Number = interval.start;
 			var rangeEnd:Number = interval.end;
-
-			trace(colourHighlight)
 
 			// trace("|-- " + interval + " --|");
 			// trace("colourHighlight.intervals.length = " + colourHighlight.intervals.length)

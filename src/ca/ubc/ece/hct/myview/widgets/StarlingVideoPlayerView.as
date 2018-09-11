@@ -259,8 +259,9 @@ public class StarlingVideoPlayerView extends StarlingView {
     private function setWidgets():void {
         centre.setWidget(_player);
         bottom.setWidget(_filmstrip);
-        right.setWidget(_captionViewer);
+        left.setWidget(_captionViewer);
         topToolbar.setWidget(_toolbar);
+
     }
 
     private function unsetWidgets(exceptions:Array):void {
@@ -343,9 +344,6 @@ public class StarlingVideoPlayerView extends StarlingView {
         centre.setSize(right.x - (left.x + left.width), bottom.y - (top.y + top.height));
         centre.x = left.x + left.width;
         centre.y = top.y + top.height;
-
-//        trace(top.y + " " + top.height);
-//        trace(bottom.y + " " + bottomToolbar.y + " " + bottom.height + " " + _height);
 
     }
 
@@ -461,7 +459,7 @@ public class StarlingVideoPlayerView extends StarlingView {
         } else {
 
             bottom.setWidget(_filmstrip);
-            left.setWidget(_captionViewer);
+            right.setWidget(_captionViewer);
             topToolbar.setWidget(_toolbar);
 
             collapseLayout();

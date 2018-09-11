@@ -23,6 +23,10 @@ import mx.controls.Text;
 
 import org.osflash.signals.Signal;
 
+import spark.components.Callout;
+
+import starling.core.Starling;
+
 import starling.display.DisplayObject;
 
 import starling.display.Image;
@@ -42,8 +46,8 @@ public class AnnotationCallout extends Sprite {
     public static const DEL_HIGHLIGHT_MODE:String = "AnnotationCallout.DEL_HIGHLIGHT_MODE";
 
     public static const GAP:int = 5;
-    public static const TAB_HEIGHT:int = 30;
-    public static var TAB_ACTIVE:String = "HIGHLIGHT";
+//    public static const TAB_HEIGHT:int = 30;
+//    public static var TAB_ACTIVE:String = "HIGHLIGHT";
 
     private var background:Quad;
     private var highlightContainer:Sprite;
@@ -53,17 +57,17 @@ public class AnnotationCallout extends Sprite {
     private var deletable:Array;
     private var circlesVisible:Array;
 
-    private var tagContainer:Sprite;
+//    private var tagContainer:Sprite;
 
-    private var tabToggleGroup:ToggleGroup;
-    private var highlightButton:ToggleButton;
-    private var tagButton:ToggleButton;
+//    private var tabToggleGroup:ToggleGroup;
+//    private var highlightButton:ToggleButton;
+//    private var tagButton:ToggleButton;
 
     public var addDeleteMode:String;
 
     public var highlightSignal:Signal;
     public var keywordTagSignal:Signal;
-    private var callout:Callout;
+    private var callout:feathers.controls.Callout;
     public static var caller:*;
 
     public function AnnotationCallout() {
@@ -86,15 +90,26 @@ public class AnnotationCallout extends Sprite {
     public static function showCallout(target:DisplayObject,
                                        highlightable:Array = null,
                                        deletable:Array = null,
-                                       callReference:* = null):Callout {
+                                       callReference:* = null):feathers.controls.Callout {
         caller = callReference;
+
+
+//        var flexCallout:spark.components.Callout = new spark.components.Callout();
+
+//        flexCallout.
+
+
+//        Starling.current.nativeOverlay.addChild(flexCallout);
+//        flexCallout.open(Starling.current.nativeOverlay, true);
+
+//        trace(flexCallout);
 
         var content:AnnotationCallout = new AnnotationCallout();
         content.setColours(highlightable, deletable);
-        content.initTags();
+//        content.initTags();
 
         StarlingWidget.allWidgetSwapStarlingNative();
-        var callout:Callout = Callout.show(content, target, new <String>[RelativePosition.TOP] );
+        var callout:feathers.controls.Callout = feathers.controls.Callout.show(content, target, new <String>[RelativePosition.TOP] );
         callout.closeOnTouchEndedOutside = false;
         callout.disposeContent = true;
         content.callout = callout;
@@ -114,7 +129,7 @@ public class AnnotationCallout extends Sprite {
 
         addButtons(highlightable);
         addDeleteButton();
-        highlightContainer.y = TAB_HEIGHT;
+//        highlightContainer.y = TAB_HEIGHT;
     }
 
     private function init():void {
@@ -123,118 +138,118 @@ public class AnnotationCallout extends Sprite {
         background.alpha = 0;
         background.touchable = false;
 
-        tagContainer = new Sprite();
+//        tagContainer = new Sprite();
 
         var toggleButtonTextFormat:TextFormat = new TextFormat("Arial", 12);
         var selectedToggleButtonTextFormat:TextFormat = new TextFormat("Arial", 12, Colours.BUTTON_ACTIVATED_FONT_COLOUR);
 
-        tabToggleGroup = new ToggleGroup();
-
-        highlightButton = new ToggleButton();
-        highlightButton.label = "Highlight";
-        highlightButton.height = TAB_HEIGHT;
-        highlightButton.fontStyles = toggleButtonTextFormat;
-        highlightButton.selectedFontStyles = selectedToggleButtonTextFormat;
-        highlightButton.padding = 3;
-        addChild(highlightButton);
-        highlightButton.validate();
-        highlightButton.toggleGroup = tabToggleGroup;
-
-        tagButton = new ToggleButton();
-        tagButton.label = "Tag";
-        tagButton.x = highlightButton.width;
-        tagButton.height = TAB_HEIGHT;
-        tagButton.fontStyles = toggleButtonTextFormat;
-        tagButton.selectedFontStyles = selectedToggleButtonTextFormat;
-        tagButton.padding = 3;
-        tagButton.toggleGroup = tabToggleGroup;
-        addChild(tagButton);
-
-        if(TAB_ACTIVE == "HIGHLIGHT") {
-            highlightButton.isSelected = true;
-            tagButton.isSelected = false;
-
+//        tabToggleGroup = new ToggleGroup();
+//
+//        highlightButton = new ToggleButton();
+//        highlightButton.label = "Highlight";
+//        highlightButton.height = TAB_HEIGHT;
+//        highlightButton.fontStyles = toggleButtonTextFormat;
+//        highlightButton.selectedFontStyles = selectedToggleButtonTextFormat;
+//        highlightButton.padding = 3;
+//        addChild(highlightButton);
+//        highlightButton.validate();
+//        highlightButton.toggleGroup = tabToggleGroup;
+//
+//        tagButton = new ToggleButton();
+//        tagButton.label = "Tag";
+//        tagButton.x = highlightButton.width;
+//        tagButton.height = TAB_HEIGHT;
+//        tagButton.fontStyles = toggleButtonTextFormat;
+//        tagButton.selectedFontStyles = selectedToggleButtonTextFormat;
+//        tagButton.padding = 3;
+//        tagButton.toggleGroup = tabToggleGroup;
+//        addChild(tagButton);
+//
+//        if(TAB_ACTIVE == "HIGHLIGHT") {
+//            highlightButton.isSelected = true;
+//            tagButton.isSelected = false;
+//
             addChild(highlightContainer);
-
-        } else if(TAB_ACTIVE == "TAG") {
-            highlightButton.isSelected = false;
-            tagButton.isSelected = true;
-
-            addChild(tagContainer);
-        }
-
-        tabToggleGroup.addEventListener(Event.CHANGE, tabToggleGroupChanged);
-
-    }
-
-    private function tabToggleGroupChanged(e:Event):void {
-
-        var oldTab:Sprite;
-        var newTab:Sprite;
-
-        if(tabToggleGroup.selectedItem == highlightButton) {
-
-            TAB_ACTIVE = "HIGHLIGHT";
-            newTab = highlightContainer;
-
-            if(contains(tagContainer)) {
-                removeChild(tagContainer);
-                oldTab = tagContainer;
-            }
-
-            if(!contains(highlightContainer)) {
-                addChild(highlightContainer);
-            }
-
-        } else if(tabToggleGroup.selectedItem == tagButton) {
-
-            TAB_ACTIVE = "TAG";
-            newTab = tagContainer;
-
-            if(contains(highlightContainer)) {
-                removeChild(highlightContainer);
-                oldTab = highlightContainer;
-            }
-
-            if(!contains(tagContainer)) {
-                addChild(tagContainer);
-            }
-
-
-        }
-
-
-        callout.height = callout.height - oldTab.height + newTab.height;
-
-        callout.invalidate(FeathersControl.INVALIDATION_FLAG_SIZE);
-        callout.validate();
+//
+//        } else if(TAB_ACTIVE == "TAG") {
+//            highlightButton.isSelected = false;
+//            tagButton.isSelected = true;
+//
+//            addChild(tagContainer);
+//        }
+//
+//        tabToggleGroup.addEventListener(Event.CHANGE, tabToggleGroupChanged);
 
     }
 
-    private function initTags():void {
-        var likeTag:KeywordTag = new KeywordTag("Like", new ca.ubc.ece.hct.Range(1, 1), Colours.BLUE, KeywordTag.THUMBS_UP);
-        var interestingTag:KeywordTag = new KeywordTag("Interesting", new ca.ubc.ece.hct.Range(1, 1), Colours.YELLOW, KeywordTag.STAR);
-        var importantTag:KeywordTag = new KeywordTag("Important", new ca.ubc.ece.hct.Range(1, 1), Colours.RED, KeywordTag.CAUTION);
-        var questionTag:KeywordTag = new KeywordTag("Question", new ca.ubc.ece.hct.Range(1, 1), Colours.BLUE, KeywordTag.QUESTION_MARK);
+//    private function tabToggleGroupChanged(e:Event):void {
+//
+//        var oldTab:Sprite;
+//        var newTab:Sprite;
+//
+//        if(tabToggleGroup.selectedItem == highlightButton) {
+//
+//            TAB_ACTIVE = "HIGHLIGHT";
+//            newTab = highlightContainer;
+//
+//            if(contains(tagContainer)) {
+//                removeChild(tagContainer);
+//                oldTab = tagContainer;
+//            }
+//
+//            if(!contains(highlightContainer)) {
+//                addChild(highlightContainer);
+//            }
+//
+//        } else if(tabToggleGroup.selectedItem == tagButton) {
+//
+//            TAB_ACTIVE = "TAG";
+//            newTab = tagContainer;
+//
+//            if(contains(highlightContainer)) {
+//                removeChild(highlightContainer);
+//                oldTab = highlightContainer;
+//            }
+//
+//            if(!contains(tagContainer)) {
+//                addChild(tagContainer);
+//            }
+//
+//
+//        }
+//
+//
+//        callout.height = callout.height - oldTab.height + newTab.height;
+//
+//        callout.invalidate(FeathersControl.INVALIDATION_FLAG_SIZE);
+//        callout.validate();
+//
+//    }
 
-        tagContainer.y = TAB_HEIGHT;
-        tagContainer.addChild(likeTag.sprite);
-        tagContainer.addChild(interestingTag.sprite);
-        tagContainer.addChild(importantTag.sprite);
-        tagContainer.addChild(questionTag.sprite);
-
-        var PADDING:uint = 2;
-        likeTag.sprite.y = 0;
-        interestingTag.sprite.y = likeTag.sprite.y + likeTag.sprite.height + PADDING;
-        importantTag.sprite.y = interestingTag.sprite.y + interestingTag.sprite.height + PADDING;
-        questionTag.sprite.y = importantTag.sprite.y + importantTag.sprite.height + PADDING;
-
-        likeTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
-        interestingTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
-        importantTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
-        questionTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
-
-    }
+//    private function initTags():void {
+//        var likeTag:KeywordTag = new KeywordTag("Like", new ca.ubc.ece.hct.Range(1, 1), Colours.BLUE, KeywordTag.THUMBS_UP);
+//        var interestingTag:KeywordTag = new KeywordTag("Interesting", new ca.ubc.ece.hct.Range(1, 1), Colours.YELLOW, KeywordTag.STAR);
+//        var importantTag:KeywordTag = new KeywordTag("Important", new ca.ubc.ece.hct.Range(1, 1), Colours.RED, KeywordTag.CAUTION);
+//        var questionTag:KeywordTag = new KeywordTag("Question", new ca.ubc.ece.hct.Range(1, 1), Colours.BLUE, KeywordTag.QUESTION_MARK);
+//
+//        tagContainer.y = TAB_HEIGHT;
+//        tagContainer.addChild(likeTag.sprite);
+//        tagContainer.addChild(interestingTag.sprite);
+//        tagContainer.addChild(importantTag.sprite);
+//        tagContainer.addChild(questionTag.sprite);
+//
+//        var PADDING:uint = 2;
+//        likeTag.sprite.y = 0;
+//        interestingTag.sprite.y = likeTag.sprite.y + likeTag.sprite.height + PADDING;
+//        importantTag.sprite.y = interestingTag.sprite.y + interestingTag.sprite.height + PADDING;
+//        questionTag.sprite.y = importantTag.sprite.y + importantTag.sprite.height + PADDING;
+//
+//        likeTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
+//        interestingTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
+//        importantTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
+//        questionTag.sprite.addEventListener(TouchEvent.TOUCH, tagTouch);
+//
+//    }
 
     private function addButtons(colours:Array):void {
 
@@ -300,7 +315,7 @@ public class AnnotationCallout extends Sprite {
         }
 
         background.readjustSize((Colours.colours.length + 1) * (2 * HighlightCircle.radius + GAP) - GAP,
-                                HighlightCircle.radius * 2 + TAB_HEIGHT);
+                                HighlightCircle.radius * 2 /*+ TAB_HEIGHT*/);
 
     }
 

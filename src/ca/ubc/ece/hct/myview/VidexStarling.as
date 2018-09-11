@@ -116,6 +116,10 @@ public class VidexStarling extends Sprite {
         assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/playerbar/play.png"), "playerBarPlay");
         assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/playerbar/unfullscreen.png"), "playerBarFullscreenOff");
 
+
+        assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/annotation/close.png"), "annotationClose");
+        assets.enqueueWithName(File.applicationDirectory.resolvePath("uiimage/annotation/note.png"), "annotationNote");
+
 //        assets.loadQueue(function onProgress(val:Number):void { trace("Asset Load Progress: " + val); });
         assets.loadQueue(function onProgress(val:Number):void {});
 

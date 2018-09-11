@@ -8,6 +8,8 @@
 
 package ca.ubc.ece.hct.myview {
 
+import ca.ubc.ece.hct.myview.common.Annotation;
+
 import com.greensock.events.LoaderEvent;
 import com.greensock.loading.*;
 
@@ -21,6 +23,7 @@ public class ServerDataLoader {
 
 		public static const LOGIN_PAGE:String = "login.php";
 		public static const HIGHLIGHT_PAGE:String = "addHighlight.php";
+    	public static const ANNOTATE_PAGE:String = "addAnnotation.php";
 		public static const GET_VIDEO_PAGE:String = "getVideo.php";
 		public static const GET_COURSE_PAGE:String = "getCourseTest.php";
 		public static const LOG_PAGE:String = "addLog.php";
@@ -42,6 +45,26 @@ public class ServerDataLoader {
 							   {signal: signal,
 						   	onComplete: requestComplete }));
 //			queue.load();
+			return signal;
+		}
+
+		public static function annotate(userID:String, media_alias_id:String, annotation:Annotation):Signal {
+            var urlString:String = "http://" + Constants.DOMAIN + "/" + ANNOTATE_PAGE + "?" +
+									"user=" + userID + "&" +
+									"media_alias_id=" + media_alias_id + "&" +
+									"annotation_id=" + annotation.id + "&" +
+									"colour=" + annotation.colour.toString(16) + "&" +
+									"start_time=" + annotation.interval.start + "&" +
+									"end_time=" + annotation.interval.end + "&" +
+									"note=" + annotation.note + "&" +
+									"delete=" + annotation.deleteFlag;
+
+			trace(urlString);
+            var signal:Signal = new Signal(Object);
+            queue.append(
+                    new DataLoader(urlString,
+                            {signal: signal,
+                                onComplete: requestComplete }));
 			return signal;
 		}
 
