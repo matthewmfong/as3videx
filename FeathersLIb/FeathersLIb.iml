@@ -2,7 +2,7 @@
 <module type="Flex" version="4">
   <component name="FlexBuildConfigurationManager" active="FeathersLIb">
     <configurations>
-      <configuration name="FeathersLIb" target-platform="Desktop" pure-as="true" output-type="Library" output-file="feathers.swc" output-folder="$MODULE_DIR$/../lib">
+      <configuration name="FeathersLIb" target-platform="Desktop" pure-as="true" output-type="Library" output-file="feathers.swc" output-folder="$MODULE_DIR$/../lib" skip-build="true">
         <dependencies target-player="26.0">
           <entries>
             <entry library-id="c5475646-7fd7-43c8-8f4c-62f7058afb2a">
