@@ -10,8 +10,16 @@
                            width="100%"
                            height="100%"
                            backgroundColor="#cccccc">
+    <fx:Script><![CDATA[
+
+        public function exit():void {
+            dispatchEvent(new Event("exit"));
+        }
+
+        ]]></fx:Script>
     <!--<s:Scroller id="scroller" width="100%" height="100%">-->
         <s:VGroup id="base_vGroup"  width="100%" height="100%" padding="10">
+            <s:Button id="back_Button" label="Back" click="exit()"></s:Button>
             <mx:ProgressBar id="progressBar_ProgressBar"
                             label=""
                             width="100%"

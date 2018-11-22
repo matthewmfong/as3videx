@@ -92,9 +92,15 @@ public class Calendar extends View {
         var runningTime:Number;
         var today:Date = new Date();
 
-        for(runningTime = startTime; runningTime <= endTime; runningTime += Constants.DAYS2MILLISECONDS) {
+
+        for(runningTime = startTime + Constants.HOURS2MILLISECONDS * 2;
+                // stupid DST will do this
+                // Sun Nov 4 00:00:00 GMT-0700 2018, Sun Nov 4 23:00:00 GMT-0800 2018
+            runningTime <= endTime;
+            runningTime += Constants.DAYS2MILLISECONDS) {
 
             date = new Date(runningTime);
+            trace(date);
 
             var db:DayBox = new DayBox(date, 0xffffff, boxWidth, boxHeight);
 

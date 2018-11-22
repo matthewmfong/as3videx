@@ -706,6 +706,36 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
+      <configuration name="BCIT_CHEM1103_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1103_1_winter_2018">
+        <dependencies>
+          <entries>
+            <entry library-name="flash" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="flash_components" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="starling" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-name="TopcoatLightMobileTheme" library-level="project">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry module-name="feathers" build-configuration-name="feathers">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="Flex" />
+        </dependencies>
+        <compiler-options>
+          <option name="resourceFilesMode" value="ResourcePatterns" />
+          <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM1103_1_winter_2018-INSTRUCTOR.xml" />
+          <option name="additionalOptions" value="-advanced-telemetry" />
+        </compiler-options>
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1103-instructor-app.xml" package-file-name="BCIT_CHEM1103_1_winter_2018-INSTRUCTOR" />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
     </configurations>
     <compiler-options />
   </component>

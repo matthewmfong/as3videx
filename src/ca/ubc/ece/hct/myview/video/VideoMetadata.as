@@ -34,6 +34,8 @@ public class VideoMetadata {
 
 		public var userData:UserData;
 		public var crowdUserData:HashMap;
+		public var crowdLastViewed:Date;
+		public var crowdUserLastViewed:String;
 		private var _crowdUserViewCounts:Array;
 
 		public var downloadProgress:Signal;
@@ -115,6 +117,10 @@ public class VideoMetadata {
 		return null;
 	}
 
+    /**
+	 * Grab all the Class Data
+     * @return Vector of VCRs, or null if there is no data
+     */
 	public function grabAllClassData():Vector.<UserData> {
 		return crowdUserData.grab(UserData.CLASS);
 	}
@@ -123,28 +129,28 @@ public class VideoMetadata {
      * Gets the aggregate viewcounts
      */
     public function get crowdUserViewCounts():Array {
-			var returnArray:Array;
-			if(_crowdUserViewCounts == null ) {
-				var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
-				if(crowdUserData != null) {
-					returnArray = [];
-                    for each(var userData:UserData in crowdUserData) {
-						for(var i:int = 0; i<userData.viewCountRecord.length; i++) {
-							if(isNaN(returnArray[i])) {
-								returnArray[i] = 0;
-							}
-							returnArray[i] += userData.viewCountRecord[i];
+		var returnArray:Array;
+		if(_crowdUserViewCounts == null ) {
+			var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
+			if(crowdUserData != null) {
+				returnArray = [];
+				for each(var userData:UserData in crowdUserData) {
+					for(var i:int = 0; i<userData.viewCountRecord.length; i++) {
+						if(isNaN(returnArray[i])) {
+							returnArray[i] = 0;
 						}
+						returnArray[i] += userData.viewCountRecord[i];
 					}
-				} else {
-					returnArray = [0];
 				}
 			} else {
-				returnArray = _crowdUserViewCounts;
+				returnArray = [0];
 			}
-
-			return returnArray;
+		} else {
+			returnArray = _crowdUserViewCounts;
 		}
+
+		return returnArray;
+	}
 
 		public function get crowdHighlights():Array {
             var returnArray:Array;

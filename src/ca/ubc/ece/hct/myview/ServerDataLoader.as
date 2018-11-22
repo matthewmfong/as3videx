@@ -285,19 +285,45 @@ public class ServerDataLoader {
 		}
 
 		public static function getRecentMedia(from:Date, to:Date):Signal {
-            trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
-					"&from=" + Util.dateToISO8601(from) +
-					"&to=" + Util.dateToISO8601(to));
+        trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
+                "&from=" + Util.dateToISO8601(from) +
+                "&to=" + Util.dateToISO8601(to));
 
-            var signal:Signal = new Signal(Object);
-            queue.append(
-                    new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
-																								"&from=" + Util.dateToISO8601(from) +
-																								"&to=" + Util.dateToISO8601(to),
-                            {signal: signal,
-                                onComplete: requestComplete }));
-            queue.load();
-            return signal;
+        var signal:Signal = new Signal(Object);
+        queue.append(
+                new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?media_loads&user_string=" + COURSE::Name +
+                        "&from=" + Util.dateToISO8601(from) +
+                        "&to=" + Util.dateToISO8601(to),
+                        {signal: signal,
+                            onComplete: requestComplete }));
+        queue.load();
+        return signal;
+    }
+
+		public static function getUsers():Signal {
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?get_users&user_string=" + COURSE::Name);
+
+			var signal:Signal = new Signal(Object);
+			queue.append(
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?get_users&user_string=" + COURSE::Name,
+							{signal: signal,
+								onComplete: requestComplete }));
+			queue.load();
+			return signal;
+		}
+
+		public static function getMediaLastLoads(media_alias_ids:String):Signal {
+
+			trace("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?last_viewed&" +
+					"media_alias_ids=" + media_alias_ids + "&user_string=" + COURSE::Name);
+			var signal:Signal = new Signal(Object);
+			queue.append(
+					new DataLoader("http://" + Constants.DOMAIN + "/" + QUERY_PAGE + "?last_viewed&" +
+							"media_alias_ids=" + media_alias_ids + "&user_string=" + COURSE::Name,
+							{signal: signal,
+								onComplete: requestComplete }));
+			queue.load();
+			return signal;
 		}
 
 		public static function requestComplete(e:LoaderEvent):void {

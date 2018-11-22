@@ -29,5 +29,5 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" default="true" project-jdk-name="Flex" project-jdk-type="Flex SDK Type (new)" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="false" project-jdk-name="Flex" project-jdk-type="Flex SDK Type (new)" />
 </project>

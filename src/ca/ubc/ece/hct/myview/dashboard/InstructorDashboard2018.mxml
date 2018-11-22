@@ -9,54 +9,62 @@
         xmlns:chart="mx.charts.*"
         xmlns:dashboard="ca.ubc.ece.hct.myview.dashboard.*"
         creationComplete="creationCompleteHandler()"
-        backgroundColor="0x00ff00"
+        backgroundColor="0xffffff"
         width="100%"
         height="100%">
 
     <fx:Script><![CDATA[
         import mx.controls.ProgressBarMode;
+
         ]]></fx:Script>
 
 
-    <s:SkinnableContainer width="100%" height="100%">
+    <s:SkinnableContainer id="main_Container" width="100%" height="100%">
         <s:layout>
             <s:VerticalLayout />
         </s:layout>
-        <s:HGroup width="100%" height="100%">
-            <s:Panel id="playlist_Panel" title="Videos" left="0" top="0" bottom="0" height="100%" backgroundAlpha="0">
-                <s:SpriteVisualElement id="playlistView_container" width="400" height="500"/>
-            </s:Panel>
-            <s:SkinnableContainer width="100%" height="100%" right="0">
+        <s:HGroup id="main_HGroup" width="100%" height="100%">
+
+            <!--<s:Panel id="playlist_Panel" title="Videos" left="0" top="0" bottom="0" height="100%" backgroundAlpha="0">-->
+                <!--<s:SpriteVisualElement id="playlistView_container" width="400" height="500"/>-->
+            <!--</s:Panel>-->
+            <s:Panel title="Active Users by Date" height="100%">
                 <s:layout>
-                    <s:VerticalLayout />
+                    <s:VerticalLayout padding="5"></s:VerticalLayout>
                 </s:layout>
-
-                <s:Panel id="mainContent_panel"
-                         title="mainContent" right="0" bottom="0" width="100%" height="100%">
-                    <s:Group id="mainContent_container"
-                             width="100%"
-                             height="100%">
+                <s:Scroller height="100%">
+                    <s:Group id="activity_Panel">
                         <s:layout>
-                            <s:VerticalLayout />
+                            <s:VerticalLayout padding="5"></s:VerticalLayout>
                         </s:layout>
-
-                        <s:Panel id="activeUsers_panel" title="Active Users" width="100%" right="0" top="0">
-                            <s:Scroller id="activeUsers_scroller"
-                                        width="100%"
-                                        height="150"
-                                        verticalScrollPolicy="off">
-                                <s:Group id="activeUsers_container" height="{activeUsers_scroller.height - 20}" clipAndEnableScrolling="true">
-                                    <!--<chart:ColumnChart id="activeUsersChart"-->
-                                    <!--showDataTips="true"-->
-                                    <!--height="{activeUsers_container.height}" />-->
-                                </s:Group>
-                            </s:Scroller>
-                        </s:Panel>
                     </s:Group>
+                </s:Scroller>
+            </s:Panel>
+
+            <s:Panel id="users_Panel" title="Users" height="100%">
+                <s:layout>
+                    <s:VerticalLayout padding="5"></s:VerticalLayout>
+                </s:layout>
+            </s:Panel>
+
+            <!--<s:VGroup>-->
+                <s:Panel height="100%">
+                    <s:layout>
+                        <s:VerticalLayout padding="5"></s:VerticalLayout>
+                    </s:layout>
+                    <s:Scroller height="100%">
+                        <s:VGroup id="summary_Group"></s:VGroup>
+                    </s:Scroller>
                 </s:Panel>
-            </s:SkinnableContainer>
+                <!--<s:TileGroup id="mainTileGroup" width="100%" height="100%">-->
+                <!--</s:TileGroup>-->
+            <!--</s:VGroup>-->
+
         </s:HGroup>
-        <s:SkinnableContainer id="progressBar_Container" width="100%" height="50">
+        <s:Group id="videoStats_Group" width="100%" height="100%"></s:Group>
+
+
+        <s:SkinnableContainer id="progressBar_Container" width="100%" height="50" bottom="0">
             <mx:ProgressBar id="progressBar"
                             label=""
                             width="100%"
