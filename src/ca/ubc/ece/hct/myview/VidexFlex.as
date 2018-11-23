@@ -2,6 +2,7 @@
  * Created by matth on 2017-07-09.
  */
 
+import air.update.events.StatusUpdateErrorEvent;
 import air.update.events.StatusUpdateEvent;
 import air.update.events.UpdateEvent;
 
@@ -37,30 +38,31 @@ private var application_preferences_so:SharedObject;
 private var nativeApplicationUpdater:com.riaspace.nativeApplicationUpdater.NativeApplicationUpdater;
 
 public function onCreationComplete():void {
-    if (stage) {
-        _init();
-    } else {
-        addEventListener(Event.ADDED_TO_STAGE, _init);
-    }
+//    if (stage) {
+//        _init();
+//    } else {
+//        addEventListener(Event.ADDED_TO_STAGE, _init);
+//    }
 //    trace(this.width + " " + this.height);
 //    trace(rootContainer.width + " " + rootContainer.height);
 
-//    var installerType:String = "";
-//    if(Capabilities.os.indexOf("Mac") >= 0) {
-//        installerType = "dmg";
-//    } else if(Capabilities.os.indexOf("Windows") >= 0) {
-//        installerType = "exe";
-//    }
-//
-//    nativeApplicationUpdater = new NativeApplicationUpdater();
-//    nativeApplicationUpdater.updateURL =
-//            "http://" + Constants.DOMAIN + "/tlef/version/update.php?" +
-//            "course_string=" + COURSE::Name + "&" +
-//            "installer_type=" + installerType + "&" +
-//            "instructor=" + (CONFIG::Instructor == true ? 1 : 0);
-//    trace("Checking update: " + nativeApplicationUpdater.updateURL);
-//    nativeApplicationUpdater.addEventListener(UpdateEvent.INITIALIZED, update);
-//    nativeApplicationUpdater.initialize();
+    var installerType:String = "";
+    if(Capabilities.os.indexOf("Mac") >= 0) {
+        installerType = "dmg";
+    } else if(Capabilities.os.indexOf("Windows") >= 0) {
+        installerType = "exe";
+    }
+
+    nativeApplicationUpdater = new NativeApplicationUpdater();
+    nativeApplicationUpdater.updateURL =
+            "http://" + Constants.DOMAIN + "/tlef/version/update.php?" +
+            "course_string=" + COURSE::Name + "&" +
+            "installer_type=" + installerType + "&" +
+            "instructor=" + (CONFIG::Instructor == true ? 1 : 0);
+    trace("Checking update: " + nativeApplicationUpdater.updateURL);
+    nativeApplicationUpdater.addEventListener(UpdateEvent.INITIALIZED, update);
+    nativeApplicationUpdater.addEventListener(StatusUpdateErrorEvent.UPDATE_ERROR, _init);
+    nativeApplicationUpdater.initialize();
 }
 
 public function update(e:UpdateEvent):void {

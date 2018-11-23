@@ -302,8 +302,8 @@ public class VidexStarling extends Sprite {
                 if(CONFIG::Instructor) {
 //                    recordsVisualizer = new UserRecordsVisualizer(stage.stageWidth, stage.stageHeight - toolbar.height);
                     instructorButton = new Button();
-                    instructorButton.label = "Instructor Mode";
-                    instructorButton.addEventListener(MouseEvent.CLICK, instructorMode);
+                    instructorButton.label = "Player Mode";
+                    instructorButton.addEventListener(MouseEvent.CLICK, swapModes);
                     instructorButton.x = stage.stageWidth - instructorButton.width - 10;
                     Starling.current.nativeOverlay.addChild(instructorButton);
 
@@ -320,12 +320,32 @@ public class VidexStarling extends Sprite {
 
     }
 
+    public function swapModes(e:MouseEvent = null):void {
+        if(flexLayer.rootContainer.contains(dashboard)) {
+            popInstructorMode();
+            backToVideoLibrary(null);
+            instructorButton.label = "Instructor Mode";
+        } else {
+            instructorMode();
+            instructorButton.label = "Player Mode";
+        }
+
+    }
+
     public function instructorMode(e:MouseEvent = null):void {
         popRootPlaylist();
+        popPlayer();
         dashboard = new InstructorDashboard2018();
         dashboard.setPlaylist(VideoMetadataManager.playlist);
         flexLayer.rootContainer.addElement(dashboard);
+
 //        dashboard.setActualSize(flexLayer.rootContainer.width, flexLayer.rootContainer.height);
+    }
+
+    public function popInstructorMode():void {
+        if(flexLayer.rootContainer.contains(dashboard)) {
+            flexLayer.rootContainer.removeElement(dashboard);
+        }
     }
 
 
@@ -392,7 +412,9 @@ public class VidexStarling extends Sprite {
         rootPlaylistView.touchable = true;
         rootPlaylistView.alpha = 1;
         pushView(rootPlaylistView);
-        Starling.current.nativeOverlay.removeChild(backButton);
+        if(Starling.current.nativeOverlay.contains(backButton)) {
+            Starling.current.nativeOverlay.removeChild(backButton);
+        }
         rootPlaylistView.setSize(stage.stageWidth - 20, stage.stageHeight - toolbar.height - 20);
 
         toolbar.title = course.code;
