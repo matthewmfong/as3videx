@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<flex-config>
+	<compiler> 
+		<define> 
+			<name>CONFIG::AIR</name> 
+			<value>true</value> 
+		</define> 
+		<define> 
+			<name>CONFIG::WEB</name> 
+			<value>false</value> 
+		</define> 
+		<define>
+			<name>CONFIG::DEV</name>
+			<value>false</value>
+		</define>
+    <define>
+      <name>COURSE::Name</name>
+      <value>"BCIT_CHEM0011_1_winter_2018"</value>
+    </define>
+    <define>
+      <name>CONFIG::Instructor</name>
+      <value>false</value>
+    </define>
+    <define>
+      <name>COURSE::PredefinedName</name>
+      <value>""</value>
+    </define>
+
+	</compiler>
+
+	<default-size>
+		<width>1280</width>
+		<height>720</height>
+	</default-size>
+  
+</flex-config>
