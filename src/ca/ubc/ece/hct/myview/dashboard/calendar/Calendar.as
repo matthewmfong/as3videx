@@ -100,7 +100,6 @@ public class Calendar extends View {
             runningTime += Constants.DAYS2MILLISECONDS) {
 
             date = new Date(runningTime);
-            trace(date);
 
             var db:DayBox = new DayBox(date, 0xffffff, boxWidth, boxHeight);
 

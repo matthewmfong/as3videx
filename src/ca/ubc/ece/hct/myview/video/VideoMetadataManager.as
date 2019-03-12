@@ -404,9 +404,23 @@ import flash.utils.ByteArray;
 						if(obj[id] != null) {
 							var slidesString:String = obj[id];
 							var slidesArray:Array = slidesString.split(",");
+							var timeString:String;
+                            var timeArray:Array;
+                            var time:Number;
 
 							for(var slideArrayIndex:int = 0; slideArrayIndex<slidesArray.length; slideArrayIndex++) {
-								slides.push(Number(slidesArray[slideArrayIndex]));
+
+								timeString = slidesArray[slideArrayIndex];
+
+								if(isNaN(Number(timeString))) {
+									timeArray = timeString.split(":");
+									time = Number(timeArray[0]*3600) + Number(timeArray[1]* 60) + Number(timeArray[2]);
+								} else {
+									time = Number(timeString);
+                                }
+
+
+                                slides.push(time);
 							}
 						}
 

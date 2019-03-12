@@ -20,6 +20,11 @@ package ca.ubc.ece.hct.myview {
 
 		public static const BUTTON_ACTIVATED_FONT_COLOUR:uint = 0x33a1ff;
 
+		public static const DASHBOARD_VCR_GRAPH_MEDIAN_COLOUR:uint = 0xff00ff;
+		public static const DASHBOARD_VCR_GRAPH_MEAN_COLOUR:uint = 0xff0000;
+		public static const DASHBOARD_VCR_GRAPH_MAX_COLOUR:uint = 0x0000ff;
+		public static const DASHBOARD_VCR_GRAPH_AGGREGATE_COLOUR:uint = 0x00ff00;
+
 		public function Colours() {}
 
 		public static function sortColours(colours:Array):Array {

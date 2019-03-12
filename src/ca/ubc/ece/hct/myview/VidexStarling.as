@@ -336,7 +336,7 @@ public class VidexStarling extends Sprite {
         popRootPlaylist();
         popPlayer();
         dashboard = new InstructorDashboard2018();
-        dashboard.setPlaylist(VideoMetadataManager.playlist);
+//        dashboard.setPlaylist(VideoMetadataManager.playlist);
         flexLayer.rootContainer.addElement(dashboard);
 
 //        dashboard.setActualSize(flexLayer.rootContainer.width, flexLayer.rootContainer.height);

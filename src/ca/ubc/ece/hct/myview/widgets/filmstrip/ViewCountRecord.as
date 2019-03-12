@@ -57,7 +57,7 @@ public class ViewCountRecord extends StarlingView {
 //        addChild(_mask);
     }
 
-    public function draw(viewCountRecord:Array,
+    public function draw(viewCountRecord:Vector.<Number>,
                          startTime:Number = -1, endTime:Number = -1,
                          colours:Array = null,
                          alphas:Array = null,

@@ -330,7 +330,7 @@ public class Filmstrip extends SimpleFilmstrip {
 //			(Canvas)(_thumbnailContainer.mask).drawPolygon(new Polygon(maskVertices));
 		}
 
-		public function drawViewCountRecord(viewCountRecordSprite:ViewCountRecord, viewCountRecord:Array,
+		public function drawViewCountRecord(viewCountRecordSprite:ViewCountRecord, viewCountRecord:Vector.<Number>,
 											colours:Array = null,
 											alphas:Array = null,
     										ratios:Array = null):void {

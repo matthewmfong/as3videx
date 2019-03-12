@@ -17,9 +17,13 @@
         }
 
         ]]></fx:Script>
+    <fx:Declarations>
+        <s:RadioButtonGroup id="bucket_RadioButtonGroup" />
+    </fx:Declarations>
     <!--<s:Scroller id="scroller" width="100%" height="100%">-->
         <s:VGroup id="base_vGroup"  width="100%" height="100%" padding="10">
-            <s:Button id="back_Button" label="Back" click="exit()"></s:Button>
+            <s:Button id="back_Button" label="Back" click="exit()" />
+            <s:Label id="title_Label" />
             <mx:ProgressBar id="progressBar_ProgressBar"
                             label=""
                             width="100%"
@@ -30,7 +34,21 @@
             <s:SpriteVisualElement id="calendar_SpriteVisualElement" width="100%" height="100"/>
             <s:Scroller id="content_Scroller" width="100%" height="100%">
                 <s:VGroup width="100%">
+                    <s:VGroup>
+                        <s:HGroup id="graphSelectionButtons_Group">
+                            <s:Button id="regular_vcr_Button" label="View counts"/>
+                            <!--<s:Button id="seen_at_least_once_Button" label="Seen at least once" />-->
+                        </s:HGroup>
+                        <s:HGroup>
+                            <s:RadioButton groupName="bucket_RadioButtonGroup" id="slider_RadioButton" label="Bucket Size" selected="true" value="bucket"/>
+                            <s:HSlider id="bucket_Slider" minimum="1" maximum="60" width="300" />
+                            <s:Label id="bucketSize_Label" text="1 second" />
+                            <s:RadioButton groupName="bucket_RadioButtonGroup" id="slides_RadioButton" label="Slides" value="slides"/>
+                            <s:ToggleButton id="editSlides_ToggleButton" label="Edit Slides" visible="false" />
+                        </s:HGroup>
+                    </s:VGroup>
                     <s:HGroup width="100%">
+                        <s:SpriteVisualElement id="stats_SpriteVisualElement" width="100" height="400" />
                         <s:SpriteVisualElement id="aggregate_vcr_SpriteVisualElement" width="100%" height="400"/>
                         <s:VGroup id="thumbnail_VGroup" width="400" paddingTop="10">
                             <s:SpriteVisualElement id="thumbnail_SpriteVisualElement" width="{thumbnail_VGroup.width}" height="300"/>

@@ -11,6 +11,7 @@ package ca.ubc.ece.hct.myview.video {
 import ca.ubc.ece.hct.Range;
 import ca.ubc.ece.hct.myview.Highlights;
 import ca.ubc.ece.hct.myview.UserData;
+import ca.ubc.ece.hct.myview.Util;
 
 import collections.HashMap;
 
@@ -34,9 +35,12 @@ public class VideoMetadata {
 
 		public var userData:UserData;
 		public var crowdUserData:HashMap;
-		public var crowdLastViewed:Date;
+		private var _crowdLastViewed:Date;
+		public function set crowdLastViewed(d:Date):void { _crowdLastViewed = d; crowdLastViewedUpdated.dispatch(); }
+		public function get crowdLastViewed():Date { return _crowdLastViewed; }
+		public var crowdLastViewedUpdated:Signal;
 		public var crowdUserLastViewed:String;
-		private var _crowdUserViewCounts:Array;
+		private var _crowdUserViewCounts:Vector.<Number>;
 
 		public var downloadProgress:Signal;
 		public var downloadComplete:Signal;
@@ -58,6 +62,8 @@ public class VideoMetadata {
 			_progressDownloaded = 0;
 //			totalNumberOfSourcesToDownload = 0;
 //            totalNumberOfSourcesDownloaded = 0;
+
+			crowdLastViewedUpdated = new Signal();
 		}
 
 		public function addSource(id:String,
@@ -128,22 +134,22 @@ public class VideoMetadata {
     /**
      * Gets the aggregate viewcounts
      */
-    public function get crowdUserViewCounts():Array {
-		var returnArray:Array;
+    public function get crowdUserViewCounts():Vector.<Number> {
+		var returnArray:Vector.<Number>;
 		if(_crowdUserViewCounts == null ) {
 			var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
 			if(crowdUserData != null) {
-				returnArray = [];
+				returnArray = new Vector.<Number>();
 				for each(var userData:UserData in crowdUserData) {
 					for(var i:int = 0; i<userData.viewCountRecord.length; i++) {
-						if(isNaN(returnArray[i])) {
-							returnArray[i] = 0;
+						if(returnArray.length == i) {
+							returnArray.push(0);
 						}
 						returnArray[i] += userData.viewCountRecord[i];
 					}
 				}
 			} else {
-				returnArray = [0];
+				returnArray = new <Number>[0];
 			}
 		} else {
 			returnArray = _crowdUserViewCounts;
@@ -154,7 +160,7 @@ public class VideoMetadata {
 
 		public function get crowdHighlights():Array {
             var returnArray:Array;
-            if(_crowdUserViewCounts == null ) {
+//            if(_crowdUserViewCounts == null ) {
                 var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
                 if(crowdUserData != null) {
                     returnArray = [];
@@ -185,20 +191,20 @@ public class VideoMetadata {
                 } else {
                     returnArray = [0];
                 }
-            } else {
-                returnArray = _crowdUserViewCounts;
-            }
+//            } else {
+//                returnArray = _crowdUserViewCounts;
+//            }
 
             return returnArray;
 		}
 
 
-		public function get currentClassCrowdHighlights():Array {
-			var returnArray:Array;
+		public function get currentClassCrowdHighlights():Vector.<Number> {
+			var returnArray:Vector.<Number>;
 			if(_crowdUserViewCounts == null ) {
 				var crowdUserData:Vector.<UserData> = crowdUserData.grab(UserData.CLASS);
 				if(crowdUserData != null) {
-					returnArray = [];
+					returnArray = new Vector.<Number>();
 					for each(var userData:UserData in crowdUserData) {
 
 						if(userData.userString.indexOf(COURSE::Name) > -1) {
@@ -228,7 +234,7 @@ public class VideoMetadata {
 						}
 					}
 				} else {
-					returnArray = [0];
+					returnArray = new <Number>[0];
 				}
 			} else {
 				returnArray = _crowdUserViewCounts;

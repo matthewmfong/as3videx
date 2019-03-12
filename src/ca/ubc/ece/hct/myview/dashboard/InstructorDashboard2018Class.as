@@ -25,6 +25,7 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 import flash.ui.Mouse;
 import flash.ui.MouseCursor;
+import flash.utils.getTimer;
 
 import mx.charts.CategoryAxis;
 import mx.charts.ColumnChart;
@@ -111,13 +112,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
         playlist_Panel = new Panel();
         playlistView_container = new SpriteVisualElement();
         activity_Panel = new Group();
-//        mainContent_panel = new Panel();
-//        mainContent_container = new Group();
-//        activeUsers_container = new Group();
-//        activeUsers_scroller = new Scroller();
         progressBar = new ProgressBar();
-
-//        summary_Panel = new Panel();
 
         recentMediaLayout = new RecentMedia();
 
@@ -191,10 +186,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
     private function loadVideo(v:VideoMetadata):void {
 
-//        trace("END HERE_________________________");
-//        trace(VideoMetadataManager.COURSE.startDate + " --> " + VideoMetadataManager.COURSE.endDate)
-
-//        trace(v.media_alias_id);
         video = v;
         videoStats = new VideoStats();
         videoStats.db = userLogLoader;
@@ -277,10 +268,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 //
 //        spr.addChild(urv);
 //        urv.loadVideo(video);
-
-        function resizeMainContent(e:ResizeEvent):void {
-//            urv.set
-        }
 
     }
 
@@ -456,7 +443,9 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
                             dateFormatter.format(Util.dateParser(entry['dateregistered'])) :
                             dateFormatter.format(Util.dateParser(entry['lastlogin']));
 
-                    users.text += entry['userstring'].substr(28, 5) + "...\n";
+                    UsersDictionary.newUser(entry['userstring']);
+
+                    users.text += "S" + UsersDictionary.getUserNumber(entry['userstring']) + "\n";
                     lastLogin.text += lastLoginString + "\n";
                     dateRegistered.text += dateFormatter.format(Util.dateParser(entry['dateregistered'])) + "\n";
                 }
@@ -479,7 +468,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         var videos:Array = VideoMetadataManager.getVideos();
         for each(var video:VideoMetadata in videos) {
-            var crowdvcr:Array = video.crowdUserViewCounts;
+            var crowdvcr:Vector.<Number> = video.crowdUserViewCounts;
             var totalMinutesViewed:Number = 0;
             for(var i:int = 0; i<crowdvcr.length; i++) {
                 totalMinutesViewed += crowdvcr[i];
@@ -500,17 +489,12 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         }
 
-        blobs.sortOn("ratio", Array.DESCENDING | Array.NUMERIC);
+        blobs.sortOn("total", Array.DESCENDING | Array.NUMERIC);
 
         var o:*;
         var today:Date = new Date();
 
         var vgroup:VGroup = new VGroup();
-//        var titlesGroup:VGroup = new VGroup();      hgroup.addElement(titlesGroup);
-//        var totalsGroup:VGroup = new VGroup();      hgroup.addElement(totalsGroup);
-//        var durationGroup:VGroup = new VGroup();    hgroup.addElement(durationGroup);
-//        var usersViewedGroup:VGroup = new VGroup(); hgroup.addElement(usersViewedGroup);
-//        var lastViewedGroup:VGroup = new VGroup();  hgroup.addElement(lastViewedGroup);
 
         var titles:Label = new Label();             titles.text = "Titles";                 titles.width = titlesWidth;
         var totals:Label = new Label();             totals.text = "Total time viewed";      totals.width = totalsWidth;
@@ -527,18 +511,11 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         vgroup.addElement(headingsGroup);
 
-
-//        titlesGroup.addElement(titles);
-//        durationGroup.addElement(durations);
-//        totalsGroup.addElement(totals);
-//        usersViewedGroup.addElement(usersViewed);
-//        lastViewedGroup.addElement(lastViewed);
-
-        var titlesMaxWidth:Number = 0,
-                totalsMaxWidth:Number = 0,
-                durationsMaxWidth:Number = 0,
-                usersViewedMaxWidth:Number = 0,
-                lastViewedMaxWidth:Number = 0;
+//        var titlesMaxWidth:Number = 0,
+//                totalsMaxWidth:Number = 0,
+//                durationsMaxWidth:Number = 0,
+//                usersViewedMaxWidth:Number = 0,
+//                lastViewedMaxWidth:Number = 0;
         var titlesArr:Array = [],
                 totalsArr:Array = [],
                 durationsArr:Array = [],
@@ -558,7 +535,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
             var totals1:Label = new Label();
             var durations1:Label = new Label();
             var usersViewed1:Label = new Label();
-            var lastViewed1:Label = new Label();
+            var lastViewed1:LastViewedLabel = new LastViewedLabel();
 
             titlesArr.push(titles1);
             totalsArr.push(totals1);
@@ -574,10 +551,11 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
             usersViewed1.text += o.usersViewed + "";
 
             titles1.video = o.video;
+            lastViewed1.video = o.video;
 
 
             if(o.lastLoad == null) {
-                lastViewed1.text += "Never";
+                lastViewed1.text += "Loading...";
             } else if(o.lastLoad.getDate() == today.getDate() &&
                     o.lastLoad.getMonth() == today.getMonth() &&
                     o.lastLoad.getFullYear() == today.getFullYear()) {
@@ -589,15 +567,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
             } else {
                 lastViewed1.text += o.lastLoad == null ? "Never" : dateFormatter.format(o.lastLoad) + "";
             }
-
-
-//            titles.invalidateSize();
-//            titles.validateNow();
-//            titlesMaxWidth = Number.max(titles1.getExplicitOrMeasuredWidth(), titlesMaxWidth);
-//            totalsMaxWidth = Number.max(totals1.width, totalsMaxWidth);
-//            durationsMaxWidth= Number.max(durations1.width, durationsMaxWidth);
-//            usersViewedMaxWidth = Number.max(usersViewed1.width, usersViewedMaxWidth);
-//            lastViewedMaxWidth = Number.max(lastViewed1.width, lastViewedMaxWidth);
 
             titles1.addEventListener(MouseEvent.CLICK,
                     function titleclick(e:MouseEvent):void {
@@ -621,29 +590,24 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
             wholeGroup.addElement(pergroup);
 
-            var vcr:VCRSprite = new VCRSprite(o.video.crowdUserViewCounts, 400 + 100 + 100 + 50 + 100, 50);
+            var vcr:VCRSprite = new VCRSprite(o.video, o.video.crowdUserViewCounts, 400 + 100 + 100 + 50 + 100, 50, o.video.slides);
+            vcr.addEventListener(MouseEvent.CLICK,
+                    function vcrClick(e:MouseEvent):void {
+                        trace(e.target.video.filename);
+                        loadVideo(e.target.video);
+                    });
+            vcr.addEventListener(MouseEvent.ROLL_OVER,
+                    function vcrMouseOver(e:MouseEvent):void {
+                        Mouse.cursor = MouseCursor.BUTTON;
+                    });
+            vcr.addEventListener(MouseEvent.ROLL_OUT,
+                    function vcrMouseOut(e:MouseEvent):void {
+                        Mouse.cursor = MouseCursor.ARROW;
+                    });
             wholeGroup.addElement(vcr);
 
-//            vcr.graphics.beginFill(0x00ff00);
-//            vcr.graphics.drawCircle(0, 0, 5);
-//            vcr.graphics.endFill();
-            vcr.width = 400 + 100 + 100 + 50 + 100;
+            vcr.width = titlesWidth + totalsWidth + durationsWidth + usersViewedWidth + lastViewedWidth;//400 + 100 + 100 + 50 + 100;
             vcr.height = 50;
-//
-////            trace(o.video.crowdUserViewCounts)
-//            var vcrSprite:VCRSprite = new VCRSprite(o.video.crowdUserViewCounts, 200, 50);
-//            vcr.addChild(vcrSprite);
-//
-//            stage.addChild(vcrSprite);
-
-//            var shape:Shape = new Shape();
-//
-//            shape.graphics.beginFill(0x00ff00);
-//            shape.graphics.drawCircle(0, 0, 5);
-//            shape.graphics.endFill();
-//
-//            vcr.addChild(shape);
-
 
             vgroup.addElement(wholeGroup);
 
@@ -651,7 +615,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         summary_Group.addElement(vgroup);
 
-        trace("titlesmaxWidth" + titlesMaxWidth)
         for(var i:int = 0; i<titlesArr.length; i++) {
             titlesArr[i].width = titlesWidth;
             totalsArr[i].width = totalsWidth;
@@ -659,7 +622,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
             usersViewedArr[i].width = usersViewedWidth;
             lastViewedArr[i].width = lastViewedWidth;
         }
-
 
 
         callNextDependentFunction();
@@ -695,6 +657,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
     }
 
+    private var timing:Number;
     private function getLastViewed():void {
 
         ServerDataLoader.getMediaLastLoads(VideoMetadataManager.getAllMediaAliasIDs().toString()).add(
@@ -710,14 +673,13 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
                             video.crowdLastViewed = Util.dateParser(obj[record]['last_load']);
                             video.crowdUserLastViewed = obj[record]['user'];
 
-//                            trace(video.title + " " + video.crowdLastViewed);
                         }
 
                     }
-
-                    callNextDependentFunction();
                 }
-        )
+        );
+
+        callNextDependentFunction();
 
     }
 
@@ -728,6 +690,8 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 }
 }
 
+import ca.ubc.ece.hct.myview.Util;
+import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 
 import flash.display.GradientType;
@@ -736,9 +700,12 @@ import flash.display.Shape;
 
 import flash.display.Sprite;
 import flash.geom.Matrix;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 
 import spark.components.Label;
 import spark.core.SpriteVisualElement;
+import spark.formatters.DateTimeFormatter;
 
 
 class Media extends Label {
@@ -746,27 +713,68 @@ class Media extends Label {
     public var video:VideoMetadata;
 }
 
+class LastViewedLabel extends Label {
+
+    private var _video:VideoMetadata;
+    public function set video(v:VideoMetadata):void {
+
+        var dateFormatter:DateTimeFormatter = new DateTimeFormatter();
+        dateFormatter.dateTimePattern = "EE MMM d, yyyy";
+
+        _video = v;
+        _video.crowdLastViewedUpdated.add(
+            function updateText():void {
+                var today:Date = new Date();
+                if(_video.crowdLastViewed == null) {
+                    text = "Never";
+                } else if(_video.crowdLastViewed.getDate() == today.getDate() &&
+                        _video.crowdLastViewed.getMonth() == today.getMonth() &&
+                        _video.crowdLastViewed.getFullYear() == today.getFullYear()) {
+                    text = "Today";
+                } else if(_video.crowdLastViewed.getDate() == today.getDate()-1 &&
+                        _video.crowdLastViewed.getMonth() == today.getMonth() &&
+                        _video.crowdLastViewed.getFullYear() == today.getFullYear()) {
+                    text = "Yesterday"; // too lazy to add logic for yesterday of last month :P
+                } else {
+                    text = _video.crowdLastViewed == null ? "Never" : dateFormatter.format(_video.crowdLastViewed) + "";
+                }
+            }
+        )
+    }
+
+}
+
 class VCRSprite extends SpriteVisualElement {
+
+    public var video:VideoMetadata;
 
     public var _width:Number;
     public var _height:Number;
 
-    public function VCRSprite(viewCountRecord:Array, width:Number, height:Number) {
+    public var vcr:Vector.<Number>;
+
+    public var maxViewCount:Number;
+
+    public static const HORIZONTAL_TICK_INTERVAL:int = 30;
+
+    public function VCRSprite(video:VideoMetadata, viewCountRecord:Vector.<Number>, width:Number, height:Number, slides:Vector.<Number> = null) {
+
+        this.video = video;
 
         _width = width;
         _height = height;
 
+        vcr = viewCountRecord;
+
         var startTime:Number = 0;
         var endTime:Number = viewCountRecord.length-1;
 
-        var maxViewCount:Number = 1;
+        maxViewCount = 1;
         for (var i:int = 0; i < viewCountRecord.length; i++) {
             if (viewCountRecord[i] > maxViewCount) {
                 maxViewCount = viewCountRecord[i];
             }
         }
-
-//        maxViewCount += 5;
 
         var graphMaxHeight:int = _height;
 
@@ -776,11 +784,11 @@ class VCRSprite extends SpriteVisualElement {
         viewCountRecordSprite.graphics.drawRect(0, 0, _width, graphMaxHeight);
         viewCountRecordSprite.graphics.endFill();
 
-        var graphHeight:Number;
+        var graphHeight:Number = 0;
 
-        var colours:Array = [0xffff00, 0xffff00, 0xffa500, 0xff0000, 0xff0000];
-        var alphas:Array = [1, 1, 1, 1, 1];
-        var ratios:Array = [0, 50, 180, 230, 255];
+        var colours:Array = [0x009900];
+        var alphas:Array = [1];
+        var ratios:Array = [0];
         var matr:Matrix = new Matrix;
         matr.createGradientBox(_width, graphMaxHeight, Math.PI / 2, 0, 0);
         viewCountRecordSprite.graphics.beginGradientFill(GradientType.LINEAR,
@@ -796,10 +804,10 @@ class VCRSprite extends SpriteVisualElement {
         var forEnd:uint = endTime;
         forEnd = Math.max(0, Math.min(viewCountRecord.length - 1, forEnd));
 
-        viewCountRecordSprite.graphics.lineTo((-uint(startTime)) / (uint(endTime + 1) - uint(startTime)) * _width,
-                graphMaxHeight - graphHeight)
+//        viewCountRecordSprite.graphics.lineTo((-uint(startTime)) / (uint(endTime + 1) - uint(startTime)) * _width,
+//                graphMaxHeight - graphHeight)
 
-        var calc:Number;
+        var calc:Number = 0;
         for (var i:int = forStart; i < forEnd; i++) {
 
 //            calc = (Math.log(viewCountRecord[i] / maxViewCount + Math.pow(Math.E, -1.5)) + 1.5) /
@@ -817,15 +825,59 @@ class VCRSprite extends SpriteVisualElement {
         viewCountRecordSprite.graphics.lineTo(_width, graphMaxHeight);
         viewCountRecordSprite.graphics.lineTo(calc, graphMaxHeight);
 
+        if(slides) {
+            for(var i:int = 0; i<slides.length; i++) {
+                viewCountRecordSprite.graphics.lineStyle(1, 0);
+                viewCountRecordSprite.graphics.moveTo((slides[i] + 0.5 - uint(startTime)) / (uint(endTime + 1) - uint(startTime)) * _width, graphMaxHeight);
+                viewCountRecordSprite.graphics.lineTo((slides[i] + 0.5 - uint(startTime)) / (uint(endTime + 1) - uint(startTime)) * _width, 0);
+            }
+        }
+
         addChild(viewCountRecordSprite);
 
-//        trace("ASLDOADJ A");
-//        var shape:Shape = new Shape();
-//
-//        graphics.beginFill(0x00ffff);
-//        graphics.drawCircle(0, 0, 5);
-//        graphics.endFill();
-//
-//        addChild(shape);
+        drawAxes();
+
+    }
+
+    public function drawAxes():void {
+        var axes:Sprite = new Sprite();
+        axes.graphics.lineStyle(1, 0);
+        axes.graphics.lineTo(0,         _height);
+        axes.graphics.lineTo(_width,  _height);
+
+        var numberofHorizontalTicks:int = vcr.length/HORIZONTAL_TICK_INTERVAL;
+        var numberOfVerticalTicks:int = _height/25;
+
+        for(var i:int = 0; i<numberOfVerticalTicks; i++) {
+            axes.graphics.moveTo(0, _height - (i+1) * _height/numberOfVerticalTicks);
+            axes.graphics.lineTo(5, _height - (i+1) * _height/numberOfVerticalTicks);
+        }
+
+        var lastTimePosition:Number = 0;
+        for(var i:int = 0; i<numberofHorizontalTicks; i++) {
+            axes.graphics.moveTo((i+1) * _width/numberofHorizontalTicks, _height);
+            axes.graphics.lineTo((i+1) * _width/numberofHorizontalTicks, _height - 5);
+
+            if(((i) * _width/numberofHorizontalTicks) - lastTimePosition  > 20) {
+                var time:TextField = new TextField();
+                time.autoSize = TextFieldAutoSize.CENTER;
+                time.text = Util.timeInSecondsToTimeString(HORIZONTAL_TICK_INTERVAL * i);
+                time.x = (i) * _width / numberofHorizontalTicks;
+                time.y = _height - time.height;
+                axes.addChild(time);
+
+                lastTimePosition = time.x + time.width;
+            }
+        }
+
+        addChild(axes);
+
+        var maxViews:TextField = new TextField();
+        maxViews.autoSize = TextFieldAutoSize.CENTER;
+        maxViews.text = maxViewCount.toString() + " total views";
+        maxViews.x = 7;
+        axes.addChild(maxViews);
+
+
     }
 }

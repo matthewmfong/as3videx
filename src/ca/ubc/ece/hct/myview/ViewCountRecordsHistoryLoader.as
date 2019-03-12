@@ -146,7 +146,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
 
         if(loader.numChildren == 0) {
-            trace("progressSignal dispatch 1, 1");
+//            trace("progressSignal dispatch 1, 1");
             progressSignal.dispatch(1, 1);
             completeSignal.dispatch();
 //            thread_resultHandler(null);
@@ -286,7 +286,7 @@ public class ViewCountRecordsHistoryLoader extends View {
     }
 
     private function thread_progressHandler(event:ThreadProgressEvent):void {
-        trace("THREAD PROGRESS: " + event.current + "/" + event.total)
+//        trace("THREAD PROGRESS: " + event.current + "/" + event.total);
 //        progressBar.setProgress(event.current, event.total);
         progressSignal.dispatch(event.current/event.total/2 + 0.5, 1);
         statusSignal.dispatch("Processing logs - " + Math.round((event.current/event.total/2 + 0.5) * 100) + "%")
@@ -294,7 +294,7 @@ public class ViewCountRecordsHistoryLoader extends View {
 
     private function loaderProgress(e:LoaderEvent):void {
 //        trace("Download Progress: " + e.target.progress);
-        trace("Download Progress: " + loader.progress + " - " + e.target.name + ": " + e.target.progress);
+//        trace("Download Progress: " + loader.progress + " - " + e.target.name + ": " + e.target.progress);
         progressSignal.dispatch(loader.progress/2, 1);
         statusSignal.dispatch("Downloading logs - " + Math.round(loader.progress/2 * 100) + "%")
     }

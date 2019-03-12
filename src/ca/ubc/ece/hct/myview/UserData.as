@@ -24,7 +24,7 @@ public class UserData {
 		// public static const FRIEND:String = "UserData.FRIEND";
 
 		public var userString:String;
-		public var viewCountRecord:Array;
+		public var viewCountRecord:Vector.<Number>;
 		// TODO: aside from setting VCR via set view_count_record, maxViewCount must be manually specified =\
 		public var maxViewCount:Number;
 		public var pauseRecord:Array;
@@ -35,7 +35,7 @@ public class UserData {
 		
 		public function UserData() {
 
-			viewCountRecord = [];
+			viewCountRecord = new Vector.<Number>();
 			pauseRecord = [];
 			playbackRateRecord = [];
 			highlights = new HashMap();

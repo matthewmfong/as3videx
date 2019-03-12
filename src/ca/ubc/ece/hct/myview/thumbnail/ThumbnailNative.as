@@ -8,8 +8,10 @@
 
 package ca.ubc.ece.hct.myview.thumbnail {
 
+import ca.ubc.ece.hct.myview.Util;
 import ca.ubc.ece.hct.myview.VideoATFManager;
 import ca.ubc.ece.hct.myview.View;
+import ca.ubc.ece.hct.myview.ui.FloatingTextField;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
 import ca.ubc.ece.hct.myview.video.VideoUtil;
 
@@ -60,6 +62,14 @@ public class ThumbnailNative extends View {
 
     public var loaded:Signal;
     private var _background:Shape;
+    private var floatingTime:FloatingTextField;
+    public function set floatingTimeVisible(v:Boolean):void {
+        if(v && !contains(floatingTime)) {
+            addChild(floatingTime);
+        } else if(!v && contains(floatingTime)) {
+            removeChild(floatingTime);
+        }
+    }
 
     public function ThumbnailNative() {
         super();
@@ -77,6 +87,8 @@ public class ThumbnailNative extends View {
 //        this.mask = maskingSprite;
 
         image = new Bitmap();
+
+        floatingTime = new FloatingTextField("0");
     }
 
     override protected function addedToStage(e:Event = null):void {
@@ -104,6 +116,9 @@ public class ThumbnailNative extends View {
             image.height = _width / video.aspectRatio;
             image.y = _height / 2 - image.height / 2;
         }
+
+        floatingTime.x = _width/2 - floatingTime.width/2;
+        floatingTime.y = _height - floatingTime.height;
     }
 
     public function loadVideo(video:VideoMetadata):void {
@@ -149,16 +164,9 @@ public class ThumbnailNative extends View {
                             exact,
                             1,
                             vuRenderedSignal);
-//					trace(id + " RENDER ME PLX");
                 }
             }
     }
-
-//    private function imageLoadedFromWeb(time:Number, data:Image, target:*):void {
-//        if(target == this) {
-//            image = data;
-//        }
-//    }
 
     private var fadeInTween:Tween;
     private var resizeFadeIn:Boolean;
@@ -194,6 +202,8 @@ public class ThumbnailNative extends View {
 
         loaded.dispatch(this);
         imageLoaded = true;
+
+        floatingTime.text = Util.timeInSecondsToTimeString(_timestamp);
     }
 
     public function seekNormalized(location:Number, exact:Boolean = false, mustLoad:Boolean = false):void {
