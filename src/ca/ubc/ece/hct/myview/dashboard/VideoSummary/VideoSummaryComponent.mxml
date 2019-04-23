@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:s="library://ns.adobe.com/flex/spark"
+                      creationComplete="creationComplete(event)">
+
+    <fx:Script><![CDATA[
+        import ca.ubc.ece.hct.myview.video.VideoMetadata;
+        import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
+        import ca.ubc.ece.hct.myview.video.VideoMetadata;
+
+        import mx.events.FlexEvent;
+
+        import org.osflash.signals.Signal;
+
+        private var _videos:Array;
+        private var videoSummaryComponents:Array;
+        private var creationCompleted:Boolean = false;
+
+        private var sortOrder:String = "videoTitle";
+        private var sortDirection:uint = Array.NUMERIC;
+
+        public var videoSelected:Signal = new Signal(VideoMetadata);
+
+        public function creationComplete(event:FlexEvent):void {
+            titles.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void {
+                sortVideoSummaryComponents("videoTitle", false);
+            });
+            totals.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void {
+                sortVideoSummaryComponents("totalSecondsViewed", true);
+            });
+            durations.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void {
+                sortVideoSummaryComponents("videoDuration", true);
+            });
+            usersViewed.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void {
+                sortVideoSummaryComponents("usersViewed", true);
+            });
+            lastViewed.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void {
+                sortVideoSummaryComponents("crowdLastViewed", true);
+            });
+
+            videoSummaryComponents = [];
+            creationCompleted = true;
+
+            if (_videos) {
+                populate();
+            }
+        }
+
+        public function set videos(videosArray:Array):void {
+            _videos = videosArray;
+
+            if (creationCompleted) {
+                populate();
+            }
+
+        }
+
+        private function populate():void {
+
+            for each(var _video:VideoMetadata in _videos) {
+
+                var videoSummary:VideoSummary = new VideoSummary();
+                videoSummary.video = _video;
+                videoSummary.videoClicked.add(function videoClicked(_video:VideoMetadata):void {
+                    videoSelected.dispatch(_video);
+                });
+
+                videoSummaryComponents.push(videoSummary);
+            }
+
+            sortVideoSummaryComponents("videoTitle", false);
+        }
+
+        private function sortVideoSummaryComponents(sortBy:String, numeric:Boolean):void {
+            if(sortOrder == sortBy) {
+                sortDirection = (sortDirection & Array.DESCENDING > 1) ? 0 : Array.DESCENDING;
+            }
+
+            sortOrder = sortBy;
+            videoSummaryComponents.sortOn(sortOrder, sortDirection | (numeric ? Array.NUMERIC : 0));
+
+            while (main_VGroup.numElements > 1) {
+                main_VGroup.removeElementAt(1);
+            }
+
+            for (var i:int = 0; i < videoSummaryComponents.length; i++) {
+                main_VGroup.addElement(videoSummaryComponents[i]);
+            }
+        }
+        ]]></fx:Script>
+    <s:VGroup id="main_VGroup">
+        <s:HGroup>
+            <s:Label id="titles"        text="Titles"               color="blue" width="{VideoSummary.titlesWidth}" />
+            <s:Label id="totals"        text="Total Time Viewed"    color="blue" width="{VideoSummary.totalsWidth}" />
+            <s:Label id="durations"     text="Duration"             color="blue" width="{VideoSummary.durationsWidth}" />
+            <s:Label id="usersViewed"   text="Users Viewed"         color="blue" width="{VideoSummary.usersViewedWidth}" />
+            <s:Label id="lastViewed"    text="LastViewed"           color="blue" width="{VideoSummary.lastViewedWidth}" />
+        </s:HGroup>
+    </s:VGroup>
+</s:SkinnableContainer>

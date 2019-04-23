@@ -19,6 +19,7 @@
         ]]></fx:Script>
     <fx:Declarations>
         <s:RadioButtonGroup id="bucket_RadioButtonGroup" />
+        <s:RadioButtonGroup id="graphType_RadioButtonGroup" />
     </fx:Declarations>
     <!--<s:Scroller id="scroller" width="100%" height="100%">-->
         <s:VGroup id="base_vGroup"  width="100%" height="100%" padding="10">
@@ -45,6 +46,10 @@
                             <s:Label id="bucketSize_Label" text="1 second" />
                             <s:RadioButton groupName="bucket_RadioButtonGroup" id="slides_RadioButton" label="Slides" value="slides"/>
                             <s:ToggleButton id="editSlides_ToggleButton" label="Edit Slides" visible="false" />
+                        </s:HGroup>
+                        <s:HGroup>
+                            <s:RadioButton groupName="graphType_RadioButtonGroup" id="viewCount_RadioButton" label="Views" selected="true" value="viewCount" />
+                            <s:RadioButton groupName="graphType_RadioButtonGroup" id="pauseCount_RadioButton" label="Pauses" selected="false" value="pauseCount" />
                         </s:HGroup>
                     </s:VGroup>
                     <s:HGroup width="100%">

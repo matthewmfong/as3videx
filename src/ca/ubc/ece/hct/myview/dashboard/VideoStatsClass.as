@@ -9,6 +9,7 @@
 package ca.ubc.ece.hct.myview.dashboard {
 import ca.ubc.ece.hct.myview.Constants;
 import ca.ubc.ece.hct.myview.NumberUtil;
+import ca.ubc.ece.hct.myview.PauseLocationAndDate;
 import ca.ubc.ece.hct.myview.ServerDataLoader;
 import ca.ubc.ece.hct.myview.UserData;
 import ca.ubc.ece.hct.myview.UserData;
@@ -77,6 +78,7 @@ public class VideoStatsClass extends SkinnableContainer {
     private var bucketState:Vector.<Number>;
     private var userDatasState:Vector.<UserData>;
     private var userDataDrawList:Vector.<String>;
+    private var showingDate:Date;
 
     public var scroller:Scroller;
     public var progressBar_ProgressBar:ProgressBar;
@@ -105,6 +107,9 @@ public class VideoStatsClass extends SkinnableContainer {
     public var bucketSize_Label:Label;
     public var editSlides_ToggleButton:ToggleButton;
 
+    public var graphType_RadioButtonGroup:RadioButtonGroup;
+    public var viewCount_RadioButton:RadioButton;
+    public var pauseCount_RadioButton:RadioButton;
 
     public function VideoStatsClass() {
         super();
@@ -143,6 +148,10 @@ public class VideoStatsClass extends SkinnableContainer {
         editSlides_ToggleButton = new ToggleButton();
         usernames = [];
         userDataDrawList = new Vector.<String>();
+
+        graphType_RadioButtonGroup = new RadioButtonGroup();
+        viewCount_RadioButton = new RadioButton();
+        pauseCount_RadioButton = new RadioButton();
     }
 
     public function set video(v:VideoMetadata):void {
@@ -182,6 +191,8 @@ public class VideoStatsClass extends SkinnableContainer {
             userDatasState = _video.crowdUserData.grab(UserData.CLASS);
 
             userDatasState.sort(sortUserDataByName);
+
+            showingDate = new Date();
 
             // find max view count among all users and total max view count so we can graph properly
             var aggregateVCR:Array = [];
@@ -234,7 +245,7 @@ public class VideoStatsClass extends SkinnableContainer {
         viewCountRecordSprite.addEventListener(MouseEvent.MOUSE_MOVE, vcrMouseMove);
         viewCountRecordSprite.slideEdited.add(updateSlides);
 //        viewCountRecordSprite.addEventListener(MouseEvent.CLICK, vcrClick);
-        drawViewCountRecords();
+        autoDrawGraphType();
         aggregate_vcr_SpriteVisualElement.addChild(viewCountRecordSprite);
 
 
@@ -266,17 +277,35 @@ public class VideoStatsClass extends SkinnableContainer {
         caption_SpriteVisualElement.addChild(captionView);
 
         db.select("SELECT count(*) AS count FROM main.logs WHERE action = 'seek' AND video_id = '" + _video.media_alias_id + "'").add(
-                function (r:Object):void {
+                function findSeeks(r:Object):void {
                     number_of_seeks_Label.textFlow = TextConverter.importToFlow("<b>Number of seeks: </b>" + r.data[0].count, TextConverter.TEXT_FIELD_HTML_FORMAT);
                 }
         );
 
-        db.select("SELECT * FROM main.logs WHERE action = 'stop' AND video_id = '" + _video.media_alias_id + "'").add(
-                function (r:Object):void {
+        db.select("SELECT * FROM main.logs WHERE action = 'stop' AND video_id = '" + _video.media_alias_id + "' ORDER BY date ASC").add(
+                function findPauses(r:Object):void {
                     pauseLocations = new Vector.<Number>();
+                    var userDatas:Vector.<UserData> = _video.grabAllClassData();
+
+                    var userData:UserData;
+                    for each(userData in userDatas) {
+                        userData.pauseHistory = new Vector.<PauseLocationAndDate>();
+                        userData.pauseRecord = new Vector.<Number>();
+                        initializePauseCountTo0ForUserData(userData);
+                    }
+
                     if(r.data) {
                         for (var i:int = 0; i < r.data.length; i++) {
-                            pauseLocations.push(Number(r.data[i].time));
+                            var userData:UserData = grabUserData(r.data[i].user);
+                            userData.pauseHistory.push(new PauseLocationAndDate(Number(r.data[i].time), new Date(r.data[i].date)));
+                            pauseLocations.push(r.data[i].time);
+                        }
+                    }
+
+                    for each(userData in userDatas) {
+                        for(var i:int = 0; i<userData.pauseHistory.length; i++) {
+                            var time:Number = userData.pauseHistory[i].time;
+                            userData.pauseRecord[Math.floor(time)] += 1;
                         }
                     }
 
@@ -292,9 +321,7 @@ public class VideoStatsClass extends SkinnableContainer {
                     }
 
                     bucketState = buckets;
-                    drawViewCountRecords();
-
-//                    viewCountRecordSprite.drawViewCountRecordFromUserDatas(bucketizeVCR(buckets, _video.crowdUserData.grab(UserData.CLASS)), allTimeMaxViewCount, allTimeAggregateMaxViewCount);
+                    autoDrawGraphType();
 
                     bucketSize_Label.text = bucket_Slider.value + " seconds";
                 });
@@ -314,7 +341,7 @@ public class VideoStatsClass extends SkinnableContainer {
                             }
 
                             bucketState = buckets;
-                            drawViewCountRecords();
+                            autoDrawGraphType();
 
                             bucketSize_Label.text = bucket_Slider.value + " seconds";
                             break;
@@ -324,7 +351,7 @@ public class VideoStatsClass extends SkinnableContainer {
                             bucket_Slider.enabled = false;
 
                             bucketState = _video.slides;
-                            drawViewCountRecords();
+                            autoDrawGraphType();
 
                             break;
                     }
@@ -335,7 +362,15 @@ public class VideoStatsClass extends SkinnableContainer {
                     viewCountRecordSprite.setEditMode(editSlides_ToggleButton.selected);
                 });
 
+        graphType_RadioButtonGroup.addEventListener(Event.CHANGE,
+                function graphTypeChange(e:Event):void {
+                    gotoDate(selectedDate);
+                    autoDrawGraphType();
+                });
+
     }
+
+
 
     private function crowdHighlightsLoaded(object:Object):void {
         var obj:* = JSON.parse((String)(object));
@@ -581,27 +616,86 @@ public class VideoStatsClass extends SkinnableContainer {
     }
 
     private function gotoDate(inputDate:Date):void {
-        var numUsers:Number = 0;
         var date:Date = new Date(inputDate.getTime() + Constants.DAYS2MILLISECONDS - 1);
-        var userdatas:Vector.<UserData> = new Vector.<UserData>();
-        for(var i:int = 0; i<usernames.length; i++) {
-            var user:UserData = new UserData();
-            user.userString = usernames[i];
-            user.viewCountRecord = getVCRForUserAtDate(user.userString, date);
-            for(var j:int = 0; j < user.viewCountRecord.length; j++) {
-                user.maxViewCount = Math.max(user.maxViewCount, user.viewCountRecord[j]);
-            }
-            if(user.maxViewCount > 0) {
-                numUsers++;
-            }
-            userdatas.push(user);
+        showingDate = date;
+        userDatasState = new Vector.<UserData>();
+        switch(graphType_RadioButtonGroup.selectedValue) {
+            case "viewCount":
+                for(var i:int = 0; i<usernames.length; i++) {
+                    var user:UserData = new UserData();
+                    user.userString = usernames[i];
+                    user.viewCountRecord = getVCRForUserAtDate(user.userString, date);
+                    for (var j:int = 0; j < user.viewCountRecord.length; j++) {
+                        user.maxViewCount = Math.max(user.maxViewCount, user.viewCountRecord[j]);
+                    }
+                    userDatasState.push(user);
+                }
+                break;
+
+            case "pauseCount":
+                var userDatas:Vector.<UserData> = _video.grabAllClassData();
+                for each(var userData:UserData in userDatas) {
+                    var user:UserData = new UserData();
+                    user.userString = userData.userString;
+                    initializePauseCountTo0ForUserData(user);
+
+                    for(var i:int = 0; i<userData.pauseHistory.length; i++) {
+                        if(userData.pauseHistory[i].date < date) {
+                            var time:Number = userData.pauseHistory[i].time;
+                            user.pauseRecord[Math.floor(time)] += 1;
+                        } else {
+                            break;
+                        }
+                    }
+                    userDatasState.push(user);
+                }
+
+//                var timer:Number = flash.utils.getTimer();
+//                db.select("SELECT * FROM main.logs WHERE action = 'stop' AND video_id = '" + _video.media_alias_id + "' AND date < '" + inputDate.time + "' ORDER BY date ASC").add(
+//                        function findPauses(r:Object):void {
+//
+//                            trace("query time: " + (flash.utils.getTimer() - timer));
+//                            timer = flash.utils.getTimer();
+//                            pauseLocations = new Vector.<Number>();
+//                            var userDatas:Vector.<UserData> = _video.grabAllClassData();
+//                            for each (var userData in userDatas) {
+//                                initializePauseCountTo0ForUserData(userData);
+//                            }
+//
+//                            trace("query time: " + (flash.utils.getTimer() - timer));
+//                            timer = flash.utils.getTimer();
+//
+//                            userDatasState = userDatas;
+//                            if(r.data) {
+//                                var i:int = 0;
+//                                for (i = 0; i < r.data.length; i++) {
+//
+//                                    var userData:UserData = grabUserData(r.data[i].user);
+//
+//                                    var time:Number = Number(r.data[i].time);
+//
+//                                    while(userData.pauseRecord.length < Math.floor(time) + 1) {
+//                                        userData.pauseRecord.push(0); // :P????? Not sure why sometimes the pause record is empty.
+//                                    }
+//                                    userData.pauseRecord[Math.floor(time)] += 1;
+//                                    pauseLocations.push(time);
+//                                }
+//                            }
+//
+//                            trace("org time: " + (flash.utils.getTimer() - timer));
+//                            timer = flash.utils.getTimer();
+//
+//                            pauseLocations.sort(Array.NUMERIC);
+//
+//                            autoDrawGraphType();
+//                        }
+//                );
+                break;
         }
 
-        userdatas.sort(sortUserDataByName);
+        userDatasState.sort(sortUserDataByName);
+        autoDrawGraphType();
 
-        userDatasState = userdatas;
-
-        drawViewCountRecords();
 
         secondsWatched = 0;
 
@@ -611,15 +705,24 @@ public class VideoStatsClass extends SkinnableContainer {
             }
         }
 
-        users_watched_Label.textFlow = TextConverter.importToFlow("<b>Users watched (" + date + "): </b>" + numUsers, TextConverter.TEXT_FIELD_HTML_FORMAT);
-        minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Minutes watched (" + date + "): </b>" + NumberUtil.roundDecimalToPlace(secondsWatched/60, 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
-        avg_minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Average Minutes watched per user (" + date + "): </b>" + NumberUtil.roundDecimalToPlace((secondsWatched/60/numUsers), 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
+
+//        var numUsersers:Number = 0;
+//        for(var i:int = 0; i<usernames.length; i++) {
+//            if(user.maxViewCount > 0) {
+//                numUsers++;
+//            }
+//        }
+//        users_watched_Label.textFlow = TextConverter.importToFlow("<b>Users watched (" + date + "): </b>" + numUsers, TextConverter.TEXT_FIELD_HTML_FORMAT);
+//        minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Minutes watched (" + date + "): </b>" + NumberUtil.roundDecimalToPlace(secondsWatched/60, 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
+//        avg_minutes_watched_Label.textFlow = TextConverter.importToFlow("<b>Average Minutes watched per user (" + date + "): </b>" + NumberUtil.roundDecimalToPlace((secondsWatched/60/numUsers), 1), TextConverter.TEXT_FIELD_HTML_FORMAT);
 
         db.select("SELECT count(*) AS count FROM main.logs WHERE action = 'seek' AND video_id = '" + _video.media_alias_id + "' AND date < '" + inputDate.time + "'").add(
                 function (r:Object):void {
                     number_of_seeks_Label.textFlow = TextConverter.importToFlow("<b>Number of seeks </b>" + r.data[0].count, TextConverter.TEXT_FIELD_HTML_FORMAT);
                 }
-        )
+        );
+
+
 
         for each(var vcrSprite:ViewCountRecordSprite in individualViewCountRecordSprites) {
             vcrSprite.drawViewCountRecord(getVCRForUserAtDate(vcrSprite.username, inputDate), _video, individual_VCRs_spriteVisualElement.width);
@@ -627,26 +730,39 @@ public class VideoStatsClass extends SkinnableContainer {
         }
     }
 
-    private function drawViewCountRecords():void {
-
-        viewCountRecordSprite.drawViewCountRecordFromUserDatas(bucketizeVCR(bucketState, userDatasState),
-                userDataDrawList,
-                stats_Sprite.showAggregate,
-                stats_Sprite.showMean,
-                stats_Sprite.showMedian,
-                stats_Sprite.showMax);
-
+    private function autoDrawGraphType():void {
+        switch(graphType_RadioButtonGroup.selectedValue) {
+            case "viewCount":
+                viewCountRecordSprite.drawViewCountRecordFromUserDatas(bucketizeVCR(bucketState, userDatasState),
+                        userDataDrawList,
+                        stats_Sprite.showAggregate,
+                        stats_Sprite.showMean,
+                        stats_Sprite.showMedian,
+                        stats_Sprite.showMax);
+                break;
+            case "pauseCount":
+                viewCountRecordSprite.drawPauseRecordFromUserDatas(bucketizeVCR(bucketState, userDatasState),
+                        userDataDrawList,
+                        stats_Sprite.showAggregate,
+                        stats_Sprite.showMean,
+                        stats_Sprite.showMedian,
+                        stats_Sprite.showMax);
+                break;
+        }
     }
 
     private function bucketizeVCR(buckets:Vector.<Number>, userDatas:Vector.<UserData>):Vector.<UserData> {
 
-        var buckettedVCRs:Vector.<UserData> = new Vector.<UserData>();
+        var buckettedUserDatas:Vector.<UserData> = new Vector.<UserData>();
 
         var cnt:Number = 0;
 
         for each(var userData:UserData in userDatas) {
 
-            var buckettedVCR:Vector.<Number> = new Vector.<Number>;
+//            trace("fr: " + userData.pauseRecord);
+
+            var buckettedVCR:Vector.<Number> = new Vector.<Number>();
+            var buckettedPR:Vector.<Number> = new Vector.<Number>();
 
             // i starts at -1 because of buckets never start at time 0 :P other way would be to add time 0 at the beginning
             // of the bucket list, but I'm too lazy. That's why startTime has a conditional for -1 :P
@@ -656,6 +772,7 @@ public class VideoStatsClass extends SkinnableContainer {
                 var endTime:int = (i == buckets.length - 1) ? _video.duration : buckets[i + 1]; // last bucket is to end of the video
 
                 var sum:int = 0;
+                var sumPause:int = 0;
 
                 for (var time:int = startTime; time < endTime; time++) {
 
@@ -663,12 +780,24 @@ public class VideoStatsClass extends SkinnableContainer {
                         sum += userData.viewCountRecord[time];
                     }
 
+//                    trace("userdata.pauserecord.length= " + userData.pauseRecord.length);
+//                    var pauseRecord:Vector.<Number> = userData.getDatedPauseRecord(dateSelected);
+                    if(time < userData.pauseRecord.length) {
+                        sumPause += userData.pauseRecord[time];
+                    }
+
                 }
 
+//                if(sumPause > 0) {
+//                    trace(sumPause + " LAKSDJKSALD" );
+//                }
+
                 var mean:Number = sum / (endTime - startTime);
+//                var meanPause:Number = sumPause / (endTime - startTime);
 
                 for (var j:int = 0; j < (endTime - startTime); j++) {
                     buckettedVCR.push(mean);
+                    buckettedPR.push(sumPause);
                 }
 
             }
@@ -676,22 +805,24 @@ public class VideoStatsClass extends SkinnableContainer {
             var newUserData:UserData = new UserData();
             newUserData.userString = userData.userString;
             newUserData.viewCountRecord = buckettedVCR;
-            buckettedVCRs.push(newUserData);
+            newUserData.pauseRecord = buckettedPR;
+            buckettedUserDatas.push(newUserData);
+//            trace("to: " + buckettedPR);
 
 //            trace(cnt++ + userData.userString + ": " + asdf);
         }
 
-        return buckettedVCRs;
+        return buckettedUserDatas;
     }
 
     private function updateSlides():void {
         ServerDataLoader.updateSlidesOnline(_video);
 
-        drawViewCountRecords();
+        autoDrawGraphType();
 
     }
 
-    private function sortUserDataByName(a:UserData, b:UserData):int {
+    private static function sortUserDataByName(a:UserData, b:UserData):int {
 
         if(UsersDictionary.getUserNumber(a.userString) > UsersDictionary.getUserNumber(b.userString)) {
             return 1;
@@ -702,7 +833,7 @@ public class VideoStatsClass extends SkinnableContainer {
         }
     }
 
-    private function sortUsernamesByNumber(a:String, b:String):int {
+    private static function sortUsernamesByNumber(a:String, b:String):int {
 
         if(UsersDictionary.getUserNumber(a) > UsersDictionary.getUserNumber(b)) {
             return 1;
@@ -717,8 +848,44 @@ public class VideoStatsClass extends SkinnableContainer {
 
         userDataDrawList = users;
 
-        drawViewCountRecords();
+        autoDrawGraphType();
     }
+
+    private function grabUserData(userString:String):UserData {
+        var userData:UserData = _video.grabCrowdUserData(UserData.CLASS, userString);
+        if(userData == null) {
+            userData = new UserData();
+            userData.userString = userString;
+        }
+
+        return userData;
+    }
+
+    private function initializePauseCountTo0ForUserData(userData:UserData):void {
+
+//        trace("INIT PAUSE COUNTS");
+        userData.pauseRecord = new Vector.<Number>();
+        for(var i:int = 0; i<_video.duration; i++) {
+
+//            if(userData.pauseRecord.length > i) {
+//                userData.pauseRecord[i] = 0;
+//            } else {
+                userData.pauseRecord.push(0);
+//            }
+        }
+    }
+    private function initializeViewCountTo0ForUserData(userData:UserData):void {
+        for(var i:int = 0; i<_video.duration; i++) {
+
+            if(userData.viewCountRecord.length > i) {
+                userData.viewCountRecord[i] = 0;
+            } else {
+                userData.viewCountRecord.push(0);
+            }
+        }
+    }
+
+
 
 }
 }

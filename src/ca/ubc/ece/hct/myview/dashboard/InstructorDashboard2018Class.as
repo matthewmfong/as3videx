@@ -8,6 +8,8 @@
 
 package ca.ubc.ece.hct.myview.dashboard {
 import ca.ubc.ece.hct.myview.*;
+import ca.ubc.ece.hct.myview.dashboard.VideoSummary.VideoSummary;
+import ca.ubc.ece.hct.myview.dashboard.VideoSummary.VideoSummaryComponent;
 import ca.ubc.ece.hct.myview.log.UserLogsLoader;
 import ca.ubc.ece.hct.myview.ui.UIScrollView;
 import ca.ubc.ece.hct.myview.video.VideoMetadata;
@@ -105,6 +107,9 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
     [Bindable]
     public var videoStats_Group:Group;
 
+    [Bindable]
+    public var videoSummaryComponent:VideoSummaryComponent;
+
     public function InstructorDashboard2018Class() {
 
         super();
@@ -120,6 +125,8 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
 
         dateFormatter = new DateTimeFormatter();
         dateFormatter.dateTimePattern = "EE MMM d, yyyy";
+
+        videoSummaryComponent = new VideoSummaryComponent();
 
     }
 
@@ -460,174 +467,60 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
         );
     }
 
-
-    const titlesWidth:Number = 400, totalsWidth:Number = 100, durationsWidth:Number = 100, usersViewedWidth:Number = 50, lastViewedWidth:Number = 100;
+    private var videoSummaryComponents:Array;
     private function showMostPopularVideos():void {
 
-        var blobs:Array = [];
-
-        var videos:Array = VideoMetadataManager.getVideos();
-        for each(var video:VideoMetadata in videos) {
-            var crowdvcr:Vector.<Number> = video.crowdUserViewCounts;
-            var totalMinutesViewed:Number = 0;
-            for(var i:int = 0; i<crowdvcr.length; i++) {
-                totalMinutesViewed += crowdvcr[i];
-            }
-
-
-            var o:* =
-                    {
-                        video:video,
-                        title:video.title,
-                        total:totalMinutesViewed,
-                        duration:video.duration,
-                        ratio:totalMinutesViewed/video.duration,
-                        usersViewed: video.grabAllClassData() != null ? video.grabAllClassData().length : 0,
-                        lastLoad: video.crowdLastViewed
-                    };
-            blobs.push(o);
-
-        }
-
-        blobs.sortOn("total", Array.DESCENDING | Array.NUMERIC);
-
-        var o:*;
-        var today:Date = new Date();
-
-        var vgroup:VGroup = new VGroup();
-
-        var titles:Label = new Label();             titles.text = "Titles";                 titles.width = titlesWidth;
-        var totals:Label = new Label();             totals.text = "Total time viewed";      totals.width = totalsWidth;
-        var durations:Label = new Label();          durations.text = "Duration";            durations.width = durationsWidth;
-        var usersViewed:Label = new Label();        usersViewed.text = "Users viewed";      usersViewed.width = usersViewedWidth;
-        var lastViewed:Label = new Label();         lastViewed.text = "Last Viewed";        lastViewed.width = lastViewedWidth;
-
-        var headingsGroup:HGroup = new HGroup();
-        headingsGroup.addElement(titles);
-        headingsGroup.addElement(totals);
-        headingsGroup.addElement(durations);
-        headingsGroup.addElement(usersViewed);
-        headingsGroup.addElement(lastViewed);
-
-        vgroup.addElement(headingsGroup);
-
-//        var titlesMaxWidth:Number = 0,
-//                totalsMaxWidth:Number = 0,
-//                durationsMaxWidth:Number = 0,
-//                usersViewedMaxWidth:Number = 0,
-//                lastViewedMaxWidth:Number = 0;
-        var titlesArr:Array = [],
-                totalsArr:Array = [],
-                durationsArr:Array = [],
-                usersViewedArr:Array = [],
-                lastViewedArr:Array = [];
-
-        for(var i:int = 0; i<blobs.length; i++) {
-
-            var wholeGroup:SkinnableContainer = new SkinnableContainer();
-            wholeGroup.setStyle("backgroundColor", 0xeeeeee);
-            wholeGroup.layout = new VerticalLayout();
-            var pergroup:HGroup = new HGroup();
-
-            o = blobs[i];
-
-            var titles1:Media = new Media();
-            var totals1:Label = new Label();
-            var durations1:Label = new Label();
-            var usersViewed1:Label = new Label();
-            var lastViewed1:LastViewedLabel = new LastViewedLabel();
-
-            titlesArr.push(titles1);
-            totalsArr.push(totals1);
-            durationsArr.push(durations1);
-            usersViewedArr.push(usersViewed1);
-            lastViewedArr.push(lastViewed1);
-
-            titles1.setStyle("color", 0x0000ff);
-
-            titles1.text += o.title;
-            totals1.text += Util.millisecondsToHMS(o.total * 1000) + "";
-            durations1.text += Util.millisecondsToHMS(o.duration * 1000) + "";
-            usersViewed1.text += o.usersViewed + "";
-
-            titles1.video = o.video;
-            lastViewed1.video = o.video;
-
-
-            if(o.lastLoad == null) {
-                lastViewed1.text += "Loading...";
-            } else if(o.lastLoad.getDate() == today.getDate() &&
-                    o.lastLoad.getMonth() == today.getMonth() &&
-                    o.lastLoad.getFullYear() == today.getFullYear()) {
-                lastViewed1.text += "Today";
-            } else if(o.lastLoad.getDate() == today.getDate()-1 &&
-                    o.lastLoad.getMonth() == today.getMonth() &&
-                    o.lastLoad.getFullYear() == today.getFullYear()) {
-                lastViewed1.text += "Yesterday"; // too lazy to add logic for yesterday of last month :P
-            } else {
-                lastViewed1.text += o.lastLoad == null ? "Never" : dateFormatter.format(o.lastLoad) + "";
-            }
-
-            titles1.addEventListener(MouseEvent.CLICK,
-                    function titleclick(e:MouseEvent):void {
-                        trace(e.target.video.filename);
-                        loadVideo(e.target.video);
-                    });
-            titles1.addEventListener(MouseEvent.ROLL_OVER,
-                    function mouseOver(e:MouseEvent):void {
-                        Mouse.cursor = MouseCursor.BUTTON;
-                    });
-            titles1.addEventListener(MouseEvent.ROLL_OUT,
-                    function mouseOut(e:MouseEvent):void {
-                        Mouse.cursor = MouseCursor.ARROW;
-                    });
-
-            pergroup.addElement(titles1);
-            pergroup.addElement(totals1);
-            pergroup.addElement(durations1);
-            pergroup.addElement(usersViewed1);
-            pergroup.addElement(lastViewed1);
-
-            wholeGroup.addElement(pergroup);
-
-            var vcr:VCRSprite = new VCRSprite(o.video, o.video.crowdUserViewCounts, 400 + 100 + 100 + 50 + 100, 50, o.video.slides);
-            vcr.addEventListener(MouseEvent.CLICK,
-                    function vcrClick(e:MouseEvent):void {
-                        trace(e.target.video.filename);
-                        loadVideo(e.target.video);
-                    });
-            vcr.addEventListener(MouseEvent.ROLL_OVER,
-                    function vcrMouseOver(e:MouseEvent):void {
-                        Mouse.cursor = MouseCursor.BUTTON;
-                    });
-            vcr.addEventListener(MouseEvent.ROLL_OUT,
-                    function vcrMouseOut(e:MouseEvent):void {
-                        Mouse.cursor = MouseCursor.ARROW;
-                    });
-            wholeGroup.addElement(vcr);
-
-            vcr.width = titlesWidth + totalsWidth + durationsWidth + usersViewedWidth + lastViewedWidth;//400 + 100 + 100 + 50 + 100;
-            vcr.height = 50;
-
-            vgroup.addElement(wholeGroup);
-
-        }
-
-        summary_Group.addElement(vgroup);
-
-        for(var i:int = 0; i<titlesArr.length; i++) {
-            titlesArr[i].width = titlesWidth;
-            totalsArr[i].width = totalsWidth;
-            durationsArr[i].width = durationsWidth;
-            usersViewedArr[i].width = usersViewedWidth;
-            lastViewedArr[i].width = lastViewedWidth;
-        }
-
+        videoSummaryComponent.videos = VideoMetadataManager.getVideos();
+        videoSummaryComponent.videoSelected.add(loadVideo);
+//        var titles:Label = new Label();             titles.text = "Titles";                 titles.width = VideoSummary.titlesWidth;
+//        var totals:Label = new Label();             totals.text = "Total time viewed";      totals.width = VideoSummary.totalsWidth;
+//        var durations:Label = new Label();          durations.text = "Duration";            durations.width = VideoSummary.durationsWidth;
+//        var usersViewed:Label = new Label();        usersViewed.text = "Users viewed";      usersViewed.width = VideoSummary.usersViewedWidth;
+//        var lastViewed:Label = new Label();         lastViewed.text = "Last Viewed";        lastViewed.width = VideoSummary.lastViewedWidth;
+//
+//        var headingsGroup:HGroup = new HGroup();
+//        headingsGroup.addElement(titles);
+//        headingsGroup.addElement(totals);
+//        headingsGroup.addElement(durations);
+//        headingsGroup.addElement(usersViewed);
+//        headingsGroup.addElement(lastViewed);
+//        summary_Group.addElement(headingsGroup);
+//
+//        titles.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void { sortVideoSummaryComponents("videoTitle"); });
+//        totals.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void { sortVideoSummaryComponents("totalSecondsViewed"); });
+//        durations.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void { sortVideoSummaryComponents("videoDuration"); });
+//        usersViewed.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void { sortVideoSummaryComponents("usersViewed"); });
+//        lastViewed.addEventListener(MouseEvent.CLICK, function sortByTitles(e:MouseEvent):void { sortVideoSummaryComponents("crowdLastViewed"); });
+//
+//        /// ----------------------------------------------------------------------
+//
+//        videoSummaryComponents = [];
+//        var videos:Array = VideoMetadataManager.getVideos();
+//
+//        for each(var video:VideoMetadata in videos) {
+//
+//            var videoSummary:VideoSummary = new VideoSummary();
+//            videoSummary.video = video;
+//            videoSummary.videoClicked.add(loadVideo);
+//
+//            videoSummaryComponents.push(videoSummary);
+//        }
+//
+//        sortVideoSummaryComponents("videoTitle");
 
         callNextDependentFunction();
+    }
 
+    private function sortVideoSummaryComponents(sortBy:String):void {
+        videoSummaryComponents.sortOn(sortBy, Array.NUMERIC);
 
+        while(summary_Group.numElements > 1) {
+            summary_Group.removeElementAt(1);
+        }
 
+        for(var i:int = 0; i<videoSummaryComponents.length; i++) {
+            summary_Group.addElement(videoSummaryComponents[i]);
+        }
     }
 
     private function updateLatestVCRs():void {
@@ -686,7 +579,6 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
     private function date2daymonthdate(d:Date):String {
         return Util.dayNumber2String(d.day, 3) + "\t" + Util.monthNumber2String(d.month, 3) + " " + d.date;
     }
-
 }
 }
 
@@ -858,7 +750,7 @@ class VCRSprite extends SpriteVisualElement {
             axes.graphics.moveTo((i+1) * _width/numberofHorizontalTicks, _height);
             axes.graphics.lineTo((i+1) * _width/numberofHorizontalTicks, _height - 5);
 
-            if(((i) * _width/numberofHorizontalTicks) - lastTimePosition  > 20) {
+            if((i * _width/numberofHorizontalTicks) - lastTimePosition  > 20) {
                 var time:TextField = new TextField();
                 time.autoSize = TextFieldAutoSize.CENTER;
                 time.text = Util.timeInSecondsToTimeString(HORIZONTAL_TICK_INTERVAL * i);

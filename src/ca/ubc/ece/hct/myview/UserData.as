@@ -27,7 +27,8 @@ public class UserData {
 		public var viewCountRecord:Vector.<Number>;
 		// TODO: aside from setting VCR via set view_count_record, maxViewCount must be manually specified =\
 		public var maxViewCount:Number;
-		public var pauseRecord:Array;
+		public var pauseRecord:Vector.<Number>;
+		public var pauseHistory:Vector.<PauseLocationAndDate>;
 		public var playbackRateRecord:Array;
 		public var highlights:HashMap;
 		public var annotations:HashMap;
@@ -36,7 +37,8 @@ public class UserData {
 		public function UserData() {
 
 			viewCountRecord = new Vector.<Number>();
-			pauseRecord = [];
+			pauseRecord = new Vector.<Number>();
+			pauseHistory = new Vector.<PauseLocationAndDate>();
 			playbackRateRecord = [];
 			highlights = new HashMap();
 			tags = new Vector.<KeywordTag>();
@@ -44,6 +46,28 @@ public class UserData {
 
 			annotations = new HashMap();
 
+		}
+
+		public function getDatedPauseRecord(date:Date):Vector.<Number> {
+
+			pauseRecord = new Vector.<Number>();
+			var index:Number;
+
+			for(var i:int = 0; i<pauseHistory.length; i++) {
+
+				if(pauseHistory[i].date < date) {
+
+                    index = Math.floor(pauseHistory[i].time);
+
+                    while(index + 1 > pauseRecord.length) {
+                        pauseRecord.push(0);
+                    }
+
+					pauseRecord[index]++;
+				}
+			}
+
+			return pauseRecord;
 		}
 
 		// TODO: Somehow specify that this is only good for database input (view_count_record is the db field name)
@@ -86,7 +110,7 @@ public class UserData {
 
 		public function setPlaybackRateRecord(index:uint, val:Number):void {
 			if(index < playbackRateRecord.length) {
-				var viewCount:uint = viewCountRecord[index];
+//				var viewCount:uint = viewCountRecord[index];
 				playbackRateRecord[index] = val;//(viewCount * playbackRateRecord[index] + val)/(viewCount+1);
 			}
 		}
@@ -314,7 +338,7 @@ public class UserData {
 			return coloursReturn;
 		}
 
-		public function getHighlightsForTimeRange(range:ca.ubc.ece.hct.Range):Array {
+		public function getHighlightsForTimeRange(range:Range):Array {
 			var coloursReturn:Array = [];
 
 			var highlightEntries:Array = highlights.values();
@@ -376,7 +400,7 @@ import ca.ubc.ece.hct.Range;
 class IntervalSorter {
 
 	public static function mergeSortedIntervals(intervals:Array):Array {
-		var s:Array = new Array();
+		var s:Array = [];
 		s.push(intervals[0]);
 
 	    // Start from the next interval and merge if necessary
@@ -409,3 +433,4 @@ class IntervalSorter {
 
 	}
 }
+

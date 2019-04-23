@@ -40,7 +40,7 @@ public class InstructorViewCountRecordSpriteV2 extends View {
 
     private var aggregateVCR:Vector.<Number>;
     private var stackedVCRs:Vector.<ViewCountStackingShapes>;
-    private var userDatas:Vector.<UserData>;
+//    private var userDatas:Vector.<UserData>;
 
     private var slides:Vector.<SlideMarker>;
     private var editMode:Boolean;
@@ -111,7 +111,7 @@ public class InstructorViewCountRecordSpriteV2 extends View {
         }
     }
 
-    private function drawViewCountRecord(viewCountRecords:Vector.<Vector.<Number>>,
+    public function drawViewCountRecord(viewCountRecords:Vector.<Vector.<Number>>,
                                          includeIndices:Vector.<uint>,
                                          showAggregate:Boolean = true,
                                          showMean:Boolean = true,
@@ -248,7 +248,7 @@ public class InstructorViewCountRecordSpriteV2 extends View {
                                                      showMax:Boolean = true):void {
 
         var viewCountRecords:Vector.<Vector.<Number>> = new Vector.<Vector.<Number>>();
-        this.userDatas = userdatas;
+//        this.userDatas = userdatas;
 
         for each(var userData:UserData in userdatas) {
             viewCountRecords.push(userData.viewCountRecord)
@@ -266,6 +266,35 @@ public class InstructorViewCountRecordSpriteV2 extends View {
         }
 
         drawViewCountRecord(viewCountRecords, includeIndices,
+                showAggregate, showMean, showMedian, showMax);
+
+    }
+
+    public function drawPauseRecordFromUserDatas(userdatas:Vector.<UserData>,
+                                                     userDrawList:Vector.<String>,
+                                                     showAggregate:Boolean = true,
+                                                     showMean:Boolean = true,
+                                                     showMedian:Boolean = true,
+                                                     showMax:Boolean = true):void {
+
+        var pauseRecords:Vector.<Vector.<Number>> = new Vector.<Vector.<Number>>();
+
+        for each(var userData:UserData in userdatas) {
+            pauseRecords.push(userData.pauseRecord);
+        }
+
+        var includeIndices:Vector.<uint> = new Vector.<uint>();
+        for(var i:int = 0; i<userDrawList.length; i++) {
+
+            for(var userDataIndex:int = 0; userDataIndex<userdatas.length; userDataIndex++) {
+
+                if(userdatas[userDataIndex].userString == userDrawList[i]) {
+                    includeIndices.push(userDataIndex);
+                }
+            }
+        }
+
+        drawViewCountRecord(pauseRecords, includeIndices,
                 showAggregate, showMean, showMedian, showMax);
 
     }
@@ -383,7 +412,6 @@ public class InstructorViewCountRecordSpriteV2 extends View {
     }
 
     private function deleteSlide(slide:SlideMarker):void {
-        trace("lol");
         _video.slides.removeAt(_video.slides.indexOf(slide.timestamp));
         graph.removeChild(slide);
         slides.removeAt(slides.indexOf(slide));

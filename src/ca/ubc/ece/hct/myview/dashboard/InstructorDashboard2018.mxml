@@ -8,6 +8,7 @@
         xmlns:mx="library://ns.adobe.com/flex/mx"
         xmlns:chart="mx.charts.*"
         xmlns:dashboard="ca.ubc.ece.hct.myview.dashboard.*"
+        xmlns:videoSummary="ca.ubc.ece.hct.myview.dashboard.VideoSummary.*"
         creationComplete="creationCompleteHandler()"
         backgroundColor="0xffffff"
         width="100%"
@@ -47,18 +48,16 @@
                 </s:layout>
             </s:Panel>
 
-            <!--<s:VGroup>-->
-                <s:Panel height="100%">
-                    <s:layout>
-                        <s:VerticalLayout padding="5"></s:VerticalLayout>
-                    </s:layout>
-                    <s:Scroller height="100%">
-                        <s:VGroup id="summary_Group"></s:VGroup>
-                    </s:Scroller>
-                </s:Panel>
-                <!--<s:TileGroup id="mainTileGroup" width="100%" height="100%">-->
-                <!--</s:TileGroup>-->
-            <!--</s:VGroup>-->
+            <s:Panel height="100%">
+                <s:layout>
+                    <s:VerticalLayout padding="5"></s:VerticalLayout>
+                </s:layout>
+                <s:Scroller height="100%">
+                    <s:VGroup id="summary_Group">
+                        <videoSummary:VideoSummaryComponent id="videoSummaryComponent"/>
+                    </s:VGroup>
+                </s:Scroller>
+            </s:Panel>
 
         </s:HGroup>
         <s:Group id="videoStats_Group" width="100%" height="100%"></s:Group>

@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:s="library://ns.adobe.com/flex/spark"
+                      xmlns:dashboard="ca.ubc.ece.hct.myview.dashboard.VideoSummary.*"
+                      backgroundColor="0xeeeeee"
+                      creationComplete="creationComplete(event)">
+    <fx:Script><![CDATA[
+        import ca.ubc.ece.hct.myview.Util;
+        import ca.ubc.ece.hct.myview.dashboard.*;
+        import ca.ubc.ece.hct.myview.video.VideoMetadata;
+
+        import mx.events.FlexEvent;
+
+        import org.osflash.signals.Signal;
+
+        import spark.core.SpriteVisualElement;
+        import spark.formatters.DateTimeFormatter;
+
+        private var _video:VideoMetadata;
+        private var _totalSecondsViewed:Number = 0;
+
+//        public static const
+
+        public function get videoTitle():String {
+            return _video.title;
+        }
+
+        public function get totalSecondsViewed():Number {
+            return _totalSecondsViewed / 60;
+        }
+
+        public function get videoDuration():Number {
+            return _video.duration;
+        }
+
+        public function get usersViewed():Number {
+            return _video.grabAllClassData() != null ? _video.grabAllClassData().length : 0;
+        }
+
+        public function get crowdLastViewed():Date {
+            return _video.crowdLastViewed;
+        }
+
+        public var videoClicked:Signal = new Signal(VideoMetadata);
+        private var creationCompleted:Boolean = false;
+
+        public static const titlesWidth:Number = 400,
+                totalsWidth:Number = 100,
+                durationsWidth:Number = 100,
+                usersViewedWidth:Number = 50,
+                lastViewedWidth:Number = 100;
+
+        public function creationComplete(event:FlexEvent):void {
+
+            addEventListener(MouseEvent.CLICK, click);
+            addEventListener(MouseEvent.ROLL_OVER, rollOver);
+            addEventListener(MouseEvent.ROLL_OUT, rollOut);
+            creationCompleted = true;
+
+            if (_video) {
+                draw();
+            }
+        }
+
+        public function get video():VideoMetadata {
+            return _video;
+        }
+
+        public function set video(v:VideoMetadata):void {
+            _video = v;
+
+            if(creationCompleted) {
+                draw();
+            }
+        }
+
+        private function draw():void {
+
+            var dateFormatter = new DateTimeFormatter();
+            dateFormatter.dateTimePattern = "EE MMM d, yyyy";
+
+            var crowdvcr:Vector.<Number> = _video.crowdUserViewCounts;
+            for (var i:int = 0; i < crowdvcr.length; i++) {
+                _totalSecondsViewed += crowdvcr[i];
+            }
+            title_Label.text += _video.title;
+            totals_Label.text += Util.millisecondsToHMS(_totalSecondsViewed * 1000) + "";
+            durations_Label.text += Util.millisecondsToHMS(_video.duration * 1000) + "";
+            usersViewed_Label.text += (_video.grabAllClassData() != null ? _video.grabAllClassData().length : 0) + "";
+
+            var today:Date = new Date();
+
+            if (_video.crowdLastViewed == null) {
+                lastViewed_Label.text += "Loading...";
+            } else if (_video.crowdLastViewed.getDate() == today.getDate() &&
+                    _video.crowdLastViewed.getMonth() == today.getMonth() &&
+                    _video.crowdLastViewed.getFullYear() == today.getFullYear()) {
+                lastViewed_Label.text += "Today";
+            } else if (_video.crowdLastViewed.getDate() == today.getDate() - 1 &&
+                    _video.crowdLastViewed.getMonth() == today.getMonth() &&
+                    _video.crowdLastViewed.getFullYear() == today.getFullYear()) {
+                lastViewed_Label.text += "Yesterday"; // too lazy to add logic for yesterday of last month :P
+            } else {
+                lastViewed_Label.text += _video.crowdLastViewed == null ? "Never" : dateFormatter.format(_video.crowdLastViewed) + "";
+            }
+
+            vcr.instantiate(_video,
+                    _video.crowdUserViewCounts,
+                    titlesWidth + totalsWidth + durationsWidth + usersViewedWidth + lastViewedWidth,
+                    50,
+                    _video.slides);
+        }
+
+        public function click(e:MouseEvent):void {
+//            trace(_video.filename);
+            videoClicked.dispatch(_video);
+        }
+
+        public function rollOver(e:MouseEvent):void {
+            Mouse.cursor = MouseCursor.BUTTON;
+        }
+
+        public function rollOut(e:MouseEvent):void {
+            Mouse.cursor = MouseCursor.ARROW;
+        }
+        ]]></fx:Script>
+    <s:VGroup>
+        <s:HGroup>
+            <s:Label id="title_Label" width="{titlesWidth}" color="0x0000ff"/>
+            <s:Label id="totals_Label" width="{totalsWidth}"/>
+            <s:Label id="durations_Label" width="{durationsWidth}"/>
+            <s:Label id="usersViewed_Label" width="{usersViewedWidth}"/>
+            <s:Label id="lastViewed_Label" width="{lastViewedWidth}"/>
+        </s:HGroup>
+        <s:Group>
+        <dashboard:VideoSummaryVCRComponent id="vcr" width="{titlesWidth + totalsWidth + durationsWidth + usersViewedWidth + lastViewedWidth}" height="50" />
+        </s:Group>
+    </s:VGroup>
+</s:SkinnableContainer>

@@ -82,25 +82,25 @@ public function updateStatus(e:StatusUpdateEvent):void {
     } else if(nativeApplicationUpdater.currentState == NativeApplicationUpdater.WAITING_CONFIRMATION) {
         var label:Label = new Label();
         var okay:Button = new Button();
-        var cancel:Button = new Button()
+//        var cancel:Button = new Button()
         addChild(label);
         addChild(okay);
-        addChild(cancel);
+//        addChild(cancel);
         label.invalidateSize();
         label.text = "Update available. Download now?";
         label.validateNow();
         okay.invalidateSize()
         okay.label = "OK";
-        cancel.invalidateSize()
-        cancel.label = "Update later";
+//        cancel.invalidateSize()
+//        cancel.label = "Update later";
         okay.validateNow();
-        cancel.validateNow();
+//        cancel.validateNow();
         label.x = stage.width / 2 - label.getExplicitOrMeasuredWidth()/2;
         label.y = stage.height / 2;
         okay.x = stage.width/2 - okay.getExplicitOrMeasuredWidth();
-        cancel.x = stage.width/2;
+//        cancel.x = stage.width/2;
         okay.y = label.y + label.getExplicitOrMeasuredHeight();
-        cancel.y = label.y + label.getExplicitOrMeasuredHeight();
+//        cancel.y = label.y + label.getExplicitOrMeasuredHeight();
 
         var progressBar:ProgressBar = new ProgressBar();
 
@@ -108,7 +108,7 @@ public function updateStatus(e:StatusUpdateEvent):void {
         okay.addEventListener(MouseEvent.CLICK,
                 function(e:MouseEvent):void {
                     okay.enabled = false;
-                    cancel.enabled = false;
+//                    cancel.enabled = false;
                     progressBar.source = nativeApplicationUpdater;
                     addChild(progressBar);
                     progressBar.invalidateSize();
@@ -122,13 +122,13 @@ public function updateStatus(e:StatusUpdateEvent):void {
 
         });
 
-        cancel.addEventListener(MouseEvent.CLICK,
-        function(e:MouseEvent):void {
-            removeChild(label);
-            removeChild(okay);
-            removeChild(cancel);
-            _init();
-        });
+//        cancel.addEventListener(MouseEvent.CLICK,
+//        function(e:MouseEvent):void {
+//            removeChild(label);
+//            removeChild(okay);
+//            removeChild(cancel);
+//            _init();
+//        });
 
 //        nativeApplicationUpdater.addEventListener(ProgressEvent.PROGRESS,
 //                function downloadProgress(e:flash.events.ProgressEvent):void {
