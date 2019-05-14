@@ -67,12 +67,12 @@
                         <s:RichText id="avg_minutes_watched_Label" text="Average Minutes Watched" />
                         <s:RichText id="number_of_seeks_Label" text="Number of seeks" />
                     </s:VGroup>
-                    <s:Panel title="Individual View Counts" width="100%" height="100%">
-                        <s:Scroller width="100%" height="100%">
+                    <s:Panel title="Individual View Counts" width="100%">
+                        <!--<s:Scroller width="100%" height="100%">-->
                             <s:VGroup width="100%">
                             <s:SpriteVisualElement id="individual_VCRs_spriteVisualElement" width="100%" />
                             </s:VGroup>
-                        </s:Scroller>
+                        <!--</s:Scroller>-->
                     </s:Panel>
                 </s:VGroup>
             </s:Scroller>

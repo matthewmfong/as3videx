@@ -13,6 +13,7 @@ import ca.ubc.ece.hct.myview.log.UserLogCollection;
 import ca.ubc.ece.hct.myview.log.VideoLogCollection;
 import ca.ubc.ece.hct.myview.log.VideoPlayerEvent;
 import ca.ubc.ece.hct.myview.log.VideoPlayerState;
+import ca.ubc.ece.hct.myview.video.VideoMetadataManager;
 
 import com.deng.fzip.FZip;
 import com.deng.fzip.FZipFile;
@@ -106,7 +107,7 @@ public class UserLogsLoader extends View {
 
     private function dbOpened(e:Event):void {
 
-        trace("Log DB opened")
+//        trace("Log DB opened")
         db.getLatestRecordDate().add(gotLatestRecordDate);
     }
 
@@ -134,7 +135,7 @@ public class UserLogsLoader extends View {
 
         urlsToDownload = [];
         var newFromDate:Date;
-        for(var time:Number = newTime; time < todayDate.getTime(); time += 7 * Constants.DAYS2MILLISECONDS) {
+        for(var time:Number = newTime; time < VideoMetadataManager.COURSE.endDate.getTime(); time += 7 * Constants.DAYS2MILLISECONDS) {
 
             newFromDate = new Date(time);
             getDataToDate = new Date(time + 7 * Constants.DAYS2MILLISECONDS);

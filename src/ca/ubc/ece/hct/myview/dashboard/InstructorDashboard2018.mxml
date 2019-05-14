@@ -31,21 +31,28 @@
             <!--</s:Panel>-->
             <s:Panel title="Active Users by Date" height="100%">
                 <s:layout>
-                    <s:VerticalLayout padding="5"></s:VerticalLayout>
+                    <s:VerticalLayout padding="5" />
                 </s:layout>
                 <s:Scroller height="100%">
                     <s:Group id="activity_Panel">
                         <s:layout>
-                            <s:VerticalLayout padding="5"></s:VerticalLayout>
+                            <s:VerticalLayout padding="5" />
                         </s:layout>
                     </s:Group>
                 </s:Scroller>
             </s:Panel>
 
-            <s:Panel id="users_Panel" title="Users" height="100%">
+            <s:Panel title="Users" height="100%">
                 <s:layout>
-                    <s:VerticalLayout padding="5"></s:VerticalLayout>
+                    <s:VerticalLayout padding="5" />
                 </s:layout>
+                <s:Scroller height="100%">
+                    <s:Group id="users_Panel">
+                        <s:layout>
+                            <s:VerticalLayout padding="5" />
+                        </s:layout>
+                    </s:Group>
+                </s:Scroller>
             </s:Panel>
 
             <s:Panel height="100%">

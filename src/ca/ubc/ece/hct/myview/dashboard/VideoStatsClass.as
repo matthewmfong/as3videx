@@ -325,6 +325,7 @@ public class VideoStatsClass extends SkinnableContainer {
 
                     bucketSize_Label.text = bucket_Slider.value + " seconds";
                 });
+
         bucket_RadioButtonGroup.addEventListener(Event.CHANGE,
                 function bucketRuleChange(e:Event):void {
                     switch(bucket_RadioButtonGroup.selectedValue) {

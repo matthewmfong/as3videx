@@ -71,7 +71,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
     public var playlist_Panel:Panel;
 
     [Bindable]
-    public var users_Panel:Panel;
+    public var users_Panel:Group;
     public var activity_Panel:Group;
 
     private var activeUsersData:ArrayCollection;
@@ -287,7 +287,7 @@ public class InstructorDashboard2018Class extends SkinnableContainer {
         var activeUsers:Array = [];
 
         var insertDate:Date = new Date(course.startDate.getTime());
-        var todayDate:Date = new Date();
+        var todayDate:Date = new Date() < course.endDate ? course.endDate : new Date();
         while(insertDate.getTime() < todayDate.getTime() + Constants.DAYS2MILLISECONDS) {
 
             activeDates.push(date2daymonthdate(insertDate));
