@@ -412,7 +412,7 @@ public class Thread extends EventDispatcher implements IThread {
 
     public function start(...args):void {
         if (!_isStarting && _worker && _isNew) {
-            trace("Thread start");
+//            trace("Thread start");
             _isStarting = true;
             callLater(function ():void {
                 command(_runnableClassName, ThreadRunnerX.RUN_METHOD, args);
@@ -453,13 +453,13 @@ public class Thread extends EventDispatcher implements IThread {
 
     public function terminate():void {
         if (!_workerReady) {
-            trace("Thread call later terminate");
+//            trace("Thread call later terminate");
             callLater(doTerminate);
         } else doTerminate();
     }
 
     private function doTerminate():void {
-        trace("Thread terminate");
+//        trace("Thread terminate");
         if (!_isTerminating && _worker && !_isTerminated) {
             _isTerminating = true;
             command(_runnableClassName, ThreadRunnerX.TERMINATE_REQUESTED, null);
@@ -553,7 +553,7 @@ public class Thread extends EventDispatcher implements IThread {
                 _currentState = ThreadState.RUNNING;
                 break;
             case WorkerState.TERMINATED:
-                trace("Thread onWorkerState: TERMINATED");
+//                trace("Thread onWorkerState: TERMINATED");
                 isRunning = isPaused = false;
                 _isTerminating = false;
                 isTerminated = true;
@@ -610,7 +610,7 @@ public class Thread extends EventDispatcher implements IThread {
     }
 
     private function terminateWorker():void {
-        trace("Thread terminateWorker");
+//        trace("Thread terminateWorker");
         _worker.terminate();
         _sharedProperties = null;
         System.gc(); //Collect
@@ -618,7 +618,7 @@ public class Thread extends EventDispatcher implements IThread {
     }
 
     private function destroyWorker():void {
-        trace("Thread destroyWorker");
+//        trace("Thread destroyWorker");
         _worker.removeEventListener(Event.WORKER_STATE, onWorkerState);
 
         _incomingChannel.removeEventListener(Event.CHANNEL_MESSAGE, onMessage);

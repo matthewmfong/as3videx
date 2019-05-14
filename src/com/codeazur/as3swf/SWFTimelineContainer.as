@@ -206,17 +206,17 @@ package com.codeazur.as3swf
 					bytes: (excessBytes < 0) ? -excessBytes : excessBytes
 				};
 				if(rootTimelineContainer == this) {
-					trace("WARNING: excess bytes: " + excessBytes + ", " +
+//					trace("WARNING: excess bytes: " + excessBytes + ", " +
 						"Tag: " + tag.name + ", " +
 						"Index: " + index
-					);
+//					);
 				} else {
 					eventData.indexRoot = rootTimelineContainer.tags.length;
-					trace("WARNING: excess bytes: " + excessBytes + ", " +
+//					trace("WARNING: excess bytes: " + excessBytes + ", " +
 						"Tag: " + tag.name + ", " +
 						"Index: " + index + ", " +
 						"IndexRoot: " + eventData.indexRoot
-					);
+//					);
 				}
 				var event:SWFWarningEvent = new SWFWarningEvent(eventType, index, eventData, false, true);
 				var cancelled:Boolean = !dispatchEvent(event);

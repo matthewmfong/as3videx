@@ -530,8 +530,9 @@ import flash.utils.ByteArray;
 						onChildComplete:completeHandler,
 						onChildError:errorHandler});
 
-			if(verbose)
-				trace("Download Queue:");
+			if(verbose) {
+                trace("Download Queue: " + sourcesToDownload.length + " items");
+            }
 
 			// TODO: currently using i to identify the Dataloader later. A bit hacky, unfortunately.
 			for(var i:int = 0; i<sourcesToDownload.length; i++) {
@@ -545,6 +546,10 @@ import flash.utils.ByteArray;
 				dataLoader.addEventListener("auditedSize", auditedSize);
 
 			}
+
+            if(verbose) {
+                trace("----------");
+            }
 
 			if(sourcesDownloaded == sourcesToDownload.length) {
 				downloadedSources.dispatch();

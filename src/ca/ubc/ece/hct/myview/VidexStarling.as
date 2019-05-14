@@ -131,14 +131,16 @@ public class VidexStarling extends Sprite {
 
 
         if(CONFIG::Instructor) {
-            trace("Logging in predefined.");
             UserID.login(course.toString(), COURSE::PredefinedName);
+            trace("Logging in as: " + UserID.id);
         } else {
-            trace("Auto generating login.");
             UserID.login(course.toString());
+            trace("New User: " + UserID.id);
         }
 
-        trace("Hello " + UserID.id);
+        trace("----------");
+
+
 
         addEventListener(starling.events.Event.ADDED_TO_STAGE, addedToStage);
 

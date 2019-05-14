@@ -122,7 +122,7 @@ public class UserLogsLoader extends View {
 
         getDataFromDate.setTime(getDataFromDate.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
 
-        trace("getDataFromDate " + getDataFromDate);
+        trace("User Logs latest record: " + getDataFromDate);
 
         loader = new LoaderMax( { name: "WebLoaderQueue", autoLoad:true, auditSize:true, maxConnections:1 });
 
@@ -135,7 +135,9 @@ public class UserLogsLoader extends View {
 
         urlsToDownload = [];
         var newFromDate:Date;
-        for(var time:Number = newTime; time < VideoMetadataManager.COURSE.endDate.getTime(); time += 7 * Constants.DAYS2MILLISECONDS) {
+        var toTime:Number = new Date().getTime() > VideoMetadataManager.COURSE.endDate.getTime() ?
+                                                VideoMetadataManager.COURSE.endDate.getTime() : new Date().getTime();
+        for(var time:Number = newTime; time < toTime; time += 7 * Constants.DAYS2MILLISECONDS) {
 
             newFromDate = new Date(time);
             getDataToDate = new Date(time + 7 * Constants.DAYS2MILLISECONDS);
@@ -148,10 +150,11 @@ public class UserLogsLoader extends View {
 
         }
 
-        trace("URLS TO DOWNLOAD: " + urlsToDownload.length)
+        trace("Logs to download: " + urlsToDownload.length)
         for(var i:int = 0; i<urlsToDownload.length; i++) {
             trace(i + ": " + urlsToDownload[i]);
         }
+        trace("---------");
 
         totalURLS = urlsToDownload.length;
 

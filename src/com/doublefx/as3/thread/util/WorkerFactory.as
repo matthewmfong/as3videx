@@ -124,7 +124,7 @@ public class WorkerFactory {
                     for each (var depAbcName:String in dependencies) {
                         if (tagDoABC.abcName == depAbcName.replace(/\./g, "/")) {
                             abcTags.push(tag);
-                             trace("Dep: " + depAbcName + " tag: " + tag.toString(0, 0x01));
+//                             trace("Dep: " + depAbcName + " tag: " + tag.toString(0, 0x01));
 //                            trace(new Error().getStackTrace());
                             break;
                         }
@@ -224,7 +224,7 @@ public class WorkerFactory {
             /*const file:FileReference = new FileReference();
              file.save(swfBytes, "Worker.swf");*/
 
-            trace(swf);
+//            trace(swf);
 
             if (!domain) domain = WorkerDomain.current;
 

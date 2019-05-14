@@ -229,7 +229,7 @@ public class UserLogsProcess implements Runnable {
             dispatcher.dispatchProgress(byteArray.position/byteArray.length * 100, 200);
         }
 
-        trace("I think we're all done.");
+//        trace("I think we're all done.");
 
         db.addEventListener(SQLEvent.COMMIT, finish);
         db.addEventListener(ProgressEvent.PROGRESS, commitProgress);

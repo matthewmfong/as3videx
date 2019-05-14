@@ -152,7 +152,7 @@ public class ThreadRunnerX extends DebuggableWorker implements CrossThreadDispat
         }
 
         try {
-            trace("ThreadRunnerX run");
+//            trace("ThreadRunnerX run");
             func.apply(null, args);
         } catch (e:Error) {
             dispatchError(e);
@@ -207,7 +207,7 @@ public class ThreadRunnerX extends DebuggableWorker implements CrossThreadDispat
     }
 
     protected function terminateRequested():void {
-        trace("ThreadRunnerX terminateRequested");
+//        trace("ThreadRunnerX terminateRequested");
         if (this.hasEventListener(ThreadActionRequestEvent.TERMINATE_REQUESTED)) {
             addEventListener(ThreadActionResponseEvent.TERMINATED, terminate);
             dispatchEvent(new ThreadActionRequestEvent(ThreadActionRequestEvent.TERMINATE_REQUESTED));
@@ -217,7 +217,7 @@ public class ThreadRunnerX extends DebuggableWorker implements CrossThreadDispat
     }
 
     private function terminate(e:ThreadActionResponseEvent = null):void {
-        trace("ThreadRunnerX terminate");
+//        trace("ThreadRunnerX terminate");
         _paused = false;
         removeEventListener(ThreadActionResponseEvent.TERMINATED, terminate);
         dispatchActionResponse(new ThreadActionResponseEvent(ThreadActionResponseEvent.TERMINATED));
@@ -225,7 +225,7 @@ public class ThreadRunnerX extends DebuggableWorker implements CrossThreadDispat
     }
 
     private function destroyRunnable():void {
-        trace("ThreadRunnerX destroyRunnable");
+//        trace("ThreadRunnerX destroyRunnable");
 
         _runnable[DISPATCHER_PROPERTY] = null;
         _runnable = null;
@@ -274,7 +274,7 @@ public class ThreadRunnerX extends DebuggableWorker implements CrossThreadDispat
     }
 
     public function dispatchError(error:Error):void {
-        trace("ThreadRunnerX dispatchError: " + error.message);
+//        trace("ThreadRunnerX dispatchError: " + error.message);
         _outgoingChannel.send(new ThreadFaultEvent(error));
     }
 

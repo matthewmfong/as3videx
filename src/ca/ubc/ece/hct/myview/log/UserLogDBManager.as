@@ -261,7 +261,7 @@ public class UserLogDBManager extends EventDispatcher {
     }
 
     private function commitHandler(event:SQLEvent):void {
-        trace("Commit time: " + (getTimer() - commitTimer) + ", record count: " + recordCount);
+//        trace("Commit time: " + (getTimer() - commitTimer) + ", record count: " + recordCount);
         conn.removeEventListener(SQLEvent.COMMIT, commitHandler);
         dispatchEvent(event);
     }
