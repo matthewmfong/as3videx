@@ -591,13 +591,13 @@ package starling.core
             stage3D.removeEventListener(Event.CONTEXT3D_CREATE, onContextCreated);
             stage3D.addEventListener(Event.CONTEXT3D_CREATE, onContextRestored, false, 10, true);
 
-            trace("[Starling] Context ready. Display Driver:", context.driverInfo);
+//            trace("[Starling] Context ready. Display Driver:", context.driverInfo);
             initialize();
         }
 
         private function onContextRestored(event:Event):void
         {
-            trace("[Starling] Context restored.");
+//            trace("[Starling] Context restored.");
             updateViewPort(true);
             dispatchEventWith(Event.CONTEXT3D_CREATE, false, context);
         }

@@ -122,6 +122,7 @@ public class UserLogsLoader extends View {
 
         getDataFromDate.setTime(getDataFromDate.getTime() - Constants.SERVER_TO_LOCAL_TIME_DIFF * Constants.HOURS2MILLISECONDS);
 
+        trace("---------");
         trace("User Logs latest record: " + getDataFromDate);
 
         loader = new LoaderMax( { name: "WebLoaderQueue", autoLoad:true, auditSize:true, maxConnections:1 });

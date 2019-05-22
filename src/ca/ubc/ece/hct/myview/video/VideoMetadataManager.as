@@ -531,6 +531,7 @@ import flash.utils.ByteArray;
 						onChildError:errorHandler});
 
 			if(verbose) {
+                trace("---------");
                 trace("Download Queue: " + sourcesToDownload.length + " items");
             }
 

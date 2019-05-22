@@ -24,6 +24,8 @@ import mx.controls.ProgressBar;
 
 import mx.core.FlexGlobals;
 
+import spark.components.Alert;
+
 import spark.components.Button;
 
 import spark.components.Label;
@@ -171,7 +173,14 @@ private function _init(e:Event = null):void {
 
     stage.nativeWindow.addEventListener(NativeWindowBoundsEvent.RESIZE, resizeListener);
     stage.nativeWindow.addEventListener(NativeWindowBoundsEvent.MOVE, resizeListener);
+
+    loaderInfo.uncaughtErrorEvents.addEventListener(flash.events.UncaughtErrorEvent.UNCAUGHT_ERROR,
+            function uncaughtErrors(e:flash.events.UncaughtErrorEvent):void {
+                spark.components.Alert.show(e.error.getStackTrace(), "Error");
+            }
+    );
 }
+
 
 
 public function resizeListener(e:NativeWindowBoundsEvent):void {

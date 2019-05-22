@@ -130,6 +130,7 @@ public class VidexStarling extends Sprite {
         course = Courses.getCourse(COURSE::Name);
 
 
+        trace("---------");
         if(CONFIG::Instructor) {
             UserID.login(course.toString(), COURSE::PredefinedName);
             trace("Logging in as: " + UserID.id);
@@ -165,16 +166,21 @@ public class VidexStarling extends Sprite {
         init();
         VideoMetadataManager.init();
         statusText.text = "Loading course details...";
-        VideoMetadataManager.checkingLocalFiles.add(function():void {statusText.text="Checking existing local files...";});
-        VideoMetadataManager.downloadingSources.add(function():void {statusText.text="Downloading videos...";})
+        VideoMetadataManager.checkingLocalFiles.add(function ():void {
+            statusText.text = "Checking existing local files...";
+        });
+        VideoMetadataManager.downloadingSources.add(function ():void {
+            statusText.text = "Downloading videos...";
+        })
         VideoMetadataManager.downloadedSources.add(
                 function mediaFinishedDownloading():void {
-                    statusText.text="Finished loading. Enjoy!";
+                    statusText.text = "Finished loading. Enjoy!";
                     TweenLite.to(statusText, 1,
-                            {alpha: 0,
+                            {
+                                alpha: 0,
                                 delay: 5,
                                 onComplete:
-                                        function():void {
+                                        function ():void {
                                             removeChild(statusText);
                                             statusText.dispose();
                                         }
