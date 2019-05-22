@@ -706,7 +706,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM1103_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1103_1_winter_2018" skip-build="true">
+      <configuration name="BCIT_CHEM1103_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1103_1_winter_2018-INSTRUCTOR">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -732,11 +732,15 @@
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM1103_1_winter_2018-INSTRUCTOR.xml" />
           <option name="additionalOptions" value="-advanced-telemetry" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1103-instructor-app.xml" package-file-name="BCIT_CHEM1103_1_winter_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1103-instructor-app.xml" package-file-name="BCIT_CHEM1103_1_winter_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM1105_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1105_1_winter_2018" skip-build="true">
+      <configuration name="BCIT_CHEM1105_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1105_1_winter_2018-INSTRUCTOR">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -762,11 +766,15 @@
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM1105_1_winter_2018-INSTRUCTOR.xml" />
           <option name="additionalOptions" value="-advanced-telemetry" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1105-instructor-app.xml" package-file-name="BCIT_CHEM1105_1_winter_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1105-instructor-app.xml" package-file-name="BCIT_CHEM1105_1_winter_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM1115_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1115_1_winter_2018" skip-build="true">
+      <configuration name="BCIT_CHEM1115_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1115_1_winter_2018-INSTRUCTOR">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -792,11 +800,15 @@
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM1115_1_winter_2018-INSTRUCTOR.xml" />
           <option name="additionalOptions" value="-advanced-telemetry" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1115-instructor-app.xml" package-file-name="BCIT_CHEM1115_1_winter_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem1115-instructor-app.xml" package-file-name="BCIT_CHEM1115_1_winter_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM0011_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2018" skip-build="true">
+      <configuration name="BCIT_CHEM0011_1_winter_2018-INSTRUCTOR" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM0011_1_winter_2018-INSTRUCTOR">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
@@ -822,7 +834,11 @@
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0011_1_winter_2018-INSTRUCTOR.xml" />
           <option name="additionalOptions" value="-advanced-telemetry" />
         </compiler-options>
-        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_winter_2018-INSTRUCTOR" />
+        <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-instructor-app.xml" package-file-name="BCIT_CHEM0011_1_winter_2018-INSTRUCTOR">
+          <files-to-package>
+            <FilePathAndPathInPackage file-path="$MODULE_DIR$/resources" path-in-package="." />
+          </files-to-package>
+        </packaging-air-desktop>
         <packaging-android />
         <packaging-ios />
       </configuration>
@@ -893,7 +909,6 @@
         <compiler-options>
           <option name="resourceFilesMode" value="ResourcePatterns" />
           <option name="additionalConfigFilePath" value="$MODULE_DIR$/config/config-BCIT_CHEM0011_1_spring_2019.xml" />
-          <option name="additionalOptions" value="-advanced-telemetry" />
         </compiler-options>
         <packaging-air-desktop use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/app_descriptors/chem0011-app.xml" package-file-name="patcher_BCIT_CHEM0011_1_spring_2019">
           <files-to-package>

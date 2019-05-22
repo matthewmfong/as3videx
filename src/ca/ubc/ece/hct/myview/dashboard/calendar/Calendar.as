@@ -225,7 +225,7 @@ public class Calendar extends View {
                     colour = (o.count == 0) ? 0xffffff : ColorUtil.getHeatMapColor(o.count/maxCount, colours);
 
                     var index:int = (runningTime - startTime) / Constants.DAYS2MILLISECONDS;
-                    if(index > 0) {
+                    if(index > 0 && index < dayBoxes.length-1) {
                         dayBoxes[index].setColour(Util.brighten(colour, 2));
                         dayBoxes[index].rollOverString = Math.round(o.count/60*10)/10 + " minutes viewed";
                     }
