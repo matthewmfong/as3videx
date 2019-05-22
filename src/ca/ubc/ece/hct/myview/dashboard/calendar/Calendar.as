@@ -107,18 +107,8 @@ public class Calendar extends View {
 
             calendar.addChild(db);
 
-            db.addEventListener(MouseEvent.ROLL_OVER,
-                    function (e:MouseEvent):void {
-                        dateHoverSignal.dispatch(e.currentTarget.date);
-                    });
-            db.addEventListener(MouseEvent.CLICK,
-                    function (e:MouseEvent):void {
-                        dateClickSignal.dispatch(e.currentTarget.date);
-                        for(var i:int = 0; i<dayBoxes.length; i++) {
-                            dayBoxes[i].selected = false;
-                        }
-                        (DayBox)(e.currentTarget).selected = true;
-                    });
+            db.addEventListener(MouseEvent.ROLL_OVER, dayBoxRollOver);
+            db.addEventListener(MouseEvent.CLICK, dayBoxClick);
 
             if(today.fullYear == date.fullYear && today.month == date.month && today.date == date.date) {
                 db.selected = true;
@@ -131,6 +121,19 @@ public class Calendar extends View {
         calendar.x = dayTextWidth;
         calendar.y = monthText.height + padding;
         addChild(calendar);
+    }
+
+    private function dayBoxRollOver(e:MouseEvent):void {
+        dateHoverSignal.dispatch(e.currentTarget.date);
+        calendar.setChildIndex((DayBox)(e.currentTarget), calendar.numChildren - 1);
+    }
+
+    private function dayBoxClick(e:MouseEvent):void {
+        dateClickSignal.dispatch(e.currentTarget.date);
+        for(var i:int = 0; i<dayBoxes.length; i++) {
+            dayBoxes[i].selected = false;
+        }
+        (DayBox)(e.currentTarget).selected = true;
     }
 
     public function setSize(w:Number, h:Number):void {
@@ -224,6 +227,7 @@ public class Calendar extends View {
                     var index:int = (runningTime - startTime) / Constants.DAYS2MILLISECONDS;
                     if(index > 0) {
                         dayBoxes[index].setColour(Util.brighten(colour, 2));
+                        dayBoxes[index].rollOverString = Math.round(o.count/60*10)/10 + " minutes viewed";
                     }
 
                     break;
