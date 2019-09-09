@@ -40,9 +40,10 @@ import starling.text.TextFormat;
 
 public class VideoPlaylistView extends StarlingView {
 
-		public static const buttonDimensions:Rectangle = new Rectangle(0, 0, 200, 150);
+		public static const buttonDimensions:Rectangle = new Rectangle(0, 0, 200, 30);
 //		public static const playlistButtonDimension:Rectangle = new Rectangle(0, 0, 200, 150);
 		public static const gap:Number = 5;
+		public static var rootPlaylist:VideoPlaylist;
 		public var mediaButtons:Array;
 		public var expandedPlaylistView:VideoPlaylistView;
 //		public var _width:Number, _height:Number;
@@ -61,6 +62,8 @@ public class VideoPlaylistView extends StarlingView {
 			super();
 			_width = width;
 			_height = height;
+
+			rootPlaylist = playlist;
 
 			titleHeader = new Header();
 			titleHeader.title = rootLevel ? "Home": playlist.listName;
@@ -87,46 +90,7 @@ public class VideoPlaylistView extends StarlingView {
 			var xOffset:Number = 10;
 			var yOffset:Number = 10;
 
-			for(var i:int = 0; i<playlist.mediaList.length; i++) {
-
-				if(playlist.mediaList[i] is VideoPlaylist) {
-
-					var button:VideoPlaylistButton = new VideoPlaylistButton(playlist.mediaList[i], buttonDimensions.width, buttonDimensions.height);
-
-					button.x = xOffset;
-					button.y = yOffset;
-
-					xOffset += buttonDimensions.width + gap;
-					if(xOffset + button.width > _width) {
-						xOffset = 10;
-						yOffset += button.height + gap;
-					}
-
-					container.addChild(button);
-					button.alpha = 0;
-					TweenLite.to(button, 1, {alpha: 1, delay: i/10});
-                    mediaButtons.push(button);
-                    button.addEventListener(TouchEvent.TOUCH, playlistClickedHandler);
-
-				} else if(playlist.mediaList[i] is VideoMetadata) {
-					var button2:VideoMetadataButton = new VideoMetadataButton(playlist.mediaList[i], buttonDimensions.width, buttonDimensions.height);
-
-					button2.x = xOffset;
-					button2.y = yOffset;
-
-					xOffset += buttonDimensions.width + gap;
-					if(xOffset + button2.width > _width) {
-						xOffset = 10;
-						yOffset += button2.height + gap;
-					}
-
-                    container.addChild(button2);
-					button2.alpha = 0;
-					TweenLite.to(button2, 1, {alpha: 1, delay: i/10});
-                    mediaButtons.push(button2);
-                    mediaButtons[mediaButtons.length - 1].addEventListener(TouchEvent.TOUCH, videoClickedHandler);
-				}
-			}
+			populate(playlist.mediaList);
 
 //			scrollPane.update();
 
@@ -134,14 +98,41 @@ public class VideoPlaylistView extends StarlingView {
 			graphics.drawRectangle(0, 0, _width, _height);
 			graphics.endFill();
 
+		}
 
-//            var quad:Quad = new Quad(200, 200);
-//            quad.addEventListener(TouchEvent.TOUCH, function(e:TouchEvent):void { textfielllld.text = ".... " + hello++; });
-//            addChild(quad);
+		public var numLines:Number = 0;
+		public function populate(playlist:Array):void {
+			var numVideos:Number = 0;
+            for(var i:int = 0; i<playlist.length; i++) {
+                if(playlist[i] is VideoPlaylist) {
+                    var button:VideoPlaylistButton = new VideoPlaylistButton(playlist[i], _width, buttonDimensions.height);
 
-//            textfielllld = new TextField(800, 200, "hiii");
-//            textfielllld.y = height - textfielllld.height;
-//            addChild(textfielllld)
+                    container.addChild(button);
+                    button.y = numLines * (buttonDimensions.height + 5);
+					numLines++;
+                    populate(playlist[i].mediaList);
+
+                    mediaButtons.push(button);
+                    button.addEventListener(TouchEvent.TOUCH, playlistClickedHandler);
+                } else if(playlist[i] is VideoMetadata) {
+                    var button2:VideoMetadataButton = new VideoMetadataButton(playlist[i], _width/2.1, buttonDimensions.height);
+
+					container.addChild(button2);
+                    numVideos++;
+
+					button2.x = (numVideos-1) / playlist.length < 0.5 ? 0 : _width/2;
+                    button2.y = (numVideos-1) / playlist.length < 0.5 ?
+							numLines * (buttonDimensions.height + 5) + (numVideos-1) * (buttonDimensions.height + 5) :
+                            numLines * (buttonDimensions.height + 5) + (numVideos - Math.ceil(playlist.length/2) - 1) * (buttonDimensions.height + 5);
+
+                    mediaButtons.push(button2);
+                    mediaButtons[mediaButtons.length - 1].addEventListener(TouchEvent.TOUCH, videoClickedHandler);
+                }
+
+            }
+
+			numLines += Math.ceil(playlist.length/2);
+
 		}
 
 
@@ -158,24 +149,33 @@ public class VideoPlaylistView extends StarlingView {
 
             scrollPane.setSize(_width, _height - titleHeader.height - 10);
 
-            var xOffset:Number = 10;
-            var yOffset:Number = 10;
+			mediaButtons = [];
+			scrollPane.removeChild(container);
 
-            for(var i:int = 0; i<mediaButtons.length; i++) {
-                var button:Sprite = mediaButtons[i];
+			container = new Sprite();
+			scrollPane.addChild(container);
+			numLines = 0;
 
-                button.x = xOffset;
-                button.y = yOffset;
-                xOffset += button.width + gap;
-                if(xOffset + button.width > _width) {
-                    xOffset = 10;
-                    yOffset += button.height + gap;
-                }
-            }
+			populate(rootPlaylist.mediaList);
 
-            if(expandedPlaylistView) {
-                expandedPlaylistView.setSize(_width, _height);
-            }
+//            var xOffset:Number = 10;
+//            var yOffset:Number = 10;
+//
+//            for(var i:int = 0; i<mediaButtons.length; i++) {
+//                var button:Sprite = mediaButtons[i];
+//
+//                button.x = xOffset;
+//                button.y = yOffset;
+//                xOffset += button.width + gap;
+//                if(xOffset + button.width > _width) {
+//                    xOffset = 10;
+//                    yOffset += button.height + gap;
+//                }
+//            }
+//
+//            if(expandedPlaylistView) {
+//                expandedPlaylistView.setSize(_width, _height);
+//            }
 //            scrollPane.update();
         }
 //
@@ -372,14 +372,14 @@ class VideoMetadataButton extends StarlingView {
 		_height = height;
 
 		if(video.progressDownloaded == 1) {
-			graphics.beginFill(0x9999ff);
-			thumbnail = new Thumbnail();
-			thumbnail.setSize(_width, _height);
-			thumbnail.loadVideo(video);
-			addChild(thumbnail);
-			thumbnail.showImage();
+			graphics.beginFill(0xffffff);
+//			thumbnail = new Thumbnail();
+//			thumbnail.setSize(_width, _height);
+//			thumbnail.loadVideo(video);
+//			addChild(thumbnail);
+//			thumbnail.showImage();
 		} else {
-			graphics.beginFill(0xff9999);
+			graphics.beginFill(0xffffff);
 		}
 		graphics.drawRectangle(0, 0, _width, _height);
 		graphics.endFill();
@@ -426,7 +426,7 @@ class VideoMetadataButton extends StarlingView {
 		var val:Number = bytesDownloaded/totalBytes;
 
 		graphics.clear();
-		graphics.beginFill(0xff9999);
+		graphics.beginFill(0xffffff);
 		graphics.drawRectangle(0, 0, _width, 20);
 		graphics.endFill();
 		graphics.beginFill(0x99ff99);
@@ -444,17 +444,17 @@ class VideoMetadataButton extends StarlingView {
 
 	public function downloadComplete(video:VideoMetadata):void {
 
-		if(!thumbnail) {
-            thumbnail = new Thumbnail();
-		}
-        thumbnail.setSize(_width, _height);
-        thumbnail.loadVideo(video);
-        addChild(thumbnail);
-        thumbnail.showImage();
+//		if(!thumbnail) {
+//            thumbnail = new Thumbnail();
+//		}
+//        thumbnail.setSize(_width, _height);
+//        thumbnail.loadVideo(video);
+//        addChild(thumbnail);
+//        thumbnail.showImage();
 
 		setChildIndex(title, numChildren - 1);
 		graphics.clear();
-		graphics.beginFill(0x9999ff);
+		graphics.beginFill(0xffffff);
 		graphics.drawRectangle(0, 0, _width, _height);
 		graphics.endFill();
 
