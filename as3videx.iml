@@ -1174,7 +1174,7 @@
         <packaging-android />
         <packaging-ios />
       </configuration>
-      <configuration name="BCIT_CHEM1115_1_sept_2019" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="BCIT_CHEM1115_1_sept_2019.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1115_1_sept_2019">
+      <configuration name="BCIT_CHEM1115_1_sept_2019" target-platform="Desktop" main-class="ca.ubc.ece.hct.main" output-file="Videx.swf" output-folder="$MODULE_DIR$/../bin/builds/BCIT_CHEM1115_1_sept_2019">
         <dependencies>
           <entries>
             <entry library-name="flash" library-level="project">
