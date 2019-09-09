@@ -33,6 +33,17 @@ package ca.ubc.ece.hct.myview {
             'BCIT_CHEM1115_1_winter_2018-INSTRUCTOR':        new Course("BCIT", "CHEM1115", "1", "winter", "2018"),
             'BCIT_CHEM1121_1_winter_2018-INSTRUCTOR':        new Course("BCIT", "CHEM1121", "1", "winter", "2018"),
 
+            'BCIT_CHEM0011_1_sept_2019':        new Course("BCIT", "CHEM0011", "1", "september", "2019"),
+            'BCIT_CHEM1103_1_sept_2019':        new Course("BCIT", "CHEM1103", "1", "september", "2019"),
+            'BCIT_CHEM1105_1_sept_2019':        new Course("BCIT", "CHEM1105", "1", "september", "2019"),
+            'BCIT_CHEM1115_1_sept_2019':        new Course("BCIT", "CHEM1115", "1", "september", "2019"),
+            'BCIT_CHEM1121_1_sept_2019':        new Course("BCIT", "CHEM1121", "1", "september", "2019"),
+            'BCIT_CHEM0011_1_sept_2019-INSTRUCTOR':        new Course("BCIT", "CHEM0011", "1", "september", "2019"),
+            'BCIT_CHEM1103_1_sept_2019-INSTRUCTOR':        new Course("BCIT", "CHEM1103", "1", "september", "2019"),
+            'BCIT_CHEM1105_1_sept_2019-INSTRUCTOR':        new Course("BCIT", "CHEM1105", "1", "september", "2019"),
+            'BCIT_CHEM1115_1_sept_2019-INSTRUCTOR':        new Course("BCIT", "CHEM1115", "1", "september", "2019"),
+            'BCIT_CHEM1121_1_sept_2019-INSTRUCTOR':        new Course("BCIT", "CHEM1121", "1", "september", "2019"),
+
                                               'BCIT_CHEM0011_1_spring_2018':        new Course("BCIT", "CHEM0011", "1", "spring", "2018"),
                                               'BCIT_CHEM0012_1_spring_2018':        new Course("BCIT", "CHEM0012", "1", "spring", "2018"),
                                               'BCIT_CHEM0011_1_spring_2018-INSTRUCTOR':        new Course("BCIT", "CHEM0011", "1", "spring", "2018"),
